@@ -12,7 +12,7 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 		function wpp_action_single_poll_main_function() {
 			
 			$WPP_Functions = new WPP_Functions();
-			$template_sections = $WPP_Functions->wpp_poll_template_sections();
+			$template_sections = $WPP_Functions->poll_template_sections();
 			
 			$wpp_poll_template = get_option( 'wpp_poll_template' );
 			if( empty( $wpp_poll_template ) ) $wpp_poll_template = array();

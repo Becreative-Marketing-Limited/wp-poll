@@ -330,7 +330,7 @@ class class_wpp_settings_page  {
 		
 		
 		$WPP_Functions = new WPP_Functions();
-		$template_sections = $WPP_Functions->wpp_poll_template_sections();
+		$template_sections = $WPP_Functions->poll_template_sections();
 		
 		$wpp_poll_template = get_option( 'wpp_poll_template' );
 		if( empty( $wpp_poll_template ) ) $wpp_poll_template = array();
