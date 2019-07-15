@@ -86,10 +86,12 @@ class WPPollManager {
 	 */
 	public function front_scripts() {
 
-		wp_enqueue_script( 'wpp_js', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ) );
-		wp_localize_script( 'wpp_js', 'wpp_ajax', array( 'wpp_ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+        wp_enqueue_script( 'wpp_checkbox_js', WPP_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array('jquery'), false, true );
+        wp_enqueue_script( 'wpp_js', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ) );
+        wp_localize_script( 'wpp_js', 'wpp_ajax', array( 'wpp_ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 
 		wp_enqueue_style( 'icofont', WPP_PLUGIN_URL . 'assets/fonts/icofont.min.css' );
+		wp_enqueue_style( 'wpp_checkbox', WPP_PLUGIN_URL . 'assets/front/css/checkbox.css' );
 		wp_enqueue_style( 'wpp_style', WPP_PLUGIN_URL . 'assets/front/css/style.css' );
 	}
 
