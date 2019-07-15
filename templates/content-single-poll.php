@@ -17,13 +17,15 @@ if ( post_password_required() ) {
 }
 
 ?>
+    <div id="poll-<?php the_ID(); ?>" <?php wpp_single_poll_class( '', $poll ); ?>>
 
-	<?php
-	/**
-	 * Hook: wpp_single_poll_main
-	 */
-	do_action( 'wpp_single_poll_main' );
-	?>
+		<?php
+		/**
+		 * Hook: wpp_single_poll_main
+		 */
+		do_action( 'wpp_single_poll_main' );
+		?>
+    </div>
 
 <?php
 /**

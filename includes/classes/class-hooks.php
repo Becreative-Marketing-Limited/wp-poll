@@ -19,14 +19,8 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			add_action( 'manage_poll_posts_custom_column', array( $this, 'custom_columns_content' ), 10, 2 );
 
 			add_filter( 'single_template', array( $this, 'single_poll_template' ) );
-			add_filter( 'wpp_filters_get_template_part', array( $this, 'poll_external_template' ) );
 		}
 
-
-		function poll_external_template( $template ) {
-
-			return WPP_PLUGIN_DIR . 'templates/single-poll-external/template-1.php';
-		}
 
 		/**
 		 * Filter Single Template for Poll post type
