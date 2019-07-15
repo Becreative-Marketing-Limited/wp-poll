@@ -4,7 +4,7 @@
  */
 
 
-if( ! function_exists( 'wpp_single_poll_title' ) ) {
+if ( ! function_exists( 'wpp_single_poll_title' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
 	 */
@@ -14,7 +14,7 @@ if( ! function_exists( 'wpp_single_poll_title' ) ) {
 	}
 }
 
-if( ! function_exists( 'wpp_single_poll_thumb' ) ) {
+if ( ! function_exists( 'wpp_single_poll_thumb' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
 	 */
@@ -24,7 +24,7 @@ if( ! function_exists( 'wpp_single_poll_thumb' ) ) {
 	}
 }
 
-if( ! function_exists( 'wpp_single_poll_content' ) ) {
+if ( ! function_exists( 'wpp_single_poll_content' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
 	 */
@@ -34,7 +34,7 @@ if( ! function_exists( 'wpp_single_poll_content' ) ) {
 	}
 }
 
-if( ! function_exists( 'wpp_single_poll_options' ) ) {
+if ( ! function_exists( 'wpp_single_poll_options' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
 	 */
@@ -44,7 +44,7 @@ if( ! function_exists( 'wpp_single_poll_options' ) ) {
 	}
 }
 
-if( ! function_exists( 'wpp_single_poll_notice' ) ) {
+if ( ! function_exists( 'wpp_single_poll_notice' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
 	 */
@@ -54,7 +54,7 @@ if( ! function_exists( 'wpp_single_poll_notice' ) ) {
 	}
 }
 
-if( ! function_exists( 'wpp_single_poll_message' ) ) {
+if ( ! function_exists( 'wpp_single_poll_message' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
 	 */
@@ -64,7 +64,7 @@ if( ! function_exists( 'wpp_single_poll_message' ) ) {
 	}
 }
 
-if( ! function_exists( 'wpp_single_poll_buttons' ) ) {
+if ( ! function_exists( 'wpp_single_poll_buttons' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
 	 */

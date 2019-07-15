@@ -76,8 +76,9 @@ class WPPollManager {
 		wp_enqueue_style( 'wpp_admin_style', WPP_PLUGIN_URL . 'assets/admin/css/style.css' );
 
 		wp_enqueue_script( 'jquery-ui-sortable' );
-		wp_enqueue_script( 'wpp_admin_js', plugins_url( 'assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ) );
 		wp_enqueue_script( 'apexcharts', plugins_url( 'assets/apexcharts.js', __FILE__ ) );
+		wp_enqueue_script( 'wpp_admin_js', plugins_url( 'assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ) );
+		wp_localize_script( 'wpp_admin_js', 'wpp_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 	}
 
 

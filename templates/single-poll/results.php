@@ -13,7 +13,7 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 	
 	$poll_meta_options 	= get_post_meta( $poll_id, 'poll_meta_options', true );
 	$polled_data		= get_post_meta( $poll_id, 'polled_data', true );
-	$poller 			= get_poller();
+	$poller 			= wpp_get_poller();
 	
 	if( empty( $polled_data ) ) $polled_data = array();
 	

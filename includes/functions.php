@@ -9,13 +9,146 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
-if( ! function_exists( 'wpp_single_poll_class' ) ) {
-	function wpp_single_poll_class( $class = '', $product_id = null ) {
-//		echo 'class="' . esc_attr( implode( ' ', wc_get_product_class( $class, $product_id ) ) ) . '"';
+if ( ! function_exists( 'wpp_add_poll_option' ) ) {
+	/**
+     * Return poll option HTML
+     *
+	 * @param bool $unique_id
+	 * @param array $args
+	 *
+	 * @throws PB_Error
+	 */
+	function wpp_add_poll_option( $unique_id = false, $args = array() ) {
+
+		if ( ! is_array( $args ) ) {
+			$args = array( 'label' => $args );
+		}
+
+		$unique_id      = ! $unique_id ? hexdec( uniqid() ) : $unique_id;
+		$option_label   = isset( $args['label'] ) ? $args['label'] : '';
+		$option_thumb   = isset( $args['thumb'] ) ? $args['thumb'] : '';
+		$options_fields = array(
+			array(
+				'options' => array(
+					array(
+						'id'          => "poll_meta_options[$unique_id][label]",
+						'title'       => esc_html__( 'Option label', 'wp-poll' ),
+						'placeholder' => esc_html__( 'Option 1', 'wp-poll' ),
+						'type'        => 'text',
+						'value'       => $option_label,
+					),
+					array(
+						'id'          => "poll_meta_options[$unique_id][thumb]",
+						'title'       => esc_html__( 'Image', 'wp-poll' ),
+						'placeholder' => esc_html__( 'Day 1', 'wp-poll' ),
+						'type'        => 'media',
+						'value'       => $option_thumb,
+					),
+				),
+			)
+		);
+
+		?>
+
+        <li class="poll-option-single">
+
+			<?php wpp()->PB_Settings()->generate_fields( $options_fields ); ?>
+
+            <div class="poll-option-controls">
+                <span class="option-remove" data-status=0><i class="icofont-close"></i></span>
+                <span class="option-move"><i class="icofont-drag"></i></span>
+            </div>
+        </li>
+		<?php
 	}
 }
 
+
+if ( ! function_exists( 'wpp' ) ) {
+	/**
+	 * Return global $wpp
+	 *
+	 * @return WPP_Functions
+	 */
+	function wpp() {
+		global $wpp;
+
+		if ( empty( $wpp ) ) {
+			$wpp = new WPP_Functions();
+		}
+
+		return $wpp;
+	}
+}
+
+
+if ( ! function_exists( 'wpp_get_poller' ) ) {
+	/**
+	 * Return poller info
+	 *
+	 * @return int|mixed
+	 */
+	function wpp_get_poller() {
+
+		$user = wp_get_current_user();
+		if ( $user->ID != 0 ) {
+			return $user->ID;
+		}
+
+		return wpp_get_ip_address();
+	}
+}
+
+
+if ( ! function_exists( 'wpp_get_ip_address' ) ) {
+	/**
+	 * Return IP Address
+	 *
+	 * @return mixed
+	 */
+	function wpp_get_ip_address() {
+
+		if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
+		} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+			$ip = $_SERVER['REMOTE_ADDR'];
+		}
+
+		return $ip;
+	}
+}
+
+
+if ( ! function_exists( 'wpp_single_poll_class' ) ) {
+	/**
+	 * Return single poll classes
+	 *
+	 * @param string $classes
+	 * @param null $product_id
+	 */
+	function wpp_single_poll_class( $classes = '', $product_id = null ) {
+
+		if ( ! is_array( $classes ) ) {
+			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
+		}
+
+		$classes[] = 'single-poll';
+
+		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'wpp_single_poll_class', $classes ) ) ) );
+	}
+}
+
+
 if ( ! function_exists( 'wpp_get_template_part' ) ) {
+	/**
+	 * Get Template Part
+	 *
+	 * @param $slug
+	 * @param string $name
+	 * @param array $args
+	 */
 	function wpp_get_template_part( $slug, $name = '', $args = array() ) {
 
 		$template = '';
@@ -24,7 +157,7 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 		if ( $name ) {
 			$template = locate_template( array(
 				"{$slug}-{$name}.php",
-				 "wpp/{$slug}-{$name}.php"
+				"wpp/{$slug}-{$name}.php"
 			) );
 		}
 
@@ -49,6 +182,16 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 
 
 if ( ! function_exists( 'wpp_get_template' ) ) {
+	/**
+	 * Get Template
+	 *
+	 * @param $template_name
+	 * @param array $args
+	 * @param string $template_path
+	 * @param string $default_path
+	 *
+	 * @return WP_Error
+	 */
 	function wpp_get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
 
 		if ( ! empty( $args ) && is_array( $args ) ) {
@@ -104,7 +247,6 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 
 
 //----------------------------------------------------------------------------------------------------
-
 
 
 function wpp_ajax_submit_comment() {
@@ -202,7 +344,7 @@ function wpp_ajax_submit_poll() {
 
 	$polled_data = get_post_meta( $poll_id, 'polled_data', true );
 	$polled_data = empty( $polled_data ) ? array() : $polled_data;
-	$poller      = get_poller();
+	$poller      = wpp_get_poller();
 
 	if ( array_key_exists( $poller, $polled_data ) ) {
 
@@ -225,77 +367,3 @@ function wpp_ajax_submit_poll() {
 
 add_action( 'wp_ajax_wpp_ajax_submit_poll', 'wpp_ajax_submit_poll' );
 add_action( 'wp_ajax_nopriv_wpp_ajax_submit_poll', 'wpp_ajax_submit_poll' );
-
-
-function show_notice( $type = 1 ) {
-
-	if ( $type == 1 ) {
-		$notice_type = 'wpp_success';
-	}
-	if ( $type == 0 ) {
-		$notice_type = 'wpp_error';
-	}
-
-	return "<div class='wpp_notice $notice_type'>Warning: You have already Polled !</div>";
-}
-
-function get_poller() {
-
-	$user = wp_get_current_user();
-	if ( $user->ID != 0 ) {
-		return $user->ID;
-	}
-
-	if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-		$ip = $_SERVER['HTTP_CLIENT_IP'];
-	} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-	} else {
-		$ip = $_SERVER['REMOTE_ADDR'];
-	}
-
-
-	return $ip;
-}
-
-function qa_single_poll_template( $single_template ) {
-	global $post;
-	if ( $post->post_type == 'poll' ) {
-		$single_template = WPP_PLUGIN_DIR . 'templates/single-poll/single-poll.php';
-	}
-
-	return $single_template;
-}
-
-//add_filter( 'single_template', 'qa_single_poll_template' );
-
-
-
-function wpp_dark_color( $rgb, $darker = 2 ) {
-
-	$hash = ( strpos( $rgb, '#' ) !== false ) ? '#' : '';
-	$rgb  = ( strlen( $rgb ) == 7 ) ? str_replace( '#', '', $rgb ) : ( ( strlen( $rgb ) == 6 ) ? $rgb : false );
-	if ( strlen( $rgb ) != 6 ) {
-		return $hash . '000000';
-	}
-	$darker = ( $darker > 1 ) ? $darker : 1;
-
-	list( $R16, $G16, $B16 ) = str_split( $rgb, 2 );
-
-	$R = sprintf( "%02X", floor( hexdec( $R16 ) / $darker ) );
-	$G = sprintf( "%02X", floor( hexdec( $G16 ) / $darker ) );
-	$B = sprintf( "%02X", floor( hexdec( $B16 ) / $darker ) );
-
-	return $hash . $R . $G . $B;
-}
-
-function wpp_get_ip_address() {
-	$ip = $_SERVER['REMOTE_ADDR'];
-	if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-		$ip = $_SERVER['HTTP_CLIENT_IP'];
-	} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-	}
-
-	return $ip;
-}

@@ -5,63 +5,181 @@
 * Copyright: 	2015 Jaed Mosharraf
 */
 
-if ( ! defined('ABSPATH')) exit;  // if direct access 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}  // if direct access
 
-class WPP_Post_meta_Poll{
-	
-	public function __construct(){
-		add_action('add_meta_boxes', array($this, 'meta_boxes_poll'));
-		add_action('save_post', array($this, 'meta_boxes_poll_save'));
-	}
-	
-	public function meta_boxes_poll($post_type) {
-		$post_types = array('poll');
-		if (in_array($post_type, $post_types)) {
-		
-			add_meta_box('poll_metabox',
-				__( 'Poll Data Box', 'wp-poll' ),
-				array($this, 'poll_meta_box_function'),
-				$post_type,
-				'normal',
-				'high'
-			);
-				
-		}
-	}
-	
-	public function poll_meta_box_function($post) {
- 
-        wp_nonce_field('poll_nonce_check', 'poll_nonce_check_value');
-		
-		require_once( WPP_PLUGIN_DIR . 'templates/admin/poll-meta-box.php' );
-   	}
-	
-	public function meta_boxes_poll_save($post_id){
-	 
-		if (!isset($_POST['poll_nonce_check_value'])) return $post_id;
-		$nonce = $_POST['poll_nonce_check_value'];
-		if (!wp_verify_nonce($nonce, 'poll_nonce_check')) return $post_id;
+class WPP_Post_meta_Poll {
 
-		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
-	 
-		if ('page' == $_POST['post_type']) {
-			if (!current_user_can('edit_page', $post_id)) return $post_id;
-		} else {
-			if (!current_user_can('edit_post', $post_id)) return $post_id;
+	public function __construct() {
+
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+		add_action( 'save_post', array( $this, 'save_meta_data' ) );
+		add_action( 'pb_settings_poll_meta_options', array( $this, 'display_poll_options' ) );
+	}
+
+
+	/**
+	 * Display poll option with repeater field
+	 *
+	 * @throws PB_Error
+	 */
+	function display_poll_options() {
+
+		ob_start();
+
+		foreach ( wpp()->get_meta( 'poll_meta_options', false, array() ) as $unique_id => $args ) {
+			wpp_add_poll_option( $unique_id, $args );
 		}
 
-		$poll_meta_options = stripslashes_deep( $_POST['poll_meta_options'] );
-		update_post_meta( $post_id, 'poll_meta_options', $poll_meta_options );		
-		
-		$poll_meta_multiple = stripslashes_deep( $_POST['poll_meta_multiple'] );
-		update_post_meta( $post_id, 'poll_meta_multiple', $poll_meta_multiple );		
-		
-		$poll_deadline = stripslashes_deep( $_POST['poll_deadline'] );
-		update_post_meta( $post_id, 'poll_deadline', $poll_deadline );		
-		
-		$poll_meta_new_option = stripslashes_deep( $_POST['poll_meta_new_option'] );
-		update_post_meta( $post_id, 'poll_meta_new_option', $poll_meta_new_option );		
-			
+		$poll_options = ob_get_clean();
+
+		printf( '<div class="button wpp-add-poll-option">%s</div>', esc_html__( 'Add Option', 'wp-poll' ) );
+		printf( '<ul class="poll-options">%s</ul>', $poll_options );
 	}
-	
-} new WPP_Post_meta_Poll();
+
+
+	/**
+	 * Save meta box
+	 *
+	 * @param $post_id
+	 *
+	 * @return mixed
+	 */
+	public function save_meta_data( $post_id ) {
+
+		$nonce = isset( $_POST['poll_nonce_value'] ) ? $_POST['poll_nonce_value'] : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'poll_nonce' ) ) {
+			return $post_id;
+		}
+
+		foreach ( $this->__get_meta_fields() as $field ) {
+
+			$field_id = isset( $field['id'] ) ? $field['id'] : '';
+
+			if( in_array( $field_id, array( 'post_title', 'post_content' ) ) || empty( $field_id ) ) {
+				continue;
+			}
+
+			$field_value = isset( $_POST[ $field_id ] ) ? stripslashes_deep( $_POST[ $field_id ] ) : '';
+
+			update_post_meta( $post_id, $field_id, $field_value );
+		}
+	}
+
+
+	/**
+	 * Meta box output
+	 *
+	 * @param $post
+	 *
+	 * @throws PB_Error
+	 */
+	public function poll_meta_box_function( $post ) {
+
+		wp_nonce_field( 'poll_nonce', 'poll_nonce_value' );
+
+		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
+	}
+
+
+	/**
+	 * Add meta boxes
+	 *
+	 * @param $post_type
+	 */
+	public function add_meta_boxes( $post_type ) {
+
+		if ( in_array( $post_type, array( 'poll' ) ) ) {
+
+			add_meta_box( 'poll_metabox', __( 'Poll data box', 'wp-poll' ), array(
+				$this,
+				'poll_meta_box_function'
+			), $post_type, 'normal', 'high' );
+		}
+	}
+
+
+	/**
+	 * Return meta fields for direct use to PB_Settings
+	 *
+	 * @return mixed|void
+	 */
+	function get_meta_fields() {
+
+		return apply_filters( 'wpp_filters_poll_meta_fields', array( array( 'options' => $this->__get_meta_fields() ) ) );
+	}
+
+
+	/**
+	 * Return raw meta fields
+	 *
+	 * @return array
+	 */
+	private function __get_meta_fields() {
+
+		return array(
+
+			array(
+				'id'      => 'post_title',
+				'title'   => esc_html__( 'Poll title', 'wp-poll' ),
+				'details' => esc_html__( 'Write a suitable title for this poll', 'wp-poll' ),
+				'type'    => 'text',
+			),
+
+			array(
+				'id'    => 'poll_meta_options',
+				'title' => esc_html__( 'Options', 'wp-poll' ),
+			),
+
+			array(
+				'id'            => 'content',
+				'title'         => esc_html__( 'Poll Content', 'wp-poll' ),
+				'details'       => esc_html__( 'Write some details about this poll', 'wp-poll' ),
+				'type'          => 'wp_editor',
+				'field_options' => array(
+					'media_buttons'    => false,
+					'editor_height'    => '120px',
+					'drag_drop_upload' => true,
+				),
+			),
+
+			array(
+				'id'            => 'poll_deadline',
+				'title'         => esc_html__( 'Deadline', 'wp-poll' ),
+				'details'       => esc_html__( 'Specify a date when this poll will end. Leave empty to ignore this option', 'wp-poll' ),
+				'type'          => 'datepicker',
+				'placeholder'   => date( 'Y-m-d' ),
+				'field_options' => array(
+					'dateFormat' => 'yy-mm-dd',
+				),
+			),
+
+			array(
+				'id'      => 'poll_meta_multiple',
+				'title'   => esc_html__( 'Settings', 'wp-poll' ),
+				'details' => esc_html__( 'Allow multiple vote | Default is No', 'wp-poll' ),
+				'type'    => 'select',
+				'args'    => array(
+					'yes' => esc_html__( 'Yes', 'wp-poll' ),
+					'no'  => esc_html__( 'No', 'wp-poll' ),
+				),
+				'default' => array( 'no' ),
+			),
+
+			array(
+				'id'      => 'poll_meta_new_option',
+				'details' => esc_html__( 'Allow Visitors to add New Option | Default is No', 'wp-poll' ),
+				'type'    => 'select',
+				'args'    => array(
+					'yes' => esc_html__( 'Yes', 'wp-poll' ),
+					'no'  => esc_html__( 'No', 'wp-poll' ),
+				),
+				'default' => array( 'no' ),
+			),
+		);
+	}
+}
+
+new WPP_Post_meta_Poll();

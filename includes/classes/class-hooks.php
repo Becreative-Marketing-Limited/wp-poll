@@ -19,6 +19,17 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			add_action( 'manage_poll_posts_custom_column', array( $this, 'custom_columns_content' ), 10, 2 );
 
 			add_filter( 'single_template', array( $this, 'single_poll_template' ) );
+
+			add_action( 'wp_ajax_wpp_ajax_add_option', array( $this, 'ajax_new_poll_option' ) );
+		}
+
+		function ajax_new_poll_option() {
+
+			ob_start();
+
+			wpp_add_poll_option();
+
+			wp_send_json_success( ob_get_clean() );
 		}
 
 
