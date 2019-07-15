@@ -22,6 +22,14 @@ if ( post_password_required() ) {
 		<?php
 		/**
 		 * Hook: wpp_single_poll_main
+         *
+         * @hooked wpp_single_poll_title
+         * @hooked wpp_single_poll_thumb
+         * @hooked wpp_single_poll_content
+         * @hooked wpp_single_poll_options
+         * @hooked wpp_single_poll_notice
+         * @hooked wpp_single_poll_message
+         * @hooked wpp_single_poll_buttons
 		 */
 		do_action( 'wpp_single_poll_main' );
 		?>

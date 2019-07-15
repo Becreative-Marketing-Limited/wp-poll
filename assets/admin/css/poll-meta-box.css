@@ -6,49 +6,56 @@ Admin css
     margin-top: -20px;
 }
 
-.poll_meta_box {}
-
-.poll_meta_box  .poll_title {
+#poll_metabox #post_title {
     width: 100%;
-    font-size: 15px;
-    height: 40px;
-    outline: none;
-    box-shadow: none;
+    padding: 15px 5px;
+    line-height: 20px;
 }
 
-.poll_meta_box .poll_option_container  .poll_option_single{
-    background: #dedede;
-    padding: 5px 20px;
+
+.poll-options {
+
 }
 
-.poll_meta_box .poll_option_container  .poll_option_single input{
-    background: #eee;
-	width:320px;
-    margin: 0 15px;
+.poll-options .poll-option-single {
+    background: #ff98003b;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    position: relative;
 }
 
-.poll_meta_box .poll_option_container  .poll_option_single .poll_option_remove{
-    color: #DE746C;
-    float: right;
+.poll-option-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.poll-option-controls > span {
+    background: #1199abe8;
+    color: #fff;
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 50%;
     font-size: 20px;
-    padding: 9px 15px;
-    margin-top: -5px;
-	cursor:pointer;
-}
-.poll_meta_box .poll_option_container  .poll_option_single .poll_option_single_sorter{
-    color: #DE746C;
-    float: right;
-    font-size: 20px;
-    padding: 9px 15px;
-    margin-top: -5px;
-    margin-right: 10px;
-	cursor:move;
-}
-.poll_meta_box .poll_option_container  .poll_option_single .poll_option_remove:hover,
-.poll_meta_box .poll_option_container  .poll_option_single .poll_option_single_sorter:hover{
-    background: #eee;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
+.poll-option-controls > span.option-move {
+    cursor: move;
+}
 
+.poll-option-controls > span:hover {
+    background: #176a75e8;
+}
 
+.poll-option-controls > span.option-remove {
+    background: #ff5722;
+}
+
+.poll-option-controls > span.option-remove:hover {
+    background: #da4617;
+}
 

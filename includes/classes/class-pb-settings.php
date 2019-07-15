@@ -5,7 +5,7 @@
  * Quick settings page generator for WordPress
  *
  * @package PB_Settings
- * @version 3.0.1
+ * @version 3.0.2
  * @author Pluginbazar
  * @copyright 2019 Pluginbazar.com
  * @see https://github.com/jaedm97/PB-Settings
@@ -76,15 +76,16 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 		 * @param bool $post_id
 		 * @param bool $custom_style
 		 *
-		 * @throws PB_Error
+		 * @return string|mixed
 		 */
 		function generate_fields( $settings = array(), $post_id = false, $custom_style = true ) {
 
 			if ( ! is_array( $settings ) ) {
-				throw new PB_Error( 'Invalid data provided !' );
+				return '';
 			}
 
 			$post_id = ! $post_id ? 0 : $post_id;
+			$post    = get_post( $post_id );
 
 			foreach ( $settings as $key => $setting_section ) :
 
@@ -105,7 +106,15 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 					$field_id     = str_replace( array( '[', ']' ), '', $option_id );
 
 					if ( $post_id && ! empty( $post_id ) ) {
-						$option['value']   = get_post_meta( $post_id, $option_id, true );
+
+						if ( $option_id == 'post_title' ) {
+							$option['value'] = $post->post_title;
+						} else if ( $option_id == 'content' ) {
+							$option['value'] = $post->post_content;
+						} else {
+							$option['value'] = get_post_meta( $post_id, $option_id, true );
+						}
+
 						$option['post_id'] = $post_id;
 					}
 
@@ -661,6 +670,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$required     = isset( $option['required'] ) ? $option['required'] : false;
 			$required     = $required ? "required='required'" : '';
 			$disabled     = isset( $option['disabled'] ) && $option['disabled'] ? 'disabled' : '';
+			$field_id     = str_replace( array( '[', ']' ), '', $id );
 
 			if ( empty( $value ) || ! $value ) {
 				$value = isset( $option['default'] ) ? $option['default'] : $value;
@@ -670,7 +680,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
             <input type="text" <?php echo esc_attr( $disabled ); ?> <?php echo esc_attr( $required ); ?>
 
                    name="<?php echo esc_attr( $id ); ?>"
-                   id="<?php echo esc_attr( $id ); ?>"
+                   id="<?php echo esc_attr( $field_id ); ?>"
                    placeholder="<?php echo esc_attr( $placeholder ); ?>"
                    autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
                    value="<?php echo esc_attr( $value ); ?>"/>
@@ -983,8 +993,8 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 
 		/**
-         * Return WP Timezones as Array
-         *
+		 * Return WP Timezones as Array
+		 *
 		 * @param $string
 		 * @param $option
 		 *
@@ -992,12 +1002,12 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 		 */
 		function get_timezones_array( $string, $option ) {
 
-			foreach( timezone_identifiers_list() as $time_zone ){
+			foreach ( timezone_identifiers_list() as $time_zone ) {
 				$arr_items[ $time_zone ] = str_replace( '/', ' > ', $time_zone );
 			}
 
 			return $arr_items;
-        }
+		}
 
 
 		/**
