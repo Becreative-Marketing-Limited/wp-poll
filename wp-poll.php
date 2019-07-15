@@ -58,6 +58,9 @@ class WPPollManager {
 
 		require_once( WPP_PLUGIN_DIR . 'includes/functions.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/functions-settings.php' );
+
+		require_once( WPP_PLUGIN_DIR . 'includes/template-hooks.php' );
+		require_once( WPP_PLUGIN_DIR . 'includes/template-hook-functions.php' );
 	}
 
 

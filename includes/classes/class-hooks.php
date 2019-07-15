@@ -4,7 +4,7 @@
  */
 
 
-if( ! class_exists( 'WPP_Hooks' ) ) {
+if ( ! class_exists( 'WPP_Hooks' ) ) {
 	/**
 	 * Class WPP_Hooks
 	 */
@@ -17,21 +17,49 @@ if( ! class_exists( 'WPP_Hooks' ) ) {
 
 			add_action( 'manage_poll_posts_columns', array( $this, 'add_core_poll_columns' ), 16, 1 );
 			add_action( 'manage_poll_posts_custom_column', array( $this, 'custom_columns_content' ), 10, 2 );
+
+			add_filter( 'single_template', array( $this, 'single_poll_template' ) );
+			add_filter( 'wpp_filters_get_template_part', array( $this, 'poll_external_template' ) );
 		}
 
-		public function add_core_poll_columns( $columns ) {
+
+		function poll_external_template( $template ) {
+
+			return WPP_PLUGIN_DIR . 'templates/single-poll-external/template-1.php';
+		}
+
+		/**
+		 * Filter Single Template for Poll post type
+		 *
+		 * @param $single_template
+		 *
+		 * @return string
+		 */
+		function single_poll_template( $single_template ) {
+
+			if( is_singular( 'poll' ) ) {
+				return WPP_PLUGIN_DIR . 'templates/single-poll.php';
+			}
+
+			return $single_template;
+		}
+
+
+
+		function add_core_poll_columns( $columns ) {
 
 			$new = array();
 
 			$count = 0;
-			foreach ( $columns as $col_id => $col_label ) { $count++;
+			foreach ( $columns as $col_id => $col_label ) {
+				$count ++;
 
 				if ( $count == 3 ) {
 					$new['poll-report'] = __( 'Poll Report', 'wp-poll' );
 				}
 
-				if( 'title' === $col_id ) {
-					$new[$col_id] = __( 'Poll title', 'wp-poll' );
+				if ( 'title' === $col_id ) {
+					$new[ $col_id ] = __( 'Poll title', 'wp-poll' );
 				} else {
 					$new[ $col_id ] = $col_label;
 				}
@@ -44,25 +72,26 @@ if( ! class_exists( 'WPP_Hooks' ) ) {
 			return $new;
 		}
 
-		public function custom_columns_content( $column, $post_id ) {
 
-			if( $column == 'poll-report' ):
+		function custom_columns_content( $column, $post_id ) {
 
-				$polled_data	= get_post_meta( $post_id, 'polled_data', true );
-				$poller 		= count( $polled_data );
+			global $wpp;
 
-				echo sprintf("<i>%d %s</i>", $poller, __('people polled on this', 'wp-poll') );
+			if ( $column == 'poll-report' ):
 
+				$polled_data = $wpp->get_meta( 'polled_data', $post_id, array() );
+
+				echo sprintf( "<i>%d %s</i>", count( $polled_data ), __( 'people polled on this', 'wp-poll' ) );
 				echo '<div class="row-actions">';
-				echo sprintf(  '<span class="view_report"><a href="%s" rel="permalink">'.__('View Reports', 'wp-poll').'</a></span>', "edit.php?post_type=poll&page=wpp_reports&id=".$post_id );
+				echo sprintf( '<span class="view_report"><a href="%s" rel="permalink">' . __( 'View Reports', 'wp-poll' ) . '</a></span>', "edit.php?post_type=poll&page=wpp_reports&id=" . $post_id );
 				echo '</div>';
 
 			endif;
 
-			if( $column == 'poll-date' ):
+			if ( $column == 'poll-date' ):
 
-				$time_ago = human_time_diff( get_the_time('U'), current_time('timestamp') );
-				echo "<i>$time_ago ". __('ago', 'wp-poll') ."</i>";
+				$time_ago = human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) );
+				echo "<i>$time_ago " . __( 'ago', 'wp-poll' ) . "</i>";
 
 			endif;
 		}
