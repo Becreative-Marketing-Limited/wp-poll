@@ -522,7 +522,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 			$id            = isset( $option['id'] ) ? $option['id'] : "";
 			$placeholder   = isset( $option['placeholder'] ) ? $option['placeholder'] : "";
-			$autocomplete  = isset( $option['autocomplete'] ) ? $option['autocomplete'] : "";
+			$autocomplete  = isset( $option['autocomplete'] ) ? $option['autocomplete'] : "off";
 			$value         = isset( $option['value'] ) ? $option['value'] : get_option( $id );
 			$disabled      = isset( $option['disabled'] ) && $option['disabled'] ? 'disabled' : '';
 			$field_options = isset( $option['field_options'] ) ? $option['field_options'] : array();
