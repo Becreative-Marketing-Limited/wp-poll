@@ -8,13 +8,8 @@ Admin css
 
 #poll_metabox #post_title {
     width: 100%;
-    padding: 15px 5px;
+    padding: 8px 12px;
     line-height: 20px;
-}
-
-
-.poll-options {
-
 }
 
 .poll-options .poll-option-single {
@@ -43,6 +38,11 @@ Admin css
     transition: all 0.3s;
 }
 
+.poll-option-controls > span i {
+    position: relative;
+    left: 2px;
+}
+
 .poll-option-controls > span.option-move {
     cursor: move;
 }
@@ -58,4 +58,3 @@ Admin css
 .poll-option-controls > span.option-remove:hover {
     background: #da4617;
 }
-
