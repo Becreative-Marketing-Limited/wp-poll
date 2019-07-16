@@ -3,7 +3,6 @@
  * Template - Single Poll Content
  */
 
-global $poll;
 
 /**
  * Hook: wpp_before_single_poll.
@@ -17,19 +16,23 @@ if ( post_password_required() ) {
 }
 
 ?>
-    <div id="poll-<?php the_ID(); ?>" <?php wpp_single_poll_class( '', $poll ); ?>>
-
+    <div id="poll-<?php the_ID(); ?>" <?php wpp_single_poll_class(); ?>>
 		<?php
+
+        global $poll;
+
+        $poll = wpp_get_poll();
+
 		/**
 		 * Hook: wpp_single_poll_main
-         *
-         * @hooked wpp_single_poll_title
-         * @hooked wpp_single_poll_thumb
-         * @hooked wpp_single_poll_content
-         * @hooked wpp_single_poll_options
-         * @hooked wpp_single_poll_notice
-         * @hooked wpp_single_poll_message
-         * @hooked wpp_single_poll_buttons
+		 *
+		 * @hooked wpp_single_poll_title
+		 * @hooked wpp_single_poll_thumb
+		 * @hooked wpp_single_poll_content
+		 * @hooked wpp_single_poll_options
+		 * @hooked wpp_single_poll_notice
+		 * @hooked wpp_single_poll_message
+		 * @hooked wpp_single_poll_buttons
 		 */
 		do_action( 'wpp_single_poll_main' );
 		?>
