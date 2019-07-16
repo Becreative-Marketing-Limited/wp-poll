@@ -159,7 +159,7 @@ class WPP_Post_meta_Poll {
 			array(
 				'id'      => 'poll_meta_multiple',
 				'title'   => esc_html__( 'Settings', 'wp-poll' ),
-				'details' => esc_html__( 'Allow multiple vote | Default is No', 'wp-poll' ),
+				'details' => esc_html__( 'Allow multiple vote | Default: No', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(
 					'yes' => esc_html__( 'Yes', 'wp-poll' ),
@@ -170,7 +170,7 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'      => 'poll_meta_new_option',
-				'details' => esc_html__( 'Allow Visitors to add New Option | Default is No', 'wp-poll' ),
+				'details' => esc_html__( 'Allow Visitors to add New Option | Default: No', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(
 					'yes' => esc_html__( 'Yes', 'wp-poll' ),
@@ -178,6 +178,23 @@ class WPP_Post_meta_Poll {
 				),
 				'default' => array( 'no' ),
 			),
+
+			array(
+				'id'      => 'poll_style_countdown',
+				'title' => esc_html__( 'Styles', 'wp-poll' ),
+				'details' => esc_html__( 'Select countdown timer style | Default: 1', 'wp-poll' ),
+				'type'    => 'select',
+				'args'    => array(
+					'1' => esc_html__( 'Style - 1', 'wp-poll' ),
+					'2'  => esc_html__( 'Style - 2', 'wp-poll' ),
+					'3'  => esc_html__( 'Style - 3', 'wp-poll' ),
+					'4'  => esc_html__( 'Style - 4', 'wp-poll' ),
+					'5'  => esc_html__( 'Style - 5', 'wp-poll' ),
+				),
+				'default' => array( '1' ),
+			),
+
+
 		);
 	}
 }

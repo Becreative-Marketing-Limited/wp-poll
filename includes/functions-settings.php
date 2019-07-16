@@ -14,8 +14,29 @@ $pages['woc_options'] = array(
 
 		array(
 			'title'   => esc_html__( 'General Settings', 'wp-poll' ),
-			'options' => array()
+			'options' => array(
+				array(
+					'id'       => 'wpp_btn_text_new_option',
+					'title'    => esc_html__( 'Buttons Text', 'wp-poll' ),
+					'details'  => esc_html__( 'New option button', 'wp-poll' ),
+					'placeholder'  => esc_html__( 'New Option', 'wp-poll' ),
+					'type'     => 'text',
+				),
+				array(
+					'id'       => 'wpp_btn_text_submit',
+					'details'  => esc_html__( 'Submit button', 'wp-poll' ),
+					'placeholder'  => esc_html__( 'Submit now', 'wp-poll' ),
+					'type'     => 'text',
+				),
+				array(
+					'id'       => 'wpp_btn_text_results',
+					'details'  => esc_html__( 'Results button', 'wp-poll' ),
+					'placeholder'  => esc_html__( 'Results', 'wp-poll' ),
+					'type'     => 'text',
+				),
+			)
 		),
+
 
 		array(
 			'title'   => esc_html__( 'Poll Archive', 'wp-poll' ),
@@ -43,6 +64,8 @@ $pages['woc_options'] = array(
 				),
 			)
 		),
+
+
 	),
 );
 

@@ -8,7 +8,6 @@
     $(function () {
         $(".poll-options").sortable({handle: ".option-move", revert: true});
         $(".poll_option_container").sortable({handle: ".poll_option_single_sorter"});
-        $("#poll_deadline").datepicker({minDate: new Date, dateFormat: 'dd-mm-yy'});
     });
 
 
