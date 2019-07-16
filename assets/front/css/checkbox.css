@@ -22,7 +22,7 @@
 .wpp-custom label {
 	display: block;
 	position: relative;
-	padding: 0 0 0 80px;
+	padding: 0 0 0 65px;
 	vertical-align: top;
 	cursor: pointer;
 	-webkit-transition: color 0.3s;
@@ -32,8 +32,9 @@
 .wpp-custom input[type="checkbox"],
 .wpp-custom input[type="radio"],
 .wpp-custom label::before {
-	width: 36px;
-	height: 36px;
+	margin: 0;
+	width: 44px;
+	height: 44px;
 	top: 50%;
 	left: 0;
 	position: absolute;
