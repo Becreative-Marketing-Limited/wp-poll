@@ -32,11 +32,11 @@ if ( ! class_exists( 'WPP_Post_types' ) ) {
 			 * Register Post Type Poll
 			 */
 			$this->register_post_type( 'poll', array(
-				'singular'      => esc_html__( 'Poll', 'wp-poll' ),
-				'plural'        => esc_html__( 'All Polls', 'wp-poll' ),
-				'menu_icon'     => 'dashicons-chart-bar',
-				'menu_position' => 15,
-				'supports'      => array( 'thumbnail' ),
+				'singular'          => esc_html__( 'Poll', 'wp-poll' ),
+				'plural'            => esc_html__( 'All Polls', 'wp-poll' ),
+				'menu_icon'         => 'dashicons-chart-bar',
+				'menu_position'     => 15,
+				'supports'          => array( 'thumbnail' ),
 			) );
 
 			do_action( 'wpp_register_post_types', $this );

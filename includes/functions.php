@@ -1,8 +1,10 @@
 <?php
-/*
-* @Author 		Jaed Mosharraf
-* Copyright: 	2015 Jaed Mosharraf
-*/
+/**
+ * All Functions
+ *
+ * @author Pluginbazar
+ */
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

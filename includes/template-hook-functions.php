@@ -54,13 +54,13 @@ if ( ! function_exists( 'wpp_single_poll_notice' ) ) {
 	}
 }
 
-if ( ! function_exists( 'wpp_single_poll_message' ) ) {
+if ( ! function_exists( 'wpp_single_poll_countdown' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
 	 */
-	function wpp_single_poll_message() {
+	function wpp_single_poll_countdown() {
 
-		wpp_get_template( 'single-poll/message.php' );
+		wpp_get_template( 'single-poll/countdown.php' );
 	}
 }
 

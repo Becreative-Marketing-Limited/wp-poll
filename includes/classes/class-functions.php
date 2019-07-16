@@ -5,9 +5,11 @@
  * @author Pluginbazar
  */
 
-if ( ! defined('ABSPATH')) exit;  // if direct access 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}  // if direct access
 
-if( ! class_exists( 'WPP_Functions' ) ) {
+if ( ! class_exists( 'WPP_Functions' ) ) {
 	/**
 	 * Class WPP_Functions
 	 */
@@ -15,8 +17,36 @@ if( ! class_exists( 'WPP_Functions' ) ) {
 
 
 		/**
+		 * Return button text for button
+		 *
+		 * @param string $button
+		 *
+		 * @return mixed|string|void
+		 */
+		function get_button_text( $button = '' ) {
+
+			$button_text = esc_html__( 'Submit', 'wp-poll' );
+
+			if ( ! in_array( $button, array( 'new_option', 'submit', 'results' ) ) || empty( $button ) ) {
+				return $button_text;
+			}
+
+			if ( $button == 'new_option' ) {
+				$button_text = $this->get_option( 'wpp_btn_text_new_option', esc_html__( 'New option', 'wp-poll' ) );
+			} else if ( $button == 'submit' ) {
+				$button_text = $this->get_option( 'wpp_btn_text_submit', esc_html__( 'Submit', 'wp-poll' ) );
+			}
+			if ( $button == 'results' ) {
+				$button_text = $this->get_option( 'wpp_btn_text_results', esc_html__( 'Results', 'wp-poll' ) );
+			}
+
+			return apply_filters( 'wpp_filters_button_text', $button_text, $button );
+		}
+
+
+		/**
 		 * Return Post Meta Value
-		 * 
+		 *
 		 * @param bool $meta_key
 		 * @param bool $post_id
 		 * @param string $default

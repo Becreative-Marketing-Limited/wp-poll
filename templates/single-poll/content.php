@@ -2,18 +2,18 @@
 /**
  * Template - Single Poll - Content
  *
+ * @package single-poll/content
  * @author Pluginbazar
  */
 
-if ( ! defined('ABSPATH')) exit;  // if direct access 
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}  // if direct access
 
 global $poll;
 
-echo '<pre>'; print_r( $poll->get_id() ); echo '</pre>';
-	
-
-	echo '<div class="wpp_content">';
-	the_content();
-	echo '</div>';
 ?>
+<div class="wpp-content">
+	<?php echo apply_filters( 'the_content', wp_kses_post( $poll->get_poll_content() ) ); ?>
+</div>
+
