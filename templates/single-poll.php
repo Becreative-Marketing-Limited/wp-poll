@@ -20,7 +20,7 @@ do_action( 'wpp_before_single_poll_template' );
 
 <?php while ( have_posts() ) : the_post(); ?>
 
-    <?php wpp_get_template_part( 'content', 'single-poll' ); ?>
+	<?php wpp_get_template_part( 'content', 'single-poll' ); ?>
 
 <?php endwhile; // end of the loop. ?>
 

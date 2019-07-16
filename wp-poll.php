@@ -55,6 +55,7 @@ class WPPollManager {
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-hooks.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-post-meta.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-shortcodes.php' );
+		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll.php' );
 
 		require_once( WPP_PLUGIN_DIR . 'includes/functions.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/functions-settings.php' );

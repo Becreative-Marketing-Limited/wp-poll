@@ -9,6 +9,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
+if( ! function_exists( 'wpp_get_poll' ) ) {
+	/**
+     * Return Single Poll object
+     *
+     * @global WPP_Poll $poll
+     *
+	 * @param bool $poll_id
+	 *
+	 * @return WPP_Poll
+	 */
+	function wpp_get_poll( $poll_id = false ) {
+
+		return new WPP_Poll( $poll_id );
+	}
+}
+
+
 if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 	/**
      * Return poll option HTML
@@ -123,12 +140,11 @@ if ( ! function_exists( 'wpp_get_ip_address' ) ) {
 
 if ( ! function_exists( 'wpp_single_poll_class' ) ) {
 	/**
-	 * Return single poll classes
-	 *
+     * Return single poll classes
+     *
 	 * @param string $classes
-	 * @param null $product_id
 	 */
-	function wpp_single_poll_class( $classes = '', $product_id = null ) {
+	function wpp_single_poll_class( $classes = '' ) {
 
 		if ( ! is_array( $classes ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );

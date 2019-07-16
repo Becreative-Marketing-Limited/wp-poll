@@ -1,13 +1,16 @@
 <?php
-/*
-* @Author 		Jaed Mosharraf
-* Copyright: 	2015 Jaed Mosharraf
-*/
-
+/**
+ * Template - Single Poll - Content
+ *
+ * @author Pluginbazar
+ */
 
 if ( ! defined('ABSPATH')) exit;  // if direct access 
 
-	if( empty( $poll_id ) ) $poll_id = get_the_ID();
+
+global $poll;
+
+echo '<pre>'; print_r( $poll->get_id() ); echo '</pre>';
 	
 
 	echo '<div class="wpp_content">';
