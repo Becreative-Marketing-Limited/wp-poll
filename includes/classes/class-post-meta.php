@@ -150,6 +150,7 @@ class WPP_Post_meta_Poll {
 				'title'         => esc_html__( 'Deadline', 'wp-poll' ),
 				'details'       => esc_html__( 'Specify a date when this poll will end. Leave empty to ignore this option', 'wp-poll' ),
 				'type'          => 'datepicker',
+				'autocomplete'          => 'off',
 				'placeholder'   => date( 'Y-m-d' ),
 				'field_options' => array(
 					'dateFormat' => 'yy-mm-dd',

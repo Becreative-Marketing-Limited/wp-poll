@@ -69,7 +69,7 @@
 	width: 32px;
 	height: 32px;
 	top: 50%;
-	left: 5px;
+	left: 6px;
 	pointer-events: none;
 	transform: translateY(-50%);
 }
@@ -88,21 +88,19 @@
 .wpp-circle label::before {
 	width: 30px;
 	height: 30px;
-	margin-top: -15px;
 	left: 10px;
 	position: absolute;
 }
 
 .wpp-circle label::before {
-	background-color: #fff;
+	background-color: #ddd;
 	border: none;
 }
 
 .wpp-circle svg {
-	width: 70px;
-	height: 70px;
-	margin-top: -35px;
-	left: -10px;
+	width: 56px;
+	height: 56px;
+	left: 27px;
 }
 
 .wpp-circle svg path {

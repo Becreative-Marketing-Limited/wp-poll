@@ -75,7 +75,7 @@
 */
 
 .wpp-option-list-1 {
-    max-width: 300px;
+    max-width: 400px;
 }
 
 .wpp-option-list-1 .wpp-option-single {
@@ -104,8 +104,8 @@
     top: 50%;
     position: absolute;
     transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     border-radius: 4px;
     background: #fff;
     border: 2px solid rgba(0, 0, 0, 0.1);
@@ -140,26 +140,6 @@
     box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
 }
 
-
-/**
-* Poll Option - 2
-*/
-
-.wpp-option-list-2 {
-    margin-bottom: 30px;
-    max-width: 350px;
-}
-
-.wpp-option-list-2 .wpp-option-single {
-    border-bottom: 1px solid #eee;
-    padding: 32px 0;
-    display: block;
-}
-
-.wpp-option-list-2 .wpp-option-single:last-child {
-    border-bottom: 0;
-}
-
 /**
 * Poll Option - 2,3
 */
@@ -179,6 +159,10 @@
     border-bottom: 0;
 }
 
+.wpp-option-list-2.wpp-circle svg {
+    left: -3px;
+}
+
 /**
 * Poll Option - 4,5
 */
@@ -196,7 +180,11 @@
 }
 
 .wpp-option-list-4.wpp-custom svg {
-    left: 27px;
+    left: 26px;
+}
+
+.wpp-option-list-4.wpp-circle svg {
+    left: 17px;
 }
 
 /**
@@ -220,24 +208,7 @@
     left: 37px;
 }
 
-/**
-* Poll Option - 8,9
-*/
-
-.wpp-option-list-8 {
-    margin-bottom: 30px;
-    max-width: 400px;
-}
-
-.wpp-option-list-8 .wpp-option-single {
-    border-left: 6px solid #4caf50;
-    padding: 25px 20px;
-    display: block;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 20px rgba(0, 26, 169, 0.09);
-}
-
-.wpp-option-list-8.wpp-custom svg {
+.wpp-option-list-6.wpp-circle svg {
     left: 27px;
 }
 
@@ -260,6 +231,10 @@
 
 .wpp-option-list-8.wpp-custom svg {
     left: 27px;
+}
+
+.wpp-option-list-8.wpp-circle svg {
+    left: 17px;
 }
 
 /**
@@ -272,7 +247,6 @@
 }
 
 .wpp-option-list-10 .wpp-option-single {
-    border-left: 6px solid #028471;
     padding: 25px 20px;
     display: block;
     margin-bottom: 20px;
@@ -286,10 +260,17 @@
     left: 27px;
 }
 
+.wpp-option-list-10.wpp-circle svg {
+    left: 17px;
+}
+
 .wpp-custom.wpp-option-list-10 svg path {
     stroke: #fff;
 }
 
 .wpp-option-list-10 label::before {
     border-color: #fff;
+}
+.wpp-option-list-10.wpp-circle label::before {
+    background-color: #fff;
 }
