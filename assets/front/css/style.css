@@ -5,6 +5,12 @@
 * Normalize CSS
 */
 
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 [class*="wpp-option-list"] {
     margin-bottom: 20px;
 }
@@ -51,9 +57,16 @@
     margin-bottom: 15px;
 }
 
+.wpp-option-single {
+    word-break: break-word;
+    position: relative;
+}
+
 .wpp-option-single label {
     font-size: 16px;
     line-height: 26px;
+    font-weight: normal;
+    margin: 0;
 }
 
 
@@ -72,7 +85,6 @@
     margin-bottom: 15px;
     border-radius: 5px;
     line-height: normal;
-    word-break: break-word;
 }
 
 .wpp-option-list-1 .wpp-option-single input {
@@ -139,13 +151,145 @@
 }
 
 .wpp-option-list-2 .wpp-option-single {
-    position: relative;
     border-bottom: 1px solid #eee;
-    word-break: break-word;
     padding: 32px 0;
     display: block;
 }
 
 .wpp-option-list-2 .wpp-option-single:last-child {
     border-bottom: 0;
+}
+
+/**
+* Poll Option - 2,3
+*/
+
+.wpp-option-list-2 {
+    margin-bottom: 30px;
+    max-width: 400px;
+}
+
+.wpp-option-list-2 .wpp-option-single {
+    border-bottom: 1px solid #eee;
+    padding: 32px 0;
+    display: block;
+}
+
+.wpp-option-list-2 .wpp-option-single:last-child {
+    border-bottom: 0;
+}
+
+/**
+* Poll Option - 4,5
+*/
+
+.wpp-option-list-4 {
+    margin-bottom: 30px;
+    max-width: 400px;
+}
+
+.wpp-option-list-4 .wpp-option-single {
+    border: 1px solid #eee;
+    padding: 25px 20px;
+    display: block;
+    margin-bottom: -1px
+}
+
+.wpp-option-list-4.wpp-custom svg {
+    left: 27px;
+}
+
+/**
+* Poll Option - 6,7
+*/
+
+.wpp-option-list-6 {
+    margin-bottom: 50px;
+    max-width: 400px;
+}
+
+.wpp-option-list-6 .wpp-option-single {
+    border-right: 5px solid rgba(0, 0, 0, 0.07);
+    border-left: 5px solid rgba(0, 0, 0, 0.07);
+    padding: 30px 30px;
+    display: block;
+    margin-bottom: 30px;
+    border-radius: 12px;
+}
+.wpp-option-list-6.wpp-custom svg {
+    left: 37px;
+}
+
+/**
+* Poll Option - 8,9
+*/
+
+.wpp-option-list-8 {
+    margin-bottom: 30px;
+    max-width: 400px;
+}
+
+.wpp-option-list-8 .wpp-option-single {
+    border-left: 6px solid #4caf50;
+    padding: 25px 20px;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0, 26, 169, 0.09);
+}
+
+.wpp-option-list-8.wpp-custom svg {
+    left: 27px;
+}
+
+/**
+* Poll Option - 8,9
+*/
+
+.wpp-option-list-8 {
+    margin-bottom: 40px;
+    max-width: 400px;
+}
+
+.wpp-option-list-8 .wpp-option-single {
+    border-left: 6px solid #4caf50;
+    padding: 25px 20px;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0, 26, 169, 0.09);
+}
+
+.wpp-option-list-8.wpp-custom svg {
+    left: 27px;
+}
+
+/**
+* Poll Option - 10,11
+*/
+
+.wpp-option-list-10 {
+    margin-bottom: 40px;
+    max-width: 400px;
+}
+
+.wpp-option-list-10 .wpp-option-single {
+    border-left: 6px solid #028471;
+    padding: 25px 20px;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0, 26, 169, 0.09);
+    background-image: linear-gradient(-225deg, #009688 0%, #89d432 100%);
+    color: #fff;
+    border-radius: 4px;
+}
+
+.wpp-option-list-10.wpp-custom svg {
+    left: 27px;
+}
+
+.wpp-custom.wpp-option-list-10 svg path {
+    stroke: #fff;
+}
+
+.wpp-option-list-10 label::before {
+    border-color: #fff;
 }
