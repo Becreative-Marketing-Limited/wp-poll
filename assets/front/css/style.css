@@ -51,6 +51,11 @@
     margin-bottom: 15px;
 }
 
+.wpp-option-single label {
+    font-size: 16px;
+    line-height: 26px;
+}
+
 
 /**
 * Poll Option - 1

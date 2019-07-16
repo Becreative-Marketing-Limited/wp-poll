@@ -1,25 +1,25 @@
-.ac-custom h2 {
+.wpp-custom h2 {
 	font-size: 3em;
 	font-weight: 300;
 	padding: 0 0 0.5em;
 	margin: 0 0 30px;
 }
 
-.ac-custom ul,
-.ac-custom ol {
+.wpp-custom ul,
+.wpp-custom ol {
 	list-style: none;
 	padding: 0;
 	margin: 0 auto;
 	max-width: 800px;
 }
 
-.ac-custom li {
+.wpp-custom li {
 	margin: 0 auto;
 	padding: 2em 0;
 	position: relative;
 }
 
-.ac-custom label {
+.wpp-custom label {
 	display: block;
 	position: relative;
 	padding: 0 0 0 80px;
@@ -29,9 +29,9 @@
 	transition: color 0.3s;
 }
 
-.ac-custom input[type="checkbox"],
-.ac-custom input[type="radio"],
-.ac-custom label::before {
+.wpp-custom input[type="checkbox"],
+.wpp-custom input[type="radio"],
+.wpp-custom label::before {
 	width: 36px;
 	height: 36px;
 	top: 50%;
@@ -41,8 +41,8 @@
 	transform: translateY(-50%);
 }
 
-.ac-custom input[type="checkbox"],
-.ac-custom input[type="radio"] {
+.wpp-custom input[type="checkbox"],
+.wpp-custom input[type="radio"] {
 	opacity: 0;
 	-webkit-appearance: none;
 	display: inline-block;
@@ -50,20 +50,20 @@
 	z-index: 100;
 }
 
-.ac-custom label::before {
+.wpp-custom label::before {
 	content: '';
 	border: 4px solid #ddd;
 	-webkit-transition: opacity 0.3s;
 	transition: opacity 0.3s;
 }
 
-.ac-radio label::before {
+.wpp-radio label::before {
 	border-radius: 50%;
 }
 
 /* General SVG and path styles */
 
-.ac-custom svg {
+.wpp-custom svg {
 	position: absolute;
 	width: 32px;
 	height: 32px;
@@ -73,7 +73,7 @@
 	transform: translateY(-50%);
 }
 
-.ac-custom svg path {
+.wpp-custom svg path {
 	stroke: #4CAF50;
 	stroke-width: 13px;
 	stroke-linecap: round;
@@ -81,12 +81,10 @@
 	fill: none;
 }
 
-/* Specific input, SVG and path styles */
-
 /* Circle */
-.ac-circle input[type="checkbox"],
-.ac-circle input[type="radio"],
-.ac-circle label::before {
+.wpp-circle input[type="checkbox"],
+.wpp-circle input[type="radio"],
+.wpp-circle label::before {
 	width: 30px;
 	height: 30px;
 	margin-top: -15px;
@@ -94,55 +92,55 @@
 	position: absolute;
 }
 
-.ac-circle label::before {
+.wpp-circle label::before {
 	background-color: #fff;
 	border: none;
 }
 
-.ac-circle svg {
+.wpp-circle svg {
 	width: 70px;
 	height: 70px;
 	margin-top: -35px;
 	left: -10px;
 }
 
-.ac-circle svg path {
+.wpp-circle svg path {
 	stroke-width: 5px;
 }
 
 /* Box Fill */
-.ac-boxfill svg path {
+.wpp-boxfill svg path {
 	stroke-width: 8px;
 }
 
 /* Swirl */
-.ac-swirl svg path {
+.wpp-swirl svg path {
 	stroke-width: 8px;
 }
 
 /* List */
-.ac-list ol {
+.wpp-list ol {
 	list-style: decimal;
 	list-style-position: inside;
 }
 
-.ac-list ol li {
+.wpp-list ol li {
 	font-size: 2em;
 	padding: 1em 1em 0 2em;
 	text-indent: -40px;
 }
 
-.ac-list ol li label {
+.wpp-list ol li label {
 	font-size: 1em;
 	text-indent: 0;
 	padding-left: 30px;
 }
 
-.ac-list label::before {
+.wpp-list label::before {
 	display: none;
 }
 
-.ac-list svg {
+.wpp-list svg {
 	width: 100%;
 	height: 80px;
 	left: 0;
@@ -150,6 +148,6 @@
 	margin-top: 0;
 }
 
-.ac-list svg path {
+.wpp-list svg path {
 	stroke-width: 4px;
 }
