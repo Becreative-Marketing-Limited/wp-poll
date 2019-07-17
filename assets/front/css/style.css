@@ -273,7 +273,7 @@
 }
 
 /**
-* Poll Option - 2,3
+* Poll Option - 2
 */
 
 .wpp-option-list-2 {
@@ -296,39 +296,39 @@
 }
 
 /**
-* Poll Option - 4,5
+* Poll Option - 3
 */
 
-.wpp-option-list-4 {
+.wpp-option-list-3 {
     margin-bottom: 30px;
     max-width: 400px;
 }
 
-.wpp-option-list-4 .wpp-option-single {
+.wpp-option-list-3 .wpp-option-single {
     border: 1px solid #eee;
     padding: 25px 20px;
     display: block;
     margin-bottom: -1px
 }
 
-.wpp-option-list-4.wpp-custom svg {
+.wpp-option-list-3.wpp-custom svg {
     left: 26px;
 }
 
-.wpp-option-list-4.wpp-circle svg {
+.wpp-option-list-3.wpp-circle svg {
     left: 17px;
 }
 
 /**
-* Poll Option - 6,7
+* Poll Option - 4
 */
 
-.wpp-option-list-6 {
+.wpp-option-list-4 {
     margin-bottom: 50px;
     max-width: 400px;
 }
 
-.wpp-option-list-6 .wpp-option-single {
+.wpp-option-list-4 .wpp-option-single {
     border-right: 5px solid rgba(0, 0, 0, 0.07);
     border-left: 5px solid rgba(0, 0, 0, 0.07);
     padding: 30px 30px;
@@ -336,24 +336,24 @@
     margin-bottom: 30px;
     border-radius: 12px;
 }
-.wpp-option-list-6.wpp-custom svg {
+.wpp-option-list-4.wpp-custom svg {
     left: 37px;
 }
 
-.wpp-option-list-6.wpp-circle svg {
+.wpp-option-list-4.wpp-circle svg {
     left: 27px;
 }
 
 /**
-* Poll Option - 8,9
+* Poll Option - 5
 */
 
-.wpp-option-list-8 {
+.wpp-option-list-5 {
     margin-bottom: 40px;
     max-width: 400px;
 }
 
-.wpp-option-list-8 .wpp-option-single {
+.wpp-option-list-5 .wpp-option-single {
     border-left: 6px solid #4caf50;
     padding: 25px 20px;
     display: block;
@@ -361,24 +361,24 @@
     box-shadow: 0 5px 20px rgba(0, 26, 169, 0.09);
 }
 
-.wpp-option-list-8.wpp-custom svg {
+.wpp-option-list-5.wpp-custom svg {
     left: 27px;
 }
 
-.wpp-option-list-8.wpp-circle svg {
+.wpp-option-list-5.wpp-circle svg {
     left: 17px;
 }
 
 /**
-* Poll Option - 10,11
+* Poll Option - 6
 */
 
-.wpp-option-list-10 {
+.wpp-option-list-6 {
     margin-bottom: 40px;
     max-width: 400px;
 }
 
-.wpp-option-list-10 .wpp-option-single {
+.wpp-option-list-6 .wpp-option-single {
     padding: 25px 20px;
     display: block;
     margin-bottom: 20px;
@@ -388,11 +388,11 @@
     border-radius: 4px;
 }
 
-.wpp-option-list-10.wpp-custom svg {
+.wpp-option-list-6.wpp-custom svg {
     left: 27px;
 }
 
-.wpp-option-list-10.wpp-circle svg {
+.wpp-option-list-6.wpp-circle svg {
     left: 17px;
 }
 
