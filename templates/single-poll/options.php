@@ -3,24 +3,48 @@
  * Single Poll - Options
  */
 
-if ( ! defined('ABSPATH')) exit;  // if direct access 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}  // if direct access
 
 global $poll;
 
+$options_name = sprintf( 'poll_%s_options%s', $poll->get_id(), $poll->can_vote_multiple() ? '[]' : '' );
+$options_type = $poll->can_vote_multiple() ? 'checkbox' : 'radio';
 
 ?>
 <div <?php wpp_options_single_class(); ?>>
 
-    <div class="wpp-option-single">
-        <input type="checkbox" name="england" id="england">
-        <label for="england">England</label>
-    </div>
+	<?php
+	foreach ( $poll->get_poll_options() as $option_id => $option ) :
 
-    <div class="wpp-option-single">
-        <input type="checkbox" name="england" id="bangladesh">
-        <label for="bangladesh">Bangladesh</label>
-    </div>
+		$label = isset( $option['label'] ) ? $option['label'] : '';
+		$thumb = isset( $option['thumb'] ) ? $option['thumb'] : '';
+		$thumb_class = ! empty( $thumb ) ? 'has-thumb' : '';
 
+		?>
+        <div class="wpp-option-single <?php echo esc_attr( $thumb_class ); ?>">
 
+            <div class="wpp-option-input">
+                <input type="<?php echo esc_attr( $options_type ); ?>"
+                       name="<?php echo esc_attr( $options_name ); ?>"
+                       id="option-<?php echo esc_attr( $option_id ); ?>"
+                       value="<?php esc_attr( $option_id ); ?>">
+                <label for="option-<?php echo esc_attr( $option_id ); ?>"><?php echo esc_html( $label ); ?></label>
+            </div>
+
+			<?php if ( ! empty( $thumb ) ) : ?>
+                <div class="wpp-option-thumb">
+                    <label for="option-<?php echo esc_attr( $option_id ); ?>">
+                        <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
+                    </label>
+                </div>
+			<?php endif; ?>
+
+        </div>
+	<?php
+
+	endforeach;
+	?>
 
 </div>

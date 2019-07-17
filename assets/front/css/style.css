@@ -32,7 +32,7 @@
 }
 
 .wpp-buttons .wpp-button {
-    margin:  0 7px 7px 0;
+    margin: 0 7px 7px 0;
 }
 
 .wpp-button-orange {
@@ -50,7 +50,7 @@
 .wpp-button:hover, .wpp-button:focus {
     background: #2a2a2a;
     color: #fff;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .wpp_poll_title {
@@ -107,7 +107,7 @@
     display: inline-block;
     margin-right: 25px;
     padding-right: 25px;
-    border-right: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
     font-size: 16px;
     line-height: 24px;
     text-align: center;
@@ -132,7 +132,7 @@
 .wpp-countdown-timer-3 > span {
     display: inline-block;
     margin-right: 25px;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     font-size: 16px;
     text-align: center;
     min-width: 120px;
@@ -223,6 +223,7 @@
     position: absolute;
     opacity: 0;
 }
+
 .wpp-option-list-1 .wpp-option-single input + label {
     position: relative;
     cursor: pointer;
@@ -336,6 +337,7 @@
     margin-bottom: 30px;
     border-radius: 12px;
 }
+
 .wpp-option-list-4.wpp-custom svg {
     left: 37px;
 }
@@ -403,6 +405,7 @@
 .wpp-option-list-10 label::before {
     border-color: #fff;
 }
+
 .wpp-option-list-10.wpp-circle label::before {
     background-color: #fff;
 }

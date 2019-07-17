@@ -159,7 +159,7 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'      => 'poll_meta_multiple',
-				'title'   => esc_html__( 'Settings', 'wp-poll' ),
+				'title'   => esc_html__( 'Multiple Vote', 'wp-poll' ),
 				'details' => esc_html__( 'Allow multiple vote | Default: No', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(
@@ -171,6 +171,7 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'      => 'poll_meta_new_option',
+				'title' => esc_html__( 'New Option', 'wp-poll' ),
 				'details' => esc_html__( 'Allow Visitors to add New Option | Default: No', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(
@@ -182,7 +183,7 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'      => 'poll_style_countdown',
-				'title'   => esc_html__( 'Countdown Styles', 'wp-poll' ),
+				'title'   => esc_html__( 'Timer Styles', 'wp-poll' ),
 				'details' => esc_html__( 'Countdown timer style | Default: 1', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(
