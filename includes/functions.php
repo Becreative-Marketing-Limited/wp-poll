@@ -11,15 +11,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
-if( ! function_exists( 'wpp_get_poll' ) ) {
+if ( ! function_exists( 'wpp_get_poll' ) ) {
 	/**
-     * Return Single Poll object
-     *
-     * @global WPP_Poll $poll
-     *
+	 * Return Single Poll object
+	 *
 	 * @param bool $poll_id
 	 *
 	 * @return WPP_Poll
+	 * @global WPP_Poll $poll
+	 *
 	 */
 	function wpp_get_poll( $poll_id = false ) {
 
@@ -30,8 +30,8 @@ if( ! function_exists( 'wpp_get_poll' ) ) {
 
 if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 	/**
-     * Return poll option HTML
-     *
+	 * Return poll option HTML
+	 *
 	 * @param bool $unique_id
 	 * @param array $args
 	 *
@@ -142,8 +142,8 @@ if ( ! function_exists( 'wpp_get_ip_address' ) ) {
 
 if ( ! function_exists( 'wpp_single_poll_class' ) ) {
 	/**
-     * Return single poll classes
-     *
+	 * Return single poll classes
+	 *
 	 * @param string $classes
 	 */
 	function wpp_single_poll_class( $classes = '' ) {
@@ -155,6 +155,56 @@ if ( ! function_exists( 'wpp_single_poll_class' ) ) {
 		$classes[] = 'single-poll';
 
 		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'wpp_single_poll_class', $classes ) ) ) );
+	}
+}
+
+
+if ( ! function_exists( 'wpp_options_single_class' ) ) {
+	/**
+	 * Return options single classes
+	 *
+	 * @param string $classes
+	 * @param WPP_Poll|null $poll
+	 */
+	function wpp_options_single_class( $classes = '', \WPP_Poll $poll = null ) {
+
+		if ( ! is_array( $classes ) ) {
+			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
+		}
+
+		if ( ! $poll ) {
+			global $poll;
+		}
+
+		$options_theme = $poll->get_style( 'options_theme' );
+
+
+		// Check multiple or single vote
+		$classes[] = $poll->can_vote_multiple() ? 'wpp-checkbox' : 'wpp-radio';
+
+
+		// Add Theme class
+        $classes[] = sprintf( 'wpp-option-list-%s', $options_theme );
+
+
+		// Add common class excluding for Theme - 1
+		if( $options_theme != 1 ) {
+			$classes[] = 'wpp-custom';
+        }
+
+
+		// Add checkbox animation class excluding for Theme - 1
+		if( $options_theme != 1 && $poll->can_vote_multiple() ) {
+			$classes[] = sprintf( 'wpp-%s', $poll->get_style( 'animation_checkbox' ) );
+		}
+
+
+		// Add radio animation class excluding for Theme - 1
+		if( $options_theme != 1 && ! $poll->can_vote_multiple() ) {
+			$classes[] = sprintf( 'wpp-%s', $poll->get_style( 'animation_radio' ) );
+		}
+
+		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'wpp_options_single_class', $classes ) ) ) );
 	}
 }
 

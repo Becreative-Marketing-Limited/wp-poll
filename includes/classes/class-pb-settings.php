@@ -763,7 +763,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$disabled = isset( $option['disabled'] ) && $option['disabled'] ? 'disabled' : '';
 
 			if ( empty( $value ) || ! $value ) {
-				$value = isset( $option['default'] ) ? $option['default'] : $value;
+				$value = isset( $option['default'] ) ? reset( $option['default'] ) : $value;
 			}
 
 			?>

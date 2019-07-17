@@ -58,7 +58,7 @@ class WPP_Post_meta_Poll {
 
 			$field_id = isset( $field['id'] ) ? $field['id'] : '';
 
-			if( in_array( $field_id, array( 'post_title', 'post_content' ) ) || empty( $field_id ) ) {
+			if ( in_array( $field_id, array( 'post_title', 'post_content' ) ) || empty( $field_id ) ) {
 				continue;
 			}
 
@@ -150,7 +150,7 @@ class WPP_Post_meta_Poll {
 				'title'         => esc_html__( 'Deadline', 'wp-poll' ),
 				'details'       => esc_html__( 'Specify a date when this poll will end. Leave empty to ignore this option', 'wp-poll' ),
 				'type'          => 'datepicker',
-				'autocomplete'          => 'off',
+				'autocomplete'  => 'off',
 				'placeholder'   => date( 'Y-m-d' ),
 				'field_options' => array(
 					'dateFormat' => 'yy-mm-dd',
@@ -182,17 +182,59 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'      => 'poll_style_countdown',
-				'title' => esc_html__( 'Styles', 'wp-poll' ),
-				'details' => esc_html__( 'Select countdown timer style | Default: 1', 'wp-poll' ),
+				'title'   => esc_html__( 'Countdown Styles', 'wp-poll' ),
+				'details' => esc_html__( 'Countdown timer style | Default: 1', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(
 					'1' => esc_html__( 'Style - 1', 'wp-poll' ),
-					'2'  => esc_html__( 'Style - 2', 'wp-poll' ),
-					'3'  => esc_html__( 'Style - 3', 'wp-poll' ),
-					'4'  => esc_html__( 'Style - 4', 'wp-poll' ),
-					'5'  => esc_html__( 'Style - 5', 'wp-poll' ),
+					'2' => esc_html__( 'Style - 2', 'wp-poll' ),
+					'3' => esc_html__( 'Style - 3', 'wp-poll' ),
+					'4' => esc_html__( 'Style - 4', 'wp-poll' ),
+					'5' => esc_html__( 'Style - 5', 'wp-poll' ),
 				),
 				'default' => array( '1' ),
+			),
+
+			array(
+				'id'      => 'poll_options_theme',
+				'title'   => esc_html__( 'Options Theme', 'wp-poll' ),
+				'details' => esc_html__( 'Options theme style | Default: 1', 'wp-poll' ),
+				'type'    => 'select',
+				'args'    => array(
+					'1' => esc_html__( 'Theme - 1', 'wp-poll' ),
+					'2' => esc_html__( 'Theme - 2', 'wp-poll' ),
+					'3' => esc_html__( 'Theme - 3', 'wp-poll' ),
+					'4' => esc_html__( 'Theme - 4', 'wp-poll' ),
+					'5' => esc_html__( 'Theme - 5', 'wp-poll' ),
+					'6' => esc_html__( 'Theme - 6', 'wp-poll' ),
+				),
+				'default' => array( '1' ),
+			),
+
+			array(
+				'id'      => 'poll_animation_checkbox',
+				'title' => esc_html__( 'Animations', 'wp-poll' ),
+				'details' => esc_html__( 'Animations for Multiple selections (Input type - Checkbox) | Default: Checkmark', 'wp-poll' ),
+				'type'    => 'select',
+				'args'    => array(
+					'cross'     => esc_html__( 'Cross', 'wp-poll' ),
+					'boxfill'   => esc_html__( 'Box Fill', 'wp-poll' ),
+					'checkmark' => esc_html__( 'Checkmark', 'wp-poll' ),
+					'diagonal'  => esc_html__( 'Diagonal', 'wp-poll' ),
+				),
+				'default' => array( 'checkmark' ),
+			),
+
+			array(
+				'id'      => 'poll_animation_radio',
+				'details' => esc_html__( 'Animations for Single selection (Input type - Radio) | Default: Fill', 'wp-poll' ),
+				'type'    => 'select',
+				'args'    => array(
+					'fill'   => esc_html__( 'Fill', 'wp-poll' ),
+					'circle' => esc_html__( 'Circle', 'wp-poll' ),
+					'swirl'  => esc_html__( 'Swirl', 'wp-poll' ),
+				),
+				'default' => array( 'fill' ),
 			),
 
 

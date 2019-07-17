@@ -39,6 +39,36 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
+		 * Return poll options as array
+		 *
+		 * @return mixed|void
+		 */
+		function get_poll_options() {
+
+			$_poll_options = array();
+			$poll_options  = $this->get_meta( 'poll_meta_options', array() );
+
+			foreach ( $poll_options as $option_id => $option ) {
+
+				$label     = isset( $option['label'] ) ? $option['label'] : '';
+				$thumb_id  = isset( $option['thumb'] ) ? $option['thumb'] : '';
+				$thumb_url = array();
+
+				if ( ! empty( $thumb_id ) ) {
+					$thumb_url = wp_get_attachment_image_src( $thumb_id );
+				}
+
+				$_poll_options[ $option_id ] = array(
+					'label' => $label,
+					'thumb' => reset( $thumb_url ),
+				);
+			}
+
+			return apply_filters( 'wpp_filters_poll_options', $_poll_options );
+		}
+
+
+		/**
 		 * Check whether users/visitors can vote multiple to a single poll or not
 		 *
 		 * @return bool
@@ -47,7 +77,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 			$can_multiple = $this->get_meta( 'poll_meta_multiple', 'no' );
 
-			if( $can_multiple == 'yes' ) {
+			if ( $can_multiple == 'yes' ) {
 				return true;
 			} else {
 				return false;
@@ -66,12 +96,29 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 			$style = 1;
 
-			if( ! in_array( $style_of, array( 'countdown', 'options' ) ) ) {
+			if ( ! in_array( $style_of, array(
+				'countdown',
+				'options_theme',
+				'animation_checkbox',
+				'animation_radio'
+			) ) ) {
 				return apply_filters( 'wpp_filters_get_style', $style, $style_of );
 			}
 
-			if( $style_of == 'countdown' ) {
+			if ( $style_of == 'countdown' ) {
 				$style = $this->get_meta( 'poll_style_countdown', 1 );
+			}
+
+			if ( $style_of == 'options_theme' ) {
+				$style = $this->get_meta( 'poll_options_theme', 1 );
+			}
+
+			if ( $style_of == 'animation_checkbox' ) {
+				$style = $this->get_meta( 'poll_animation_checkbox', 'checkmark' );
+			}
+
+			if ( $style_of == 'animation_radio' ) {
+				$style = $this->get_meta( 'poll_animation_radio', 'checkmark' );
 			}
 
 			return apply_filters( 'wpp_filters_get_style', $style, $style_of );
@@ -102,7 +149,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 			$is_new_option = $this->get_meta( 'poll_meta_new_option', 'no' );
 
-			if( $is_new_option == 'yes' ) {
+			if ( $is_new_option == 'yes' ) {
 				return true;
 			} else {
 				return false;
