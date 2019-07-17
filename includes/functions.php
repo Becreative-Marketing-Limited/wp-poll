@@ -184,23 +184,23 @@ if ( ! function_exists( 'wpp_options_single_class' ) ) {
 
 
 		// Add Theme class
-        $classes[] = sprintf( 'wpp-option-list-%s', $options_theme );
+		$classes[] = sprintf( 'wpp-option-list-%s', $options_theme );
 
 
 		// Add common class excluding for Theme - 1
-		if( $options_theme != 1 ) {
+		if ( $options_theme != 1 ) {
 			$classes[] = 'wpp-custom';
-        }
+		}
 
 
 		// Add checkbox animation class excluding for Theme - 1
-		if( $options_theme != 1 && $poll->can_vote_multiple() ) {
+		if ( $options_theme != 1 && $poll->can_vote_multiple() ) {
 			$classes[] = sprintf( 'wpp-%s', $poll->get_style( 'animation_checkbox' ) );
 		}
 
 
 		// Add radio animation class excluding for Theme - 1
-		if( $options_theme != 1 && ! $poll->can_vote_multiple() ) {
+		if ( $options_theme != 1 && ! $poll->can_vote_multiple() ) {
 			$classes[] = sprintf( 'wpp-%s', $poll->get_style( 'animation_radio' ) );
 		}
 
@@ -435,3 +435,4 @@ function wpp_ajax_submit_poll() {
 
 add_action( 'wp_ajax_wpp_ajax_submit_poll', 'wpp_ajax_submit_poll' );
 add_action( 'wp_ajax_nopriv_wpp_ajax_submit_poll', 'wpp_ajax_submit_poll' );
+

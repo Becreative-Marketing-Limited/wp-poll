@@ -134,6 +134,12 @@ class WPP_Post_meta_Poll {
 			),
 
 			array(
+				'id'            => '_thumbnail_id',
+				'title'         => esc_html__( 'Featured Image', 'wp-poll' ),
+				'type'          => 'media',
+			),
+
+			array(
 				'id'            => 'content',
 				'title'         => esc_html__( 'Poll Content', 'wp-poll' ),
 				'details'       => esc_html__( 'Write some details about this poll', 'wp-poll' ),

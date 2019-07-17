@@ -108,7 +108,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 					if ( $post_id && ! empty( $post_id ) ) {
 
 						if ( $option_id == 'post_title' ) {
-							$option['value'] = $post->post_title;
+							$option['value'] = $post->post_title != 'Auto Draft' ? $post->post_title : '';
 						} else if ( $option_id == 'content' ) {
 							$option['value'] = $post->post_content;
 						} else {
