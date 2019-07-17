@@ -22,7 +22,7 @@ global $poll, $wpp;
 	 * New option button
 	 */
     if ( $poll->visitors_can_add_option() ) {
-		printf( '<button class="wpp-button wpp-button-orange">%s</button>', $wpp->get_button_text( 'new_option' ) );
+		printf( '<button class="wpp-button wpp-button-orange wpp-button-new-option">%s</button>', $wpp->get_button_text( 'new_option' ) );
 	}
 
 

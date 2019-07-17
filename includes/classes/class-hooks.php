@@ -21,8 +21,48 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			add_filter( 'single_template', array( $this, 'single_poll_template' ) );
 
 			add_action( 'wp_ajax_wpp_ajax_add_option', array( $this, 'ajax_new_poll_option' ) );
+			add_action( 'wp_ajax_wpp_front_new_option', array( $this, 'wpp_front_new_option' ) );
+			add_action( 'wp_ajax_nopriv_wpp_front_new_option', array( $this, 'wpp_front_new_option' ) );
 		}
 
+
+		/**
+		 * Add new option
+		 *
+		 * ajax: wpp_front_new_option
+		 */
+		function wpp_front_new_option() {
+
+			$poll_id      = isset( $_POST['poll_id'] ) ? sanitize_text_field( $_POST['poll_id'] ) : '';
+			$option_value = isset( $_POST['opt_val'] ) ? sanitize_text_field( $_POST['opt_val'] ) : '';
+
+			if ( empty( $option_value ) || empty( $poll_id ) ) {
+				wp_send_json_error();
+			}
+
+			global $poll;
+
+			$poll   = wpp_get_poll( $poll_id );
+			$option = $poll->add_poll_option( $option_value );
+
+			if ( $option ) {
+
+				ob_start();
+				wpp_get_template( 'single-poll/options-single.php', $option );
+				$options_html = ob_get_clean();
+
+				wp_send_json_success( $options_html );
+			}
+
+			wp_send_json_error( esc_html__( 'Something went wrong', 'wp-poll' ) );
+		}
+
+
+		/**
+		 * New poll option html
+		 *
+		 * @throws PB_Error
+		 */
 		function ajax_new_poll_option() {
 
 			ob_start();
@@ -42,13 +82,12 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		 */
 		function single_poll_template( $single_template ) {
 
-			if( is_singular( 'poll' ) ) {
+			if ( is_singular( 'poll' ) ) {
 				return WPP_PLUGIN_DIR . 'templates/single-poll.php';
 			}
 
 			return $single_template;
 		}
-
 
 
 		function add_core_poll_columns( $columns ) {

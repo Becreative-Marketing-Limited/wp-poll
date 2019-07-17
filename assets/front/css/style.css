@@ -405,3 +405,64 @@
 [class*="wpp-option-list"] .has-label.has-thumb .wpp-option-input {
     width: calc(100% - 50px);
 }
+
+
+
+
+/**
+ * Popup Styles
+ */
+
+
+.wpp-popup-container {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 9999999;
+    font-size: 14px;
+    font-family: Open Sans, sans-serif;
+}
+
+.wpp-popup-container .wpp-popup-box {
+    background: none repeat scroll 0 0 rgb(255, 255, 255);
+    height: auto;
+    margin: 0 auto;
+    padding: 15px;
+    position: relative;
+    text-align: center;
+    top: 20%;
+    min-width: 320px;
+    width: 30%;
+    border-radius: 3px;
+    box-shadow: 0 10px 8px rgba(100, 100, 100, 0.9);
+}
+
+.wpp-popup-container .wpp-popup-box .box-close{
+    font-size: 15px;
+    line-height: 20px;
+    color: #ffffff;
+    background: #f80013;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 2px;
+    transition: background 0.2s linear;
+}
+
+.wpp-popup-container .wpp-popup-box .box-close:hover{
+    color: #fff;
+    background: #94000f;
+}
+
+.wpp-popup-container .wpp-popup-box .box-message{
+    padding: 15px;
+    font-size: 20px;
+    color: red;
+}

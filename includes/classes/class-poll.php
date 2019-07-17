@@ -39,6 +39,37 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
+		 * Add new poll option
+		 *
+		 * @param string $option_label
+		 * @param bool $from_frontend
+		 *
+		 * @return array|bool
+		 */
+		function add_poll_option( $option_label = '', $from_frontend = true ) {
+
+			if ( empty( $option_label ) ) {
+				return false;
+			}
+
+			$poll_options  = $this->get_meta( 'poll_meta_options', array() );
+			$option_id     = hexdec( uniqid() );
+			$option_to_add = array(
+				'label'    => $option_label,
+				'frontend' => true,
+			);
+
+			$poll_options[ $option_id ] = $option_to_add;
+
+			if ( $this->update_meta( 'poll_meta_options', $poll_options ) ) {
+				return array_merge( array( 'option_id' => $option_id ), $option_to_add );
+			} else {
+				return false;
+			}
+		}
+
+
+		/**
 		 * Return whether a poll has a thumbnail or not
 		 *
 		 * @return bool
@@ -215,6 +246,26 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			$meta_value = $wpp->get_meta( $meta_key, $this->get_id(), $default );
 
 			return apply_filters( 'wpp_filters_get_poll_meta', $meta_value, $meta_key, $this );
+		}
+
+
+		/**
+		 * Update Poll meta value
+		 *
+		 * @param string $meta_key
+		 * @param string $meta_value
+		 *
+		 * @return bool|int
+		 */
+		function update_meta( $meta_key = '', $meta_value = '' ) {
+
+			do_action( 'wpp_before_update_poll_meta', $meta_key, $meta_value, $this );
+
+			$ret = update_post_meta( $this->get_id(), $meta_key, $meta_value );
+
+			do_action( 'wpp_after_update_poll_meta', $meta_key, $meta_value, $this );
+
+			return $ret;
 		}
 
 

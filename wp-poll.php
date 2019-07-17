@@ -66,6 +66,21 @@ class WPPollManager {
 
 
 	/**
+	 * Retun data that will pass on pluginObject
+	 *
+	 * @return array
+	 */
+	function localize_scripts_data() {
+
+		$plugin_obj = array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		);
+
+		return $plugin_obj;
+	}
+
+
+	/**
 	 * Loading scripts to backend
 	 */
 	public function admin_scripts() {
@@ -79,7 +94,7 @@ class WPPollManager {
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_script( 'apexcharts', plugins_url( 'assets/apexcharts.js', __FILE__ ) );
 		wp_enqueue_script( 'wpp_admin_js', plugins_url( 'assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ) );
-		wp_localize_script( 'wpp_admin_js', 'wpp_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+		wp_localize_script( 'wpp_admin_js', 'wpp_object', $this->localize_scripts_data() );
 	}
 
 
@@ -88,9 +103,9 @@ class WPPollManager {
 	 */
 	public function front_scripts() {
 
-        wp_enqueue_script( 'wpp_checkbox_js', WPP_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array('jquery'), false, true );
-        wp_enqueue_script( 'wpp_js', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ) );
-        wp_localize_script( 'wpp_js', 'wpp_ajax', array( 'wpp_ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+		wp_enqueue_script( 'wpp_checkbox_js', WPP_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), false, true );
+		wp_enqueue_script( 'wpp_js', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ) );
+		wp_localize_script( 'wpp_js', 'wpp_object', $this->localize_scripts_data() );
 
 		wp_enqueue_style( 'icofont', WPP_PLUGIN_URL . 'assets/fonts/icofont.min.css' );
 		wp_enqueue_style( 'wpp_checkbox', WPP_PLUGIN_URL . 'assets/front/css/checkbox.css' );
