@@ -150,7 +150,3 @@
 .wpp-list svg path {
     stroke-width: 4px;
 }
-
-.wpp-custom .wpp-option-thumb label::before {
-    display: none;
-}

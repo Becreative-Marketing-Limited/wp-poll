@@ -20,10 +20,11 @@ $options_type = $poll->can_vote_multiple() ? 'checkbox' : 'radio';
 
 		$label = isset( $option['label'] ) ? $option['label'] : '';
 		$thumb = isset( $option['thumb'] ) ? $option['thumb'] : '';
-		$thumb_class = ! empty( $thumb ) ? 'has-thumb' : '';
+		$thumb_class = ! empty( $thumb ) ? ' has-thumb' : '';
+		$label_class = ! empty( $label ) ? ' has-label' : '';
 
 		?>
-        <div class="wpp-option-single <?php echo esc_attr( $thumb_class ); ?>">
+        <div class="wpp-option-single <?php echo esc_attr( $thumb_class .' '. $label_class ); ?>">
 
             <div class="wpp-option-input">
                 <input type="<?php echo esc_attr( $options_type ); ?>"
@@ -35,9 +36,7 @@ $options_type = $poll->can_vote_multiple() ? 'checkbox' : 'radio';
 
 			<?php if ( ! empty( $thumb ) ) : ?>
                 <div class="wpp-option-thumb">
-                    <label for="option-<?php echo esc_attr( $option_id ); ?>">
-                        <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
-                    </label>
+                    <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
                 </div>
 			<?php endif; ?>
 
