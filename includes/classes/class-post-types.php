@@ -36,7 +36,7 @@ if ( ! class_exists( 'WPP_Post_types' ) ) {
 				'plural'            => esc_html__( 'All Polls', 'wp-poll' ),
 				'menu_icon'         => 'dashicons-chart-bar',
 				'menu_position'     => 15,
-				'supports'          => array( 'thumbnail' ),
+				'supports'          => array( '' ),
 			) );
 
 			do_action( 'wpp_register_post_types', $this );

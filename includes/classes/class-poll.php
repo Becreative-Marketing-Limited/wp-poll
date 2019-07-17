@@ -39,6 +39,38 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
+		 * Return whether a poll has a thumbnail or not
+		 *
+		 * @return bool
+		 */
+		function has_thumbnail() {
+
+			if ( empty( $this->get_thumbnail() ) ) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+
+		/**
+		 * Return Post thumbnail URL
+		 *
+		 * @param string $size
+		 *
+		 * @return mixed|void
+		 */
+		function get_thumbnail( $size = 'full' ) {
+
+			$thumbnail_id = $this->get_meta( '_thumbnail_id' );
+			$_thumb_url   = ! empty( $thumbnail_id ) ? wp_get_attachment_image_src( $thumbnail_id, $size ) : array();
+			$thumb_url    = reset( $_thumb_url );
+
+			return apply_filters( 'wpp_filters_poll_thumbnail', $thumb_url, $thumbnail_id, $size );
+		}
+
+
+		/**
 		 * Return poll options as array
 		 *
 		 * @return mixed|void

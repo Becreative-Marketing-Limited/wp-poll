@@ -7,8 +7,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+global $wpp;
 
-get_header(); ?>
+/**
+ * Get WP Header
+ */
+get_header();
+?>
 
 <?php
 /**
@@ -33,4 +38,24 @@ do_action( 'wpp_after_single_poll_template' );
 ?>
 
 
-<?php get_footer();
+<?php
+
+/**
+ * Get WP Sidebar
+ */
+
+if( $wpp->display_sidebar() ) {
+	get_sidebar();
+}
+
+?>
+
+
+<?php
+
+/**
+ * Get WP Footer
+ */
+
+get_footer();
+?>
