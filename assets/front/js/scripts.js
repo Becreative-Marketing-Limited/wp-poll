@@ -40,8 +40,9 @@
     });
 
     $(document).on('keypress', '.wpp-new-option input[type="text"]', function (e) {
+        console.log( e.which );
         if (e.which === 13) {
-            $(this).parent().find('.button').trigger('click');
+            $(this).parent().find('.wpp-button').trigger('click');
         }
     });
 
