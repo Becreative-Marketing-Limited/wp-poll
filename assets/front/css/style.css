@@ -74,7 +74,7 @@
     display: block;
     cursor: pointer;
     font-size: 16px;
-    line-height: 26px;
+    /* line-height: 26px; */
     font-weight: normal;
     margin: 0;
 }
@@ -367,6 +367,7 @@
     display: block;
     margin-bottom: 20px;
     box-shadow: 0 5px 20px rgba(0, 26, 169, 0.09);
+    background-color: #009688;
     background-image: linear-gradient(-225deg, #009688 0%, #89d432 100%);
     color: #fff;
     border-radius: 4px;
@@ -390,6 +391,194 @@
 
 .wpp-option-list-6.wpp-circle label::before {
     background-color: #fff;
+}
+
+/**
+* Poll Option - 7
+*/
+
+.wpp-option-list-7 .wpp-option-single {
+    padding: 20px 26px;
+    display: block;
+    margin-bottom: 23px;
+    background-color: #0F3357;
+    color: #fff;
+    border-radius: 50px;
+}
+
+.wpp-custom.wpp-option-list-7 label {
+    padding: 0 0 0 55px;
+}
+
+.wpp-option-list-7.wpp-custom input[type="checkbox"],
+.wpp-option-list-7.wpp-custom input[type="radio"],
+.wpp-option-list-7.wpp-custom label::before {
+    border: 3px solid #ddd;
+    width: 36px;
+    height: 36px;
+}
+
+.wpp-option-list-7.wpp-circle label::before {
+    width: 24px;
+    height: 24px;
+    left: 0;
+}
+
+.wpp-option-list-7.wpp-custom svg {
+    left: 32px;
+    width: 26px;
+    height: 26px;
+}
+
+.wpp-option-list-7.wpp-circle svg {
+    left: 14px;
+    width: 46px;
+    height: 46px;
+}
+
+.wpp-option-list-7.wpp-circle .wpp-option-single label {
+    padding-left: 40px;
+}
+
+.wpp-option-list-7 .wpp-option-single label {
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.wpp-option-list-7 .wpp-option-single input:checked + label {
+    color: green;
+}
+
+
+/**
+* Poll Option - 8
+*/
+
+.wpp-option-list-8 {
+    max-width: 547px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.wpp-option-list-8 .wpp-col {
+    -ms-flex: 0 0 33.33%;
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+    min-width: 180.31px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.wpp-option-list-8 .wpp-option-single {
+    flex-direction: column-reverse;
+    justify-content: unset;
+    padding: 10px;
+    display: block;
+    margin-bottom: 10px;
+    background-color: #F9E7E2;
+    border: 1px solid #EC785B;
+    border-radius: 4px;
+}
+
+.wpp-option-list-8  .wpp-option-single.has-label.has-thumb .wpp-option-input {
+    padding: 15px 0 5px;
+}
+
+.wpp-option-list-8 .wpp-option-single.has-thumb .wpp-option-thumb,
+.wpp-option-list-8  .wpp-option-single.has-label.has-thumb .wpp-option-input {
+    width: 100%;
+}
+
+.wpp-custom.wpp-option-list-8 label {
+    padding: 0 0 0 46px;
+    font-weight: 600;
+}
+
+.wpp-custom.wpp-option-list-8 .has-thumb:not(.has-label) label {
+    height: 47px;
+    min-width: 150px;
+}
+
+.wpp-option-list-8.wpp-custom input[type="checkbox"],
+.wpp-option-list-8.wpp-custom input[type="radio"],
+.wpp-option-list-8.wpp-custom label::before {
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    top: auto;
+    transform: none;
+    bottom: -5px;
+}
+
+
+.wpp-option-list-8.wpp-custom .has-thumb:not(.has-label) input[type="checkbox"],
+.wpp-option-list-8.wpp-custom .has-thumb:not(.has-label) input[type="radio"],
+.wpp-option-list-8.wpp-custom .has-thumb:not(.has-label) label::before {
+    bottom: 0;
+}
+
+.wpp-option-list-8.wpp-custom.wpp-circle .has-thumb:not(.has-label) label::before {
+    bottom: 5px;
+}
+
+.wpp-option-list-8.wpp-circle label::before {
+    width: 24px;
+    height: 24px;
+    left: 0;
+    bottom: 1px;
+}
+
+.wpp-option-list-8.wpp-custom svg {
+    left: 15px;
+    width: 26px;
+    height: 26px;
+    top: auto;
+    transform: none;
+    bottom: 15px;
+}
+
+.wpp-option-list-8.wpp-circle svg {
+    left: 3px;
+    width: 38px;
+    height: 38px;
+    bottom: 8px;
+}
+
+.wpp-option-list-8.wpp-circle .wpp-option-single.has-label:not(.has-thumb) svg {
+    left: 3px;
+    width: 38px;
+    height: 38px;
+    bottom: 7px;
+}
+
+.wpp-option-list-8.wpp-circle .wpp-option-single label {
+    padding-left: 34px;
+}
+
+.wpp-option-list-8 .wpp-option-single input:checked + label {
+    color: #ec785b;
+}
+
+.wpp-custom.wpp-option-list-8 svg path {
+    stroke: #ec785b;
+}
+
+.wpp-option-list-8 .wpp-option-single.has-label:not(.has-thumb) {
+    padding: 13px 10px;
+}
+
+.wpp-option-list-8 .wpp-option-single.has-label:not(.has-thumb) svg {
+    left: 15px;
+    width: 26px;
+    height: 26px;
+    top: auto;
+    transform: none;
+    bottom: 13px;
 }
 
 /**
@@ -427,6 +616,12 @@
     outline: none;
 }
 
+.wpp-new-option .wpp-notice-warning {
+    position: relative;
+    top: -12px;
+    color: red;
+}
+
 .wpp-popup-container {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
     display: none;
@@ -447,7 +642,7 @@
     position: relative;
     text-align: center;
     top: 20%;
-    max-width: 290px;
+    max-width: 320px;
     border-radius: 3px;
     box-shadow: 0 10px 8px rgba(100, 100, 100, 0.9);
 }
