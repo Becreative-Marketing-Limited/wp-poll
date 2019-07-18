@@ -48,6 +48,10 @@
     background: #F44336;
 }
 
+.wpp-button-blue {
+    background: #087fde;
+}
+
 .wpp-button:hover, .wpp-button:focus {
     background: #2a2a2a;
     color: #fff;
@@ -61,6 +65,7 @@
 .wpp-option-single {
     word-break: break-word;
     position: relative;
+    cursor: pointer;
 }
 
 .wpp-option-single label {
@@ -410,9 +415,15 @@
 
 
 /**
- * Popup Styles
+* Add New Option
  */
 
+.wpp-new-option input[type="text"] {
+    width: 100%;
+    padding: 9px 13px;
+    margin: 8px 0 20px;
+    outline: none;
+}
 
 .wpp-popup-container {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
@@ -424,44 +435,41 @@
     top: 0;
     width: 100%;
     z-index: 9999999;
-    font-size: 14px;
-    font-family: Open Sans, sans-serif;
 }
 
 .wpp-popup-container .wpp-popup-box {
     background: none repeat scroll 0 0 rgb(255, 255, 255);
     height: auto;
     margin: 0 auto;
-    padding: 15px;
+    padding: 35px;
     position: relative;
     text-align: center;
     top: 20%;
-    min-width: 320px;
-    width: 30%;
+    max-width: 290px;
     border-radius: 3px;
     box-shadow: 0 10px 8px rgba(100, 100, 100, 0.9);
 }
 
-.wpp-popup-container .wpp-popup-box .box-close{
-    font-size: 15px;
+.wpp-popup-container .box-close {
+    font-size: 16px;
     line-height: 20px;
     color: #ffffff;
     background: #f80013;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: -10px;
+    right: -10px;
     cursor: pointer;
-    padding: 3px 5px;
+    padding: 5px 7px;
     border-radius: 2px;
     transition: background 0.2s linear;
 }
 
-.wpp-popup-container .wpp-popup-box .box-close:hover{
+.wpp-popup-container .box-close:hover {
     color: #fff;
     background: #94000f;
 }
 
-.wpp-popup-container .wpp-popup-box .box-message{
+.wpp-popup-container .wpp-popup-box .box-message {
     padding: 15px;
     font-size: 20px;
     color: red;

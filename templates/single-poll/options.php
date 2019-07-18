@@ -28,10 +28,9 @@ global $poll;
 <div class="wpp-popup-container">
     <div class="wpp-popup-box">
         <span class="box-close"><i class="icofont-close"></i></span>
-
         <div class="wpp-new-option">
             <input type="text" placeholder="<?php esc_attr_e( 'Your option', 'wp-poll' ); ?>">
-            <button class="button" data-pollid="<?php echo esc_attr( $poll->get_id() ); ?>"><?php esc_html_e( 'Add Option', 'wp-poll' ); ?></button>
+            <button class="wpp-button wpp-button-blue" data-pollid="<?php echo esc_attr( $poll->get_id() ); ?>"><?php esc_html_e( 'Add Option', 'wp-poll' ); ?></button>
         </div>
 
     </div>

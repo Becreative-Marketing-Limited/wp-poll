@@ -214,6 +214,8 @@ class WPP_Post_meta_Poll {
 					'4' => esc_html__( 'Theme - 4', 'wp-poll' ),
 					'5' => esc_html__( 'Theme - 5', 'wp-poll' ),
 					'6' => esc_html__( 'Theme - 6', 'wp-poll' ),
+					'7' => esc_html__( 'Theme - 7', 'wp-poll' ),
+					'8' => esc_html__( 'Theme - 8', 'wp-poll' ),
 				),
 				'default' => array( '1' ),
 			),
