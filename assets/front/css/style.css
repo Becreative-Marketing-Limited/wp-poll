@@ -30,6 +30,8 @@
     color: #fff;
     transition: 0.3s;
     min-width: 99px;
+    outline: none;
+    box-shadow: none;
 }
 
 .wpp-buttons .wpp-button {
