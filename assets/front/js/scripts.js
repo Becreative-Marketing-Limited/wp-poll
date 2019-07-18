@@ -15,6 +15,8 @@
 
         if (typeof pollID === "undefined" || pollID.length === 0 ||
             typeof optionValue === "undefined" || optionValue.length === 0) {
+
+            $(this).parent().find('span').fadeIn(100);
             return;
         }
 
@@ -39,10 +41,13 @@
 
     });
 
-    $(document).on('keypress', '.wpp-new-option input[type="text"]', function (e) {
-        console.log( e.which );
+    $(document).on('keyup', '.wpp-new-option input[type="text"]', function (e) {
         if (e.which === 13) {
             $(this).parent().find('.wpp-button').trigger('click');
+        }
+
+        if( $(this).val().length > 0 ) {
+            $(this).parent().find('span').hide();
         }
     });
 
