@@ -16,10 +16,10 @@ $pages['woc_options'] = array(
 			'title'   => esc_html__( 'General Settings', 'wp-poll' ),
 			'options' => array(
 				array(
-					'id'       => 'wpp_poll_sidebar',
-					'title'    => esc_html__( 'Single Poll Sidebar', 'wp-poll' ),
-					'details'  => esc_html__( 'Do you want to display sidebar on single poll page?', 'wp-poll' ),
-					'type'     => 'select',
+					'id'      => 'wpp_poll_sidebar',
+					'title'   => esc_html__( 'Single Poll Sidebar', 'wp-poll' ),
+					'details' => esc_html__( 'Do you want to display sidebar on single poll page?', 'wp-poll' ),
+					'type'    => 'select',
 					'args'    => array(
 						'yes' => esc_html__( 'Yes', 'wp-poll' ),
 						'no'  => esc_html__( 'No', 'wp-poll' ),
@@ -53,11 +53,18 @@ $pages['woc_options'] = array(
 			'title'   => esc_html__( 'Poll Archive', 'wp-poll' ),
 			'options' => array(
 				array(
-					'id'       => 'wpp_poll_page',
-					'title'    => esc_html__( 'Archive Page', 'wp-poll' ),
-					'details'  => esc_html__( 'Select a poll archive page', 'wp-poll' ),
-					'type'     => 'select',
-					'args'     => 'PAGES',
+					'id'      => 'wpp_page_archive',
+					'title'   => esc_html__( 'Archive Page', 'wp-poll' ),
+					'details' => esc_html__( 'Select a poll archive page', 'wp-poll' ),
+					'type'    => 'select',
+					'args'    => 'PAGES',
+				),
+				array(
+					'id'          => 'wpp_archive_items_per_page',
+					'title'       => esc_html__( 'Items per page', 'wp-poll' ),
+					'details'     => esc_html__( 'How many poll do you want to show per page | Default: 10', 'wp-poll' ),
+					'placeholder' => esc_html__( '10', 'wp-poll' ),
+					'type'        => 'number',
 				),
 				array(
 					'id'      => 'wpp_poll_page_content_show',

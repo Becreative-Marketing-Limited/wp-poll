@@ -5,6 +5,18 @@
 
 
 /**
+ * Hooks for Poll Archive Single
+ */
+add_action( 'wpp_poll_archive_single_main', 'wpp_poll_archive_single_thumb', 10 );
+add_action( 'wpp_poll_archive_single_main', 'wpp_poll_archive_single_summary', 20 );
+
+add_action( 'wpp_poll_archive_single_summary', 'wpp_poll_archive_single_title', 10 );
+add_action( 'wpp_poll_archive_single_summary', 'wpp_poll_archive_single_meta', 15 );
+add_action( 'wpp_poll_archive_single_summary', 'wpp_poll_archive_single_excerpt', 20 );
+add_action( 'wpp_poll_archive_single_summary', 'wpp_poll_archive_single_options', 25 );
+
+
+/**
  * Hooks for Single Poll
  *
  * @see wpp_single_poll_title()

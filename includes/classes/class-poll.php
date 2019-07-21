@@ -39,6 +39,70 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
+		 * Return Poll published date
+		 *
+		 * @param string $format
+		 *
+		 * @return mixed|void
+		 */
+		function get_published_date( $format = 'U' ) {
+
+			return apply_filters( 'wpp_filters_poll_published_date', get_the_date( $format, $this->get_id() ) );
+		}
+
+
+		/**
+		 * Return Poll author information upon given value
+		 *
+		 * @param string $info
+		 *
+		 * @return mixed|string
+		 */
+		function get_author_info( $info = 'display_name' ) {
+
+			$poll_author = $this->get_author();
+
+			if ( ! $poll_author || empty( $poll_author ) ) {
+				return '';
+			}
+
+			if ( isset( $poll_author->$info ) ) {
+				return $poll_author->$info;
+			}
+
+			return '';
+		}
+
+
+		/**
+		 * Return Poll post author object
+		 *
+		 * @return bool|WP_User
+		 */
+		function get_author() {
+
+			$poll_author_id = isset( $this->poll_post->post_author ) ? $this->poll_post->post_author : '';
+
+			if ( ! empty( $poll_author_id ) ) {
+				return get_user_by( 'ID', $poll_author_id );
+			}
+
+			return false;
+		}
+
+
+		/**
+		 * Return poll permalink
+		 *
+		 * @return mixed|void
+		 */
+		function get_permalink() {
+
+			return apply_filters( 'wpp_filter_poll_permalink', get_the_permalink( $this->get_id() ) );
+		}
+
+
+		/**
 		 * Add new poll option
 		 *
 		 * @param string $option_label
@@ -224,11 +288,20 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		/**
 		 * Return Poll content
 		 *
+		 * @param bool $length
+		 * @param null $more
+		 *
 		 * @return mixed|void
 		 */
-		function get_poll_content() {
+		function get_poll_content( $length = false, $more = null ) {
 
-			return apply_filters( 'wpp_filters_poll_content', $this->get_poll_post()->post_content );
+			$content = $this->get_poll_post()->post_content;
+
+			if( $length ) {
+				$content = wp_trim_words( $content, $length, $more);
+			}
+
+			return apply_filters( 'wpp_filters_poll_content', $content );
 		}
 
 
@@ -294,7 +367,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		/**
 		 * Return Poll post object
 		 *
-		 * @return null
+		 * @return null|WP_Post
 		 */
 		function get_poll_post() {
 

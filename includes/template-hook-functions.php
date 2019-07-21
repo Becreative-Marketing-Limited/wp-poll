@@ -73,3 +73,69 @@ if ( ! function_exists( 'wpp_single_poll_buttons' ) ) {
 		wpp_get_template( 'single-poll/buttons.php' );
 	}
 }
+
+
+if ( ! function_exists( 'wpp_poll_archive_single_thumb' ) ) {
+	/**
+	 * Hook: wpp_poll_archive_single_main - 10
+	 */
+	function wpp_poll_archive_single_thumb() {
+
+		wpp_get_template( 'loop/thumb.php' );
+	}
+}
+
+
+if ( ! function_exists( 'wpp_poll_archive_single_summary' ) ) {
+	/**
+	 * Hook: wpp_poll_archive_single_main - 20
+	 */
+	function wpp_poll_archive_single_summary() {
+
+		wpp_get_template( 'loop/summary.php' );
+	}
+}
+
+
+if ( ! function_exists( 'wpp_poll_archive_single_title' ) ) {
+	/**
+	 * Hook: wpp_poll_archive_single_summary - 10
+	 */
+	function wpp_poll_archive_single_title() {
+
+		wpp_get_template( 'loop/title.php' );
+	}
+}
+
+
+if ( ! function_exists( 'wpp_poll_archive_single_meta' ) ) {
+	/**
+	 * Hook: wpp_poll_archive_single_summary - 15
+	 */
+	function wpp_poll_archive_single_meta() {
+
+		wpp_get_template( 'loop/meta.php' );
+	}
+}
+
+
+if ( ! function_exists( 'wpp_poll_archive_single_excerpt' ) ) {
+	/**
+	 * Hook: wpp_poll_archive_single_summary - 20
+	 */
+	function wpp_poll_archive_single_excerpt() {
+
+		wpp_get_template( 'loop/excerpt.php' );
+	}
+}
+
+
+if ( ! function_exists( 'wpp_poll_archive_single_options' ) ) {
+	/**
+	 * Hook: wpp_poll_archive_single_summary - 25
+	 */
+	function wpp_poll_archive_single_options() {
+
+		wpp_get_template( 'loop/options.php' );
+	}
+}

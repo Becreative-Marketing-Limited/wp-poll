@@ -11,6 +11,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
+if( ! function_exists( 'wpp_is_page' ) ) {
+	/**
+	 * Return whether a page is $searched_page or not
+	 *
+	 * @param string $page_for
+	 *
+	 * @return bool
+	 */
+	function wpp_is_page( $page_for = 'archive' ) {
+
+		if ( ! in_array( $page_for, array( 'archive' ) ) ) {
+			return false;
+		}
+
+		$page_id = wpp()->get_option( 'wpp_page_' . $page_for );
+
+		if ( $page_id == get_the_ID() ) {
+			return true;
+		}
+
+		return false;
+	}
+}
+
+
 if ( ! function_exists( 'wpp_get_poll' ) ) {
 	/**
 	 * Return Single Poll object
@@ -145,6 +170,25 @@ if ( ! function_exists( 'wpp_get_ip_address' ) ) {
 		}
 
 		return $ip;
+	}
+}
+
+
+if ( ! function_exists( 'wpp_poll_archive_class' ) ) {
+	/**
+	 * Return poll archive class container
+	 *
+	 * @param string $classes
+	 */
+	function wpp_poll_archive_class( $classes = '' ) {
+
+		if ( ! is_array( $classes ) ) {
+			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
+		}
+
+		$classes[] = 'archive-poll';
+
+		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'wpp_filters_poll_archive_class', $classes ) ) ) );
 	}
 }
 
