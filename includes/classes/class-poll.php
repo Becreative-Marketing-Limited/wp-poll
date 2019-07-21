@@ -95,6 +95,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 			$thumbnail_id = $this->get_meta( '_thumbnail_id' );
 			$_thumb_url   = ! empty( $thumbnail_id ) ? wp_get_attachment_image_src( $thumbnail_id, $size ) : array();
+			$_thumb_url   = ! empty( $_thumb_url ) ? $_thumb_url : array();
 			$thumb_url    = reset( $_thumb_url );
 
 			return apply_filters( 'wpp_filters_poll_thumbnail', $thumb_url, $thumbnail_id, $size );

@@ -30,7 +30,7 @@ global $poll;
         <span class="box-close"><i class="icofont-close"></i></span>
         <div class="wpp-new-option">
             <input type="text" placeholder="<?php esc_attr_e( 'Your option', 'wp-poll' ); ?>">
-            <span class="wpp-notice-warning" style="display: none;">Please write some text !</span>
+            <span class="wpp-notice-warning" style="display: none;"><?php esc_html_e('Please write some text !', 'wp-poll') ?></span>
             <button class="wpp-button wpp-button-blue" data-pollid="<?php echo esc_attr( $poll->get_id() ); ?>"><?php esc_html_e( 'Add Option', 'wp-poll' ); ?></button>
         </div>
     </div>
