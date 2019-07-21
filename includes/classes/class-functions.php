@@ -17,6 +17,19 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 
 
 		/**
+		 * Return the number of items per page
+		 *
+		 * @return mixed|void
+		 */
+		function get_polls_per_page() {
+
+			$items_per_page = $this->get_option( 'wpp_archive_items_per_page', 10 );
+
+			return apply_filters( 'wpp_filters_polls_per_page', $items_per_page );
+		}
+
+
+		/**
 		 * Display sidebar or not
 		 *
 		 * @return bool
