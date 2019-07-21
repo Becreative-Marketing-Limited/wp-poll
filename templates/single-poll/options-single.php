@@ -22,7 +22,7 @@ $options_theme = $poll->get_style( 'options_theme' );
 
 ?>
 
-<?php if ($options_theme == 8 ) : ?>
+<?php if ($options_theme == 8 || $options_theme == 9 || $options_theme == 10 ) : ?>
 <div class="wpp-col">
 <?php endif; ?>
 
@@ -42,6 +42,6 @@ $options_theme = $poll->get_style( 'options_theme' );
         <?php endif; ?>
     </div> <!-- .wpp-option-single -->
 
-<?php if ($options_theme == 8 ) : ?>
+<?php if ( $options_theme == 8 || $options_theme == 9 || $options_theme == 10 ) : ?>
 </div> <!-- .wwp-col -->
 <?php endif; ?>
