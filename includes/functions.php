@@ -46,6 +46,7 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 		$unique_id      = ! $unique_id ? hexdec( uniqid() ) : $unique_id;
 		$option_label   = isset( $args['label'] ) ? $args['label'] : '';
 		$option_thumb   = isset( $args['thumb'] ) ? $args['thumb'] : '';
+		$is_frontend    = isset( $args['frontend'] ) ? $args['frontend'] : false;
 		$options_fields = array(
 			array(
 				'options' => array(
@@ -76,6 +77,14 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
             <div class="poll-option-controls">
                 <span class="option-remove" data-status=0><i class="icofont-close"></i></span>
                 <span class="option-move"><i class="icofont-drag"></i></span>
+
+				<?php if ( $is_frontend ) : ?>
+                    <input type="hidden" name="poll_meta_options[<?php echo esc_attr( $unique_id ); ?>][frontend]"
+                           value="<?php echo esc_attr( $is_frontend ); ?>">
+                    <span class="option-external tt--hint tt--top"
+                          aria-label="<?php esc_attr_e( 'Added on frontend', 'wp-poll' ); ?>"><i
+                                class="icofont-tick-boxed"></i></span>
+				<?php endif; ?>
             </div>
         </li>
 		<?php

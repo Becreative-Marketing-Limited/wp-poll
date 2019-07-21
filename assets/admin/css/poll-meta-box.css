@@ -58,3 +58,8 @@ Admin css
 .poll-option-controls > span.option-remove:hover {
     background: #da4617;
 }
+
+.poll-option-controls > span.option-external {
+    background: none;
+    color: #2f2f2f;
+}

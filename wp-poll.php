@@ -88,6 +88,7 @@ class WPPollManager {
 		wp_enqueue_style( 'jquery-ui' );
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'jquery-ui', WPP_PLUGIN_URL . 'assets/jquery-ui.css' );
+		wp_enqueue_style( 'tooltip', WPP_PLUGIN_URL . 'assets/tool-tip.min.css' );
 		wp_enqueue_style( 'icofont', WPP_PLUGIN_URL . 'assets/fonts/icofont.min.css' );
 		wp_enqueue_style( 'wpp_admin_style', WPP_PLUGIN_URL . 'assets/admin/css/style.css' );
 
@@ -107,6 +108,7 @@ class WPPollManager {
 		wp_enqueue_script( 'wpp_js', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ) );
 		wp_localize_script( 'wpp_js', 'wpp_object', $this->localize_scripts_data() );
 
+		wp_enqueue_style( 'tooltip', WPP_PLUGIN_URL . 'assets/tool-tip.min.css' );
 		wp_enqueue_style( 'icofont', WPP_PLUGIN_URL . 'assets/fonts/icofont.min.css' );
 		wp_enqueue_style( 'wpp_checkbox', WPP_PLUGIN_URL . 'assets/front/css/checkbox.css' );
 		wp_enqueue_style( 'wpp_style', WPP_PLUGIN_URL . 'assets/front/css/style.css' );
