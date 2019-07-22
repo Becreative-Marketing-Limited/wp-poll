@@ -59,8 +59,8 @@
                     }
 
                     if ($.inArray(optionID, response.data.percentages)) {
-                        $(this).find('.wpp-option-result-bar').addClass(classTobeAdded).css('width', percentageValue + '%');
-                        $(this).find('.wpp-option-result').html( singleVoteCount );
+                        $(this).addClass('has-result').find('.wpp-option-result-bar').addClass(classTobeAdded).css('width', percentageValue + '%');
+                        $(this).find('.wpp-option-result').html( singleVoteCount + ' Vote(s)' );
                     }
                 });
             }
