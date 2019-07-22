@@ -241,6 +241,7 @@ p.wpp-responses.wpp-success {
     font-size: 16px;
     line-height: 24px;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .wpp-countdown-timer-2 > span:last-child {
@@ -411,7 +412,7 @@ p.wpp-responses.wpp-success {
     display: block;
 }
 
-.wpp-option-list-2 .wpp-option-single:last-child {
+.wpp-option-list-2 .wpp-option-single:not(.has-result):last-child {
     border-bottom: 0;
 }
 
@@ -1047,6 +1048,53 @@ p.wpp-responses.wpp-success {
 
 .wpp-option-single.has-result .wpp-option-result {
     bottom: -35px;
+}
+
+.wpp-option-list-2 .wpp-option-single.has-result {
+    border-top: 1px solid #eee;
+}
+
+.wpp-option-list-2 .wpp-option-single.has-result .wpp-option-result-bar,
+.wpp-option-list-3 .wpp-option-single.has-result .wpp-option-result-bar {
+    border-radius: 0;
+    top: -1px;
+}
+
+.wpp-option-list-4 .wpp-option-single.has-result .wpp-option-result-bar {
+    left: 2%;
+    border-top-right-radius: 3px;
+    max-width: 96%;
+}
+
+.wpp-option-list-5 .wpp-option-single.has-result .wpp-option-result-bar {
+    border-top-left-radius: 0;
+}
+
+.wpp-option-list-6 .wpp-option-single.has-result {
+    margin-top: 10px;
+}
+
+.wpp-option-list-6 .wpp-option-single .wpp-option-result-bar {
+    border-top-left-radius: 0;
+    height: 5px;
+    top: -10px;
+}
+
+.wpp-option-list-7 .wpp-option-single.has-result {
+    margin-top: 12px;
+    margin-bottom: 65px;
+}
+
+.wpp-option-list-7 .wpp-option-single .wpp-option-result-bar {
+    border-radius: 6px;
+    height: 6px;
+    top: -12px;
+    max-width: calc(100% - 60px);
+    left: 30px;
+}
+
+.wpp-option-list-7 .wpp-option-single .wpp-option-result {
+    left: 30px;
 }
 
 
