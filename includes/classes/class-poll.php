@@ -47,7 +47,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 			$polled_data  = $this->get_meta( 'polled_data', array() );
 			$total_voted  = count( $polled_data );
-			$poll_results = array( 'total' => $total_voted );
+			$poll_results = array( 'total' => $total_voted, 'singles' => array(), 'percentages' => array() );
 
 			/**
 			 * Calculate vote count per single option
@@ -59,6 +59,11 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 				}
 
 				foreach ( $polled_options as $option_id ) {
+
+					if( ! isset( $poll_results['singles'][ $option_id ] ) ) {
+						$poll_results['singles'][ $option_id ] = 0;
+					}
+
 					$poll_results['singles'][ $option_id ] ++;
 				}
 			}
