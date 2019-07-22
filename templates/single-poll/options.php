@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $poll;
 
+
+$poll->get_poll_results();
+
+
 ?>
 <div <?php wpp_options_single_class( 'wpp-options' ); ?>>
 

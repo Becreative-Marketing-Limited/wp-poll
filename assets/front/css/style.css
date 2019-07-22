@@ -68,6 +68,8 @@
     word-break: break-word;
     position: relative;
     cursor: pointer;
+    z-index: 10;
+    overflow: hidden;
 }
 
 .wpp-option-single label {
@@ -78,6 +80,31 @@
     font-weight: normal;
     margin: 0;
 }
+
+
+p.wpp-responses {
+    margin: 10px 0 20px;
+    background: #f1f1f1;
+    border-left: 5px solid;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 12px;
+    display: none;
+    cursor: pointer;
+}
+
+p.wpp-responses.wpp-error {
+    background: #ff57225c;
+}
+
+p.wpp-responses.wpp-warning {
+    background: #ffc1075c;
+}
+
+p.wpp-responses.wpp-success {
+    background: #4caf505c;
+}
+
 
 
 /**
@@ -955,6 +982,40 @@
     font-size: 20px;
     color: red;
 }
+
+/**
+ * Single Poll Results
+ */
+
+
+.wpp-option-result-bar.results-danger {
+    background: #ff5722;
+}
+
+.wpp-option-result-bar.results-warning {
+    background: #ff9800;
+}
+
+.wpp-option-result-bar.results-info {
+    background: #03a9f4;
+}
+
+.wpp-option-result-bar.results-success {
+    background: #4caf50;
+}
+
+.wpp-option-list-1 .wpp-option-result-bar {
+    position: absolute;
+    height: 3px;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 0;
+    transition: 0.5s;
+}
+
+
+
 
 /**
 * Responsive Media

@@ -39,6 +39,45 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
+		 * Return poll results
+		 *
+		 * @return mixed|void
+		 */
+		function get_poll_results() {
+
+			$polled_data  = $this->get_meta( 'polled_data', array() );
+			$total_voted  = count( $polled_data );
+			$poll_results = array( 'total' => $total_voted );
+
+			/**
+			 * Calculate vote count per single option
+			 */
+			foreach ( $polled_data as $poller => $polled_options ) {
+
+				if ( empty( $polled_options ) || ! is_array( $polled_options ) ) {
+					continue;
+				}
+
+				foreach ( $polled_options as $option_id ) {
+					$poll_results['singles'][ $option_id ] ++;
+				}
+			}
+
+			/**
+			 * Calculate vote percentage per single option
+			 */
+			$singles = isset( $poll_results['singles'] ) ? $poll_results['singles'] : array();
+			$singles = ! empty( $singles ) ? $singles : array();
+
+			foreach ( $singles as $option_id => $single_count ) {
+				$poll_results['percentages'][ $option_id ] = floor( ( $single_count * 100 ) / $total_voted );
+			}
+
+			return apply_filters( 'wpp_filters_poll_results', $poll_results, $this->get_id(), $this );
+		}
+
+
+		/**
 		 * Return Poll published date
 		 *
 		 * @param string $format

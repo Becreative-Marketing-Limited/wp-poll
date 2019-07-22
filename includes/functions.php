@@ -143,9 +143,8 @@ if ( ! function_exists( 'wpp_get_poller' ) ) {
 	 */
 	function wpp_get_poller() {
 
-		$user = wp_get_current_user();
-		if ( $user->ID != 0 ) {
-			return $user->ID;
+		if ( is_user_logged_in() ) {
+			return get_current_user_id();
 		}
 
 		return wpp_get_ip_address();

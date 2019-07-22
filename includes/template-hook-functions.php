@@ -75,6 +75,17 @@ if ( ! function_exists( 'wpp_single_poll_buttons' ) ) {
 }
 
 
+if ( ! function_exists( 'wpp_single_poll_responses' ) ) {
+	/**
+	 * Hook: wpp_single_poll_main - 10
+	 */
+	function wpp_single_poll_responses() {
+
+		wpp_get_template( 'single-poll/responses.php' );
+	}
+}
+
+
 if ( ! function_exists( 'wpp_poll_archive_single_thumb' ) ) {
 	/**
 	 * Hook: wpp_poll_archive_single_main - 10

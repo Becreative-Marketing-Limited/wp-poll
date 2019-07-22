@@ -23,6 +23,104 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			add_action( 'wp_ajax_wpp_ajax_add_option', array( $this, 'ajax_new_poll_option' ) );
 			add_action( 'wp_ajax_wpp_front_new_option', array( $this, 'wpp_front_new_option' ) );
 			add_action( 'wp_ajax_nopriv_wpp_front_new_option', array( $this, 'wpp_front_new_option' ) );
+
+			add_action( 'wp_ajax_wpp_submit_poll', array( $this, 'wpp_submit_poll' ) );
+			add_action( 'wp_ajax_nopriv_wpp_submit_poll', array( $this, 'wpp_submit_poll' ) );
+
+			add_action( 'wp_ajax_wpp_get_poll_results', array( $this, 'wpp_get_poll_results' ) );
+			add_action( 'wp_ajax_nopriv_wpp_get_poll_results', array( $this, 'wpp_get_poll_results' ) );
+		}
+
+
+		/**
+		 * Ajax Get Poll Results
+		 */
+		function wpp_get_poll_results() {
+
+			$poll_id = isset( $_POST['poll_id'] ) ? sanitize_text_field( $_POST['poll_id'] ) : '';
+
+			if ( empty( $poll_id ) ) {
+				wp_send_json_error( esc_html__( 'Invalid data found !', 'wp-poll' ) );
+			}
+
+			$poll = wpp_get_poll( $poll_id );
+
+			wp_send_json_success( $poll->get_poll_results() );
+		}
+
+
+		/**
+		 * Ajax Submit poll
+		 */
+		function wpp_submit_poll() {
+
+			$poll_id      = isset( $_POST['poll_id'] ) ? sanitize_text_field( $_POST['poll_id'] ) : '';
+			$checked_data = isset( $_POST['checked_data'] ) ? stripslashes_deep( $_POST['checked_data'] ) : array();
+
+			if ( empty( $poll_id ) || empty( $checked_data ) || ! is_array( $checked_data ) ) {
+				wp_send_json_error( esc_html__( 'Invalid data found !', 'wp-poll' ) );
+			}
+
+			$polled_data = get_post_meta( $poll_id, 'polled_data', true );
+			$polled_data = empty( $polled_data ) ? array() : $polled_data;
+			$poller      = wpp_get_poller();
+
+			/**
+			 * Check if already voted
+			 */
+			if ( array_key_exists( $poller, $polled_data ) ) {
+				wp_send_json_error( esc_html__( 'You have already voted on this poll !', 'wp-poll' ) );
+			}
+
+
+			/**
+			 * Add vote into polled data
+			 */
+			foreach ( $checked_data as $option_id ) {
+				$polled_data[ $poller ][] = $option_id;
+			}
+
+
+			/**
+			 * Action before saving a vote
+			 *
+			 * @param $poll_id
+			 * @param $polled_data
+			 * @param $poller
+			 */
+			do_action( 'wpp_before_vote', $poll_id, $polled_data, $poller );
+
+
+			/**
+			 * Save polled data
+			 *
+			 * @filter wpp_filter_before_saving_polled_data
+			 */
+			$response = update_post_meta( $poll_id, 'polled_data', apply_filters( 'wpp_filter_before_saving_polled_data', $polled_data ) );
+
+
+			/**
+			 * Action after saving a vote
+			 *
+			 * @param $poll_id
+			 * @param $polled_data
+			 * @param $poller
+			 * @param $response
+			 */
+			do_action( 'wpp_after_vote', $poll_id, $polled_data, $poller, $response );
+
+
+			/*
+			 * Return if all goes well
+			 */
+			if ( $response ) {
+				wp_send_json_success( esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ) );
+			}
+
+			/**
+			 * Something must be wrong
+			 */
+			wp_send_json_error( esc_html__( 'Something went wrong !', 'wp-poll' ) );
 		}
 
 
