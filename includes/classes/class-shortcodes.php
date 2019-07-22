@@ -101,6 +101,7 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 				'show_sorting'    => 'yes',
 				'show_count'      => 'yes',
 				'show_pagination' => 'yes',
+				'show_results'    => 'no',
 			);
 
 			$args = apply_filters( 'wpp_filters_poll_archive_query', array_merge( $defaults, $atts ) );

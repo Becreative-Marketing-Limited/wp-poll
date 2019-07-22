@@ -23,10 +23,10 @@
 .wpp-button {
     display: inline-block;
     line-height: normal;
-    padding: 10px 16px;
+    padding: 12px 20px;
     background: #000;
     border: 0;
-    border-radius: 4px;
+    border-radius: 2px;
     color: #fff;
     transition: 0.3s;
     min-width: 99px;
@@ -153,9 +153,16 @@ p.wpp-responses.wpp-success {
     padding-left: 25px;
 }
 
+.poll-archive-single .poll-options .area-right {
+    float: right;
+}
+
+.poll-archive-single .poll-options .area-right:last-child {
+    margin-right: 10px;
+}
+
 .poll-archive-single .poll-options img {
     width: 32px;
-    float: right;
     border-radius: 4px;
 }
 
