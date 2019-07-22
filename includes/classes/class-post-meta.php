@@ -134,9 +134,9 @@ class WPP_Post_meta_Poll {
 			),
 
 			array(
-				'id'            => '_thumbnail_id',
-				'title'         => esc_html__( 'Featured Image', 'wp-poll' ),
-				'type'          => 'media',
+				'id'    => '_thumbnail_id',
+				'title' => esc_html__( 'Featured Image', 'wp-poll' ),
+				'type'  => 'media',
 			),
 
 			array(
@@ -177,7 +177,7 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'      => 'poll_meta_new_option',
-				'title' => esc_html__( 'New Option', 'wp-poll' ),
+				'title'   => esc_html__( 'New Option', 'wp-poll' ),
 				'details' => esc_html__( 'Allow Visitors to add New Option | Default: No', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(
@@ -208,15 +208,15 @@ class WPP_Post_meta_Poll {
 				'details' => esc_html__( 'Options theme style | Default: 1', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(
-					'1' => esc_html__( 'Theme - 1', 'wp-poll' ),
-					'2' => esc_html__( 'Theme - 2', 'wp-poll' ),
-					'3' => esc_html__( 'Theme - 3', 'wp-poll' ),
-					'4' => esc_html__( 'Theme - 4', 'wp-poll' ),
-					'5' => esc_html__( 'Theme - 5', 'wp-poll' ),
-					'6' => esc_html__( 'Theme - 6', 'wp-poll' ),
-					'7' => esc_html__( 'Theme - 7', 'wp-poll' ),
-					'8' => esc_html__( 'Theme - 8', 'wp-poll' ),
-					'9' => esc_html__( 'Theme - 9', 'wp-poll' ),
+					'1'  => esc_html__( 'Theme - 1', 'wp-poll' ),
+					'2'  => esc_html__( 'Theme - 2', 'wp-poll' ),
+					'3'  => esc_html__( 'Theme - 3', 'wp-poll' ),
+					'4'  => esc_html__( 'Theme - 4', 'wp-poll' ),
+					'5'  => esc_html__( 'Theme - 5', 'wp-poll' ),
+					'6'  => esc_html__( 'Theme - 6', 'wp-poll' ),
+					'7'  => esc_html__( 'Theme - 7', 'wp-poll' ),
+					'8'  => esc_html__( 'Theme - 8', 'wp-poll' ),
+					'9'  => esc_html__( 'Theme - 9', 'wp-poll' ),
 					'10' => esc_html__( 'Theme - 10', 'wp-poll' ),
 				),
 				'default' => array( '1' ),
@@ -224,7 +224,7 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'      => 'poll_animation_checkbox',
-				'title' => esc_html__( 'Animations', 'wp-poll' ),
+				'title'   => esc_html__( 'Animations', 'wp-poll' ),
 				'details' => esc_html__( 'Animations for Multiple selections (Input type - Checkbox) | Default: Checkmark', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(

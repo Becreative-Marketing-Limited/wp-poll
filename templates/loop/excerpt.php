@@ -13,6 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $poll;
 
 ?>
-<div class="poll-excerpt">
-	<?php echo apply_filters( 'the_excerpt', $poll->get_poll_content( 15 ) ); ?>
-</div>
+
+<?php if ( ! empty( $poll->get_poll_content() ) ) : ?>
+    <div class="poll-excerpt">
+		<?php echo apply_filters( 'the_excerpt', $poll->get_poll_content( 15 ) ); ?>
+    </div>
+<?php endif; ?>

@@ -14,8 +14,12 @@ global $poll;
 
 ?>
 
-<div class="poll-thumb">
-    <a href="<?php echo esc_url( $poll->get_permalink() ); ?>"><img style="width:100px;"
-                                                                    src="<?php echo esc_url( $poll->get_thumbnail() ); ?>"
-                                                                    alt="<?php echo esc_attr( $poll->get_name() ); ?>"></a>
-</div>
+<?php if( $poll->has_thumbnail() ) : ?>
+
+    <div class="poll-thumb">
+        <a href="<?php echo esc_url( $poll->get_permalink() ); ?>"><img
+                                                                        src="<?php echo esc_url( $poll->get_thumbnail('thumbnail' ) ); ?>"
+                                                                        alt="<?php echo esc_attr( $poll->get_name() ); ?>"></a>
+    </div>
+
+<?php endif; ?>

@@ -297,8 +297,8 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 			$content = $this->get_poll_post()->post_content;
 
-			if( $length ) {
-				$content = wp_trim_words( $content, $length, $more);
+			if ( $length ) {
+				$content = wp_trim_words( $content, $length, $more );
 			}
 
 			return apply_filters( 'wpp_filters_poll_content', $content );

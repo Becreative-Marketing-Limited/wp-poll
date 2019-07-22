@@ -22,15 +22,17 @@ if ( post_password_required() ) {
 	return;
 }
 
+global $poll;
+
+$poll = wpp_get_poll();
+
+$has_thumb = $poll->has_thumbnail() ? 'has-thumbnail' : '';
+
 ?>
 
-<div id="poll-archive-single-<?php the_ID(); ?>" class="poll-archive-single">
+<div id="poll-archive-single-<?php the_ID(); ?>" class="poll-archive-single <?php echo esc_attr( $has_thumb ); ?>">
 
 	<?php
-
-	global $poll;
-
-	$poll = wpp_get_poll();
 
 	/**
 	 * Hook: wpp_single_poll_main

@@ -24,7 +24,7 @@ global $poll;
 		$thumb_url     = isset( $option['thumb'] ) ? $option['thumb'] : '';
 
 		if ( ! empty( $thumb_url ) ) {
-			$option_html[] = sprintf( '<img src="%s" alt="%s">', $thumb_url, $label );
+			$option_html[] = sprintf( '<img src="%s" alt="%s">', $thumb_url, isset( $option['label'] ) ? $option['label'] : '' );
 		}
 
 		printf( '<li>%s</li>', implode( ' - ', array_filter( $option_html ) ) );
