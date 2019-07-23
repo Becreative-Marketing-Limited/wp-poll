@@ -3,106 +3,76 @@ Admin css
 */
 
 
-@import 'poll-meta-box.css';
 
-
-#wpp_chart_report_after {
-    padding: 10px 10px;
-    margin: 15px 0;
-    background: #2EA3F2;
-    color: #fff;
+#poll_metabox #post_title {
+    width: 100%;
+    padding: 8px 12px;
+    line-height: 20px;
 }
 
-#wpp_chart_report_after  a{
-    color: #fff !important;
-}
-
-#wpp_chart_report_after  .fa{
-    font-size: 30px;
-    vertical-align: middle;
-    margin-right: 15px;
-}
-
-#wp_shortcode_notice {
-    color:red;
-}
-
-.poll_view_link { float:right; text-decoration:none; }
-
-.button.button-orange{
-    background: #e77f11;
-    color: #fff;
-    transition: all ease-out 0.15s;
-    border-color: #e77f11;
-    box-shadow: 0 1px 0 #e77f11;
-}
-
-.button.button-orange:hover,.button.button-orange:active,.button.button-orange:focus{
-    background: #D54E21;
-    color: #fff;
-    border-color: #D54E21;
-    box-shadow: 0 1px 0 #D54E21;
-}
-
-.button.wpp-add-poll-option {
-    min-width: 150px;
-    height: 42px;
-    line-height: 42px;
-    text-align: center;
-    font-weight: 600;
-    background: #1398d4;
-    font-size: 16px;
-    color: #fff;
-    border: 0;
-    transition: 0.3s;
-    margin-bottom: 10px;
-    box-shadow: none;
-}
-
-.button.wpp-add-poll-option:focus,
-.button.wpp-add-poll-option:hover {
-    background: #0581b9;
-    color: #fff;
-}
-
-.wpp_td {
-    display:inline-block;
-    margin-right:25px;
-    vertical-align:top;
-}
-.wpp_td .wpp_td_single {
-    background: #dedede;
+.poll-options .poll-option-single {
+    background: #ff98003b;
     padding: 10px 20px;
-    width: 320px;
-    user-select:none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    position: relative;
 }
-.wpp_td .wpp_td_label{
-    font-size:14px;
-    font-weight:500;
+
+.poll-option-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
-.wpp_td .wpp_td_single input[type=checkbox] {
-    float: right;
-    margin-top: 0;
-    margin-right: 10px;
-    width: 20px;
-    height: 20px;
+
+.poll-option-controls > span {
+    background: #1199abe8;
+    color: #fff;
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
 }
-.wpp_td .wpp_td_single input[type=checkbox]:before {
-    font-size:24px !important;
+
+.poll-option-controls > span i {
+    position: relative;
+    left: 2px;
 }
-.wpp_td .wpp_td_icon {
-    color: #DE746C;
-    float: right;
-    font-size: 22px;
-    padding: 8px 15px;
-    margin-top: -10px;
-    margin-left: 8px;
+
+.poll-option-controls > span.option-move {
     cursor: move;
 }
-.wpp_td .wpp_td_icon:hover {
-    background: #eee;
+
+.poll-option-controls > span:hover {
+    background: #176a75e8;
 }
-.wpp_td .wpp_td_icon.wpp_td_add_section,
-.wpp_td .wpp_td_icon.wpp_td_single_remove{
-    cursor:pointer;
+
+.poll-option-controls > span.option-remove {
+    background: #ff5722;
+}
+
+.poll-option-controls > span.option-remove:hover {
+    background: #da4617;
+}
+
+.poll-option-controls > span.option-external {
+    background: none;
+    color: #2f2f2f;
+}
+
+
+/**
+ * Chart Reporting
+ */
+
+#wpp-chart-report {
+    padding-top: 20px;
+    padding-left: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 22px 35px -16px rgba(0,0,0, 0.1);
+    max-width: 860px;
+    margin: 35px auto;
 }

@@ -4,6 +4,10 @@
  */
 
 
+/**
+ * Frontend Templates Hooks
+ */
+
 if ( ! function_exists( 'wpp_single_poll_title' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
@@ -148,5 +152,20 @@ if ( ! function_exists( 'wpp_poll_archive_single_options' ) ) {
 	function wpp_poll_archive_single_options() {
 
 		wpp_get_template( 'loop/options.php' );
+	}
+}
+
+
+
+
+
+/**
+ * Backend Template Hooks
+ */
+
+if( ! function_exists( 'wpp_admin_render_reports' ) ) {
+	function wpp_admin_render_reports() {
+
+		require( WPP_PLUGIN_DIR . 'includes/admin-templates/reports.php' );
 	}
 }

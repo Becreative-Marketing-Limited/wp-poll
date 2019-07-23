@@ -6,6 +6,8 @@
 
 /**
  * Hooks for Poll Archive Single
+ *
+ * @on Frontend
  */
 add_action( 'wpp_poll_archive_single_main', 'wpp_poll_archive_single_thumb', 10 );
 add_action( 'wpp_poll_archive_single_main', 'wpp_poll_archive_single_summary', 20 );
@@ -26,6 +28,8 @@ add_action( 'wpp_poll_archive_single_summary', 'wpp_poll_archive_single_options'
  * @see wpp_single_poll_notice()
  * @see wpp_single_poll_countdown()
  * @see wpp_single_poll_buttons()
+ *
+ * @on Frontend
  */
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_title', 10 );
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_thumb', 15 );
@@ -35,3 +39,14 @@ add_action( 'wpp_single_poll_main', 'wpp_single_poll_notice', 30 );
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_countdown', 35 );
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_responses', 40 );
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_buttons', 45 );
+
+
+
+
+
+/**
+ * Backend Template Hooks
+ */
+
+add_action( 'wpp-reports', 'wpp_admin_render_reports' );
+
