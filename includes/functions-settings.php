@@ -7,7 +7,7 @@
 
 $pages = array();
 
-$pages['woc_options'] = array(
+$pages['wpp-options'] = array(
 
 	'page_nav'      => sprintf( '<i class="icofont-ui-settings"></i> %s', esc_html__( 'Options', 'wp-poll' ) ),
 	'page_settings' => array(
@@ -86,7 +86,28 @@ $pages['woc_options'] = array(
 	),
 );
 
-$pages['woc_support'] = array(
+$pages['wpp-reports'] = array(
+	'page_nav'      => sprintf( '<i class="icofont-chart-histogram-alt"></i> %s', esc_html__( 'Reports', 'wp-poll' ) ),
+	'show_submit'   => false,
+	'page_settings' => array(
+		array(
+			'title'       => esc_html__( 'Poll Reports', 'wp-poll' ),
+			'description' => esc_html__( 'View reports for specific poll item', 'wp-poll' ),
+			'options'     => array(
+				array(
+					'id'      => 'wpp_reports_poll_id',
+					'title'   => esc_html__( 'Select Poll', 'wp-poll' ),
+					'details' => esc_html__( 'Select a poll you want to see report. Reports will generate automatically', 'wp-poll' ),
+					'type'    => 'select',
+					'value'   => isset( $_GET['poll-id'] ) ? $_GET['poll-id'] : '',
+					'args'    => 'POSTS_%poll%',
+				),
+			),
+		),
+	)
+);
+
+$pages['wpp-support'] = array(
 	'page_nav'      => '<i class="icofont-live-support"></i> ' . esc_html__( 'Support', 'wp-poll' ),
 	'show_submit'   => false,
 	'page_settings' => array(
@@ -117,16 +138,15 @@ $pages['woc_support'] = array(
 	)
 );
 
-global $wpp;
 
-$wpp->PB_Settings( array(
+wpp()->PB_Settings( array(
 	'add_in_menu'     => true,
 	'menu_type'       => 'submenu',
 	'menu_title'      => esc_html__( 'Settings', 'wp-poll' ),
 	'page_title'      => esc_html__( 'Settings', 'wp-poll' ),
-	'menu_page_title' => 'WooCommerce Open Close - ' . esc_html__( 'Control Panel', 'wp-poll' ),
+	'menu_page_title' => esc_html__( 'Poll - Control Panel', 'wp-poll' ),
 	'capability'      => "manage_options",
-	'menu_slug'       => "woc-open-close",
+	'menu_slug'       => 'wpp-settings',
 	'parent_slug'     => "edit.php?post_type=poll",
 	'pages'           => $pages,
 ) );

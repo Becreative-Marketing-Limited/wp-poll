@@ -32,7 +32,38 @@ class WPPollManager {
 		$this->define_classes_functions();
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+
+		register_activation_hook( __FILE__, array( $this, 'on_activation') );
+		register_deactivation_hook( __FILE__, array( $this, 'on_deactivation') );
 	}
+
+
+	/**
+	 * Plugin Deactivation Hook
+	 */
+	function on_deactivation() {
+		$this->permalink_flush();
+	}
+
+
+	/**
+	 * Plugin Activation Hook
+	 */
+	function on_activation() {
+		$this->permalink_flush();
+	}
+
+
+	/**
+	 * Flush Rewrite rules on Activation or Deactivation plugin
+	 */
+	function permalink_flush() {
+
+		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-post-types.php' );
+
+		flush_rewrite_rules();
+	}
+
 
 
 	/**

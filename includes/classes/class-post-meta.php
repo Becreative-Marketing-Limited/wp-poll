@@ -122,13 +122,6 @@ class WPP_Post_meta_Poll {
 		return array(
 
 			array(
-				'id'      => 'post_title',
-				'title'   => esc_html__( 'Poll title', 'wp-poll' ),
-				'details' => esc_html__( 'Write a suitable title for this poll', 'wp-poll' ),
-				'type'    => 'text',
-			),
-
-			array(
 				'id'    => 'poll_meta_options',
 				'title' => esc_html__( 'Options', 'wp-poll' ),
 			),
