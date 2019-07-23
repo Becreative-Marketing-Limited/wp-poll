@@ -39,6 +39,14 @@ if ( ! class_exists( 'WPP_Post_types' ) ) {
 				'supports'          => array( 'title' ),
 			) );
 
+			/**
+			 * Register Post Type Poll
+			 */
+			$this->register_taxonomy( 'poll_cat', 'poll', array(
+				'singular'          => esc_html__( 'Poll Category', 'wp-poll' ),
+				'plural'            => esc_html__( 'Poll Categories', 'wp-poll' ),
+			) );
+
 			do_action( 'wpp_register_post_types', $this );
 		}
 
