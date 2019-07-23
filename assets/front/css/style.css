@@ -12,12 +12,15 @@
 }
 
 [class*="wpp-option-list"] {
-    margin-bottom: 30px;
     max-width: 430px;
 }
 
 .wpp_content {
     margin-bottom: 20px;
+}
+
+.wpp-poll-thumbnail {
+    margin-bottom: 25px;
 }
 
 .wpp-button {
@@ -32,6 +35,10 @@
     min-width: 99px;
     outline: none;
     box-shadow: none;
+}
+
+.wpp-poll-title {
+    margin: 0 0 30px;
 }
 
 .wpp-buttons .wpp-button {
@@ -209,7 +216,7 @@ p.wpp-responses.wpp-success {
 
 
 [class*="wpp-countdown-timer"] > span {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .wpp-countdown-timer-1 > span {
@@ -241,7 +248,6 @@ p.wpp-responses.wpp-success {
     font-size: 16px;
     line-height: 24px;
     text-align: center;
-    margin-bottom: 30px;
 }
 
 .wpp-countdown-timer-2 > span:last-child {
@@ -269,7 +275,6 @@ p.wpp-responses.wpp-success {
     min-width: 120px;
     min-height: 120px;
     border-radius: 50%;
-    margin-bottom: 25px;
 }
 
 .wpp-countdown-timer-3 .count-number {
@@ -293,7 +298,6 @@ p.wpp-responses.wpp-success {
     min-width: 120px;
     min-height: 120px;
     border-radius: 50%;
-    margin-bottom: 15px;
 }
 
 .wpp-countdown-timer-4 .count-number {
@@ -314,11 +318,9 @@ p.wpp-responses.wpp-success {
     min-width: 120px;
     min-height: 120px;
     border-radius: 50%;
-    margin-bottom: 15px;
     color: #fff;
     background-color: #009688;
     background-image: linear-gradient(-225deg, #009688 0%, #89d432 100%);
-
 }
 
 .wpp-countdown-timer-5 .count-number {
@@ -1146,5 +1148,9 @@ p.wpp-responses.wpp-success {
         line-height: 22px;
         margin-top: 17px;
         margin-bottom: 0;
+    }
+
+    [class*="wpp-countdown-timer"] {
+        text-align: center;
     }
 }
