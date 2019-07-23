@@ -11,6 +11,27 @@
     });
 
 
+    $(document).on('change', '#wpp_reports_poll_id', function () {
+
+
+        let parts = location.search.replace('?','').split('&').reduce(function(s,c){var t=c.split('=');s[t[0]]=t[1];return s;},{}),
+            redirectURL = window.location.protocol + '//' + window.location.hostname + window.location.pathname + '?',
+            pollID = $(this).find('option:selected').val();
+
+        $.each( parts, function( index, value ) {
+            redirectURL += index + '=' + value + '&';
+        });
+
+        if( typeof pollID === 'undefined' || pollID.length === 0 ) {
+            window.location.replace( redirectURL );
+        }
+
+        redirectURL += 'poll-id=' + pollID;
+
+        window.location.replace( redirectURL );
+    });
+
+
     /**
      * Add new option in poll meta box
      */
@@ -93,11 +114,6 @@
         }
     })
 
-
-    $(document).on('change', '#wpp_report_form select', function () {
-
-        $(this).closest('form').trigger('submit');
-    })
 
     function copyToClipboard(element) {
         var $temp = jQuery("<input>");

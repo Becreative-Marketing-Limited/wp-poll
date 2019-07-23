@@ -39,6 +39,30 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
+		 * Return Option Label upon giving Option ID
+		 *
+		 * @param bool $option_id
+		 *
+		 * @return mixed|void
+		 */
+		function get_option_label( $option_id = false ) {
+
+			if( ! $option_id ) {
+				return apply_filters( 'wpp_filter_get_option_label', esc_html__( 'N/A', 'wp-poll' ), $option_id, $this->get_id(), $this );
+			}
+
+			$poll_options = $this->get_poll_options();
+			$option_label = isset( $poll_options[$option_id]['label'] ) ? $poll_options[$option_id]['label'] : '';
+
+			if( empty( $option_label ) ) {
+				return apply_filters( 'wpp_filter_get_option_label', esc_html__( 'N/A', 'wp-poll' ), $option_id, $this->get_id(), $this );
+			}
+
+			return apply_filters( 'wpp_filter_get_option_label', $option_label, $option_id, $this->get_id(), $this );
+		}
+
+
+		/**
 		 * Return poll results
 		 *
 		 * @return mixed|void
