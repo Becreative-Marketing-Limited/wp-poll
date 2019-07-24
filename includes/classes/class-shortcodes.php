@@ -39,10 +39,14 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 				return $content;
 			}
 
-			if ( in_array( 'yes', wpp()->get_option( 'wpp_poll_page_content_show', 'no' ) ) ) {
-				$content .= do_shortcode( '[poll_list]' );
+			$show_results    = wpp()->display_on_archive( 'results' ) ? 'yes' : 'no';
+			$show_pagination = wpp()->display_on_archive( 'pagination' ) ? 'yes' : 'no';
+			$shortcode       = sprintf( '[poll_list show_results="%s" show_pagination="%s"]', $show_results, $show_pagination );
+
+			if ( wpp()->display_on_archive( 'page-content' ) ) {
+				$content .= do_shortcode( $shortcode );
 			} else {
-				$content = do_shortcode( '[poll_list]' );
+				$content = do_shortcode( $shortcode );
 			}
 
 			return $content;

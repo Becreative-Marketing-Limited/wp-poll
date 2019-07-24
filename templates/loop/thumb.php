@@ -14,7 +14,7 @@ global $poll;
 
 ?>
 
-<?php if( $poll->has_thumbnail() ) : ?>
+<?php if( $poll->has_thumbnail() && wpp()->display_on_archive( 'thumb' ) ) : ?>
 
     <div class="poll-thumb">
         <a href="<?php echo esc_url( $poll->get_permalink() ); ?>"><img

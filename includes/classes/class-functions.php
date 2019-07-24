@@ -17,6 +17,29 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 
 
 		/**
+		 * Display Items or Not in Archive page
+		 *
+		 * @param bool $thing_to_check page-content | results | thumb | pagination
+		 *
+		 * @return bool
+		 */
+		function display_on_archive( $thing_to_check = false ) {
+
+			if( ! $thing_to_check || empty( $thing_to_check ) ) {
+				return false;
+			}
+
+			$archive_show_hide = $this->get_option( 'wpp_archive_show_hide', array( 'pagination' ) );
+
+			if( in_array( $thing_to_check, $archive_show_hide ) ) {
+				return true;
+			}
+
+			return false;
+		}
+
+
+		/**
 		 * Return the number of items per page
 		 *
 		 * @return mixed|void

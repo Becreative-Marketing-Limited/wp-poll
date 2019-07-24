@@ -225,7 +225,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 
 				echo sprintf( "<i>%d %s</i>", count( $polled_data ), __( 'people polled on this', 'wp-poll' ) );
 				echo '<div class="row-actions">';
-				echo sprintf( '<span class="view_report"><a href="%s" rel="permalink">' . __( 'View Reports', 'wp-poll' ) . '</a></span>', "edit.php?post_type=poll&page=wpp_reports&id=" . $post_id );
+				echo sprintf( '<span class="view_report"><a href="%s" rel="permalink">' . __( 'View Reports', 'wp-poll' ) . '</a></span>', "edit.php?post_type=poll&page=wpp-settings&tab=wpp-reports&poll-id=" . $post_id );
 				echo '</div>';
 
 			endif;

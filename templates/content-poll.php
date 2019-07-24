@@ -26,7 +26,7 @@ global $poll;
 
 $poll = wpp_get_poll();
 
-$has_thumb = $poll->has_thumbnail() ? 'has-thumbnail' : '';
+$has_thumb = $poll->has_thumbnail() && wpp()->display_on_archive( 'thumb' ) ? 'has-thumbnail' : '';
 
 ?>
 

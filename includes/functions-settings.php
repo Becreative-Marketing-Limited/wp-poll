@@ -67,17 +67,17 @@ $pages['wpp-options'] = array(
 					'type'        => 'number',
 				),
 				array(
-					'id'      => 'wpp_poll_page_content_show',
-					'title'   => esc_html__( 'Page content', 'wp-poll' ),
-					'details' => esc_html__( 'Do you want to show page Content?', 'wp-poll' ),
-					'type'    => 'radio',
+					'id'      => 'wpp_archive_show_hide',
+					'title'   => esc_html__( 'Show / Hide', 'wp-poll' ),
+					'details' => esc_html__( 'Choose what you want to display on archive page.', 'wp-poll' ),
+					'type'    => 'checkbox',
 					'args'    => array(
-						'yes' => esc_html__( 'Yes', 'wp-poll' ),
-						'no'  => esc_html__( 'No', 'wp-poll' ),
+						'thumb'        => esc_html__( 'Display poll thumbnail', 'wp-poll' ),
+						'results'      => esc_html__( 'Display poll results', 'wp-poll' ),
+						'pagination'   => esc_html__( 'Display pagination', 'wp-poll' ),
+						'page-content' => esc_html__( 'Display archive page content', 'wp-poll' ),
 					),
-					'default' => array(
-						'no'
-					),
+					'default' => array( 'pagination' ),
 				),
 			)
 		),
@@ -99,9 +99,20 @@ $pages['wpp-reports'] = array(
 					'title'   => esc_html__( 'Select Poll', 'wp-poll' ),
 					'details' => esc_html__( 'Select a poll you want to see report. Reports will generate automatically', 'wp-poll' ),
 					'type'    => 'select',
-					'value'   => isset( $_GET['poll-id'] ) ? $_GET['poll-id'] : '',
+					'value'   => isset( $_GET['poll-id'] ) ? sanitize_text_field( $_GET['poll-id'] ) : '',
 					'args'    => 'POSTS_%poll%',
 				),
+				array(
+					'id'    => 'wpp_reports_style',
+					'title' => esc_html__( 'Report Style', 'wp-poll' ),
+					'type'  => 'select',
+					'value' => isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : 'pie',
+					'args'  => array(
+						'pie' => esc_html__( 'Pie Charts', 'wp-poll' ),
+						'bar' => esc_html__( 'Bar Charts', 'wp-poll' ),
+					),
+				),
+
 			),
 		),
 	)

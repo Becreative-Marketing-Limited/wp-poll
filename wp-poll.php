@@ -33,8 +33,8 @@ class WPPollManager {
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 
-		register_activation_hook( __FILE__, array( $this, 'on_activation') );
-		register_deactivation_hook( __FILE__, array( $this, 'on_deactivation') );
+		register_activation_hook( __FILE__, array( $this, 'on_activation' ) );
+		register_deactivation_hook( __FILE__, array( $this, 'on_deactivation' ) );
 	}
 
 
@@ -63,7 +63,6 @@ class WPPollManager {
 
 		flush_rewrite_rules();
 	}
-
 
 
 	/**
@@ -104,7 +103,8 @@ class WPPollManager {
 	function localize_scripts_data() {
 
 		$plugin_obj = array(
-			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'ajaxurl'  => admin_url( 'admin-ajax.php' ),
+			'copyText' => esc_html__( 'Copied !', 'wp-poll' ),
 		);
 
 		return $plugin_obj;

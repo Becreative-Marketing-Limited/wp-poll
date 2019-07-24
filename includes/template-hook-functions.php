@@ -155,6 +155,16 @@ if ( ! function_exists( 'wpp_poll_archive_single_options' ) ) {
 	}
 }
 
+if ( ! function_exists( 'wpp_poll_archive_pagination' ) ) {
+	/**
+	 * Hook: wpp_after_poll_archive - 10
+	 */
+	function wpp_poll_archive_pagination() {
+
+		wpp_get_template( 'loop/pagination.php' );
+	}
+}
+
 
 
 
@@ -167,5 +177,12 @@ if( ! function_exists( 'wpp_admin_render_reports' ) ) {
 	function wpp_admin_render_reports() {
 
 		require( WPP_PLUGIN_DIR . 'includes/admin-templates/reports.php' );
+	}
+}
+
+if( ! function_exists( 'wpp_poll_submitbox' ) ) {
+	function wpp_poll_submitbox() {
+
+		require( WPP_PLUGIN_DIR . 'includes/admin-templates/poll-submitbox.php' );
 	}
 }

@@ -39,6 +39,69 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
+		 * @param bool $reports_for false | labels | percentages | counts | total_votes
+		 *
+		 * @return mixed|void
+		 */
+		function get_poll_reports( $reports_for = false ) {
+
+			$poll_reports = array();
+			$poll_options = $this->get_poll_options();
+			$poll_results = $this->get_poll_results();
+
+			foreach ( $poll_options as $option_id => $option ) {
+
+				$poll_reports[ $option_id ] = array(
+					'label'      => isset( $option['label'] ) ? $option['label'] : '',
+					'percentage' => isset( $poll_results['percentages'][ $option_id ] ) ? $poll_results['percentages'][ $option_id ] : 0,
+					'count'      => isset( $poll_results['singles'][ $option_id ] ) ? $poll_results['singles'][ $option_id ] : 0,
+				);
+			}
+
+
+			/**
+			 * Reports for : labels
+			 */
+			if( $reports_for == 'labels' ) {
+				$poll_reports = array_map( function( $report ) {
+					return isset( $report['label'] ) ? $report['label'] : '';
+				}, $poll_reports );
+			}
+
+
+			/**
+			 * Report for : percentages
+			 */
+			if( $reports_for == 'percentages' ) {
+				$poll_reports = array_map( function( $report ) {
+					return isset( $report['percentage'] ) ? $report['percentage'] : 0;
+				}, $poll_reports );
+			}
+
+
+			/**
+			 * Report for : counts
+			 */
+			if( $reports_for == 'counts' ) {
+				$poll_reports = array_map( function( $report ) {
+					return isset( $report['count'] ) ? $report['count'] : 0;
+				}, $poll_reports );
+			}
+
+
+			/**
+			 * Report for : total_votes
+			 */
+			if( $reports_for == 'total_votes' ) {
+				$poll_reports = isset( $poll_results['total'] ) ? $poll_results['total'] : 0;
+			}
+
+
+			return apply_filters( 'wpp_poll_reports', $poll_reports, $reports_for, $this->get_id(), $this );
+		}
+
+
+		/**
 		 * Return Option Label upon giving Option ID
 		 *
 		 * @param bool $option_id
@@ -47,14 +110,14 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		 */
 		function get_option_label( $option_id = false ) {
 
-			if( ! $option_id ) {
+			if ( ! $option_id ) {
 				return apply_filters( 'wpp_filter_get_option_label', esc_html__( 'N/A', 'wp-poll' ), $option_id, $this->get_id(), $this );
 			}
 
 			$poll_options = $this->get_poll_options();
-			$option_label = isset( $poll_options[$option_id]['label'] ) ? $poll_options[$option_id]['label'] : '';
+			$option_label = isset( $poll_options[ $option_id ]['label'] ) ? $poll_options[ $option_id ]['label'] : '';
 
-			if( empty( $option_label ) ) {
+			if ( empty( $option_label ) ) {
 				return apply_filters( 'wpp_filter_get_option_label', esc_html__( 'N/A', 'wp-poll' ), $option_id, $this->get_id(), $this );
 			}
 
@@ -84,7 +147,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 				foreach ( $polled_options as $option_id ) {
 
-					if( ! isset( $poll_results['singles'][ $option_id ] ) ) {
+					if ( ! isset( $poll_results['singles'][ $option_id ] ) ) {
 						$poll_results['singles'][ $option_id ] = 0;
 					}
 
