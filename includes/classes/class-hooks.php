@@ -56,13 +56,13 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 
 			$poll_id      = isset( $_POST['poll_id'] ) ? sanitize_text_field( $_POST['poll_id'] ) : '';
 			$checked_data = isset( $_POST['checked_data'] ) ? stripslashes_deep( $_POST['checked_data'] ) : array();
+			$poll         = wpp_get_poll( $poll_id );
 
 			if ( empty( $poll_id ) || empty( $checked_data ) || ! is_array( $checked_data ) ) {
 				wp_send_json_error( esc_html__( 'Invalid data found !', 'wp-poll' ) );
 			}
 
-			$polled_data = get_post_meta( $poll_id, 'polled_data', true );
-			$polled_data = empty( $polled_data ) ? array() : $polled_data;
+			$polled_data = $poll->get_meta( 'polled_data', array() );
 			$poller      = wpp_get_poller();
 
 			/**
@@ -70,6 +70,14 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			 */
 			if ( array_key_exists( $poller, $polled_data ) ) {
 				wp_send_json_error( esc_html__( 'You have already voted on this poll !', 'wp-poll' ) );
+			}
+
+
+			/**
+			 * Check ready to vote or not
+			 */
+			if ( ! $poll->ready_to_vote() ) {
+				wp_send_json_error( esc_html__( 'This poll can not be voted any more !', 'wp-poll' ) );
 			}
 
 

@@ -100,6 +100,10 @@ p.wpp-responses {
     cursor: pointer;
 }
 
+p.wpp-responses.display {
+    display: block;
+}
+
 p.wpp-responses.wpp-error {
     background: #ff57225c;
 }

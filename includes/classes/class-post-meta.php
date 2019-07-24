@@ -146,7 +146,7 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'            => 'poll_deadline',
-				'title'         => esc_html__( 'Deadline', 'wp-poll' ),
+				'title'         => esc_html__( 'Settings', 'wp-poll' ),
 				'details'       => esc_html__( 'Specify a date when this poll will end. Leave empty to ignore this option', 'wp-poll' ),
 				'type'          => 'datepicker',
 				'autocomplete'  => 'off',
@@ -157,27 +157,13 @@ class WPP_Post_meta_Poll {
 			),
 
 			array(
-				'id'      => 'poll_meta_multiple',
-				'title'   => esc_html__( 'Multiple Vote', 'wp-poll' ),
-				'details' => esc_html__( 'Allow multiple vote | Default: No', 'wp-poll' ),
-				'type'    => 'select',
-				'args'    => array(
-					'yes' => esc_html__( 'Yes', 'wp-poll' ),
-					'no'  => esc_html__( 'No', 'wp-poll' ),
+				'id'            => 'poll_allow_disallow',
+				'type'          => 'checkbox',
+				'args' => array(
+					'vote_after_deadline' => esc_html__( 'Allow users to vote after poll meets deadline', 'wp-poll' ),
+					'multiple_votes' => esc_html__( 'Allow Multiple votes', 'wp-poll' ),
+					'new_options' => esc_html__( 'Allow Visitors to add new options', 'wp-poll' ),
 				),
-				'default' => array( 'no' ),
-			),
-
-			array(
-				'id'      => 'poll_meta_new_option',
-				'title'   => esc_html__( 'New Option', 'wp-poll' ),
-				'details' => esc_html__( 'Allow Visitors to add New Option | Default: No', 'wp-poll' ),
-				'type'    => 'select',
-				'args'    => array(
-					'yes' => esc_html__( 'Yes', 'wp-poll' ),
-					'no'  => esc_html__( 'No', 'wp-poll' ),
-				),
-				'default' => array( 'no' ),
 			),
 
 			array(
@@ -197,7 +183,7 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'      => 'poll_options_theme',
-				'title'   => esc_html__( 'Options Theme', 'wp-poll' ),
+				'title'   => esc_html__( 'Options Styles', 'wp-poll' ),
 				'details' => esc_html__( 'Options theme style | Default: 1', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(
@@ -217,7 +203,6 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'      => 'poll_animation_checkbox',
-				'title'   => esc_html__( 'Animations', 'wp-poll' ),
 				'details' => esc_html__( 'Animations for Multiple selections (Input type - Checkbox) | Default: Checkmark', 'wp-poll' ),
 				'type'    => 'select',
 				'args'    => array(
