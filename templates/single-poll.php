@@ -41,19 +41,6 @@ do_action( 'wpp_after_single_poll_template' );
 <?php
 
 /**
- * Get WP Sidebar
- */
-
-if( $wpp->display_sidebar() ) {
-	get_sidebar();
-}
-
-?>
-
-
-<?php
-
-/**
  * Get WP Footer
  */
 

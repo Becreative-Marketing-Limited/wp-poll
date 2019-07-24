@@ -53,23 +53,6 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 
 
 		/**
-		 * Display sidebar or not
-		 *
-		 * @return bool
-		 */
-		function display_sidebar() {
-
-			$poll_sidebar = $this->get_option( 'wpp_poll_sidebar', 'yes' );
-
-			if( $poll_sidebar === 'yes' ) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-
-
-		/**
 		 * Return button text for button
 		 *
 		 * @param string $button

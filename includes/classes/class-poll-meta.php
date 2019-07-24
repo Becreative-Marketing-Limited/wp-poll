@@ -225,8 +225,6 @@ class WPP_Post_meta_Poll {
 				),
 				'default' => array( 'fill' ),
 			),
-
-
 		);
 	}
 }

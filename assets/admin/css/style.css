@@ -82,3 +82,33 @@ Admin css
     max-width: 795px;
     margin: 10px auto 20px auto;
 }
+
+
+/**
+ * Widgets
+ */
+
+.widget-inside .wps-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.widget-inside .wps-field > label {
+    font-size: 13px;
+}
+
+.widget-inside .wps-field .wps-field-inputs {
+    margin: 0;
+    min-width: 0;
+    width: 75%;
+}
+
+.widget-inside .wps-field .wps-field-inputs select,
+.widget-inside .wps-field .wps-field-inputs input {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+

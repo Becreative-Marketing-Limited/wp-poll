@@ -1,7 +1,14 @@
 <?php
 /**
  * Class Poll
+ *
+ * @author Pluginbazar
+ * @package includes/classes/class-poll
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}  // if direct access
 
 
 if ( ! class_exists( 'WPP_Poll' ) ) {
@@ -45,16 +52,20 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		 */
 		function ready_to_vote() {
 
-			$can_vote = false;
+			$can_vote      = true;
+			$poll_deadline = $this->get_poll_deadline( 'U' );
 
-			// Check deadline
-			if( date( 'U' ) < $this->get_poll_deadline( 'U' ) ) {
-				$can_vote = true;
-			}
+			if ( ! empty( $poll_deadline ) && $poll_deadline !== 0 ) {
 
-			// Check allow/disallow
-			if( $this->get_allows_disallows( 'vote_after_deadline' ) ) {
-				$can_vote = true;
+				// Check deadline
+				if ( date( 'U' ) > $poll_deadline ) {
+					$can_vote = false;
+				}
+
+				// Check allow/disallow
+				if ( ! $this->get_allows_disallows( 'vote_after_deadline' ) ) {
+					$can_vote = false;
+				}
 			}
 
 			return apply_filters( 'wpp_filters_ready_to_vote', $can_vote, $this->get_id() );
@@ -85,8 +96,8 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			/**
 			 * Reports for : labels
 			 */
-			if( $reports_for == 'labels' ) {
-				$poll_reports = array_map( function( $report ) {
+			if ( $reports_for == 'labels' ) {
+				$poll_reports = array_map( function ( $report ) {
 					return isset( $report['label'] ) ? $report['label'] : '';
 				}, $poll_reports );
 			}
@@ -95,8 +106,8 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			/**
 			 * Report for : percentages
 			 */
-			if( $reports_for == 'percentages' ) {
-				$poll_reports = array_map( function( $report ) {
+			if ( $reports_for == 'percentages' ) {
+				$poll_reports = array_map( function ( $report ) {
 					return isset( $report['percentage'] ) ? $report['percentage'] : 0;
 				}, $poll_reports );
 			}
@@ -105,8 +116,8 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			/**
 			 * Report for : counts
 			 */
-			if( $reports_for == 'counts' ) {
-				$poll_reports = array_map( function( $report ) {
+			if ( $reports_for == 'counts' ) {
+				$poll_reports = array_map( function ( $report ) {
 					return isset( $report['count'] ) ? $report['count'] : 0;
 				}, $poll_reports );
 			}
@@ -115,7 +126,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			/**
 			 * Report for : total_votes
 			 */
-			if( $reports_for == 'total_votes' ) {
+			if ( $reports_for == 'total_votes' ) {
 				$poll_reports = isset( $poll_results['total'] ) ? $poll_results['total'] : 0;
 			}
 
@@ -357,7 +368,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		 */
 		function can_vote_multiple() {
 
-			return $this->get_meta( 'multiple_votes', false );
+			return $this->get_allows_disallows( 'multiple_votes' );
 		}
 
 
@@ -505,13 +516,13 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		 */
 		function get_allows_disallows( $thing_to_check = false ) {
 
-			if( ! $thing_to_check || empty( $thing_to_check ) ) {
+			if ( ! $thing_to_check || empty( $thing_to_check ) ) {
 				return false;
 			}
 
 			$allow_disallow = $this->get_meta( 'poll_allow_disallow', array() );
 
-			if( is_array( $allow_disallow ) && in_array( $thing_to_check, $allow_disallow ) ) {
+			if ( is_array( $allow_disallow ) && in_array( $thing_to_check, $allow_disallow ) ) {
 				return true;
 			}
 

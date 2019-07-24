@@ -16,17 +16,6 @@ $pages['wpp-options'] = array(
 			'title'   => esc_html__( 'General Settings', 'wp-poll' ),
 			'options' => array(
 				array(
-					'id'      => 'wpp_poll_sidebar',
-					'title'   => esc_html__( 'Single Poll Sidebar', 'wp-poll' ),
-					'details' => esc_html__( 'Do you want to display sidebar on single poll page?', 'wp-poll' ),
-					'type'    => 'select',
-					'args'    => array(
-						'yes' => esc_html__( 'Yes', 'wp-poll' ),
-						'no'  => esc_html__( 'No', 'wp-poll' ),
-					),
-					'default' => array( 'yes' ),
-				),
-				array(
 					'id'          => 'wpp_btn_text_new_option',
 					'title'       => esc_html__( 'Buttons Text', 'wp-poll' ),
 					'details'     => esc_html__( 'New option button', 'wp-poll' ),

@@ -25,13 +25,14 @@ class WPPollManager {
 	/**
 	 * WPPollManager constructor.
 	 */
-	public function __construct() {
+	function __construct() {
 
 		$this->define_constants();
 		$this->load_scripts();
 		$this->define_classes_functions();
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
 		register_activation_hook( __FILE__, array( $this, 'on_activation' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'on_deactivation' ) );
@@ -65,10 +66,16 @@ class WPPollManager {
 	}
 
 
+	function register_widgets() {
+
+		register_widget( 'WPP_Widgets' );
+	}
+
+
 	/**
 	 * Loading TextDomain
 	 */
-	public function load_textdomain() {
+	function load_textdomain() {
 
 		load_plugin_textdomain( 'wp-poll', false, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
@@ -77,15 +84,16 @@ class WPPollManager {
 	/**
 	 * Loading classes and functions
 	 */
-	public function define_classes_functions() {
+	function define_classes_functions() {
 
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-post-types.php' );
+		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll-post-types.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-functions.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-hooks.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-post-meta.php' );
+		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll-meta.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-shortcodes.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll.php' );
+		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll-widgets.php' );
 
 		require_once( WPP_PLUGIN_DIR . 'includes/functions.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/functions-settings.php' );
@@ -114,7 +122,7 @@ class WPPollManager {
 	/**
 	 * Loading scripts to backend
 	 */
-	public function admin_scripts() {
+	function admin_scripts() {
 
 		wp_enqueue_style( 'jquery-ui' );
 		wp_enqueue_style( 'wp-color-picker' );
@@ -133,7 +141,7 @@ class WPPollManager {
 	/**
 	 * Loading scripts to the frontend
 	 */
-	public function front_scripts() {
+	function front_scripts() {
 
 		wp_enqueue_script( 'wpp_checkbox_js', WPP_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), false, true );
 		wp_enqueue_script( 'wpp_js', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ) );
@@ -149,7 +157,7 @@ class WPPollManager {
 	/**
 	 * Loading scripts
 	 */
-	public function load_scripts() {
+	function load_scripts() {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'front_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
@@ -159,7 +167,7 @@ class WPPollManager {
 	/**
 	 * Define Constants
 	 */
-	public function define_constants() {
+	function define_constants() {
 
 		define( 'WPP_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
 		define( 'WPP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );

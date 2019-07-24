@@ -41,4 +41,3 @@ global $poll, $wpp;
 	?>
 
 </div>
-
