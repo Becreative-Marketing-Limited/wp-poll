@@ -29,8 +29,9 @@ global $poll, $wpp;
 	/**
 	 * Submit button
 	 */
-	printf( '<button class="wpp-button wpp-button-green wpp-submit-poll" data-poll-id="%s">%s</button>', $poll->get_id(), $wpp->get_button_text( 'submit' ) );
-
+	if( $poll->ready_to_vote() ) {
+		printf( '<button class="wpp-button wpp-button-green wpp-submit-poll" data-poll-id="%s">%s</button>', $poll->get_id(), $wpp->get_button_text( 'submit' ) );
+	}
 
 	/**
 	 * Results button
@@ -40,4 +41,3 @@ global $poll, $wpp;
 	?>
 
 </div>
-

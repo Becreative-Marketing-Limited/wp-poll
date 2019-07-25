@@ -17,6 +17,29 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 
 
 		/**
+		 * Display Items or Not in Archive page
+		 *
+		 * @param bool $thing_to_check page-content | results | thumb | pagination
+		 *
+		 * @return bool
+		 */
+		function display_on_archive( $thing_to_check = false ) {
+
+			if( ! $thing_to_check || empty( $thing_to_check ) ) {
+				return false;
+			}
+
+			$archive_show_hide = $this->get_option( 'wpp_archive_show_hide', array( 'pagination' ) );
+
+			if( in_array( $thing_to_check, $archive_show_hide ) ) {
+				return true;
+			}
+
+			return false;
+		}
+
+
+		/**
 		 * Return the number of items per page
 		 *
 		 * @return mixed|void
@@ -26,23 +49,6 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 			$items_per_page = $this->get_option( 'wpp_archive_items_per_page', 10 );
 
 			return apply_filters( 'wpp_filters_polls_per_page', $items_per_page );
-		}
-
-
-		/**
-		 * Display sidebar or not
-		 *
-		 * @return bool
-		 */
-		function display_sidebar() {
-
-			$poll_sidebar = $this->get_option( 'wpp_poll_sidebar', 'yes' );
-
-			if( $poll_sidebar === 'yes' ) {
-				return true;
-			} else {
-				return false;
-			}
 		}
 
 

@@ -356,15 +356,26 @@ if ( ! class_exists( 'PB_Settings' ) ) {
             <div class="button" <?php echo esc_attr( $disabled ); ?>
                  id="media_upload_<?php echo esc_attr( $unique_id ); ?>"><?php esc_html_e( 'Upload' ); ?></div>
 
+            <?php if( ! empty( $value ) ) : ?>
+                <div class="button button-primary" id="media_upload_<?php echo esc_attr( $unique_id ); ?>_remove"><?php esc_html_e( 'Remove' ); ?></div>
+            <?php endif; ?>
+
             <script>
                 jQuery(document).ready(function ($) {
-                    $("#media_upload_<?php echo esc_attr( $unique_id ); ?>").click(function () {
+
+
+                    $(document).on('click', '#media_upload_<?php echo esc_attr( $unique_id ); ?>_remove', function () {
+                        $(this).parent().find('.media_preview img').attr( 'src', '');
+                        $(this).parent().find('input[name="_thumbnail_id"]').val('');
+                    });
+
+                    $(document).on('click', '#media_upload_<?php echo esc_attr( $unique_id ); ?>', function () {
                         var send_attachment_bkp = wp.media.editor.send.attachment;
                         wp.media.editor.send.attachment = function (props, attachment) {
                             $("#media_preview_<?php echo esc_attr( $unique_id ); ?>").attr('src', attachment.url);
                             $("#media_input_<?php echo esc_attr( $unique_id ); ?>").val(attachment.id);
                             wp.media.editor.send.attachment = send_attachment_bkp;
-                        }
+                        };
                         wp.media.editor.open($(this));
                         return false;
                     });

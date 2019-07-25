@@ -48,6 +48,7 @@ endif;
 /**
  * After Poll Archive
  *
+ * @see wpp_poll_archive_pagination() - 10
  */
 do_action( 'wpp_after_poll_archive' );
 

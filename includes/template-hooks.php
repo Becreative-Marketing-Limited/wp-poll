@@ -17,6 +17,9 @@ add_action( 'wpp_poll_archive_single_summary', 'wpp_poll_archive_single_meta', 1
 add_action( 'wpp_poll_archive_single_summary', 'wpp_poll_archive_single_excerpt', 20 );
 add_action( 'wpp_poll_archive_single_summary', 'wpp_poll_archive_single_options', 25 );
 
+add_action( 'wpp_after_poll_archive', 'wpp_poll_archive_pagination', 10 );
+
+
 
 /**
  * Hooks for Single Poll
@@ -50,3 +53,4 @@ add_action( 'wpp_single_poll_main', 'wpp_single_poll_buttons', 45 );
 
 add_action( 'wpp-reports', 'wpp_admin_render_reports' );
 
+add_action( 'post_submitbox_start', 'wpp_poll_submitbox' );

@@ -2,8 +2,6 @@
 Admin css
 */
 
-
-
 #poll_metabox #post_title {
     width: 100%;
     padding: 8px 12px;
@@ -63,16 +61,54 @@ Admin css
 }
 
 
+.post-type-poll .wps-field fieldset label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.post-type-poll .wps-field fieldset br {
+    display: none;
+}
+
+
 /**
  * Chart Reporting
  */
 
 #wpp-chart-report {
-    padding-top: 20px;
-    padding-left: 10px;
     background: #fff;
     border: 1px solid #ddd;
-    box-shadow: 0 22px 35px -16px rgba(0,0,0, 0.1);
-    max-width: 860px;
-    margin: 35px auto;
+    box-shadow: 0 22px 35px -16px rgba(0, 0, 0, 0.1);
+    max-width: 795px;
+    margin: 10px auto 20px auto;
 }
+
+
+/**
+ * Widgets
+ */
+
+.widget-inside .wps-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.widget-inside .wps-field > label {
+    font-size: 13px;
+}
+
+.widget-inside .wps-field .wps-field-inputs {
+    margin: 0;
+    min-width: 0;
+    width: 75%;
+}
+
+.widget-inside .wps-field .wps-field-inputs select,
+.widget-inside .wps-field .wps-field-inputs input {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+

@@ -11,24 +11,72 @@
     });
 
 
-    $(document).on('change', '#wpp_reports_poll_id', function () {
+    $(document).on('click', '#submitpost .wpp-item span.shortcode', function () {
+
+        let inputField = document.createElement('input'),
+            htmlElement = $(this),
+            ariaLabel = htmlElement.attr('aria-label');
+
+        document.body.appendChild(inputField);
+        inputField.value = htmlElement.html();
+        inputField.select();
+        document.execCommand('copy', false);
+        inputField.remove();
+
+        htmlElement.attr( 'aria-label', pluginObject.copyText );
+
+        setTimeout( function() {
+            htmlElement.attr( 'aria-label', ariaLabel );
+        }, 5000 );
+    });
 
 
-        let parts = location.search.replace('?','').split('&').reduce(function(s,c){var t=c.split('=');s[t[0]]=t[1];return s;},{}),
+    $(document).on('change', '#wpp_reports_style', function () {
+
+
+        let parts = location.search.replace('?', '').split('&').reduce(function (s, c) {
+                var t = c.split('=');
+                s[t[0]] = t[1];
+                return s;
+            }, {}),
             redirectURL = window.location.protocol + '//' + window.location.hostname + window.location.pathname + '?',
-            pollID = $(this).find('option:selected').val();
+            styleType = $(this).find('option:selected').val();
 
-        $.each( parts, function( index, value ) {
+        $.each(parts, function (index, value) {
             redirectURL += index + '=' + value + '&';
         });
 
-        if( typeof pollID === 'undefined' || pollID.length === 0 ) {
-            window.location.replace( redirectURL );
+        if (typeof styleType === 'undefined' || styleType.length === 0) {
+            window.location.replace(redirectURL);
+        }
+
+        redirectURL += 'type=' + styleType;
+
+        window.location.replace(redirectURL);
+    });
+
+    $(document).on('change', '#wpp_reports_poll_id', function () {
+
+
+        let parts = location.search.replace('?', '').split('&').reduce(function (s, c) {
+                var t = c.split('=');
+                s[t[0]] = t[1];
+                return s;
+            }, {}),
+            redirectURL = window.location.protocol + '//' + window.location.hostname + window.location.pathname + '?',
+            pollID = $(this).find('option:selected').val();
+
+        $.each(parts, function (index, value) {
+            redirectURL += index + '=' + value + '&';
+        });
+
+        if (typeof pollID === 'undefined' || pollID.length === 0) {
+            window.location.replace(redirectURL);
         }
 
         redirectURL += 'poll-id=' + pollID;
 
-        window.location.replace( redirectURL );
+        window.location.replace(redirectURL);
     });
 
 
@@ -71,60 +119,6 @@
 
         }
     });
-
-
-
-
-
-
-    $(document).on('click', '.wpp_td_add_section', function () {
-
-        var section_key = $(this).attr('section_key');
-        var label = $(this).parent().find('.wpp_td_label').html();
-
-        var __DATA__ = "<li class='wpp_td_single " + section_key + "'><span class='wpp_td_label'>" + label + "</span>" +
-            "<div class='wpp_td_icon wpp_td_single_remove'><i class='fa fa-times'></i></div>" +
-            "<div class='wpp_td_icon wpp_td_single_sorter'><i class='fa fa-sort'></i></div>" +
-            "<input type='hidden' name='wpp_poll_template[]' value='" + section_key + "' /></li>";
-
-        $('.wpp_td_templates').append(__DATA__).find("." + section_key).hide().fadeIn();
-    });
-
-
-    $(document).on('click', '.wpp_td_templates .wpp_td_single .wpp_td_single_remove', function () {
-
-        var step = $(this).attr('step');
-
-        if (step === 'f') {
-            $(this).html("<i class='fa fa-check'></i>");
-            $(this).attr('step', 'l');
-        } else $(this).parent().remove();
-    });
-
-
-    $(document).on('click', '.wp_poll_shortcode_copy', function () {
-
-        var __COPY_TEXT__ = $('#wp_poll_shortcode').val();
-
-        try {
-            $('#wp_poll_shortcode').select();
-            document.execCommand('copy');
-        } catch (e) {
-            alert(e);
-        }
-    })
-
-
-    function copyToClipboard(element) {
-        var $temp = jQuery("<input>");
-        jQuery("body").append($temp);
-        $temp.val(jQuery(element).val()).select();
-        document.execCommand("copy");
-        $temp.remove();
-
-        jQuery('#wp_shortcode_notice').remove();
-        jQuery(element).parent().append('<span id="wp_shortcode_notice">Copied to Clipboard.</span>');
-    }
 
 
 })(jQuery, window, document, wpp_object);

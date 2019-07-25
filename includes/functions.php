@@ -366,125 +366,41 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 }
 
 
-//----------------------------------------------------------------------------------------------------
+if ( ! function_exists( 'wpp_pagination' ) ) {
+	/**
+     * Return Pagination HTML Content
+     *
+	 * @param bool $query_object
+	 * @param array $args
+	 *
+	 * @return array|string|void
+	 */
+	function wpp_pagination( $query_object = false, $args = array() ) {
 
+		global $wp_query;
 
-function wpp_ajax_submit_comment() {
+		$previous_query = $wp_query;
 
-	$html        = '';
-	$poll_id     = (int) sanitize_text_field( $_POST['poll_id'] );
-	$wpp_name    = sanitize_text_field( $_POST['wpp_name'] );
-	$wpp_email   = sanitize_email( $_POST['wpp_email'] );
-	$wpp_comment = sanitize_text_field( $_POST['wpp_comment'] );
-
-	$user_id = email_exists( $wpp_email );
-	if ( ! $user_id ) {
-
-		$arr_user_name   = explode( $wpp_email );
-		$user_name       = isset( $arr_user_name[0] ) ? $arr_user_name[0] : $wpp_email;
-		$random_password = wp_generate_password( $length = 12, $include_standard_special_chars = false );
-
-		$user_id = wp_create_user( $user_name, $random_password, $wpp_email );
-		wp_update_user( array( 'ID' => $user_id, 'display_name' => $wpp_name ) );
-	}
-
-	$wpp_comment_data = array(
-		'comment_post_ID'      => $poll_id,
-		'comment_author'       => $wpp_name,
-		'comment_author_email' => $wpp_email,
-		'comment_content'      => $wpp_comment,
-		'comment_type'         => '',
-		'comment_parent'       => 0,
-		'user_id'              => $user_id,
-		'comment_author_IP'    => wpp_get_ip_address(),
-		'comment_date'         => current_time( 'mysql' ),
-		'comment_approved'     => 1,
-	);
-
-	$wpp_comment_id = wp_insert_comment( $wpp_comment_data );
-
-	$wpp_comment_message_error   = get_option( 'wpp_comment_message_error' );
-	$wpp_comment_message_success = get_option( 'wpp_comment_message_success' );
-	if ( empty( $wpp_comment_message_error ) ) {
-		$wpp_comment_message_error = __( 'Something went wrong, Please try latter', 'wp-poll' );
-	}
-	if ( empty( $wpp_comment_message_success ) ) {
-		$wpp_comment_message_success = __( 'Success, Your Comment may be under review and publish latter', 'wp-poll' );
-	}
-
-	if ( ! $wpp_comment_id ) {
-		$html .= '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ' .
-		         apply_filters( 'wpp_filters_comment_error', $wpp_comment_message_error );
-	} else {
-		$html .= '<i class="fa fa-check-circle-o" aria-hidden="true"></i> ' .
-		         apply_filters( 'wpp_filters_comment_success', $wpp_comment_message_success );
-	}
-
-	echo $html;
-	die();
-}
-
-add_action( 'wp_ajax_wpp_ajax_submit_comment', 'wpp_ajax_submit_comment' );
-add_action( 'wp_ajax_nopriv_wpp_ajax_submit_comment', 'wpp_ajax_submit_comment' );
-
-
-function wpp_ajax_add_new_option() {
-
-	$response   = array();
-	$poll_id    = (int) sanitize_text_field( $_POST['poll_id'] );
-	$option_val = sanitize_text_field( $_POST['option_val'] );
-
-	if ( empty( $poll_id ) || empty( $option_val ) ) {
-		die();
-	}
-
-	$poll_meta_options = get_post_meta( $poll_id, 'poll_meta_options', true );
-	if ( empty( $poll_meta_options ) ) {
-		$poll_meta_options = array();
-	}
-
-	$poll_meta_options[ time() ] = $option_val;
-
-
-	update_post_meta( $poll_id, 'poll_meta_options', $poll_meta_options );
-
-	echo 'ok';
-	die();
-}
-
-add_action( 'wp_ajax_wpp_ajax_add_new_option', 'wpp_ajax_add_new_option' );
-add_action( 'wp_ajax_nopriv_wpp_ajax_add_new_option', 'wpp_ajax_add_new_option' );
-
-
-function wpp_ajax_submit_poll() {
-
-	$response     = array();
-	$poll_id      = (int) sanitize_text_field( $_POST['poll_id'] );
-	$checked_opts = $_POST['checked'];
-
-	$polled_data = get_post_meta( $poll_id, 'polled_data', true );
-	$polled_data = empty( $polled_data ) ? array() : $polled_data;
-	$poller      = wpp_get_poller();
-
-	if ( array_key_exists( $poller, $polled_data ) ) {
-
-		$response['status'] = 0;
-		$response['notice'] = '<i class="fa fa-exclamation-triangle"></i> You have reached the Maximum Polling quota !';
-	} else {
-
-		foreach ( $checked_opts as $option ) {
-			$polled_data[ $poller ][] = $option;
+		if ( $query_object ) {
+			$wp_query = $query_object;
 		}
-		update_post_meta( $poll_id, 'polled_data', $polled_data );
 
-		$response['status'] = 1;
-		$response['notice'] = '<i class="fa fa-check"></i> Successfully Polled on this.';
+		$paged = max( 1, ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1 );
+
+		$defaults = array(
+			'base'      => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
+			'format'    => '?paged=%#%',
+			'current'   => $paged,
+			'total'     => $wp_query->max_num_pages,
+			'prev_text' => esc_html__( 'Previous', 'wp-poll' ),
+			'next_text' => esc_html__( 'Next', 'wp-poll' ),
+		);
+
+		$args           = apply_filters( 'wpp_filters_pagination', array_merge( $defaults, $args ) );
+		$paginate_links = paginate_links( $args );
+
+		$wp_query = $previous_query;
+
+		return $paginate_links;
 	}
-
-	echo json_encode( $response );
-	die();
 }
-
-add_action( 'wp_ajax_wpp_ajax_submit_poll', 'wpp_ajax_submit_poll' );
-add_action( 'wp_ajax_nopriv_wpp_ajax_submit_poll', 'wpp_ajax_submit_poll' );
-

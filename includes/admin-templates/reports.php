@@ -13,18 +13,24 @@ if ( empty( $poll_id ) ) {
 	return;
 }
 
-$poll         = wpp_get_poll( $poll_id );
-$poll_results = $poll->get_poll_results();
-$totalVotes   = isset( $poll_results['total'] ) ? $poll_results['total'] : 0;
-$singles      = isset( $poll_results['singles'] ) && is_array( $poll_results['singles'] ) ? $poll_results['singles'] : array();
-$seriesVotes  = array_values( $singles );
-$percentages  = isset( $poll_results['percentages'] ) && is_array( $poll_results['percentages'] ) ? $poll_results['percentages'] : array();
-$seriesValues = array_values( $percentages );
-$seriesLabels = array();
+$poll = wpp_get_poll( $poll_id );
 
-foreach ( $percentages as $option_id => $percentage ) {
-	$seriesLabels[] = $poll->get_option_label( $option_id );
+$seriesVotes  = array_values( $poll->get_poll_reports( 'counts' ) );
+$seriesLabels = array_values( $poll->get_poll_reports( 'labels' ) );
+$totalVotes   = $poll->get_poll_reports( 'total_votes' );
+$chart_type   = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : 'pie';
+
+if ( $chart_type == 'pie' ) {
+	$series = array_values( $poll->get_poll_reports( 'counts' ) );
+	$series = json_encode( $series );
+} else if ( $chart_type == 'bar' ) {
+	$series = array(
+		'name' => esc_html__( 'Voted', 'wp-poll' ),
+		'data' => array_values( $poll->get_poll_reports( 'percentages' ) ),
+	);
+	$series = sprintf( '[%s]', preg_replace( '/"([a-zA-Z]+[a-zA-Z0-9_]*)":/', '$1:', json_encode( $series ) ) );
 }
+
 
 ?>
 
@@ -32,18 +38,19 @@ foreach ( $percentages as $option_id => $percentage ) {
 
 
 <script>
-
     let pollTitle = '<?php printf( esc_html__( 'Poll : %s', 'wp-poll' ), $poll->get_name() ); ?>',
-        seriesName = '<?php esc_html_e( 'Voted', 'wp-poll' ); ?>',
+        series = <?php echo $series; ?>,
         seriesVotes = <?php echo json_encode( $seriesVotes ); ?>,
-        seriesValues = <?php echo json_encode( $seriesValues ); ?>,
         seriesLabels = <?php echo json_encode( $seriesLabels ); ?>,
         totalVotes = <?php echo esc_html( $totalVotes ); ?>,
+        chartType = '<?php echo esc_html( $chart_type ); ?>',
         options = {
             chart: {
-                height: 350,
-                type: 'bar',
+                height: 360,
+                type: chartType,
             },
+            labels: seriesLabels,
+            series: series,
             plotOptions: {
                 bar: {
                     dataLabels: {
@@ -52,7 +59,7 @@ foreach ( $percentages as $option_id => $percentage ) {
                 }
             },
             dataLabels: {
-                enabled: true,
+                enabled: chartType !== 'pie',
                 formatter: function (val, opts) {
                     return 'Voted ' + seriesVotes[opts.dataPointIndex] + '/' + totalVotes;
                 },
@@ -62,10 +69,6 @@ foreach ( $percentages as $option_id => $percentage ) {
                     colors: ["#304758"]
                 }
             },
-            series: [{
-                name: seriesName,
-                data: seriesValues,
-            }],
             xaxis: {
                 categories: seriesLabels,
                 position: 'top',
@@ -119,25 +122,42 @@ foreach ( $percentages as $option_id => $percentage ) {
                 labels: {
                     show: false,
                     formatter: function (val) {
-                        return val + "%";
+                        if (chartType === 'bar') {
+                            return val + '%';
+                        }
+                        return val;
                     }
                 }
 
             },
             title: {
                 text: pollTitle,
-                floating: true,
-                offsetY: 320,
-                align: 'center',
+                floating: false,
+                offsetY: 330,
+                align: 'left',
                 style: {
-                    color: '#444'
+                    color: '#444',
+                    margin: '20px',
                 }
             },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
         },
         chart = new ApexCharts(
             document.querySelector("#wpp-chart-report"),
             options
         );
+
+    console.log(options);
 
     chart.render();
 </script>
