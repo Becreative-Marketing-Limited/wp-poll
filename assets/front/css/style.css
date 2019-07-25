@@ -11,6 +11,11 @@
     box-sizing: border-box;
 }
 
+img {
+    height: auto;
+    max-width: 100%;
+}
+
 [class*="wpp-option-list"] {
     max-width: 430px;
     margin-bottom: 30px;
@@ -81,6 +86,7 @@
     cursor: pointer;
     font-size: 16px;
     line-height: 26px;
+    min-height: 26px;
     font-weight: normal;
     margin: 0;
 }
@@ -114,6 +120,33 @@ p.wpp-responses.wpp-success {
 }
 
 
+.wpp-pagination {
+    text-align: center;
+}
+
+.wpp-pagination > * {
+    display: inline-block;
+    border: 1px solid #dadada;
+    background-color: #fff;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 3px;
+    margin: 0 2px 6px;
+    overflow: hidden;
+    outline: none !important;
+    text-decoration: none;
+    color: #777;
+    transition: 0.3s;
+}
+
+.wpp-pagination > .current,
+.entry-content .wpp-pagination > .current,
+.wpp-pagination > *:hover,
+.entry-content .wpp-pagination > *:hover {
+    background: #FF5722;
+    border-color: #FF5722;
+    color: #fff;
+}
 
 /**
 * Archive Page
