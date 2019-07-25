@@ -126,6 +126,7 @@ p.wpp-responses.wpp-success {
 
 .wpp-pagination > * {
     display: inline-block;
+    line-height: normal;
     border: 1px solid #dadada;
     background-color: #fff;
     padding: 6px 14px;
