@@ -57,14 +57,14 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 			if ( ! empty( $poll_deadline ) && $poll_deadline !== 0 ) {
 
-				// Check deadline
-				if ( date( 'U' ) > $poll_deadline ) {
-					$can_vote = false;
-				}
-
 				// Check allow/disallow
 				if ( ! $this->get_allows_disallows( 'vote_after_deadline' ) ) {
 					$can_vote = false;
+				}
+
+				// Check deadline
+				if ( date( 'U' ) < $poll_deadline ) {
+					$can_vote = true;
 				}
 			}
 
