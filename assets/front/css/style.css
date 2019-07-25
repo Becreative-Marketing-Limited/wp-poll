@@ -13,10 +13,7 @@
 
 [class*="wpp-option-list"] {
     max-width: 430px;
-}
-
-.wpp_content {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .wpp-poll-thumbnail {
@@ -155,7 +152,6 @@ p.wpp-responses.wpp-success {
 }
 
 .poll-archive-single .poll-options {
-    max-width: 600px;
     margin-bottom: 0;
     padding-left: 25px;
 }
@@ -931,8 +927,6 @@ p.wpp-responses.wpp-success {
 [class*="wpp-option-list"] .has-label.has-thumb .wpp-option-input {
     width: calc(100% - 50px);
 }
-
-
 
 
 /**
