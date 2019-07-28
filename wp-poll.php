@@ -1,13 +1,13 @@
 <?php
 /*
     Plugin Name: WP Poll
-    Plugin URI: https://www.pluginbazar.net/product/wp-poll/
-    Description: It allows user to poll in your website with many awesome feature.
-    Version: 3.1.0
+    Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
+    Description: It allows user to poll in your website with many awesome features.
+    Version: 3.1.1
     Author: Pluginbazar
 	Text Domain: wp-poll
 	Domain Path: /languages/
-    Author URI: https://pluginbazar.net/
+    Author URI: https://pluginbazar.com/
     License: GPLv2 or later
     License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -33,41 +33,13 @@ class WPPollManager {
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
-
-		register_activation_hook( __FILE__, array( $this, 'on_activation' ) );
-		register_deactivation_hook( __FILE__, array( $this, 'on_deactivation' ) );
 	}
 
 
 	/**
-	 * Plugin Deactivation Hook
+	 * Register Widgets
 	 */
-	function on_deactivation() {
-		$this->permalink_flush();
-	}
-
-
-	/**
-	 * Plugin Activation Hook
-	 */
-	function on_activation() {
-		$this->permalink_flush();
-	}
-
-
-	/**
-	 * Flush Rewrite rules on Activation or Deactivation plugin
-	 */
-	function permalink_flush() {
-
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-post-types.php' );
-
-		flush_rewrite_rules();
-	}
-
-
 	function register_widgets() {
-
 		register_widget( 'WPP_Widgets' );
 	}
 

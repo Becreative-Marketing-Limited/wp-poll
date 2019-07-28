@@ -1,40 +1,53 @@
 === WP Poll ===
 	Contributors: jaedm97,pluginbazar
-	Donate link: https://www.pluginbazar.net/product/gift-a-coffee/
-	Tags: WP Poll, WordPress Polling,WordPress Poll, democracy, poll, polling, polls, Post, survey, vote, widget, opinion, justice
+	Donate link: https://pluginbazar.com/contact/
+	Tags: Poll, Polls, WP Polls, WordPress Polling,WordPress Poll, democracy, poll, polling, polls, Post, survey, vote, widget, opinion, justice
 	Requires at least: 3.8
-	Tested up to: 5.0.3
-	Stable tag: 3.0.2
+	Tested up to: 5.2.2
+	Stable tag: 3.1.1
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-	This plugin will allow you to create and manage poll in your WordPress
+	Complete solution for Polls in WordPress
 
 == Description ==
 
-Hello, Now a days, to be updated with the flow of time, having a option to take your visitor's opinion is almost obvious.
-From this Idea we build this plug-in that will satisfy your need in case of poll management. You can easily create and maintain 
-a poll in your WordPress without any harassment.
+Easy solution for taking opinions from your visitors/users with multiple styles/themes and highly customizable backend.
 
-[### See What's New in 2.2](https://goo.gl/G1peJu)
 
-And finally you will get a Report in the Admin view to be confirmed about how your visitor react on your each Poll.
+### Features
+* Single and Multi votes
+* Ability to create Unlimited Poll options
+* 10+ Themes variations
+* 5+ Timer styles
+* 7+ Input type animation styles
+* Ability to create new option from users on Frontend
+* Graphically Poll reporting on Backend
+* Possibility to generate 1000+ variations
+* Ready Widget
+
+
+### Coming on Future versions
+* Integration with Contact Form 7
+* Frontned Poll Management
+* Gutenberg Compatibility
+* WP Bakery Page Builder Compatibility
+* Startup Wizard
+* Integration with MailChimp and so on....
+
+Don't hesitate to start using it and let us know any issue...
+
+
+[### Report an Issue](https://pluginbazar.com/forums/forum/wp-poll/)
+
 
 
 `
-	https://pluginbazar.net/demo/wp-poll/wp-admin/
+	https://demo.pluginbazar.com/wp-poll/
 	
-	Username: demo
-	Password: demo
+	Username: pbwppoll
+	Password: pluginbazar
 `
-
-### KEY Features
-* 100% User Friendly and Customization Support without having any coding skill.
-* 100% Unique Review. No SPAM. No one can review twice in single Question.
-* 100% Browser Compatibility.
-* Support Categorized Poll.
-* Visitors can see All Polls with Awesome filters.
-* Featured Polling System. IT's FREE !
 
 
 == Installation ==
@@ -47,7 +60,20 @@ And finally you will get a Report in the Admin view to be confirmed about how yo
 1. screenshot-1.png
 2. screenshot-2.png
 3. screenshot-3.png
-3. screenshot-4.png
+4. screenshot-4.png
+5. screenshot-5.png
+6. screenshot-6.png
+7. screenshot-7.png
+8. screenshot-8.png
+9. screenshot-9.png
+10. screenshot-10.png
+11. screenshot-11.png
+12. screenshot-12.png
+13. screenshot-13.png
+14. screenshot-14.png
+15. screenshot-15.png
+16. screenshot-16.png
+17. screenshot-17.png
 
 
 == Changelog ==
@@ -85,10 +111,16 @@ And finally you will get a Report in the Admin view to be confirmed about how yo
 	= 3.0.2 =
     * 23/01/2019 Fixed bug
 
+	= 3.1.0 =
+    * 25/07/2019 Coming up with completely new backend and frontend with multiple variations
+
+	= 3.1.1 =
+    * 28/07/2019 Bug Fixing
+
 
 == Upgrade Notice ==
 
-= 2.0.0 =
-2.0.0 is a major update. 
+= 3.1.0 =
+3.1.0 is a major update.
 
 	
