@@ -110,5 +110,14 @@ Admin css
     max-width: 100%;
 }
 
-
+a.wpp-preview-link,
+a.wpp-preview-link:active,
+a.wpp-preview-link:focus,
+a.wpp-preview-link:hover {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #FF5722;
+    outline:none;
+    box-shadow:none;
+}
 

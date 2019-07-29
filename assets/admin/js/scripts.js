@@ -11,6 +11,25 @@
     });
 
 
+    $(document).on('change', '#poll_style_countdown, #poll_options_theme, #poll_animation_checkbox, #poll_animation_radio', function () {
+
+        let selectedOption = $(this).find('option:selected').val(),
+            thisOption = $(this).parent().parent(),
+            thisPreviewLink = thisOption.find('.wpp-preview-link'),
+            demoServer = thisPreviewLink.data('demo-server'),
+            target = thisPreviewLink.data('target'),
+            finalURL = '';
+
+        if (typeof selectedOption === 'undefined' || selectedOption.length === 0) {
+            return;
+        }
+
+        finalURL = 'https:' + demoServer + '/' + target + '-' + selectedOption;
+
+        thisPreviewLink.attr('href', finalURL);
+    });
+
+
     $(document).on('click', '#submitpost .wpp-item span.shortcode', function () {
 
         let inputField = document.createElement('input'),
@@ -23,11 +42,11 @@
         document.execCommand('copy', false);
         inputField.remove();
 
-        htmlElement.attr( 'aria-label', pluginObject.copyText );
+        htmlElement.attr('aria-label', pluginObject.copyText);
 
-        setTimeout( function() {
-            htmlElement.attr( 'aria-label', ariaLabel );
-        }, 5000 );
+        setTimeout(function () {
+            htmlElement.attr('aria-label', ariaLabel);
+        }, 5000);
     });
 
 

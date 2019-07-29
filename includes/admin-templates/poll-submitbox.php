@@ -6,17 +6,23 @@
  * @author Pluginbazar
  */
 
-
 global $post;
 
 if ( $post->post_type != 'poll' ) {
 	return;
 }
 
-
 ?>
 
 <div class="wpp-poll-publishbox">
+    <div class="wpp-item results">
+        <label><?php esc_html_e( 'Results / Report', 'wp-poll' ); ?></label>
+        <a class="tt--hint tt--top"
+           href="<?php echo esc_url( admin_url( 'edit.php?post_type=poll&page=wpp-settings&tab=wpp-reports&poll-id=' . $post->ID ) ); ?>"
+           aria-label="<?php esc_attr_e( 'Click to see Results', 'wp-poll' ); ?>">
+			<?php esc_html_e( 'View Results', 'wp-poll' ); ?>
+        </a>
+    </div>
     <div class="wpp-item">
         <label><?php esc_html_e( 'Shortcode', 'wp-poll' ); ?></label>
         <span class="shortcode tt--hint tt--top"
@@ -69,6 +75,12 @@ if ( $post->post_type != 'poll' ) {
         /*user-select: none;*/
         /*-webkit-user-select: none;*/
         /*-webkit-user-modify: read-only;*/
+    }
+
+    .wpp-item.results {
+        padding: 0 10px 20px;
+        border-bottom: 1px solid #f1f1f1;
+        margin: 0 -10px 20px -10px;
     }
 
 </style>
