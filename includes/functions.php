@@ -271,9 +271,12 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 	 */
 	function wpp_get_template_part( $slug, $name = '', $args = array() ) {
 
-		$template = '';
+		$template   = '';
+		$plugin_dir = WPP_PLUGIN_DIR;
 
-		// Look in yourtheme/slug-name.php and yourtheme/woocommerce/slug-name.php.
+		/**
+		 * Locate template
+		 */
 		if ( $name ) {
 			$template = locate_template( array(
 				"{$slug}-{$name}.php",
@@ -281,22 +284,117 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 			) );
 		}
 
-		// Get default slug-name.php.
-		if ( ! $template && $name && file_exists( untrailingslashit( WPP_PLUGIN_DIR ) . "/templates/{$slug}-{$name}.php" ) ) {
-			$template = untrailingslashit( WPP_PLUGIN_DIR ) . "/templates/{$slug}-{$name}.php";
+		/**
+		 * Check directory for templates from Addons
+		 */
+		$backtrace      = debug_backtrace( 2, true );
+		$backtrace      = empty( $backtrace ) ? array() : $backtrace;
+		$backtrace      = reset( $backtrace );
+		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
+
+		if ( strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'WPPS_PLUGIN_DIR' ) ) {
+			$plugin_dir = WPPS_PLUGIN_DIR;
 		}
 
-		// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/woocommerce/slug.php.
+
+		/**
+		 * Search for Template in Plugin
+		 *
+		 * @in Plugin
+		 */
+		if ( ! $template && $name && file_exists( untrailingslashit( $plugin_dir ) . "/templates/{$slug}-{$name}.php" ) ) {
+			$template = untrailingslashit( $plugin_dir ) . "/templates/{$slug}-{$name}.php";
+		}
+
+
+		/**
+		 * Search for Template in Theme
+		 *
+		 * @in Theme
+		 */
 		if ( ! $template ) {
 			$template = locate_template( array( "{$slug}.php", "wpp/{$slug}.php" ) );
 		}
 
-		// Allow 3rd party plugins to filter template file from their plugin.
+
+		/**
+		 * Allow 3rd party plugins to filter template file from their plugin.
+		 *
+		 * @filter wpp_filters_get_template_part
+		 */
 		$template = apply_filters( 'wpp_filters_get_template_part', $template, $slug, $name );
+
 
 		if ( $template ) {
 			load_template( $template, false );
 		}
+	}
+}
+
+
+if ( ! function_exists( 'wpp_locate_template' ) ) {
+	/**
+     * Locate template
+     *
+	 * @param $template_name
+	 * @param string $template_path
+	 * @param string $default_path
+	 *
+	 * @return mixed|void
+	 */
+	function wpp_locate_template( $template_name, $template_path = '', $default_path = '' ) {
+
+		$plugin_dir = WPP_PLUGIN_DIR;
+
+		/**
+		 * Template path in Theme
+		 */
+		if ( ! $template_path ) {
+			$template_path = 'wpp/';
+		}
+
+		/**
+		 * Check directory for templates from Addons
+		 */
+		$backtrace      = debug_backtrace( 2, true );
+		$backtrace      = empty( $backtrace ) ? array() : $backtrace;
+		$backtrace      = reset( $backtrace );
+		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
+
+		if ( strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'WPPS_PLUGIN_DIR' ) ) {
+			$plugin_dir = WPPS_PLUGIN_DIR;
+		}
+
+		/**
+		 * Template default path from Plugin
+		 */
+		if ( ! $default_path ) {
+			$default_path = untrailingslashit( $plugin_dir ) . '/templates/';
+		}
+
+		/**
+		 * Look within passed path within the theme - this is priority.
+		 */
+		$template = locate_template(
+			array(
+				trailingslashit( $template_path ) . $template_name,
+				$template_name,
+			)
+		);
+
+		/**
+		 * Get default template
+		 */
+		if ( ! $template ) {
+			$template = $default_path . $template_name;
+		}
+
+		/**
+		 * Return what we found with allowing 3rd party to override
+		 *
+		 * @filter wpp_filters_locate_template
+		 */
+		return apply_filters( 'wpp_filters_locate_template', $template, $template_name, $template_path );
 	}
 }
 
@@ -331,37 +429,6 @@ if ( ! function_exists( 'wpp_get_template' ) ) {
 		include $located;
 
 		do_action( 'wpp_after_template_part', $template_name, $template_path, $located, $args );
-	}
-}
-
-
-if ( ! function_exists( 'wpp_locate_template' ) ) {
-	function wpp_locate_template( $template_name, $template_path = '', $default_path = '' ) {
-
-
-		if ( ! $template_path ) {
-			$template_path = 'wpp/';
-		}
-
-		if ( ! $default_path ) {
-			$default_path = untrailingslashit( WPP_PLUGIN_DIR ) . '/templates/';
-		}
-
-		// Look within passed path within the theme - this is priority.
-		$template = locate_template(
-			array(
-				trailingslashit( $template_path ) . $template_name,
-				$template_name,
-			)
-		);
-
-		// Get default template/.
-		if ( ! $template ) {
-			$template = $default_path . $template_name;
-		}
-
-		// Return what we found.
-		return apply_filters( 'wpp_filters_locate_template', $template, $template_name, $template_path );
 	}
 }
 
