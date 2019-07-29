@@ -11,7 +11,69 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
-if( ! function_exists( 'wpp_is_page' ) ) {
+/**
+ * New poll submission
+ *
+ * @param string $option_id
+ * @param string $poll_id
+ * @param string $user_id
+ * @param string $user_ip
+ * @param string $date_time
+ *
+ * @return int|WP_Error
+ */
+function wpp_insert_poll_submission( $option_id = '', $poll_id = '', $user_id = '', $user_ip = '', $date_time = '' ) {
+
+	if ( empty( $option_id ) ) {
+		return new WP_Error( 'invalid_data', esc_html__( 'Option id can not be empty !', 'wp-poll' ) );
+	}
+
+	$poll_id = ! $poll_id ? get_the_ID() : $poll_id;
+	if ( empty( $poll_id ) || $poll_id === 0 ) {
+		return new WP_Error( 'invalid_data', esc_html__( 'Missing or invalid poll id !', 'wp-poll' ) );
+	}
+
+	global $wpdb;
+
+	$query    = sprintf( 'SELECT * FROM %s WHERE poll_id = %s AND option_id = %s AND user_id = "%s")', WPP_TABLE_RESULTS, $poll_id, $option_id, $user_id );
+	$response = $wpdb->get_row( $query );
+
+	if ( ! $response || $response === null ) {
+		$query = sprintf( 'SELECT * FROM %s WHERE poll_id = %s AND option_id = %s AND user_ip = "%s")',WPP_TABLE_RESULTS, $poll_id, $option_id, $user_ip );
+		$response = $wpdb->get_row( $query );
+	}
+
+
+	$data_to_insert = array(
+		'poll_id'   => $poll_id,
+		'option_id' => $option_id,
+		'user_id'   => $user_id,
+		'user_ip'   => $user_ip,
+		'datetime'  => ! $date_time ? current_time( 'mysql' ) : $date_time,
+	);
+
+	echo '<pre>';
+	print_r( array(
+		'Query'    => $query,
+		'Response' => $response,
+		'Data'     => $data_to_insert,
+	) );
+	echo '</pre>';
+
+
+	if ( ! $response || $response === null ) {
+
+
+		$wpdb->insert( WPP_TABLE_RESULTS, $data_to_insert );
+
+		return $wpdb->insert_id;
+	}
+
+	return new WP_Error( 'trying_duplicate', esc_html__( 'Trying to duplicate entry', 'wp-poll' ) );
+}
+
+
+if ( ! function_exists( 'wpp_is_page' ) ) {
 	/**
 	 * Return whether a page is $searched_page or not
 	 *
@@ -368,8 +430,8 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 
 if ( ! function_exists( 'wpp_pagination' ) ) {
 	/**
-     * Return Pagination HTML Content
-     *
+	 * Return Pagination HTML Content
+	 *
 	 * @param bool $query_object
 	 * @param array $args
 	 *

@@ -1,16 +1,17 @@
 <?php
-/*
-    Plugin Name: WP Poll
-    Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
-    Description: It allows user to poll in your website with many awesome features.
-    Version: 3.1.1
-    Author: Pluginbazar
-	Text Domain: wp-poll
-	Domain Path: /languages/
-    Author URI: https://pluginbazar.com/
-    License: GPLv2 or later
-    License URI: http://www.gnu.org/licenses/gpl-2.0.html
-*/
+/**
+ * Plugin Name: WP Poll
+ *
+ * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
+ * Description: It allows user to poll in your website with many awesome features.
+ * Version: 3.1.1
+ * Author: Pluginbazar
+ * Text Domain: wp-poll
+ * Domain Path: /languages/
+ * Author URI: https://pluginbazar.com/
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -33,6 +34,31 @@ class WPPollManager {
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
+		register_activation_hook( __FILE__, array( $this, 'on_activation' ) );
+	}
+
+
+	/**
+	 * on Activation of Plugin
+	 */
+	function on_activation() {
+
+		global $wpdb;
+
+		$charset = $wpdb->get_charset_collate();
+		$sql     = sprintf( 'CREATE TABLE IF NOT EXISTS %s (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            poll_id int(9) NOT NULL,
+            user_id int(9),
+            user_ip varchar(20),
+            option_id varchar(255),
+			datetime datetime DEFAULT "0000-00-00 00:00:00" NOT NULL,
+			PRIMARY KEY  (id)) %s;', WPP_TABLE_RESULTS, $charset
+		);
+
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		dbDelta( $sql );
 	}
 
 
@@ -72,6 +98,8 @@ class WPPollManager {
 
 		require_once( WPP_PLUGIN_DIR . 'includes/template-hooks.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/template-hook-functions.php' );
+
+		require_once( WPP_PLUGIN_DIR . 'includes/class-data-update.php' );
 	}
 
 
@@ -141,6 +169,9 @@ class WPPollManager {
 	 */
 	function define_constants() {
 
+		global $wpdb;
+
+		define( 'WPP_TABLE_RESULTS', sprintf( '%spoll_results', $wpdb->prefix ) );
 		define( 'WPP_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
 		define( 'WPP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 		define( 'WPP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
