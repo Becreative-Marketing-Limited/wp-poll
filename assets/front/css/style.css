@@ -5,7 +5,7 @@
 * Normalize CSS
 */
 
-:after, :before {
+:after, :before, * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -372,15 +372,10 @@ p.wpp-responses.wpp-success {
 * Poll Option - 1
 */
 .wpp-option-list-1 {
-    max-width: 460px;
+    max-width: 550px;
 }
 .wpp-option-list-1 .wpp-option-single {
-    padding: 15px;
-    background: #f5f5f5;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.13);
-    margin-bottom: 20px;
-    border-radius: 5px;
-    line-height: normal;
+    margin-bottom: 30px;
 }
 
 .wpp-option-list-1 .wpp-option-single input {
@@ -391,11 +386,83 @@ p.wpp-responses.wpp-success {
 .wpp-option-list-1 .wpp-option-single input + label {
     position: relative;
     cursor: pointer;
-    padding-left: 30px;
+    padding-left: 45px;
     display: block;
 }
 
 .wpp-option-list-1 .wpp-option-single input + label:before {
+    content: '';
+    left: 0;
+    top: 15px;
+    position: absolute;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background: #fff;
+    border: 1px solid #d2d8dd;
+    transition: 0.3s;
+}
+
+.wpp-option-list-1 .wpp-option-single input[type="radio"] + label:before {
+    border-radius: 50%;
+}
+
+.wpp-option-list-1 .wpp-option-single input:hover + label:before,
+.wpp-option-list-1 .wpp-option-single input:checked + label:before {
+    background: #0586ec;
+    border-color: #0586ec;
+}
+
+.wpp-option-list-1 .wpp-option-single input + label:after {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 12px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    z-index: 999;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg) translateY(-50%);
+    transform: rotate(45deg) translateY(-50%);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.wpp-option-list-1 .wpp-option-single input:checked + label:after {
+    opacity: 1;
+}
+
+
+/**
+* Poll Option - 2
+*/
+.wpp-option-list-2 {
+    max-width: 460px;
+}
+.wpp-option-list-2 .wpp-option-single {
+    padding: 15px;
+    background: #f5f5f5;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.13);
+    margin-bottom: 20px;
+    border-radius: 5px;
+    line-height: normal;
+}
+
+.wpp-option-list-2 .wpp-option-single input {
+    position: absolute;
+    opacity: 0;
+}
+
+.wpp-option-list-2 .wpp-option-single input + label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 30px;
+    display: block;
+}
+
+.wpp-option-list-2 .wpp-option-single input + label:before {
     content: '';
     left: 0;
     top: 50%;
@@ -409,16 +476,16 @@ p.wpp-responses.wpp-success {
     transition: 0.3s;
 }
 
-.wpp-option-list-1 .wpp-option-single input[type="radio"] + label:before {
+.wpp-option-list-2 .wpp-option-single input[type="radio"] + label:before {
     border-radius: 50%;
 }
 
-.wpp-option-list-1 .wpp-option-single input:hover + label:before,
-.wpp-option-list-1 .wpp-option-single input:checked + label:before {
+.wpp-option-list-2 .wpp-option-single input:hover + label:before,
+.wpp-option-list-2 .wpp-option-single input:checked + label:before {
     background: #40a544;
 }
 
-.wpp-option-list-1 .wpp-option-single input + label:after {
+.wpp-option-list-2 .wpp-option-single input + label:after {
     content: '';
     position: absolute;
     left: 4px;
@@ -432,47 +499,28 @@ p.wpp-responses.wpp-success {
     transition: 0.3s;
 }
 
-.wpp-option-list-1 .wpp-option-single input:checked + label:after {
+.wpp-option-list-2 .wpp-option-single input:checked + label:after {
     opacity: 1;
     box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
 }
 
 
 /**
-* Poll Option - 2
+* Poll Option - 3
 */
 
-.wpp-option-list-2 .wpp-option-single {
+.wpp-option-list-3 .wpp-option-single {
     border-bottom: 1px solid #eee;
     padding: 32px 0;
     display: block;
 }
 
-.wpp-option-list-2 .wpp-option-single:not(.has-result):last-child {
+.wpp-option-list-3 .wpp-option-single:not(.has-result):last-child {
     border-bottom: 0;
 }
 
-.wpp-option-list-2.wpp-circle svg {
-    left: -3px;
-}
-
-/**
-* Poll Option - 3
-*/
-
-.wpp-option-list-3 .wpp-option-single {
-    border: 1px solid #eee;
-    padding: 25px 20px;
-    display: block;
-    margin-bottom: -1px
-}
-
-.wpp-option-list-3.wpp-custom svg {
-    left: 26px;
-}
-
 .wpp-option-list-3.wpp-circle svg {
-    left: 17px;
+    left: -3px;
 }
 
 /**
@@ -480,6 +528,25 @@ p.wpp-responses.wpp-success {
 */
 
 .wpp-option-list-4 .wpp-option-single {
+    border: 1px solid #eee;
+    padding: 25px 20px;
+    display: block;
+    margin-bottom: -1px
+}
+
+.wpp-option-list-4.wpp-custom svg {
+    left: 26px;
+}
+
+.wpp-option-list-4.wpp-circle svg {
+    left: 17px;
+}
+
+/**
+* Poll Option - 5
+*/
+
+.wpp-option-list-5 .wpp-option-single {
     border-right: 5px solid rgba(0, 0, 0, 0.07);
     border-left: 5px solid rgba(0, 0, 0, 0.07);
     padding: 30px 30px;
@@ -488,32 +555,12 @@ p.wpp-responses.wpp-success {
     border-radius: 12px;
 }
 
-.wpp-option-list-4.wpp-custom svg {
+.wpp-option-list-5.wpp-custom svg {
     left: 37px;
 }
 
-.wpp-option-list-4.wpp-circle svg {
-    left: 27px;
-}
-
-/**
-* Poll Option - 5
-*/
-
-.wpp-option-list-5 .wpp-option-single {
-    border-left: 6px solid #4caf50;
-    padding: 25px 20px;
-    display: block;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 20px rgba(0, 26, 169, 0.09);
-}
-
-.wpp-option-list-5.wpp-custom svg {
-    left: 27px;
-}
-
 .wpp-option-list-5.wpp-circle svg {
-    left: 17px;
+    left: 27px;
 }
 
 /**
@@ -521,14 +568,11 @@ p.wpp-responses.wpp-success {
 */
 
 .wpp-option-list-6 .wpp-option-single {
+    border-left: 6px solid #4caf50;
     padding: 25px 20px;
     display: block;
     margin-bottom: 20px;
     box-shadow: 0 5px 20px rgba(0, 26, 169, 0.09);
-    background-color: #009688;
-    background-image: linear-gradient(-225deg, #009688 0%, #89d432 100%);
-    color: #fff;
-    border-radius: 4px;
 }
 
 .wpp-option-list-6.wpp-custom svg {
@@ -539,23 +583,46 @@ p.wpp-responses.wpp-success {
     left: 17px;
 }
 
-.wpp-custom.wpp-option-list-6 svg path {
-    stroke: #fff;
-}
-
-.wpp-option-list-6 label::before {
-    border-color: #fff;
-}
-
-.wpp-option-list-6.wpp-circle label::before {
-    background-color: #fff;
-}
-
 /**
 * Poll Option - 7
 */
 
 .wpp-option-list-7 .wpp-option-single {
+    padding: 25px 20px;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0, 26, 169, 0.09);
+    background-color: #009688;
+    background-image: linear-gradient(-225deg, #009688 0%, #89d432 100%);
+    color: #fff;
+    border-radius: 4px;
+}
+
+.wpp-option-list-7.wpp-custom svg {
+    left: 27px;
+}
+
+.wpp-option-list-7.wpp-circle svg {
+    left: 17px;
+}
+
+.wpp-custom.wpp-option-list-7 svg path {
+    stroke: #fff;
+}
+
+.wpp-option-list-7 label::before {
+    border-color: #fff;
+}
+
+.wpp-option-list-7.wpp-circle label::before {
+    background-color: #fff;
+}
+
+/**
+* Poll Option - 8
+*/
+
+.wpp-option-list-8 .wpp-option-single {
     padding: 20px 26px;
     display: block;
     margin-bottom: 23px;
@@ -564,57 +631,57 @@ p.wpp-responses.wpp-success {
     border-radius: 50px;
 }
 
-.wpp-custom.wpp-option-list-7 label {
+.wpp-custom.wpp-option-list-8 label {
     padding: 0 0 0 55px;
 }
 
-.wpp-option-list-7.wpp-custom input[type="checkbox"],
-.wpp-option-list-7.wpp-custom input[type="radio"],
-.wpp-option-list-7.wpp-custom label::before {
+.wpp-option-list-8.wpp-custom input[type="checkbox"],
+.wpp-option-list-8.wpp-custom input[type="radio"],
+.wpp-option-list-8.wpp-custom label::before {
     border: 3px solid #ddd;
     width: 36px;
     height: 36px;
 }
 
-.wpp-option-list-7.wpp-circle label::before {
+.wpp-option-list-8.wpp-circle label::before {
     width: 24px;
     height: 24px;
     left: 0;
 }
 
-.wpp-option-list-7.wpp-custom svg {
+.wpp-option-list-8.wpp-custom svg {
     left: 32px;
     width: 26px;
     height: 26px;
 }
 
-.wpp-option-list-7.wpp-circle svg {
+.wpp-option-list-8.wpp-circle svg {
     left: 14px;
     width: 46px;
     height: 46px;
 }
 
-.wpp-option-list-7.wpp-circle .wpp-option-single label {
+.wpp-option-list-8.wpp-circle .wpp-option-single label {
     padding-left: 40px;
 }
 
-.wpp-option-list-7 .wpp-option-single label {
+.wpp-option-list-8 .wpp-option-single label {
     font-size: 16px;
     line-height: 26px;
     font-weight: 600;
     margin: 0;
 }
 
-.wpp-option-list-7 .wpp-option-single input:checked + label {
+.wpp-option-list-8 .wpp-option-single input:checked + label {
     color: green;
 }
 
 
 /**
-* Poll Option - 8
+* Poll Option - 9
 */
 
-.wpp-option-list-8 {
+.wpp-option-list-9 {
     max-width: 547px;
     display: flex;
     flex-wrap: wrap;
@@ -623,7 +690,7 @@ p.wpp-responses.wpp-success {
     margin-right: -5px;
 }
 
-.wpp-option-list-8 .wpp-col {
+.wpp-option-list-9 .wpp-col {
     -ms-flex: 0 0 33.33%;
     flex: 0 0 33.33%;
     max-width: 33.33%;
@@ -632,7 +699,7 @@ p.wpp-responses.wpp-success {
     padding-right: 5px;
 }
 
-.wpp-option-list-8 .wpp-option-single {
+.wpp-option-list-9 .wpp-option-single {
     flex-direction: column-reverse;
     justify-content: unset;
     padding: 10px;
@@ -643,28 +710,28 @@ p.wpp-responses.wpp-success {
     border-radius: 4px;
 }
 
-.wpp-option-list-8  .wpp-option-single.has-label.has-thumb .wpp-option-input {
+.wpp-option-list-9  .wpp-option-single.has-label.has-thumb .wpp-option-input {
     padding: 15px 0 5px;
 }
 
-.wpp-option-list-8 .wpp-option-single.has-thumb .wpp-option-thumb,
-.wpp-option-list-8  .wpp-option-single.has-label.has-thumb .wpp-option-input {
+.wpp-option-list-9 .wpp-option-single.has-thumb .wpp-option-thumb,
+.wpp-option-list-9  .wpp-option-single.has-label.has-thumb .wpp-option-input {
     width: 100%;
 }
 
-.wpp-custom.wpp-option-list-8 label {
+.wpp-custom.wpp-option-list-9 label {
     padding: 0 0 0 46px;
     font-weight: 600;
 }
 
-.wpp-custom.wpp-option-list-8 .has-thumb:not(.has-label) label {
+.wpp-custom.wpp-option-list-9 .has-thumb:not(.has-label) label {
     height: 47px;
     min-width: 150px;
 }
 
-.wpp-option-list-8.wpp-custom input[type="checkbox"],
-.wpp-option-list-8.wpp-custom input[type="radio"],
-.wpp-option-list-8.wpp-custom label::before {
+.wpp-option-list-9.wpp-custom input[type="checkbox"],
+.wpp-option-list-9.wpp-custom input[type="radio"],
+.wpp-option-list-9.wpp-custom label::before {
     border: 3px solid rgba(0, 0, 0, 0.1);
     width: 36px;
     height: 36px;
@@ -674,24 +741,24 @@ p.wpp-responses.wpp-success {
 }
 
 
-.wpp-option-list-8.wpp-custom .has-thumb:not(.has-label) input[type="checkbox"],
-.wpp-option-list-8.wpp-custom .has-thumb:not(.has-label) input[type="radio"],
-.wpp-option-list-8.wpp-custom .has-thumb:not(.has-label) label::before {
+.wpp-option-list-9.wpp-custom .has-thumb:not(.has-label) input[type="checkbox"],
+.wpp-option-list-9.wpp-custom .has-thumb:not(.has-label) input[type="radio"],
+.wpp-option-list-9.wpp-custom .has-thumb:not(.has-label) label::before {
     bottom: 0;
 }
 
-.wpp-option-list-8.wpp-custom.wpp-circle .has-thumb:not(.has-label) label::before {
+.wpp-option-list-9.wpp-custom.wpp-circle .has-thumb:not(.has-label) label::before {
     bottom: 5px;
 }
 
-.wpp-option-list-8.wpp-circle label::before {
+.wpp-option-list-9.wpp-circle label::before {
     width: 24px;
     height: 24px;
     left: 0;
     bottom: 1px;
 }
 
-.wpp-option-list-8.wpp-custom svg {
+.wpp-option-list-9.wpp-custom svg {
     left: 15px;
     width: 26px;
     height: 26px;
@@ -700,135 +767,22 @@ p.wpp-responses.wpp-success {
     bottom: 15px;
 }
 
-.wpp-option-list-8.wpp-circle svg {
+.wpp-option-list-9.wpp-circle svg {
     left: 3px;
     width: 38px;
     height: 38px;
     bottom: 8px;
 }
 
-.wpp-option-list-8.wpp-circle .wpp-option-single.has-label:not(.has-thumb) svg {
+.wpp-option-list-9.wpp-circle .wpp-option-single.has-label:not(.has-thumb) svg {
     left: 3px;
     width: 38px;
     height: 38px;
     bottom: 7px;
 }
 
-.wpp-option-list-8.wpp-circle .wpp-option-single label {
+.wpp-option-list-9.wpp-circle .wpp-option-single label {
     padding-left: 34px;
-}
-
-.wpp-option-list-8 .wpp-option-single input:checked + label {
-    color: #ec785b;
-}
-
-.wpp-custom.wpp-option-list-8 svg path {
-    stroke: #ec785b;
-}
-
-.wpp-option-list-8 .wpp-option-single.has-label:not(.has-thumb) {
-    padding: 13px 10px;
-}
-
-.wpp-option-list-8 .wpp-option-single.has-label:not(.has-thumb) svg {
-    left: 15px;
-    width: 26px;
-    height: 26px;
-    top: auto;
-    transform: none;
-    bottom: 13px;
-}
-
-
-/**
-* Poll Option - 9
-*/
-
-.wpp-option-list-9 {
-    max-width: 1024px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-left: -15px;
-    margin-right: -15px;
-}
-
-.wpp-option-list-9 .wpp-col {
-    -ms-flex: 0 0 33.33%;
-    flex: 0 0 33.33%;
-    max-width: 33.33%;
-    min-width: 200px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.wpp-option-list-9 .wpp-option-single {
-    flex-direction: column-reverse;
-    justify-content: unset;
-    display: block;
-    margin-bottom: 30px;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 5px 20px rgba(88, 88, 88, 0.3);
-}
-
-.wpp-option-list-9 .wpp-option-single.has-thumb .wpp-option-thumb {
-    border-radius: 4px 4px 0 0;
-    text-align: center;
-    width: 100%;
-    background-color: #f36868;
-    background-image: linear-gradient(48deg, #ffc672 -7.4%, #fb835d 71.6% );
-    margin-bottom: 65px;
-}
-
-.wpp-option-list-9 .wpp-option-single.has-thumb .wpp-option-thumb img {
-    width: 100px;
-    border-radius: 50%;
-    position: relative;
-    bottom: -50px;
-    padding: 5px;
-    background: #fff;
-    box-shadow: 0 -8px 11px rgba(0, 0, 0, 0.19), 0 8px 11px rgba(0, 0, 0, 0.19);
-}
-
-.wpp-custom.wpp-option-list-9 label {
-    position: inherit;
-    padding: 0 0 75px;
-    text-align: center;
-    font-size: 18px;
-    line-height: 30px;
-}
-
-.wpp-custom.wpp-option-list-9.wpp-checkbox label {
-    padding: 0 0 85px;
-}
-
-.wpp-custom.wpp-option-list-9 .has-label:not(.has-thumb) label {
-    padding-bottom: 72px;
-}
-
-.wpp-option-list-9 .wpp-option-input {
-    width: 100%;
-}
-
-.wpp-option-list-9.wpp-custom input[type="checkbox"],
-.wpp-option-list-9.wpp-custom input[type="radio"],
-.wpp-option-list-9.wpp-custom label::before {
-    top: auto;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.wpp-option-list-9.wpp-custom svg {
-    left: 50%;
-    top: auto;
-    bottom: 30px;
-    transform: translateX(-50%);
-}
-
-.wpp-option-list-9.wpp-circle .wpp-option-single svg {
-    bottom: 12px;
 }
 
 .wpp-option-list-9 .wpp-option-single input:checked + label {
@@ -843,6 +797,16 @@ p.wpp-responses.wpp-success {
     padding: 13px 10px;
 }
 
+.wpp-option-list-9 .wpp-option-single.has-label:not(.has-thumb) svg {
+    left: 15px;
+    width: 26px;
+    height: 26px;
+    top: auto;
+    transform: none;
+    bottom: 13px;
+}
+
+
 /**
 * Poll Option - 10
 */
@@ -852,35 +816,36 @@ p.wpp-responses.wpp-success {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-left: -10px;
-    margin-right: -10px;
+    margin-left: -15px;
+    margin-right: -15px;
 }
 
 .wpp-option-list-10 .wpp-col {
     -ms-flex: 0 0 33.33%;
     flex: 0 0 33.33%;
     max-width: 33.33%;
-    min-width: 205px;
-    padding-left: 10px;
-    padding-right: 10px;
+    min-width: 200px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .wpp-option-list-10 .wpp-option-single {
     flex-direction: column-reverse;
     justify-content: unset;
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     background-color: #fff;
-    border: 6px solid #fff;
+    border-radius: 4px;
     box-shadow: 0 5px 20px rgba(88, 88, 88, 0.3);
 }
 
 .wpp-option-list-10 .wpp-option-single.has-thumb .wpp-option-thumb {
+    border-radius: 4px 4px 0 0;
     text-align: center;
     width: 100%;
-    background-color: #3d3bf8;
+    background-color: #f36868;
+    background-image: linear-gradient(48deg, #ffc672 -7.4%, #fb835d 71.6% );
     margin-bottom: 65px;
-    background-image: linear-gradient( 249.1deg, rgba(11,206,250,1) -6.5%, rgba(65,46,248,1) 100.2% );
 }
 
 .wpp-option-list-10 .wpp-option-single.has-thumb .wpp-option-thumb img {
@@ -890,6 +855,7 @@ p.wpp-responses.wpp-success {
     bottom: -50px;
     padding: 5px;
     background: #fff;
+    box-shadow: 0 -8px 11px rgba(0, 0, 0, 0.19), 0 8px 11px rgba(0, 0, 0, 0.19);
 }
 
 .wpp-custom.wpp-option-list-10 label {
@@ -933,14 +899,115 @@ p.wpp-responses.wpp-success {
 }
 
 .wpp-option-list-10 .wpp-option-single input:checked + label {
-    color: #0fc2fa;
+    color: #ec785b;
 }
 
 .wpp-custom.wpp-option-list-10 svg path {
-    stroke: #0fc2fa;
+    stroke: #ec785b;
 }
 
 .wpp-option-list-10 .wpp-option-single.has-label:not(.has-thumb) {
+    padding: 13px 10px;
+}
+
+/**
+* Poll Option - 11
+*/
+
+.wpp-option-list-11 {
+    max-width: 1024px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.wpp-option-list-11 .wpp-col {
+    -ms-flex: 0 0 33.33%;
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+    min-width: 205px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.wpp-option-list-11 .wpp-option-single {
+    flex-direction: column-reverse;
+    justify-content: unset;
+    display: block;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 6px solid #fff;
+    box-shadow: 0 5px 20px rgba(88, 88, 88, 0.3);
+}
+
+.wpp-option-list-11 .wpp-option-single.has-thumb .wpp-option-thumb {
+    text-align: center;
+    width: 100%;
+    background-color: #3d3bf8;
+    margin-bottom: 65px;
+    background-image: linear-gradient( 249.1deg, rgba(11,206,250,1) -6.5%, rgba(65,46,248,1) 100.2% );
+}
+
+.wpp-option-list-11 .wpp-option-single.has-thumb .wpp-option-thumb img {
+    width: 100px;
+    border-radius: 50%;
+    position: relative;
+    bottom: -50px;
+    padding: 5px;
+    background: #fff;
+}
+
+.wpp-custom.wpp-option-list-11 label {
+    position: inherit;
+    padding: 0 0 75px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.wpp-custom.wpp-option-list-11.wpp-checkbox label {
+    padding: 0 0 85px;
+}
+
+.wpp-custom.wpp-option-list-11 .has-label:not(.has-thumb) label {
+    padding-bottom: 72px;
+}
+
+.wpp-option-list-11 .wpp-option-input {
+    width: 100%;
+}
+
+.wpp-option-list-11.wpp-custom input[type="checkbox"],
+.wpp-option-list-11.wpp-custom input[type="radio"],
+.wpp-option-list-11.wpp-custom label::before {
+    top: auto;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.wpp-option-list-11.wpp-custom svg {
+    left: 50%;
+    top: auto;
+    bottom: 30px;
+    transform: translateX(-50%);
+}
+
+.wpp-option-list-11.wpp-circle .wpp-option-single svg {
+    bottom: 12px;
+}
+
+.wpp-option-list-11 .wpp-option-single input:checked + label {
+    color: #0fc2fa;
+}
+
+.wpp-custom.wpp-option-list-11 svg path {
+    stroke: #0fc2fa;
+}
+
+.wpp-option-list-11 .wpp-option-single.has-label:not(.has-thumb) {
     padding: 13px 10px;
 }
 
@@ -1083,42 +1150,42 @@ p.wpp-responses.wpp-success {
     bottom: -35px;
 }
 
-.wpp-option-list-2 .wpp-option-single.has-result {
+.wpp-option-list-3 .wpp-option-single.has-result {
     border-top: 1px solid #eee;
 }
 
-.wpp-option-list-2 .wpp-option-single.has-result .wpp-option-result-bar,
-.wpp-option-list-3 .wpp-option-single.has-result .wpp-option-result-bar {
+.wpp-option-list-3 .wpp-option-single.has-result .wpp-option-result-bar,
+.wpp-option-list-4 .wpp-option-single.has-result .wpp-option-result-bar {
     border-radius: 0;
     top: -1px;
 }
 
-.wpp-option-list-4 .wpp-option-single.has-result .wpp-option-result-bar {
+.wpp-option-list-5 .wpp-option-single.has-result .wpp-option-result-bar {
     left: 2%;
     border-top-right-radius: 3px;
     max-width: 96%;
 }
 
-.wpp-option-list-5 .wpp-option-single.has-result .wpp-option-result-bar {
+.wpp-option-list-6 .wpp-option-single.has-result .wpp-option-result-bar {
     border-top-left-radius: 0;
 }
 
-.wpp-option-list-6 .wpp-option-single.has-result {
+.wpp-option-list-7 .wpp-option-single.has-result {
     margin-top: 12px;
 }
 
-.wpp-option-list-6 .wpp-option-single .wpp-option-result-bar {
+.wpp-option-list-7 .wpp-option-single .wpp-option-result-bar {
     border-radius: 6px;
     height: 6px;
     top: -12px;
 }
 
-.wpp-option-list-7 .wpp-option-single.has-result {
+.wpp-option-list-8 .wpp-option-single.has-result {
     margin-top: 12px;
     margin-bottom: 65px;
 }
 
-.wpp-option-list-7 .wpp-option-single .wpp-option-result-bar {
+.wpp-option-list-8 .wpp-option-single .wpp-option-result-bar {
     border-radius: 6px;
     height: 6px;
     top: -12px;
@@ -1126,21 +1193,21 @@ p.wpp-responses.wpp-success {
     left: 30px;
 }
 
-.wpp-option-list-7 .wpp-option-single .wpp-option-result {
+.wpp-option-list-8 .wpp-option-single .wpp-option-result {
     left: 30px;
 }
 
-.wpp-option-list-8 .wpp-option-single.has-result {
+.wpp-option-list-9 .wpp-option-single.has-result {
     margin-top: 12px;
 }
 
-.wpp-option-list-8 .wpp-option-single .wpp-option-result-bar {
+.wpp-option-list-9 .wpp-option-single .wpp-option-result-bar {
     border-radius: 6px;
     height: 6px;
     top: -12px;
 }
 
-.wpp-option-list-9 .wpp-option-single .wpp-option-result-bar {
+.wpp-option-list-10 .wpp-option-single .wpp-option-result-bar {
     border-radius: 6px;
     height: 4px;
     top: auto;
@@ -1149,7 +1216,7 @@ p.wpp-responses.wpp-success {
     left: 10px;
 }
 
-.wpp-option-list-10 .wpp-option-single .wpp-option-result-bar {
+.wpp-option-list-11 .wpp-option-single .wpp-option-result-bar {
     border-radius: 0;
     height: 4px;
     top: auto;
@@ -1158,7 +1225,7 @@ p.wpp-responses.wpp-success {
     left: 5px;
 }
 
-.wpp-option-list-10 .wpp-option-single.has-result .wpp-option-result {
+.wpp-option-list-11 .wpp-option-single.has-result .wpp-option-result {
     bottom: -40px;
 }
 
