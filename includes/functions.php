@@ -240,19 +240,19 @@ if ( ! function_exists( 'wpp_options_single_class' ) ) {
 
 
 		// Add common class excluding for Theme - 1
-		if ( $options_theme != 1 ) {
+		if ( $options_theme != 1 && $options_theme != 2 ) {
 			$classes[] = 'wpp-custom';
 		}
 
 
 		// Add checkbox animation class excluding for Theme - 1
-		if ( $options_theme != 1 && $poll->can_vote_multiple() ) {
+		if ( $options_theme != 1 && $options_theme != 2 && $poll->can_vote_multiple() ) {
 			$classes[] = sprintf( 'wpp-%s', $poll->get_style( 'animation_checkbox' ) );
 		}
 
 
 		// Add radio animation class excluding for Theme - 1
-		if ( $options_theme != 1 && ! $poll->can_vote_multiple() ) {
+		if ( $options_theme != 1 && $options_theme != 2 && ! $poll->can_vote_multiple() ) {
 			$classes[] = sprintf( 'wpp-%s', $poll->get_style( 'animation_radio' ) );
 		}
 
