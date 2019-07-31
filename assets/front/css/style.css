@@ -236,10 +236,10 @@ p.wpp-responses.wpp-success {
 * Single Poll
 */
 
-.single-poll .wpp-content {
+.poll-single .wpp-content {
     margin-bottom: 30px;
 }
-.single-poll .wpp-content p:last-child {
+.poll-single .wpp-content p:last-child {
     margin-bottom: 0;
 }
 
