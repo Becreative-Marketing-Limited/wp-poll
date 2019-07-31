@@ -448,7 +448,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		 */
 		function get_poll_content( $length = false, $more = null ) {
 
-			$content = $this->get_poll_post()->post_content;
+			$content = $this->get_post()->post_content;
 
 			if ( $length ) {
 				$content = wp_trim_words( $content, $length, $more );
@@ -545,7 +545,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		 *
 		 * @return null|WP_Post
 		 */
-		function get_poll_post() {
+		function get_post() {
 
 			return $this->poll_post;
 		}

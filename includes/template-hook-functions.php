@@ -18,6 +18,7 @@ if ( ! function_exists( 'wpp_single_poll_title' ) ) {
 	}
 }
 
+
 if ( ! function_exists( 'wpp_single_poll_thumb' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
@@ -27,6 +28,7 @@ if ( ! function_exists( 'wpp_single_poll_thumb' ) ) {
 		wpp_get_template( 'single-poll/thumb.php' );
 	}
 }
+
 
 if ( ! function_exists( 'wpp_single_poll_content' ) ) {
 	/**
@@ -38,6 +40,7 @@ if ( ! function_exists( 'wpp_single_poll_content' ) ) {
 	}
 }
 
+
 if ( ! function_exists( 'wpp_single_poll_options' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
@@ -47,6 +50,7 @@ if ( ! function_exists( 'wpp_single_poll_options' ) ) {
 		wpp_get_template( 'single-poll/options.php' );
 	}
 }
+
 
 if ( ! function_exists( 'wpp_single_poll_notice' ) ) {
 	/**
@@ -58,6 +62,7 @@ if ( ! function_exists( 'wpp_single_poll_notice' ) ) {
 	}
 }
 
+
 if ( ! function_exists( 'wpp_single_poll_countdown' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10
@@ -67,6 +72,7 @@ if ( ! function_exists( 'wpp_single_poll_countdown' ) ) {
 		wpp_get_template( 'single-poll/countdown.php' );
 	}
 }
+
 
 if ( ! function_exists( 'wpp_single_poll_buttons' ) ) {
 	/**
@@ -166,21 +172,18 @@ if ( ! function_exists( 'wpp_poll_archive_pagination' ) ) {
 }
 
 
-
-
-
 /**
  * Backend Template Hooks
  */
 
-if( ! function_exists( 'wpp_admin_render_reports' ) ) {
+if ( ! function_exists( 'wpp_admin_render_reports' ) ) {
 	function wpp_admin_render_reports() {
 
 		require( WPP_PLUGIN_DIR . 'includes/admin-templates/reports.php' );
 	}
 }
 
-if( ! function_exists( 'wpp_poll_submitbox' ) ) {
+if ( ! function_exists( 'wpp_poll_submitbox' ) ) {
 	function wpp_poll_submitbox() {
 
 		require( WPP_PLUGIN_DIR . 'includes/admin-templates/poll-submitbox.php' );

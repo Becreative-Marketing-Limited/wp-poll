@@ -62,6 +62,7 @@ class WPPollManager {
 //		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings.php' );
 		require_once( '/Volumes/Devroot/PB-Settings/class-pb-settings.php' );
 
+		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-item-data.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll-post-types.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-functions.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-hooks.php' );
