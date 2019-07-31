@@ -16,7 +16,7 @@ if ( post_password_required() ) {
 }
 
 ?>
-    <div id="poll-<?php the_ID(); ?>" <?php wpp_single_poll_class(); ?>>
+    <div id="poll-<?php the_ID(); ?>" <?php wpp_single_post_class(); ?>>
 		<?php
 
         global $poll;

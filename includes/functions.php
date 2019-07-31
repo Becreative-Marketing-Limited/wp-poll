@@ -192,21 +192,21 @@ if ( ! function_exists( 'wpp_poll_archive_class' ) ) {
 }
 
 
-if ( ! function_exists( 'wpp_single_poll_class' ) ) {
+if ( ! function_exists( 'wpp_single_post_class' ) ) {
 	/**
-	 * Return single poll classes
+	 * Return single post classes
 	 *
 	 * @param string $classes
 	 */
-	function wpp_single_poll_class( $classes = '' ) {
+	function wpp_single_post_class( $classes = '' ) {
 
 		if ( ! is_array( $classes ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
 		}
 
-		$classes[] = 'single-poll';
+		$classes[] = sprintf( 'single-%s', get_post_type() );
 
-		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'wpp_single_poll_class', $classes ) ) ) );
+		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'wpp_single_post_class', array_filter( $classes ) ) ) ) );
 	}
 }
 
@@ -334,8 +334,8 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 
 if ( ! function_exists( 'wpp_locate_template' ) ) {
 	/**
-     * Locate template
-     *
+	 * Locate template
+	 *
 	 * @param $template_name
 	 * @param string $template_path
 	 * @param string $default_path

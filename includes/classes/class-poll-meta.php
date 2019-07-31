@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
 
-class WPP_Post_meta_Poll {
+class WPP_Poll_meta {
 
 	public function __construct() {
 
@@ -160,6 +160,14 @@ class WPP_Post_meta_Poll {
 		return array(
 
 			array(
+				'id'      => 'poll_type',
+				'title'   => esc_html__( 'Poll Type', 'wp-poll' ),
+				'details' => esc_html__( 'Select type for this poll. Default: General Poll', 'wp-poll' ),
+				'type'    => 'select',
+				'args'    => wpp()->get_poll_types(),
+			),
+
+			array(
 				'id'    => 'poll_meta_options',
 				'title' => esc_html__( 'Options', 'wp-poll' ),
 			),
@@ -184,7 +192,7 @@ class WPP_Post_meta_Poll {
 
 			array(
 				'id'            => 'poll_deadline',
-				'title'         => esc_html__( 'Settings', 'wp-poll' ),
+				'title'         => esc_html__( 'Deadline', 'wp-poll' ),
 				'details'       => esc_html__( 'Specify a date when this poll will end. Leave empty to ignore this option', 'wp-poll' ),
 				'type'          => 'datepicker',
 				'autocomplete'  => 'off',
@@ -195,9 +203,10 @@ class WPP_Post_meta_Poll {
 			),
 
 			array(
-				'id'   => 'poll_allow_disallow',
-				'type' => 'checkbox',
-				'args' => array(
+				'id'    => 'poll_allow_disallow',
+				'title' => esc_html__( 'Settings', 'wp-poll' ),
+				'type'  => 'checkbox',
+				'args'  => array(
 					'vote_after_deadline' => esc_html__( 'Allow users to vote after poll meets deadline', 'wp-poll' ),
 					'multiple_votes'      => esc_html__( 'Allow Multiple votes', 'wp-poll' ),
 					'new_options'         => esc_html__( 'Allow Visitors to add new options', 'wp-poll' ),
@@ -267,4 +276,4 @@ class WPP_Post_meta_Poll {
 	}
 }
 
-new WPP_Post_meta_Poll();
+new WPP_Poll_meta();

@@ -2,6 +2,10 @@
 Admin css
 */
 
+.wpp-no-display {
+    display: none;
+}
+
 #poll_metabox #post_title {
     width: 100%;
     padding: 8px 12px;
@@ -60,21 +64,22 @@ Admin css
     color: #2f2f2f;
 }
 
-
+​
+​
 .post-type-poll .wps-field fieldset label {
-    display: block;
+    display: inline-block;
     margin-bottom: 10px;
 }
 
-.post-type-poll .wps-field fieldset br {
-    display: none;
+.post-type-poll .wps-field fieldset label input[type="checkbox"],
+.post-type-poll .wps-field fieldset label input[type="radio"] {
+    margin-top: -2px;
+    margin-right: 8px;
 }
-
 
 /**
  * Chart Reporting
  */
-
 #wpp-chart-report {
     background: #fff;
     border: 1px solid #ddd;
@@ -83,11 +88,9 @@ Admin css
     margin: 10px auto 20px auto;
 }
 
-
 /**
  * Widgets
  */
-
 .widget-inside .wps-field {
     display: flex;
     justify-content: space-between;
@@ -117,7 +120,34 @@ a.wpp-preview-link:hover {
     margin-left: 10px;
     text-decoration: none;
     color: #FF5722;
-    outline:none;
-    box-shadow:none;
+    outline: none;
+    box-shadow: none;
 }
+
+/**
+ * Notices
+ */
+
+.wpp-notice {
+    background: #00bcd43b;
+    padding: 10px;
+    border-left: 3px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.wpp-notice.wpp-warning {
+    background: #ff98003b;
+}
+
+.wpp-notice.wpp-error {
+    background: #ff57223b;
+}
+
+.wpp-notice.wpp-success {
+    background: #4caf503b;
+}
+
+
+
 
