@@ -177,6 +177,26 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 			return $ret;
 		}
 
+		/**
+		 * Return content
+		 *
+		 * @param bool $length
+		 * @param null $more
+		 *
+		 * @return mixed|void
+		 */
+		function get_content( $length = false, $more = null ) {
+
+			$content = $this->get_post()->post_content;
+
+			if ( $length ) {
+				$content = wp_trim_words( $content, $length, $more );
+			}
+
+			return apply_filters( 'wpp_filters_poll_content', $content );
+		}
+
+
 
 		/**
 		 * Return title

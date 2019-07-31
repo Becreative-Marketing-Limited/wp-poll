@@ -14,8 +14,8 @@ global $poll;
 
 ?>
 
-<?php if ( ! empty( $poll->get_poll_content() ) ) : ?>
+<?php if ( ! empty( $poll->get_content() ) ) : ?>
     <div class="poll-excerpt">
-		<?php echo apply_filters( 'the_excerpt', $poll->get_poll_content( 15 ) ); ?>
+		<?php echo apply_filters( 'the_excerpt', $poll->get_content( 15 ) ); ?>
     </div>
 <?php endif; ?>

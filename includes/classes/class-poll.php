@@ -15,23 +15,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 	/**
 	 * Class WPP_Hooks
 	 */
-	class WPP_Poll {
-
-
-		/**
-		 * Poll ID
-		 *
-		 * @var null
-		 */
-		public $poll_id = null;
-
-
-		/**
-		 * Poll Post
-		 *
-		 * @var null
-		 */
-		public $poll_post = null;
+	class WPP_Poll extends WPP_Item_data {
 
 
 		/**
@@ -40,8 +24,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		 * @param bool $poll_id
 		 */
 		function __construct( $poll_id = false ) {
-
-			$this->init( $poll_id );
+			parent::__construct( $poll_id );
 		}
 
 
@@ -204,70 +187,6 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
-		 * Return Poll published date
-		 *
-		 * @param string $format
-		 *
-		 * @return mixed|void
-		 */
-		function get_published_date( $format = 'U' ) {
-
-			return apply_filters( 'wpp_filters_poll_published_date', get_the_date( $format, $this->get_id() ) );
-		}
-
-
-		/**
-		 * Return Poll author information upon given value
-		 *
-		 * @param string $info
-		 *
-		 * @return mixed|string
-		 */
-		function get_author_info( $info = 'display_name' ) {
-
-			$poll_author = $this->get_author();
-
-			if ( ! $poll_author || empty( $poll_author ) ) {
-				return '';
-			}
-
-			if ( isset( $poll_author->$info ) ) {
-				return $poll_author->$info;
-			}
-
-			return '';
-		}
-
-
-		/**
-		 * Return Poll post author object
-		 *
-		 * @return bool|WP_User
-		 */
-		function get_author() {
-
-			$poll_author_id = isset( $this->poll_post->post_author ) ? $this->poll_post->post_author : '';
-
-			if ( ! empty( $poll_author_id ) ) {
-				return get_user_by( 'ID', $poll_author_id );
-			}
-
-			return false;
-		}
-
-
-		/**
-		 * Return poll permalink
-		 *
-		 * @return mixed|void
-		 */
-		function get_permalink() {
-
-			return apply_filters( 'wpp_filter_poll_permalink', get_the_permalink( $this->get_id() ) );
-		}
-
-
-		/**
 		 * Add new poll option
 		 *
 		 * @param string $option_label
@@ -295,39 +214,6 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			} else {
 				return false;
 			}
-		}
-
-
-		/**
-		 * Return whether a poll has a thumbnail or not
-		 *
-		 * @return bool
-		 */
-		function has_thumbnail() {
-
-			if ( empty( $this->get_thumbnail() ) ) {
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-
-		/**
-		 * Return Post thumbnail URL
-		 *
-		 * @param string $size
-		 *
-		 * @return mixed|void
-		 */
-		function get_thumbnail( $size = 'full' ) {
-
-			$thumbnail_id = $this->get_meta( '_thumbnail_id' );
-			$_thumb_url   = ! empty( $thumbnail_id ) ? wp_get_attachment_image_src( $thumbnail_id, $size ) : array();
-			$_thumb_url   = ! empty( $_thumb_url ) ? $_thumb_url : array();
-			$thumb_url    = reset( $_thumb_url );
-
-			return apply_filters( 'wpp_filters_poll_thumbnail', $thumb_url, $thumbnail_id, $size );
 		}
 
 
@@ -439,75 +325,6 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
-		 * Return Poll content
-		 *
-		 * @param bool $length
-		 * @param null $more
-		 *
-		 * @return mixed|void
-		 */
-		function get_poll_content( $length = false, $more = null ) {
-
-			$content = $this->get_post()->post_content;
-
-			if ( $length ) {
-				$content = wp_trim_words( $content, $length, $more );
-			}
-
-			return apply_filters( 'wpp_filters_poll_content', $content );
-		}
-
-
-		/**
-		 * Return Meta Value
-		 *
-		 * @param string $meta_key
-		 * @param string $default
-		 *
-		 * @return mixed|void
-		 */
-		function get_meta( $meta_key = '', $default = '' ) {
-
-			global $wpp;
-
-			$meta_value = $wpp->get_meta( $meta_key, $this->get_id(), $default );
-
-			return apply_filters( 'wpp_filters_get_poll_meta', $meta_value, $meta_key, $this );
-		}
-
-
-		/**
-		 * Update Poll meta value
-		 *
-		 * @param string $meta_key
-		 * @param string $meta_value
-		 *
-		 * @return bool|int
-		 */
-		function update_meta( $meta_key = '', $meta_value = '' ) {
-
-			do_action( 'wpp_before_update_poll_meta', $meta_key, $meta_value, $this );
-
-			$ret = update_post_meta( $this->get_id(), $meta_key, $meta_value );
-
-			do_action( 'wpp_after_update_poll_meta', $meta_key, $meta_value, $this );
-
-			return $ret;
-		}
-
-
-		/**
-		 * Return Poll title
-		 *
-		 * @return mixed|void
-		 */
-		function get_name() {
-
-			return apply_filters( 'wpp_filters_poll_name', \get_the_title( $this->get_id() ) );
-		}
-
-
-		/**
 		 * Return allows disallows for a poll
 		 *
 		 * @param bool $thing_to_check vote_after_deadline | multiple_votes | new_options
@@ -527,39 +344,6 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			}
 
 			return false;
-		}
-
-
-		/**
-		 * Return poll ID
-		 *
-		 * @return bool|null
-		 */
-		function get_id() {
-			return $this->poll_id;
-		}
-
-
-		/**
-		 * Return Poll post object
-		 *
-		 * @return null|WP_Post
-		 */
-		function get_post() {
-
-			return $this->poll_post;
-		}
-
-
-		/**
-		 * Initialize poll
-		 *
-		 * @param $poll_id
-		 */
-		function init( $poll_id ) {
-
-			$this->poll_id   = ! $poll_id ? get_the_ID() : $poll_id;
-			$this->poll_post = get_post( $this->poll_id );
 		}
 	}
 

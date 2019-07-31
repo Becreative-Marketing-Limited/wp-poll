@@ -204,7 +204,7 @@ if ( ! function_exists( 'wpp_single_post_class' ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
 		}
 
-		$classes[] = sprintf( 'single-%s', get_post_type() );
+		$classes[] = sprintf( '%s-single', get_post_type() );
 
 		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'wpp_single_post_class', array_filter( $classes ) ) ) ) );
 	}
