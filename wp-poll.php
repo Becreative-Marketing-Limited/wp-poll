@@ -62,7 +62,7 @@ class WPPollManager {
 //		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings.php' );
 		
 		$settings_path = str_replace( array( 'Pluginbazar/free/', 'Pluginbazar\free/' ), '', ABSPATH );
-		include $settings_path . "PB-Settings/class-pb-settings.php";;
+		include $settings_path . "PB-Settings/class-pb-settings.php";
 
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-item-data.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll-post-types.php' );

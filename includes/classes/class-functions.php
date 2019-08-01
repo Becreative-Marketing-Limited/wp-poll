@@ -17,6 +17,51 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 
 
 		/**
+		 * Return Polls
+		 *
+		 * @param array $args
+		 * @param string $return_type array | wp_query
+		 *
+		 * @return array|mixed|void
+		 */
+		function get_polls( $args = array(), $return_type = 'array' ) {
+
+			$return = array();
+
+			/**
+			 * set post type
+			 */
+			$args['post_type'] = 'poll';
+
+
+			if ( $return_type == 'array' ) {
+				$return = apply_filters( 'wpp_filters_get_polls', get_posts( $args ) );
+			}
+
+			if ( $return_type == 'wp-query' ) {
+				$return = apply_filters( 'wpp_filters_get_polls', new WP_Query( $args ) );
+			}
+
+			return $return;
+		}
+
+
+		/**
+		 * Return poll categories
+		 *
+		 * @param array $args
+		 *
+		 * @return mixed|void
+		 */
+		function get_poll_categories( $args = array() ) {
+
+			$args['taxonomy'] = 'poll_cat';
+
+			return apply_filters( 'wpp_filters_poll_categories', get_terms( $args ) );
+		}
+
+
+		/**
 		 * Return Poll types
 		 *
 		 * @return mixed|void
