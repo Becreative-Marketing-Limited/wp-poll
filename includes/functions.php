@@ -192,6 +192,25 @@ if ( ! function_exists( 'wpp_poll_archive_class' ) ) {
 }
 
 
+if ( ! function_exists( 'wpp_generate_classes' ) ) {
+	/**
+     * Generate and return classes
+     *
+	 * @param string $classes
+	 *
+	 * @return string
+	 */
+	function wpp_generate_classes( $classes = '' ) {
+
+		if ( ! is_array( $classes ) ) {
+			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
+		}
+
+		return implode( " ", apply_filters( 'wpp_generate_classes', array_filter( $classes ) ) );
+	}
+}
+
+
 if ( ! function_exists( 'wpp_single_post_class' ) ) {
 	/**
 	 * Return single post classes
@@ -206,9 +225,12 @@ if ( ! function_exists( 'wpp_single_post_class' ) ) {
 
 		$classes[] = sprintf( '%s-single', get_post_type() );
 
-		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'wpp_single_post_class', array_filter( $classes ) ) ) ) );
+		printf( 'class="%s"', wpp_generate_classes( $classes ) );
 	}
 }
+
+
+
 
 
 if ( ! function_exists( 'wpp_options_single_class' ) ) {
@@ -332,25 +354,21 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 }
 
 
-if ( ! function_exists( 'wpp_locate_template' ) ) {
+if ( ! function_exists( 'wpp_get_template' ) ) {
 	/**
-	 * Locate template
+	 * Get Template
 	 *
 	 * @param $template_name
+	 * @param array $args
 	 * @param string $template_path
 	 * @param string $default_path
 	 *
-	 * @return mixed|void
+	 * @return WP_Error
 	 */
-	function wpp_locate_template( $template_name, $template_path = '', $default_path = '' ) {
+	function wpp_get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
 
-		$plugin_dir = WPP_PLUGIN_DIR;
-
-		/**
-		 * Template path in Theme
-		 */
-		if ( ! $template_path ) {
-			$template_path = 'wpp/';
+		if ( ! empty( $args ) && is_array( $args ) ) {
+			extract( $args ); // @codingStandardsIgnoreLine
 		}
 
 		/**
@@ -361,7 +379,47 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 		$backtrace      = reset( $backtrace );
 		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
 
-		if ( strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'WPPS_PLUGIN_DIR' ) ) {
+		$located = wpp_locate_template( $template_name, $template_path, $default_path, $backtrace_file );
+
+
+		if ( ! file_exists( $located ) ) {
+			return new WP_Error( 'invalid_data', __( '%s does not exist.', 'woc-open-close' ), '<code>' . $located . '</code>' );
+		}
+
+		$located = apply_filters( 'wpp_filters_get_template', $located, $template_name, $args, $template_path, $default_path );
+
+		do_action( 'wpp_before_template_part', $template_name, $template_path, $located, $args );
+
+		include $located;
+
+		do_action( 'wpp_after_template_part', $template_name, $template_path, $located, $args );
+	}
+}
+
+
+if ( ! function_exists( 'wpp_locate_template' ) ) {
+	/**
+	 *  Locate template
+	 *
+	 * @param $template_name
+	 * @param string $template_path
+	 * @param string $default_path
+	 * @param string $backtrace_file
+	 *
+	 * @return mixed|void
+	 */
+	function wpp_locate_template( $template_name, $template_path = '', $default_path = '', $backtrace_file = '' ) {
+
+		$plugin_dir = WPP_PLUGIN_DIR;
+
+		/**
+		 * Template path in Theme
+		 */
+		if ( ! $template_path ) {
+			$template_path = 'wpp/';
+		}
+
+		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'WPPS_PLUGIN_DIR' ) ) {
 			$plugin_dir = WPPS_PLUGIN_DIR;
 		}
 
@@ -395,40 +453,6 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 		 * @filter wpp_filters_locate_template
 		 */
 		return apply_filters( 'wpp_filters_locate_template', $template, $template_name, $template_path );
-	}
-}
-
-
-if ( ! function_exists( 'wpp_get_template' ) ) {
-	/**
-	 * Get Template
-	 *
-	 * @param $template_name
-	 * @param array $args
-	 * @param string $template_path
-	 * @param string $default_path
-	 *
-	 * @return WP_Error
-	 */
-	function wpp_get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
-
-		if ( ! empty( $args ) && is_array( $args ) ) {
-			extract( $args ); // @codingStandardsIgnoreLine
-		}
-
-		$located = wpp_locate_template( $template_name, $template_path, $default_path );
-
-		if ( ! file_exists( $located ) ) {
-			return new WP_Error( 'invalid_data', __( '%s does not exist.', 'woc-open-close' ), '<code>' . $located . '</code>' );
-		}
-
-		$located = apply_filters( 'wpp_filters_get_template', $located, $template_name, $args, $template_path, $default_path );
-
-		do_action( 'wpp_before_template_part', $template_name, $template_path, $located, $args );
-
-		include $located;
-
-		do_action( 'wpp_after_template_part', $template_name, $template_path, $located, $args );
 	}
 }
 
