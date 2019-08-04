@@ -29,6 +29,20 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 
 			add_action( 'wp_ajax_wpp_get_poll_results', array( $this, 'wpp_get_poll_results' ) );
 			add_action( 'wp_ajax_nopriv_wpp_get_poll_results', array( $this, 'wpp_get_poll_results' ) );
+
+			add_action( 'admin_menu', array( $this, 'add_extensions_menu' ), 99 );
+		}
+
+
+		function add_extensions_menu() {
+
+			global $submenu;
+
+			$submenu['edit.php?post_type=poll'][99] = array(
+				esc_html__( 'Extensions', 'wp-poll' ),
+				'manage_options',
+				admin_url( 'edit.php?post_type=poll&page=wpp-settings&tab=wpp-extensions' ),
+			);
 		}
 
 

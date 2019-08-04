@@ -7,7 +7,7 @@
 
 $pages = array();
 
-$pages['wpp-options'] = array(
+$pages['wpp-options']    = array(
 
 	'page_nav'      => sprintf( '<i class="icofont-ui-settings"></i> %s', esc_html__( 'Options', 'wp-poll' ) ),
 	'page_settings' => array(
@@ -74,8 +74,7 @@ $pages['wpp-options'] = array(
 
 	),
 );
-
-$pages['wpp-reports'] = array(
+$pages['wpp-reports']    = array(
 	'page_nav'      => sprintf( '<i class="icofont-chart-histogram-alt"></i> %s', esc_html__( 'Reports', 'wp-poll' ) ),
 	'show_submit'   => false,
 	'page_settings' => array(
@@ -106,8 +105,11 @@ $pages['wpp-reports'] = array(
 		),
 	)
 );
-
-$pages['wpp-support'] = array(
+$pages['wpp-extensions'] = array(
+	'page_nav'    => sprintf( '<i class="icofont-addons"></i> %s', esc_html__( 'Extensions', 'wp-poll' ) ),
+	'show_submit' => false,
+);
+$pages['wpp-support']    = array(
 	'page_nav'      => '<i class="icofont-live-support"></i> ' . esc_html__( 'Support', 'wp-poll' ),
 	'show_submit'   => false,
 	'page_settings' => array(
@@ -137,7 +139,6 @@ $pages['wpp-support'] = array(
 		),
 	)
 );
-
 
 wpp()->PB_Settings( array(
 	'add_in_menu'     => true,
