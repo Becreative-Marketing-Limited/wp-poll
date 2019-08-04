@@ -38,9 +38,9 @@ if ( ! is_wp_error( $response ) ) {
                 <h2><?php echo esc_html( $title ); ?></h2>
                 <p><?php echo esc_html( $desc ); ?></p>
                 <div class="pricing">
-                    <a class="price"
+                    <a class="price" target="_blank"
                        href="<?php echo esc_url( $purchase_url ); ?>"><?php echo esc_html( $pricing ); ?></a>
-                    <a class="purchase"
+                    <a class="purchase" target="_blank"
                        href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'View Details', 'wp-poll' ); ?></a>
                 </div>
             </div>

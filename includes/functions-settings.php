@@ -120,19 +120,31 @@ $pages['wpp-support']    = array(
 				array(
 					'id'      => '__1',
 					'title'   => esc_html__( 'Support Forum', 'wp-poll' ),
-					'details' => sprintf( '%1$s<br>' . esc_html__( '<a href="%1$s" target="_blank">Ask in Forum</a>', 'wp-poll' ), WPP_FORUM_URL ),
+					'details' => sprintf( '<a href="%1$s" target="_blank">%1$s</a><br><a href="%1$s" target="_blank">%2$s</a>',
+						WPP_FORUM_URL,
+						esc_html__( 'Ask Forum', 'wp-poll' )
+					),
 				),
 
 				array(
 					'id'      => '__2',
-					'title'   => esc_html__( 'Can\'t Login..?', 'wp-poll' ),
-					'details' => sprintf( esc_html__( '<span>Unable to login <strong>Pluginbazar.com</strong></span><br><a href="%1$s" target="_blank">Get Immediate Solution</a>', 'wp-poll' ), WPP_CONTACT_URL ),
+					'title'   => esc_html__( 'Ask Directly', 'wp-poll' ),
+					'details' => sprintf( '%3$s<br><a href="%1$s" target="_blank">%2$s</a>',
+						WPP_CONTACT_URL,
+						esc_html__( 'Ask about your issue directly', 'wp-poll' ),
+						esc_html__( 'Support didnt"t work properly? No Problem, Ask directly here to get a quick response.' )
+					),
 				),
 
 				array(
 					'id'      => '__3',
 					'title'   => esc_html__( 'Like this Plugin?', 'wp-poll' ),
-					'details' => sprintf( esc_html__( '<span>To share feedback about this plugin Please </span><br><a href="%1$s" target="_blank">Rate now</a>', 'wp-poll' ), WPP_REVIEW_URL ),
+					'details' => sprintf( '%s<br>%s<br><a href="%s" target="_blank">%s</a>',
+						esc_html__( 'Do you like this plugin and our hard works into it?', 'wp-poll' ),
+						esc_html__( 'Simply rate it and let the worlds know about it. We dont know any language to Thank you', 'wp-poll' ),
+						WPP_REVIEW_URL,
+						esc_html__( 'Rate Now', 'wp-poll' )
+					),
 				),
 
 			)
@@ -145,7 +157,7 @@ wpp()->PB_Settings( array(
 	'menu_type'       => 'submenu',
 	'menu_title'      => esc_html__( 'Settings', 'wp-poll' ),
 	'page_title'      => esc_html__( 'Settings', 'wp-poll' ),
-	'menu_page_title' => esc_html__( 'Poll - Control Panel', 'wp-poll' ),
+	'menu_page_title' => esc_html__( 'WP Poll - Control Panel', 'wp-poll' ),
 	'capability'      => "manage_options",
 	'menu_slug'       => 'wpp-settings',
 	'parent_slug'     => "edit.php?post_type=poll",
