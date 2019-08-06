@@ -23,6 +23,12 @@ class WPP_Poll_meta {
 		add_action( 'pb_settings_poll_animation_radio', array( $this, 'add_preview_html' ) );
 	}
 
+
+	/**
+	 * Add live preview link to the themes/animations
+	 *
+	 * @param $option
+	 */
 	function add_preview_html( $option ) {
 
 		$option_id = isset( $option['id'] ) ? $option['id'] : '';
@@ -33,6 +39,7 @@ class WPP_Poll_meta {
 
 		$tt_text          = esc_html__( 'See live preview for this selection', 'wp-poll' );
 		$option_value     = wpp()->get_meta( $option_id );
+		$option_value     = is_array( $option_value ) ? reset( $option_value ) : $option_value;
 		$data_demo_server = '//demo.pluginbazar.com/wp-poll/poll';
 
 		if ( $option_id == 'poll_style_countdown' ) {
@@ -59,8 +66,6 @@ class WPP_Poll_meta {
 
 	/**
 	 * Display poll option with repeater field
-	 *
-	 * @throws PB_Error
 	 */
 	function display_poll_options() {
 
@@ -233,19 +238,19 @@ class WPP_Poll_meta {
 				'id'      => 'poll_options_theme',
 				'title'   => esc_html__( 'Options Styles', 'wp-poll' ),
 				'details' => esc_html__( 'Options theme style | Default: 1', 'wp-poll' ),
-				'type'    => 'select',
+				'type'    => 'image_select',
 				'args'    => array(
-					'1'  => esc_html__( 'Theme - 1', 'wp-poll' ),
-					'2'  => esc_html__( 'Theme - 2', 'wp-poll' ),
-					'3'  => esc_html__( 'Theme - 3', 'wp-poll' ),
-					'4'  => esc_html__( 'Theme - 4', 'wp-poll' ),
-					'5'  => esc_html__( 'Theme - 5', 'wp-poll' ),
-					'6'  => esc_html__( 'Theme - 6', 'wp-poll' ),
-					'7'  => esc_html__( 'Theme - 7', 'wp-poll' ),
-					'8'  => esc_html__( 'Theme - 8', 'wp-poll' ),
-					'9'  => esc_html__( 'Theme - 9', 'wp-poll' ),
-					'10' => esc_html__( 'Theme - 10', 'wp-poll' ),
-					'11' => esc_html__( 'Theme - 11', 'wp-poll' ),
+					'1'  => sprintf( '%sassets/images/themes/theme-1.jpg', WPP_PLUGIN_URL ),
+					'2'  => sprintf( '%sassets/images/themes/theme-2.jpg', WPP_PLUGIN_URL ),
+					'3'  => sprintf( '%sassets/images/themes/theme-3.jpg', WPP_PLUGIN_URL ),
+					'4'  => sprintf( '%sassets/images/themes/theme-4.jpg', WPP_PLUGIN_URL ),
+					'5'  => sprintf( '%sassets/images/themes/theme-5.jpg', WPP_PLUGIN_URL ),
+					'6'  => sprintf( '%sassets/images/themes/theme-6.jpg', WPP_PLUGIN_URL ),
+					'7'  => sprintf( '%sassets/images/themes/theme-7.jpg', WPP_PLUGIN_URL ),
+					'8'  => sprintf( '%sassets/images/themes/theme-8.jpg', WPP_PLUGIN_URL ),
+					'9'  => sprintf( '%sassets/images/themes/theme-9.jpg', WPP_PLUGIN_URL ),
+					'10' => sprintf( '%sassets/images/themes/theme-10.jpg', WPP_PLUGIN_URL ),
+					'11' => sprintf( '%sassets/images/themes/theme-11.jpg', WPP_PLUGIN_URL ),
 				),
 				'default' => array( '1' ),
 			),
@@ -253,12 +258,12 @@ class WPP_Poll_meta {
 			array(
 				'id'      => 'poll_animation_checkbox',
 				'details' => esc_html__( 'Animations for Multiple selections (Input type - Checkbox) | Default: Checkmark', 'wp-poll' ),
-				'type'    => 'select',
+				'type'    => 'image_select',
 				'args'    => array(
-					'cross'     => esc_html__( 'Cross', 'wp-poll' ),
-					'boxfill'   => esc_html__( 'Box Fill', 'wp-poll' ),
-					'checkmark' => esc_html__( 'Checkmark', 'wp-poll' ),
-					'diagonal'  => esc_html__( 'Diagonal', 'wp-poll' ),
+					'cross'     => sprintf( '%sassets/images/animations/cross.jpg', WPP_PLUGIN_URL ),
+					'boxfill'   => sprintf( '%sassets/images/animations/boxfill.jpg', WPP_PLUGIN_URL ),
+					'checkmark' => sprintf( '%sassets/images/animations/checkmark.jpg', WPP_PLUGIN_URL ),
+					'diagonal'  => sprintf( '%sassets/images/animations/diagonal.jpg', WPP_PLUGIN_URL ),
 				),
 				'default' => array( 'checkmark' ),
 			),
@@ -266,11 +271,11 @@ class WPP_Poll_meta {
 			array(
 				'id'      => 'poll_animation_radio',
 				'details' => esc_html__( 'Animations for Single selection (Input type - Radio) | Default: Fill', 'wp-poll' ),
-				'type'    => 'select',
+				'type'    => 'image_select',
 				'args'    => array(
-					'fill'   => esc_html__( 'Fill', 'wp-poll' ),
-					'circle' => esc_html__( 'Circle', 'wp-poll' ),
-					'swirl'  => esc_html__( 'Swirl', 'wp-poll' ),
+					'fill'   => sprintf( '%sassets/images/animations/fill.jpg', WPP_PLUGIN_URL ),
+					'circle' => sprintf( '%sassets/images/animations/circle.jpg', WPP_PLUGIN_URL ),
+					'swirl'  => sprintf( '%sassets/images/animations/swirl.jpg', WPP_PLUGIN_URL ),
 				),
 				'default' => array( 'fill' ),
 			),

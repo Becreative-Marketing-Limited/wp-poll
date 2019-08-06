@@ -204,15 +204,9 @@ a.wpp-preview-link:hover {
 }
 
 .wps-field.count-down-selection .image-select > label {
-    width: inherit;
-    border: 1px solid #d1d1d1;
-    border-radius: 5px;
+    width: 280px;
 }
 
-.wps-field.count-down-selection .image-select > label > img {
-    border-radius: 5px;
-}
-
-.wps-field.count-down-selection a.wpp-preview-link {
+.wps-field.image_select a.wpp-preview-link {
     margin-left: 0;
 }
