@@ -17,6 +17,28 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 
 
 		/**
+		 * Return site navigation menu list
+		 *
+		 * @param array $args
+		 *
+		 * @return mixed|void
+		 */
+		function get_site_navs( $args = array() ) {
+
+			$site_navs = array();
+
+			foreach ( wp_get_nav_menus( $args ) as $nav_menu ) {
+				if ( ! $nav_menu instanceof WP_Term ) {
+					continue;
+				}
+				$site_navs[ $nav_menu->term_id ] = $nav_menu->name;
+			}
+
+			return apply_filters( 'wpp_filters_site_navs', $site_navs, $args );
+		}
+
+
+		/**
 		 * Return Polls
 		 *
 		 * @param array $args

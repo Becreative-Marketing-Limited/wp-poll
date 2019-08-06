@@ -197,6 +197,20 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 		}
 
 
+		/**
+		 * Return if an item has content or not
+		 *
+		 * @return bool
+		 */
+		function has_content() {
+
+			if( empty( $this->get_content() ) ) {
+				return false;
+			}
+
+			return true;
+		}
+
 
 		/**
 		 * Return title

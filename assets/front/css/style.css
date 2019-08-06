@@ -1231,6 +1231,30 @@ p.wpp-responses.wpp-success {
 
 
 /**
+ * Notices
+ */
+
+.wpp-notice {
+    background: #00bcd43b;
+    padding: 10px;
+    border-left: 3px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.wpp-notice.wpp-warning {
+    background: #ff98003b;
+}
+
+.wpp-notice.wpp-error {
+    background: #ff57223b;
+}
+
+.wpp-notice.wpp-success {
+    background: #4caf503b;
+}
+
+/**
 * Responsive Media
  */
 
