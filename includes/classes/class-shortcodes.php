@@ -21,8 +21,31 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 
 			add_shortcode( 'poll_list', array( $this, 'display_poll_archive' ) );
 			add_shortcode( 'poll', array( $this, 'display_single_poll' ) );
+			add_shortcode( 'poller_list', array( $this, 'display_poller_list' ) );
 
 			add_filter( 'the_content', array( $this, 'poll_archive_page_content' ), 99 );
+		}
+
+
+		/**
+		 * Update Poll archive page content
+		 *
+		 * @param $atts
+		 * @param $content
+		 *
+		 * @return string
+		 */
+		public function display_poller_list( $atts = array(), $content = null ) {
+
+			ob_start();
+
+			if ( isset( $atts['option_id'] ) && ! empty( $atts['option_id'] ) ) {
+				wpp_get_template( 'poller-list-single.php', $atts );
+			} else {
+				wpp_get_template( 'poller-list.php', $atts );
+			}
+
+			return ob_get_clean();
 		}
 
 
