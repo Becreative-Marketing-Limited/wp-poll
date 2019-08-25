@@ -21,6 +21,28 @@ img {
     margin-bottom: 30px;
 }
 
+table, td, th {
+    border: 1px solid rgba(0, 0, 0, .1)
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-width: 1px 0 0 1px;
+    margin: 0 0 1.5em;
+    width: 100%
+}
+
+th {
+    font-weight: 700
+}
+
+td, th {
+    padding: 8px;
+    text-align: left;
+    border-width: 0 1px 1px 0
+}
+
 .wpp-poll-thumbnail {
     margin-bottom: 25px;
 }
@@ -1260,6 +1282,28 @@ p.wpp-responses.wpp-success {
 .wpp-notice.wpp-success {
     background: #4caf503b;
 }
+
+/**
+ * Poller List
+ */
+.wpp-poller-list-container h3 {
+    margin-bottom: 20px;
+}
+
+.wpp-poller-list-container table td {
+    text-align: center;
+}
+
+.wpp-poller-list-container table th,
+.wpp-poller-list-container table td {
+    text-align: center;
+}
+
+.wpp-poller-list-container table th:first-child,
+.wpp-poller-list-container table td:first-child {
+    text-align: left;
+}
+
 
 /**
 * Responsive Media
