@@ -64,6 +64,8 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 	 */
 	function wpp_add_poll_option( $unique_id = false, $args = array() ) {
 
+		global $post;
+
 		if ( ! is_array( $args ) ) {
 			$args = array( 'label' => $args );
 		}
@@ -89,6 +91,12 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 						'type'        => 'media',
 						'value'       => $option_thumb,
 					),
+					array(
+						'id'      => "poll_meta_options[$unique_id][shortcode]",
+						'title'   => esc_html__( 'Shortcode', 'wp-poll' ),
+
+						'details' => sprintf( '<span class="shortcode tt--hint tt--top" aria-label="Click to Copy">[poller_list poll_id="%s" option_id="%s"]</span>', $post->ID, $unique_id ),
+					),
 				),
 			)
 		);
@@ -110,6 +118,8 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
                           aria-label="<?php esc_attr_e( 'Added on frontend', 'wp-poll' ); ?>"><i
                                 class="icofont-tick-boxed"></i></span>
 				<?php endif; ?>
+
+                <!--                <span class="option-shortcode" aria-label=""><i class="icofont-code"></i></span>-->
             </div>
         </li>
 		<?php
@@ -194,8 +204,8 @@ if ( ! function_exists( 'wpp_poll_archive_class' ) ) {
 
 if ( ! function_exists( 'wpp_generate_classes' ) ) {
 	/**
-     * Generate and return classes
-     *
+	 * Generate and return classes
+	 *
 	 * @param string $classes
 	 *
 	 * @return string
@@ -228,9 +238,6 @@ if ( ! function_exists( 'wpp_single_post_class' ) ) {
 		printf( 'class="%s"', wpp_generate_classes( $classes ) );
 	}
 }
-
-
-
 
 
 if ( ! function_exists( 'wpp_options_single_class' ) ) {

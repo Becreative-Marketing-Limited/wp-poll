@@ -30,7 +30,7 @@
     });
 
 
-    $(document).on('click', '#submitpost .wpp-item span.shortcode', function () {
+    $(document).on('click', 'span.shortcode', function () {
 
         let inputField = document.createElement('input'),
             htmlElement = $(this),

@@ -40,12 +40,21 @@ Admin css
 
 .poll-option-controls > span i {
     position: relative;
-    left: 2px;
+    left: 0;
 }
 
 .poll-option-controls > span.option-move {
     cursor: move;
 }
+
+.poll-option-controls > span.option-shortcode {
+    background: #607d8be8;
+}
+
+.poll-option-controls > span.option-shortcode:hover {
+    background: #435863e8;
+}
+
 
 .poll-option-controls > span:hover {
     background: #176a75e8;
@@ -63,6 +72,10 @@ Admin css
     background: none;
     color: #2f2f2f;
 }
+
+
+
+
 
 Ã¢â‚¬â€¹
 Ã¢â‚¬â€¹
@@ -209,4 +222,18 @@ a.wpp-preview-link:hover {
 
 .wps-field.image_select a.wpp-preview-link {
     margin-left: 0;
+}
+
+
+span.shortcode {
+    background: #f1f1f1;
+    border: 1px solid #a2a2a2;
+    padding: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #868686;
+    /*user-select: none;*/
+    /*-webkit-user-select: none;*/
+    /*-webkit-user-modify: read-only;*/
 }
