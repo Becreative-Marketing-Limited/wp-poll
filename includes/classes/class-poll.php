@@ -38,6 +38,10 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			$poll_type = 'poll';
 			$poll_type = $this->get_meta( 'poll_type', $poll_type );
 
+			if( $poll_type == 'survey' && ! defined( 'WPPS_PLUGIN_FILE' ) ) {
+				$poll_type = 'poll';
+			}
+
 			return apply_filters( 'wpp_filters_poll_type', $poll_type, $this->get_id() );
 		}
 
