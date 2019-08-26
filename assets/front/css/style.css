@@ -171,6 +171,22 @@ p.wpp-responses.wpp-success {
     color: #fff;
 }
 
+.wpp-checkmark svg {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    top: 50%;
+    left: 6px;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.wpp-checkmark svg path {
+    stroke-width: 5px;
+    stroke-linecap: unset;
+    stroke-linejoin: round;
+}
+
 /**
 * Archive Page
 */
@@ -558,6 +574,7 @@ p.wpp-responses.wpp-success {
 
 .wpp-option-list-4 .wpp-option-single {
     border: 1px solid #eee;
+    background-color: #fff;
     padding: 25px 20px;
     display: block;
     margin-bottom: -1px
@@ -597,6 +614,7 @@ p.wpp-responses.wpp-success {
 */
 
 .wpp-option-list-6 .wpp-option-single {
+    background-color: #fff;
     border-left: 6px solid #4caf50;
     padding: 25px 20px;
     display: block;
@@ -719,6 +737,10 @@ p.wpp-responses.wpp-success {
     margin-right: -5px;
 }
 
+.wpp-option-list-9 {
+
+}
+
 .wpp-option-list-9 .wpp-col {
     -ms-flex: 0 0 33.33%;
     flex: 0 0 33.33%;
@@ -739,8 +761,9 @@ p.wpp-responses.wpp-success {
     border-radius: 4px;
 }
 
-.wpp-option-list-9 .wpp-option-single.has-label.has-thumb .wpp-option-input {
-    padding: 15px 0 5px;
+.wpp-option-list-9  .wpp-option-single.has-label.has-thumb .wpp-option-input {
+    margin: 15px 0 5px;
+
 }
 
 .wpp-option-list-9 .wpp-option-single.has-thumb .wpp-option-thumb,
@@ -748,9 +771,15 @@ p.wpp-responses.wpp-success {
     width: 100%;
 }
 
+.wpp-custom.wpp-option-list-9 .wpp-option-input {
+    position: relative;
+}
+
 .wpp-custom.wpp-option-list-9 label {
-    padding: 0 0 0 46px;
+    padding: 0 0 0 52px;
     font-weight: 600;
+    position: initial;
+    line-height: normal;
 }
 
 .wpp-custom.wpp-option-list-9 .has-thumb:not(.has-label) label {
@@ -764,11 +793,8 @@ p.wpp-responses.wpp-success {
     border: 3px solid rgba(0, 0, 0, 0.1);
     width: 36px;
     height: 36px;
-    top: auto;
-    transform: none;
     bottom: -5px;
 }
-
 
 .wpp-option-list-9.wpp-custom .has-thumb:not(.has-label) input[type="checkbox"],
 .wpp-option-list-9.wpp-custom .has-thumb:not(.has-label) input[type="radio"],
@@ -787,27 +813,11 @@ p.wpp-responses.wpp-success {
     bottom: 1px;
 }
 
-.wpp-option-list-9.wpp-custom svg {
-    left: 15px;
-    width: 26px;
-    height: 26px;
-    top: auto;
-    transform: none;
-    bottom: 15px;
-}
-
 .wpp-option-list-9.wpp-circle svg {
-    left: 3px;
-    width: 38px;
-    height: 38px;
+    left: -6px;
+    width: 36px;
+    height: 36px;
     bottom: 8px;
-}
-
-.wpp-option-list-9.wpp-circle .wpp-option-single.has-label:not(.has-thumb) svg {
-    left: 3px;
-    width: 38px;
-    height: 38px;
-    bottom: 7px;
 }
 
 .wpp-option-list-9.wpp-circle .wpp-option-single label {
@@ -824,16 +834,21 @@ p.wpp-responses.wpp-success {
 
 .wpp-option-list-9 .wpp-option-single.has-label:not(.has-thumb) {
     padding: 13px 10px;
+    min-height: 34px;
 }
 
-.wpp-option-list-9 .wpp-option-single.has-label:not(.has-thumb) svg {
-    left: 15px;
-    width: 26px;
-    height: 26px;
-    top: auto;
-    transform: none;
-    bottom: 13px;
+.wpp-option-list-9 svg {
+    width: 24px;
+    height: 24px;
+    left: 6px;
 }
+
+.wpp-option-list-9.wpp-checkmark svg {
+    width: 36px;
+    height: 36px;
+    left: 0;
+}
+
 
 
 /**
@@ -1060,6 +1075,25 @@ p.wpp-responses.wpp-success {
 
 [class*="wpp-option-list"] .has-label.has-thumb .wpp-option-input {
     width: calc(100% - 50px);
+}
+
+.wpp-option-list-10.wpp-checkmark svg,
+.wpp-option-list-11.wpp-checkmark svg {
+    bottom: 26px;
+}
+
+.wpp-option-list-4.wpp-checkmark svg,
+.wpp-option-list-6.wpp-checkmark svg,
+.wpp-option-list-7.wpp-checkmark svg {
+    left: 22px;
+}
+
+.wpp-option-list-5.wpp-checkmark svg {
+    left: 31px;
+}
+
+.wpp-option-list-3.wpp-checkmark svg {
+    left: 1px;
 }
 
 
