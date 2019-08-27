@@ -215,6 +215,7 @@ class WPP_Poll_meta {
 					'vote_after_deadline' => esc_html__( 'Allow users to vote after poll meets deadline', 'wp-poll' ),
 					'multiple_votes'      => esc_html__( 'Allow Multiple votes', 'wp-poll' ),
 					'new_options'         => esc_html__( 'Allow Visitors to add new options', 'wp-poll' ),
+					'hide_timer'          => esc_html__( 'Hide countdown timer for this poll ', 'wp-poll' ),
 				),
 			),
 
