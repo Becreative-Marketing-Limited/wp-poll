@@ -4,7 +4,7 @@
  *
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.1.7
+ * Version: 3.1.8
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -17,6 +17,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
 
+global $wpdb;
+
+define( 'WPP_TABLE_RESULTS', sprintf( '%spoll_results', $wpdb->prefix ) );
+define( 'WPP_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
+define( 'WPP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'WPP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
+define( 'WPP_FORUM_URL', 'https://pluginbazar.com/forums/forum/wp-poll' );
+define( 'WPP_CONTACT_URL', 'https://pluginbazar.com/contact/' );
+define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
+
 
 /**
  * Class WPPollManager
@@ -28,7 +38,6 @@ class WPPollManager {
 	 */
 	function __construct() {
 
-		$this->define_constants();
 		$this->load_scripts();
 		$this->define_classes_functions();
 
@@ -59,11 +68,10 @@ class WPPollManager {
 	 */
 	function define_classes_functions() {
 
+//		$settings_path = str_replace( array( 'Pluginbazar/free/', 'Pluginbazar\free/' ), '', ABSPATH );
+//		include $settings_path . "PB-Settings/class-pb-settings.php";
+
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings.php' );
-		$settings_path = str_replace( array( 'Pluginbazar/free/', 'Pluginbazar\free/' ), '', ABSPATH );
-		include $settings_path . "PB-Settings/class-pb-settings.php";
-
-
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-item-data.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll-post-types.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-functions.php' );
@@ -139,23 +147,6 @@ class WPPollManager {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'front_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
-	}
-
-
-	/**
-	 * Define Constants
-	 */
-	function define_constants() {
-
-		global $wpdb;
-
-		define( 'WPP_TABLE_RESULTS', sprintf( '%spoll_results', $wpdb->prefix ) );
-		define( 'WPP_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
-		define( 'WPP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-		define( 'WPP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
-		define( 'WPP_FORUM_URL', 'https://pluginbazar.com/forums/forum/wp-poll' );
-		define( 'WPP_CONTACT_URL', 'https://pluginbazar.com/contact/' );
-		define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
 	}
 }
 

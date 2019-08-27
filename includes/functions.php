@@ -42,11 +42,15 @@ if ( ! function_exists( 'wpp_get_poll' ) ) {
 	 *
 	 * @param bool $poll_id
 	 *
-	 * @return WPP_Poll
+	 * @return bool | WPP_Poll
 	 * @global WPP_Poll $poll
 	 *
 	 */
 	function wpp_get_poll( $poll_id = false ) {
+
+	    if( get_post_type( $poll_id ) != 'poll' ){
+	        return false;
+        }
 
 		return new WPP_Poll( $poll_id );
 	}

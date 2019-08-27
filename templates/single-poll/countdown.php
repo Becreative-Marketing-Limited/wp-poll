@@ -12,6 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $poll;
 
+
+if( $poll->hide_countdown_timer() ) {
+    return;
+}
+
+
 $unique_id = uniqid();
 
 ?>

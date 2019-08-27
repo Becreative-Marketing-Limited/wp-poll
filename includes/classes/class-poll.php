@@ -345,6 +345,17 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
+		 * Return true or false about displaying countdown timer
+		 *
+		 * @return bool
+		 */
+		function hide_countdown_timer() {
+
+			return $this->get_allows_disallows( 'hide_timer' );
+		}
+
+
+		/**
 		 * Return allows disallows for a poll
 		 *
 		 * @param bool $thing_to_check vote_after_deadline | multiple_votes | new_options
