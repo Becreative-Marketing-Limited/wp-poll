@@ -48,11 +48,28 @@ if ( ! function_exists( 'wpp_get_poll' ) ) {
 	 */
 	function wpp_get_poll( $poll_id = false ) {
 
-	    if( get_post_type( $poll_id ) != 'poll' ){
-	        return false;
-        }
+		if ( get_post_type( $poll_id ) != 'poll' ) {
+			return false;
+		}
 
 		return new WPP_Poll( $poll_id );
+	}
+}
+
+
+if ( ! function_exists( 'wpp_the_poll' ) ) {
+	/**
+     * Set poll in global variable
+     *
+	 * @param bool $poll_id
+	 */
+	function wpp_the_poll( $poll_id = false ) {
+
+		global $poll;
+
+		if( get_post_type( $poll_id ) == 'poll' && ! $poll instanceof WPP_Poll ) {
+		    $poll = new WPP_Poll( $poll_id );
+        }
 	}
 }
 
@@ -63,8 +80,6 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 	 *
 	 * @param bool $unique_id
 	 * @param array $args
-	 *
-	 * @throws PB_Error
 	 */
 	function wpp_add_poll_option( $unique_id = false, $args = array() ) {
 
@@ -78,38 +93,35 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 		$option_label   = isset( $args['label'] ) ? $args['label'] : '';
 		$option_thumb   = isset( $args['thumb'] ) ? $args['thumb'] : '';
 		$is_frontend    = isset( $args['frontend'] ) ? $args['frontend'] : false;
+		$poll_id        = isset( $args['poll_id'] ) ? $args['poll_id'] : $post->ID;
 		$options_fields = array(
 			array(
-				'options' => array(
-					array(
-						'id'          => "poll_meta_options[$unique_id][label]",
-						'title'       => esc_html__( 'Option label', 'wp-poll' ),
-						'placeholder' => esc_html__( 'Option 1', 'wp-poll' ),
-						'type'        => 'text',
-						'value'       => $option_label,
-					),
-					array(
-						'id'          => "poll_meta_options[$unique_id][thumb]",
-						'title'       => esc_html__( 'Image', 'wp-poll' ),
-						'placeholder' => esc_html__( 'Day 1', 'wp-poll' ),
-						'type'        => 'media',
-						'value'       => $option_thumb,
-					),
-					array(
-						'id'      => "poll_meta_options[$unique_id][shortcode]",
-						'title'   => esc_html__( 'Shortcode', 'wp-poll' ),
+				'id'          => "poll_meta_options[$unique_id][label]",
+				'title'       => esc_html__( 'Option label', 'wp-poll' ),
+				'placeholder' => esc_html__( 'Option 1', 'wp-poll' ),
+				'type'        => 'text',
+				'value'       => $option_label,
+			),
+			array(
+				'id'          => "poll_meta_options[$unique_id][thumb]",
+				'title'       => esc_html__( 'Image', 'wp-poll' ),
+				'placeholder' => esc_html__( 'Day 1', 'wp-poll' ),
+				'type'        => 'media',
+				'value'       => $option_thumb,
+			),
+			array(
+				'id'    => "poll_meta_options[$unique_id][shortcode]",
+				'title' => esc_html__( 'Shortcode', 'wp-poll' ),
 
-						'details' => sprintf( '<span class="shortcode tt--hint tt--top" aria-label="Click to Copy">[poller_list poll_id="%s" option_id="%s"]</span>', $post->ID, $unique_id ),
-					),
-				),
-			)
+				'details' => sprintf( '<span class="shortcode tt--hint tt--top" aria-label="Click to Copy">[poller_list poll_id="%s" option_id="%s"]</span>', $post->ID, $unique_id ),
+			),
 		);
 
 		?>
 
         <li class="poll-option-single">
 
-			<?php wpp()->PB_Settings()->generate_fields( $options_fields ); ?>
+			<?php wpp()->PB_Settings()->generate_fields( array( array( 'options' => apply_filters( 'wpp_filters_poll_options_fields', $options_fields, $poll_id, $unique_id, $args ) ) ) ); ?>
 
             <div class="poll-option-controls">
                 <span class="option-remove" data-status=0><i class="icofont-close"></i></span>
@@ -122,8 +134,6 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
                           aria-label="<?php esc_attr_e( 'Added on frontend', 'wp-poll' ); ?>"><i
                                 class="icofont-tick-boxed"></i></span>
 				<?php endif; ?>
-
-                <!--                <span class="option-shortcode" aria-label=""><i class="icofont-code"></i></span>-->
             </div>
         </li>
 		<?php
@@ -394,7 +404,7 @@ if ( ! function_exists( 'wpp_get_template' ) ) {
 
 
 		if ( ! file_exists( $located ) ) {
-			return new WP_Error( 'invalid_data', __( '%s does not exist.', 'woc-open-close' ), '<code>' . $located . '</code>' );
+			return new WP_Error( 'invalid_data', __( '%s does not exist.', 'wp-poll' ), '<code>' . $located . '</code>' );
 		}
 
 		$located = apply_filters( 'wpp_filters_get_template', $located, $template_name, $args, $template_path, $default_path );
@@ -430,9 +440,16 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 			$template_path = 'wpp/';
 		}
 
+		// Check for survey
 		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'WPPS_PLUGIN_DIR' ) ) {
 			$plugin_dir = WPPS_PLUGIN_DIR;
 		}
+
+		// Check for MCQ
+		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-quiz' ) !== false && defined( 'WPPQUIZ_PLUGIN_DIR' ) ) {
+			$plugin_dir = WPPQUIZ_PLUGIN_DIR;
+		}
+
 
 		/**
 		 * Template default path from Plugin

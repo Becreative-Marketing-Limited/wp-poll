@@ -219,7 +219,7 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 		 */
 		function get_name() {
 
-			return apply_filters( 'wpps_filters_item_name', get_the_title( $this->get_id() ) );
+			return apply_filters( 'wpps_filters_item_name', $this->item_post->post_title );
 		}
 
 		/**

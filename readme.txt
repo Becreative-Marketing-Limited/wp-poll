@@ -1,21 +1,20 @@
 === WP Poll ===
 	Contributors: jaedm97,pluginbazar
 	Donate link: https://pluginbazar.com/contact/
-	Tags: Poll, Polls, WP Polls, WordPress Polling,WordPress Poll, democracy, poll, polling, polls, Post, survey, vote, widget, opinion, justice
-	Requires at least: 3.8
+	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
+	Requires at least: 4.6
 	Tested up to: 5.2.2
-	Stable tag: 3.1.8
+	Stable tag: 3.1.9
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-	Complete solution for Polls in WordPress
+    Integrate smart poll system to your WordPress as the way you wanted to with so many options to configure.
 
 == Description ==
 
-Easy solution for taking opinions from your visitors/users with multiple styles/themes and highly customizable backend.
+WP Poll allows your to integrate highly customizable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
 
-
-### Features
+### FEATURES
 * Single and Multi votes
 * Ability to create Unlimited Poll options
 * 10+ Themes variations
@@ -28,20 +27,38 @@ Easy solution for taking opinions from your visitors/users with multiple styles/
 * Display results for a single poll with shortcode
 * Display results for an option of a single poll with shortcode
 
+### ADDONS
+#### 1. WP Poll - Survey
+[Buy this addon only at $29](https://pluginbazar.com/plugin/wp-poll-survey/)
 
-### Coming on Future versions
+###### Features
+* Unlimited survey creation with poll
+* Progress bar with counter
+* Additional form with multiple fields controlling
+* 8 Different themes for each survey
+* Control custom header with site logo and navigation menu depending on survey theme
+* Terms and Conditions management for each survey
+* List of responses in a single place
+* And many more are coming soon
+
+#### 1. WP Poll - Question Answer
+[Buy this addon only at $29](https://pluginbazar.com/plugin/wp-poll-question-answer/)
+###### Features
+* This addon is still under development and coming with huge options
+
+### Coming on Future versions of Poll
 * Integration with Contact Form 7
 * Frontned Poll Management
 * Gutenberg Compatibility
 * WP Bakery Page Builder Compatibility
+* Elementor Widget Compatibility
 * Startup Wizard
-* Integration with MailChimp and so on....
+* Integration with MailChimp, twilio, Zapier and so on....
 
 Don't hesitate to start using it and let us know any issue...
 
 
 [### Report an Issue](https://pluginbazar.com/forums/forum/wp-poll/)
-
 
 
 `
@@ -142,5 +159,3 @@ Don't hesitate to start using it and let us know any issue...
 
 = 3.1.0 =
 3.1.0 is a major update.
-
-	

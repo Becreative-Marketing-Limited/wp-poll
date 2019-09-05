@@ -104,12 +104,15 @@
      */
     $(document).on('click', '.wpp-add-poll-option', function () {
 
+        console.log( $(this).data('poll-id') );
+
         $.ajax({
             type: 'GET',
             context: this,
             url: pluginObject.ajaxurl,
             data: {
                 "action": "wpp_ajax_add_option",
+                "poll_id": $(this).data('poll-id'),
             },
             success: function (response) {
 

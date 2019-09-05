@@ -1337,6 +1337,14 @@ p.wpp-responses.wpp-success {
     text-align: left;
 }
 
+.single-poll-wrong {
+    width: 70%;
+    margin: 5% auto;
+}
+
+.logged-in .single-survey-wrap {
+    top: 32px;
+}
 
 /**
 * Responsive Media
