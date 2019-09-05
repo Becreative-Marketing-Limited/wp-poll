@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 5.2.2
-	Stable tag: 3.1.9
+	Stable tag: 3.1.10
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,10 +41,16 @@ WP Poll allows your to integrate highly customizable polling system with so many
 * List of responses in a single place
 * And many more are coming soon
 
-#### 1. WP Poll - Question Answer
-[Buy this addon only at $29](https://pluginbazar.com/plugin/wp-poll-question-answer/)
+#### 1. WP Poll - Quiz
+[Buy this addon only at $29](https://pluginbazar.com/plugin/wp-poll-quiz/)
 ###### Features
-* This addon is still under development and coming with huge options
+* Unlimited quiz creation with poll
+* Cool navigation to next poll
+* Clean and Smart design
+* Show preview before final submission of Quiz
+* Each question has seperate single template showing correct answer.
+* Show results with given and correct answer
+* And many more are coming soon.
 
 ### Coming on Future versions of Poll
 * Integration with Contact Form 7
@@ -154,6 +160,9 @@ Don't hesitate to start using it and let us know any issue...
     = 3.1.8 =
     * 26/08/2019 Countdown timer disabling feature
     * 26/08/2019 Checkmark animation update
+
+    = 3.1.10 =
+    * 06/09/2019 Quiz addon released
 
 == Upgrade Notice ==
 
