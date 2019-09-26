@@ -4,7 +4,7 @@
  *
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.1.8
+ * Version: 3.1.10
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -26,6 +26,7 @@ define( 'WPP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 define( 'WPP_FORUM_URL', 'https://pluginbazar.com/forums/forum/wp-poll' );
 define( 'WPP_CONTACT_URL', 'https://pluginbazar.com/contact/' );
 define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
+define( 'WPP_VERSION', '3.1.9' );
 
 
 /**

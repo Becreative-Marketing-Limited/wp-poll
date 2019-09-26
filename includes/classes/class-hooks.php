@@ -180,14 +180,14 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 
 		/**
 		 * New poll option html
-		 *
-		 * @throws PB_Error
 		 */
 		function ajax_new_poll_option() {
 
+			$poll_id = isset( $_GET['poll_id'] ) ? sanitize_text_field( $_GET['poll_id'] ) : '';
+
 			ob_start();
 
-			wpp_add_poll_option();
+			wpp_add_poll_option( false, array( 'poll_id' => $poll_id ) );
 
 			wp_send_json_success( ob_get_clean() );
 		}
@@ -202,11 +202,13 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		 */
 		function single_poll_template( $single_template ) {
 
+			$original_template = $single_template;
+
 			if ( is_singular( 'poll' ) ) {
-				return WPP_PLUGIN_DIR . 'templates/single-poll.php';
+				$single_template = WPP_PLUGIN_DIR . 'templates/single-poll.php';
 			}
 
-			return $single_template;
+			return apply_filters( 'wpp_filters_single_poll_template', $single_template, $original_template );
 		}
 
 

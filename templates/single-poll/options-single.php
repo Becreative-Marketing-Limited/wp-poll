@@ -17,7 +17,8 @@ $thumb_class   = ! empty( $thumb ) ? ' has-thumb' : '';
 $label_class   = ! empty( $label ) ? ' has-label' : '';
 $options_theme = $poll->get_style( 'options_theme' );
 $option_name   = 'submit_poll_option';
-$option_name   = $poll->get_poll_type() === 'survey' ? sprintf( '%s[%s]', $option_name, $poll->get_id() ) : $option_name;
+$option_name   = $poll->get_poll_type() == 'survey' ? sprintf( '%s[%s]', $option_name, $poll->get_id() ) : $option_name;
+$option_name = $poll->get_poll_type() == 'survey' && $options_type == 'checkbox' ? $option_name . "[]" : $option_name;
 
 ?>
 

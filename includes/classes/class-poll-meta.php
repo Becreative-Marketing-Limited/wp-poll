@@ -69,6 +69,8 @@ class WPP_Poll_meta {
 	 */
 	function display_poll_options() {
 
+		global $post;
+
 		ob_start();
 
 		foreach ( wpp()->get_meta( 'poll_meta_options', false, array() ) as $unique_id => $args ) {
@@ -77,7 +79,7 @@ class WPP_Poll_meta {
 
 		$poll_options = ob_get_clean();
 
-		printf( '<div class="button wpp-add-poll-option">%s</div>', esc_html__( 'Add Option', 'wp-poll' ) );
+		printf( '<div class="button wpp-add-poll-option" data-poll-id="%s">%s</div>', $post->ID, esc_html__( 'Add Option', 'wp-poll' ) );
 		printf( '<ul class="poll-options">%s</ul>', $poll_options );
 	}
 
@@ -151,7 +153,7 @@ class WPP_Poll_meta {
 	 */
 	function get_meta_fields() {
 
-		return apply_filters( 'wpp_filters_poll_meta_fields', array( array( 'options' => $this->__get_meta_fields() ) ) );
+		return apply_filters( 'wpp_filters_poll_meta_options_fields', array( array( 'options' => $this->__get_meta_fields() ) ) );
 	}
 
 
@@ -162,7 +164,7 @@ class WPP_Poll_meta {
 	 */
 	private function __get_meta_fields() {
 
-		return array(
+		$meta_fields = array(
 
 			array(
 				'id'      => 'poll_type',
@@ -281,6 +283,8 @@ class WPP_Poll_meta {
 				'default' => array( 'fill' ),
 			),
 		);
+
+		return apply_filters( 'wpp_filters_poll_meta_fields', $meta_fields );
 	}
 }
 
