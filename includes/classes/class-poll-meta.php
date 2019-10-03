@@ -99,7 +99,7 @@ class WPP_Poll_meta {
 			return $post_id;
 		}
 
-		foreach ( $this->__get_meta_fields() as $field ) {
+		foreach ( wpp()->get_poll_meta_fields() as $field ) {
 
 			$field_id = isset( $field['id'] ) ? $field['id'] : '';
 
@@ -153,138 +153,7 @@ class WPP_Poll_meta {
 	 */
 	function get_meta_fields() {
 
-		return apply_filters( 'wpp_filters_poll_meta_options_fields', array( array( 'options' => $this->__get_meta_fields() ) ) );
-	}
-
-
-	/**
-	 * Return raw meta fields
-	 *
-	 * @return array
-	 */
-	private function __get_meta_fields() {
-
-		$meta_fields = array(
-
-			array(
-				'id'      => 'poll_type',
-				'title'   => esc_html__( 'Poll Type', 'wp-poll' ),
-				'details' => esc_html__( 'Select type for this poll. Default: General Poll', 'wp-poll' ),
-				'type'    => 'select',
-				'args'    => wpp()->get_poll_types(),
-			),
-
-			array(
-				'id'    => 'poll_meta_options',
-				'title' => esc_html__( 'Options', 'wp-poll' ),
-			),
-
-			array(
-				'id'    => '_thumbnail_id',
-				'title' => esc_html__( 'Featured Image', 'wp-poll' ),
-				'type'  => 'media',
-			),
-
-			array(
-				'id'            => 'content',
-				'title'         => esc_html__( 'Poll Content', 'wp-poll' ),
-				'details'       => esc_html__( 'Write some details about this poll', 'wp-poll' ),
-				'type'          => 'wp_editor',
-				'field_options' => array(
-					'media_buttons'    => false,
-					'editor_height'    => '120px',
-					'drag_drop_upload' => true,
-				),
-			),
-
-			array(
-				'id'            => 'poll_deadline',
-				'title'         => esc_html__( 'Deadline', 'wp-poll' ),
-				'details'       => esc_html__( 'Specify a date when this poll will end. Leave empty to ignore this option', 'wp-poll' ),
-				'type'          => 'datepicker',
-				'autocomplete'  => 'off',
-				'placeholder'   => date( 'Y-m-d' ),
-				'field_options' => array(
-					'dateFormat' => 'yy-mm-dd',
-				),
-			),
-
-			array(
-				'id'    => 'poll_allow_disallow',
-				'title' => esc_html__( 'Settings', 'wp-poll' ),
-				'type'  => 'checkbox',
-				'args'  => array(
-					'vote_after_deadline' => esc_html__( 'Allow users to vote after poll meets deadline', 'wp-poll' ),
-					'multiple_votes'      => esc_html__( 'Allow Multiple votes', 'wp-poll' ),
-					'new_options'         => esc_html__( 'Allow Visitors to add new options', 'wp-poll' ),
-					'hide_timer'          => esc_html__( 'Hide countdown timer for this poll ', 'wp-poll' ),
-				),
-			),
-
-			array(
-				'id'      => 'poll_style_countdown',
-				'title'   => esc_html__( 'Timer Styles', 'wp-poll' ),
-				'details' => esc_html__( 'Countdown timer style | Default: 1', 'wp-poll' ),
-				'type'    => 'image_select',
-				'class'   => 'count-down-selection',
-				'args'    => array(
-					'1' => sprintf( '%sassets/images/timer/style-1.jpg', WPP_PLUGIN_URL ),
-					'2' => sprintf( '%sassets/images/timer/style-2.jpg', WPP_PLUGIN_URL ),
-					'3' => sprintf( '%sassets/images/timer/style-3.jpg', WPP_PLUGIN_URL ),
-					'4' => sprintf( '%sassets/images/timer/style-4.jpg', WPP_PLUGIN_URL ),
-					'5' => sprintf( '%sassets/images/timer/style-5.jpg', WPP_PLUGIN_URL ),
-				),
-				'default' => array( '1' ),
-			),
-
-			array(
-				'id'      => 'poll_options_theme',
-				'title'   => esc_html__( 'Options Styles', 'wp-poll' ),
-				'details' => esc_html__( 'Options theme style | Default: 1', 'wp-poll' ),
-				'type'    => 'image_select',
-				'args'    => array(
-					'1'  => sprintf( '%sassets/images/themes/theme-1.jpg', WPP_PLUGIN_URL ),
-					'2'  => sprintf( '%sassets/images/themes/theme-2.jpg', WPP_PLUGIN_URL ),
-					'3'  => sprintf( '%sassets/images/themes/theme-3.jpg', WPP_PLUGIN_URL ),
-					'4'  => sprintf( '%sassets/images/themes/theme-4.jpg', WPP_PLUGIN_URL ),
-					'5'  => sprintf( '%sassets/images/themes/theme-5.jpg', WPP_PLUGIN_URL ),
-					'6'  => sprintf( '%sassets/images/themes/theme-6.jpg', WPP_PLUGIN_URL ),
-					'7'  => sprintf( '%sassets/images/themes/theme-7.jpg', WPP_PLUGIN_URL ),
-					'8'  => sprintf( '%sassets/images/themes/theme-8.jpg', WPP_PLUGIN_URL ),
-					'9'  => sprintf( '%sassets/images/themes/theme-9.jpg', WPP_PLUGIN_URL ),
-					'10' => sprintf( '%sassets/images/themes/theme-10.jpg', WPP_PLUGIN_URL ),
-					'11' => sprintf( '%sassets/images/themes/theme-11.jpg', WPP_PLUGIN_URL ),
-				),
-				'default' => array( '1' ),
-			),
-
-			array(
-				'id'      => 'poll_animation_checkbox',
-				'details' => esc_html__( 'Animations for Multiple selections (Input type - Checkbox) | Default: Checkmark', 'wp-poll' ),
-				'type'    => 'image_select',
-				'args'    => array(
-					'cross'     => sprintf( '%sassets/images/animations/cross.jpg', WPP_PLUGIN_URL ),
-					'boxfill'   => sprintf( '%sassets/images/animations/boxfill.jpg', WPP_PLUGIN_URL ),
-					'checkmark' => sprintf( '%sassets/images/animations/checkmark.jpg', WPP_PLUGIN_URL ),
-					'diagonal'  => sprintf( '%sassets/images/animations/diagonal.jpg', WPP_PLUGIN_URL ),
-				),
-				'default' => array( 'checkmark' ),
-			),
-
-			array(
-				'id'      => 'poll_animation_radio',
-				'details' => esc_html__( 'Animations for Single selection (Input type - Radio) | Default: Fill', 'wp-poll' ),
-				'type'    => 'image_select',
-				'args'    => array(
-					'fill'   => sprintf( '%sassets/images/animations/fill.jpg', WPP_PLUGIN_URL ),
-					'circle' => sprintf( '%sassets/images/animations/circle.jpg', WPP_PLUGIN_URL ),
-					'swirl'  => sprintf( '%sassets/images/animations/swirl.jpg', WPP_PLUGIN_URL ),
-				),
-				'default' => array( 'fill' ),
-			),
-		);
-
-		return apply_filters( 'wpp_filters_poll_meta_fields', $meta_fields );
+		return apply_filters( 'wpp_filters_poll_meta_options_fields', array( array( 'options' => wpp()->get_poll_meta_fields() ) ) );
 	}
 }
 

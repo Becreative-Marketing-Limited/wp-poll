@@ -17,6 +17,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 
 			add_action( 'manage_poll_posts_columns', array( $this, 'add_core_poll_columns' ), 16, 1 );
 			add_action( 'manage_poll_posts_custom_column', array( $this, 'custom_columns_content' ), 10, 2 );
+			add_filter( 'post_row_actions', array( $this, 'remove_row_actions' ), 10, 1 );
 
 			add_filter( 'single_template', array( $this, 'single_poll_template' ) );
 
@@ -260,6 +261,23 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				echo "<i>$time_ago " . __( 'ago', 'wp-poll' ) . "</i>";
 
 			endif;
+		}
+
+		/**
+		 * Remove Post row actions
+		 *
+		 * @param $actions
+		 *
+		 * @return mixed
+		 */
+		public function remove_row_actions( $actions ) {
+			global $post;
+
+			if ( $post->post_type === 'poll' ) {
+				unset( $actions['inline hide-if-no-js'] );
+			}
+
+			return $actions;
 		}
 	}
 

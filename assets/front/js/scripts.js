@@ -40,11 +40,11 @@
                         singleVoteCount = response.data.singles[optionID],
                         classTobeAdded = '';
 
-                    if( typeof percentageValue === 'undefined' ) {
+                    if (typeof percentageValue === 'undefined') {
                         percentageValue = 0;
                     }
 
-                    if( typeof singleVoteCount === 'undefined' || singleVoteCount.length === 0 ) {
+                    if (typeof singleVoteCount === 'undefined' || singleVoteCount.length === 0) {
                         singleVoteCount = 0;
                     }
 
@@ -60,7 +60,7 @@
 
                     if ($.inArray(optionID, response.data.percentages)) {
                         $(this).addClass('has-result').find('.wpp-option-result-bar').addClass(classTobeAdded).css('width', percentageValue + '%');
-                        $(this).find('.wpp-option-result').html( singleVoteCount + ' Vote(s)' );
+                        $(this).find('.wpp-option-result').html(singleVoteCount + ' Vote(s)');
                     }
                 });
             }
@@ -96,10 +96,16 @@
                 'checked_data': checkedData,
             },
             success: function (response) {
-
                 if (!response.success) {
                     singlePoll.find('.wpp-responses').addClass('wpp-error').html(response.data).slideDown();
                 } else {
+                    /**
+                     * Trigger to enhance on Success of Poll Submission
+                     *
+                     * @trigger wpp_poll_submission_success
+                     */
+                    $(document.body).trigger('wpp_poll_submission_success', response);
+
                     singlePoll.find('.wpp-responses').addClass('wpp-success').html(response.data).slideDown();
                 }
             }

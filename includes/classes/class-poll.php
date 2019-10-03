@@ -38,7 +38,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			$poll_type = 'poll';
 			$poll_type = $this->get_meta( 'poll_type', $poll_type );
 
-			if( $poll_type == 'survey' && ! defined( 'WPPS_PLUGIN_FILE' ) ) {
+			if ( $poll_type == 'survey' && ! defined( 'WPPS_PLUGIN_FILE' ) ) {
 				$poll_type = 'poll';
 			}
 
@@ -47,7 +47,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
-		 * Return whether a poll is ready to vote or not
+		 * Return whether a poll is ready to vote or not checking deadline
 		 *
 		 * @return mixed|void
 		 */
@@ -160,6 +160,14 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		}
 
 
+		function get_polled_data() {
+
+			$polled_data = $this->get_meta( 'polled_data', array() );
+
+			return apply_filters( 'wpp_filters_polled_data', $polled_data );
+		}
+
+
 		/**
 		 * Return poll results
 		 *
@@ -167,7 +175,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		 */
 		function get_poll_results() {
 
-			$polled_data  = $this->get_meta( 'polled_data', array() );
+			$polled_data  = $this->get_polled_data();
 			$total_voted  = count( $polled_data );
 			$poll_results = array( 'total' => $total_voted, 'singles' => array(), 'percentages' => array() );
 
