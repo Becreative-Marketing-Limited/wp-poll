@@ -761,7 +761,7 @@ p.wpp-responses.wpp-success {
     border-radius: 4px;
 }
 
-.wpp-option-list-9  .wpp-option-single.has-label.has-thumb .wpp-option-input {
+.wpp-option-list-9 .wpp-option-single.has-label.has-thumb .wpp-option-input {
     margin: 15px 0 5px;
 }
 
@@ -847,7 +847,6 @@ p.wpp-responses.wpp-success {
     height: 36px;
     left: 0;
 }
-
 
 
 /**
@@ -1119,7 +1118,6 @@ p.wpp-responses.wpp-success {
     height: 100%;
     left: 0;
     position: fixed;
-    text-align: center;
     top: 0;
     width: 100%;
     z-index: 9999999;
@@ -1131,11 +1129,16 @@ p.wpp-responses.wpp-success {
     margin: 0 auto;
     padding: 35px;
     position: relative;
-    text-align: center;
     top: 20%;
     max-width: 320px;
     border-radius: 3px;
     box-shadow: 0 10px 8px rgba(100, 100, 100, 0.9);
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.wpp-popup-container .wpp-popup-box.popup-box-medium {
+    max-width: 750px;
 }
 
 .wpp-popup-container .box-close {
