@@ -478,6 +478,10 @@ p.wpp-responses.wpp-success {
     opacity: 1;
 }
 
+.wpp-option-list-1 .wpp-option-single.has-result {
+    padding-top: 10px;
+}
+
 
 /**
 * Poll Option - 2
