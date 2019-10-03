@@ -85,28 +85,6 @@ if ( ! function_exists( 'wpp_single_poll_buttons' ) ) {
 }
 
 
-if ( ! function_exists( 'wpp_single_poll_cf7_popup' ) ) {
-	/**
-	 * Hook: wpp_single_poll_cf7_popup - 50
-	 */
-	function wpp_single_poll_cf7_popup() {
-
-		wpp_get_template( 'single-poll/cf7-popup.php' );
-	}
-}
-
-
-if ( ! function_exists( 'wpp_single_poll_social_share' ) ) {
-	/**
-	 * Hook: wpp_single_poll_social_share - 55
-	 */
-	function wpp_single_poll_social_share() {
-
-		wpp_get_template( 'single-poll/social-share.php' );
-	}
-}
-
-
 if ( ! function_exists( 'wpp_single_poll_responses' ) ) {
 	/**
 	 * Hook: wpp_single_poll_main - 10

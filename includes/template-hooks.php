@@ -30,8 +30,6 @@ add_action( 'wpp_after_poll_archive', 'wpp_poll_archive_pagination', 10 );
  * @see wpp_single_poll_notice()
  * @see wpp_single_poll_countdown()
  * @see wpp_single_poll_buttons()
- * @see wpp_single_poll_cf7_popup()
- * @see wpp_single_poll_social_share()
  *
  * @on Frontend
  */
@@ -43,8 +41,6 @@ add_action( 'wpp_single_poll_main', 'wpp_single_poll_notice', 30 );
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_countdown', 35 );
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_responses', 40 );
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_buttons', 45 );
-//add_action( 'wpp_single_poll_main', 'wpp_single_poll_cf7_popup', 50 );
-add_action( 'wpp_single_poll_main', 'wpp_single_poll_social_share', 55 );
 
 
 /**

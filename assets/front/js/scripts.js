@@ -160,29 +160,12 @@
 
 
     $(document).on('click', '.wpp-button-new-option', function () {
-        $(this).parent().parent().find('.wpp-new-option-wrap').fadeIn().find('input[type="text"]').focus();
+        $(this).parent().parent().find('.wpp-popup-container').fadeIn().find('input[type="text"]').focus();
     });
 
 
     $(document).on('click', '.wpp-popup-container .box-close', function () {
         $(this).parent().parent().fadeOut();
-    });
-
-
-    /* Poll popup */
-    $(document).on( 'ready', function () {
-
-        // $(window).on( 'load', function() {
-        //     $('.wpp-cf7-popup-wrap, .wpp-show-popup-on-load').fadeIn();
-        // });
-
-        $(window).on('scroll', function() {
-            var scroll = $(window).scrollTop();
-            console.log( scroll );
-            if ( scroll >= 300) {
-                $('.wpp-cf7-popup-wrap, .wpp-show-popup-on-load').fadeIn();
-            }
-        });
     });
 
 

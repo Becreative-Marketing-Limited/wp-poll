@@ -22,62 +22,8 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 			add_shortcode( 'poll_list', array( $this, 'display_poll_archive' ) );
 			add_shortcode( 'poll', array( $this, 'display_single_poll' ) );
 			add_shortcode( 'poller_list', array( $this, 'display_poller_list' ) );
-//			add_shortcode( 'force_user_poll', array( $this, 'display_force_user_poll' ) );
 
 			add_filter( 'the_content', array( $this, 'poll_archive_page_content' ), 99 );
-		}
-
-
-		/**
-		 * Display Single Poll
-		 *
-		 * @param $atts
-		 * @param null $content
-		 *
-		 * @return false|string
-		 */
-		public function display_force_user_poll( $atts, $content = null ) {
-
-			$atts = shortcode_atts( array(
-				'id'         => '',
-				'popup_show' => ''
-			), $atts );
-
-			$poll_id = empty( $atts['id'] ) ? '' : $atts['id'];
-
-//			$popup_show = ! empty( $atts['popup_show'] ) && $atts['popup_show'] == 'scroll' ? 'wpp-show-popup-on-scroll' : 'wpp-show-popup-on-load';
-			$popup_show = ! empty( $atts['popup_show'] ) && $atts['popup_show'] == 'scroll' ? 'wpp-show-popup-on-scroll' : '';
-
-			global $post;
-
-			$post = get_post( $poll_id );
-			setup_postdata( $post );
-
-			echo '<pre>'; print_r( $popup_show ); echo '</pre>';
-
-			ob_start();
-
-			?>
-
-            <div class="wpp-froce-user-poll-wrap wpp-popup-container <?php echo esc_attr( $popup_show ); ?>">
-                <div class="wpp-popup-box">
-
-					<?php if ( $atts['popup_show'] == 'scroll') : ?>
-                        <span class="box-close"><i class="icofont-close"></i></span>
-					<?php endif; ?>
-
-					<?php wpp_get_template( 'content-single-poll.php' ); ?>
-
-                </div>
-
-            </div>
-
-
-			<?php
-
-			wp_reset_postdata();
-
-			return ob_get_clean();
 		}
 
 

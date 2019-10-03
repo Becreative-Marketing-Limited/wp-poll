@@ -3,8 +3,8 @@
 	Donate link: https://pluginbazar.com/contact/
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
-	Tested up to: 5.2.2
-	Stable tag: 3.1.10
+	Tested up to: 5.2.3
+	Stable tag: 3.1.11
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,7 +41,7 @@ WP Poll allows your to integrate highly customizable polling system with so many
 * List of responses in a single place
 * And many more are coming soon
 
-#### 1. WP Poll - Quiz
+#### 2. WP Poll - Quiz
 [Buy this addon only at $29](https://pluginbazar.com/plugin/wp-poll-quiz/)
 ###### Features
 * Unlimited quiz creation with poll

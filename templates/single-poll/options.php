@@ -27,7 +27,7 @@ global $poll;
 
 <?php if ( $poll->get_poll_type() === 'poll' ) : ?>
 
-    <div class="wpp-popup-container wpp-new-option-wrap">
+    <div class="wpp-popup-container">
         <div class="wpp-popup-box">
             <span class="box-close"><i class="icofont-close"></i></span>
             <div class="wpp-new-option">
