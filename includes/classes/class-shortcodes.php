@@ -22,7 +22,7 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 			add_shortcode( 'poll_list', array( $this, 'display_poll_archive' ) );
 			add_shortcode( 'poll', array( $this, 'display_single_poll' ) );
 			add_shortcode( 'poller_list', array( $this, 'display_poller_list' ) );
-			add_shortcode( 'force_user_poll', array( $this, 'display_force_user_poll' ) );
+//			add_shortcode( 'force_user_poll', array( $this, 'display_force_user_poll' ) );
 
 			add_filter( 'the_content', array( $this, 'poll_archive_page_content' ), 99 );
 		}
@@ -45,12 +45,15 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 
 			$poll_id = empty( $atts['id'] ) ? '' : $atts['id'];
 
-			$popup_show = ! empty( $atts['popup_show'] ) && $atts['popup_show'] == 'scroll' ? 'wpp-show-popup-on-scroll' : 'wpp-show-popup-on-load';
+//			$popup_show = ! empty( $atts['popup_show'] ) && $atts['popup_show'] == 'scroll' ? 'wpp-show-popup-on-scroll' : 'wpp-show-popup-on-load';
+			$popup_show = ! empty( $atts['popup_show'] ) && $atts['popup_show'] == 'scroll' ? 'wpp-show-popup-on-scroll' : '';
 
 			global $post;
 
 			$post = get_post( $poll_id );
 			setup_postdata( $post );
+
+			echo '<pre>'; print_r( $popup_show ); echo '</pre>';
 
 			ob_start();
 

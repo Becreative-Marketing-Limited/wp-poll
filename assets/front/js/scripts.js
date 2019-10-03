@@ -172,14 +172,15 @@
     /* Poll popup */
     $(document).on( 'ready', function () {
 
-        $(window).on( 'load', function() {
-            $('.wpp-cf7-popup-wrap, .wpp-show-popup-on-load').fadeIn();
-        });
+        // $(window).on( 'load', function() {
+        //     $('.wpp-cf7-popup-wrap, .wpp-show-popup-on-load').fadeIn();
+        // });
 
         $(window).on('scroll', function() {
             var scroll = $(window).scrollTop();
-            if ( scroll >= 50) {
-                $('.wpp-show-popup-on-scroll').fadeIn();
+            console.log( scroll );
+            if ( scroll >= 300) {
+                $('.wpp-cf7-popup-wrap, .wpp-show-popup-on-load').fadeIn();
             }
         });
     });

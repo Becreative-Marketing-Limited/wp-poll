@@ -88,28 +88,34 @@ class WPP_Poll_meta {
 	 * Save meta box
 	 *
 	 * @param $post_id
-	 *
-	 * @return mixed
 	 */
 	public function save_meta_data( $post_id ) {
 
-		$nonce = isset( $_POST['poll_nonce_value'] ) ? $_POST['poll_nonce_value'] : '';
+		$force_nonce = isset( $_POST['wpp_force_nonce_val'] ) ? $_POST['wpp_force_nonce_val'] : '';
+		$nonce       = isset( $_POST['poll_nonce_value'] ) ? $_POST['poll_nonce_value'] : '';
 
-		if ( ! wp_verify_nonce( $nonce, 'poll_nonce' ) ) {
-			return $post_id;
+
+		if ( wp_verify_nonce( $nonce, 'poll_nonce' ) ) {
+			foreach ( $this->__get_meta_fields() as $field ) {
+
+				$field_id = isset( $field['id'] ) ? $field['id'] : '';
+
+				if ( in_array( $field_id, array( 'post_title', 'post_content' ) ) || empty( $field_id ) ) {
+					continue;
+				}
+
+				$field_value = isset( $_POST[ $field_id ] ) ? stripslashes_deep( $_POST[ $field_id ] ) : '';
+
+				update_post_meta( $post_id, $field_id, $field_value );
+			}
 		}
 
-		foreach ( $this->__get_meta_fields() as $field ) {
 
-			$field_id = isset( $field['id'] ) ? $field['id'] : '';
+		if ( wp_verify_nonce( $force_nonce, 'wpp_force_nonce' ) ) {
 
-			if ( in_array( $field_id, array( 'post_title', 'post_content' ) ) || empty( $field_id ) ) {
-				continue;
-			}
+			$force_poll_id = isset( $_POST['force_poll_id'] ) ? stripslashes_deep( $_POST['force_poll_id'] ) : '';
 
-			$field_value = isset( $_POST[ $field_id ] ) ? stripslashes_deep( $_POST[ $field_id ] ) : '';
-
-			update_post_meta( $post_id, $field_id, $field_value );
+			update_post_meta( $post_id, 'force_poll_id', $force_poll_id );
 		}
 	}
 
@@ -118,14 +124,39 @@ class WPP_Poll_meta {
 	 * Meta box output
 	 *
 	 * @param $post
-	 *
-	 * @throws PB_Error
 	 */
 	public function poll_meta_box_function( $post ) {
 
 		wp_nonce_field( 'poll_nonce', 'poll_nonce_value' );
 
 		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
+	}
+
+
+	/**
+	 * Metabox to add in all post type
+	 *
+	 * @param $post
+	 */
+	function display_wpp_post_metabox( $post ) {
+
+		$fields = array(
+			array(
+				'options' => array(
+					array(
+						'id'       => 'force_poll_id',
+						'title'    => esc_html__( 'Force users to poll in order to view the content of this post?', 'wp-poll' ),
+						'details'  => esc_html__( 'Leave empty if you want to skip this feature', 'wp-poll' ),
+						'type'     => 'select2',
+						'multiple' => false,
+						'args'     => 'POSTS_%poll%',
+					),
+				)
+			)
+		);
+
+		wp_nonce_field( 'wpp_force_nonce', 'wpp_force_nonce_val' );
+		wpp()->PB_Settings()->generate_fields( $fields, $post->ID );
 	}
 
 
@@ -142,6 +173,13 @@ class WPP_Poll_meta {
 				$this,
 				'poll_meta_box_function'
 			), $post_type, 'normal', 'high' );
+		}
+
+		if ( $post_type !== 'poll' ) {
+			add_meta_box( 'wpp_post_metabox', __( 'Poll Settings', 'wp-poll' ), array(
+				$this,
+				'display_wpp_post_metabox'
+			), $post_type, 'side' );
 		}
 	}
 

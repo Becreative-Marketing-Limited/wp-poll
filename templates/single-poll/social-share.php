@@ -10,6 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
 
+if( ! is_singular('poll' ) ) {
+    return;
+}
 
 ?>
 
