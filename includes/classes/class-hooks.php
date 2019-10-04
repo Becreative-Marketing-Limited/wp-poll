@@ -33,11 +33,20 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			add_action( 'wp_ajax_wpp_get_poll_results', array( $this, 'wpp_get_poll_results' ) );
 			add_action( 'wp_ajax_nopriv_wpp_get_poll_results', array( $this, 'wpp_get_poll_results' ) );
 
-			add_action( 'admin_menu', array( $this, 'add_extensions_menu' ), 99 );
-
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta' ), 10, 2 );
 			add_filter( 'plugin_action_links_' . WPP_PLUGIN_FILE, array( $this, 'add_plugin_actions' ), 10, 2 );
+
+			add_action( 'pb_settings_wpp-extensions', array( $this, 'render_extensions' ) );
 		}
+
+
+		/**
+		 * Render Extensions
+		 */
+		function render_extensions() {
+			require( WPP_PLUGIN_DIR . 'includes/admin-templates/extensions.php' );
+		}
+
 
 		/**
 		 * Add custom links to Plugin actions
@@ -49,7 +58,8 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		function add_plugin_actions( $links ) {
 
 			$action_links = array(
-				'settings' => sprintf( __( '<a href="%s">Settings</a>', 'woc-open-close' ), admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close' ) ),
+				'settings'   => sprintf( __( '<a href="%s">Settings</a>', 'wp-poll' ), admin_url( 'edit.php?post_type=poll&page=wpp-settings' ) ),
+				'extensions' => sprintf( __( '<a href="%s">Extensions</a>', 'wp-poll' ), admin_url( 'edit.php?post_type=poll&page=wpp-settings&tab=wpp-extensions' ) ),
 			);
 
 			return array_merge( $action_links, $links );
@@ -69,34 +79,15 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			if ( WPP_PLUGIN_FILE === $file ) {
 
 				$row_meta = array(
-					'docs'    => sprintf( __( '<a href="%s"><i class="icofont-search-document"></i> Docs</a>', 'woc-open-close' ), esc_url( WPP_DOCS_URL ) ),
-					'support' => sprintf( __( '<a href="%s"><i class="icofont-live-support"></i> Forum</a>', 'woc-open-close' ), esc_url( WPP_FORUM_URL ) ),
-					'buypro'  => sprintf( __( '<a class="woc-plugin-meta-buy" href="%s"><i class="icofont-cart-alt"></i> Get Pro</a>', 'woc-open-close' ), esc_url( WPP_PRO_URL ) ),
+					'docs'    => sprintf( __( '<a href="%s"><i class="icofont-search-document"></i> Docs</a>', 'wp-poll' ), esc_url( WPP_DOCS_URL ) ),
+					'support' => sprintf( __( '<a href="%s"><i class="icofont-live-support"></i> Forum</a>', 'wp-poll' ), esc_url( WPP_FORUM_URL ) ),
+					'buypro'  => sprintf( __( '<a class="wpp-plugin-meta-buy" href="%s"><i class="icofont-cart-alt"></i> Get Pro</a>', 'wpp-open-close' ), esc_url( WPP_PRO_URL ) ),
 				);
-
-//				if ( WOC_PLUGIN_TYPE == 'pro' ) {
-//					unset( $row_meta['buypro'] );
-//				}
 
 				return array_merge( $links, $row_meta );
 			}
 
 			return (array) $links;
-		}
-
-
-		/**
-		 * Add Extension Menu to Main Plugin
-		 */
-		function add_extensions_menu() {
-
-			global $submenu;
-
-			$submenu['edit.php?post_type=poll'][99] = array(
-				esc_html__( 'Extensions', 'wp-poll' ),
-				'manage_options',
-				admin_url( 'edit.php?post_type=poll&page=wpp-settings&tab=wpp-extensions' ),
-			);
 		}
 
 
@@ -344,11 +335,40 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				'supports'      => array( 'title' ),
 			) ) );
 
+
 			// Register Taxonomy - poll_cat
 			wpp()->PB_Settings()->register_taxonomy( 'poll_cat', 'poll', apply_filters( 'wpp_filters_tax_poll_cat', array(
 				'singular' => esc_html__( 'Poll Category', 'wp-poll' ),
 				'plural'   => esc_html__( 'Poll Categories', 'wp-poll' ),
 			) ) );
+
+
+			// Add Settings Menu
+			wpp()->PB_Settings( array(
+				'add_in_menu'     => true,
+				'menu_type'       => 'submenu',
+				'menu_title'      => esc_html__( 'Settings', 'wp-poll' ),
+				'page_title'      => esc_html__( 'Settings', 'wp-poll' ),
+				'menu_page_title' => esc_html__( 'WP Poll - Control Panel', 'wp-poll' ),
+				'capability'      => "manage_options",
+				'menu_slug'       => 'wpp-settings',
+				'parent_slug'     => "edit.php?post_type=poll",
+				'pages'           => wpp()->get_plugin_settings(),
+			) );
+
+
+			// Add Extensions Menu
+			wpp()->PB_Settings( array(
+				'add_in_menu'     => true,
+				'menu_type'       => 'submenu',
+				'menu_title'      => esc_html__( 'Extensions', 'wp-poll' ),
+				'page_title'      => esc_html__( 'Extensions', 'wp-poll' ),
+				'menu_page_title' => esc_html__( 'WP Poll - Extensions', 'wp-poll' ),
+				'capability'      => 'manage_options',
+				'menu_slug'       => 'wpp-extensions',
+				'parent_slug'     => "edit.php?post_type=poll",
+				'show_submit'     => false,
+			) );
 		}
 	}
 

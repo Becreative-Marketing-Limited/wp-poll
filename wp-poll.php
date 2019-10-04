@@ -1,10 +1,9 @@
 <?php
 /**
  * Plugin Name: WP Poll
- *
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.1.11
+ * Version: 3.1.12
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -25,11 +24,11 @@ define( 'WPP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 
 define( 'WPP_PRO_URL', 'https://pluginbazar.com/plugin/wp-poll-pro/' );
-define( 'WPP_DOCS_URL', 'https://pluginbazar.com/forums/forum/wp-poll' );
+define( 'WPP_DOCS_URL', 'https://pluginbazar.com/docs/wp-poll/' );
 define( 'WPP_FORUM_URL', 'https://pluginbazar.com/forums/forum/wp-poll' );
 define( 'WPP_CONTACT_URL', 'https://pluginbazar.com/contact/' );
 define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
-define( 'WPP_VERSION', '3.1.9' );
+define( 'WPP_VERSION', '3.1.12' );
 
 
 /**
@@ -86,7 +85,6 @@ class WPPollManager {
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll-widgets.php' );
 
 		require_once( WPP_PLUGIN_DIR . 'includes/functions.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/functions-settings.php' );
 
 		require_once( WPP_PLUGIN_DIR . 'includes/template-hooks.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/template-hook-functions.php' );

@@ -189,11 +189,3 @@ if ( ! function_exists( 'wpp_poll_submitbox' ) ) {
 		require( WPP_PLUGIN_DIR . 'includes/admin-templates/poll-submitbox.php' );
 	}
 }
-
-
-if ( ! function_exists( 'wpp_admin_render_extensions' ) ) {
-	function wpp_admin_render_extensions() {
-
-		require( WPP_PLUGIN_DIR . 'includes/admin-templates/extensions.php' );
-	}
-}

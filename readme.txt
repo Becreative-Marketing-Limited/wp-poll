@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 5.2.3
-	Stable tag: 3.1.11
+	Stable tag: 3.1.12
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Don't hesitate to start using it and let us know any issue...
 
     = 3.1.10 =
     * 06/09/2019 Quiz addon released
+
+    = 3.1.12 =
+    * 05/10/2019 Premium version released
 
 == Upgrade Notice ==
 

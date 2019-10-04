@@ -50,5 +50,3 @@ add_action( 'wpp_single_poll_main', 'wpp_single_poll_buttons', 45 );
 add_action( 'wpp-reports', 'wpp_admin_render_reports' );
 
 add_action( 'post_submitbox_start', 'wpp_poll_submitbox' );
-
-add_action( 'wpp-extensions', 'wpp_admin_render_extensions' );

@@ -7,7 +7,7 @@
  */
 
 $extensions = array();
-$response   = wp_remote_get( 'https://api.pluginbazar.com/wp-json/wpp/v1/get-addons' );
+$response   = wp_remote_get( esc_url( 'https://api.pluginbazar.com/wp-json/wpp/get-addons' ) );
 
 if ( ! is_wp_error( $response ) ) {
 	$response   = wp_remote_retrieve_body( $response );
@@ -16,10 +16,9 @@ if ( ! is_wp_error( $response ) ) {
 	printf( '<div class="notice notice-error is-dismissible"><p>%s</p></div>', $response->get_error_message() );
 }
 
-
 ?>
 
-<div class="wpp-extensions">
+<div class="pb-extensions">
 
 	<?php foreach ( $extensions as $extension ) :
 
@@ -32,10 +31,11 @@ if ( ! is_wp_error( $response ) ) {
 
 		?>
 
-        <div class="wpp-extension">
-            <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $title ); ?>">
+        <div class="pb-extension">
+            <a href="<?php echo esc_url( $url ); ?>"><img src="<?php echo esc_url( $thumb ); ?>"
+                                                          alt="<?php echo esc_attr( $title ); ?>"></a>
             <div class="info">
-                <h2><?php echo esc_html( $title ); ?></h2>
+                <h2><a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $title ); ?></a></h2>
                 <p><?php echo esc_html( $desc ); ?></p>
                 <div class="pricing">
                     <a class="price" target="_blank"
