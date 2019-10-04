@@ -47,8 +47,24 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 
 		/**
-         * Register Taxonomy
+         * Register Shortcode
          *
+		 * @param string $shortcode
+		 * @param string $callable_func
+		 */
+		function register_shortcode( $shortcode = '', $callable_func = '' ) {
+
+		    if( empty( $shortcode ) || ! $shortcode || ! $callable_func || empty( $callable_func ) ) {
+		        return;
+            }
+
+		    add_shortcode( $shortcode, $callable_func );
+        }
+
+
+		/**
+		 * Register Taxonomy
+		 *
 		 * @param $tax_name
 		 * @param $obj_name
 		 * @param array $args
@@ -96,7 +112,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				'parent'             => sprintf( __( 'Parent %s', 'wp-poll' ), $singular ),
 			), $labels );
 
-			register_taxonomy( $tax_name, apply_filters( "pb_register_taxonomy_$tax_name", $args, $obj_name ) );
+			register_taxonomy( $tax_name, $obj_name, apply_filters( "pb_register_taxonomy_$tax_name", $args, $obj_name ) );
 		}
 
 
@@ -115,6 +131,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$singular = isset( $args['singular'] ) ? $args['singular'] : '';
 			$plural   = isset( $args['plural'] ) ? $args['plural'] : '';
 			$labels   = isset( $args['labels'] ) ? $args['labels'] : array();
+			$rewrite  = isset( $args['rewrite'] ) ? $args['rewrite'] : array();
 
 			$args = array_merge( array(
 				'description'         => sprintf( __( 'This is where you can create and manage %s.' ), $plural ),
@@ -150,6 +167,9 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				'not_found_in_trash' => sprintf( __( 'No %s found in trash' ), $plural ),
 				'parent'             => sprintf( __( 'Parent %s' ), $singular ),
 			), $labels );
+
+			$args['rewrite'] = array_merge( array( 'slug' => $post_type ), $rewrite );
+
 
 			register_post_type( $post_type, apply_filters( "pb_register_post_type_$post_type", $args ) );
 		}
@@ -363,12 +383,11 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 			?>
             <div id="media_preview_<?php echo esc_attr( $id ); ?>">
-				<?php echo esc_html( $html ); ?>
+				<?php echo $html; ?>
             </div>
             <div class='button' <?php echo esc_attr( $disabled ); ?>
                  id="media_upload_<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Images' ); ?></div>
 
-            ?>
             <script>
                 jQuery(document).ready(function ($) {
 
@@ -400,7 +419,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
                 #media_preview_<?php echo $id; ?> > div {
                     display: inline-block;
                     vertical-align: top;
-                    width: 180px;
+                    width: 100px;
                     border: 1px solid #ddd;
                     padding: 12px;
                     margin: 0 10px 10px 0;
@@ -654,6 +673,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$autocomplete  = isset( $option['autocomplete'] ) ? $option['autocomplete'] : "off";
 			$value         = isset( $option['value'] ) ? $option['value'] : get_option( $id );
 			$disabled      = isset( $option['disabled'] ) && $option['disabled'] ? 'disabled' : '';
+			$load_ui       = isset( $option['load_ui'] ) ? $option['load_ui'] : true;
 			$field_options = isset( $option['field_options'] ) ? $option['field_options'] : array();
 			$field_options = preg_replace( '/"([^"]+)"\s*:\s*/', '$1:', json_encode( $field_options ) );
 			$field_id      = str_replace( array( '[', ']' ), '', $id );
@@ -662,7 +682,9 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				$value = isset( $option['default'] ) ? $option['default'] : $value;
 			}
 
-			wp_enqueue_style( 'jquery-ui', '//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css' );
+			if ( $load_ui ) {
+				wp_enqueue_style( 'jquery-ui', '//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css' );
+			}
 			wp_enqueue_script( 'jquery-ui-datepicker' );
 
 			?>
@@ -883,6 +905,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 		function generate_select( $option ) {
 
 			$id       = isset( $option['id'] ) ? $option['id'] : "";
+			$field_id = str_replace( array( '[', ']' ), '_', $id );
 			$args     = isset( $option['args'] ) ? $option['args'] : array();
 			$args     = is_array( $args ) ? $args : $this->generate_args_from_string( $args, $option );
 			$value    = isset( $option['value'] ) ? $option['value'] : get_option( $id );
@@ -897,7 +920,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			?>
             <select <?php echo esc_attr( $disabled ); ?> <?php echo esc_attr( $required ); ?>
                     name="<?php echo esc_attr( $id ); ?>"
-                    id="<?php echo esc_attr( $id ); ?>">
+                    id="<?php echo esc_attr( $field_id ); ?>">
 
 				<?php
 
@@ -936,7 +959,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				foreach ( $args as $key => $val ) {
 
 					$checked = is_array( $value ) && in_array( $key, $value ) ? "checked" : "";
-					printf( '<label for="%1$s_%2$s"><input %3$s %4$s type="checkbox" id="%1$s_%2$s" name="%1$s[]" value="%2$s">%5$s</label><br>',
+					printf( '<label for="%1$s_%2$s"><input %3$s %4$s type="checkbox" id="%1$s_%2$s" name="%1$s[]" value="%2$s"><span>%5$s</span></label><br>',
 						$id, $key, $disabled, $checked, $val
 					);
 				}
@@ -968,7 +991,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				<?php
 				foreach ( $args as $key => $val ) {
 					$checked = is_array( $value ) && in_array( $key, $value ) ? "checked" : "";
-					printf( '<label><input %1$s %2$s type="radio" name="%3$s[]" value="%4$s">%5$s</label><br>',
+					printf( '<label><input %1$s %2$s type="radio" name="%3$s[]" value="%4$s"><span>%5$s</span></label><br>',
 						$disabled, $checked, $option_id, $key, $val
 					);
 				}
@@ -1152,6 +1175,8 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				}
 
 				do_action( $this->get_current_page() );
+
+				do_action( 'pb_settings_' . $this->get_menu_slug() );
 
 				do_action( 'pb_settings_after_page_' . $this->get_current_page() );
 				?>
@@ -1382,9 +1407,11 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 		 * @return bool
 		 */
 		private function show_submit_button() {
-			return isset( $this->get_pages()[ $this->get_current_page() ]['show_submit'] )
+			$show_submit = isset( $this->get_pages()[ $this->get_current_page() ]['show_submit'] )
 				? $this->get_pages()[ $this->get_current_page() ]['show_submit']
 				: true;
+
+			return isset( $this->data['show_submit'] ) && ! $this->data['show_submit'] ? $this->data['show_submit'] : $show_submit;
 		}
 
 

@@ -19,7 +19,7 @@ if ( ! class_exists( 'WPP_Post_types' ) ) {
 		 */
 		function __construct() {
 
-			add_action( 'init', array( $this, 'add_post_types' ) );
+//			add_action( 'init', array( $this, 'add_post_types' ) );
 		}
 
 
