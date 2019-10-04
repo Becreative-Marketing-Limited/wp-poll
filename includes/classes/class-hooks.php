@@ -34,9 +34,60 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			add_action( 'wp_ajax_nopriv_wpp_get_poll_results', array( $this, 'wpp_get_poll_results' ) );
 
 			add_action( 'admin_menu', array( $this, 'add_extensions_menu' ), 99 );
+
+			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta' ), 10, 2 );
+			add_filter( 'plugin_action_links_' . WPP_PLUGIN_FILE, array( $this, 'add_plugin_actions' ), 10, 2 );
+		}
+
+		/**
+		 * Add custom links to Plugin actions
+		 *
+		 * @param $links
+		 *
+		 * @return array
+		 */
+		function add_plugin_actions( $links ) {
+
+			$action_links = array(
+				'settings' => sprintf( __( '<a href="%s">Settings</a>', 'woc-open-close' ), admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close' ) ),
+			);
+
+			return array_merge( $action_links, $links );
 		}
 
 
+		/**
+		 * Add custom links to plugin meta
+		 *
+		 * @param $links
+		 * @param $file
+		 *
+		 * @return array
+		 */
+		function add_plugin_meta( $links, $file ) {
+
+			if ( WPP_PLUGIN_FILE === $file ) {
+
+				$row_meta = array(
+					'docs'    => sprintf( __( '<a href="%s"><i class="icofont-search-document"></i> Docs</a>', 'woc-open-close' ), esc_url( WPP_DOCS_URL ) ),
+					'support' => sprintf( __( '<a href="%s"><i class="icofont-live-support"></i> Forum</a>', 'woc-open-close' ), esc_url( WPP_FORUM_URL ) ),
+					'buypro'  => sprintf( __( '<a class="woc-plugin-meta-buy" href="%s"><i class="icofont-cart-alt"></i> Get Pro</a>', 'woc-open-close' ), esc_url( WPP_PRO_URL ) ),
+				);
+
+//				if ( WOC_PLUGIN_TYPE == 'pro' ) {
+//					unset( $row_meta['buypro'] );
+//				}
+
+				return array_merge( $links, $row_meta );
+			}
+
+			return (array) $links;
+		}
+
+
+		/**
+		 * Add Extension Menu to Main Plugin
+		 */
 		function add_extensions_menu() {
 
 			global $submenu;
