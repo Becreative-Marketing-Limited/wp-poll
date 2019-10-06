@@ -13,10 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $poll;
 
 
-if( $poll->hide_countdown_timer() ) {
+if( $poll->hide_countdown_timer() || empty( $poll_deadline = $poll->get_poll_deadline() ) ) {
     return;
 }
-
 
 $unique_id = uniqid();
 
@@ -31,7 +30,7 @@ $unique_id = uniqid();
 
         (function updateTime() {
 
-            var countDownDate = new Date(new Date('<?php echo esc_html( $poll->get_poll_deadline() ); ?>').toString()).getTime(),
+            var countDownDate = new Date(new Date('<?php echo esc_html( $poll_deadline ); ?>').toString()).getTime(),
                 now = new Date().getTime(),
                 distance = countDownDate - now,
                 days = 0, hours = 0, minutes = 0, seconds = 0;

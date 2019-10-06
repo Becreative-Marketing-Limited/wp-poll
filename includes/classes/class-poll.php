@@ -336,8 +336,9 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		function get_poll_deadline( $format = 'M j Y G:i:s' ) {
 
 			$deadline = $this->get_meta( 'poll_deadline' );
+			$deadline = empty( $deadline ) ? '' : date( $format, strtotime( $deadline ) );
 
-			return apply_filters( 'wpp_filters_poll_deadline', date( $format, strtotime( $deadline ) ) );
+			return apply_filters( 'wpp_filters_poll_deadline', $deadline );
 		}
 
 

@@ -1037,7 +1037,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
                 <style>
                     .image-select > label {
                         display: inline-block;
-                        width: 120px;
+                        width: 80px;
                         margin: 0 15px 15px 0;
                         position: relative;
                         border: 1px solid #d1d1d1;
@@ -1045,17 +1045,17 @@ if ( ! class_exists( 'PB_Settings' ) ) {
                     }
 
                     .image-select > label.checked:after {
-                        content: '✔';
+                        content: '✓';
                         position: absolute;
-                        width: 30px;
-                        height: 30px;
+                        width: 22px;
+                        height: 22px;
                         background: #4CAF50;
                         color: #fff;
                         top: -10px;
                         right: -10px;
                         border-radius: 50%;
                         text-align: center;
-                        line-height: 30px;
+                        line-height: 1.7;
                     }
 
                     .image-select > label > input[type="radio"],

@@ -335,6 +335,12 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 		$backtrace      = reset( $backtrace );
 		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
 
+		// Search in Poll Pro
+		if ( strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'WPPP_PLUGIN_DIR' ) ) {
+			$plugin_dir = WPPP_PLUGIN_DIR;
+		}
+
+		// Search in Survey
 		if ( strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'WPPS_PLUGIN_DIR' ) ) {
 			$plugin_dir = WPPS_PLUGIN_DIR;
 		}
@@ -438,6 +444,11 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 		 */
 		if ( ! $template_path ) {
 			$template_path = 'wpp/';
+		}
+
+		// Check for Poll Pro
+		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'WPPP_PLUGIN_DIR' ) ) {
+			$plugin_dir = WPPP_PLUGIN_DIR;
 		}
 
 		// Check for survey
