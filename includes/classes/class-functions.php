@@ -17,6 +17,22 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 
 
 		/**
+		 * Print notices
+		 *
+		 * @param string $message
+		 * @param string $type
+		 * @param bool $is_dismissible
+		 */
+		function print_notice( $message = '', $type = 'success', $is_dismissible = true ) {
+
+			$is_dismissible = $is_dismissible ? 'is-dismissible' : '';
+
+			if( ! empty( $message ) ) {
+				printf( '<div class="notice notice-%s %s"><p>%s</p></div>', $type, $is_dismissible, $message );
+			}
+		}
+
+		/**
 		 * Return site navigation menu list
 		 *
 		 * @param array $args
@@ -333,12 +349,12 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 					'id'    => 'poll_allow_disallow',
 					'title' => esc_html__( 'Settings', 'wp-poll' ),
 					'type'  => 'checkbox',
-					'args'  => array(
+					'args'  => apply_filters( 'wpp_filters_allow_disallow_options', array(
 						'vote_after_deadline' => esc_html__( 'Allow users to vote after poll meets deadline', 'wp-poll' ),
 						'multiple_votes'      => esc_html__( 'Allow Multiple votes', 'wp-poll' ),
 						'new_options'         => esc_html__( 'Allow Visitors to add new options', 'wp-poll' ),
-						'hide_timer'          => esc_html__( 'Hide countdown timer for this poll ', 'wp-poll' ),
-					),
+						'hide_timer'          => esc_html__( 'Hide countdown timer for this poll', 'wp-poll' ),
+					) ),
 				),
 
 				array(

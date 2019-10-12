@@ -365,6 +365,17 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 
 		/**
+		 * Return true or false about displaying poll results
+		 *
+		 * @return bool
+		 */
+		function hide_results() {
+
+			return $this->get_allows_disallows( 'hide_results' );
+		}
+
+
+		/**
 		 * Return allows disallows for a poll
 		 *
 		 * @param bool $thing_to_check vote_after_deadline | multiple_votes | new_options

@@ -356,6 +356,23 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				'pages'           => wpp()->get_plugin_settings(),
 			) );
 
+			if ( apply_filters( 'wpp_filters_enable_license_menu', false ) ) {
+
+				// Add License Menu
+				wpp()->PB_Settings( array(
+					'add_in_menu'     => true,
+					'menu_type'       => 'submenu',
+					'menu_title'      => esc_html__( 'Licenses', 'wp-poll' ),
+					'page_title'      => esc_html__( 'Licenses', 'wp-poll' ),
+					'menu_page_title' => esc_html__( 'WP Poll - License Management', 'wp-poll' ),
+					'capability'      => "manage_options",
+					'menu_slug'       => 'wpp-licenses',
+					'parent_slug'     => "edit.php?post_type=poll",
+					'pages'           => apply_filters( 'wpp_filters_license_menu', array() ),
+				) );
+			}
+
+			do_action( 'wpp_after_settings_menu' );
 
 			// Add Extensions Menu
 			wpp()->PB_Settings( array(

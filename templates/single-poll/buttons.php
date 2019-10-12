@@ -36,8 +36,9 @@ global $poll, $wpp;
 	/**
 	 * Results button
 	 */
-	printf( '<button class="wpp-button wpp-button-red wpp-get-poll-results" data-poll-id="%s">%s</button>', $poll->get_id(), $wpp->get_button_text( 'results' ) );
-
+	if( ! $poll->hide_results() ) {
+		printf( '<button class="wpp-button wpp-button-red wpp-get-poll-results" data-poll-id="%s">%s</button>', $poll->get_id(), $wpp->get_button_text( 'results' ) );
+	}
 	?>
 
 </div>

@@ -59,17 +59,17 @@ if ( ! function_exists( 'wpp_get_poll' ) ) {
 
 if ( ! function_exists( 'wpp_the_poll' ) ) {
 	/**
-     * Set poll in global variable
-     *
+	 * Set poll in global variable
+	 *
 	 * @param bool $poll_id
 	 */
 	function wpp_the_poll( $poll_id = false ) {
 
 		global $poll;
 
-		if( get_post_type( $poll_id ) == 'poll' && ! $poll instanceof WPP_Poll ) {
-		    $poll = new WPP_Poll( $poll_id );
-        }
+		if ( get_post_type( $poll_id ) == 'poll' && ! $poll instanceof WPP_Poll ) {
+			$poll = new WPP_Poll( $poll_id );
+		}
 	}
 }
 
@@ -532,5 +532,27 @@ if ( ! function_exists( 'wpp_pagination' ) ) {
 		$wp_query = $previous_query;
 
 		return $paginate_links;
+	}
+}
+
+
+if ( ! function_exists( 'wpp_is_plugin_activated' ) ) {
+	/**
+     * Check if extension license activated or not
+     *
+	 * @param string $plugin_shortform
+	 *
+	 * @return bool
+	 */
+	function wpp_is_plugin_activated( $plugin_shortform = '' ) {
+
+		$defined = sprintf( '%s_SECRET_KEY', strtoupper( $plugin_shortform ) );
+		$option  = sprintf( '%s_license_status', strtolower( $plugin_shortform ) );
+
+		if ( ! empty( $plugin_shortform ) && $plugin_shortform && defined( $defined ) && wpp()->get_option( $option ) == 'activated' ) {
+			return true;
+		}
+
+		return false;
 	}
 }

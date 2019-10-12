@@ -1,10 +1,10 @@
-=== WP Poll ===
+=== WP Poll - Best Polling Solution with Quiz & sSurvey ===
 	Contributors: jaedm97,pluginbazar
 	Donate link: https://pluginbazar.com/contact/
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 5.2.3
-	Stable tag: 3.1.12
+	Stable tag: 3.1.13
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@
 
 == Description ==
 
-WP Poll allows your to integrate highly customizable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
+WP Poll allows your to integrate highly customisable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
 
 ### FEATURES
 * Single and Multi votes
@@ -24,12 +24,27 @@ WP Poll allows your to integrate highly customizable polling system with so many
 * Graphically Poll reporting on Backend
 * Possibility to generate 1000+ variations
 * Ready Widget
-* Display results for a single poll with shortcode
-* Display results for an option of a single poll with shortcode
+* Display results for a single poll with short-code
+* Display results for an option of a single poll with short-code
+
+### PRO VERSION
+[Purchase WP Poll Pro](https://pluginbazar.com/?add-to-cart=1125/)
+
+###### Features
+* Pay to Poll (WooCommerce Integration)
+* Duplicate Poll
+* Reset Results
+* Lock Content Until Poll
+* Popup Poll on Scroll
+
+* Social Share Buttons
+* And many more are coming soon
+
 
 ### ADDONS
 #### 1. WP Poll - Survey
-[Buy this addon only at $29](https://pluginbazar.com/plugin/wp-poll-survey/)
+[Buy this addon only at $29](https://pluginbazar.com/?add-to-cart=900)
+
 
 ###### Features
 * Unlimited survey creation with poll
@@ -42,19 +57,19 @@ WP Poll allows your to integrate highly customizable polling system with so many
 * And many more are coming soon
 
 #### 2. WP Poll - Quiz
-[Buy this addon only at $29](https://pluginbazar.com/plugin/wp-poll-quiz/)
+[Buy this add-on only at $29](https://pluginbazar.com/plugin/wp-poll-quiz/)
 ###### Features
 * Unlimited quiz creation with poll
 * Cool navigation to next poll
 * Clean and Smart design
 * Show preview before final submission of Quiz
-* Each question has seperate single template showing correct answer.
+* Each question has separate single template showing correct answer.
 * Show results with given and correct answer
 * And many more are coming soon.
 
 ### Coming on Future versions of Poll
 * Integration with Contact Form 7
-* Frontned Poll Management
+* Front-end Poll Management
 * Gutenberg Compatibility
 * WP Bakery Page Builder Compatibility
 * Elementor Widget Compatibility
@@ -166,6 +181,9 @@ Don't hesitate to start using it and let us know any issue...
 
     = 3.1.12 =
     * 05/10/2019 Premium version released
+
+    = 3.1.13 =
+    * 06/10/2019 WooCommerce Integration - Pay to Poll
 
 == Upgrade Notice ==
 
