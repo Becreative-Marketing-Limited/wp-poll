@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 5.2.3
-	Stable tag: 3.1.13
+	Stable tag: 3.1.14
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -184,6 +184,9 @@ Don't hesitate to start using it and let us know any issue...
 
     = 3.1.13 =
     * 06/10/2019 WooCommerce Integration - Pay to Poll
+
+    = 3.1.14 =
+    * 12/10/2019 WooCommerce Integration Update
 
 == Upgrade Notice ==
 
