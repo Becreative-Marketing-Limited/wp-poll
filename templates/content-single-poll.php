@@ -3,9 +3,10 @@
  * Template - Single Poll Content
  */
 
-global $poll;
+global $poll, $wp_query;
 
-$poll = wpp_get_poll();
+$poll        = wpp_get_poll();
+$embed_class = $wp_query->get( 'poll_in_embed', false ) ? 'inside-embed' : '';
 
 /**
  * Hook: wpp_before_single_poll.
@@ -19,7 +20,7 @@ if ( post_password_required() ) {
 }
 
 ?>
-    <div id="poll-<?php the_ID(); ?>" <?php wpp_single_post_class(); ?>>
+    <div id="poll-<?php the_ID(); ?>" <?php wpp_single_post_class( $embed_class ); ?>>
 		<?php
 		/**
 		 * Before Single poll main content

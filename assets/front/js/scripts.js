@@ -5,7 +5,6 @@
 (function ($, window, document, pluginObject) {
     "use strict";
 
-
     $(document).on('click', '.wpp-get-poll-results', function () {
 
         let pollID = $(this).data('poll-id');

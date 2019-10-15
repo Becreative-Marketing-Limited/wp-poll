@@ -311,8 +311,9 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 	 * @param $slug
 	 * @param string $name
 	 * @param array $args
+	 * @param bool $main_template | When you call a template from extensions you can use this param as true to check from main template only
 	 */
-	function wpp_get_template_part( $slug, $name = '', $args = array() ) {
+	function wpp_get_template_part( $slug, $name = '', $args = array(), $main_template = false ) {
 
 		$template   = '';
 		$plugin_dir = WPP_PLUGIN_DIR;
@@ -337,12 +338,12 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 
 		// Search in Poll Pro
 		if ( strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'WPPP_PLUGIN_DIR' ) ) {
-			$plugin_dir = WPPP_PLUGIN_DIR;
+			$plugin_dir = $main_template ? WPP_PLUGIN_DIR : WPPP_PLUGIN_DIR;
 		}
 
 		// Search in Survey
 		if ( strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'WPPS_PLUGIN_DIR' ) ) {
-			$plugin_dir = WPPS_PLUGIN_DIR;
+			$plugin_dir = $main_template ? WPP_PLUGIN_DIR : WPPS_PLUGIN_DIR;
 		}
 
 
@@ -389,10 +390,11 @@ if ( ! function_exists( 'wpp_get_template' ) ) {
 	 * @param array $args
 	 * @param string $template_path
 	 * @param string $default_path
+	 * @param bool $main_template | When you call a template from extensions you can use this param as true to check from main template only
 	 *
 	 * @return WP_Error
 	 */
-	function wpp_get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+	function wpp_get_template( $template_name, $args = array(), $template_path = '', $default_path = '', $main_template = false ) {
 
 		if ( ! empty( $args ) && is_array( $args ) ) {
 			extract( $args ); // @codingStandardsIgnoreLine
@@ -406,7 +408,7 @@ if ( ! function_exists( 'wpp_get_template' ) ) {
 		$backtrace      = reset( $backtrace );
 		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
 
-		$located = wpp_locate_template( $template_name, $template_path, $default_path, $backtrace_file );
+		$located = wpp_locate_template( $template_name, $template_path, $default_path, $backtrace_file, $main_template );
 
 
 		if ( ! file_exists( $located ) ) {
@@ -432,10 +434,11 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 	 * @param string $template_path
 	 * @param string $default_path
 	 * @param string $backtrace_file
+     * @param bool $main_template | When you call a template from extensions you can use this param as true to check from main template only
 	 *
 	 * @return mixed|void
 	 */
-	function wpp_locate_template( $template_name, $template_path = '', $default_path = '', $backtrace_file = '' ) {
+	function wpp_locate_template( $template_name, $template_path = '', $default_path = '', $backtrace_file = '', $main_template = false ) {
 
 		$plugin_dir = WPP_PLUGIN_DIR;
 
@@ -448,17 +451,17 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 
 		// Check for Poll Pro
 		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'WPPP_PLUGIN_DIR' ) ) {
-			$plugin_dir = WPPP_PLUGIN_DIR;
+			$plugin_dir = $main_template ? WPP_PLUGIN_DIR : WPPP_PLUGIN_DIR;
 		}
 
 		// Check for survey
 		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'WPPS_PLUGIN_DIR' ) ) {
-			$plugin_dir = WPPS_PLUGIN_DIR;
+			$plugin_dir = $main_template ? WPP_PLUGIN_DIR : WPPS_PLUGIN_DIR;
 		}
 
 		// Check for MCQ
 		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-quiz' ) !== false && defined( 'WPPQUIZ_PLUGIN_DIR' ) ) {
-			$plugin_dir = WPPQUIZ_PLUGIN_DIR;
+			$plugin_dir = $main_template ? WPP_PLUGIN_DIR : WPPQUIZ_PLUGIN_DIR;
 		}
 
 

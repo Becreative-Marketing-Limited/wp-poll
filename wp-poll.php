@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: WP Poll
+ * Plugin Name: WP Poll - Best Polling Solution with Quiz & Survey
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.1.14
+ * Version: 3.1.15
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -131,8 +131,12 @@ class WPPollManager {
 	 */
 	function front_scripts() {
 
-		wp_enqueue_script( 'wpp_checkbox_js', WPP_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), false, true );
-		wp_enqueue_script( 'wpp_js', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ) );
+		global $wp_query;
+
+		$load_in_footer = $wp_query->get( 'poll_in_embed' ) ? false : $wp_query->get( 'poll_in_embed' );
+
+		wp_enqueue_script( 'wpp_checkbox_js', WPP_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), false, $load_in_footer );
+		wp_enqueue_script( 'wpp_js', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), false, $load_in_footer );
 		wp_localize_script( 'wpp_js', 'wpp_object', $this->localize_scripts_data() );
 
 		wp_enqueue_style( 'tooltip', WPP_PLUGIN_URL . 'assets/tool-tip.min.css' );

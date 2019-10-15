@@ -1,4 +1,4 @@
-(function ($, window, document, pluginObject) {
+(function ($, window, document) {
     "use strict";
 
     let pathDefs = {
@@ -191,4 +191,4 @@
         });
     }
 
-})(jQuery, window, document, wpp_object);
+})(jQuery, window, document);

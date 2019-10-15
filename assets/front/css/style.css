@@ -59,6 +59,7 @@ td, th {
     min-width: 99px;
     outline: none;
     box-shadow: none;
+    cursor: pointer;
 }
 
 .wpp-poll-title {
@@ -274,7 +275,7 @@ p.wpp-responses.wpp-success {
 * Single Poll
 */
 
-.poll-single {
+.poll-single:not(.inside-embed) {
     margin: 70px 0;
 }
 
@@ -1125,6 +1126,10 @@ p.wpp-responses.wpp-success {
     top: 0;
     width: 100%;
     z-index: 9999999;
+}
+
+.wpp-popup-container.popup-open {
+    display: block;
 }
 
 .wpp-popup-container .wpp-popup-box {
