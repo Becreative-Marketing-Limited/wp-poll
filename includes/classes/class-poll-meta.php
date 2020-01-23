@@ -16,51 +16,6 @@ class WPP_Poll_meta {
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_meta_data' ) );
 		add_action( 'pb_settings_poll_meta_options', array( $this, 'display_poll_options' ) );
-
-		add_action( 'pb_settings_poll_style_countdown', array( $this, 'add_preview_html' ) );
-		add_action( 'pb_settings_poll_options_theme', array( $this, 'add_preview_html' ) );
-		add_action( 'pb_settings_poll_animation_checkbox', array( $this, 'add_preview_html' ) );
-		add_action( 'pb_settings_poll_animation_radio', array( $this, 'add_preview_html' ) );
-	}
-
-
-	/**
-	 * Add live preview link to the themes/animations
-	 *
-	 * @param $option
-	 */
-	function add_preview_html( $option ) {
-
-		$option_id = isset( $option['id'] ) ? $option['id'] : '';
-
-		if ( empty( $option_id ) ) {
-			return;
-		}
-
-		$tt_text          = esc_html__( 'See live preview for this selection', 'wp-poll' );
-		$option_value     = wpp()->get_meta( $option_id );
-		$option_value     = is_array( $option_value ) ? reset( $option_value ) : $option_value;
-		$data_demo_server = '//demo.pluginbazar.com/wp-poll/poll';
-
-		if ( $option_id == 'poll_style_countdown' ) {
-			$tt_text     = esc_html__( 'See live preview for this countdown style', 'wp-poll' );
-			$data_target = 'countdown-timer-style';
-		} else if ( $option_id == 'poll_options_theme' ) {
-			$tt_text     = esc_html__( 'See live preview for this theme of options', 'wp-poll' );
-			$data_target = 'poll-theme-variation';
-		} else if ( $option_id == 'poll_animation_checkbox' ) {
-			$tt_text     = esc_html__( 'See live preview for this checkbox animation', 'wp-poll' );
-			$data_target = 'input-type-checkbox-animation-effect';
-		} else if ( $option_id == 'poll_animation_radio' ) {
-			$tt_text     = esc_html__( 'See live preview for this radio animation', 'wp-poll' );
-			$data_target = 'input-type-radio-animation-effect';
-		}
-
-		printf( '<a data-demo-server="%s" data-target="%s" class="wpp-preview-link tt--hint tt--top" href="%s" aria-label="%s" target="_blank">%s</a>',
-			$data_demo_server, $data_target,
-			esc_url( sprintf( '%s/%s-%s', $data_demo_server, $data_target, $option_value ) ),
-			$tt_text, esc_html__( 'Live Preview', 'wp-poll' )
-		);
 	}
 
 

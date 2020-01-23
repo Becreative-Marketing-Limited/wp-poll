@@ -349,7 +349,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		 */
 		function visitors_can_add_option() {
 
-			return $this->get_allows_disallows( 'new_options' );
+			return apply_filters( 'wpp_filters_visitors_can_add_option', $this->get_allows_disallows( 'new_options' ), $this->get_id() );
 		}
 
 

@@ -112,7 +112,6 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 			array(
 				'id'    => "poll_meta_options[$unique_id][shortcode]",
 				'title' => esc_html__( 'Shortcode', 'wp-poll' ),
-
 				'details' => sprintf( '<span class="shortcode tt--hint tt--top" aria-label="Click to Copy">[poller_list poll_id="%s" option_id="%s"]</span>', $post->ID, $unique_id ),
 			),
 		);
