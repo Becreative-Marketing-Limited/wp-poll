@@ -111,7 +111,7 @@ td, th {
     line-height: 26px;
     min-height: 26px;
     font-weight: normal;
-    margin: 0;
+    margin: 0 !important;
 }
 
 
@@ -131,6 +131,7 @@ p.wpp-responses.display {
 }
 
 p.wpp-responses.wpp-error {
+    color: #000;
     background: #ff57225c;
 }
 
@@ -1107,7 +1108,7 @@ p.wpp-responses.wpp-success {
 .wpp-new-option input[type="text"] {
     width: 100%;
     padding: 9px 13px;
-    margin: 8px 0 20px;
+    margin: 10px 0 20px;
     outline: none;
 }
 
