@@ -12,8 +12,31 @@ Admin css
     line-height: 20px;
 }
 
+
+#poll_metabox .wpp-add-poll-option {
+    position: relative;
+    text-align: center;
+    min-width: 180px;
+    padding: 8px 21px;
+    font-size: 18px;
+    background: #007cba;
+    border-width: 0;
+    color: #fff;
+    text-indent: 10px;
+}
+
+
+#poll_metabox .wpp-add-poll-option:after {
+    content: '+';
+    position: relative;
+    padding-left: 8px;
+    font-size: 28px;
+    line-height: 13px;
+    top: 2px;
+}
+
 .poll-options .poll-option-single {
-    background: #ff98003b;
+    background: #f1f1f1;
     padding: 10px 20px;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -77,8 +100,8 @@ Admin css
 
 
 
-Ã¢â‚¬â€¹
-Ã¢â‚¬â€¹
+ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â¹
+ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â¹
 .post-type-poll .wps-field fieldset label {
     display: inline-block;
     margin-bottom: 10px;
