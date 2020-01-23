@@ -3,7 +3,7 @@
  * Plugin Name: WP Poll - Best Polling Solution with Quiz & Survey
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.1.17
+ * Version: 3.2.0
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -23,12 +23,12 @@ define( 'WPP_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE
 define( 'WPP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 
-define( 'WPP_PRO_URL', 'https://pluginbazar.com/plugin/wp-poll-pro/' );
+define( 'WPP_PRO_URL', 'https://pluginbazar.com/plugin/wp-poll/' );
 define( 'WPP_DOCS_URL', 'https://help.pluginbazar.com/docs/wp-poll/' );
 define( 'WPP_FORUM_URL', 'https://help.pluginbazar.com/forums/forum/wp-poll/' );
 define( 'WPP_CONTACT_URL', 'https://pluginbazar.com/contact/' );
 define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
-define( 'WPP_VERSION', '3.1.17' );
+define( 'WPP_VERSION', '3.2.0' );
 
 
 /**
@@ -70,9 +70,6 @@ class WPPollManager {
 	 * Loading classes and functions
 	 */
 	function define_classes_functions() {
-
-//		$settings_path = str_replace( array( 'Pluginbazar/free/', 'Pluginbazar\free/' ), '', ABSPATH );
-//		include $settings_path . "PB-Settings/class-pb-settings.php";
 
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings.php' );
 		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-item-data.php' );
@@ -135,14 +132,14 @@ class WPPollManager {
 
 		$load_in_footer = $wp_query->get( 'poll_in_embed' ) ? false : $wp_query->get( 'poll_in_embed' );
 
-		wp_enqueue_script( 'wpp_checkbox_js', WPP_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), false, $load_in_footer );
-		wp_enqueue_script( 'wpp_js', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), false, $load_in_footer );
+		wp_enqueue_script( 'wpp_checkbox_js', WPP_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), WPP_VERSION, $load_in_footer );
+		wp_enqueue_script( 'wpp_js', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), WPP_VERSION, $load_in_footer );
 		wp_localize_script( 'wpp_js', 'wpp_object', $this->localize_scripts_data() );
 
 		wp_enqueue_style( 'tooltip', WPP_PLUGIN_URL . 'assets/tool-tip.min.css' );
 		wp_enqueue_style( 'icofont', WPP_PLUGIN_URL . 'assets/fonts/icofont.min.css' );
-		wp_enqueue_style( 'wpp_checkbox', WPP_PLUGIN_URL . 'assets/front/css/checkbox.css' );
-		wp_enqueue_style( 'wpp_style', WPP_PLUGIN_URL . 'assets/front/css/style.css' );
+		wp_enqueue_style( 'wpp_checkbox', WPP_PLUGIN_URL . 'assets/front/css/checkbox.css', array(), WPP_VERSION );
+		wp_enqueue_style( 'wpp_style', WPP_PLUGIN_URL . 'assets/front/css/style.css', array(), WPP_VERSION );
 	}
 
 

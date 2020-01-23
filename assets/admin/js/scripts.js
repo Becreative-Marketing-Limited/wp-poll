@@ -118,7 +118,6 @@
 
                 if (response.success) {
                     $(response.data).hide().appendTo('.poll-options').slideDown();
-                    // $('.poll-options').append( response.data );
                 }
             }
         });
