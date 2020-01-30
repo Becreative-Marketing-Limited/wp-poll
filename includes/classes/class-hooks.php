@@ -37,6 +37,52 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			add_filter( 'plugin_action_links_' . WPP_PLUGIN_FILE, array( $this, 'add_plugin_actions' ), 10, 2 );
 
 			add_action( 'pb_settings_wpp-extensions', array( $this, 'render_extensions' ) );
+
+			add_action( 'wp_ajax_wpp_report_download_csv', array( $this, 'wpp_report_download_csv' ) );
+		}
+
+		
+		function wpp_report_download_csv() {
+
+			$export_nonce = isset( $_REQUEST['wpp_export_nonce_value'] ) ? $_REQUEST['wpp_export_nonce_value'] : '';
+			if( ! wp_verify_nonce( $export_nonce, 'wpp_export_nonce' ) ) return;
+
+			$poll_id = isset( $_REQUEST['wpp_reports_poll_id'] ) ? sanitize_text_field( $_REQUEST['wpp_reports_poll_id'] ) : '';
+
+			if ( empty( $poll_id ) ) {
+				return;
+			}
+
+			$poll = wpp_get_poll( $poll_id );
+
+			$poll_reports = $poll->get_poll_reports( 'counts' );
+
+
+			$filename = $poll->get_name() . date("Y_m_d_H_i_s");
+
+
+			header("Content-Type: text/csv");
+			header("Content-Disposition: attachment; filename=$filename.csv");
+			header("Cache-Control: no-cache, no-store, must-revalidate");
+			header("Pragma: no-cache");
+			header("Expires: 0");
+
+			$out = fopen('php://output', 'w');
+
+			fputcsv( $out,  $poll_reports );
+
+			foreach( $poll_reports as $poll_report ) {
+
+				$form_key_values = array_map( function( $form_key ) use ($poll_report) { return $poll_report; }, $poll_reports );
+
+
+				fputcsv( $out, $form_key_values );
+			}
+
+			fclose($out);
+			die();
+
+
 		}
 
 

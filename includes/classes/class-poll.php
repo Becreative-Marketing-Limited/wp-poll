@@ -131,7 +131,6 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 				$poll_reports = isset( $poll_results['total'] ) ? $poll_results['total'] : 0;
 			}
 
-
 			return apply_filters( 'wpp_poll_reports', $poll_reports, $reports_for, $this->get_id(), $this );
 		}
 
@@ -203,7 +202,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			 */
 			$singles = isset( $poll_results['singles'] ) ? $poll_results['singles'] : array();
 			$singles = ! empty( $singles ) ? $singles : array();
-
+			
 			foreach ( $singles as $option_id => $single_count ) {
 				$poll_results['percentages'][ $option_id ] = floor( ( $single_count * 100 ) / $total_voted );
 			}

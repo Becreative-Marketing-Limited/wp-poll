@@ -519,10 +519,15 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 								),
 							),
 
+							array(
+								'id'		=> 'wpp_export_button',
+							),
+
 						),
 					),
 				) ),
 			);
+
 			$pages['wpp-support'] = array(
 				'page_nav'      => '<i class="icofont-live-support"></i> ' . esc_html__( 'Support', 'wp-poll' ),
 				'show_submit'   => false,
