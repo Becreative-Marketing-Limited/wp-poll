@@ -30,18 +30,6 @@ WP Poll allows your to integrate highly customisable polling system with so many
 * Display results for a single poll with short-code
 * Display results for an option of a single poll with short-code
 
-### PRO VERSION
-[Purchase WP Poll Pro](https://pluginbazar.com/?add-to-cart=1125/)
-
-###### Features
-* Pay to Poll (WooCommerce Integration)
-* Duplicate Poll
-* Reset Results
-* Lock Content Until Poll
-* Popup Poll on Scroll
-* Social Share Buttons
-* Embed Poll in a Click
-* And many more are coming soon
 
 
 ### ADDONS
@@ -194,7 +182,10 @@ Don't hesitate to start using it and let us know any issue...
     = 3.1.15 =
     * 15/10/2019 Embed Poll added on Pro Version
 
+    = 3.2.0 =
+    * 23/01/2020 Checkbox design and bug fix
+
 == Upgrade Notice ==
 
-= 3.1.0 =
-3.1.0 is a major update.
+= 3.2.0 =
+3.2.0 is a major update.
