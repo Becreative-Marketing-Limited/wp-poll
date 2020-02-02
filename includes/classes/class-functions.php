@@ -17,6 +17,27 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 
 
 		/**
+		 * Return human readable user information
+		 *
+		 * @param bool $user_id
+		 * @param string $info_to_get
+		 *
+		 * @return bool|mixed
+		 */
+		function get_human_readable_info( $user_id = false, $info_to_get = 'user_email' ) {
+
+			$user_id = ! $user_id ? get_current_user_id() : $user_id;
+			$user    = get_user_by( 'ID', $user_id );
+
+			if ( $user instanceof WP_User ) {
+				return $user->{$info_to_get};
+			}
+
+			return false;
+		}
+
+
+		/**
 		 * Print notices
 		 *
 		 * @param string $message
@@ -27,7 +48,7 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 
 			$is_dismissible = $is_dismissible ? 'is-dismissible' : '';
 
-			if( ! empty( $message ) ) {
+			if ( ! empty( $message ) ) {
 				printf( '<div class="notice notice-%s %s"><p>%s</p></div>', $type, $is_dismissible, $message );
 			}
 		}
@@ -501,12 +522,13 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 						'description' => esc_html__( 'View reports for specific poll item', 'wp-poll' ),
 						'options'     => array(
 							array(
-								'id'      => 'wpp_reports_poll_id',
-								'title'   => esc_html__( 'Select Poll', 'wp-poll' ),
-								'details' => esc_html__( 'Select a poll you want to see report. Reports will generate automatically', 'wp-poll' ),
-								'type'    => 'select',
-								'value'   => isset( $_GET['poll-id'] ) ? sanitize_text_field( $_GET['poll-id'] ) : '',
-								'args'    => 'POSTS_%poll%',
+								'id'       => 'wpp_reports_poll_id',
+								'title'    => esc_html__( 'Select Poll', 'wp-poll' ),
+								'details'  => esc_html__( 'Select a poll you want to see report. Reports will generate automatically', 'wp-poll' ),
+								'type'     => 'select',
+								'value'    => isset( $_GET['poll-id'] ) ? sanitize_text_field( $_GET['poll-id'] ) : '',
+								'args'     => 'POSTS_%poll%',
+								'required' => true,
 							),
 							array(
 								'id'    => 'wpp_reports_style',
@@ -519,10 +541,15 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 								),
 							),
 
+							array(
+								'id' => 'wpp_export_button',
+							),
+
 						),
 					),
 				) ),
 			);
+
 			$pages['wpp-support'] = array(
 				'page_nav'      => '<i class="icofont-live-support"></i> ' . esc_html__( 'Support', 'wp-poll' ),
 				'show_submit'   => false,
@@ -578,6 +605,31 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 			);
 
 			return apply_filters( 'wpp_filters_settings_pages', $pages );
+		}
+
+
+		/**
+		 * Return Arguments Value
+		 *
+		 * @param string $key
+		 * @param string $default
+		 * @param array $args
+		 *
+		 * @return mixed|string
+		 */
+		function get_args_option( $key = '', $default = '', $args = array() ) {
+
+			global $this_preloader;
+
+			$args    = empty( $args ) ? $this_preloader : $args;
+			$default = empty( $default ) ? '' : $default;
+			$key     = empty( $key ) ? '' : $key;
+
+			if ( isset( $args[ $key ] ) && ! empty( $args[ $key ] ) ) {
+				return $args[ $key ];
+			}
+
+			return $default;
 		}
 	}
 }

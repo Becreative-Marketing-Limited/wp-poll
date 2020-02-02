@@ -1164,6 +1164,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
                 </nav>
 
 				<?php
+                
 				do_action( 'pb_settings_before_page_' . $this->get_current_page() );
 
 				if ( $this->show_submit_button() ) {

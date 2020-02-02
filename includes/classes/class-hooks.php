@@ -37,6 +37,60 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			add_filter( 'plugin_action_links_' . WPP_PLUGIN_FILE, array( $this, 'add_plugin_actions' ), 10, 2 );
 
 			add_action( 'pb_settings_wpp-extensions', array( $this, 'render_extensions' ) );
+
+			add_action( 'wp_ajax_wpp_report_download_csv', array( $this, 'wpp_report_download_csv' ) );
+		}
+
+
+		function wpp_report_download_csv() {
+
+			$export_nonce = isset( $_REQUEST['wpp_export_nonce_value'] ) ? $_REQUEST['wpp_export_nonce_value'] : '';
+			if ( ! wp_verify_nonce( $export_nonce, 'wpp_export_nonce' ) ) {
+				return;
+			}
+
+			$poll_id = isset( $_REQUEST['wpp_reports_poll_id'] ) ? sanitize_text_field( $_REQUEST['wpp_reports_poll_id'] ) : '';
+			$poll    = wpp_get_poll( $poll_id );
+
+			$poll_reports   = array();
+			$polled_data    = $poll->get_polled_data();
+			$filename       = $poll->get_name() . '_' . date( "Y_m_d_H_i_s" );
+			$poll_options   = array_map( function ( $option ) {
+				return wpp()->get_args_option( 'label', '', $option );
+			}, $poll->get_poll_options() );
+			$poll_reports[] = array_merge( array( esc_html__( 'Poller information', 'wp-poll' ) ), array_values( $poll_options ) );
+
+			foreach ( $polled_data as $poller => $polled_options ) {
+
+				if ( empty( $polled_options ) || ! is_array( $polled_options ) ) {
+					continue;
+				}
+
+				$single_row   = array();
+				$single_row[] = is_int( $poller ) ? wpp()->get_human_readable_info( $poller ) : $poller;;
+
+				foreach ( $poll_options as $option_id => $option_label ) {
+					$single_row[] = in_array( $option_id, $polled_options ) ? 'yes' : '';
+				}
+
+				$poll_reports[] = $single_row;
+			}
+
+
+			header("Content-Type: text/csv");
+			header( "Content-Disposition: attachment; filename=$filename.csv" );
+			header( "Cache-Control: no-cache, no-store, must-revalidate" );
+			header( "Pragma: no-cache" );
+			header( "Expires: 0" );
+
+			$out = fopen( 'php://output', 'w' );
+
+			foreach ( $poll_reports as $poll_report ) {
+				fputcsv( $out, $poll_report );
+			}
+
+			fclose( $out );
+			die();
 		}
 
 

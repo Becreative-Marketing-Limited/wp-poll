@@ -11,6 +11,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
+if( ! function_exists( 'wpp_export_button' ) ) {
+	function wpp_export_button() {
+
+		wp_nonce_field('wpp_export_nonce', 'wpp_export_nonce_value');
+
+		printf("<input type='hidden' name='action' value='wpp_report_download_csv' />" );
+		printf("<input type='submit' class='button' value='Export Report' />" );
+	}
+}
+add_action( 'pb_settings_before_wpp_export_button', 'wpp_export_button' );
+
+
+if( ! function_exists( 'wpp_after_page_export' ) ) {
+	function wpp_after_page_export() {
+
+		printf( "</form>" );
+	}
+}
+add_action( 'pb_settings_after_page_wpp-reports', 'wpp_after_page_export' );
+
+
+
+if( ! function_exists( 'wpp_before_page_export' ) ) {
+	function wpp_before_page_export() {
+
+		$action_url = admin_url( 'admin-ajax.php' );
+
+		printf("<form action='%s' method='get'>", $action_url );
+	}
+}
+add_action( 'pb_settings_before_page_wpp-reports', 'wpp_before_page_export' );
+
+
 if ( ! function_exists( 'wpp_is_page' ) ) {
 	/**
 	 * Return whether a page is $searched_page or not
