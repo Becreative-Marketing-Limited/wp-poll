@@ -14,7 +14,7 @@
 
 WP Poll allows your to integrate highly customisable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
 
-[TRY DEMO](https://demo.pluginbazar.com/wp-poll/) | [BUY PRO](https://pluginbazar.com/?add-to-cart=1125) | [HELP](https://help.pluginbazar.com/forums/forum/wp-poll/) | [DOCUMENTATION](https://help.pluginbazar.com/docs/wp-poll/)
+[TRY DEMO](https://demo.pluginbazar.com/wp-poll/) | [HELP](https://help.pluginbazar.com/forums/forum/wp-poll/) | [DOCUMENTATION](https://help.pluginbazar.com/docs/wp-poll/) 
 
 
 ### FEATURES
