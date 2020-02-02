@@ -44,9 +44,6 @@ if( ! function_exists( 'wpp_before_page_export' ) ) {
 add_action( 'pb_settings_before_page_wpp-reports', 'wpp_before_page_export' );
 
 
-
-
-
 if ( ! function_exists( 'wpp_is_page' ) ) {
 	/**
 	 * Return whether a page is $searched_page or not

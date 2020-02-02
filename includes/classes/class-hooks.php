@@ -77,10 +77,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			}
 
 
-
-//			header( "Content-Encoding: UTF-8" );
 			header("Content-Type: text/csv");
-//			header( "Content-type: text/csv; charset=UTF-8" );
 			header( "Content-Disposition: attachment; filename=$filename.csv" );
 			header( "Cache-Control: no-cache, no-store, must-revalidate" );
 			header( "Pragma: no-cache" );
