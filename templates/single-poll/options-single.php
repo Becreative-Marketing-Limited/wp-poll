@@ -11,6 +11,7 @@ global $poll;
 
 $options_type  = $poll->can_vote_multiple() ? 'checkbox' : 'radio';
 $option_id     = isset( $args['option_id'] ) ? $args['option_id'] : '';
+$unique_id     = uniqid( 'option-' );
 $label         = isset( $args['label'] ) ? $args['label'] : '';
 $thumb         = isset( $args['thumb'] ) ? $args['thumb'] : '';
 $thumb_class   = ! empty( $thumb ) ? ' has-thumb' : '';
@@ -31,9 +32,9 @@ $option_name   = $poll->get_poll_type() == 'survey' && $options_type == 'checkbo
         <div class="wpp-option-input">
             <input type="<?php echo esc_attr( $options_type ); ?>"
                    name="<?php echo esc_attr( $option_name ); ?>"
-                   id="option-<?php echo esc_attr( $option_id ); ?>"
+                   id="<?php echo esc_attr( $unique_id ); ?>"
                    value="<?php echo esc_attr( $option_id ); ?>">
-            <label for="option-<?php echo esc_attr( $option_id ); ?>"><?php echo esc_html( $label ); ?></label>
+            <label for="<?php echo esc_attr( $unique_id ); ?>"><?php echo esc_html( $label ); ?></label>
         </div>
 
 		<?php if ( ! empty( $thumb ) ) : ?>
