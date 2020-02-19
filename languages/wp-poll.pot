@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Poll\n"
-"POT-Creation-Date: 2020-02-10 23:45+0600\n"
-"PO-Revision-Date: 2020-02-10 23:41+0600\n"
+"POT-Creation-Date: 2020-02-19 12:27+0600\n"
+"PO-Revision-Date: 2020-02-04 18:33+0600\n"
 "Last-Translator: \n"
 "Language-Team: Pluginbazar\n"
 "Language: en\n"
@@ -13,14 +13,19 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: ;esc_html__;esc_html_e;__;_e\n"
+"X-Poedit-KeywordsList: __(;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: includes\n"
-"X-Poedit-SearchPath-2: templates\n"
-"X-Poedit-SearchPath-3: wp-poll.php\n"
+"X-Poedit-SearchPathExcluded-0: assets\n"
+"X-Poedit-SearchPathExcluded-1: languages\n"
+"X-Poedit-SearchPathExcluded-2: .git\n"
 
 #: includes/admin-templates/poll-submitbox.php:19
 msgid "Results / Report"
+msgstr ""
+
+#: includes/admin-templates/poll-submitbox.php:22
+msgid "Click to see Results"
 msgstr ""
 
 #: includes/admin-templates/poll-submitbox.php:23
@@ -29,6 +34,10 @@ msgstr ""
 
 #: includes/admin-templates/poll-submitbox.php:27 includes/functions.php:147
 msgid "Shortcode"
+msgstr ""
+
+#: includes/admin-templates/poll-submitbox.php:29
+msgid "Click to Copy"
 msgstr ""
 
 #: includes/admin-templates/reports.php:28
@@ -54,41 +63,8 @@ msgid "New option"
 msgstr ""
 
 #: includes/classes/class-functions.php:195
-#: includes/classes/class-functions.php:297
 #: includes/classes/class-functions.php:477
 msgid "Results"
-msgstr ""
-
-#: includes/classes/class-functions.php:267
-msgid "Poll Notice"
-msgstr ""
-
-#: includes/classes/class-functions.php:272
-msgid "Poll Title"
-msgstr ""
-
-#: includes/classes/class-functions.php:277
-msgid "Message Section"
-msgstr ""
-
-#: includes/classes/class-functions.php:282
-msgid "Poll Thumbnail"
-msgstr ""
-
-#: includes/classes/class-functions.php:287
-msgid "Content"
-msgstr ""
-
-#: includes/classes/class-functions.php:292
-msgid "Poll Options"
-msgstr ""
-
-#: includes/classes/class-functions.php:302
-msgid "Buttons"
-msgstr ""
-
-#: includes/classes/class-functions.php:307
-msgid "Comments"
 msgstr ""
 
 #: includes/classes/class-functions.php:328
@@ -338,31 +314,6 @@ msgstr ""
 msgid "Poller information"
 msgstr ""
 
-#: includes/classes/class-hooks.php:115
-#, php-format
-msgid "<a href=\"%s\">Settings</a>"
-msgstr ""
-
-#: includes/classes/class-hooks.php:116
-#, php-format
-msgid "<a href=\"%s\">Extensions</a>"
-msgstr ""
-
-#: includes/classes/class-hooks.php:136
-#, php-format
-msgid "<a href=\"%s\"><i class=\"icofont-search-document\"></i> Docs</a>"
-msgstr ""
-
-#: includes/classes/class-hooks.php:137
-#, php-format
-msgid "<a href=\"%s\"><i class=\"icofont-live-support\"></i> Forum</a>"
-msgstr ""
-
-#: includes/classes/class-hooks.php:138
-#, php-format
-msgid "<a class=\"wpp-plugin-meta-buy\" href=\"%s\"><i class=\"icofont-cart-alt\"></i> Get Pro</a>"
-msgstr ""
-
 #: includes/classes/class-hooks.php:156 includes/classes/class-hooks.php:175
 msgid "Invalid data found !"
 msgstr ""
@@ -385,30 +336,6 @@ msgstr ""
 
 #: includes/classes/class-hooks.php:276
 msgid "Something went wrong"
-msgstr ""
-
-#: includes/classes/class-hooks.php:323
-msgid "Poll Report"
-msgstr ""
-
-#: includes/classes/class-hooks.php:327
-msgid "Poll title"
-msgstr ""
-
-#: includes/classes/class-hooks.php:335
-msgid "Published at"
-msgstr ""
-
-#: includes/classes/class-hooks.php:349
-msgid "people polled on this"
-msgstr ""
-
-#: includes/classes/class-hooks.php:351
-msgid "View Reports"
-msgstr ""
-
-#: includes/classes/class-hooks.php:359
-msgid "ago"
 msgstr ""
 
 #: includes/classes/class-hooks.php:389
@@ -435,109 +362,6 @@ msgstr ""
 msgid "WP Poll - Control Panel"
 msgstr ""
 
-#: includes/classes/class-pb-settings.php:83
-#: includes/classes/class-pb-settings.php:137
-#: includes/classes/class-poll-post-types.php:87
-#: includes/classes/class-poll-post-types.php:143
-#, php-format
-msgid "This is where you can create and manage %s."
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:98
-#: includes/classes/class-pb-settings.php:101
-#: includes/classes/class-pb-settings.php:154
-#: includes/classes/class-pb-settings.php:157
-#: includes/classes/class-poll-post-types.php:71
-#: includes/classes/class-poll-post-types.php:74
-#: includes/classes/class-poll-post-types.php:127
-#: includes/classes/class-poll-post-types.php:130
-#, php-format
-msgid "%s"
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:102
-#: includes/classes/class-pb-settings.php:103
-#: includes/classes/class-pb-settings.php:158
-#: includes/classes/class-pb-settings.php:159
-#: includes/classes/class-poll-post-types.php:75
-#: includes/classes/class-poll-post-types.php:76
-#: includes/classes/class-poll-post-types.php:131
-#: includes/classes/class-poll-post-types.php:132
-#, php-format
-msgid "Add %s"
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:104
-#: includes/classes/class-pb-settings.php:160
-#: includes/classes/class-poll-post-types.php:77
-#: includes/classes/class-poll-post-types.php:133
-msgid "Edit"
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:105
-#: includes/classes/class-poll-post-types.php:134
-#, php-format
-msgid "%s Details"
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:106
-#: includes/classes/class-pb-settings.php:162
-#: includes/classes/class-poll-post-types.php:79
-#: includes/classes/class-poll-post-types.php:135
-#, php-format
-msgid "New %s"
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:107
-#: includes/classes/class-pb-settings.php:108
-#: includes/classes/class-pb-settings.php:163
-#: includes/classes/class-pb-settings.php:164
-#: includes/classes/class-poll-post-types.php:80
-#: includes/classes/class-poll-post-types.php:81
-#: includes/classes/class-poll-post-types.php:136
-#: includes/classes/class-poll-post-types.php:137
-#, php-format
-msgid "View %s"
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:109
-#: includes/classes/class-pb-settings.php:165
-#: includes/classes/class-poll-post-types.php:82
-#: includes/classes/class-poll-post-types.php:138
-#, php-format
-msgid "Search %s"
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:110
-#: includes/classes/class-pb-settings.php:166
-#: includes/classes/class-poll-post-types.php:83
-#: includes/classes/class-poll-post-types.php:139
-#, php-format
-msgid "No %s found"
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:111
-#: includes/classes/class-pb-settings.php:167
-#: includes/classes/class-poll-post-types.php:84
-#: includes/classes/class-poll-post-types.php:140
-#, php-format
-msgid "No %s found in trash"
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:112
-#: includes/classes/class-pb-settings.php:168
-#: includes/classes/class-poll-post-types.php:85
-#: includes/classes/class-poll-post-types.php:141
-#, php-format
-msgid "Parent %s"
-msgstr ""
-
-#: includes/classes/class-pb-settings.php:161
-#: includes/classes/class-poll-post-types.php:78
-#, php-format
-msgid "Edit %s"
-msgstr ""
-
 #: includes/classes/class-pb-settings.php:389
 msgid "Select Images"
 msgstr ""
@@ -557,18 +381,6 @@ msgstr ""
 
 #: includes/classes/class-poll-meta.php:37 templates/single-poll/options.php:38
 msgid "Add Option"
-msgstr ""
-
-#: includes/classes/class-poll-meta.php:96
-msgid "Poll data box"
-msgstr ""
-
-#: includes/classes/class-poll-post-types.php:120
-msgid "Singular"
-msgstr ""
-
-#: includes/classes/class-poll-post-types.php:121
-msgid "Plural"
 msgstr ""
 
 #: includes/classes/class-poll-widgets.php:22
@@ -611,9 +423,8 @@ msgstr ""
 msgid "Day 1"
 msgstr ""
 
-#: includes/functions.php:447
-#, php-format
-msgid "%s does not exist."
+#: includes/functions.php:166
+msgid "Added on frontend"
 msgstr ""
 
 #: includes/functions.php:560
@@ -638,24 +449,21 @@ msgstr ""
 msgid "Vote(s)"
 msgstr ""
 
-#: templates/poll-list.php:40
-msgid " ago"
-msgstr ""
-
-#: templates/poll-list.php:59
-msgid "Response(s)"
-msgstr ""
-
-#: templates/poll-list.php:78
-msgid "No Poll found"
-msgstr ""
-
 #: templates/poller-list.php:32
 msgid "Poller"
 msgstr ""
 
+#: templates/single-poll/options.php:34
+msgid "Your option"
+msgstr ""
+
 #: templates/single-poll/options.php:36
 msgid "Please write some text !"
+msgstr ""
+
+#: templates/single-poll/responses.php:20
+#: templates/single-poll/responses.php:25
+msgid "Click to dismiss this notice !"
 msgstr ""
 
 #: templates/single-poll/responses.php:20

@@ -56,7 +56,7 @@ if ( ! defined('ABSPATH')) exit; // if direct access
 			<div class='wpp_right'>
 				<a class='wpp_title' href='$poll_permalink'>$poll_title</a>
 				<a class='inline wpp_categories'><i class='fa fa-folder-open'></i> $terms_html</a>
-				<a class='inline wpp_report'><i class='fa fa-paper-plane'></i> $poller ".__('Response(s)','wp-poll')."</a>
+				<a class='inline wpp_report'><i class='fa fa-paper-plane'></i> $poller ".esc_html__('Response(s)','wp-poll')."</a>
 				<a class='inline wpp_published'><i class='fa fa-clock-o'></i> $time_ago</a>
 			</div>
 		</div>";

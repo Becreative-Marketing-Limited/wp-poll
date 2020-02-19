@@ -386,7 +386,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				<?php echo $html; ?>
             </div>
             <div class='button' <?php echo esc_attr( $disabled ); ?>
-                 id="media_upload_<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Images' ); ?></div>
+                 id="media_upload_<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Images', 'wp-poll' ); ?></div>
 
             <script>
                 jQuery(document).ready(function ($) {
@@ -493,11 +493,11 @@ if ( ! class_exists( 'PB_Settings' ) ) {
             <input type="hidden" name="<?php echo esc_attr( $id ); ?>"
                    id="media_input_<?php echo esc_attr( $field_id ); ?>" value="<?php echo esc_attr( $value ); ?>"/>
             <div class="button" <?php echo esc_attr( $disabled ); ?>
-                 id="media_upload_<?php echo esc_attr( $field_id ); ?>"><?php esc_html_e( 'Upload' ); ?></div>
+                 id="media_upload_<?php echo esc_attr( $field_id ); ?>"><?php esc_html_e( 'Upload', 'wp-poll' ); ?></div>
 
 			<?php if ( ! empty( $value ) ) : ?>
                 <div class="button button-primary"
-                     id="media_upload_<?php echo esc_attr( $field_id ); ?>_remove"><?php esc_html_e( 'Remove' ); ?></div>
+                     id="media_upload_<?php echo esc_attr( $field_id ); ?>_remove"><?php esc_html_e( 'Remove', 'wp-poll' ); ?></div>
 			<?php endif; ?>
 
             <script>

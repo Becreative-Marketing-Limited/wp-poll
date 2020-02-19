@@ -93,7 +93,7 @@ class WPP_Poll_meta {
 
 		if ( in_array( $post_type, array( 'poll' ) ) ) {
 
-			add_meta_box( 'poll_metabox', __( 'Poll data box', 'wp-poll' ), array(
+			add_meta_box( 'poll_metabox', esc_html__('Poll data box', 'wp-poll' ), array(
 				$this,
 				'poll_meta_box_function'
 			), $post_type, 'normal', 'high' );
