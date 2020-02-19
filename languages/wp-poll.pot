@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Poll\n"
-"POT-Creation-Date: 2020-02-19 16:02+0600\n"
+"POT-Creation-Date: 2020-02-19 19:25+0600\n"
 "PO-Revision-Date: 2020-02-04 18:33+0600\n"
 "Last-Translator: \n"
 "Language-Team: Pluginbazar\n"
@@ -486,7 +486,7 @@ msgstr ""
 msgid "Published on %s"
 msgstr ""
 
-#: templates/loop/options.php:31
+#: templates/loop/options.php:31 wp-poll.php:101
 msgid "Vote(s)"
 msgstr ""
 
@@ -496,6 +496,18 @@ msgstr ""
 
 #: templates/poller-list.php:32
 msgid "Poller"
+msgstr ""
+
+#: templates/single-poll/countdown.php:46
+msgid "Hours"
+msgstr ""
+
+#: templates/single-poll/countdown.php:47
+msgid "Minutes"
+msgstr ""
+
+#: templates/single-poll/countdown.php:48
+msgid "Seconds"
 msgstr ""
 
 #: templates/single-poll/options.php:34
