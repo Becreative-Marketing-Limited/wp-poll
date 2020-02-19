@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Poll\n"
-"POT-Creation-Date: 2020-02-19 12:27+0600\n"
+"POT-Creation-Date: 2020-02-19 16:02+0600\n"
 "PO-Revision-Date: 2020-02-04 18:33+0600\n"
 "Last-Translator: \n"
 "Language-Team: Pluginbazar\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __(;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e\n"
+"X-Poedit-KeywordsList: __(;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_n_noop(\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: assets\n"
@@ -101,7 +101,8 @@ msgid "Specify a date when this poll will end. Leave empty to ignore this option
 msgstr ""
 
 #: includes/classes/class-functions.php:371
-#: includes/classes/class-hooks.php:409 includes/classes/class-hooks.php:410
+#: includes/classes/class-hooks.php:115 includes/classes/class-hooks.php:409
+#: includes/classes/class-hooks.php:410
 msgid "Settings"
 msgstr ""
 
@@ -314,6 +315,22 @@ msgstr ""
 msgid "Poller information"
 msgstr ""
 
+#: includes/classes/class-hooks.php:116
+msgid "Extensions"
+msgstr ""
+
+#: includes/classes/class-hooks.php:136
+msgid "Docs"
+msgstr ""
+
+#: includes/classes/class-hooks.php:137
+msgid "Forum"
+msgstr ""
+
+#: includes/classes/class-hooks.php:138
+msgid "Get Pro"
+msgstr ""
+
 #: includes/classes/class-hooks.php:156 includes/classes/class-hooks.php:175
 msgid "Invalid data found !"
 msgstr ""
@@ -338,23 +355,43 @@ msgstr ""
 msgid "Something went wrong"
 msgstr ""
 
+#: includes/classes/class-hooks.php:323
+msgid "Poll Report"
+msgstr ""
+
+#: includes/classes/class-hooks.php:327
+msgid "Poll title"
+msgstr ""
+
+#: includes/classes/class-hooks.php:335
+msgid "Published at"
+msgstr ""
+
+#: includes/classes/class-hooks.php:349
+msgid "people polled on this"
+msgstr ""
+
+#: includes/classes/class-hooks.php:351
+msgid "View Reports"
+msgstr ""
+
+#: includes/classes/class-hooks.php:359
+msgid "ago"
+msgstr ""
+
 #: includes/classes/class-hooks.php:389
-#: includes/classes/class-poll-post-types.php:35
 msgid "Poll"
 msgstr ""
 
 #: includes/classes/class-hooks.php:390
-#: includes/classes/class-poll-post-types.php:36
 msgid "All Polls"
 msgstr ""
 
 #: includes/classes/class-hooks.php:399
-#: includes/classes/class-poll-post-types.php:46
 msgid "Poll Category"
 msgstr ""
 
 #: includes/classes/class-hooks.php:400
-#: includes/classes/class-poll-post-types.php:47
 msgid "Poll Categories"
 msgstr ""
 
@@ -381,6 +418,10 @@ msgstr ""
 
 #: includes/classes/class-poll-meta.php:37 templates/single-poll/options.php:38
 msgid "Add Option"
+msgstr ""
+
+#: includes/classes/class-poll-meta.php:96
+msgid "Poll data box"
 msgstr ""
 
 #: includes/classes/class-poll-widgets.php:22
@@ -449,6 +490,10 @@ msgstr ""
 msgid "Vote(s)"
 msgstr ""
 
+#: templates/poll-list.php:59
+msgid "Response(s)"
+msgstr ""
+
 #: templates/poller-list.php:32
 msgid "Poller"
 msgstr ""
@@ -470,6 +515,6 @@ msgstr ""
 msgid "This poll has been finished and no longer available to vote !"
 msgstr ""
 
-#: wp-poll.php:101
+#: wp-poll.php:100
 msgid "Copied !"
 msgstr ""
