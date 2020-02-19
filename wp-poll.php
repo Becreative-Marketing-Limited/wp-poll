@@ -98,6 +98,7 @@ class WPPollManager {
 		$plugin_obj = array(
 			'ajaxurl'  => admin_url( 'admin-ajax.php' ),
 			'copyText' => esc_html__( 'Copied !', 'wp-poll' ),
+			'voteText' => esc_html__( 'Vote(s)', 'wp-poll' ),
 		);
 
 		return $plugin_obj;

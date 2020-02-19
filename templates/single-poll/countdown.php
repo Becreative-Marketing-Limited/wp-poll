@@ -43,9 +43,9 @@ $unique_id = uniqid();
             }
 
             $("#wpp-countdown-timer-<?php echo esc_attr( $unique_id ); ?>").html(
-                '<span class="hours"><span class="count-number">' + hours + '</span><span class="count-text">Hours</span></span>' +
-                '<span class="minutes"><span class="count-number">' + minutes + '</span><span class="count-text">Minutes</span></span>' +
-                '<span class="seconds"><span class="count-number">' + seconds + '</span><span class="count-text">Seconds</span></span>');
+                '<span class="hours"><span class="count-number">' + hours + '</span><span class="count-text"><?php esc_html_e( 'Hours', 'wp-poll' ); ?></span></span>' +
+                '<span class="minutes"><span class="count-number">' + minutes + '</span><span class="count-text"><?php esc_html_e( 'Minutes', 'wp-poll'); ?></span></span>' +
+                '<span class="seconds"><span class="count-number">' + seconds + '</span><span class="count-text"><?php esc_html_e( 'Seconds', 'wp-poll' ); ?></span></span>');
 
             setTimeout(updateTime, 1000);
         })();

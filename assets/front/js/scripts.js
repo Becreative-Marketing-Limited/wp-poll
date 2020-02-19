@@ -59,7 +59,7 @@
 
                     if ($.inArray(optionID, response.data.percentages)) {
                         $(this).addClass('has-result').find('.wpp-option-result-bar').addClass(classTobeAdded).css('width', percentageValue + '%');
-                        $(this).find('.wpp-option-result').html(singleVoteCount + ' Vote(s)');
+                        $(this).find('.wpp-option-result').html(singleVoteCount + ' ' +  pluginObject.voteText);
                     }
                 });
             }
