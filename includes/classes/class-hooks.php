@@ -393,6 +393,8 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				'supports'      => array( 'title' ),
 			) ) );
 
+			do_action( 'wpp_register_post_types', wpp()->PB_Settings() );
+
 
 			// Register Taxonomy - poll_cat
 			wpp()->PB_Settings()->register_taxonomy( 'poll_cat', 'poll', apply_filters( 'wpp_filters_tax_poll_cat', array(
