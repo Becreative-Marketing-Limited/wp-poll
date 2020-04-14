@@ -1158,17 +1158,18 @@ p.wpp-responses.wpp-success {
 
 
 .wpp-popup-container .box-close {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 20px;
+    line-height: 28px;
     color: #ffffff;
     background: #f80013;
     position: absolute;
     top: 7px;
     right: 7px;
     cursor: pointer;
-    padding: 5px 7px;
     border-radius: 2px;
     transition: background 0.2s linear;
+    width: 28px;
+    height: 28px;
 }
 
 .wpp-popup-container .box-close:hover {

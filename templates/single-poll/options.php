@@ -29,7 +29,7 @@ global $poll;
 
     <div class="wpp-popup-container">
         <div class="wpp-popup-box">
-            <span class="box-close"><i class="icofont-close"></i></span>
+            <span class="box-close dashicons dashicons-no-alt"></span>
             <div class="wpp-new-option">
                 <input type="text" placeholder="<?php esc_attr_e( 'Your option', 'wp-poll' ); ?>">
                 <span class="wpp-notice-warning"

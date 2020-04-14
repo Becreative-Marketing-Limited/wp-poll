@@ -11,19 +11,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
-if( ! function_exists( 'wpp_export_button' ) ) {
+if ( ! function_exists( 'wpp_export_button' ) ) {
 	function wpp_export_button() {
 
-		wp_nonce_field('wpp_export_nonce', 'wpp_export_nonce_value');
+		wp_nonce_field( 'wpp_export_nonce', 'wpp_export_nonce_value' );
 
-		printf("<input type='hidden' name='action' value='wpp_report_download_csv' />" );
-		printf("<input type='submit' class='button' value='Export Report' />" );
+		printf( "<input type='hidden' name='action' value='wpp_report_download_csv' />" );
+		printf( "<input type='submit' class='button' value='Export Report' />" );
 	}
 }
 add_action( 'pb_settings_before_wpp_export_button', 'wpp_export_button' );
 
 
-if( ! function_exists( 'wpp_after_page_export' ) ) {
+if ( ! function_exists( 'wpp_after_page_export' ) ) {
 	function wpp_after_page_export() {
 
 		printf( "</form>" );
@@ -32,13 +32,12 @@ if( ! function_exists( 'wpp_after_page_export' ) ) {
 add_action( 'pb_settings_after_page_wpp-reports', 'wpp_after_page_export' );
 
 
-
-if( ! function_exists( 'wpp_before_page_export' ) ) {
+if ( ! function_exists( 'wpp_before_page_export' ) ) {
 	function wpp_before_page_export() {
 
 		$action_url = admin_url( 'admin-ajax.php' );
 
-		printf("<form action='%s' method='get'>", $action_url );
+		printf( "<form action='%s' method='get'>", $action_url );
 	}
 }
 add_action( 'pb_settings_before_page_wpp-reports', 'wpp_before_page_export' );
@@ -143,8 +142,8 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 				'value'       => $option_thumb,
 			),
 			array(
-				'id'    => "poll_meta_options[$unique_id][shortcode]",
-				'title' => esc_html__( 'Shortcode', 'wp-poll' ),
+				'id'      => "poll_meta_options[$unique_id][shortcode]",
+				'title'   => esc_html__( 'Shortcode', 'wp-poll' ),
 				'details' => sprintf( '<span class="shortcode tt--hint tt--top" aria-label="Click to Copy">[poller_list poll_id="%s" option_id="%s"]</span>', $post->ID, $unique_id ),
 			),
 		);
@@ -156,15 +155,15 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 			<?php wpp()->PB_Settings()->generate_fields( array( array( 'options' => apply_filters( 'wpp_filters_poll_options_fields', $options_fields, $poll_id, $unique_id, $args ) ) ) ); ?>
 
             <div class="poll-option-controls">
-                <span class="option-remove" data-status=0><i class="icofont-close"></i></span>
-                <span class="option-move"><i class="icofont-drag"></i></span>
+                <span class="option-remove dashicons dashicons-no-alt" data-status=0></span>
+                <span class="option-move dashicons dashicons-move"></span>
 
 				<?php if ( $is_frontend ) : ?>
                     <input type="hidden" name="poll_meta_options[<?php echo esc_attr( $unique_id ); ?>][frontend]"
                            value="<?php echo esc_attr( $is_frontend ); ?>">
                     <span class="option-external tt--hint tt--top"
-                          aria-label="<?php esc_attr_e( 'Added on frontend', 'wp-poll' ); ?>"><i
-                                class="icofont-tick-boxed"></i></span>
+                          aria-label="<?php esc_attr_e( 'Added on frontend', 'wp-poll' ); ?>"><span
+                                class="dashicons dashicons-nametag"></span></span>
 				<?php endif; ?>
             </div>
         </li>
@@ -466,7 +465,7 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 	 * @param string $template_path
 	 * @param string $default_path
 	 * @param string $backtrace_file
-     * @param bool $main_template | When you call a template from extensions you can use this param as true to check from main template only
+	 * @param bool $main_template | When you call a template from extensions you can use this param as true to check from main template only
 	 *
 	 * @return mixed|void
 	 */
@@ -571,23 +570,25 @@ if ( ! function_exists( 'wpp_pagination' ) ) {
 }
 
 
-if ( ! function_exists( 'wpp_is_plugin_activated' ) ) {
+if ( ! function_exists( 'wpp_is_extension' ) ) {
 	/**
-     * Check if extension license activated or not
-     *
-	 * @param string $plugin_shortform
+	 * Check if extension is activated or not
+	 *
+	 * @param string $ext_name
 	 *
 	 * @return bool
 	 */
-	function wpp_is_plugin_activated( $plugin_shortform = '' ) {
+	function wpp_is_extension( $ext_name = 'pro' ) {
 
-		$defined = sprintf( '%s_SECRET_KEY', strtoupper( $plugin_shortform ) );
-		$option  = sprintf( '%s_license_status', strtolower( $plugin_shortform ) );
-
-		if ( ! empty( $plugin_shortform ) && $plugin_shortform && defined( $defined ) && wpp()->get_option( $option ) == 'activated' ) {
-			return true;
+		switch ( $ext_name ) {
+			case 'quiz' :
+				return defined( 'WPPP_PLUGIN_FILE' ) ? true : false;
+			case 'survey' :
+				return defined( 'WPPQUIZ_PLUGIN_FILE' ) ? true : false;
+			default :
+				return defined( 'WPPS_PLUGIN_FILE' ) ? true : false;
 		}
-
-		return false;
 	}
 }
+
+

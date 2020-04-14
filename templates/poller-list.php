@@ -43,7 +43,7 @@ if ( ! $poll || empty( $poll ) ) {
             <tr>
                 <td><?php echo empty( $poller ) ? $user : $poller->display_name; ?></td>
 				<?php foreach ( $poll->get_poll_options() as $option_id => $option ) : ?>
-					<?php printf( '<td>%s</td>', in_array( $option_id, $data ) ? '<i class="icofont-check-alt"></i>' : '' ); ?>
+					<?php printf( '<td>%s</td>', in_array( $option_id, $data ) ? '<span class="dashicons dashicons-yes"></span>' : '' ); ?>
 				<?php endforeach; ?>
             </tr>
 		<?php endforeach; ?>

@@ -5,9 +5,7 @@
  * @author Pluginbazar
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'WPP_Functions' ) ) {
 	/**
@@ -52,6 +50,7 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 				printf( '<div class="notice notice-%s %s"><p>%s</p></div>', $type, $is_dismissible, $message );
 			}
 		}
+
 
 		/**
 		 * Return site navigation menu list
@@ -114,6 +113,7 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 		 */
 		function get_poll_categories( $args = array() ) {
 
+			$args             = ! array( $args ) ? array() : $args;
 			$args['taxonomy'] = 'poll_cat';
 
 			return apply_filters( 'wpp_filters_poll_categories', get_terms( $args ) );
@@ -255,12 +255,13 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 			return new PB_Settings( $args );
 		}
 
+
 		/**
 		 * Single Poll Template Section
 		 *
 		 * @return mixed|void
 		 */
-		public function poll_template_sections() {
+		function poll_template_sections() {
 
 			$template_sections = array(
 				'wpp_poll_notice'   => array(
@@ -314,12 +315,13 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 			return apply_filters( 'wpp_filters_poll_template_sections', $template_sections );
 		}
 
+
 		/**
 		 * Return raw meta fields
 		 *
 		 * @return array
 		 */
-		public function get_poll_meta_fields() {
+		function get_poll_meta_fields() {
 
 			$meta_fields = array(
 
@@ -450,10 +452,10 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 		 *
 		 * @return mixed|void
 		 */
-		public function get_plugin_settings() {
+		function get_plugin_settings() {
 
 			$pages['wpp-options'] = array(
-				'page_nav'      => sprintf( '<i class="icofont-ui-settings"></i> %s', esc_html__( 'Options', 'wp-poll' ) ),
+				'page_nav'      => esc_html__( 'Options', 'wp-poll' ),
 				'page_settings' => apply_filters( 'wpp_filters_settings_page_options', array(
 					array(
 						'title'   => esc_html__( 'General Settings', 'wp-poll' ),
@@ -514,7 +516,7 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 				) ),
 			);
 			$pages['wpp-reports'] = array(
-				'page_nav'      => sprintf( '<i class="icofont-chart-histogram-alt"></i> %s', esc_html__( 'Reports', 'wp-poll' ) ),
+				'page_nav'      => esc_html__( 'Reports', 'wp-poll' ),
 				'show_submit'   => false,
 				'page_settings' => apply_filters( 'wpp_filters_settings_page_reports', array(
 					array(
@@ -549,9 +551,8 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 					),
 				) ),
 			);
-
 			$pages['wpp-support'] = array(
-				'page_nav'      => '<i class="icofont-live-support"></i> ' . esc_html__( 'Support', 'wp-poll' ),
+				'page_nav'      => esc_html__( 'Support', 'wp-poll' ),
 				'show_submit'   => false,
 				'page_settings' => apply_filters( 'wpp_filters_settings_page_support', array(
 
@@ -593,7 +594,7 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 				) ),
 			);
 			$pages['wpp-pro']     = array(
-				'page_nav'      => sprintf( '<i class="icofont-addons"></i> %s', esc_html__( 'Pro Settings', 'wp-poll' ) ),
+				'page_nav'      => esc_html__( 'Pro Settings', 'wp-poll' ),
 				'show_submit'   => false,
 				'page_settings' => apply_filters( 'wpp_filters_settings_page_support', array(
 					array(

@@ -15,7 +15,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		 */
 		function __construct() {
 
-			add_action( 'init', array( $this, 'register_post_types_taxs_pages_shortcode' ) );
+			add_action( 'init', array( $this, 'register_everything' ) );
 
 			add_action( 'manage_poll_posts_columns', array( $this, 'add_core_poll_columns' ), 16, 1 );
 			add_action( 'manage_poll_posts_custom_column', array( $this, 'custom_columns_content' ), 10, 2 );
@@ -77,7 +77,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			}
 
 
-			header("Content-Type: text/csv");
+			header( "Content-Type: text/csv" );
 			header( "Content-Disposition: attachment; filename=$filename.csv" );
 			header( "Cache-Control: no-cache, no-store, must-revalidate" );
 			header( "Pragma: no-cache" );
@@ -111,12 +111,16 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		 */
 		function add_plugin_actions( $links ) {
 
-			$action_links = array(
-				'settings'   => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=wpp-settings' ), esc_html__('Settings', 'wp-poll' ) ),
-				'extensions' => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=wpp-settings&tab=wpp-extensions' ), esc_html__('Extensions', 'wp-poll' ) ),
-			);
+			$links = array_merge( array(
+				'settings'   => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=wpp-settings' ), esc_html__( 'Settings', 'wp-poll' ) ),
+				'extensions' => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=wpp-settings&tab=wpp-extensions' ), esc_html__( 'Extensions', 'wp-poll' ) ),
+			), $links );
 
-			return array_merge( $action_links, $links );
+			if ( ! wpp_is_extension() ) {
+				$links['go-pro'] = sprintf( '<a href="%s">%s</a>', esc_url( WPP_PRO_URL ), esc_html__( 'Go Pro', 'wp-poll' ) );
+			}
+
+			return $links;
 		}
 
 
@@ -133,9 +137,8 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			if ( WPP_PLUGIN_FILE === $file ) {
 
 				$row_meta = array(
-					'docs'    => sprintf( '<a href="%s"><i class="icofont-search-document"></i> %s</a>', esc_url( WPP_DOCS_URL ), esc_html__( 'Docs', 'wp-poll' ) ),
-					'support' => sprintf( '<a href="%s"><i class="icofont-live-support"></i> %s</a>', esc_url( WPP_FORUM_URL ), esc_html__( 'Forum', 'wp-poll' ) ),
-					'buypro'  => sprintf( '<a class="wpp-plugin-meta-buy" href="%s"><i class="icofont-cart-alt"></i> %s</a>', esc_url( WPP_PRO_URL ), esc_html__( 'Get Pro', 'wp-poll' ) ),
+					'docs'    => sprintf( '<a href="%s">%s</a>', esc_url( WPP_DOCS_URL ), esc_html__( 'Docs', 'wp-poll' ) ),
+					'support' => sprintf( '<a href="%s">%s</a>', esc_url( WPP_FORUM_URL ), esc_html__( 'Forum', 'wp-poll' ) ),
 				);
 
 				return array_merge( $links, $row_meta );
@@ -320,11 +323,11 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				$count ++;
 
 				if ( $count == 3 ) {
-					$new['poll-report'] = esc_html__('Poll Report', 'wp-poll' );
+					$new['poll-report'] = esc_html__( 'Poll Report', 'wp-poll' );
 				}
 
 				if ( 'title' === $col_id ) {
-					$new[ $col_id ] = esc_html__('Poll title', 'wp-poll' );
+					$new[ $col_id ] = esc_html__( 'Poll title', 'wp-poll' );
 				} else {
 					$new[ $col_id ] = $col_label;
 				}
@@ -332,7 +335,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				unset( $new['date'] );
 			}
 
-			$new['poll-date'] = esc_html__('Published at', 'wp-poll' );
+			$new['poll-date'] = esc_html__( 'Published at', 'wp-poll' );
 
 			return $new;
 		}
@@ -346,9 +349,9 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 
 				$polled_data = $wpp->get_meta( 'polled_data', $post_id, array() );
 
-				echo sprintf( "<i>%d %s</i>", count( $polled_data ), esc_html__('people polled on this', 'wp-poll' ) );
+				echo sprintf( "<i>%d %s</i>", count( $polled_data ), esc_html__( 'people polled on this', 'wp-poll' ) );
 				echo '<div class="row-actions">';
-				echo sprintf( '<span class="view_report"><a href="%s" rel="permalink">' . esc_html__('View Reports', 'wp-poll' ) . '</a></span>', "edit.php?post_type=poll&page=wpp-settings&tab=wpp-reports&poll-id=" . $post_id );
+				echo sprintf( '<span class="view_report"><a href="%s" rel="permalink">' . esc_html__( 'View Reports', 'wp-poll' ) . '</a></span>', "edit.php?post_type=poll&page=wpp-settings&tab=wpp-reports&poll-id=" . $post_id );
 				echo '</div>';
 
 			endif;
@@ -356,7 +359,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			if ( $column == 'poll-date' ):
 
 				$time_ago = human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) );
-				echo "<i>$time_ago " . esc_html__('ago', 'wp-poll' ) . "</i>";
+				echo "<i>$time_ago " . esc_html__( 'ago', 'wp-poll' ) . "</i>";
 
 			endif;
 		}
@@ -382,7 +385,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		/**
 		 * Register Post types, Taxes, Pages and Shortcodes
 		 */
-		function register_post_types_taxs_pages_shortcode() {
+		function register_everything() {
 
 			// Register post type - Poll
 			wpp()->PB_Settings()->register_post_type( 'poll', apply_filters( 'wpp_filters_post_type_poll', array(
