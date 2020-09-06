@@ -3,7 +3,7 @@
  * Plugin Name: WP Poll - Best Polling Solution with Quiz & Survey
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.2.8
+ * Version: 3.2.9
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -26,7 +26,7 @@ define( 'WPP_DOCS_URL', 'https://help.pluginbazar.com/docs/wp-poll/' );
 define( 'WPP_FORUM_URL', 'https://help.pluginbazar.com/forums/forum/wp-poll/' );
 define( 'WPP_CONTACT_URL', 'https://pluginbazar.com/contact/' );
 define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
-define( 'WPP_VERSION', '3.2.8' );
+define( 'WPP_VERSION', '3.2.9' );
 
 
 /**
@@ -69,19 +69,19 @@ class WPPollManager {
 	 */
 	function define_classes_functions() {
 
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings-3.1.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-item-data.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-functions.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-hooks.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll-meta.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-shortcodes.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/classes/class-poll-widgets.php' );
+		require_once WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings-3.1.php';
+		require_once WPP_PLUGIN_DIR . 'includes/classes/class-item-data.php';
+		require_once WPP_PLUGIN_DIR . 'includes/classes/class-functions.php';
+		require_once WPP_PLUGIN_DIR . 'includes/classes/class-hooks.php';
+		require_once WPP_PLUGIN_DIR . 'includes/classes/class-poll-meta.php';
+		require_once WPP_PLUGIN_DIR . 'includes/classes/class-shortcodes.php';
+		require_once WPP_PLUGIN_DIR . 'includes/classes/class-poll.php';
+		require_once WPP_PLUGIN_DIR . 'includes/classes/class-poll-widgets.php';
 
-		require_once( WPP_PLUGIN_DIR . 'includes/functions.php' );
+		require_once WPP_PLUGIN_DIR . 'includes/functions.php';
 
-		require_once( WPP_PLUGIN_DIR . 'includes/template-hooks.php' );
-		require_once( WPP_PLUGIN_DIR . 'includes/template-hook-functions.php' );
+		require_once WPP_PLUGIN_DIR . 'includes/template-hooks.php';
+		require_once WPP_PLUGIN_DIR . 'includes/template-hook-functions.php';
 	}
 
 
