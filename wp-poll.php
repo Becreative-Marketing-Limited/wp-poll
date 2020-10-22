@@ -3,7 +3,7 @@
  * Plugin Name: WP Poll - Best Polling Solution with Quiz & Survey
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.2.9
+ * Version: 3.3.0
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -151,3 +151,24 @@ class WPPollManager {
 }
 
 new WPPollManager();
+
+
+/**
+ * Initialize the plugin tracker
+ *
+ * @return void
+ */
+function appsero_init_tracker_wp_poll() {
+
+	if ( ! class_exists( 'Appsero\Client' ) ) {
+		require_once __DIR__ . '/includes/appsero/Client.php';
+	}
+
+	$client = new Appsero\Client( 'bd4df6fe-adfb-4657-a198-43fc6863ce3a', 'WP Poll &#8211; Best Polling Solution with Quiz &amp; Survey', __FILE__ );
+
+	// Active insights
+	$client->insights()->init();
+}
+
+appsero_init_tracker_wp_poll();
+
