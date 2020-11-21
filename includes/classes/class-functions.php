@@ -515,8 +515,70 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 					),
 				) ),
 			);
+			$pages['wpp-pro']     = array(
+				'page_nav'      => esc_html__( 'Pro Options', 'wp-poll-pro' ),
+				'page_settings' => apply_filters( 'wpp_filters_settings_page_pro', array(
+					array(
+						'title'   => esc_html__( 'Premium Settings', 'wp-poll-pro' ),
+						'options' => array(
+							array(
+								'id'       => 'wppp_disable_options',
+								'title'    => esc_html__( 'Options to Disable', 'wp-poll-pro' ),
+								'type'     => 'checkbox',
+								'args'     => array(
+									'social_share' => esc_html__( 'Disable social share on single poll page', 'wp-poll-pro' ),
+								),
+								'disabled' => ! wpp()->is_pro(),
+							),
+							array(
+								'id'       => 'wppp_popup_poll',
+								'title'    => esc_html__( 'Popup Poll on Scroll', 'wp-poll-pro' ),
+								'details'  => esc_html__( 'Set a poll that will popup when users / visitors scroll and come to end on your website. Leave empty to disable this option.', 'wp-poll-pro' ),
+								'type'     => 'select2',
+								'multiple' => false,
+								'args'     => 'POSTS_%poll%',
+								'disabled' => ! wpp()->is_pro(),
+							),
+						),
+					),
+					array(
+						'title'       => esc_html__( 'SMS Settings - Twilio', 'wp-poll-pro' ),
+						'description' => sprintf( '%s <a href="%s">%s</a>',
+							esc_html__( 'You need to sign up on Twilio and get necessary information below to make the SMS functions enable.', 'wp-poll-pro' ),
+							esc_url( 'www.twilio.com/referral/0ZT7C7' ),
+							esc_html__( 'Click here to Start now', 'wp-poll-pro' )
+						),
+						'options'     => array(
+							array(
+								'id'          => '_twilio_sid',
+								'title'       => esc_html__( 'Account SID', 'wp-poll-pro' ),
+								'details'     => sprintf( '<a href="%s">%s</a>', esc_url( 'www.twilio.com/referral/0ZT7C7' ), esc_html__( 'Login to get this information', 'wp-poll-pro' ) ),
+								'type'        => 'text',
+								'placeholder' => 'AC67jfk762a8a84f0fjwtd779c57572eb8',
+								'disabled'    => ! wpp()->is_pro(),
+							),
+							array(
+								'id'          => '_twilio_token',
+								'title'       => esc_html__( 'Auth Token', 'wp-poll-pro' ),
+								'details'     => sprintf( '<a href="%s">%s</a>', esc_url( 'www.twilio.com/referral/0ZT7C7' ), esc_html__( 'Login to get this information', 'wp-poll-pro' ) ),
+								'type'        => 'text',
+								'placeholder' => 'cd1232661c62b3f95190kod16739b6e1',
+								'disabled'    => ! wpp()->is_pro(),
+							),
+							array(
+								'id'          => '_twilio_sms_from',
+								'title'       => esc_html__( 'From Phone', 'wp-poll-pro' ),
+								'details'     => esc_html__( 'Set a number from where the SMS will be sent', 'wp-poll-pro' ),
+								'type'        => 'text',
+								'placeholder' => '+12015883105',
+								'disabled'    => ! wpp()->is_pro(),
+							),
+						),
+					),
+				) ),
+			);
 			$pages['wpp-reports'] = array(
-				'page_nav'      => esc_html__( 'Reports', 'wp-poll' ),
+				'page_nav'      => esc_html__( 'Poll Reports', 'wp-poll' ),
 				'show_submit'   => false,
 				'page_settings' => apply_filters( 'wpp_filters_settings_page_reports', array(
 					array(
@@ -557,31 +619,23 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 				'page_settings' => apply_filters( 'wpp_filters_settings_page_support', array(
 
 					'sec_options' => array(
-						'title'   => esc_html__( 'Emergency support from Pluginbazar.com', 'wp-poll' ),
+						'title'   => esc_html__( 'Support from Pluginbazar', 'wp-poll' ),
 						'options' => array(
-							array(
-								'id'      => '__1',
-								'title'   => esc_html__( 'Support Forum', 'wp-poll' ),
-								'details' => sprintf( '<a href="%1$s" target="_blank">%1$s</a><br><a href="%1$s" target="_blank">%2$s</a>',
-									WPP_FORUM_URL,
-									esc_html__( 'Ask Forum', 'wp-poll' )
-								),
-							),
 
 							array(
-								'id'      => '__2',
-								'title'   => esc_html__( 'Ask Directly', 'wp-poll' ),
-								'details' => sprintf( '%3$s<br><a href="%1$s" target="_blank">%2$s</a>',
-									WPP_CONTACT_URL,
-									esc_html__( 'Ask about your issue directly', 'wp-poll' ),
-									esc_html__( 'Support didnt"t work properly? No Problem, Ask directly here to get a quick response.' )
-								),
+								'id'      => 'wpp_chat',
+								'title'   => esc_html__( 'Live Chat', 'wp-poll' ),
+								'details' => sprintf( '<a style="text-decoration: none;" href="%s" target="_blank"><span class="dashicons dashicons-format-chat"></span></a>', esc_url( 'https://m.me/pluginbazar' ) ),
 							),
-
 							array(
-								'id'      => '__3',
+								'id'      => 'wpp_ticket',
+								'title'   => esc_html__( 'Support Ticket', 'wp-poll' ),
+								'details' => sprintf( '<a href="%s" target="_blank">%s</a>', PB_TICKET_URL, esc_html__( 'Create Ticket', 'wp-poll' ) ),
+							),
+							array(
+								'id'      => 'wpp_review',
 								'title'   => esc_html__( 'Like this Plugin?', 'wp-poll' ),
-								'details' => sprintf( '%s<br>%s<br><a href="%s" target="_blank">%s</a>',
+								'details' => sprintf( '<p style="color: #ff9800;"><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></p><p>%s</p><p>%s</p><p><a href="%s" target="_blank">%s</a></p>',
 									esc_html__( 'Do you like this plugin and our hard works into it?', 'wp-poll' ),
 									esc_html__( 'Simply rate it and let the worlds know about it. We dont know any language to Thank you', 'wp-poll' ),
 									WPP_REVIEW_URL,
@@ -593,19 +647,17 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 					),
 				) ),
 			);
-			$pages['wpp-pro']     = array(
-				'page_nav'      => esc_html__( 'Pro Settings', 'wp-poll' ),
-				'show_submit'   => false,
-				'page_settings' => apply_filters( 'wpp_filters_settings_page_support', array(
-					array(
-						'title'       => esc_html__( 'Purchase WP Poll Pro to unlock some great features.', 'wp-poll' ),
-						'description' => sprintf( '<a target="_blank" href="%s">%s</a>', WPP_PRO_URL, esc_html__( 'Purchase now with Discount', 'wp-poll' ) ),
-						'options'     => array()
-					),
-				) ),
-			);
 
 			return apply_filters( 'wpp_filters_settings_pages', $pages );
+		}
+
+		/**
+		 * Check if this plugin is pro version or not
+		 *
+		 * @return bool
+		 */
+		function is_pro() {
+			return apply_filters( 'wpp_filters_is_pro', class_exists( 'WPPP_main' ) );
 		}
 
 

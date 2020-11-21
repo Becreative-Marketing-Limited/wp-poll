@@ -1,10 +1,10 @@
-=== WP Poll - Best Polling Solution with Quiz & Survey ===
+=== WP Poll - Best Polling Solution in WordPress ===
 	Contributors: jaedm97,pluginbazar
 	Donate link: https://pluginbazar.com/contact/
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
-	Tested up to: 5.5.1
-	Stable tag: 3.3.0
+	Tested up to: 5.5.3
+	Stable tag: 3.3.1
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,7 +32,6 @@ WP Poll allows your to integrate highly customisable polling system with so many
 * Display results for an option of a single poll with short-code
 
 
-
 ### ADDONS
 #### 1. WP Poll - Survey
 [Buy this addon only at $29](https://pluginbazar.com/?add-to-cart=900)
@@ -48,6 +47,7 @@ WP Poll allows your to integrate highly customisable polling system with so many
 * List of responses in a single place
 * And many more are coming soon
 
+
 #### 2. WP Poll - Quiz
 [Buy this add-on only at $29](https://pluginbazar.com/plugin/wp-poll-quiz/)
 ###### Features
@@ -58,6 +58,7 @@ WP Poll allows your to integrate highly customisable polling system with so many
 * Each question has separate single template showing correct answer.
 * Show results with given and correct answer
 * And many more are coming soon.
+
 
 ### Coming on Future versions of Poll
 * Integration with Contact Form 7
@@ -86,6 +87,7 @@ Don't hesitate to start using it and let us know any issue...
 
 1. Install as regular WordPress plugin.<br />
 2. Go your plugin settings via WordPress Dashboard and find "<strong>WP Poll</strong>" activate it.<br />
+
 
 == Screenshots ==
 
@@ -197,6 +199,7 @@ Don't hesitate to start using it and let us know any issue...
 
     = 3.2.5 =
     * 23/03/2020 Add-on Bug Fixing
+
 
 == Upgrade Notice ==
 

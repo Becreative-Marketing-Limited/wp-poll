@@ -2,10 +2,10 @@
 /**
  * PB Settings
  *
- * Quick settings page generator for WordPress
+ * Quick settings page generator for WordPress with many more features
  *
+ * @version 3.3.1
  * @package PB_Settings
- * @version 3.1
  * @author Pluginbazar
  * @copyright 2019 Pluginbazar.com
  * @see https://github.com/jaedm97/PB-Settings
@@ -17,7 +17,6 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 	class PB_Settings {
 
 		public $data = array();
-		public $disabled_notice = null;
 
 		private $options = array();
 		private $checked = array();
@@ -36,13 +35,22 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				add_action( 'admin_menu', array( $this, 'add_menu_in_admin_menu' ), 12 );
 			}
 
-			$this->disabled_notice = $this->get_disabled_notice();
 			$this->set_options();
 
 			add_action( 'admin_init', array( $this, 'display_fields' ), 12 );
-			add_filter( 'whitelist_options', array( $this, 'whitelist_options' ), 99, 1 );
-
 			add_action( 'admin_notices', array( $this, 'required_plugin_check' ) );
+
+			add_filter( 'whitelist_options', array( $this, 'whitelist_options' ), 99, 1 );
+		}
+
+
+		/**
+		 * Render License warning
+		 */
+		function render_license_warning() {
+			printf( '<div class="notice notice-error"><p>You must activate <strong>%s</strong>. Don\'t have your key? <a href="%s" target="_blank">Get Now</a></p><p><a class="button-primary" href="%s">Activate License</a></p></div>',
+				$this->get_data( 'plugin_name' ), $this->get_data( 'license_url' ), $this->get_data( 'license_page' )
+			);
 		}
 
 
@@ -158,7 +166,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$args['labels'] = array_merge( array(
 				'name'               => sprintf( __( '%s' ), $plural ),
 				'singular_name'      => $singular,
-				'menu_name'          => __( $singular ),
+				'menu_name'          => __( $plural ),
 				'all_items'          => sprintf( __( '%s' ), $plural ),
 				'add_new'            => sprintf( __( 'Add %s' ), $singular ),
 				'add_new_item'       => sprintf( __( 'Add %s' ), $singular ),
@@ -389,8 +397,8 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				}
 			}
 
-			if ( isset( $option['disabled'] ) && $option['disabled'] && ! empty( $this->disabled_notice ) ) {
-				printf( '<span class="disabled-notice" style="background: #ffe390eb;margin-left: 10px;padding: 5px 12px;font-size: 12px;border-radius: 3px;color: #717171;">%s</span>', $this->disabled_notice );
+			if ( isset( $option['disabled'] ) && $option['disabled'] && ! empty( $this->get_disabled_notice() ) ) {
+				printf( '<span class="disabled-notice" style="background: #ffe390eb;margin-left: 10px;padding: 5px 12px;font-size: 12px;border-radius: 3px;color: #717171;">%s</span>', $this->get_disabled_notice() );
 			}
 
 			do_action( "pb_settings_before_option", $option );
@@ -1194,7 +1202,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				<?php
 				settings_errors();
 
-				do_action( 'pb_settings_before_page_' . $this->get_current_page() );
+				do_action( 'pb_settings_before_page_' . $this->get_current_page(), $this );
 
 				$this->get_settings_nav_tab();
 
@@ -1204,9 +1212,9 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 					print( $this->get_settings_fields_html() );
 				}
 
-				do_action( $this->get_current_page() );
+				do_action( $this->get_current_page(), $this );
 
-				do_action( 'pb_settings_after_page_' . $this->get_current_page() );
+				do_action( 'pb_settings_after_page_' . $this->get_current_page(), $this );
 				?>
             </div>
 			<?php
@@ -1702,7 +1710,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 		function get_option_value( $option_id = false, $default = '' ) {
 
 			if ( ! $option_id || empty( $option_id ) ) {
-				return false;
+				returnfalse;
 			}
 
 			$option = array();

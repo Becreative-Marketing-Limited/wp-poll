@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: WP Poll - Best Polling Solution with Quiz & Survey
+ * Plugin Name: WP Poll - Best Polling Solution in WordPress
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.0
+ * Version: 3.3.1
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -16,17 +16,16 @@ defined( 'ABSPATH' ) || exit;
 
 global $wpdb;
 
-define( 'WPP_TABLE_RESULTS', sprintf( '%spoll_results', $wpdb->prefix ) );
-define( 'WPP_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
-define( 'WPP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'WPP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
+defined( 'WPP_TABLE_RESULTS' ) || define( 'WPP_TABLE_RESULTS', sprintf( '%spoll_results', $wpdb->prefix ) );
+defined( 'WPP_PLUGIN_URL' ) || define( 'WPP_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
+defined( 'WPP_PLUGIN_DIR' ) || define( 'WPP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+defined( 'WPP_PLUGIN_FILE' ) || define( 'WPP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
+defined( 'WPP_PLUGIN_LINK' ) || define( 'WPP_PLUGIN_LINK', 'https://pluginbazar.com/plugin/wp-poll/' );
+defined( 'WPP_DOCS_URL' ) || define( 'WPP_DOCS_URL', 'https://pluginbazar.com/docs/wp-poll/' );
+defined( 'WPP_REVIEW_URL' ) || define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
+defined( 'WPP_VERSION' ) || define( 'WPP_VERSION', '3.3.1' );
 
-define( 'WPP_PRO_URL', 'https://codecanyon.net/item/wp-poll-pro/25587395' );
-define( 'WPP_DOCS_URL', 'https://help.pluginbazar.com/docs/wp-poll/' );
-define( 'WPP_FORUM_URL', 'https://help.pluginbazar.com/forums/forum/wp-poll/' );
-define( 'WPP_CONTACT_URL', 'https://pluginbazar.com/contact/' );
-define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
-define( 'WPP_VERSION', '3.2.9' );
+defined( 'PB_TICKET_URL' ) || define( 'PB_TICKET_URL', 'https://pluginbazar.com/my-account/tickets/?action=new' );
 
 
 /**
@@ -69,7 +68,7 @@ class WPPollManager {
 	 */
 	function define_classes_functions() {
 
-		require_once WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings-3.1.php';
+		require_once WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings.php';
 		require_once WPP_PLUGIN_DIR . 'includes/classes/class-item-data.php';
 		require_once WPP_PLUGIN_DIR . 'includes/classes/class-functions.php';
 		require_once WPP_PLUGIN_DIR . 'includes/classes/class-hooks.php';

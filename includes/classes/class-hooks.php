@@ -112,12 +112,12 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		function add_plugin_actions( $links ) {
 
 			$links = array_merge( array(
-				'settings'   => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=wpp-settings' ), esc_html__( 'Settings', 'wp-poll' ) ),
-				'extensions' => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=wpp-settings&tab=wpp-extensions' ), esc_html__( 'Extensions', 'wp-poll' ) ),
+				'settings' => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=wpp-settings' ), esc_html__( 'Settings', 'wp-poll' ) ),
+//				'extensions' => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=wpp-settings&tab=wpp-extensions' ), esc_html__( 'Extensions', 'wp-poll' ) ),
 			), $links );
 
-			if ( ! wpp_is_extension() ) {
-				$links['go-pro'] = sprintf( '<a href="%s">%s</a>', esc_url( WPP_PRO_URL ), esc_html__( 'Go Pro', 'wp-poll' ) );
+			if ( ! wpp()->is_pro() ) {
+				$links['go-pro'] = sprintf( '<a href="%s">%s</a>', esc_url( WPP_PLUGIN_LINK ), esc_html__( 'Go Pro', 'wp-poll' ) );
 			}
 
 			return $links;
@@ -137,8 +137,8 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			if ( WPP_PLUGIN_FILE === $file ) {
 
 				$row_meta = array(
-					'docs'    => sprintf( '<a href="%s">%s</a>', esc_url( WPP_DOCS_URL ), esc_html__( 'Docs', 'wp-poll' ) ),
-					'support' => sprintf( '<a href="%s">%s</a>', esc_url( WPP_FORUM_URL ), esc_html__( 'Forum', 'wp-poll' ) ),
+					'docs'    => sprintf( '<a href="%s" class="wpp-doc" target="_blank">%s</a>', esc_url( WPP_DOCS_URL ), esc_html__( 'Documentation', 'wp-poll' ) ),
+					'support' => sprintf( '<a href="%s" class="wpp-support" target="_blank">%s</a>', esc_url( PB_TICKET_URL ), esc_html__( 'Support Ticket', 'wp-poll' ) ),
 				);
 
 				return array_merge( $links, $row_meta );
@@ -389,8 +389,11 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 
 			// Register post type - Poll
 			wpp()->PB_Settings()->register_post_type( 'poll', apply_filters( 'wpp_filters_post_type_poll', array(
-				'singular'      => esc_html__( 'Poll', 'wp-poll' ),
+				'singular'      => esc_html__( 'WP Poll', 'wp-poll' ),
 				'plural'        => esc_html__( 'All Polls', 'wp-poll' ),
+				'labels'        => array(
+					'add_new' => esc_html__( 'Add New', 'wp-poll' ),
+				),
 				'menu_icon'     => 'dashicons-chart-bar',
 				'menu_position' => 15,
 				'supports'      => array( 'title' ),
@@ -418,6 +421,10 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				'menu_slug'       => 'wpp-settings',
 				'parent_slug'     => "edit.php?post_type=poll",
 				'pages'           => wpp()->get_plugin_settings(),
+				'disabled_notice' => sprintf( '%s <a href="%s?ref=%s" target="_blank">%s</a>',
+					esc_html__( 'This feature is locked.', 'wp-poll' ), WPP_PLUGIN_LINK, get_site_url(),
+					esc_html__( 'Get pro', 'wp-poll' )
+				),
 			) );
 
 			do_action( 'wpp_after_settings_menu' );

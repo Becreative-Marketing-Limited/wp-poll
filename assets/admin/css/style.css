@@ -275,7 +275,22 @@ span.shortcode {
     box-shadow: none;
 }
 
-.poll_page_wpp-settings .nav-tab-wrapper > a:last-child {
-    color: #E91E63;
-    background: #fff;
+a.wpp-support,
+a.wpp-support:focus,
+a.wpp-support:active,
+a.wpp-doc,
+a.wpp-doc:focus,
+a.wpp-doc:active {
+    background: #e61f63;
+    color: #fff;
+    padding: 3px 12px 5px;
+    border-radius: 50px;
+    font-size: 12px;
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+a.wpp-doc {
+    background: #292929;
 }
