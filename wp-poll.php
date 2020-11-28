@@ -3,7 +3,7 @@
  * Plugin Name: WP Poll - Best Polling Solution in WordPress
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.1
+ * Version: 3.3.2
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -23,7 +23,7 @@ defined( 'WPP_PLUGIN_FILE' ) || define( 'WPP_PLUGIN_FILE', plugin_basename( __FI
 defined( 'WPP_PLUGIN_LINK' ) || define( 'WPP_PLUGIN_LINK', 'https://pluginbazar.com/plugin/wp-poll/' );
 defined( 'WPP_DOCS_URL' ) || define( 'WPP_DOCS_URL', 'https://pluginbazar.com/docs/wp-poll/' );
 defined( 'WPP_REVIEW_URL' ) || define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
-defined( 'WPP_VERSION' ) || define( 'WPP_VERSION', '3.3.1' );
+defined( 'WPP_VERSION' ) || define( 'WPP_VERSION', '3.3.2' );
 
 defined( 'PB_TICKET_URL' ) || define( 'PB_TICKET_URL', 'https://pluginbazar.com/my-account/tickets/?action=new' );
 
@@ -91,13 +91,13 @@ class WPPollManager {
 	 */
 	function localize_scripts_data() {
 
-		$plugin_obj = array(
-			'ajaxurl'  => admin_url( 'admin-ajax.php' ),
-			'copyText' => esc_html__( 'Copied !', 'wp-poll' ),
-			'voteText' => esc_html__( 'Vote(s)', 'wp-poll' ),
+		return array(
+			'ajaxurl'            => admin_url( 'admin-ajax.php' ),
+			'copyText'           => esc_html__( 'Copied !', 'wp-poll' ),
+			'voteText'           => esc_html__( 'Vote(s)', 'wp-poll' ),
+			'tempProDownload'    => esc_url( 'https://pluginbazar.com/my-account/downloads/' ),
+			'tempProDownloadTxt' => esc_html__( 'Download Version 1.1.0', 'wp-poll' ),
 		);
-
-		return $plugin_obj;
 	}
 
 

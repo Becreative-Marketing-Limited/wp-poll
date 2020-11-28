@@ -10,6 +10,13 @@
         $(".poll_option_container").sortable({handle: ".poll_option_single_sorter"});
     });
 
+    $(window).on('load', function () {
+        let updateContainer = $('#wp-poll-pro-update'),
+            detailsButton = updateContainer.find('.thickbox.open-plugin-details-modal');
+
+        detailsButton.removeClass('thickbox').attr('target', '_blank').attr('href', pluginObject.tempProDownload).html(pluginObject.tempProDownloadTxt);
+    });
+
 
     $(document).on('change', '#poll_style_countdown, #poll_options_theme, #poll_animation_checkbox, #poll_animation_radio', function () {
 

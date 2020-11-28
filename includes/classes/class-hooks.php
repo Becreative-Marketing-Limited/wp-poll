@@ -37,12 +37,54 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			add_filter( 'plugin_action_links_' . WPP_PLUGIN_FILE, array( $this, 'add_plugin_actions' ), 10, 2 );
 
 			add_action( 'pb_settings_wpp-extensions', array( $this, 'render_extensions' ) );
+			add_action( 'wp_ajax_wpp_report_download_csv', array( $this, 'download_csv_report' ) );
 
-			add_action( 'wp_ajax_wpp_report_download_csv', array( $this, 'wpp_report_download_csv' ) );
+			add_action( 'pre_set_site_transient_update_plugins', array( $this, 'transient_update_plugins' ), 21, 1 );
 		}
 
 
-		function wpp_report_download_csv() {
+		/**
+		 * Manage pro version update in earlier plugin
+		 *
+		 * @param $transient
+		 *
+		 * @return mixed
+		 */
+		function transient_update_plugins( $transient ) {
+
+			if ( defined( 'WPPP_VERSION' ) && WPPP_VERSION === '1.0.2' ) {
+
+				$plugin_obj                = new stdClass();
+				$plugin_obj->id            = WPPP_PLUGIN_FILE;
+				$plugin_obj->slug          = 'wp-poll-pro';
+				$plugin_obj->plugin        = 'wp-poll-pro/wp-poll-pro.php';
+				$plugin_obj->new_version   = '1.1.0';
+				$plugin_obj->url           = 'https://pluginbazar.com/plugins/wp-poll';
+				$plugin_obj->package       = 'https://connect.pluginbazar.com/download/8/';
+				$plugin_obj->icons         = array(
+					'2x' => 'https://ps.w.org/wp-poll/assets/icon-256x256.png?rev=2086322',
+					'1x' => 'https://ps.w.org/wp-poll/assets/icon-128x128.png?rev=2086322',
+				);
+				$plugin_obj->banners       = array(
+					'2x' => 'https://ps.w.org/wp-poll/assets/banner-1544x500.png?rev=2086322',
+					'1x' => 'https://ps.w.org/wp-poll/assets/banner-772x250.png?rev=2086322',
+				);
+				$plugin_obj->banners_rtl   = array();
+				$plugin_obj->tested        = '5.5.3';
+				$plugin_obj->requires_php  = array();
+				$plugin_obj->compatibility = new stdClass();
+
+				$transient->response[ WPPP_PLUGIN_FILE ] = $plugin_obj;
+			}
+
+			return $transient;
+		}
+
+
+		/**
+		 * Download poll report csv
+		 */
+		function download_csv_report() {
 
 			$export_nonce = isset( $_REQUEST['wpp_export_nonce_value'] ) ? $_REQUEST['wpp_export_nonce_value'] : '';
 			if ( ! wp_verify_nonce( $export_nonce, 'wpp_export_nonce' ) ) {

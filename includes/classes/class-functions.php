@@ -329,8 +329,9 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 					'id'      => 'poll_type',
 					'title'   => esc_html__( 'Poll Type', 'wp-poll' ),
 					'details' => esc_html__( 'Select type for this poll. Default: General Poll', 'wp-poll' ),
-					'type'    => 'select',
+					'type'    => 'radio',
 					'args'    => wpp()->get_poll_types(),
+					'default' => array( 'poll' ),
 				),
 
 				array(
@@ -522,7 +523,7 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 						'title'   => esc_html__( 'Premium Settings', 'wp-poll-pro' ),
 						'options' => array(
 							array(
-								'id'       => 'wppp_disable_options',
+								'id'       => 'wpp_disabled_options',
 								'title'    => esc_html__( 'Options to Disable', 'wp-poll-pro' ),
 								'type'     => 'checkbox',
 								'args'     => array(

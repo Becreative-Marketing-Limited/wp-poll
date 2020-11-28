@@ -1148,14 +1148,13 @@ p.wpp-responses.wpp-success {
 }
 
 .wpp-popup-container .wpp-popup-box.popup-box-medium {
-    max-width: 750px;
+    max-width: 460px;
 }
 
 .wpp-popup-container.wpp-embed-popup .wpp-popup-box {
-    min-height: 320px;
+    min-height: 180px;
     box-shadow: none;
 }
-
 
 .wpp-popup-container .box-close {
     font-size: 20px;

@@ -16,9 +16,8 @@ Admin css
 #poll_metabox .wpp-add-poll-option {
     position: relative;
     text-align: center;
-    min-width: 180px;
-    padding: 8px 21px;
-    font-size: 18px;
+    padding: 5px 12px;
+    font-size: 14px;
     background: #007cba;
     border-width: 0;
     color: #fff;
@@ -30,7 +29,7 @@ Admin css
     content: '+';
     position: relative;
     padding-left: 8px;
-    font-size: 28px;
+    font-size: 22px;
     line-height: 13px;
     top: 2px;
 }
@@ -41,6 +40,25 @@ Admin css
     border-radius: 5px;
     margin-bottom: 15px;
     position: relative;
+}
+
+.poll-options .poll-option-single .wps-field {
+    display: inline-block;
+    width: 33%;
+}
+
+.poll-options .poll-option-single .wps-field .wps-field-inputs {
+    margin: 10px 0 0 0;
+}
+
+.poll-options .poll-option-single .wps-field .wps-field-inputs input[type=text],
+.poll-options .poll-option-single .wps-field .wps-field-inputs textarea,
+.poll-options .poll-option-single .wps-field .wps-field-inputs input[type=number] {
+    width: 90%;
+}
+
+.poll-options .poll-option-single .wps-field span.shortcode {
+    width: 75%;
 }
 
 .poll-option-controls {
