@@ -3,7 +3,7 @@
  * Plugin Name: WP Poll - Best Polling Solution in WordPress
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.2
+ * Version: 3.3.3
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
