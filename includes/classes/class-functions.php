@@ -319,32 +319,28 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 		/**
 		 * Return raw meta fields
 		 *
+		 * @param string $fields_for
+		 *
 		 * @return array
 		 */
-		function get_poll_meta_fields() {
+		function get_poll_meta_fields( $fields_for = 'general' ) {
 
-			$meta_fields = array(
 
+			$meta_fields['general']  = array(
 				array(
-					'id'      => 'poll_type',
-					'title'   => esc_html__( 'Poll Type', 'wp-poll' ),
-					'details' => esc_html__( 'Select type for this poll. Default: General Poll', 'wp-poll' ),
-					'type'    => 'radio',
-					'args'    => wpp()->get_poll_types(),
-					'default' => array( 'poll' ),
+					'id'          => 'post_title',
+					'title'       => esc_html__( 'Poll Title', 'wp-poll' ),
+					'placeholder' => esc_html__( 'Poll title here', 'wp-poll' ),
+					'details'     => esc_html__( 'Write a suitable title for this poll', 'wp-poll' ),
+					'type'        => 'text',
 				),
-
 				array(
-					'id'    => 'poll_meta_options',
-					'title' => esc_html__( 'Options', 'wp-poll' ),
+					'id'          => 'post_name',
+					'title'       => esc_html__( 'Poll Permalink', 'wp-poll' ),
+					'placeholder' => esc_html__( 'poll-slug-here', 'wp-poll' ),
+					'details'     => esc_html__( 'Leave blank to fill automatically from poll title. You just need to put the slug.', 'wp-poll' ),
+					'type'        => 'text',
 				),
-
-				array(
-					'id'    => '_thumbnail_id',
-					'title' => esc_html__( 'Featured Image', 'wp-poll' ),
-					'type'  => 'media',
-				),
-
 				array(
 					'id'            => 'content',
 					'title'         => esc_html__( 'Poll Content', 'wp-poll' ),
@@ -356,7 +352,27 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 						'drag_drop_upload' => true,
 					),
 				),
-
+				array(
+					'id'    => '_thumbnail_id',
+					'title' => esc_html__( 'Featured Image', 'wp-poll' ),
+					'type'  => 'media',
+				),
+			);
+			$meta_fields['options']  = array(
+				array(
+					'id'    => 'poll_meta_options',
+					'title' => esc_html__( 'Options', 'wp-poll' ),
+				),
+			);
+			$meta_fields['settings'] = array(
+				array(
+					'id'      => 'poll_type',
+					'title'   => esc_html__( 'Poll Type', 'wp-poll' ),
+					'details' => esc_html__( 'Select type for this poll. Default: General Poll', 'wp-poll' ),
+					'type'    => 'radio',
+					'args'    => wpp()->get_poll_types(),
+					'default' => array( 'poll' ),
+				),
 				array(
 					'id'            => 'poll_deadline',
 					'title'         => esc_html__( 'Deadline', 'wp-poll' ),
@@ -368,7 +384,6 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 						'dateFormat' => 'yy-mm-dd',
 					),
 				),
-
 				array(
 					'id'    => 'poll_allow_disallow',
 					'title' => esc_html__( 'Settings', 'wp-poll' ),
@@ -380,7 +395,8 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 						'hide_timer'          => esc_html__( 'Hide countdown timer for this poll', 'wp-poll' ),
 					) ),
 				),
-
+			);
+			$meta_fields['designs']  = array(
 				array(
 					'id'      => 'poll_style_countdown',
 					'title'   => esc_html__( 'Timer Styles', 'wp-poll' ),
@@ -396,7 +412,6 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 					),
 					'default' => array( '1' ),
 				),
-
 				array(
 					'id'      => 'poll_options_theme',
 					'title'   => esc_html__( 'Options Styles', 'wp-poll' ),
@@ -417,7 +432,6 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 					),
 					'default' => array( '1' ),
 				),
-
 				array(
 					'id'      => 'poll_animation_checkbox',
 					'details' => esc_html__( 'Animations for Multiple selections (Input type - Checkbox) | Default: Checkmark', 'wp-poll' ),
@@ -430,7 +444,6 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 					),
 					'default' => array( 'checkmark' ),
 				),
-
 				array(
 					'id'      => 'poll_animation_radio',
 					'details' => esc_html__( 'Animations for Single selection (Input type - Radio) | Default: Fill', 'wp-poll' ),
@@ -444,7 +457,11 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 				),
 			);
 
-			return apply_filters( 'wpp_filters_poll_meta_fields', $meta_fields );
+			if ( isset( $meta_fields[ $fields_for ] ) && is_array( $meta_fields[ $fields_for ] ) ) {
+				return apply_filters( 'wpp_filters_poll_meta_fields_' . $fields_for, $meta_fields[ $fields_for ] );
+			}
+
+			return array();
 		}
 
 

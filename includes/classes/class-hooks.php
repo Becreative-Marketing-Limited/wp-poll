@@ -439,11 +439,12 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				'singular'      => esc_html__( 'WP Poll', 'wp-poll' ),
 				'plural'        => esc_html__( 'All Polls', 'wp-poll' ),
 				'labels'        => array(
-					'add_new' => esc_html__( 'Add New', 'wp-poll' ),
+					'add_new'   => esc_html__( 'Add Poll', 'wp-poll' ),
+					'edit_item' => esc_html__( 'Edit Poll', 'wp-poll' ),
 				),
 				'menu_icon'     => 'dashicons-chart-bar',
 				'menu_position' => 15,
-				'supports'      => array( 'title' ),
+				'supports'      => array( '' ),
 			) ) );
 
 			do_action( 'wpp_register_post_types', wpp()->PB_Settings() );

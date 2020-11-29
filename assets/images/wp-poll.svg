@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.058" y1="-0.044" x2="1.208" y2="1.19" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#98a0ff"/>
+      <stop offset="1" stop-color="#4eeeec"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <circle id="Ellipse_4" data-name="Ellipse 4" cx="64" cy="64" r="64" transform="translate(626 1090)" fill="url(#linear-gradient)"/>
+    </clipPath>
+    <linearGradient id="linear-gradient-4" x1="0.6" y1="-0.15" x2="0.26" y2="1.262" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-5" x1="-0.674" y1="0.073" x2="1.208" y2="1.19" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6e79ff"/>
+      <stop offset="1" stop-color="#4eeeec"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_189" data-name="Group 189" transform="translate(2709 -554)">
+    <g id="Group_186" data-name="Group 186" transform="translate(-2709 554)">
+      <circle id="Ellipse_8" data-name="Ellipse 8" cx="64" cy="64" r="64" fill="url(#linear-gradient)"/>
+      <g id="Mask_Group_4" data-name="Mask Group 4" transform="translate(-626 -1090)" clip-path="url(#clip-path)">
+        <circle id="Ellipse_7" data-name="Ellipse 7" cx="119" cy="119" r="119" transform="translate(622 1093)" fill="url(#linear-gradient)"/>
+        <circle id="Ellipse_6" data-name="Ellipse 6" cx="88" cy="88" r="88" transform="translate(653 1124)" fill="url(#linear-gradient-4)"/>
+        <circle id="Ellipse_5" data-name="Ellipse 5" cx="64" cy="64" r="64" transform="translate(677 1148)" fill="url(#linear-gradient-5)"/>
+      </g>
+    </g>
+    <g id="Group_185" data-name="Group 185" transform="translate(-3628.965 -20.508)">
+      <path id="Subtraction_1" data-name="Subtraction 1" d="M50,60H10A10.011,10.011,0,0,1,0,50V10A10.011,10.011,0,0,1,10,0H50A10.011,10.011,0,0,1,60,10V50A10.011,10.011,0,0,1,50,60ZM39.054,30V47.929h7.277V30ZM26.45,12.248V47.929h7.277V12.248Zm-12.6,8.166V47.929h7.277V20.414Z" transform="translate(953.965 608.508)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

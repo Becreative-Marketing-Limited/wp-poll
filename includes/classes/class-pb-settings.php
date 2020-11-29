@@ -5,7 +5,7 @@
  * Quick settings page generator for WordPress
  *
  * @package PB_Settings
- * @version 3.3.1
+ * @version 3.3.2
  * @author Pluginbazar
  * @copyright 2019 Pluginbazar.com
  * @see https://github.com/jaedm97/PB-Settings
@@ -296,6 +296,8 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 						if ( $option_id == 'post_title' ) {
 							$option['value'] = $post->post_title != 'Auto Draft' ? $post->post_title : '';
+						} else if ( $option_id == 'post_name' ) {
+							$option['value'] = $post->post_name;
 						} else if ( $option_id == 'content' ) {
 							$option['value'] = $post->post_content;
 						} else {

@@ -2,18 +2,163 @@
 Admin css
 */
 
-.wpp-no-display {
+
+body.post-type-poll {
+    overflow-x: hidden;
+}
+
+#poll-metabox {
+    border: none;
+    box-shadow: 0 0 20px 5px rgb(0 0 0 / 0.17);
+    margin-top: -20px;
+}
+
+#poll-metabox .postbox-header {
     display: none;
 }
 
-#poll_metabox #post_title {
+#poll-metabox .inside {
+    padding: 0;
+    margin: 0;
+}
+
+
+.wpp-poll-meta {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wpp-poll-meta .meta-sidebar {
+    min-width: 280px;
+    width: 30%;
+    border-right: 1px solid #efefef;
+    background: #a1c9fb61;
+}
+
+.wpp-poll-meta .meta-sidebar .header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 25px 25px 0;
+}
+
+.wpp-poll-meta .meta-sidebar .header img {
+    box-shadow: 0 5px 30px 2px rgb(93 127 197 / 50%);
+    border-radius: 50%;
+}
+
+.wpp-poll-meta .meta-sidebar .meta-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0 25px;
+}
+
+.wpp-poll-meta .meta-sidebar .meta-nav > li {
+    display: inline-block;
+    padding: 24px 0 24px 24px;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 34px;
+    transition: 0.1s;
+    width: calc(100% - 24px);
+    text-align: left;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.wpp-poll-meta .meta-sidebar .meta-nav > li:hover,
+.wpp-poll-meta .meta-sidebar .meta-nav > li.active {
+    background: linear-gradient(to right, #5c68ef 0%, #5fb4f6 100%);
+    color: #fff;
+}
+
+.wpp-poll-meta .meta-sidebar .footer {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #c5c5c5;
+    margin-top: 10px;
+    background: #32373c;
+}
+
+.wpp-poll-meta .meta-sidebar .footer > a,
+.wpp-poll-meta .meta-sidebar .footer > a:focus,
+.wpp-poll-meta .meta-sidebar .footer > a:visited {
+    text-decoration: none;
+    font-size: 16px;
+    color: #ffffff;
+    transition: 0.3s;
+    outline: none;
+    box-shadow: none;
+}
+
+.wpp-poll-meta .meta-sidebar .footer > a:hover {
+    color: #F44336;
+}
+
+.wpp-poll-meta .meta-content {
+    position: relative;
+    width: 75%;
+    padding: 20px;
+}
+
+.wpp-poll-meta .meta-content.loading:before {
+    position: absolute;
+    content: ' ';
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #f1f1f1;
+    height: 100%;
+    z-index: 99;
+    opacity: 0.8;
+}
+
+.wpp-poll-meta .meta-content.loading:after {
+    position: absolute;
+    content: url(../../images/loader.gif);
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+}
+
+.wpp-poll-meta .tab-content-item {
+    display: none;
+    transition: 0.3s;
+}
+
+.wpp-poll-meta .tab-content-item.active {
+    display: block;
+}
+
+.wpp-poll-meta .tab-content-item .item-title {
+    margin: 0 0 20px 0;
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.wpp-poll-meta .tab-content-item .item-title:after {
+    position: absolute;
+    content: ' ';
+    width: 100%;
+    height: 1px;
+    background: #d6d6d6;
+    left: 0;
+    bottom: 0;
+}
+
+
+#poll-metabox #post_title {
     width: 100%;
     padding: 8px 12px;
     line-height: 20px;
 }
 
 
-#poll_metabox .wpp-add-poll-option {
+#poll-metabox .wpp-add-poll-option {
     position: relative;
     text-align: center;
     padding: 5px 12px;
@@ -25,7 +170,7 @@ Admin css
 }
 
 
-#poll_metabox .wpp-add-poll-option:after {
+#poll-metabox .wpp-add-poll-option:after {
     content: '+';
     position: relative;
     padding-left: 8px;
@@ -44,17 +189,11 @@ Admin css
 
 .poll-options .poll-option-single .wps-field {
     display: inline-block;
-    width: 33%;
+    width: 30%;
 }
 
 .poll-options .poll-option-single .wps-field .wps-field-inputs {
     margin: 10px 0 0 0;
-}
-
-.poll-options .poll-option-single .wps-field .wps-field-inputs input[type=text],
-.poll-options .poll-option-single .wps-field .wps-field-inputs textarea,
-.poll-options .poll-option-single .wps-field .wps-field-inputs input[type=number] {
-    width: 90%;
 }
 
 .poll-options .poll-option-single .wps-field span.shortcode {

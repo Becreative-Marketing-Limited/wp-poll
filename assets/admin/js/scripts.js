@@ -18,6 +18,28 @@
     });
 
 
+    $(document).on('click', '.wpp-poll-meta .meta-nav > li', function () {
+
+        let thisMetaNav = $(this),
+            target = thisMetaNav.data('target'),
+            metaContent = thisMetaNav.parent().parent().parent().find('.meta-content');
+
+        if (thisMetaNav.hasClass('active')) {
+            return;
+        }
+
+        metaContent.addClass('loading');
+        metaContent.find('.tab-content-item').removeClass('active');
+
+        thisMetaNav.parent().find('.active').removeClass('active');
+        thisMetaNav.addClass('active');
+
+        setTimeout(function () {
+            metaContent.find('.' + target).addClass('active');
+            metaContent.removeClass('loading');
+        }, 500);
+    });
+
     $(document).on('change', '#poll_style_countdown, #poll_options_theme, #poll_animation_checkbox, #poll_animation_radio', function () {
 
         let selectedOption = $(this).find('option:selected').val(),
@@ -111,7 +133,7 @@
      */
     $(document).on('click', '.wpp-add-poll-option', function () {
 
-        console.log( $(this).data('poll-id') );
+        console.log($(this).data('poll-id'));
 
         $.ajax({
             type: 'GET',

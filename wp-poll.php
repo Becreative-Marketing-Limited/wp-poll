@@ -72,7 +72,7 @@ class WPPollManager {
 		require_once WPP_PLUGIN_DIR . 'includes/classes/class-item-data.php';
 		require_once WPP_PLUGIN_DIR . 'includes/classes/class-functions.php';
 		require_once WPP_PLUGIN_DIR . 'includes/classes/class-hooks.php';
-		require_once WPP_PLUGIN_DIR . 'includes/classes/class-poll-meta.php';
+		require_once WPP_PLUGIN_DIR . 'includes/classes/class-meta-boxes.php';
 		require_once WPP_PLUGIN_DIR . 'includes/classes/class-shortcodes.php';
 		require_once WPP_PLUGIN_DIR . 'includes/classes/class-poll.php';
 		require_once WPP_PLUGIN_DIR . 'includes/classes/class-poll-widgets.php';

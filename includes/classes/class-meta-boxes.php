@@ -70,17 +70,63 @@ class WPP_Poll_meta {
 
 
 	/**
+	 * Return html of poll settings box
+	 *
+	 * @return false|string
+	 */
+	function get_poll_edit_results_html() {
+
+		global $post;
+
+		ob_start();
+		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Return html of poll settings box
+	 *
+	 * @return false|string
+	 */
+	function get_poll_results_html() {
+
+		global $post;
+
+		ob_start();
+		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Return html of poll settings box
+	 *
+	 * @return false|string
+	 */
+	function get_poll_settings_html() {
+
+		global $post;
+
+		ob_start();
+		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
+
+		return ob_get_clean();
+	}
+
+
+	/**
 	 * Meta box output
 	 *
 	 * @param $post
 	 *
 	 * @throws PB_Error
 	 */
-	public function poll_meta_box_function( $post ) {
+	public function render_poll_meta( $post ) {
 
 		wp_nonce_field( 'poll_nonce', 'poll_nonce_value' );
 
-		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
+		wpp_get_template( 'metabox/poll-meta.php', array( 'meta_box' => $this ) );
 	}
 
 
@@ -92,11 +138,7 @@ class WPP_Poll_meta {
 	public function add_meta_boxes( $post_type ) {
 
 		if ( in_array( $post_type, array( 'poll' ) ) ) {
-
-			add_meta_box( 'poll_metabox', esc_html__('Poll data box', 'wp-poll' ), array(
-				$this,
-				'poll_meta_box_function'
-			), $post_type, 'normal', 'high' );
+			add_meta_box( 'poll-metabox', esc_html__( 'Poll data box', 'wp-poll' ), array( $this, 'render_poll_meta' ), $post_type, 'normal', 'high' );
 		}
 	}
 
@@ -104,11 +146,13 @@ class WPP_Poll_meta {
 	/**
 	 * Return meta fields for direct use to PB_Settings
 	 *
+	 * @param string $fields_for
+	 *
 	 * @return mixed|void
 	 */
-	function get_meta_fields() {
+	function get_meta_fields( $fields_for = 'general' ) {
 
-		return apply_filters( 'wpp_filters_poll_meta_options_fields', array( array( 'options' => wpp()->get_poll_meta_fields() ) ) );
+		return apply_filters( 'wpp_filters_poll_meta_options_fields_for_' . $fields_for, array( array( 'options' => wpp()->get_poll_meta_fields( $fields_for ) ) ) );
 	}
 }
 
