@@ -1,5 +1,4 @@
 <?php
-
 /*
 * @Author 		Jaed Mosharraf
 * Copyright: 	2015 Jaed Mosharraf
@@ -43,15 +42,13 @@ class WPP_Poll_meta {
 	 * Save meta box
 	 *
 	 * @param $post_id
-	 *
-	 * @return mixed
 	 */
 	public function save_meta_data( $post_id ) {
 
 		$nonce = isset( $_POST['poll_nonce_value'] ) ? $_POST['poll_nonce_value'] : '';
 
 		if ( ! wp_verify_nonce( $nonce, 'poll_nonce' ) ) {
-			return $post_id;
+			return;
 		}
 
 		foreach ( wpp()->get_poll_meta_fields() as $field ) {
@@ -66,52 +63,6 @@ class WPP_Poll_meta {
 
 			update_post_meta( $post_id, $field_id, $field_value );
 		}
-	}
-
-
-	/**
-	 * Return html of poll settings box
-	 *
-	 * @return false|string
-	 */
-	function get_poll_edit_results_html() {
-
-		global $post;
-
-		ob_start();
-		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * Return html of poll settings box
-	 *
-	 * @return false|string
-	 */
-	function get_poll_results_html() {
-
-		global $post;
-
-		ob_start();
-		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * Return html of poll settings box
-	 *
-	 * @return false|string
-	 */
-	function get_poll_settings_html() {
-
-		global $post;
-
-		ob_start();
-		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
-
-		return ob_get_clean();
 	}
 
 

@@ -52,7 +52,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		 */
 		function transient_update_plugins( $transient ) {
 
-			if ( ! defined( 'WPPP_LICENSE_PAGE' ) && WPPP_VERSION === '1.0.2' ) {
+			if ( ! defined( 'WPPP_LICENSE_PAGE' ) && defined( 'WPPP_VERSION' ) && WPPP_VERSION === '1.0.2' ) {
 
 				$plugin_obj                = new stdClass();
 				$plugin_obj->id            = WPPP_PLUGIN_FILE;

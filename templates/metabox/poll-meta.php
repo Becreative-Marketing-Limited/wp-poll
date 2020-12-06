@@ -19,8 +19,8 @@ global $post;
         <ul class="meta-nav">
             <li class="active" data-target="tab-content-general"><?php esc_html_e( 'General Data', 'wp-poll' ); ?></li>
             <li data-target="tab-content-options"><?php esc_html_e( 'Options', 'wp-poll' ); ?></li>
-            <li data-target="tab-content-settings"><?php esc_html_e( 'Settings', 'wp-poll' ); ?></li>
             <li data-target="tab-content-designs"><?php esc_html_e( 'Designs', 'wp-poll' ); ?></li>
+            <li data-target="tab-content-settings"><?php esc_html_e( 'Settings', 'wp-poll' ); ?></li>
             <li data-target="tab-content-results"><?php esc_html_e( 'Results', 'wp-poll' ); ?></li>
             <li data-target="tab-content-manipulate"><?php esc_html_e( 'Manipulate Results', 'wp-poll' ); ?></li>
         </ul>
@@ -46,17 +46,17 @@ global $post;
             </div>
         </div>
 
-        <div class="tab-content-item tab-content-settings">
-            <p class="item-title">Poll Settings</p>
-            <div class="item-wrap">
-				<?php wpp()->PB_Settings()->generate_fields( $meta_box->get_meta_fields( 'settings' ), $post->ID ); ?>
-            </div>
-        </div>
-
         <div class="tab-content-item tab-content-designs">
             <p class="item-title">Poll Designs</p>
             <div class="item-wrap">
 				<?php wpp()->PB_Settings()->generate_fields( $meta_box->get_meta_fields( 'designs' ), $post->ID ); ?>
+            </div>
+        </div>
+
+        <div class="tab-content-item tab-content-settings">
+            <p class="item-title">Poll Settings</p>
+            <div class="item-wrap">
+			    <?php wpp()->PB_Settings()->generate_fields( $meta_box->get_meta_fields( 'settings' ), $post->ID ); ?>
             </div>
         </div>
 

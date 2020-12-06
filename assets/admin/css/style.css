@@ -11,6 +11,8 @@ body.post-type-poll {
     border: none;
     box-shadow: 0 0 20px 5px rgb(0 0 0 / 0.17);
     margin-top: -20px;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 #poll-metabox .postbox-header {
@@ -44,6 +46,8 @@ body.post-type-poll {
 .wpp-poll-meta .meta-sidebar .header img {
     box-shadow: 0 5px 30px 2px rgb(93 127 197 / 50%);
     border-radius: 50%;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .wpp-poll-meta .meta-sidebar .meta-nav {
