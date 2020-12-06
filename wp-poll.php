@@ -110,7 +110,7 @@ class WPPollManager {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'jquery-ui', WPP_PLUGIN_URL . 'assets/jquery-ui.css' );
 		wp_enqueue_style( 'tooltip', WPP_PLUGIN_URL . 'assets/tool-tip.min.css' );
-		wp_enqueue_style( 'wpp-admin', WPP_PLUGIN_URL . 'assets/admin/css/style.css' );
+//		wp_enqueue_style( 'wpp-admin', WPP_PLUGIN_URL . 'assets/admin/css/style.css' );
 
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_script( 'apexcharts', plugins_url( 'assets/apexcharts.js', __FILE__ ) );

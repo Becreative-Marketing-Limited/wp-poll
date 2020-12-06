@@ -11,6 +11,65 @@ global $post;
 
 //echo '<pre>'; print_r( $post ); echo '</pre>';
 
+
+wpp()->PB_Settings()->render_panel( array(
+	'logo_url'    => esc_url( WPP_PLUGIN_URL . 'assets/images/wp-poll.svg' ),
+	'items'       => array(
+		array(
+			'id'         => 'general',
+			'label'      => esc_html__( 'General', 'wp-poll' ),
+			'page_title' => esc_html__( 'Poll General Data', 'wp-poll' ),
+			'fields'     => wpp()->get_poll_meta_fields( 'general' ),
+		),
+		'options' => array(
+			'id'         => 'options',
+			'label'      => esc_html__( 'Options', 'wp-poll' ),
+			'page_title' => esc_html__( 'Poll Options Data', 'wp-poll' ),
+			'fields'     => wpp()->get_poll_meta_fields( 'options' ),
+		),
+		array(
+			'id'         => 'designs',
+			'label'      => esc_html__( 'Designs', 'wp-poll' ),
+			'page_title' => esc_html__( 'Poll Designs', 'wp-poll' ),
+			'fields'     => wpp()->get_poll_meta_fields( 'designs' ),
+		),
+		array(
+			'id'         => 'settings',
+			'label'      => esc_html__( 'Settings', 'wp-poll' ),
+			'page_title' => esc_html__( 'Poll Settings', 'wp-poll' ),
+			'fields'     => wpp()->get_poll_meta_fields( 'settings' ),
+		),
+		array(
+			'id'         => 'results',
+			'label'      => esc_html__( 'Results', 'wp-poll' ),
+			'page_title' => esc_html__( 'Poll Results', 'wp-poll' ),
+			'fields'     => '',
+		),
+		array(
+			'id'         => 'edit_results',
+			'label'      => esc_html__( 'Manipulate Results', 'wp-poll' ),
+			'page_title' => esc_html__( 'Update Poll Results', 'wp-poll' ),
+			'fields'     => '',
+		),
+	),
+	'footer_menu' => array(
+		array(
+			'label' => esc_html__( 'Ticket', 'wp-poll' ),
+			'url'   => PB_TICKET_URL,
+		),
+		array(
+			'label' => esc_html__( 'Docs', 'wp-poll' ),
+			'url'   => WPP_DOCS_URL,
+		),
+		array(
+			'label' => esc_html__( 'Get Pro', 'wp-poll' ),
+			'url'   => WPP_PLUGIN_LINK,
+		),
+	),
+	'post_id'     => $post->ID,
+) );
+
+return;
 ?>
 
 <div class="wpp-poll-meta">
@@ -35,7 +94,7 @@ global $post;
         <div class="tab-content-item tab-content-general active">
             <p class="item-title">Poll General Data</p>
             <div class="item-wrap">
-				<?php wpp()->PB_Settings()->generate_fields( $meta_box->get_meta_fields( 'general' ), $post->ID ); ?>
+				<?php wpp()->PB_Settings()->generate_fields( $post->ID ); ?>
             </div>
         </div>
 
@@ -56,7 +115,7 @@ global $post;
         <div class="tab-content-item tab-content-settings">
             <p class="item-title">Poll Settings</p>
             <div class="item-wrap">
-			    <?php wpp()->PB_Settings()->generate_fields( $meta_box->get_meta_fields( 'settings' ), $post->ID ); ?>
+				<?php wpp()->PB_Settings()->generate_fields( $meta_box->get_meta_fields( 'settings' ), $post->ID ); ?>
             </div>
         </div>
 

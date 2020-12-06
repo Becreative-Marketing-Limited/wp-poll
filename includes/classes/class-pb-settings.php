@@ -44,6 +44,43 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 		}
 
 
+		function render_panel( $args = array() ) {
+
+			$nav_items    = array();
+			$nav_contents = array();
+			$items        = (array) $this->get_data( 'items', array(), $args );
+			$post_id      = $this->get_data( 'post_id', get_the_ID(), $args );
+
+			foreach ( $items as $index => $item ) {
+
+				$is_active  = (int) $index === 0 ? 'active' : '';
+				$item_id    = $this->get_data( 'id', '', $item );
+				$item_label = $this->get_data( 'label', esc_html( 'Panel name' ), $item );
+				$page_title = $this->get_data( 'page_title', esc_html( 'Panel page title' ), $item );
+				$fields     = $this->get_data( 'fields', array(), $item );
+				$fields     = is_array( $fields ) && empty( $fields ) ? array() : array( array( 'options' => $fields ) );
+
+				ob_start();
+				$this->generate_fields( $fields, $post_id );
+
+				$nav_items[]    = sprintf( '<li class="%s" data-target="tab-content-%s">%s</li>', $is_active, $item_id, $item_label );
+				$nav_contents[] = sprintf( '<div class="tab-content-item tab-content-%s %s"><p class="item-title">%s</p><div class="item-wrap">%s</div></div>', $item_id, $is_active, $page_title, ob_get_clean() );
+			}
+
+			$_nav_header   = sprintf( '<div class="header"><img src="%s"></div>', $this->get_data( 'logo_url', get_the_ID(), $args ) );
+			$_nav_items    = sprintf( '<ul class="meta-nav">%s</ul>', implode( '', $nav_items ) );
+			$_nav_footer   = implode( '', array_map( function ( $footer_nav ) {
+				return sprintf( '<a class="footer-link" href="%s" target="_blank">%s</a>',
+					$this->get_data( 'url', '', $footer_nav ),
+					$this->get_data( 'label', esc_html__( 'Menu item', 'wp-poll' ), $footer_nav )
+				);
+			}, $this->get_data( 'footer_menu', array(), $args ) ) );
+			$_nav_contents = sprintf( '<ul class="meta-nav">%s</ul>', implode( '', $nav_contents ) );
+
+			printf( '<div class="wpp-poll-meta"><div class="meta-sidebar">%s%s%s</div></div>', $_nav_header, $_nav_items, $_nav_footer );
+		}
+
+
 		/**
 		 * Check if any plugin require to work the current plugin
 		 *

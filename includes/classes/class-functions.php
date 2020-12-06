@@ -669,6 +669,7 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 			return apply_filters( 'wpp_filters_settings_pages', $pages );
 		}
 
+
 		/**
 		 * Check if this plugin is pro version or not
 		 *
