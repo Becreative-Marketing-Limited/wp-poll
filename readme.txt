@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 5.5.3
-	Stable tag: 3.3.4
+	Stable tag: 3.3.5
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@
 
 WP Poll allows your to integrate highly customisable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
 
-[BUY PRO at 70% OFF](https://codecanyon.net/item/wp-poll-pro/25587395/) | [TRY DEMO](https://demo.pluginbazar.com/wp-poll/) | [HELP](https://help.pluginbazar.com/forums/forum/wp-poll/) | [DOCUMENTATION](https://help.pluginbazar.com/docs/wp-poll/) 
+[BUY PRO at 70% OFF](https://pluginbazar.com/plugin/wp-poll/?ref=wordpress.org) | [TRY DEMO](https://demo.pluginbazar.com/wp-poll/try-demo/)
 
 
 ### FEATURES
@@ -70,17 +70,6 @@ WP Poll allows your to integrate highly customisable polling system with so many
 * Integration with MailChimp, twilio, Zapier and so on....
 
 Don't hesitate to start using it and let us know any issue...
-
-
-[### Report an Issue](https://pluginbazar.com/forums/forum/wp-poll/)
-
-
-`
-	https://demo.pluginbazar.com/wp-poll/
-	
-	Username: pbwppoll
-	Password: pluginbazar
-`
 
 
 == Installation ==

@@ -676,7 +676,7 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 		 * @return bool
 		 */
 		function is_pro() {
-			return apply_filters( 'wpp_filters_is_pro', class_exists( 'WPPP_main' ) );
+			return apply_filters( 'wpp_filters_is_pro', class_exists( 'WP_Poll_pro' ) );
 		}
 
 
