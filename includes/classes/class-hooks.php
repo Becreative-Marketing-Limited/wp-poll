@@ -399,7 +399,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				),
 				'menu_icon'     => 'dashicons-chart-bar',
 				'menu_position' => 15,
-				'supports'      => array( '' ),
+				'supports'      => array( 'title' ),
 			) ) );
 
 			do_action( 'wpp_register_post_types', wpp()->PB_Settings() );

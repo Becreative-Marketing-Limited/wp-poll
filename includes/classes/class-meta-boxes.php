@@ -77,7 +77,9 @@ class WPP_Poll_meta {
 
 		wp_nonce_field( 'poll_nonce', 'poll_nonce_value' );
 
-		wpp_get_template( 'metabox/poll-meta.php', array( 'meta_box' => $this ) );
+		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
+
+//		wpp_get_template( 'metabox/poll-meta.php', array( 'meta_box' => $this ) );
 	}
 
 
