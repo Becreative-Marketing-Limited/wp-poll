@@ -18,7 +18,6 @@ if ( ! class_exists( 'WPP_Widgets' ) ) {
 		 * WPP_Widgets constructor.
 		 */
 		function __construct() {
-
 			parent::__construct( 'wpp_widget_poll', esc_html__( 'WP Poll', 'wp-poll' ), array( 'description' => esc_html__( 'Display single poll', 'wp-poll' ), ) );
 		}
 

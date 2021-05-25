@@ -15,8 +15,9 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		 */
 		function __construct() {
 
-			$this->register_everything();
+//			$this->register_everything();
 
+			add_action( 'init', array( $this, 'register_everything' ) );
 			add_action( 'manage_poll_posts_columns', array( $this, 'add_core_poll_columns' ), 16, 1 );
 			add_action( 'manage_poll_posts_custom_column', array( $this, 'custom_columns_content' ), 10, 2 );
 			add_filter( 'post_row_actions', array( $this, 'remove_row_actions' ), 10, 1 );

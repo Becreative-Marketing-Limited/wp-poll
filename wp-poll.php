@@ -3,7 +3,7 @@
  * Plugin Name: WP Poll - Best Polling Solution in WordPress
  * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.9
+ * Version: 3.3.10
  * Author: Pluginbazar
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -37,7 +37,12 @@ if ( ! class_exists( 'WP_Poll_main' ) ) {
 		 * WP_Poll_main constructor.
 		 */
 		function __construct() {
-			add_action( 'init', array( $this, 'init' ) );
+
+			$this->load_scripts();
+			$this->define_classes_functions();
+
+			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 		}
 
 
@@ -54,18 +59,6 @@ if ( ! class_exists( 'WP_Poll_main' ) ) {
 
 
 		/**
-		 * Initialize the plugin
-		 */
-		function init() {
-			$this->load_scripts();
-			$this->define_classes_functions();
-
-			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
-		}
-
-
-		/**
 		 * Register Widgets
 		 */
 		function register_widgets() {
@@ -77,7 +70,6 @@ if ( ! class_exists( 'WP_Poll_main' ) ) {
 		 * Loading TextDomain
 		 */
 		function load_textdomain() {
-
 			load_plugin_textdomain( 'wp-poll', false, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
 		}
 
@@ -180,7 +172,7 @@ function pb_sdk_init_wp_poll() {
 
 	global $wpp_sdk;
 
-	$wpp_sdk = new Pluginbazar\Client( esc_html( 'WP Poll' ), 'wp-poll', 34, '3.3.9' );
+	$wpp_sdk = new Pluginbazar\Client( esc_html( 'WP Poll' ), 'wp-poll', 34, '3.3.10' );
 }
 
 /**
