@@ -192,6 +192,8 @@ Don't hesitate to start using it and let us know any issue...
 	= 3.3.6 =
     * 05/05/2021 New version with updated SDK
 
+    = 3.3.10 =
+    * 25/05/2021 Widget fix
 
 == Upgrade Notice ==
 
