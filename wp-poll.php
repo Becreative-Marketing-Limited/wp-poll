@@ -164,20 +164,22 @@ if ( ! class_exists( 'WP_Poll_main' ) ) {
 WP_Poll_main::instance();
 
 
-function pb_sdk_init_wp_poll() {
+function pb_sdk_init_wp_poll( $sdk_source = '' ) {
 
 	if ( ! class_exists( 'Pluginbazar\Client' ) ) {
+		$sdk_source = empty( $sdk_source ) ? '' : '../' . $sdk_source . '/';
 		require_once( plugin_dir_path( __FILE__ ) . 'includes/sdk/class-client.php' );
 	}
 
-	global $wpp_sdk;
+	global $wppoll_sdk;
 
-	$wpp_sdk = new Pluginbazar\Client( esc_html( 'WP Poll' ), 'wp-poll', 34, '3.3.10' );
+	$wppoll_sdk = new Pluginbazar\Client( esc_html( 'WP Poll' ), 'wp-poll', 34, '3.3.10' );
 }
 
 /**
- * @global \Pluginbazar\Client $wpp_sdk
+ * @global \Pluginbazar\Client $wppoll_sdk
  */
-global $wpp_sdk;
+global $wppoll_sdk;
 
 pb_sdk_init_wp_poll();
+
