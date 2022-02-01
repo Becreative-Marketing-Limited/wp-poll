@@ -3,8 +3,8 @@
 	Donate link: https://pluginbazar.com/contact/
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
-	Tested up to: 5.7.2
-	Stable tag: 3.3.10
+	Tested up to: 5.9
+	Stable tag: 3.3.11
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,9 +12,9 @@
 
 == Description ==
 
-WP Poll allows your to integrate highly customisable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
+WP Poll allows you to integrate highly customisable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
 
-[BUY PRO](https://pluginbazar.com/plugin/wp-poll/?ref=wordpress.org) | [TRY DEMO](https://demo.pluginbazar.com/wp-poll/try-demo/)
+[BUY PRO IN 60% PLUS DISCOUNT](https://pluginbazar.com/plugin/wp-poll/?ref=wordpress.org) | [TRY DEMO](https://demo.pluginbazar.com/wp-poll/try-demo/)
 
 ### FEATURES
 * Single and Multi votes
@@ -31,11 +31,6 @@ WP Poll allows your to integrate highly customisable polling system with so many
 * Display results for an option of a single poll with short-code
 
 
-### ADDONS
-#### 1. WP Poll - Survey
-[Buy this addon only at $29](https://pluginbazar.com/?add-to-cart=900)
-
-
 ###### Features
 * Unlimited survey creation with poll
 * Progress bar with counter
@@ -45,18 +40,6 @@ WP Poll allows your to integrate highly customisable polling system with so many
 * Terms and Conditions management for each survey
 * List of responses in a single place
 * And many more are coming soon
-
-
-#### 2. WP Poll - Quiz
-[Buy this add-on only at $29](https://pluginbazar.com/plugin/wp-poll-quiz/)
-###### Features
-* Unlimited quiz creation with poll
-* Cool navigation to next poll
-* Clean and Smart design
-* Show preview before final submission of Quiz
-* Each question has separate single template showing correct answer.
-* Show results with given and correct answer
-* And many more are coming soon.
 
 
 ### Coming on Future versions of Poll
@@ -195,7 +178,10 @@ Don't hesitate to start using it and let us know any issue...
     = 3.3.10 =
     * 25/05/2021 Widget fix
 
+    = 3.3.11 =
+    * 01/02/2022 FIX - SDK issue fix
+
 == Upgrade Notice ==
 
-= 3.3.6 =
-3.3.6 is a major update.
+= 3.3.11 =
+3.3.11 is a major update.
