@@ -37,12 +37,12 @@ if ( ! class_exists( 'WP_Poll_main' ) ) {
 		 * WP_Poll_main constructor.
 		 */
 		function __construct() {
-
 			$this->load_scripts();
 			$this->define_classes_functions();
 
-			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
+			load_plugin_textdomain( 'wp-poll', false, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
 		}
 
 
@@ -67,14 +67,6 @@ if ( ! class_exists( 'WP_Poll_main' ) ) {
 
 
 		/**
-		 * Loading TextDomain
-		 */
-		function load_textdomain() {
-			load_plugin_textdomain( 'wp-poll', false, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
-		}
-
-
-		/**
 		 * Loading classes and functions
 		 */
 		function define_classes_functions() {
@@ -88,7 +80,6 @@ if ( ! class_exists( 'WP_Poll_main' ) ) {
 			require_once WPP_PLUGIN_DIR . 'includes/classes/class-shortcodes.php';
 			require_once WPP_PLUGIN_DIR . 'includes/classes/class-poll.php';
 			require_once WPP_PLUGIN_DIR . 'includes/classes/class-poll-widgets.php';
-
 
 			require_once WPP_PLUGIN_DIR . 'includes/template-hooks.php';
 			require_once WPP_PLUGIN_DIR . 'includes/template-hook-functions.php';
@@ -154,15 +145,13 @@ if ( ! class_exists( 'WP_Poll_main' ) ) {
 		 * Loading scripts
 		 */
 		function load_scripts() {
-
 			add_action( 'wp_enqueue_scripts', array( $this, 'front_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 		}
 	}
 }
 
-WP_Poll_main::instance();
-
+add_action( 'plugins_loaded', array( 'WP_Poll_main', 'instance' ), 90 );
 
 function pb_sdk_init_wp_poll() {
 
