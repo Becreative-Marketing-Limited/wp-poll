@@ -15,8 +15,6 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		 */
 		function __construct() {
 
-//			$this->register_everything();
-
 			add_action( 'init', array( $this, 'register_everything' ) );
 			add_action( 'manage_poll_posts_columns', array( $this, 'add_core_poll_columns' ), 16, 1 );
 			add_action( 'manage_poll_posts_custom_column', array( $this, 'custom_columns_content' ), 10, 2 );
@@ -405,14 +403,12 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 
 			do_action( 'wpp_register_post_types', wpp()->PB_Settings() );
 
-
 			// Register Taxonomy - poll_cat
 			wpp()->PB_Settings()->register_taxonomy( 'poll_cat', 'poll', apply_filters( 'wpp_filters_tax_poll_cat', array(
 				'singular'     => esc_html__( 'Poll Category', 'wp-poll' ),
 				'plural'       => esc_html__( 'Poll Categories', 'wp-poll' ),
 				'hierarchical' => true,
 			) ) );
-
 
 			// Add Settings Menu
 			wpp()->PB_Settings( array(

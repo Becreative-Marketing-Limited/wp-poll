@@ -569,26 +569,3 @@ if ( ! function_exists( 'wpp_pagination' ) ) {
 	}
 }
 
-
-if ( ! function_exists( 'wpp_is_extension' ) ) {
-	/**
-	 * Check if extension is activated or not
-	 *
-	 * @param string $ext_name
-	 *
-	 * @return bool
-	 */
-	function wpp_is_extension( $ext_name = 'pro' ) {
-
-		switch ( $ext_name ) {
-			case 'quiz' :
-				return defined( 'WPPP_PLUGIN_FILE' ) ? true : false;
-			case 'survey' :
-				return defined( 'WPPQUIZ_PLUGIN_FILE' ) ? true : false;
-			default :
-				return defined( 'WPPS_PLUGIN_FILE' ) ? true : false;
-		}
-	}
-}
-
-
