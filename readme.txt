@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 5.9
-	Stable tag: 3.3.12
+	Stable tag: 3.3.13
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,6 +182,9 @@ WP Poll allows you to integrate highly customisable polling system with so many 
 
     = 3.3.12 =
     * 04/02/2022 FIX - SDK issue fix
+
+    = 3.3.13 =
+    * 26/02/2022 FIX - Buddypress plugin conflict issue.
 
 == Upgrade Notice ==
 
