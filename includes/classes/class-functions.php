@@ -751,35 +751,24 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 				) ),
 			);
 			$pages['wpp-support'] = array(
-				'page_nav'      => esc_html__( 'Support', 'wp-poll' ),
+				'page_nav'      => esc_html__( 'Help & Support', 'wp-poll' ),
 				'show_submit'   => false,
 				'page_settings' => apply_filters( 'wpp_filters_settings_page_support', array(
-
 					'sec_options' => array(
 						'title'   => esc_html__( 'Support from Pluginbazar', 'wp-poll' ),
 						'options' => array(
-
 							array(
-								'id'      => 'wpp_chat',
-								'title'   => esc_html__( 'Live Chat', 'wp-poll' ),
-								'details' => sprintf( '<a style="text-decoration: none;" href="%s" target="_blank"><span class="dashicons dashicons-format-chat"></span></a>', esc_url( 'https://m.me/pluginbazar' ) ),
-							),
-							array(
-								'id'      => 'wpp_ticket',
+								'id'      => '__1',
 								'title'   => esc_html__( 'Support Ticket', 'wp-poll' ),
-								'details' => sprintf( '<a href="%s" target="_blank">%s</a>', PB_TICKET_URL, esc_html__( 'Create Ticket', 'wp-poll' ) ),
+								'details' => sprintf( '<a href="%s" class="button-primary" target="_blank">%s</a>', WPP_TICKET_URL, esc_html__( 'Create Support Ticket', 'wp-poll' ) ),
 							),
 							array(
-								'id'      => 'wpp_review',
+								'id'      => '__2',
 								'title'   => esc_html__( 'Like this Plugin?', 'wp-poll' ),
-								'details' => sprintf( '<p style="color: #ff9800;"><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></p><p>%s</p><p>%s</p><p><a href="%s" target="_blank">%s</a></p>',
-									esc_html__( 'Do you like this plugin and our hard works into it?', 'wp-poll' ),
-									esc_html__( 'Simply rate it and let the worlds know about it. We dont know any language to Thank you', 'wp-poll' ),
-									WPP_REVIEW_URL,
-									esc_html__( 'Rate Now', 'wp-poll' )
-								),
+								'details' => sprintf( '<span>%s</span><p><a href="%s" class="button-primary" target="_blank">%s</a></p>',
+									esc_html__( 'If you like our plugin, please do a favour by giving 5 star review on the forum.', 'wp-poll' ),
+									WPP_WP_REVIEW_URL, esc_html__( 'Rate Now', 'wp-poll' ) ),
 							),
-
 						)
 					),
 				) ),

@@ -55,7 +55,7 @@ wpp()->PB_Settings()->render_panel( array(
 	'footer_menu' => array(
 		array(
 			'label' => esc_html__( 'Ticket', 'wp-poll' ),
-			'url'   => PB_TICKET_URL,
+			'url'   => WPP_TICKET_URL,
 		),
 		array(
 			'label' => esc_html__( 'Docs', 'wp-poll' ),
@@ -84,7 +84,7 @@ return;
             <li data-target="tab-content-manipulate"><?php esc_html_e( 'Manipulate Results', 'wp-poll' ); ?></li>
         </ul>
         <div class="footer">
-            <a class="footer-link" href="<?php echo esc_url( PB_TICKET_URL ); ?>" target="_blank"><?php esc_html_e( 'Ticket', 'wp-poll' ); ?></a>
+            <a class="footer-link" href="<?php echo esc_url( WPP_TICKET_URL ); ?>" target="_blank"><?php esc_html_e( 'Ticket', 'wp-poll' ); ?></a>
             <a class="footer-link" href="<?php echo esc_url( WPP_DOCS_URL ); ?>" target="_blank"><?php esc_html_e( 'Doc', 'wp-poll' ); ?></a>
             <a class="footer-link" href="<?php echo esc_url( WPP_PLUGIN_LINK ); ?>" target="_blank"><?php esc_html_e( 'Get Pro', 'wp-poll' ); ?></a>
         </div>

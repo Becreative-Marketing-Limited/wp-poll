@@ -139,7 +139,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 
 				$row_meta = array(
 					'docs'    => sprintf( '<a href="%s" class="wpp-doc" target="_blank">%s</a>', esc_url( WPP_DOCS_URL ), esc_html__( 'Documentation', 'wp-poll' ) ),
-					'support' => sprintf( '<a href="%s" class="wpp-support" target="_blank">%s</a>', esc_url( PB_TICKET_URL ), esc_html__( 'Support Ticket', 'wp-poll' ) ),
+					'support' => sprintf( '<a href="%s" class="wpp-support" target="_blank">%s</a>', esc_url( WPP_TICKET_URL ), esc_html__( 'Support Ticket', 'wp-poll' ) ),
 				);
 
 				return array_merge( $links, $row_meta );
