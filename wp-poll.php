@@ -25,6 +25,10 @@ defined( 'WPP_DOCS_URL' ) || define( 'WPP_DOCS_URL', 'https://pluginbazar.com/d/
 defined( 'WPP_WP_REVIEW_URL' ) || define( 'WPP_WP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
 defined( 'WPP_TICKET_URL' ) || define( 'WPP_TICKET_URL', 'https://pluginbazar.com/supports/wp-poll/' );
 
+if ( ! class_exists( 'WooOpenClose_main' ) ) {
+	require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+}
+
 if ( ! class_exists( 'WP_Poll_main' ) ) {
 	/**
 	 * Class WP_Poll_main
@@ -71,7 +75,6 @@ if ( ! class_exists( 'WP_Poll_main' ) ) {
 		 */
 		function define_classes_functions() {
 
-			require_once WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings.php';
 			require_once WPP_PLUGIN_DIR . 'includes/classes/class-item-data.php';
 			require_once WPP_PLUGIN_DIR . 'includes/classes/class-functions.php';
 			require_once WPP_PLUGIN_DIR . 'includes/functions.php';
@@ -155,20 +158,15 @@ add_action( 'plugins_loaded', array( 'WP_Poll_main', 'instance' ), 90 );
 
 function pb_sdk_init_wp_poll() {
 
-	if ( ! class_exists( 'Pluginbazar\Client' ) ) {
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/sdk/class-client.php' );
-	}
-
 	if ( ! function_exists( 'get_plugins' ) ) {
 		include_once ABSPATH . '/wp-admin/includes/plugin.php';
 	}
 
 	global $wppoll_sdk;
 
-	$wppoll_sdk = new Pluginbazar\Client( esc_html( 'WP Poll Pro' ), 'wp-poll', 34, __FILE__ );
-	$wppoll_sdk->license()->add_settings_page( array( 'parent_slug' => 'edit.php?post_type=poll' ) );;
+	$wppoll_sdk = new Pluginbazar\Client( esc_html( 'WP Poll' ), 'wp-poll', 34, __FILE__ );
 	$wppoll_sdk->notifications();
-	$wppoll_sdk->updater();
+
 }
 
 /**

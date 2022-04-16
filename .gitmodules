@@ -1,3 +1,0 @@
-[submodule "includes/sdk"]
-	path = includes/sdk
-	url = git@github.com:pluginbazar/sdk.git

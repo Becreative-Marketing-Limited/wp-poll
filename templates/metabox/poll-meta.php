@@ -7,12 +7,12 @@ if ( ! $meta_box instanceof WPP_Poll_meta ) {
 	return;
 }
 
-global $post;
+global $post,$wppoll_sdk;
 
 //echo '<pre>'; print_r( $post ); echo '</pre>';
 
 
-wpp()->PB_Settings()->render_panel( array(
+$wppoll_sdk->Settings()->render_panel( array(
 	'logo_url'    => esc_url( WPP_PLUGIN_URL . 'assets/images/wp-poll.svg' ),
 	'items'       => array(
 		array(
@@ -94,28 +94,28 @@ return;
         <div class="tab-content-item tab-content-general active">
             <p class="item-title">Poll General Data</p>
             <div class="item-wrap">
-				<?php wpp()->PB_Settings()->generate_fields( $post->ID ); ?>
+				<?php $wppoll_sdk->Settings()->generate_fields( $post->ID ); ?>
             </div>
         </div>
 
         <div class="tab-content-item tab-content-options">
             <p class="item-title">Poll Options Data</p>
             <div class="item-wrap">
-				<?php wpp()->PB_Settings()->generate_fields( $meta_box->get_meta_fields( 'options' ), $post->ID ); ?>
+				<?php $wppoll_sdk->Settings()->generate_fields( $meta_box->get_meta_fields( 'options' ), $post->ID ); ?>
             </div>
         </div>
 
         <div class="tab-content-item tab-content-designs">
             <p class="item-title">Poll Designs</p>
             <div class="item-wrap">
-				<?php wpp()->PB_Settings()->generate_fields( $meta_box->get_meta_fields( 'designs' ), $post->ID ); ?>
+				<?php $wppoll_sdk->Settings()->generate_fields( $meta_box->get_meta_fields( 'designs' ), $post->ID ); ?>
             </div>
         </div>
 
         <div class="tab-content-item tab-content-settings">
             <p class="item-title">Poll Settings</p>
             <div class="item-wrap">
-				<?php wpp()->PB_Settings()->generate_fields( $meta_box->get_meta_fields( 'settings' ), $post->ID ); ?>
+				<?php $wppoll_sdk->Settings()->generate_fields( $meta_box->get_meta_fields( 'settings' ), $post->ID ); ?>
             </div>
         </div>
 

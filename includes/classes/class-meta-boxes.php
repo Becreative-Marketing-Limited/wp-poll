@@ -67,17 +67,16 @@ class WPP_Poll_meta {
 
 
 	/**
-	 * Meta box output
-	 *
 	 * @param $post
 	 *
-	 * @throws PB_Error
+	 * @return void
 	 */
 	public function render_poll_meta( $post ) {
+		global $wppoll_sdk;
 
 		wp_nonce_field( 'poll_nonce', 'poll_nonce_value' );
 
-		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
+		$wppoll_sdk->Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
 
 //		wpp_get_template( 'metabox/poll-meta.php', array( 'meta_box' => $this ) );
 	}

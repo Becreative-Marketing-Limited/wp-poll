@@ -1,0 +1,35 @@
+{
+    "packages": [
+        {
+            "name": "pluginbazar/sdk",
+            "version": "1.0.5",
+            "version_normalized": "1.0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pluginbazar/sdk.git",
+                "reference": "5cb571065f6d3534b9f307734843817a60941492"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pluginbazar/sdk/zipball/5cb571065f6d3534b9f307734843817a60941492",
+                "reference": "5cb571065f6d3534b9f307734843817a60941492",
+                "shasum": ""
+            },
+            "time": "2022-04-11T07:10:26+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "classes/"
+                ]
+            },
+            "support": {
+                "source": "https://github.com/pluginbazar/sdk/tree/1.0.5",
+                "issues": "https://github.com/pluginbazar/sdk/issues"
+            },
+            "install-path": "../pluginbazar/sdk"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

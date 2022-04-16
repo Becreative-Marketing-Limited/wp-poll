@@ -244,19 +244,6 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 
 
 		/**
-		 * Return PB_Settings class
-		 *
-		 * @param array $args
-		 *
-		 * @return PB_Settings
-		 */
-		function PB_Settings( $args = array() ) {
-
-			return new PB_Settings( $args );
-		}
-
-
-		/**
 		 * Single Poll Template Section
 		 *
 		 * @return mixed|void
