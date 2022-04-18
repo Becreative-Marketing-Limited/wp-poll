@@ -45,7 +45,7 @@ class WPP_Poll_meta {
 	 */
 	public function save_meta_data( $post_id ) {
 
-		$nonce = isset( $_POST['poll_nonce_value'] ) ? $_POST['poll_nonce_value'] : '';
+		$nonce = isset( $_POST['poll_nonce_value'] ) ? sanitize_text_field($_POST['poll_nonce_value']) : '';
 
 		if ( ! wp_verify_nonce( $nonce, 'poll_nonce' ) ) {
 			return;

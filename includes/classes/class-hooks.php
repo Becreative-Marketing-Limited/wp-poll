@@ -45,7 +45,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		 */
 		function download_csv_report() {
 
-			$export_nonce = isset( $_REQUEST['wpp_export_nonce_value'] ) ? $_REQUEST['wpp_export_nonce_value'] : '';
+			$export_nonce = isset( $_REQUEST['wpp_export_nonce_value'] ) ? sanitize_text_field($_REQUEST['wpp_export_nonce_value']) : '';
 			if ( ! wp_verify_nonce( $export_nonce, 'wpp_export_nonce' ) ) {
 				return;
 			}
@@ -402,7 +402,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				'supports'      => array( 'title' ),
 			) ) );
 
-			do_action( 'wpp_register_post_types', $wppoll_sdk->utils());
+			do_action( 'wpp_register_post_types');
 
 			// Register Taxonomy - poll_cat
 			$wppoll_sdk->utils()->register_taxonomy( 'poll_cat', 'poll', apply_filters( 'wpp_filters_tax_poll_cat', array(
@@ -414,9 +414,8 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 			// Add Settings Menu
 			$wppoll_sdk->Settings()->create_menu( array(
 				'add_in_menu'     => true,
-				'menu_type'       => 'submenu',
+				'menu_type'       => 'sub_menu',
 				'menu_title'      => esc_html__( 'Settings', 'wp-poll' ),
-				'page_title'      => esc_html__( 'Settings', 'wp-poll' ),
 				'menu_page_title' => esc_html__( 'WP Poll - Control Panel', 'wp-poll' ),
 				'capability'      => "manage_options",
 				'menu_slug'       => 'wpp-settings',
