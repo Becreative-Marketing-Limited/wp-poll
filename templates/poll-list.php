@@ -75,7 +75,7 @@ if ( ! defined('ABSPATH')) exit; // if direct access
 	
 	wp_reset_query();
 	
-	else: ?><span><?php echo esc_html__('No Poll found', 'wp-poll'); ?></span> <?php
+	else: ?><span><?php echo __('No Poll found', 'wp-poll'); ?></span> <?php
 	endif; ?>
 	
 	

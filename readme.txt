@@ -1,10 +1,10 @@
-=== WP Poll - Best Polling Solution in WordPress ===
-	Contributors: jaedm97,pluginbazar
-	Donate link: https://pluginbazar.com/contact/
+=== LiquidPoll - Advanced Polls for Creators and Brands ===
+	Contributors: frankopazo,liquidpoll
+	Donate link: https://www.paypal.com/paypalme/frankopazo
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
-	Tested up to: 5.9
-	Stable tag: 3.3.13
+	Tested up to: 5.9.3
+	Stable tag: 3.3.14
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,9 +12,9 @@
 
 == Description ==
 
-WP Poll allows you to integrate highly customisable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
+LiquidPoll allows you to integrate highly customisable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
 
-[BUY PRO IN 60% PLUS DISCOUNT](https://pluginbazar.com/plugin/wp-poll/?ref=wordpress.org) | [TRY DEMO](https://demo.pluginbazar.com/wp-poll/try-demo/)
+
 
 ### FREE PLUGIN FEATURES
 * Single and Multi votes
@@ -51,13 +51,13 @@ WP Poll allows you to integrate highly customisable polling system with so many 
 * Hide results
 * Integration with MailChimp, twilio, Zapier and so on....
 
-[REPORT ANY ISSUE](https://pluginbazar.com/supports/wp-poll/#new-post)
+[REPORT ANY ISSUE](https://liquidpoll.com/contact)
 
 
 == Installation ==
 
 1. Install as regular WordPress plugin.<br />
-2. Go your plugin settings via WordPress Dashboard and find "<strong>WP Poll</strong>" activate it.<br />
+2. Go your plugin settings via WordPress Dashboard and find "<strong>LiquidPoll </strong>" activate it.<br />
 
 
 == Screenshots ==
@@ -185,6 +185,9 @@ WP Poll allows you to integrate highly customisable polling system with so many 
 
     = 3.3.13 =
     * 26/02/2022 FIX - Buddypress plugin conflict issue.
+
+    = 3.3.14 =
+    * 16/05/2022 Add - Plugin information update.
 
 == Upgrade Notice ==
 

@@ -60,10 +60,9 @@ if ( ! class_exists( 'WPP_Widgets' ) ) {
 		 * @param array $instance
 		 *
 		 * @return string|void
-		 * @throws Error
+		 * @throws PB_Error
 		 */
 		function form( $instance ) {
-			global $wppoll_sdk;
 
 			$widget_title = isset( $instance['title'] ) ? $instance['title'] : '';
 			$poll_id      = isset( $instance['poll_id'] ) ? $instance['poll_id'] : '';
@@ -90,7 +89,7 @@ if ( ! class_exists( 'WPP_Widgets' ) ) {
 				)
 			);
 
-			$wppoll_sdk->Settings()->generate_fields( $fields );
+			wpp()->PB_Settings()->generate_fields( $fields );
 		}
 	}
 }

@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: WP Poll - Best Polling Solution in WordPress
- * Plugin URI: https://www.pluginbazar.com/plugin/wp-poll/
+ * Plugin Name: LiquidPoll - Advanced Polls for Creators and Brands
+ * Plugin URI: https://www.liquidpoll.com
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.13
- * Author: Pluginbazar
+ * Version: 3.3.14
+ * Author: LiquidPoll
  * Text Domain: wp-poll
  * Domain Path: /languages/
- * Author URI: https://pluginbazar.com/
+ * Author URI: https://www.liquidpoll.com
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -20,14 +20,10 @@ defined( 'WPP_TABLE_RESULTS' ) || define( 'WPP_TABLE_RESULTS', sprintf( '%spoll_
 defined( 'WPP_PLUGIN_URL' ) || define( 'WPP_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
 defined( 'WPP_PLUGIN_DIR' ) || define( 'WPP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 defined( 'WPP_PLUGIN_FILE' ) || define( 'WPP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
-defined( 'WPP_PLUGIN_LINK' ) || define( 'WPP_PLUGIN_LINK', 'https://pluginbazar.com/plugin/wp-poll/' );
-defined( 'WPP_DOCS_URL' ) || define( 'WPP_DOCS_URL', 'https://pluginbazar.com/d/wp-poll/' );
-defined( 'WPP_WP_REVIEW_URL' ) || define( 'WPP_WP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
-defined( 'WPP_TICKET_URL' ) || define( 'WPP_TICKET_URL', 'https://pluginbazar.com/supports/wp-poll/' );
-
-if ( ! class_exists( 'WooOpenClose_main' ) ) {
-	require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
-}
+defined( 'WPP_PLUGIN_LINK' ) || define( 'WPP_PLUGIN_LINK', 'https://www.liquidpoll.com' );
+defined( 'WPP_DOCS_URL' ) || define( 'WPP_DOCS_URL', 'https://www.liquidpoll.com/docs' );
+defined( 'WPP_REVIEW_URL' ) || define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
+defined( 'PB_TICKET_URL' ) || define( 'PB_TICKET_URL', 'https://www.com/my-account/' );
 
 if ( ! class_exists( 'WP_Poll_main' ) ) {
 	/**
@@ -75,6 +71,7 @@ if ( ! class_exists( 'WP_Poll_main' ) ) {
 		 */
 		function define_classes_functions() {
 
+			require_once WPP_PLUGIN_DIR . 'includes/classes/class-pb-settings.php';
 			require_once WPP_PLUGIN_DIR . 'includes/classes/class-item-data.php';
 			require_once WPP_PLUGIN_DIR . 'includes/classes/class-functions.php';
 			require_once WPP_PLUGIN_DIR . 'includes/functions.php';
@@ -158,15 +155,20 @@ add_action( 'plugins_loaded', array( 'WP_Poll_main', 'instance' ), 90 );
 
 function pb_sdk_init_wp_poll() {
 
+	if ( ! class_exists( 'Pluginbazar\Client' ) ) {
+		require_once( plugin_dir_path( __FILE__ ) . 'includes/sdk/class-client.php' );
+	}
+
 	if ( ! function_exists( 'get_plugins' ) ) {
 		include_once ABSPATH . '/wp-admin/includes/plugin.php';
 	}
 
 	global $wppoll_sdk;
 
-	$wppoll_sdk = new Pluginbazar\Client( esc_html( 'WP Poll' ), 'wp-poll', 34, __FILE__ );
+	$wppoll_sdk = new Pluginbazar\Client( esc_html( 'WP Poll Pro' ), 'wp-poll', 34, __FILE__ );
+	$wppoll_sdk->license()->add_settings_page( array( 'parent_slug' => 'edit.php?post_type=poll' ) );;
 	$wppoll_sdk->notifications();
-
+	$wppoll_sdk->updater();
 }
 
 /**

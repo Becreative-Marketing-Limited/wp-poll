@@ -25,12 +25,12 @@ if ( ! $poll || empty( $poll ) ) {
 <div class="wpp-poller-list-single-container">
 
 	<?php if ( ! empty( $option_id ) ) : ?>
-        <p><?php echo esc_html__( sprintf( 'You are seeing results for the option \'%s\' only', $poll->get_option_label( $option_id ) ), 'wp-poll' ); ?></p>
+        <p><?php esc_html_e( sprintf( 'You are seeing results for the option \'%s\' only', $poll->get_option_label( $option_id ) ), 'wp-poll' ); ?></p>
 	<?php endif; ?>
 
     <table class="wpp-poller-list-single">
         <tr>
-            <th><?php echo esc_html__( sprintf( '%s - %s', $poll->get_name(), $poll->get_option_label( $option_id ) ), 'wp-poll' ); ?></th>
+            <th><?php esc_html_e( sprintf( '%s - %s', $poll->get_name(), $poll->get_option_label( $option_id ) ), 'wp-poll' ); ?></th>
         </tr>
 
 		<?php foreach ( $poll->get_meta( 'polled_data', array() ) as $user => $data ) :

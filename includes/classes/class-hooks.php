@@ -45,7 +45,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		 */
 		function download_csv_report() {
 
-			$export_nonce = isset( $_REQUEST['wpp_export_nonce_value'] ) ? sanitize_text_field($_REQUEST['wpp_export_nonce_value']) : '';
+			$export_nonce = isset( $_REQUEST['wpp_export_nonce_value'] ) ? $_REQUEST['wpp_export_nonce_value'] : '';
 			if ( ! wp_verify_nonce( $export_nonce, 'wpp_export_nonce' ) ) {
 				return;
 			}
@@ -139,7 +139,7 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 
 				$row_meta = array(
 					'docs'    => sprintf( '<a href="%s" class="wpp-doc" target="_blank">%s</a>', esc_url( WPP_DOCS_URL ), esc_html__( 'Documentation', 'wp-poll' ) ),
-					'support' => sprintf( '<a href="%s" class="wpp-support" target="_blank">%s</a>', esc_url( WPP_TICKET_URL ), esc_html__( 'Support Ticket', 'wp-poll' ) ),
+					'support' => sprintf( '<a href="%s" class="wpp-support" target="_blank">%s</a>', esc_url( PB_TICKET_URL ), esc_html__( 'Support Ticket', 'wp-poll' ) ),
 				);
 
 				return array_merge( $links, $row_meta );
@@ -387,10 +387,9 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 		 * Register Post types, Taxes, Pages and Shortcodes
 		 */
 		function register_everything() {
-			global $wppoll_sdk;
 
 			// Register post type - Poll
-			$wppoll_sdk->utils()->register_post_type( 'poll', apply_filters( 'wpp_filters_post_type_poll', array(
+			wpp()->PB_Settings()->register_post_type( 'poll', apply_filters( 'wpp_filters_post_type_poll', array(
 				'singular'      => esc_html__( 'WP Poll', 'wp-poll' ),
 				'plural'        => esc_html__( 'All Polls', 'wp-poll' ),
 				'labels'        => array(
@@ -402,20 +401,21 @@ if ( ! class_exists( 'WPP_Hooks' ) ) {
 				'supports'      => array( 'title' ),
 			) ) );
 
-			do_action( 'wpp_register_post_types');
+			do_action( 'wpp_register_post_types', wpp()->PB_Settings() );
 
 			// Register Taxonomy - poll_cat
-			$wppoll_sdk->utils()->register_taxonomy( 'poll_cat', 'poll', apply_filters( 'wpp_filters_tax_poll_cat', array(
+			wpp()->PB_Settings()->register_taxonomy( 'poll_cat', 'poll', apply_filters( 'wpp_filters_tax_poll_cat', array(
 				'singular'     => esc_html__( 'Poll Category', 'wp-poll' ),
 				'plural'       => esc_html__( 'Poll Categories', 'wp-poll' ),
 				'hierarchical' => true,
 			) ) );
 
 			// Add Settings Menu
-			$wppoll_sdk->Settings()->create_menu( array(
+			wpp()->PB_Settings( array(
 				'add_in_menu'     => true,
-				'menu_type'       => 'sub_menu',
+				'menu_type'       => 'submenu',
 				'menu_title'      => esc_html__( 'Settings', 'wp-poll' ),
+				'page_title'      => esc_html__( 'Settings', 'wp-poll' ),
 				'menu_page_title' => esc_html__( 'WP Poll - Control Panel', 'wp-poll' ),
 				'capability'      => "manage_options",
 				'menu_slug'       => 'wpp-settings',

@@ -152,7 +152,7 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 
         <li class="poll-option-single">
 
-			<?php global $wppoll_sdk; $wppoll_sdk->settings()->generate_fields( array( array( 'options' => apply_filters( 'wpp_filters_poll_options_fields', $options_fields, $poll_id, $unique_id, $args ) ) ) ); ?>
+			<?php wpp()->PB_Settings()->generate_fields( array( array( 'options' => apply_filters( 'wpp_filters_poll_options_fields', $options_fields, $poll_id, $unique_id, $args ) ) ) ); ?>
 
             <div class="poll-option-controls">
                 <span class="option-remove dashicons dashicons-no-alt" data-status=0></span>
@@ -162,7 +162,7 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
                     <input type="hidden" name="poll_meta_options[<?php echo esc_attr( $unique_id ); ?>][frontend]"
                            value="<?php echo esc_attr( $is_frontend ); ?>">
                     <span class="option-external tt--hint tt--top"
-                          aria-label="<?php echo esc_attr__( 'Added on frontend', 'wp-poll' ); ?>"><span
+                          aria-label="<?php esc_attr_e( 'Added on frontend', 'wp-poll' ); ?>"><span
                                 class="dashicons dashicons-nametag"></span></span>
 				<?php endif; ?>
             </div>

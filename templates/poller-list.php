@@ -24,12 +24,12 @@ if ( ! $poll || empty( $poll ) ) {
 
 <div class="wpp-poller-list-container">
 
-    <h3><?php echo esc_html__( sprintf( 'Poll Title: %s', $poll->get_name() ), 'wp-poll' ); ?></h3>
+    <h3><?php esc_html_e( sprintf( 'Poll Title: %s', $poll->get_name() ), 'wp-poll' ); ?></h3>
 
 
     <table class="wpp-poller-list">
         <tr>
-            <th><?php echo esc_html__( 'Poller', 'wp-poll' ); ?></th>
+            <th><?php esc_html_e( 'Poller', 'wp-poll' ); ?></th>
 
 			<?php foreach ( $poll->get_poll_options() as $option ) : ?>
                 <th><?php echo esc_html( $option['label'] ); ?></th>

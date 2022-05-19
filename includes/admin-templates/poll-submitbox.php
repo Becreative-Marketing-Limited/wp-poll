@@ -19,14 +19,14 @@ if ( $post->post_type != 'poll' ) {
         <label><?php esc_html_e( 'Results / Report', 'wp-poll' ); ?></label>
         <a class="tt--hint tt--top"
            href="<?php echo esc_url( admin_url( 'edit.php?post_type=poll&page=wpp-settings&tab=wpp-reports&poll-id=' . $post->ID ) ); ?>"
-           aria-label="<?php echo esc_attr__( 'Click to see Results', 'wp-poll' ); ?>">
-			<?php echo esc_attr__( 'View Results', 'wp-poll' ); ?>
+           aria-label="<?php esc_attr_e( 'Click to see Results', 'wp-poll' ); ?>">
+			<?php esc_html_e( 'View Results', 'wp-poll' ); ?>
         </a>
     </div>
     <div class="wpp-item">
-        <label><?php echo esc_attr__( 'Shortcode', 'wp-poll' ); ?></label>
+        <label><?php esc_html_e( 'Shortcode', 'wp-poll' ); ?></label>
         <span class="shortcode tt--hint tt--top"
-              aria-label="<?php echo esc_attr__( 'Click to Copy', 'wp-poll' ); ?>"><?php printf( '[poll id="%s"]', $post->ID ); ?></span>
+              aria-label="<?php esc_attr_e( 'Click to Copy', 'wp-poll' ); ?>"><?php printf( '[poll id="%s"]', $post->ID ); ?></span>
     </div>
 </div>
 
