@@ -3,7 +3,7 @@
  * Plugin Name: LiquidPoll - Advanced Polls for Creators and Brands
  * Plugin URI: https://www.liquidpoll.com
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.14
+ * Version: 3.3.15
  * Author: LiquidPoll
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -20,10 +20,10 @@ defined( 'WPP_TABLE_RESULTS' ) || define( 'WPP_TABLE_RESULTS', sprintf( '%spoll_
 defined( 'WPP_PLUGIN_URL' ) || define( 'WPP_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
 defined( 'WPP_PLUGIN_DIR' ) || define( 'WPP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 defined( 'WPP_PLUGIN_FILE' ) || define( 'WPP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
-defined( 'WPP_PLUGIN_LINK' ) || define( 'WPP_PLUGIN_LINK', 'https://www.liquidpoll.com' );
+defined( 'WPP_PLUGIN_LINK' ) || define( 'WPP_PLUGIN_LINK', 'https://www.liquidpoll.com/pro' );
 defined( 'WPP_DOCS_URL' ) || define( 'WPP_DOCS_URL', 'https://www.liquidpoll.com/docs' );
 defined( 'WPP_REVIEW_URL' ) || define( 'WPP_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
-defined( 'PB_TICKET_URL' ) || define( 'PB_TICKET_URL', 'https://www.com/my-account/' );
+defined( 'PB_TICKET_URL' ) || define( 'PB_TICKET_URL', 'https://www.liquidpoll.com/my-account/' );
 
 if ( ! class_exists( 'WP_Poll_main' ) ) {
 	/**
@@ -165,7 +165,7 @@ function pb_sdk_init_wp_poll() {
 
 	global $wppoll_sdk;
 
-	$wppoll_sdk = new Pluginbazar\Client( esc_html( 'WP Poll Pro' ), 'wp-poll', 34, __FILE__ );
+	$wppoll_sdk = new Pluginbazar\Client( esc_html( 'LiquidPoll Pro' ), 'wp-poll', 34, __FILE__ );
 	$wppoll_sdk->license()->add_settings_page( array( 'parent_slug' => 'edit.php?post_type=poll' ) );;
 	$wppoll_sdk->notifications();
 	$wppoll_sdk->updater();

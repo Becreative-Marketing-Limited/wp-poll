@@ -762,7 +762,7 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 							array(
 								'id'      => 'wpp_chat',
 								'title'   => esc_html__( 'Live Chat', 'wp-poll' ),
-								'details' => sprintf( '<a style="text-decoration: none;" href="%s" target="_blank"><span class="dashicons dashicons-format-chat"></span></a>', esc_url( 'https://m.me/pluginbazar' ) ),
+								'details' => sprintf( '<a style="text-decoration: none;" href="%s" target="_blank"><span class="dashicons dashicons-format-chat"></span></a>', esc_url( 'https://www.liquidpoll.com' ) ),
 							),
 							array(
 								'id'      => 'wpp_ticket',

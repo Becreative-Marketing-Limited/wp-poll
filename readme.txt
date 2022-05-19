@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 5.9.3
-	Stable tag: 3.3.14
+	Stable tag: 3.3.15
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@
 
 LiquidPoll allows you to integrate highly customisable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
 
-
+[BUY PRO](https://www.liquidpoll.com/pro/) | [DOCUMENTATION](https://www.liquidpoll.com/docs/) | [COMMUNITY & SUPPORT](https://www.liquidpoll.com/community/)
 
 ### FREE PLUGIN FEATURES
 * Single and Multi votes
