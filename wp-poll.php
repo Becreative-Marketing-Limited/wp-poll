@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: LiquidPoll - Advanced Polls for Creators and Brands
- * Plugin URI: https://www.liquidpoll.com
+ * Plugin URI: https://liquidpoll.com
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.15
+ * Version: 3.3.16
  * Author: LiquidPoll
  * Text Domain: wp-poll
  * Domain Path: /languages/
- * Author URI: https://www.liquidpoll.com
+ * Author URI: https://liquidpoll.com
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -165,7 +165,7 @@ function pb_sdk_init_wp_poll() {
 
 	global $wppoll_sdk;
 
-	$wppoll_sdk = new Pluginbazar\Client( esc_html( 'LiquidPoll Pro' ), 'wp-poll', 34, __FILE__ );
+	$wppoll_sdk = new Pluginbazar\Client( esc_html( 'LiquidPoll Pro' ), 'wp-poll', 126, __FILE__ );
 	$wppoll_sdk->license()->add_settings_page( array( 'parent_slug' => 'edit.php?post_type=poll' ) );;
 	$wppoll_sdk->notifications();
 	$wppoll_sdk->updater();

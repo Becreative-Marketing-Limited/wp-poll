@@ -16,8 +16,8 @@ class License {
 	protected $data;
 	protected $option_key = null;
 	protected $menu_args = null;
-	protected $license_server = 'https://pluginbazar.com';
-	protected $secret_key = '5beed4ad27fd52.16817105';
+	protected $license_server = 'https://www.liquidpoll.com';
+	protected $secret_key = '6287d0ca3125a4.96767836';
 
 	/**
 	 * @var Client null
@@ -282,10 +282,10 @@ class License {
                         </div>
                     </form>
                     <p>
-						<?php printf( $this->client->__trans( 'Find your license key from <a target="_blank" href="%s/my-account/license-keys/"><strong>Pluginbazar.com > My Account > License Keys</strong></a>' ), $this->license_server ); ?>
+						<?php printf( $this->client->__trans( 'Find your license key from <a target="_blank" href="%s/my-account/license-keys/"><strong>LiquidPoll.com > My Account > License Keys</strong></a>' ), $this->license_server ); ?>
                     </p>
                     <p>
-						<?php printf( $this->client->__trans( 'Download latest version manually from <a target="_blank" href="%s/my-account/downloads/"><strong>Pluginbazar.com > My Account > Downloads</strong></a>' ), $this->license_server ); ?>
+						<?php printf( $this->client->__trans( 'Download latest version manually from <a target="_blank" href="%s/my-account/downloads/"><strong>LiquidPoll.com > My Account > Downloads</strong></a>' ), $this->license_server ); ?>
                     </p>
                 </div>
             </div>
