@@ -259,7 +259,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 				$thumb_url = array();
 
 				if ( ! empty( $thumb_id ) ) {
-					$thumb_url = wp_get_attachment_image_src( $thumb_id );
+					$thumb_url = wp_get_attachment_image_src( $thumb_id, 'full' );
 				}
 
 				$_poll_options[ $option_id ] = array(

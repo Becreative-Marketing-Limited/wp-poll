@@ -17,8 +17,7 @@ img {
 }
 
 [class*="wpp-option-list"] {
-    max-width: 430px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 table, td, th {
@@ -47,27 +46,40 @@ td, th {
     margin-bottom: 25px;
 }
 
+.wpp-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 .wpp-button {
     display: inline-block;
-    line-height: normal;
-    padding: 12px 20px;
-    background: #000;
+    padding: 16px 18px;
+    background: #5F64EB;
     border: 0;
-    border-radius: 2px;
+    border-radius: 5px;
     color: #fff;
     transition: 0.3s;
     min-width: 99px;
     outline: none;
     box-shadow: none;
     cursor: pointer;
+    font-size: 20px;
+    line-height: 23px;
+    font-weight: 600;
+    margin-right: 18px;
+    font-family: Roboto, serif;
+    text-align: center;
+    width: 50%;
 }
 
 .wpp-poll-title {
-    margin: 0 0 30px;
-}
-
-.wpp-buttons .wpp-button {
-    margin: 0 7px 7px 0;
+    font-family: Roboto, serif;
+    font-size: 35px;
+    font-weight: 600;
+    line-height: 41px;
+    letter-spacing: 0;
+    text-align: left;
+    margin: 0 0 15px 0;
 }
 
 .wpp-button-orange {
@@ -80,6 +92,11 @@ td, th {
 
 .wpp-button-red {
     background: #F44336;
+}
+
+.wpp-button-gray {
+    background: #F2F2F2;
+    color: #909090;
 }
 
 .wpp-button-blue {
@@ -276,12 +293,16 @@ p.wpp-responses.wpp-success {
 * Single Poll
 */
 
+.poll-single {
+    max-width: 560px;
+}
+
 .poll-single:not(.inside-embed) {
     margin: 70px 0;
 }
 
 .poll-single .wpp-content {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .poll-single .wpp-content p:last-child {
@@ -298,13 +319,19 @@ p.wpp-responses.wpp-success {
     margin-bottom: 30px;
 }
 
+.wpp-countdown-timer-1 {
+    margin: 25px 0;
+    text-align: center;
+}
+
 .wpp-countdown-timer-1 > span {
     display: inline-block;
     margin-right: 15px;
     padding-right: 15px;
     border-right: 1px solid #ccc;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 22px;
+    line-height: 25px;
+    font-weight: 400;
 }
 
 .wpp-countdown-timer-1 > span:last-child {
@@ -315,8 +342,7 @@ p.wpp-responses.wpp-success {
 
 .wpp-countdown-timer-1 .count-number {
     margin-right: 5px;
-    font-weight: bold;
-    font-size: 20px;
+    font-weight: 700;
 }
 
 .wpp-countdown-timer-2 > span {
@@ -432,22 +458,25 @@ p.wpp-responses.wpp-success {
 .wpp-option-list-1 .wpp-option-single input + label {
     position: relative;
     cursor: pointer;
-    padding-left: 45px;
     display: block;
+    width: 100%;
+    font-size: 20px;
+    line-height: 23px;
+    font-weight: 600;
+    color: #000000;
 }
 
 .wpp-option-list-1 .wpp-option-single input + label:before {
     content: '';
-    left: 0;
+    right: 0;
     top: 15px;
     position: absolute;
     transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border-radius: 3px;
-    background: #fff;
-    border: 1px solid #d2d8dd;
-    transition: 0.3s;
+    background: #EEEEEE;
+    border: 4px solid #EEEEEE;
 }
 
 .wpp-option-list-1 .wpp-option-single input[type="radio"] + label:before {
@@ -456,32 +485,31 @@ p.wpp-responses.wpp-success {
 
 .wpp-option-list-1 .wpp-option-single input:hover + label:before,
 .wpp-option-list-1 .wpp-option-single input:checked + label:before {
-    background: #0586ec;
-    border-color: #0586ec;
+    background: linear-gradient(180deg, #80C2FF 0%, #4398E8 100%);
 }
 
-.wpp-option-list-1 .wpp-option-single input + label:after {
-    content: '';
-    position: absolute;
-    left: 9px;
-    top: 12px;
-    width: 6px;
-    height: 10px;
-    border: solid white;
-    z-index: 999;
-    border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg) translateY(-50%);
-    transform: rotate(45deg) translateY(-50%);
-    opacity: 0;
-    transition: 0.3s;
-}
+/*.wpp-option-list-1 .wpp-option-single input + label:after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    right: 15px;*/
+/*    top: 12px;*/
+/*    width: 6px;*/
+/*    height: 10px;*/
+/*    border: solid white;*/
+/*    z-index: 999;*/
+/*    border-width: 0 2px 2px 0;*/
+/*    -webkit-transform: rotate(45deg) translateY(-50%);*/
+/*    transform: rotate(45deg) translateY(-50%);*/
+/*    opacity: 0;*/
+/*    transition: 0.3s;*/
+/*}*/
 
-.wpp-option-list-1 .wpp-option-single input:checked + label:after {
-    opacity: 1;
-}
+/*.wpp-option-list-1 .wpp-option-single input:checked + label:after {*/
+/*    opacity: 1;*/
+/*}*/
 
 .wpp-option-list-1 .wpp-option-single.has-result {
-    padding-top: 10px;
+    margin-bottom: 90px;
 }
 
 
@@ -1074,11 +1102,17 @@ p.wpp-responses.wpp-success {
 }
 
 [class*="wpp-option-list"] .has-thumb .wpp-option-thumb {
-    width: 32px;
+    width: 75px;
+}
+
+[class*="wpp-option-list"] .has-thumb .wpp-option-thumb img {
+    height: auto;
+    max-width: 100%;
+    border-radius: 5px;
 }
 
 [class*="wpp-option-list"] .has-label.has-thumb .wpp-option-input {
-    width: calc(100% - 50px);
+    width: calc(100% - 100px);
 }
 
 .wpp-option-list-10.wpp-checkmark svg,
@@ -1190,36 +1224,37 @@ p.wpp-responses.wpp-success {
     background: #ff5722;
 }
 
-.wpp-option-result-bar.results-warning {
-    background: #ff9800;
-}
+/*.wpp-option-result-bar.results-warning {*/
+/*    background: #ff9800;*/
+/*}*/
 
-.wpp-option-result-bar.results-info {
-    background: #03a9f4;
-}
+/*.wpp-option-result-bar.results-info {*/
+/*    background: #03a9f4;*/
+/*}*/
 
-.wpp-option-result-bar.results-success {
-    background: #4caf50;
-}
+/*.wpp-option-result-bar.results-success {*/
+/*    background: #4caf50;*/
+/*}*/
 
 .wpp-option-result-bar {
     position: absolute;
-    height: 3px;
+    height: 5px;
     left: 0;
-    top: 0;
+    bottom: -25px;
     z-index: -1;
     width: 0;
     transition: 0.5s;
-    border-top-left-radius: 3px;
+    background: #44C368;
 }
 
 .wpp-option-result {
     position: absolute;
     left: 0;
     bottom: 0;
-    font-size: 17px;
-    color: rgba(0, 0, 0, 0.3);
-    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+    font-weight: 300;
     transition: 0.5s;
 }
 
@@ -1228,7 +1263,7 @@ p.wpp-responses.wpp-success {
 }
 
 .wpp-option-single.has-result .wpp-option-result {
-    bottom: -35px;
+    bottom: -58px;
 }
 
 .wpp-option-list-3 .wpp-option-single.has-result {

@@ -38,9 +38,9 @@ add_action( 'wpp_single_poll_main', 'wpp_single_poll_thumb', 15 );
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_content', 20 );
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_options', 25 );
 add_action( 'wpp_single_poll_main', 'wpp_single_poll_notice', 30 );
-add_action( 'wpp_single_poll_main', 'wpp_single_poll_countdown', 35 );
-add_action( 'wpp_single_poll_main', 'wpp_single_poll_responses', 40 );
-add_action( 'wpp_single_poll_main', 'wpp_single_poll_buttons', 45 );
+add_action( 'wpp_single_poll_main', 'wpp_single_poll_responses', 35 );
+add_action( 'wpp_single_poll_main', 'wpp_single_poll_buttons', 40 );
+add_action( 'wpp_single_poll_main', 'wpp_single_poll_countdown', 45 );
 
 
 /**

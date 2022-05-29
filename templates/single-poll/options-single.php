@@ -29,6 +29,13 @@ $option_name   = $poll->get_poll_type() == 'survey' && $options_type == 'checkbo
 
     <div class="wpp-option-single <?php echo esc_attr( $thumb_class . ' ' . $label_class ); ?>"
          data-option-id="<?php echo esc_attr( $option_id ); ?>">
+
+        <?php if ( ! empty( $thumb ) ) : ?>
+            <div class="wpp-option-thumb">
+                <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
+            </div>
+	    <?php endif; ?>
+
         <div class="wpp-option-input">
             <input type="<?php echo esc_attr( $options_type ); ?>"
                    name="<?php echo esc_attr( $option_name ); ?>"
@@ -37,11 +44,7 @@ $option_name   = $poll->get_poll_type() == 'survey' && $options_type == 'checkbo
             <label for="<?php echo esc_attr( $unique_id ); ?>"><?php echo esc_html( $label ); ?></label>
         </div>
 
-		<?php if ( ! empty( $thumb ) ) : ?>
-            <div class="wpp-option-thumb">
-                <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
-            </div>
-		<?php endif; ?>
+
 
 		<?php if ( ! $poll->hide_results() ) : ?>
             <div class="wpp-option-result"></div>
