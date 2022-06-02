@@ -1224,17 +1224,17 @@ p.wpp-responses.wpp-success {
     background: #ff5722;
 }
 
-/*.wpp-option-result-bar.results-warning {*/
-/*    background: #ff9800;*/
-/*}*/
+.wpp-option-result-bar.results-warning {
+    background: #ff9800;
+}
 
-/*.wpp-option-result-bar.results-info {*/
-/*    background: #03a9f4;*/
-/*}*/
+.wpp-option-result-bar.results-info {
+    background: #03a9f4;
+}
 
-/*.wpp-option-result-bar.results-success {*/
-/*    background: #4caf50;*/
-/*}*/
+.wpp-option-result-bar.results-success {
+    background: #4caf50;
+}
 
 .wpp-option-result-bar {
     position: absolute;

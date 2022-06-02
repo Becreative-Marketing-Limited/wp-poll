@@ -652,6 +652,35 @@ if ( ! class_exists( 'WPP_Functions' ) ) {
 					),
 				) ),
 			);
+			$pages['wpp-styling'] = array(
+				'page_nav'      => esc_html__( 'Styling', 'wp-poll' ),
+				'page_settings' => apply_filters( 'wpp_filters_settings_page_styling', array(
+					array(
+						'title'   => esc_html__( 'Basic styling (Free)', 'wp-poll' ),
+						'options' => array(
+							array(
+								'id'          => 'wpp_btn_text_new_option',
+								'title'       => esc_html__( 'Buttons Text', 'wp-poll' ),
+								'details'     => esc_html__( 'New option button', 'wp-poll' ),
+								'placeholder' => esc_html__( 'New Option', 'wp-poll' ),
+								'type'        => 'text',
+							),
+						)
+					),
+					array(
+						'title'   => esc_html__( 'Advanced styling (Pro)', 'wp-poll' ),
+						'options' => array(
+							array(
+								'id'      => 'wpp_page_archive',
+								'title'   => esc_html__( 'Archive Page', 'wp-poll' ),
+								'details' => esc_html__( 'Select a poll archive page', 'wp-poll' ),
+								'type'    => 'select',
+								'args'    => 'PAGES',
+							),
+						)
+					),
+				) ),
+			);
 			$pages['wpp-pro']     = array(
 				'page_nav'      => esc_html__( 'Pro Options', 'wp-poll-pro' ),
 				'page_settings' => apply_filters( 'wpp_filters_settings_page_pro', array(
