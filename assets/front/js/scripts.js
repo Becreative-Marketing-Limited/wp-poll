@@ -7,7 +7,8 @@
 
     $(document).on('click', '.wpp-get-poll-results', function () {
 
-        let pollID = $(this).data('poll-id');
+        let resultButton = $(this),
+            pollID = resultButton.data('poll-id');
 
         if (typeof pollID === 'undefined') {
             return;
@@ -57,11 +58,13 @@
                         classTobeAdded = 'results-success';
                     }
 
-                    if ($.inArray(optionID, response.data.percentages)) {
+                    if ($.inArray(optionID, response.data.percentages) && percentageValue > 0) {
                         $(this).addClass('has-result').find('.wpp-option-result-bar').addClass(classTobeAdded).css('width', percentageValue + '%');
-                        $(this).find('.wpp-option-result').html(singleVoteCount + ' ' +  pluginObject.voteText);
+                        $(this).find('.wpp-option-result').html(percentageValue + '%').css('left', 'calc(' + percentageValue + '% - 35px)');
                     }
                 });
+
+                resultButton.parent().fadeOut('slow', 'linear');
             }
         });
     });
