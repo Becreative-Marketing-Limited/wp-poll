@@ -2,7 +2,39 @@
 Admin css
 */
 
-.wpp-no-display {
+:root {
+    --sliderxwoo-primary-color: #774ea9;
+    --sliderxwoo-red-color: #ff6a5f;
+}
+
+body.post-type-poll #titlediv #title,
+body.post-type-poll #titlediv #title:focus {
+    padding: 12px 8px;
+    height: auto;
+    border-radius: 3px;
+    border: 1px solid #774ea952;
+    outline: none;
+    box-shadow: none;
+    margin-bottom: 10px;
+}
+
+body.post-type-poll #titlediv #title-prompt-text {
+    padding: 17px 10px;
+}
+
+body.post-type-poll #submitdiv {
+    box-shadow: 3px 5px 15px 5px rgb(0 0 0 / 7%);
+    border: none;
+}
+
+body.post-type-poll #submitdiv .postbox-header,
+body.post-type-poll #submitdiv .handlediv,
+body.post-type-poll #submitdiv .hndle {
+    display: none;
+}
+
+
+.liquidpoll-no-display {
     display: none;
 }
 
@@ -13,7 +45,7 @@ Admin css
 }
 
 
-#poll_metabox .wpp-add-poll-option {
+#poll_metabox .liquidpoll-add-poll-option {
     position: relative;
     text-align: center;
     min-width: 180px;
@@ -26,7 +58,7 @@ Admin css
 }
 
 
-#poll_metabox .wpp-add-poll-option:after {
+#poll_metabox .liquidpoll-add-poll-option:after {
     content: '+';
     position: relative;
     padding-left: 8px;
@@ -115,7 +147,7 @@ Admin css
 /**
  * Chart Reporting
  */
-#wpp-chart-report {
+#liquidpoll-chart-report {
     background: #fff;
     border: 1px solid #ddd;
     box-shadow: 0 22px 35px -16px rgba(0, 0, 0, 0.1);
@@ -148,10 +180,10 @@ Admin css
     max-width: 100%;
 }
 
-a.wpp-preview-link,
-a.wpp-preview-link:active,
-a.wpp-preview-link:focus,
-a.wpp-preview-link:hover {
+a.liquidpoll-preview-link,
+a.liquidpoll-preview-link:active,
+a.liquidpoll-preview-link:focus,
+a.liquidpoll-preview-link:hover {
     margin-left: 10px;
     text-decoration: none;
     color: #FF5722;
@@ -163,7 +195,7 @@ a.wpp-preview-link:hover {
  * Notices
  */
 
-.wpp-notice {
+.liquidpoll-notice {
     background: #00bcd43b;
     padding: 10px;
     border-left: 3px solid;
@@ -171,15 +203,15 @@ a.wpp-preview-link:hover {
     border-bottom-right-radius: 3px;
 }
 
-.wpp-notice.wpp-warning {
+.liquidpoll-notice.liquidpoll-warning {
     background: #ff98003b;
 }
 
-.wpp-notice.wpp-error {
+.liquidpoll-notice.liquidpoll-error {
     background: #ff57223b;
 }
 
-.wpp-notice.wpp-success {
+.liquidpoll-notice.liquidpoll-success {
     background: #4caf503b;
 }
 
@@ -187,7 +219,7 @@ a.wpp-preview-link:hover {
     width: 160px;
 }
 
-.wps-field.image_select a.wpp-preview-link {
+.wps-field.image_select a.liquidpoll-preview-link {
     margin-left: 0;
 }
 
@@ -275,12 +307,12 @@ span.shortcode {
     box-shadow: none;
 }
 
-a.wpp-support,
-a.wpp-support:focus,
-a.wpp-support:active,
-a.wpp-doc,
-a.wpp-doc:focus,
-a.wpp-doc:active {
+a.liquidpoll-support,
+a.liquidpoll-support:focus,
+a.liquidpoll-support:active,
+a.liquidpoll-doc,
+a.liquidpoll-doc:focus,
+a.liquidpoll-doc:active {
     background: #e61f63;
     color: #fff;
     padding: 3px 12px 5px;
@@ -291,6 +323,6 @@ a.wpp-doc:active {
     border: none;
 }
 
-a.wpp-doc {
+a.liquidpoll-doc {
     background: #292929;
 }

@@ -11,15 +11,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
-if ( ! class_exists( 'WPP_Poll' ) ) {
+if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 	/**
-	 * Class WPP_Hooks
+	 * Class LIQUIDPOLL_Hooks
 	 */
-	class WPP_Poll extends WPP_Item_data {
+	class LIQUIDPOLL_Poll extends LIQUIDPOLL_Item_data {
 
 
 		/**
-		 * WPP_Poll constructor.
+		 * LIQUIDPOLL_Poll constructor.
 		 *
 		 * @param bool $poll_id
 		 */
@@ -38,11 +38,11 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			$poll_type = 'poll';
 			$poll_type = $this->get_meta( 'poll_type', $poll_type );
 
-			if ( $poll_type == 'survey' && ! defined( 'WPPS_PLUGIN_FILE' ) ) {
+			if ( $poll_type == 'survey' && ! defined( 'LIQUIDPOLLS_PLUGIN_FILE' ) ) {
 				$poll_type = 'poll';
 			}
 
-			return apply_filters( 'wpp_filters_poll_type', $poll_type, $this->get_id() );
+			return apply_filters( 'liquidpoll_filters_poll_type', $poll_type, $this->get_id() );
 		}
 
 
@@ -69,7 +69,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 				}
 			}
 
-			return apply_filters( 'wpp_filters_ready_to_vote', $can_vote, $this->get_id() );
+			return apply_filters( 'liquidpoll_filters_ready_to_vote', $can_vote, $this->get_id() );
 		}
 
 
@@ -131,7 +131,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 				$poll_reports = isset( $poll_results['total'] ) ? $poll_results['total'] : 0;
 			}
 
-			return apply_filters( 'wpp_poll_reports', $poll_reports, $reports_for, $this->get_id(), $this );
+			return apply_filters( 'liquidpoll_poll_reports', $poll_reports, $reports_for, $this->get_id(), $this );
 		}
 
 
@@ -145,17 +145,17 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		function get_option_label( $option_id = false ) {
 
 			if ( ! $option_id ) {
-				return apply_filters( 'wpp_filter_get_option_label', esc_html__( 'N/A', 'wp-poll' ), $option_id, $this->get_id(), $this );
+				return apply_filters( 'liquidpoll_filter_get_option_label', esc_html__( 'N/A', 'wp-poll' ), $option_id, $this->get_id(), $this );
 			}
 
 			$poll_options = $this->get_poll_options();
 			$option_label = isset( $poll_options[ $option_id ]['label'] ) ? $poll_options[ $option_id ]['label'] : '';
 
 			if ( empty( $option_label ) ) {
-				return apply_filters( 'wpp_filter_get_option_label', esc_html__( 'N/A', 'wp-poll' ), $option_id, $this->get_id(), $this );
+				return apply_filters( 'liquidpoll_filter_get_option_label', esc_html__( 'N/A', 'wp-poll' ), $option_id, $this->get_id(), $this );
 			}
 
-			return apply_filters( 'wpp_filter_get_option_label', $option_label, $option_id, $this->get_id(), $this );
+			return apply_filters( 'liquidpoll_filter_get_option_label', $option_label, $option_id, $this->get_id(), $this );
 		}
 
 
@@ -163,7 +163,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 			$polled_data = $this->get_meta( 'polled_data', array() );
 
-			return apply_filters( 'wpp_filters_polled_data', $polled_data );
+			return apply_filters( 'liquidpoll_filters_polled_data', $polled_data );
 		}
 
 
@@ -202,12 +202,12 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			 */
 			$singles = isset( $poll_results['singles'] ) ? $poll_results['singles'] : array();
 			$singles = ! empty( $singles ) ? $singles : array();
-			
+
 			foreach ( $singles as $option_id => $single_count ) {
 				$poll_results['percentages'][ $option_id ] = floor( ( $single_count * 100 ) / $total_voted );
 			}
 
-			return apply_filters( 'wpp_filters_poll_results', $poll_results, $this->get_id(), $this );
+			return apply_filters( 'liquidpoll_filters_poll_results', $poll_results, $this->get_id(), $this );
 		}
 
 
@@ -253,22 +253,13 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			$poll_options  = $this->get_meta( 'poll_meta_options', array() );
 
 			foreach ( $poll_options as $option_id => $option ) {
-
-				$label     = isset( $option['label'] ) ? $option['label'] : '';
-				$thumb_id  = isset( $option['thumb'] ) ? $option['thumb'] : '';
-				$thumb_url = array();
-
-				if ( ! empty( $thumb_id ) ) {
-					$thumb_url = wp_get_attachment_image_src( $thumb_id );
-				}
-
 				$_poll_options[ $option_id ] = array(
-					'label' => $label,
-					'thumb' => reset( $thumb_url ),
+					'label' => isset( $option['label'] ) ? $option['label'] : '',
+					'thumb' => isset( $option['thumb']['url'] ) ? $option['thumb']['url'] : '',
 				);
 			}
 
-			return apply_filters( 'wpp_filters_poll_options', $_poll_options );
+			return apply_filters( 'liquidpoll_filters_poll_options', $_poll_options );
 		}
 
 
@@ -300,7 +291,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 				'animation_checkbox',
 				'animation_radio'
 			) ) ) {
-				return apply_filters( 'wpp_filters_get_style', $style, $style_of );
+				return apply_filters( 'liquidpoll_filters_get_style', $style, $style_of );
 			}
 
 			if ( $style_of == 'countdown' ) {
@@ -321,7 +312,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 
 			$style = is_array( $style ) ? reset( $style ) : $style;
 
-			return apply_filters( 'wpp_filters_get_style', $style, $style_of );
+			return apply_filters( 'liquidpoll_filters_get_style', $style, $style_of );
 		}
 
 
@@ -337,7 +328,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 			$deadline = $this->get_meta( 'poll_deadline' );
 			$deadline = empty( $deadline ) ? '' : date( $format, strtotime( $deadline ) );
 
-			return apply_filters( 'wpp_filters_poll_deadline', $deadline );
+			return apply_filters( 'liquidpoll_filters_poll_deadline', $deadline );
 		}
 
 
@@ -348,7 +339,7 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		 */
 		function visitors_can_add_option() {
 
-			return apply_filters( 'wpp_filters_visitors_can_add_option', $this->get_allows_disallows( 'new_options' ), $this->get_id() );
+			return apply_filters( 'liquidpoll_filters_visitors_can_add_option', $this->get_allows_disallows( 'new_options' ), $this->get_id() );
 		}
 
 
@@ -397,5 +388,5 @@ if ( ! class_exists( 'WPP_Poll' ) ) {
 		}
 	}
 
-	new WPP_Poll();
+	new LIQUIDPOLL_Poll();
 }

@@ -5,13 +5,13 @@
 
 global $poll, $wp_query;
 
-$poll        = wpp_get_poll();
+$poll        = liquidpoll_get_poll();
 $embed_class = $wp_query->get( 'poll_in_embed', false ) ? 'inside-embed' : '';
 
 /**
- * Hook: wpp_before_single_poll.
+ * Hook: liquidpoll_before_single_poll.
  */
-do_action( 'wpp_before_single_poll' );
+do_action( 'liquidpoll_before_single_poll' );
 
 if ( post_password_required() ) {
 	echo get_the_password_form(); // WPCS: XSS ok.
@@ -20,40 +20,40 @@ if ( post_password_required() ) {
 }
 
 ?>
-    <div id="poll-<?php the_ID(); ?>" <?php wpp_single_post_class( $embed_class ); ?>>
+    <div id="poll-<?php the_ID(); ?>" <?php liquidpoll_single_post_class( $embed_class ); ?>>
 		<?php
 		/**
 		 * Before Single poll main content
 		 */
-		do_action( 'wpp_before_single_poll_main' );
+		do_action( 'liquidpoll_before_single_poll_main' );
 
 
-		if ( apply_filters( 'wpp_filters_display_single_poll_main', true ) ) {
+		if ( apply_filters( 'liquidpoll_filters_display_single_poll_main', true ) ) {
 			/**
-			 * Hook: wpp_single_poll_main
+			 * Hook: liquidpoll_single_poll_main
 			 *
-			 * @hooked wpp_single_poll_title
-			 * @hooked wpp_single_poll_thumb
-			 * @hooked wpp_single_poll_content
-			 * @hooked wpp_single_poll_options
-			 * @hooked wpp_single_poll_notice
-			 * @hooked wpp_single_poll_message
-			 * @hooked wpp_single_poll_buttons
+			 * @hooked liquidpoll_single_poll_title
+			 * @hooked liquidpoll_single_poll_thumb
+			 * @hooked liquidpoll_single_poll_content
+			 * @hooked liquidpoll_single_poll_options
+			 * @hooked liquidpoll_single_poll_notice
+			 * @hooked liquidpoll_single_poll_message
+			 * @hooked liquidpoll_single_poll_buttons
 			 */
-			do_action( 'wpp_single_poll_main' );
+			do_action( 'liquidpoll_single_poll_main' );
 		}
 
 
 		/**
 		 * After Single poll main content
 		 */
-		do_action( 'wpp_after_single_poll_main' );
+		do_action( 'liquidpoll_after_single_poll_main' );
 		?>
     </div>
 
 <?php
 /**
- * Hook: wpp_after_single_poll
+ * Hook: liquidpoll_after_single_poll
  */
-do_action( 'wpp_after_single_poll' );
+do_action( 'liquidpoll_after_single_poll' );
 ?>

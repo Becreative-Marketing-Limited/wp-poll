@@ -13,7 +13,7 @@ if ( empty( $poll_id ) ) {
 	return;
 }
 
-$poll = wpp_get_poll( $poll_id );
+$poll = liquidpoll_get_poll( $poll_id );
 
 $seriesVotes  = array_values( $poll->get_poll_reports( 'counts' ) );
 $seriesLabels = array_values( $poll->get_poll_reports( 'labels' ) );
@@ -34,7 +34,7 @@ if ( $chart_type == 'pie' ) {
 
 ?>
 
-<div id="wpp-chart-report"></div>
+<div id="liquidpoll-chart-report"></div>
 
 
 <script>
@@ -153,7 +153,7 @@ if ( $chart_type == 'pie' ) {
             }]
         },
         chart = new ApexCharts(
-            document.querySelector("#wpp-chart-report"),
+            document.querySelector("#liquidpoll-chart-report"),
             options
         );
 

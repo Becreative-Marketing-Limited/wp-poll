@@ -19,15 +19,15 @@ global $poll;
 	/**
 	 * Poll Archive single summary
 	 *
-	 * @hooked wpp_poll_archive_single_main
+	 * @hooked liquidpoll_poll_archive_single_main
 	 *
-	 * @see wpp_poll_archive_single_title()
-	 * @see wpp_poll_archive_single_meta()
-     * @see wpp_poll_archive_single_excerpt()
-	 * @see wpp_poll_archive_single_options()
+	 * @see liquidpoll_poll_archive_single_title()
+	 * @see liquidpoll_poll_archive_single_meta()
+     * @see liquidpoll_poll_archive_single_excerpt()
+	 * @see liquidpoll_poll_archive_single_options()
 	 */
 
-	do_action( 'wpp_poll_archive_single_summary' );
+	do_action( 'liquidpoll_poll_archive_single_summary' );
 	?>
 
 </div>

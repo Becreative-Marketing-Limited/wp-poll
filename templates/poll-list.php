@@ -8,30 +8,30 @@
 
 if ( ! defined('ABSPATH')) exit; // if direct access 
 	
-	$wpp_list_per_page = get_option( 'wpp_list_per_page' );
-	if( empty( $wpp_list_per_page ) ) $wpp_list_per_page = 10;
+	$liquidpoll_list_per_page = get_option( 'liquidpoll_list_per_page' );
+	if( empty( $liquidpoll_list_per_page ) ) $liquidpoll_list_per_page = 10;
 	
 	if ( get_query_var('paged') ) { $paged = get_query_var('paged');} 
 	elseif ( get_query_var('page') ) { $paged = get_query_var('page'); } 
 	else { $paged = 1; }
 	
-	$WPP_Poll_query = new WP_Query( array (
+	$LIQUIDPOLL_Poll_query = new WP_Query( array (
 		'post_type' => 'poll',
 		'post_status' => array( 'publish' ),
 		'order' => 'DESC',
 		'orderby' => 'date',
-		'posts_per_page' => $wpp_list_per_page,
+		'posts_per_page' => $liquidpoll_list_per_page,
 		'paged' => $paged,
 	) );
 			
 
 ?>
 
-<div class="wpp_list_container">
+<div class="liquidpoll_list_container">
 	
 	<?php 
-	if ( $WPP_Poll_query->have_posts() ) : 
-	while ( $WPP_Poll_query->have_posts() ) : $WPP_Poll_query->the_post();
+	if ( $LIQUIDPOLL_Poll_query->have_posts() ) : 
+	while ( $LIQUIDPOLL_Poll_query->have_posts() ) : $LIQUIDPOLL_Poll_query->the_post();
 		
 		$poll_title 	= get_the_title();
 		$poll_permalink = get_the_permalink();
@@ -49,15 +49,15 @@ if ( ! defined('ABSPATH')) exit; // if direct access
 		}
 
 		echo "
-		<div class='wpp_list_single'>
-			<div class='wpp_left'>
-				<div class='wpp_icon dashicons-before dashicons-chart-bar'></div>
+		<div class='liquidpoll_list_single'>
+			<div class='liquidpoll_left'>
+				<div class='liquidpoll_icon dashicons-before dashicons-chart-bar'></div>
 			</div>
-			<div class='wpp_right'>
-				<a class='wpp_title' href='$poll_permalink'>$poll_title</a>
-				<a class='inline wpp_categories'><i class='fa fa-folder-open'></i> $terms_html</a>
-				<a class='inline wpp_report'><i class='fa fa-paper-plane'></i> $poller ".esc_html__('Response(s)','wp-poll')."</a>
-				<a class='inline wpp_published'><i class='fa fa-clock-o'></i> $time_ago</a>
+			<div class='liquidpoll_right'>
+				<a class='liquidpoll_title' href='$poll_permalink'>$poll_title</a>
+				<a class='inline liquidpoll_categories'><i class='fa fa-folder-open'></i> $terms_html</a>
+				<a class='inline liquidpoll_report'><i class='fa fa-paper-plane'></i> $poller ".esc_html__('Response(s)','wp-poll')."</a>
+				<a class='inline liquidpoll_published'><i class='fa fa-clock-o'></i> $time_ago</a>
 			</div>
 		</div>";
 	
@@ -68,7 +68,7 @@ if ( ! defined('ABSPATH')) exit; // if direct access
 		'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
 		'format' => '?paged=%#%',
 		'current' => max( 1, $paged ),
-		'total' => $WPP_Poll_query->max_num_pages
+		'total' => $LIQUIDPOLL_Poll_query->max_num_pages
 	);
 			
 	?><div class="paginate"> <?php echo paginate_links($paginate); ?> </div> <?php		

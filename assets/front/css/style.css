@@ -16,7 +16,7 @@ img {
     max-width: 100%;
 }
 
-[class*="wpp-option-list"] {
+[class*="liquidpoll-option-list"] {
     max-width: 430px;
     margin-bottom: 30px;
 }
@@ -43,11 +43,11 @@ td, th {
     border-width: 0 1px 1px 0
 }
 
-.wpp-poll-thumbnail {
+.liquidpoll-poll-thumbnail {
     margin-bottom: 25px;
 }
 
-.wpp-button {
+.liquidpoll-button {
     display: inline-block;
     line-height: normal;
     padding: 12px 20px;
@@ -62,41 +62,41 @@ td, th {
     cursor: pointer;
 }
 
-.wpp-poll-title {
+.liquidpoll-poll-title {
     margin: 0 0 30px;
 }
 
-.wpp-buttons .wpp-button {
+.liquidpoll-buttons .liquidpoll-button {
     margin: 0 7px 7px 0;
 }
 
-.wpp-button-orange {
+.liquidpoll-button-orange {
     background: #ffb023;
 }
 
-.wpp-button-green {
+.liquidpoll-button-green {
     background: #4CAF50;
 }
 
-.wpp-button-red {
+.liquidpoll-button-red {
     background: #F44336;
 }
 
-.wpp-button-blue {
+.liquidpoll-button-blue {
     background: #087fde;
 }
 
-.wpp-button:hover, .wpp-button:focus {
+.liquidpoll-button:hover, .liquidpoll-button:focus {
     background: #2a2a2a;
     color: #fff;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.wpp_poll_title {
+.liquidpoll_poll_title {
     margin-bottom: 15px;
 }
 
-.wpp-option-single {
+.liquidpoll-option-single {
     word-break: break-word;
     position: relative;
     cursor: pointer;
@@ -104,7 +104,7 @@ td, th {
     transition: 0.4s;
 }
 
-.wpp-option-single label {
+.liquidpoll-option-single label {
     display: block;
     cursor: pointer;
     font-size: 16px;
@@ -115,7 +115,7 @@ td, th {
 }
 
 
-p.wpp-responses {
+p.liquidpoll-responses {
     margin: 10px 0 20px;
     background: #f1f1f1;
     border-left: 5px solid;
@@ -126,29 +126,29 @@ p.wpp-responses {
     cursor: pointer;
 }
 
-p.wpp-responses.display {
+p.liquidpoll-responses.display {
     display: block;
 }
 
-p.wpp-responses.wpp-error {
+p.liquidpoll-responses.liquidpoll-error {
     color: #000;
     background: #ff57225c;
 }
 
-p.wpp-responses.wpp-warning {
+p.liquidpoll-responses.liquidpoll-warning {
     background: #ffc1075c;
 }
 
-p.wpp-responses.wpp-success {
+p.liquidpoll-responses.liquidpoll-success {
     background: #4caf505c;
 }
 
 
-.wpp-pagination {
+.liquidpoll-pagination {
     text-align: center;
 }
 
-.wpp-pagination > * {
+.liquidpoll-pagination > * {
     display: inline-block;
     line-height: normal;
     border: 1px solid #dadada;
@@ -164,16 +164,16 @@ p.wpp-responses.wpp-success {
     transition: 0.3s;
 }
 
-.wpp-pagination > .current,
-.entry-content .wpp-pagination > .current,
-.wpp-pagination > *:hover,
-.entry-content .wpp-pagination > *:hover {
+.liquidpoll-pagination > .current,
+.entry-content .liquidpoll-pagination > .current,
+.liquidpoll-pagination > *:hover,
+.entry-content .liquidpoll-pagination > *:hover {
     background: #FF5722;
     border-color: #FF5722;
     color: #fff;
 }
 
-.wpp-checkmark svg {
+.liquidpoll-checkmark svg {
     position: absolute;
     width: 42px;
     height: 42px;
@@ -183,7 +183,7 @@ p.wpp-responses.wpp-success {
     transform: translateY(-50%);
 }
 
-.wpp-checkmark svg path {
+.liquidpoll-checkmark svg path {
     stroke-width: 5px;
     stroke-linecap: unset;
     stroke-linejoin: round;
@@ -280,11 +280,11 @@ p.wpp-responses.wpp-success {
     margin: 70px 0;
 }
 
-.poll-single .wpp-content {
+.poll-single .liquidpoll-content {
     margin-bottom: 30px;
 }
 
-.poll-single .wpp-content p:last-child {
+.poll-single .liquidpoll-content p:last-child {
     margin-bottom: 0;
 }
 
@@ -294,11 +294,11 @@ p.wpp-responses.wpp-success {
  */
 
 
-[class*="wpp-countdown-timer"] > span {
+[class*="liquidpoll-countdown-timer"] > span {
     margin-bottom: 30px;
 }
 
-.wpp-countdown-timer-1 > span {
+.liquidpoll-countdown-timer-1 > span {
     display: inline-block;
     margin-right: 15px;
     padding-right: 15px;
@@ -307,19 +307,19 @@ p.wpp-responses.wpp-success {
     line-height: 20px;
 }
 
-.wpp-countdown-timer-1 > span:last-child {
+.liquidpoll-countdown-timer-1 > span:last-child {
     border-right: 0;
     margin-right: 0;
     padding-right: 0;
 }
 
-.wpp-countdown-timer-1 .count-number {
+.liquidpoll-countdown-timer-1 .count-number {
     margin-right: 5px;
     font-weight: bold;
     font-size: 20px;
 }
 
-.wpp-countdown-timer-2 > span {
+.liquidpoll-countdown-timer-2 > span {
     display: inline-block;
     margin-right: 25px;
     padding-right: 25px;
@@ -329,13 +329,13 @@ p.wpp-responses.wpp-success {
     text-align: center;
 }
 
-.wpp-countdown-timer-2 > span:last-child {
+.liquidpoll-countdown-timer-2 > span:last-child {
     border-right: 0;
     margin-right: 0;
     padding-right: 0;
 }
 
-.wpp-countdown-timer-2 .count-number {
+.liquidpoll-countdown-timer-2 .count-number {
     margin-right: 5px;
     font-weight: bold;
     font-size: 42px;
@@ -345,7 +345,7 @@ p.wpp-responses.wpp-success {
 }
 
 
-.wpp-countdown-timer-3 > span {
+.liquidpoll-countdown-timer-3 > span {
     display: inline-block;
     margin-right: 25px;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -356,7 +356,7 @@ p.wpp-responses.wpp-success {
     border-radius: 50%;
 }
 
-.wpp-countdown-timer-3 .count-number {
+.liquidpoll-countdown-timer-3 .count-number {
     margin-right: 5px;
     font-weight: bold;
     font-size: 42px;
@@ -367,7 +367,7 @@ p.wpp-responses.wpp-success {
 }
 
 
-.wpp-countdown-timer-4 > span {
+.liquidpoll-countdown-timer-4 > span {
     display: inline-block;
     margin-right: 15px;
     border-left: 4px solid rgba(248, 0, 19, 0.17);
@@ -379,7 +379,7 @@ p.wpp-responses.wpp-success {
     border-radius: 50%;
 }
 
-.wpp-countdown-timer-4 .count-number {
+.liquidpoll-countdown-timer-4 .count-number {
     font-weight: bold;
     font-size: 42px;
     line-height: 32px;
@@ -389,7 +389,7 @@ p.wpp-responses.wpp-success {
     color: #4dd7fd;
 }
 
-.wpp-countdown-timer-5 > span {
+.liquidpoll-countdown-timer-5 > span {
     display: inline-block;
     margin-right: 15px;
     font-size: 16px;
@@ -402,7 +402,7 @@ p.wpp-responses.wpp-success {
     background-image: linear-gradient(-225deg, #009688 0%, #89d432 100%);
 }
 
-.wpp-countdown-timer-5 .count-number {
+.liquidpoll-countdown-timer-5 .count-number {
     margin-right: 5px;
     font-weight: bold;
     font-size: 42px;
@@ -416,27 +416,27 @@ p.wpp-responses.wpp-success {
 /**
 * Poll Option - 1
 */
-.wpp-option-list-1 {
+.liquidpoll-option-list-1 {
     max-width: 550px;
 }
 
-.wpp-option-list-1 .wpp-option-single {
+.liquidpoll-option-list-1 .liquidpoll-option-single {
     margin-bottom: 30px;
 }
 
-.wpp-option-list-1 .wpp-option-single input {
+.liquidpoll-option-list-1 .liquidpoll-option-single input {
     position: absolute;
     opacity: 0;
 }
 
-.wpp-option-list-1 .wpp-option-single input + label {
+.liquidpoll-option-list-1 .liquidpoll-option-single input + label {
     position: relative;
     cursor: pointer;
     padding-left: 45px;
     display: block;
 }
 
-.wpp-option-list-1 .wpp-option-single input + label:before {
+.liquidpoll-option-list-1 .liquidpoll-option-single input + label:before {
     content: '';
     left: 0;
     top: 15px;
@@ -450,17 +450,17 @@ p.wpp-responses.wpp-success {
     transition: 0.3s;
 }
 
-.wpp-option-list-1 .wpp-option-single input[type="radio"] + label:before {
+.liquidpoll-option-list-1 .liquidpoll-option-single input[type="radio"] + label:before {
     border-radius: 50%;
 }
 
-.wpp-option-list-1 .wpp-option-single input:hover + label:before,
-.wpp-option-list-1 .wpp-option-single input:checked + label:before {
+.liquidpoll-option-list-1 .liquidpoll-option-single input:hover + label:before,
+.liquidpoll-option-list-1 .liquidpoll-option-single input:checked + label:before {
     background: #0586ec;
     border-color: #0586ec;
 }
 
-.wpp-option-list-1 .wpp-option-single input + label:after {
+.liquidpoll-option-list-1 .liquidpoll-option-single input + label:after {
     content: '';
     position: absolute;
     left: 9px;
@@ -476,11 +476,11 @@ p.wpp-responses.wpp-success {
     transition: 0.3s;
 }
 
-.wpp-option-list-1 .wpp-option-single input:checked + label:after {
+.liquidpoll-option-list-1 .liquidpoll-option-single input:checked + label:after {
     opacity: 1;
 }
 
-.wpp-option-list-1 .wpp-option-single.has-result {
+.liquidpoll-option-list-1 .liquidpoll-option-single.has-result {
     padding-top: 10px;
 }
 
@@ -488,11 +488,11 @@ p.wpp-responses.wpp-success {
 /**
 * Poll Option - 2
 */
-.wpp-option-list-2 {
+.liquidpoll-option-list-2 {
     max-width: 460px;
 }
 
-.wpp-option-list-2 .wpp-option-single {
+.liquidpoll-option-list-2 .liquidpoll-option-single {
     padding: 15px;
     background: #f5f5f5;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.13);
@@ -501,19 +501,19 @@ p.wpp-responses.wpp-success {
     line-height: normal;
 }
 
-.wpp-option-list-2 .wpp-option-single input {
+.liquidpoll-option-list-2 .liquidpoll-option-single input {
     position: absolute;
     opacity: 0;
 }
 
-.wpp-option-list-2 .wpp-option-single input + label {
+.liquidpoll-option-list-2 .liquidpoll-option-single input + label {
     position: relative;
     cursor: pointer;
     padding-left: 30px;
     display: block;
 }
 
-.wpp-option-list-2 .wpp-option-single input + label:before {
+.liquidpoll-option-list-2 .liquidpoll-option-single input + label:before {
     content: '';
     left: 0;
     top: 50%;
@@ -527,16 +527,16 @@ p.wpp-responses.wpp-success {
     transition: 0.3s;
 }
 
-.wpp-option-list-2 .wpp-option-single input[type="radio"] + label:before {
+.liquidpoll-option-list-2 .liquidpoll-option-single input[type="radio"] + label:before {
     border-radius: 50%;
 }
 
-.wpp-option-list-2 .wpp-option-single input:hover + label:before,
-.wpp-option-list-2 .wpp-option-single input:checked + label:before {
+.liquidpoll-option-list-2 .liquidpoll-option-single input:hover + label:before,
+.liquidpoll-option-list-2 .liquidpoll-option-single input:checked + label:before {
     background: #40a544;
 }
 
-.wpp-option-list-2 .wpp-option-single input + label:after {
+.liquidpoll-option-list-2 .liquidpoll-option-single input + label:after {
     content: '';
     position: absolute;
     left: 4px;
@@ -550,7 +550,7 @@ p.wpp-responses.wpp-success {
     transition: 0.3s;
 }
 
-.wpp-option-list-2 .wpp-option-single input:checked + label:after {
+.liquidpoll-option-list-2 .liquidpoll-option-single input:checked + label:after {
     opacity: 1;
     box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
 }
@@ -560,17 +560,17 @@ p.wpp-responses.wpp-success {
 * Poll Option - 3
 */
 
-.wpp-option-list-3 .wpp-option-single {
+.liquidpoll-option-list-3 .liquidpoll-option-single {
     border-bottom: 1px solid #eee;
     padding: 32px 0;
     display: block;
 }
 
-.wpp-option-list-3 .wpp-option-single:not(.has-result):last-child {
+.liquidpoll-option-list-3 .liquidpoll-option-single:not(.has-result):last-child {
     border-bottom: 0;
 }
 
-.wpp-option-list-3.wpp-circle svg {
+.liquidpoll-option-list-3.liquidpoll-circle svg {
     left: -3px;
 }
 
@@ -578,7 +578,7 @@ p.wpp-responses.wpp-success {
 * Poll Option - 4
 */
 
-.wpp-option-list-4 .wpp-option-single {
+.liquidpoll-option-list-4 .liquidpoll-option-single {
     border: 1px solid #eee;
     background-color: #fff;
     padding: 25px 20px;
@@ -586,11 +586,11 @@ p.wpp-responses.wpp-success {
     margin-bottom: -1px
 }
 
-.wpp-option-list-4.wpp-custom svg {
+.liquidpoll-option-list-4.liquidpoll-custom svg {
     left: 26px;
 }
 
-.wpp-option-list-4.wpp-circle svg {
+.liquidpoll-option-list-4.liquidpoll-circle svg {
     left: 17px;
 }
 
@@ -598,7 +598,7 @@ p.wpp-responses.wpp-success {
 * Poll Option - 5
 */
 
-.wpp-option-list-5 .wpp-option-single {
+.liquidpoll-option-list-5 .liquidpoll-option-single {
     border-right: 5px solid rgba(0, 0, 0, 0.07);
     border-left: 5px solid rgba(0, 0, 0, 0.07);
     padding: 30px 30px;
@@ -607,11 +607,11 @@ p.wpp-responses.wpp-success {
     border-radius: 12px;
 }
 
-.wpp-option-list-5.wpp-custom svg {
+.liquidpoll-option-list-5.liquidpoll-custom svg {
     left: 37px;
 }
 
-.wpp-option-list-5.wpp-circle svg {
+.liquidpoll-option-list-5.liquidpoll-circle svg {
     left: 27px;
 }
 
@@ -619,7 +619,7 @@ p.wpp-responses.wpp-success {
 * Poll Option - 6
 */
 
-.wpp-option-list-6 .wpp-option-single {
+.liquidpoll-option-list-6 .liquidpoll-option-single {
     background-color: #fff;
     border-left: 6px solid #4caf50;
     padding: 25px 20px;
@@ -628,11 +628,11 @@ p.wpp-responses.wpp-success {
     box-shadow: 0 5px 20px rgba(0, 26, 169, 0.09);
 }
 
-.wpp-option-list-6.wpp-custom svg {
+.liquidpoll-option-list-6.liquidpoll-custom svg {
     left: 27px;
 }
 
-.wpp-option-list-6.wpp-circle svg {
+.liquidpoll-option-list-6.liquidpoll-circle svg {
     left: 17px;
 }
 
@@ -640,7 +640,7 @@ p.wpp-responses.wpp-success {
 * Poll Option - 7
 */
 
-.wpp-option-list-7 .wpp-option-single {
+.liquidpoll-option-list-7 .liquidpoll-option-single {
     padding: 25px 20px;
     display: block;
     margin-bottom: 20px;
@@ -651,23 +651,23 @@ p.wpp-responses.wpp-success {
     border-radius: 4px;
 }
 
-.wpp-option-list-7.wpp-custom svg {
+.liquidpoll-option-list-7.liquidpoll-custom svg {
     left: 27px;
 }
 
-.wpp-option-list-7.wpp-circle svg {
+.liquidpoll-option-list-7.liquidpoll-circle svg {
     left: 17px;
 }
 
-.wpp-custom.wpp-option-list-7 svg path {
+.liquidpoll-custom.liquidpoll-option-list-7 svg path {
     stroke: #fff;
 }
 
-.wpp-option-list-7 label::before {
+.liquidpoll-option-list-7 label::before {
     border-color: #fff;
 }
 
-.wpp-option-list-7.wpp-circle label::before {
+.liquidpoll-option-list-7.liquidpoll-circle label::before {
     background-color: #fff;
 }
 
@@ -675,7 +675,7 @@ p.wpp-responses.wpp-success {
 * Poll Option - 8
 */
 
-.wpp-option-list-8 .wpp-option-single {
+.liquidpoll-option-list-8 .liquidpoll-option-single {
     padding: 20px 26px;
     display: block;
     margin-bottom: 23px;
@@ -684,48 +684,48 @@ p.wpp-responses.wpp-success {
     border-radius: 50px;
 }
 
-.wpp-custom.wpp-option-list-8 label {
+.liquidpoll-custom.liquidpoll-option-list-8 label {
     padding: 0 0 0 55px;
 }
 
-.wpp-option-list-8.wpp-custom input[type="checkbox"],
-.wpp-option-list-8.wpp-custom input[type="radio"],
-.wpp-option-list-8.wpp-custom label::before {
+.liquidpoll-option-list-8.liquidpoll-custom input[type="checkbox"],
+.liquidpoll-option-list-8.liquidpoll-custom input[type="radio"],
+.liquidpoll-option-list-8.liquidpoll-custom label::before {
     border: 3px solid #ddd;
     width: 36px;
     height: 36px;
 }
 
-.wpp-option-list-8.wpp-circle label::before {
+.liquidpoll-option-list-8.liquidpoll-circle label::before {
     width: 24px;
     height: 24px;
     left: 0;
 }
 
-.wpp-option-list-8.wpp-custom svg {
+.liquidpoll-option-list-8.liquidpoll-custom svg {
     left: 32px;
     width: 26px;
     height: 26px;
 }
 
-.wpp-option-list-8.wpp-circle svg {
+.liquidpoll-option-list-8.liquidpoll-circle svg {
     left: 14px;
     width: 46px;
     height: 46px;
 }
 
-.wpp-option-list-8.wpp-circle .wpp-option-single label {
+.liquidpoll-option-list-8.liquidpoll-circle .liquidpoll-option-single label {
     padding-left: 40px;
 }
 
-.wpp-option-list-8 .wpp-option-single label {
+.liquidpoll-option-list-8 .liquidpoll-option-single label {
     font-size: 16px;
     line-height: 26px;
     font-weight: 600;
     margin: 0;
 }
 
-.wpp-option-list-8 .wpp-option-single input:checked + label {
+.liquidpoll-option-list-8 .liquidpoll-option-single input:checked + label {
     color: green;
 }
 
@@ -734,7 +734,7 @@ p.wpp-responses.wpp-success {
 * Poll Option - 9
 */
 
-.wpp-option-list-9 {
+.liquidpoll-option-list-9 {
     max-width: 547px;
     display: flex;
     flex-wrap: wrap;
@@ -743,11 +743,11 @@ p.wpp-responses.wpp-success {
     margin-right: -5px;
 }
 
-.wpp-option-list-9 {
+.liquidpoll-option-list-9 {
 
 }
 
-.wpp-option-list-9 .wpp-col {
+.liquidpoll-option-list-9 .liquidpoll-col {
     -ms-flex: 0 0 33.33%;
     flex: 0 0 33.33%;
     max-width: 33.33%;
@@ -756,7 +756,7 @@ p.wpp-responses.wpp-success {
     padding-right: 5px;
 }
 
-.wpp-option-list-9 .wpp-option-single {
+.liquidpoll-option-list-9 .liquidpoll-option-single {
     flex-direction: column-reverse;
     justify-content: unset;
     padding: 10px;
@@ -767,88 +767,88 @@ p.wpp-responses.wpp-success {
     border-radius: 4px;
 }
 
-.wpp-option-list-9 .wpp-option-single.has-label.has-thumb .wpp-option-input {
+.liquidpoll-option-list-9 .liquidpoll-option-single.has-label.has-thumb .liquidpoll-option-input {
     margin: 15px 0 5px;
 }
 
-.wpp-option-list-9 .wpp-option-single.has-thumb .wpp-option-thumb,
-.wpp-option-list-9 .wpp-option-single.has-label.has-thumb .wpp-option-input {
+.liquidpoll-option-list-9 .liquidpoll-option-single.has-thumb .liquidpoll-option-thumb,
+.liquidpoll-option-list-9 .liquidpoll-option-single.has-label.has-thumb .liquidpoll-option-input {
     width: 100%;
 }
 
-.wpp-custom.wpp-option-list-9 .wpp-option-input {
+.liquidpoll-custom.liquidpoll-option-list-9 .liquidpoll-option-input {
     position: relative;
 }
 
-.wpp-custom.wpp-option-list-9 label {
+.liquidpoll-custom.liquidpoll-option-list-9 label {
     padding: 0 0 0 52px;
     font-weight: 600;
     position: initial;
     line-height: normal;
 }
 
-.wpp-custom.wpp-option-list-9 .has-thumb:not(.has-label) label {
+.liquidpoll-custom.liquidpoll-option-list-9 .has-thumb:not(.has-label) label {
     height: 47px;
     min-width: 150px;
 }
 
-.wpp-option-list-9.wpp-custom input[type="checkbox"],
-.wpp-option-list-9.wpp-custom input[type="radio"],
-.wpp-option-list-9.wpp-custom label::before {
+.liquidpoll-option-list-9.liquidpoll-custom input[type="checkbox"],
+.liquidpoll-option-list-9.liquidpoll-custom input[type="radio"],
+.liquidpoll-option-list-9.liquidpoll-custom label::before {
     border: 3px solid rgba(0, 0, 0, 0.1);
     width: 36px;
     height: 36px;
     bottom: -5px;
 }
 
-.wpp-option-list-9.wpp-custom .has-thumb:not(.has-label) input[type="checkbox"],
-.wpp-option-list-9.wpp-custom .has-thumb:not(.has-label) input[type="radio"],
-.wpp-option-list-9.wpp-custom .has-thumb:not(.has-label) label::before {
+.liquidpoll-option-list-9.liquidpoll-custom .has-thumb:not(.has-label) input[type="checkbox"],
+.liquidpoll-option-list-9.liquidpoll-custom .has-thumb:not(.has-label) input[type="radio"],
+.liquidpoll-option-list-9.liquidpoll-custom .has-thumb:not(.has-label) label::before {
     bottom: 0;
 }
 
-.wpp-option-list-9.wpp-custom.wpp-circle .has-thumb:not(.has-label) label::before {
+.liquidpoll-option-list-9.liquidpoll-custom.liquidpoll-circle .has-thumb:not(.has-label) label::before {
     bottom: 5px;
 }
 
-.wpp-option-list-9.wpp-circle label::before {
+.liquidpoll-option-list-9.liquidpoll-circle label::before {
     width: 24px;
     height: 24px;
     left: 0;
     bottom: 1px;
 }
 
-.wpp-option-list-9.wpp-circle svg {
+.liquidpoll-option-list-9.liquidpoll-circle svg {
     left: -6px;
     width: 36px;
     height: 36px;
     bottom: 8px;
 }
 
-.wpp-option-list-9.wpp-circle .wpp-option-single label {
+.liquidpoll-option-list-9.liquidpoll-circle .liquidpoll-option-single label {
     padding-left: 34px;
 }
 
-.wpp-option-list-9 .wpp-option-single input:checked + label {
+.liquidpoll-option-list-9 .liquidpoll-option-single input:checked + label {
     color: #ec785b;
 }
 
-.wpp-custom.wpp-option-list-9 svg path {
+.liquidpoll-custom.liquidpoll-option-list-9 svg path {
     stroke: #ec785b;
 }
 
-.wpp-option-list-9 .wpp-option-single.has-label:not(.has-thumb) {
+.liquidpoll-option-list-9 .liquidpoll-option-single.has-label:not(.has-thumb) {
     padding: 13px 10px;
     min-height: 34px;
 }
 
-.wpp-option-list-9 svg {
+.liquidpoll-option-list-9 svg {
     width: 24px;
     height: 24px;
     left: 6px;
 }
 
-.wpp-option-list-9.wpp-checkmark svg {
+.liquidpoll-option-list-9.liquidpoll-checkmark svg {
     width: 36px;
     height: 36px;
     left: 0;
@@ -859,7 +859,7 @@ p.wpp-responses.wpp-success {
 * Poll Option - 10
 */
 
-.wpp-option-list-10 {
+.liquidpoll-option-list-10 {
     max-width: 1024px;
     display: flex;
     flex-wrap: wrap;
@@ -868,7 +868,7 @@ p.wpp-responses.wpp-success {
     margin-right: -15px;
 }
 
-.wpp-option-list-10 .wpp-col {
+.liquidpoll-option-list-10 .liquidpoll-col {
     -ms-flex: 0 0 33.33%;
     flex: 0 0 33.33%;
     max-width: 33.33%;
@@ -877,7 +877,7 @@ p.wpp-responses.wpp-success {
     padding-right: 15px;
 }
 
-.wpp-option-list-10 .wpp-option-single {
+.liquidpoll-option-list-10 .liquidpoll-option-single {
     flex-direction: column-reverse;
     justify-content: unset;
     display: block;
@@ -887,7 +887,7 @@ p.wpp-responses.wpp-success {
     box-shadow: 0 5px 20px rgba(88, 88, 88, 0.3);
 }
 
-.wpp-option-list-10 .wpp-option-single.has-thumb .wpp-option-thumb {
+.liquidpoll-option-list-10 .liquidpoll-option-single.has-thumb .liquidpoll-option-thumb {
     border-radius: 4px 4px 0 0;
     text-align: center;
     width: 100%;
@@ -896,7 +896,7 @@ p.wpp-responses.wpp-success {
     margin-bottom: 65px;
 }
 
-.wpp-option-list-10 .wpp-option-single.has-thumb .wpp-option-thumb img {
+.liquidpoll-option-list-10 .liquidpoll-option-single.has-thumb .liquidpoll-option-thumb img {
     width: 100px;
     border-radius: 50%;
     position: relative;
@@ -906,7 +906,7 @@ p.wpp-responses.wpp-success {
     box-shadow: 0 -8px 11px rgba(0, 0, 0, 0.19), 0 8px 11px rgba(0, 0, 0, 0.19);
 }
 
-.wpp-custom.wpp-option-list-10 label {
+.liquidpoll-custom.liquidpoll-option-list-10 label {
     position: inherit;
     padding: 0 0 75px;
     text-align: center;
@@ -914,47 +914,47 @@ p.wpp-responses.wpp-success {
     line-height: 30px;
 }
 
-.wpp-custom.wpp-option-list-10.wpp-checkbox label {
+.liquidpoll-custom.liquidpoll-option-list-10.liquidpoll-checkbox label {
     padding: 0 0 85px;
 }
 
-.wpp-custom.wpp-option-list-10 .has-label:not(.has-thumb) label {
+.liquidpoll-custom.liquidpoll-option-list-10 .has-label:not(.has-thumb) label {
     padding-bottom: 72px;
 }
 
-.wpp-option-list-10 .wpp-option-input {
+.liquidpoll-option-list-10 .liquidpoll-option-input {
     width: 100%;
 }
 
-.wpp-option-list-10.wpp-custom input[type="checkbox"],
-.wpp-option-list-10.wpp-custom input[type="radio"],
-.wpp-option-list-10.wpp-custom label::before {
+.liquidpoll-option-list-10.liquidpoll-custom input[type="checkbox"],
+.liquidpoll-option-list-10.liquidpoll-custom input[type="radio"],
+.liquidpoll-option-list-10.liquidpoll-custom label::before {
     top: auto;
     bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.wpp-option-list-10.wpp-custom svg {
+.liquidpoll-option-list-10.liquidpoll-custom svg {
     left: 50%;
     top: auto;
     bottom: 30px;
     transform: translateX(-50%);
 }
 
-.wpp-option-list-10.wpp-circle .wpp-option-single svg {
+.liquidpoll-option-list-10.liquidpoll-circle .liquidpoll-option-single svg {
     bottom: 12px;
 }
 
-.wpp-option-list-10 .wpp-option-single input:checked + label {
+.liquidpoll-option-list-10 .liquidpoll-option-single input:checked + label {
     color: #ec785b;
 }
 
-.wpp-custom.wpp-option-list-10 svg path {
+.liquidpoll-custom.liquidpoll-option-list-10 svg path {
     stroke: #ec785b;
 }
 
-.wpp-option-list-10 .wpp-option-single.has-label:not(.has-thumb) {
+.liquidpoll-option-list-10 .liquidpoll-option-single.has-label:not(.has-thumb) {
     padding: 13px 10px;
 }
 
@@ -962,7 +962,7 @@ p.wpp-responses.wpp-success {
 * Poll Option - 11
 */
 
-.wpp-option-list-11 {
+.liquidpoll-option-list-11 {
     max-width: 1024px;
     display: flex;
     flex-wrap: wrap;
@@ -971,7 +971,7 @@ p.wpp-responses.wpp-success {
     margin-right: -10px;
 }
 
-.wpp-option-list-11 .wpp-col {
+.liquidpoll-option-list-11 .liquidpoll-col {
     -ms-flex: 0 0 33.33%;
     flex: 0 0 33.33%;
     max-width: 33.33%;
@@ -980,7 +980,7 @@ p.wpp-responses.wpp-success {
     padding-right: 10px;
 }
 
-.wpp-option-list-11 .wpp-option-single {
+.liquidpoll-option-list-11 .liquidpoll-option-single {
     flex-direction: column-reverse;
     justify-content: unset;
     display: block;
@@ -990,7 +990,7 @@ p.wpp-responses.wpp-success {
     box-shadow: 0 5px 20px rgba(88, 88, 88, 0.3);
 }
 
-.wpp-option-list-11 .wpp-option-single.has-thumb .wpp-option-thumb {
+.liquidpoll-option-list-11 .liquidpoll-option-single.has-thumb .liquidpoll-option-thumb {
     text-align: center;
     width: 100%;
     background-color: #3d3bf8;
@@ -998,7 +998,7 @@ p.wpp-responses.wpp-success {
     background-image: linear-gradient(249.1deg, rgba(11, 206, 250, 1) -6.5%, rgba(65, 46, 248, 1) 100.2%);
 }
 
-.wpp-option-list-11 .wpp-option-single.has-thumb .wpp-option-thumb img {
+.liquidpoll-option-list-11 .liquidpoll-option-single.has-thumb .liquidpoll-option-thumb img {
     width: 100px;
     border-radius: 50%;
     position: relative;
@@ -1007,7 +1007,7 @@ p.wpp-responses.wpp-success {
     background: #fff;
 }
 
-.wpp-custom.wpp-option-list-11 label {
+.liquidpoll-custom.liquidpoll-option-list-11 label {
     position: inherit;
     padding: 0 0 75px;
     text-align: center;
@@ -1015,47 +1015,47 @@ p.wpp-responses.wpp-success {
     line-height: 30px;
 }
 
-.wpp-custom.wpp-option-list-11.wpp-checkbox label {
+.liquidpoll-custom.liquidpoll-option-list-11.liquidpoll-checkbox label {
     padding: 0 0 85px;
 }
 
-.wpp-custom.wpp-option-list-11 .has-label:not(.has-thumb) label {
+.liquidpoll-custom.liquidpoll-option-list-11 .has-label:not(.has-thumb) label {
     padding-bottom: 72px;
 }
 
-.wpp-option-list-11 .wpp-option-input {
+.liquidpoll-option-list-11 .liquidpoll-option-input {
     width: 100%;
 }
 
-.wpp-option-list-11.wpp-custom input[type="checkbox"],
-.wpp-option-list-11.wpp-custom input[type="radio"],
-.wpp-option-list-11.wpp-custom label::before {
+.liquidpoll-option-list-11.liquidpoll-custom input[type="checkbox"],
+.liquidpoll-option-list-11.liquidpoll-custom input[type="radio"],
+.liquidpoll-option-list-11.liquidpoll-custom label::before {
     top: auto;
     bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.wpp-option-list-11.wpp-custom svg {
+.liquidpoll-option-list-11.liquidpoll-custom svg {
     left: 50%;
     top: auto;
     bottom: 30px;
     transform: translateX(-50%);
 }
 
-.wpp-option-list-11.wpp-circle .wpp-option-single svg {
+.liquidpoll-option-list-11.liquidpoll-circle .liquidpoll-option-single svg {
     bottom: 12px;
 }
 
-.wpp-option-list-11 .wpp-option-single input:checked + label {
+.liquidpoll-option-list-11 .liquidpoll-option-single input:checked + label {
     color: #0fc2fa;
 }
 
-.wpp-custom.wpp-option-list-11 svg path {
+.liquidpoll-custom.liquidpoll-option-list-11 svg path {
     stroke: #0fc2fa;
 }
 
-.wpp-option-list-11 .wpp-option-single.has-label:not(.has-thumb) {
+.liquidpoll-option-list-11 .liquidpoll-option-single.has-label:not(.has-thumb) {
     padding: 13px 10px;
 }
 
@@ -1064,39 +1064,39 @@ p.wpp-responses.wpp-success {
 * Style Compatibility
 */
 
-[class*="wpp-option-list"] .has-thumb {
+[class*="liquidpoll-option-list"] .has-thumb {
     display: flex;
     align-items: center;
 }
 
-[class*="wpp-option-list"] .has-thumb.has-label {
+[class*="liquidpoll-option-list"] .has-thumb.has-label {
     justify-content: space-between;
 }
 
-[class*="wpp-option-list"] .has-thumb .wpp-option-thumb {
+[class*="liquidpoll-option-list"] .has-thumb .liquidpoll-option-thumb {
     width: 32px;
 }
 
-[class*="wpp-option-list"] .has-label.has-thumb .wpp-option-input {
+[class*="liquidpoll-option-list"] .has-label.has-thumb .liquidpoll-option-input {
     width: calc(100% - 50px);
 }
 
-.wpp-option-list-10.wpp-checkmark svg,
-.wpp-option-list-11.wpp-checkmark svg {
+.liquidpoll-option-list-10.liquidpoll-checkmark svg,
+.liquidpoll-option-list-11.liquidpoll-checkmark svg {
     bottom: 26px;
 }
 
-.wpp-option-list-4.wpp-checkmark svg,
-.wpp-option-list-6.wpp-checkmark svg,
-.wpp-option-list-7.wpp-checkmark svg {
+.liquidpoll-option-list-4.liquidpoll-checkmark svg,
+.liquidpoll-option-list-6.liquidpoll-checkmark svg,
+.liquidpoll-option-list-7.liquidpoll-checkmark svg {
     left: 22px;
 }
 
-.wpp-option-list-5.wpp-checkmark svg {
+.liquidpoll-option-list-5.liquidpoll-checkmark svg {
     left: 31px;
 }
 
-.wpp-option-list-3.wpp-checkmark svg {
+.liquidpoll-option-list-3.liquidpoll-checkmark svg {
     left: 1px;
 }
 
@@ -1105,20 +1105,20 @@ p.wpp-responses.wpp-success {
 * Add New Option
  */
 
-.wpp-new-option input[type="text"] {
+.liquidpoll-new-option input[type="text"] {
     width: 100%;
     padding: 9px 13px;
     margin: 10px 0 20px;
     outline: none;
 }
 
-.wpp-new-option .wpp-notice-warning {
+.liquidpoll-new-option .liquidpoll-notice-warning {
     position: relative;
     top: -12px;
     color: red;
 }
 
-.wpp-popup-container {
+.liquidpoll-popup-container {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
     display: none;
     height: 100%;
@@ -1129,11 +1129,11 @@ p.wpp-responses.wpp-success {
     z-index: 9999999;
 }
 
-.wpp-popup-container.popup-open {
+.liquidpoll-popup-container.popup-open {
     display: block;
 }
 
-.wpp-popup-container .wpp-popup-box {
+.liquidpoll-popup-container .liquidpoll-popup-box {
     background: none repeat scroll 0 0 rgb(255, 255, 255);
     height: auto;
     margin: 0 auto;
@@ -1147,16 +1147,16 @@ p.wpp-responses.wpp-success {
     overflow-y: auto;
 }
 
-.wpp-popup-container .wpp-popup-box.popup-box-medium {
+.liquidpoll-popup-container .liquidpoll-popup-box.popup-box-medium {
     max-width: 460px;
 }
 
-.wpp-popup-container.wpp-embed-popup .wpp-popup-box {
+.liquidpoll-popup-container.liquidpoll-embed-popup .liquidpoll-popup-box {
     min-height: 180px;
     box-shadow: none;
 }
 
-.wpp-popup-container .box-close {
+.liquidpoll-popup-container .box-close {
     font-size: 20px;
     line-height: 28px;
     color: #ffffff;
@@ -1171,12 +1171,12 @@ p.wpp-responses.wpp-success {
     height: 28px;
 }
 
-.wpp-popup-container .box-close:hover {
+.liquidpoll-popup-container .box-close:hover {
     color: #fff;
     background: #94000f;
 }
 
-.wpp-popup-container .wpp-popup-box .box-message {
+.liquidpoll-popup-container .liquidpoll-popup-box .box-message {
     padding: 15px;
     font-size: 20px;
     color: red;
@@ -1186,23 +1186,23 @@ p.wpp-responses.wpp-success {
  * Single Poll Results
  */
 
-.wpp-option-result-bar.results-danger {
+.liquidpoll-option-result-bar.results-danger {
     background: #ff5722;
 }
 
-.wpp-option-result-bar.results-warning {
+.liquidpoll-option-result-bar.results-warning {
     background: #ff9800;
 }
 
-.wpp-option-result-bar.results-info {
+.liquidpoll-option-result-bar.results-info {
     background: #03a9f4;
 }
 
-.wpp-option-result-bar.results-success {
+.liquidpoll-option-result-bar.results-success {
     background: #4caf50;
 }
 
-.wpp-option-result-bar {
+.liquidpoll-option-result-bar {
     position: absolute;
     height: 3px;
     left: 0;
@@ -1213,7 +1213,7 @@ p.wpp-responses.wpp-success {
     border-top-left-radius: 3px;
 }
 
-.wpp-option-result {
+.liquidpoll-option-result {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -1223,50 +1223,50 @@ p.wpp-responses.wpp-success {
     transition: 0.5s;
 }
 
-.wpp-option-single.has-result {
+.liquidpoll-option-single.has-result {
     margin-bottom: 55px;
 }
 
-.wpp-option-single.has-result .wpp-option-result {
+.liquidpoll-option-single.has-result .liquidpoll-option-result {
     bottom: -35px;
 }
 
-.wpp-option-list-3 .wpp-option-single.has-result {
+.liquidpoll-option-list-3 .liquidpoll-option-single.has-result {
     border-top: 1px solid #eee;
 }
 
-.wpp-option-list-3 .wpp-option-single.has-result .wpp-option-result-bar,
-.wpp-option-list-4 .wpp-option-single.has-result .wpp-option-result-bar {
+.liquidpoll-option-list-3 .liquidpoll-option-single.has-result .liquidpoll-option-result-bar,
+.liquidpoll-option-list-4 .liquidpoll-option-single.has-result .liquidpoll-option-result-bar {
     border-radius: 0;
     top: -1px;
 }
 
-.wpp-option-list-5 .wpp-option-single.has-result .wpp-option-result-bar {
+.liquidpoll-option-list-5 .liquidpoll-option-single.has-result .liquidpoll-option-result-bar {
     left: 2%;
     border-top-right-radius: 3px;
     max-width: 96%;
 }
 
-.wpp-option-list-6 .wpp-option-single.has-result .wpp-option-result-bar {
+.liquidpoll-option-list-6 .liquidpoll-option-single.has-result .liquidpoll-option-result-bar {
     border-top-left-radius: 0;
 }
 
-.wpp-option-list-7 .wpp-option-single.has-result {
+.liquidpoll-option-list-7 .liquidpoll-option-single.has-result {
     margin-top: 12px;
 }
 
-.wpp-option-list-7 .wpp-option-single .wpp-option-result-bar {
+.liquidpoll-option-list-7 .liquidpoll-option-single .liquidpoll-option-result-bar {
     border-radius: 6px;
     height: 6px;
     top: -12px;
 }
 
-.wpp-option-list-8 .wpp-option-single.has-result {
+.liquidpoll-option-list-8 .liquidpoll-option-single.has-result {
     margin-top: 12px;
     margin-bottom: 65px;
 }
 
-.wpp-option-list-8 .wpp-option-single .wpp-option-result-bar {
+.liquidpoll-option-list-8 .liquidpoll-option-single .liquidpoll-option-result-bar {
     border-radius: 6px;
     height: 6px;
     top: -12px;
@@ -1274,21 +1274,21 @@ p.wpp-responses.wpp-success {
     left: 30px;
 }
 
-.wpp-option-list-8 .wpp-option-single .wpp-option-result {
+.liquidpoll-option-list-8 .liquidpoll-option-single .liquidpoll-option-result {
     left: 30px;
 }
 
-.wpp-option-list-9 .wpp-option-single.has-result {
+.liquidpoll-option-list-9 .liquidpoll-option-single.has-result {
     margin-top: 12px;
 }
 
-.wpp-option-list-9 .wpp-option-single .wpp-option-result-bar {
+.liquidpoll-option-list-9 .liquidpoll-option-single .liquidpoll-option-result-bar {
     border-radius: 6px;
     height: 6px;
     top: -12px;
 }
 
-.wpp-option-list-10 .wpp-option-single .wpp-option-result-bar {
+.liquidpoll-option-list-10 .liquidpoll-option-single .liquidpoll-option-result-bar {
     border-radius: 6px;
     height: 4px;
     top: auto;
@@ -1297,7 +1297,7 @@ p.wpp-responses.wpp-success {
     left: 10px;
 }
 
-.wpp-option-list-11 .wpp-option-single .wpp-option-result-bar {
+.liquidpoll-option-list-11 .liquidpoll-option-single .liquidpoll-option-result-bar {
     border-radius: 0;
     height: 4px;
     top: auto;
@@ -1306,7 +1306,7 @@ p.wpp-responses.wpp-success {
     left: 5px;
 }
 
-.wpp-option-list-11 .wpp-option-single.has-result .wpp-option-result {
+.liquidpoll-option-list-11 .liquidpoll-option-single.has-result .liquidpoll-option-result {
     bottom: -40px;
 }
 
@@ -1315,7 +1315,7 @@ p.wpp-responses.wpp-success {
  * Notices
  */
 
-.wpp-notice {
+.liquidpoll-notice {
     background: #00bcd43b;
     padding: 10px;
     border-left: 3px solid;
@@ -1323,36 +1323,36 @@ p.wpp-responses.wpp-success {
     border-bottom-right-radius: 3px;
 }
 
-.wpp-notice.wpp-warning {
+.liquidpoll-notice.liquidpoll-warning {
     background: #ff98003b;
 }
 
-.wpp-notice.wpp-error {
+.liquidpoll-notice.liquidpoll-error {
     background: #ff57223b;
 }
 
-.wpp-notice.wpp-success {
+.liquidpoll-notice.liquidpoll-success {
     background: #4caf503b;
 }
 
 /**
  * Poller List
  */
-.wpp-poller-list-container h3 {
+.liquidpoll-poller-list-container h3 {
     margin-bottom: 20px;
 }
 
-.wpp-poller-list-container table td {
+.liquidpoll-poller-list-container table td {
     text-align: center;
 }
 
-.wpp-poller-list-container table th,
-.wpp-poller-list-container table td {
+.liquidpoll-poller-list-container table th,
+.liquidpoll-poller-list-container table td {
     text-align: center;
 }
 
-.wpp-poller-list-container table th:first-child,
-.wpp-poller-list-container table td:first-child {
+.liquidpoll-poller-list-container table th:first-child,
+.liquidpoll-poller-list-container table td:first-child {
     text-align: left;
 }
 
@@ -1370,22 +1370,22 @@ p.wpp-responses.wpp-success {
  */
 
 @media (max-width: 767px) {
-    .wpp-countdown-timer-4 > span,
-    .wpp-countdown-timer-5 > span {
+    .liquidpoll-countdown-timer-4 > span,
+    .liquidpoll-countdown-timer-5 > span {
         font-size: 14px;
         min-width: 80px;
         min-height: 80px;
     }
 
-    .wpp-countdown-timer-4 .count-number,
-    .wpp-countdown-timer-5 .count-number {
+    .liquidpoll-countdown-timer-4 .count-number,
+    .liquidpoll-countdown-timer-5 .count-number {
         font-size: 20px;
         line-height: 22px;
         margin-top: 17px;
         margin-bottom: 0;
     }
 
-    [class*="wpp-countdown-timer"] {
+    [class*="liquidpoll-countdown-timer"] {
         text-align: center;
     }
 }

@@ -1,25 +1,25 @@
-.wpp-custom h2 {
+.liquidpoll-custom h2 {
     font-size: 3em;
     font-weight: 300;
     padding: 0 0 0.5em;
     margin: 0 0 30px;
 }
 
-.wpp-custom ul,
-.wpp-custom ol {
+.liquidpoll-custom ul,
+.liquidpoll-custom ol {
     list-style: none;
     padding: 0;
     margin: 0 auto;
     max-width: 800px;
 }
 
-.wpp-custom li {
+.liquidpoll-custom li {
     margin: 0 auto;
     padding: 2em 0;
     position: relative;
 }
 
-.wpp-custom label {
+.liquidpoll-custom label {
     display: block;
     position: relative;
     padding: 0 0 0 65px;
@@ -29,9 +29,9 @@
     transition: color 0.3s;
 }
 
-.wpp-custom input[type="checkbox"],
-.wpp-custom input[type="radio"],
-.wpp-custom label::before {
+.liquidpoll-custom input[type="checkbox"],
+.liquidpoll-custom input[type="radio"],
+.liquidpoll-custom label::before {
     margin: 0;
     width: 44px;
     height: 44px;
@@ -42,8 +42,8 @@
     transform: translateY(-50%);
 }
 
-.wpp-custom input[type="checkbox"],
-.wpp-custom input[type="radio"] {
+.liquidpoll-custom input[type="checkbox"],
+.liquidpoll-custom input[type="radio"] {
     opacity: 0;
     -webkit-appearance: none;
     display: inline-block;
@@ -51,20 +51,20 @@
     z-index: 100;
 }
 
-.wpp-custom label::before {
+.liquidpoll-custom label::before {
     content: '';
     border: 4px solid #ddd;
     -webkit-transition: opacity 0.3s;
     transition: opacity 0.3s;
 }
 
-.wpp-radio label::before {
+.liquidpoll-radio label::before {
     border-radius: 50%;
 }
 
 /* General SVG and path styles */
 
-.wpp-custom svg {
+.liquidpoll-custom svg {
     position: absolute;
     width: 32px;
     height: 32px;
@@ -74,7 +74,7 @@
     transform: translateY(-50%);
 }
 
-.wpp-custom svg path {
+.liquidpoll-custom svg path {
     stroke: #4CAF50;
     stroke-width: 13px;
     stroke-linecap: round;
@@ -83,63 +83,63 @@
 }
 
 /* Circle */
-.wpp-circle input[type="checkbox"],
-.wpp-circle input[type="radio"],
-.wpp-circle label::before {
+.liquidpoll-circle input[type="checkbox"],
+.liquidpoll-circle input[type="radio"],
+.liquidpoll-circle label::before {
     width: 30px;
     height: 30px;
     left: 10px;
     position: absolute;
 }
 
-.wpp-circle label::before {
+.liquidpoll-circle label::before {
     background-color: #ddd;
     border: none;
 }
 
-.wpp-circle svg {
+.liquidpoll-circle svg {
     width: 56px;
     height: 56px;
     left: 27px;
 }
 
-.wpp-circle svg path {
+.liquidpoll-circle svg path {
     stroke-width: 5px;
 }
 
 /* Box Fill */
-.wpp-boxfill svg path {
+.liquidpoll-boxfill svg path {
     stroke-width: 8px;
 }
 
 /* Swirl */
-.wpp-swirl svg path {
+.liquidpoll-swirl svg path {
     stroke-width: 8px;
 }
 
 /* List */
-.wpp-list ol {
+.liquidpoll-list ol {
     list-style: decimal;
     list-style-position: inside;
 }
 
-.wpp-list ol li {
+.liquidpoll-list ol li {
     font-size: 2em;
     padding: 1em 1em 0 2em;
     text-indent: -40px;
 }
 
-.wpp-list ol li label {
+.liquidpoll-list ol li label {
     font-size: 1em;
     text-indent: 0;
     padding-left: 30px;
 }
 
-.wpp-list label::before {
+.liquidpoll-list label::before {
     display: none;
 }
 
-.wpp-list svg {
+.liquidpoll-list svg {
     width: 100%;
     height: 80px;
     left: 0;
@@ -147,6 +147,6 @@
     margin-top: 0;
 }
 
-.wpp-list svg path {
+.liquidpoll-list svg path {
     stroke-width: 4px;
 }

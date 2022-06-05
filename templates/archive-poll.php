@@ -25,32 +25,32 @@ $wp_query          = $poll_archive;
  * Before Poll Archive
  *
  */
-do_action( 'wpp_before_poll_archive' );
+do_action( 'liquidpoll_before_poll_archive' );
 
 if ( $poll_archive->have_posts() ) :
 
-	wpp_get_template( 'loop/start.php' );
+	liquidpoll_get_template( 'loop/start.php' );
 
 	while ( $poll_archive->have_posts() ) : $poll_archive->the_post();
 
-		wpp_get_template_part( 'content', 'poll' );
+		liquidpoll_get_template_part( 'content', 'poll' );
 
 	endwhile;
 
-	wpp_get_template( 'loop/end.php' );
+	liquidpoll_get_template( 'loop/end.php' );
 
 else :
 
-	wpp_get_template( 'loop/no-item.php' );
+	liquidpoll_get_template( 'loop/no-item.php' );
 
 endif;
 
 /**
  * After Poll Archive
  *
- * @see wpp_poll_archive_pagination() - 10
+ * @see liquidpoll_poll_archive_pagination() - 10
  */
-do_action( 'wpp_after_poll_archive' );
+do_action( 'liquidpoll_after_poll_archive' );
 
 
 $wp_query = $previous_wp_query;

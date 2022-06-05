@@ -22,20 +22,20 @@
             list: {speed: .3, easing: 'ease-in-out'}
         };
 
-    $(document).on('click', '.wpp-option-single', function () {
+    $(document).on('click', '.liquidpoll-option-single', function () {
 
         if( $(this).find('svg').length ) {
             return;
         }
 
-        let checkbxsCross = Array.prototype.slice.call(document.querySelectorAll('.wpp-cross input[type="checkbox"]')),
-            radiobxsFill = Array.prototype.slice.call(document.querySelectorAll('.wpp-fill input[type="radio"]')),
-            checkbxsCheckmark = Array.prototype.slice.call(document.querySelectorAll('.wpp-checkmark input[type="checkbox"]')),
-            radiobxsCircle = Array.prototype.slice.call(document.querySelectorAll('.wpp-circle input[type="radio"]')),
-            checkbxsBoxfill = Array.prototype.slice.call(document.querySelectorAll('.wpp-boxfill input[type="checkbox"]')),
-            radiobxsSwirl = Array.prototype.slice.call(document.querySelectorAll('.wpp-swirl input[type="radio"]')),
-            checkbxsDiagonal = Array.prototype.slice.call(document.querySelectorAll('.wpp-diagonal input[type="checkbox"]')),
-            checkbxsList = Array.prototype.slice.call(document.querySelectorAll('.wpp-list input[type="checkbox"]'));
+        let checkbxsCross = Array.prototype.slice.call(document.querySelectorAll('.liquidpoll-cross input[type="checkbox"]')),
+            radiobxsFill = Array.prototype.slice.call(document.querySelectorAll('.liquidpoll-fill input[type="radio"]')),
+            checkbxsCheckmark = Array.prototype.slice.call(document.querySelectorAll('.liquidpoll-checkmark input[type="checkbox"]')),
+            radiobxsCircle = Array.prototype.slice.call(document.querySelectorAll('.liquidpoll-circle input[type="radio"]')),
+            checkbxsBoxfill = Array.prototype.slice.call(document.querySelectorAll('.liquidpoll-boxfill input[type="checkbox"]')),
+            radiobxsSwirl = Array.prototype.slice.call(document.querySelectorAll('.liquidpoll-swirl input[type="radio"]')),
+            checkbxsDiagonal = Array.prototype.slice.call(document.querySelectorAll('.liquidpoll-diagonal input[type="checkbox"]')),
+            checkbxsList = Array.prototype.slice.call(document.querySelectorAll('.liquidpoll-list input[type="checkbox"]'));
 
 
         checkbxsCross.forEach(function (el, i) {

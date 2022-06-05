@@ -4,109 +4,180 @@
 * Copyright: 	2015 Jaed Mosharraf
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
+defined( 'ABSPATH' ) || exit;
 
-class WPP_Poll_meta {
+class LIQUIDPOLL_Poll_meta {
 
 	public function __construct() {
 
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-		add_action( 'save_post', array( $this, 'save_meta_data' ) );
-		add_action( 'pb_settings_poll_meta_options', array( $this, 'display_poll_options' ) );
+		$this->generate_poll_meta_box();
 	}
 
 
-	/**
-	 * Display poll option with repeater field
-	 */
-	function display_poll_options() {
+	public function generate_poll_meta_box() {
 
-		global $post;
+		$prefix = 'liquidpoll_poll_meta';
 
-		ob_start();
+		PBSettings::createMetabox( $prefix,
+			array(
+				'title'     => __( 'Slider Options', 'wp-poll' ),
+				'post_type' => 'poll',
+				'data_type' => 'unserialize',
+				'context'   => 'normal',
+				'nav'       => 'inline',
+				'preview'   => true,
+			)
+		);
 
-		foreach ( wpp()->get_meta( 'poll_meta_options', false, array() ) as $unique_id => $args ) {
-			wpp_add_poll_option( $unique_id, $args );
-		}
-
-		$poll_options = ob_get_clean();
-
-		printf( '<div class="button wpp-add-poll-option" data-poll-id="%s">%s</div>', $post->ID, esc_html__( 'Add Option', 'wp-poll' ) );
-		printf( '<ul class="poll-options">%s</ul>', $poll_options );
-	}
-
-
-	/**
-	 * Save meta box
-	 *
-	 * @param $post_id
-	 */
-	public function save_meta_data( $post_id ) {
-
-		$nonce = isset( $_POST['poll_nonce_value'] ) ? $_POST['poll_nonce_value'] : '';
-
-		if ( ! wp_verify_nonce( $nonce, 'poll_nonce' ) ) {
-			return;
-		}
-
-		foreach ( wpp()->get_poll_meta_fields() as $field ) {
-
-			$field_id = isset( $field['id'] ) ? $field['id'] : '';
-
-			if ( in_array( $field_id, array( 'post_title', 'post_content' ) ) || empty( $field_id ) ) {
-				continue;
-			}
-
-			$field_value = isset( $_POST[ $field_id ] ) ? stripslashes_deep( $_POST[ $field_id ] ) : '';
-
-			update_post_meta( $post_id, $field_id, $field_value );
+		foreach ( $this->get_meta_field_sections() as $section ) {
+			PBSettings::createSection( $prefix, $section );
 		}
 	}
 
 
-	/**
-	 * Meta box output
-	 *
-	 * @param $post
-	 *
-	 * @throws PB_Error
-	 */
-	public function render_poll_meta( $post ) {
+	public function get_meta_field_sections() {
 
-		wp_nonce_field( 'poll_nonce', 'poll_nonce_value' );
+		$poll_setting_fields = array(
+			array(
+				'id'    => 'settings_vote_after_deadline',
+				'title' => esc_html__( 'Poll settings', 'wp-poll' ),
+				'label' => esc_html__( 'Allow users to vote after deadline.', 'wp-poll' ),
+				'type'  => 'switcher',
+			),
+			array(
+				'id'    => 'settings_multiple_votes',
+				'title' => ' ',
+				'label' => esc_html__( 'Allow users to vote on multiple options in a single poll.', 'wp-poll' ),
+				'type'  => 'switcher',
+				'class' => 'padding-top-none',
+			),
+			array(
+				'id'    => 'settings_new_options',
+				'title' => ' ',
+				'label' => esc_html__( 'Allow users to add new option.', 'wp-poll' ),
+				'type'  => 'switcher',
+				'class' => 'padding-top-none',
+			),
+			array(
+				'id'    => 'settings_hide_timer',
+				'title' => ' ',
+				'label' => esc_html__( 'Hide countdown timer for this poll.', 'wp-poll' ),
+				'type'  => 'switcher',
+				'class' => 'padding-top-none',
+			),
+		);
+		$poll_setting_fields = apply_filters( 'LiquidPoll/Filters/poll_setting_fields', $poll_setting_fields );
 
-		wpp()->PB_Settings()->generate_fields( $this->get_meta_fields(), $post->ID );
+		$field_sections['general_settings'] = array(
+			'title'  => __( 'General Settings', 'wp-poll' ),
+			'icon'   => 'fa fa-cog',
+			'fields' => array_merge( array(
+				array(
+					'id'      => '_type',
+					'title'   => esc_html__( 'Poll type', 'wp-poll' ),
+					'type'    => 'button_set',
+					'options' => array(
+						'poll'         => array( 'label' => esc_html__( 'Poll', 'wp-poll' ) ),
+						'reaction'     => array( 'label' => esc_html__( 'Reaction', 'wp-poll' ), 'availability' => 'upcoming', ),
+						'subscription' => array( 'label' => esc_html__( 'Subscription', 'wp-poll' ), 'availability' => 'upcoming', ),
+						'feedback'     => array( 'label' => esc_html__( 'Feedback', 'wp-poll' ), 'availability' => 'upcoming', ),
+					),
+					'default' => 'poll',
+				),
+				array(
+					'id'       => '_content',
+					'title'    => esc_html__( 'Poll Content', 'wp-poll' ),
+					'subtitle' => esc_html__( 'Description about this poll', 'wp-poll' ),
+					'type'     => 'wp_editor',
+				),
+				array(
+					'id'            => '_deadline',
+					'title'         => esc_html__( 'Deadline', 'wp-poll' ),
+					'subtitle'      => esc_html__( 'Specify a date when this poll will end. Leave empty to ignore this option', 'wp-poll' ),
+					'type'          => 'date',
+					'autocomplete'  => 'off',
+					'placeholder'   => date( 'Y-m-d' ),
+					'field_options' => array(
+						'dateFormat' => 'yy-mm-dd',
+					),
+				),
+			), $poll_setting_fields )
+		);
+		$field_sections['poll_options']     = array(
+			'title'  => __( 'Poll Options', 'wp-poll' ),
+			'icon'   => 'fa fa-th-large',
+			'fields' => array(
+				array(
+					'id'           => 'poll_meta_options',
+					'title'        => esc_html__( 'Options', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add poll options here. You can skip using media if you do not need this.', 'wp-poll' ),
+					'type'         => 'repeater',
+					'button_title' => esc_html__( 'Add option', 'wp-poll' ),
+					'fields'       => array(
+						array(
+							'id'    => 'label',
+							'title' => esc_html__( 'Label', 'wp-poll' ),
+							'type'  => 'text',
+						),
+						array(
+							'id'           => 'thumb',
+							'title'        => esc_html__( 'Thumbnail', 'wp-poll' ),
+							'type'         => 'media',
+							'preview_size' => 'full',
+							'library'      => 'image',
+							'url'          => false,
+						),
+//						array(
+//							'id'      => 'shortcode',
+//							'title'   => esc_html__( 'Shortcode', 'wp-poll' ),
+//							'type'    => 'text',
+//							'class'   => 'hide-input-field',
+//							'default' => '',
+//							'desc'    => sprintf( '<span class="shortcode tt--hint tt--top" aria-label="Click to Copy">[poller_list poll_id="%s" option_id="%s"]</span>', '', '' )
+//						),
+					),
+				),
+			),
+		);
+		$field_sections['poll_styling']     = array(
+			'title'  => __( 'Styling', 'wp-poll' ),
+			'icon'   => 'fa fa-bolt',
+			'fields' => array(
+				array(
+					'id'       => '_theme',
+					'title'    => esc_html__( 'Theme Style', 'wp-poll' ),
+					'subtitle' => esc_html__( 'By default it will apply from global settings.', 'wp-poll' ),
+					'type'     => 'select',
+					'options'  => array(
+						'default' => array(
+							'label' => esc_html__( 'Default', 'wp-poll' ),
+						),
+						'1'       => array(
+							'label' => esc_html__( 'Theme One', 'wp-poll' ),
+						),
+						'2'       => array(
+							'label' => esc_html__( 'Theme Two', 'wp-poll' ),
+						),
+						'3'       => array(
+							'label'        => esc_html__( 'Theme Three (Pro)', 'wp-poll' ),
+							'availability' => 'pro',
+						),
+						'4'       => array(
+							'label'        => esc_html__( 'Theme Four (Pro)', 'wp-poll' ),
+							'availability' => 'pro',
+						),
+						'x'       => array(
+							'label'        => esc_html__( '10+ are coming soon', 'wp-poll' ),
+							'availability' => 'upcoming',
+						),
+					),
+					'default'  => 'default',
+				),
+			),
+		);
 
-//		wpp_get_template( 'metabox/poll-meta.php', array( 'meta_box' => $this ) );
-	}
-
-
-	/**
-	 * Add meta boxes
-	 *
-	 * @param $post_type
-	 */
-	public function add_meta_boxes( $post_type ) {
-
-		if ( in_array( $post_type, array( 'poll' ) ) ) {
-			add_meta_box( 'poll-metabox', esc_html__( 'Poll data box', 'wp-poll' ), array( $this, 'render_poll_meta' ), $post_type, 'normal', 'high' );
-		}
-	}
-
-
-	/**
-	 * Return meta fields for direct use to PB_Settings
-	 *
-	 * @param string $fields_for
-	 *
-	 * @return mixed|void
-	 */
-	function get_meta_fields( $fields_for = 'general' ) {
-
-		return apply_filters( 'wpp_filters_poll_meta_options_fields_for_' . $fields_for, array( array( 'options' => wpp()->get_poll_meta_fields( $fields_for ) ) ) );
+		return apply_filters( 'LiquidPoll/Filters/poll_meta_field_sections', $field_sections );
 	}
 }
 
-new WPP_Poll_meta();
+new LIQUIDPOLL_Poll_meta();

@@ -12,10 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /**
-* Hook: wpp_before_poll_archive_single.
+* Hook: liquidpoll_before_poll_archive_single.
 */
 
-do_action( 'wpp_before_poll_archive_single' );
+do_action( 'liquidpoll_before_poll_archive_single' );
 
 if ( post_password_required() ) {
 	echo get_the_password_form();
@@ -24,9 +24,9 @@ if ( post_password_required() ) {
 
 global $poll;
 
-$poll = wpp_get_poll();
+$poll = liquidpoll_get_poll();
 
-$has_thumb = $poll->has_thumbnail() && wpp()->display_on_archive( 'thumb' ) ? 'has-thumbnail' : '';
+$has_thumb = $poll->has_thumbnail() && liquidpoll()->display_on_archive( 'thumb' ) ? 'has-thumbnail' : '';
 
 ?>
 
@@ -35,12 +35,12 @@ $has_thumb = $poll->has_thumbnail() && wpp()->display_on_archive( 'thumb' ) ? 'h
 	<?php
 
 	/**
-	 * Hook: wpp_single_poll_main
+	 * Hook: liquidpoll_single_poll_main
 	 *
-	 * @see wpp_poll_archive_single_thumb()
-	 * @see wpp_poll_archive_single_summary()
+	 * @see liquidpoll_poll_archive_single_thumb()
+	 * @see liquidpoll_poll_archive_single_summary()
 	 */
-	do_action( 'wpp_poll_archive_single_main' );
+	do_action( 'liquidpoll_poll_archive_single_main' );
 	?>
 
 </div>
@@ -49,7 +49,7 @@ $has_thumb = $poll->has_thumbnail() && wpp()->display_on_archive( 'thumb' ) ? 'h
 <?php
 
 /**
- * Hook: wpp_after_poll_archive_single
+ * Hook: liquidpoll_after_poll_archive_single
  */
 
-do_action( 'wpp_after_poll_archive_single' );
+do_action( 'liquidpoll_after_poll_archive_single' );

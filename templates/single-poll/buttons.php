@@ -10,11 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
 
-global $poll, $wpp;
+global $poll, $liquidpoll;
 
 ?>
 
-<div class="wpp-buttons">
+<div class="liquidpoll-buttons">
 
 	<?php
 
@@ -22,7 +22,7 @@ global $poll, $wpp;
 	 * New option button
 	 */
     if ( $poll->visitors_can_add_option() ) {
-		printf( '<button class="wpp-button wpp-button-orange wpp-button-new-option">%s</button>', $wpp->get_button_text( 'new_option' ) );
+		printf( '<button class="liquidpoll-button liquidpoll-button-orange liquidpoll-button-new-option">%s</button>', $liquidpoll->get_button_text( 'new_option' ) );
 	}
 
 
@@ -30,14 +30,14 @@ global $poll, $wpp;
 	 * Submit button
 	 */
 	if( $poll->ready_to_vote() ) {
-		printf( '<button class="wpp-button wpp-button-green wpp-submit-poll" data-poll-id="%s">%s</button>', $poll->get_id(), $wpp->get_button_text( 'submit' ) );
+		printf( '<button class="liquidpoll-button liquidpoll-button-green liquidpoll-submit-poll" data-poll-id="%s">%s</button>', $poll->get_id(), $liquidpoll->get_button_text( 'submit' ) );
 	}
 
 	/**
 	 * Results button
 	 */
 	if( ! $poll->hide_results() ) {
-		printf( '<button class="wpp-button wpp-button-red wpp-get-poll-results" data-poll-id="%s">%s</button>', $poll->get_id(), $wpp->get_button_text( 'results' ) );
+		printf( '<button class="liquidpoll-button liquidpoll-button-red liquidpoll-get-poll-results" data-poll-id="%s">%s</button>', $poll->get_id(), $liquidpoll->get_button_text( 'results' ) );
 	}
 	?>
 

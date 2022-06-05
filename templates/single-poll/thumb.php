@@ -12,7 +12,7 @@ global $poll;
 ?>
 
 <?php if ( $poll->has_thumbnail() ) : ?>
-    <div class="wpp-poll-thumbnail">
+    <div class="liquidpoll-poll-thumbnail">
         <img src="<?php echo esc_url( $poll->get_thumbnail() ); ?>"
              alt="<?php echo esc_attr( $poll->get_name() ); ?>"/>
     </div>

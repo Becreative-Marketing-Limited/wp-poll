@@ -24,12 +24,12 @@ $option_name   = $poll->get_poll_type() == 'survey' && $options_type == 'checkbo
 ?>
 
 <?php if ( $options_theme == 9 || $options_theme == 10 || $options_theme == 11 ) : ?>
-<div class="wpp-col">
+<div class="liquidpoll-col">
 	<?php endif; ?>
 
-    <div class="wpp-option-single <?php echo esc_attr( $thumb_class . ' ' . $label_class ); ?>"
+    <div class="liquidpoll-option-single <?php echo esc_attr( $thumb_class . ' ' . $label_class ); ?>"
          data-option-id="<?php echo esc_attr( $option_id ); ?>">
-        <div class="wpp-option-input">
+        <div class="liquidpoll-option-input">
             <input type="<?php echo esc_attr( $options_type ); ?>"
                    name="<?php echo esc_attr( $option_name ); ?>"
                    id="<?php echo esc_attr( $unique_id ); ?>"
@@ -38,17 +38,17 @@ $option_name   = $poll->get_poll_type() == 'survey' && $options_type == 'checkbo
         </div>
 
 		<?php if ( ! empty( $thumb ) ) : ?>
-            <div class="wpp-option-thumb">
+            <div class="liquidpoll-option-thumb">
                 <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
             </div>
 		<?php endif; ?>
 
 		<?php if ( ! $poll->hide_results() ) : ?>
-            <div class="wpp-option-result"></div>
-            <div class="wpp-option-result-bar"></div>
+            <div class="liquidpoll-option-result"></div>
+            <div class="liquidpoll-option-result-bar"></div>
 		<?php endif; ?>
 
-    </div> <!-- .wpp-option-single -->
+    </div> <!-- .liquidpoll-option-single -->
 
 	<?php if ( $options_theme == 9 || $options_theme == 10 || $options_theme == 11 ) : ?>
 </div> <!-- .wwp-col -->

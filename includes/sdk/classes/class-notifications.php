@@ -45,7 +45,7 @@ class Notifications {
 	 * Force check notifications
 	 */
 	function force_check_notifications() {
-		if ( $this->client->get_args_option( 'force-check', wp_unslash( $_GET ) ) === 'yes' ) {
+		if ( Utils::get_args_option( 'force-check', wp_unslash( $_GET ) ) === 'yes' ) {
 			$this->set_cached_notification_data( $this->get_latest_notification_data() );
 		}
 	}
@@ -57,7 +57,7 @@ class Notifications {
 	 * @return mixed|string
 	 */
 	private function get_message() {
-		return $this->client->get_parsed_string( $this->client->get_args_option( 'message', $this->get_notification_data() ) );
+		return $this->client->get_parsed_string( Utils::get_args_option( 'message', $this->get_notification_data() ) );
 	}
 
 
@@ -67,7 +67,7 @@ class Notifications {
 	 * @return array|mixed|string
 	 */
 	private function get_id() {
-		return $this->client->get_args_option( 'id', $this->get_notification_data() );
+		return Utils::get_args_option( 'id', $this->get_notification_data() );
 	}
 
 

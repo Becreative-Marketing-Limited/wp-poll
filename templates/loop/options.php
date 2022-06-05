@@ -27,7 +27,7 @@ $singles      = isset( $poll_results['singles'] ) ? $poll_results['singles'] : a
 		$thumb_url     = isset( $option['thumb'] ) ? $option['thumb'] : '';
 		$votes_count = isset( $singles[$option_id] ) ? $singles[$option_id] : 0;
 
-		if ( apply_filters( 'wpp_filter_show_results_in_archive', $show_results ) ) {
+		if ( apply_filters( 'liquidpoll_filter_show_results_in_archive', $show_results ) ) {
 			$option_html[] = sprintf( '<span class="area-right">%s %s</span>', $votes_count, esc_html__( 'Vote(s)', 'wp-poll') );
 		}
 

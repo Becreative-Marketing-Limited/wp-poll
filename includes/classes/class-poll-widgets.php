@@ -1,6 +1,6 @@
 <?php
 /**
- * Class WPP_Widgets
+ * Class LIQUIDPOLL_Widgets
  *
  * @author Pluginbazar
  * @package includes/classes/class-poll
@@ -11,14 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
-if ( ! class_exists( 'WPP_Widgets' ) ) {
-	class WPP_Widgets extends WP_Widget {
+if ( ! class_exists( 'LIQUIDPOLL_Widgets' ) ) {
+	class LIQUIDPOLL_Widgets extends WP_Widget {
 
 		/**
-		 * WPP_Widgets constructor.
+		 * LIQUIDPOLL_Widgets constructor.
 		 */
 		function __construct() {
-			parent::__construct( 'wpp_widget_poll', esc_html__( 'WP Poll', 'wp-poll' ), array( 'description' => esc_html__( 'Display single poll', 'wp-poll' ), ) );
+			parent::__construct( 'liquidpoll_widget_poll', esc_html__( 'WP Poll', 'wp-poll' ), array( 'description' => esc_html__( 'Display single poll', 'wp-poll' ), ) );
 		}
 
 
@@ -43,7 +43,7 @@ if ( ! class_exists( 'WPP_Widgets' ) ) {
 
 			$post = get_post( $poll_id );
 			setup_postdata( $post );
-			wpp_get_template( 'content-single-poll.php' );
+			liquidpoll_get_template( 'content-single-poll.php' );
 			wp_reset_postdata();
 
 
@@ -89,7 +89,7 @@ if ( ! class_exists( 'WPP_Widgets' ) ) {
 				)
 			);
 
-			wpp()->PB_Settings()->generate_fields( $fields );
+			liquidpoll()->PB_Settings()->generate_fields( $fields );
 		}
 	}
 }
