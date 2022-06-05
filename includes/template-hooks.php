@@ -33,6 +33,7 @@ add_action( 'liquidpoll_after_poll_archive', 'liquidpoll_poll_archive_pagination
  *
  * @on Frontend
  */
+
 add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_title', 10 );
 add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_thumb', 15 );
 add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_content', 20 );

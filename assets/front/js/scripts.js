@@ -7,7 +7,8 @@
 
     $(document).on('click', '.liquidpoll-get-poll-results', function () {
 
-        let pollID = $(this).data('poll-id');
+        let resultButton = $(this),
+            pollID = resultButton.data('poll-id');
 
         if (typeof pollID === 'undefined') {
             return;
@@ -62,6 +63,8 @@
                         $(this).find('.liquidpoll-option-result').html(singleVoteCount + ' ' +  pluginObject.voteText);
                     }
                 });
+
+                resultButton.parent().fadeOut('slow', 'linear');
             }
         });
     });

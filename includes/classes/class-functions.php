@@ -531,6 +531,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 					),
 				) ),
 			);
+
 			$pages['liquidpoll-pro']     = array(
 				'page_nav'      => esc_html__( 'Pro Options', 'wp-poll-pro' ),
 				'page_settings' => apply_filters( 'liquidpoll_filters_settings_page_pro', array(
