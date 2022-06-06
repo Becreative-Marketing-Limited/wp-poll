@@ -59,7 +59,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			if ( ! empty( $poll_deadline ) && $poll_deadline !== 0 ) {
 
 				// Check allow/disallow
-				if ( ! $this->get_allows_disallows( 'vote_after_deadline' ) ) {
+				if ( ! $this->get_meta( 'settings_vote_after_deadline' ) ) {
 					$can_vote = false;
 				}
 
@@ -252,8 +252,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			$_poll_options = array();
 			$poll_options  = $this->get_meta( 'poll_meta_options', array() );
 
-			foreach ( $poll_options as $option_id => $option ) {
-				$_poll_options[ $option_id ] = array(
+			foreach ( $poll_options as $option ) {
+				$_poll_options[ $option['unique_id'] ] = array(
 					'label' => isset( $option['label'] ) ? $option['label'] : '',
 					'thumb' => isset( $option['thumb']['url'] ) ? $option['thumb']['url'] : '',
 				);
@@ -269,8 +269,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		 * @return bool
 		 */
 		function can_vote_multiple() {
-
-			return $this->get_allows_disallows( 'multiple_votes' );
+			return $this->get_meta( 'settings_multiple_votes', false );
 		}
 
 
@@ -325,7 +324,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		 */
 		function get_poll_deadline( $format = 'M j Y G:i:s' ) {
 
-			$deadline = $this->get_meta( 'poll_deadline' );
+			$deadline = $this->get_meta( '_deadline' );
 			$deadline = empty( $deadline ) ? '' : date( $format, strtotime( $deadline ) );
 
 			return apply_filters( 'liquidpoll_filters_poll_deadline', $deadline );
@@ -338,8 +337,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		 * @return bool
 		 */
 		function visitors_can_add_option() {
-
-			return apply_filters( 'liquidpoll_filters_visitors_can_add_option', $this->get_allows_disallows( 'new_options' ), $this->get_id() );
+			return apply_filters( 'liquidpoll_filters_visitors_can_add_option', $this->get_meta( 'settings_new_options', false ), $this->get_id() );
 		}
 
 
@@ -349,8 +347,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		 * @return bool
 		 */
 		function hide_countdown_timer() {
-
-			return $this->get_allows_disallows( 'hide_timer' );
+			return $this->get_meta( 'settings_hide_timer', false );
 		}
 
 
@@ -360,31 +357,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		 * @return bool
 		 */
 		function hide_results() {
-
-			return $this->get_allows_disallows( 'hide_results' );
-		}
-
-
-		/**
-		 * Return allows disallows for a poll
-		 *
-		 * @param bool $thing_to_check vote_after_deadline | multiple_votes | new_options
-		 *
-		 * @return bool
-		 */
-		function get_allows_disallows( $thing_to_check = false ) {
-
-			if ( ! $thing_to_check || empty( $thing_to_check ) ) {
-				return false;
-			}
-
-			$allow_disallow = $this->get_meta( 'poll_allow_disallow', array() );
-
-			if ( is_array( $allow_disallow ) && in_array( $thing_to_check, $allow_disallow ) ) {
-				return true;
-			}
-
-			return false;
+			return $this->get_meta( 'hide_results', false );
 		}
 	}
 

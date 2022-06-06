@@ -440,6 +440,7 @@
     padding: 0 20px 20px 20px;
 }
 
+.pbsettings-metabox .pbsettings-field.hide-field,
 .pbsettings-metabox .pbsettings-field.hide-input-field .pbsettings-fieldset input {
     display: none;
 }

@@ -37,6 +37,26 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 			add_action( 'pb_settings_liquidpoll-extensions', array( $this, 'render_extensions' ) );
 			add_action( 'wp_ajax_liquidpoll_report_download_csv', array( $this, 'download_csv_report' ) );
+
+			add_filter( 'PBSettings/Filters/field_value', array( $this, 'update_field_value' ), 10, 3 );
+		}
+
+		/**
+		 * Update field value from PBSettings
+		 *
+		 * @param $value
+		 * @param $field_id
+		 * @param $field_type
+		 *
+		 * @return mixed|string
+		 */
+		function update_field_value( $value, $field_id, $field_type ) {
+
+			if ( empty( $value ) && 'unique_id' === $field_id && 'text' === $field_type ) {
+				$value = uniqid( date( 'ji' ) );
+			}
+
+			return $value;
 		}
 
 

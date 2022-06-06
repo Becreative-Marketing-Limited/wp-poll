@@ -108,12 +108,19 @@ class LIQUIDPOLL_Poll_meta {
 			'icon'   => 'fa fa-th-large',
 			'fields' => array(
 				array(
-					'id'           => 'poll_meta_options',
-					'title'        => esc_html__( 'Options', 'wp-poll' ),
-					'subtitle'     => esc_html__( 'Add poll options here. You can skip using media if you do not need this.', 'wp-poll' ),
-					'type'         => 'repeater',
-					'button_title' => esc_html__( 'Add option', 'wp-poll' ),
-					'fields'       => array(
+					'id'              => 'poll_meta_options',
+					'title'           => esc_html__( 'Options', 'wp-poll' ),
+					'subtitle'        => esc_html__( 'Add poll options here. You can skip using media if you do not need this.', 'wp-poll' ),
+					'type'            => 'repeater',
+					'button_title'    => esc_html__( 'Add option', 'wp-poll' ),
+					'disable_actions' => array( 'clone' ),
+					'fields'          => array(
+						array(
+							'id'      => 'unique_id',
+							'title'   => esc_html__( 'ID', 'wp-poll' ),
+							'type'    => 'text',
+							'class'    => 'hide-field',
+						),
 						array(
 							'id'    => 'label',
 							'title' => esc_html__( 'Label', 'wp-poll' ),

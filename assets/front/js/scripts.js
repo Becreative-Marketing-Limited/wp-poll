@@ -48,18 +48,8 @@
                         singleVoteCount = 0;
                     }
 
-                    if (percentageValue <= 25) {
-                        classTobeAdded = 'results-danger';
-                    } else if (percentageValue > 25 && percentageValue <= 50) {
-                        classTobeAdded = 'results-warning';
-                    } else if (percentageValue > 50 && percentageValue <= 75) {
-                        classTobeAdded = 'results-info';
-                    } else {
-                        classTobeAdded = 'results-success';
-                    }
-
                     if ($.inArray(optionID, response.data.percentages)) {
-                        $(this).addClass('has-result').find('.liquidpoll-option-result-bar').addClass(classTobeAdded).css('width', percentageValue + '%');
+                        $(this).addClass('has-result').find('.liquidpoll-option-result-bar').css('width', percentageValue + '%');
                         $(this).find('.liquidpoll-option-result').html(singleVoteCount + ' ' +  pluginObject.voteText);
                     }
                 });
