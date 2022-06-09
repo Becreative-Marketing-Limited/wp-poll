@@ -180,11 +180,10 @@
  * 01. 04. Navigation
  */
 .pbsettings-nav {
-    display: flex;
+    display: inline-block;
     position: relative;
     z-index: 10;
     float: left;
-    align-items: center;
 }
 
 .pbsettings-nav ul {
@@ -650,6 +649,16 @@
     border-right-style: solid;
     margin-right: 1px;
     border-top: 4px solid var(--pbsettings-primary-color);
+}
+
+.pbsettings-theme-dark .pbsettings-nav-inline ul li.pbsettings-extra-nav.right {
+    float: right;
+}
+
+.pbsettings-theme-dark .pbsettings-nav-inline ul li.pbsettings-extra-nav a {
+    background: transparent;
+    color: inherit;
+    border-color: transparent;
 }
 
 .pbsettings-theme-dark .pbsettings-nav-inline ul li .pbsettings-active:after {

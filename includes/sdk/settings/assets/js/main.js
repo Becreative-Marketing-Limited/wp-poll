@@ -216,20 +216,23 @@
 
                     var $link = $(this);
 
-                    $links.removeClass('pbsettings-active');
-                    $link.addClass('pbsettings-active');
+                    if ($link.parent().hasClass('pbsettings-extra-nav')) {
+                        window.open($link.attr('href'));
+                    } else {
+                        $links.removeClass('pbsettings-active');
+                        $link.addClass('pbsettings-active');
 
-                    if ($last !== undefined) {
-                        $last.addClass('hidden');
+                        if ($last !== undefined) {
+                            $last.addClass('hidden');
+                        }
+
+                        var $section = $sections.eq(index);
+
+                        $section.removeClass('hidden');
+                        $section.pb_settings_reload_script();
+
+                        $last = $section;
                     }
-
-                    var $section = $sections.eq(index);
-
-                    $section.removeClass('hidden');
-                    $section.pb_settings_reload_script();
-
-                    $last = $section;
-
                 });
 
             });

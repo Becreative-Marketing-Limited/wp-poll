@@ -229,9 +229,9 @@ if ( ! class_exists( 'PBSettings_Metabox' ) ) {
 					$tab_key ++;
 				}
 
-				echo '</ul>';
-
 				do_action( 'pbsettings_after_meta_navs' );
+
+				echo '</ul>';
 
 				echo '</div>';
 

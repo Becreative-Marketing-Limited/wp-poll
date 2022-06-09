@@ -38,44 +38,21 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_action( 'pb_settings_liquidpoll-extensions', array( $this, 'render_extensions' ) );
 			add_action( 'wp_ajax_liquidpoll_report_download_csv', array( $this, 'download_csv_report' ) );
 
-//			add_filter( 'PBSettings/Filters/field_value', array( $this, 'update_field_value' ), 10, 3 );
 			add_action( 'pbsettings_after_meta_navs', array( $this, 'add_plugin_promotional_navs' ) );
 		}
 
-
+		/**
+		 * Add promotional navigation tabs in meta box
+		 */
 		function add_plugin_promotional_navs() {
 
-			echo '<div class="liquidpoll-metabox-nav-extra">';
-
 			if ( ! liquidpoll()->is_pro() ) {
-				printf( '<a class="liquidpoll-meta-nav right" href="%s">%s</a>', 'https://fb.com', esc_html__( 'Get Pro', 'wp-poll' ) );
+				printf( '<li class="pbsettings-extra-nav"><a href="%s">%s</a></li>', LIQUIDPOLL_PLUGIN_LINK, esc_html__( 'Get Pro', 'wp-poll' ) );
 			}
 
-			printf( '<a class="liquidpoll-meta-nav right" href="%s">%s</a>', '', esc_html__( 'Documentation', 'wp-poll' ) );
-			printf( '<a class="liquidpoll-meta-nav right" href="%s">%s</a>', '', esc_html__( 'Community', 'wp-poll' ) );
-
-			echo '</div>';
+			printf( '<li class="pbsettings-extra-nav right"><a href="%s">%s</a></li>', LIQUIDPOLL_DOCS_URL, esc_html__( 'Documentation', 'wp-poll' ) );
+			printf( '<li class="pbsettings-extra-nav right"><a href="%s">%s</a></li>', LIQUIDPOLL_TICKET_URL, esc_html__( 'Community', 'wp-poll' ) );
 		}
-
-
-		/**
-		 * Update field value from PBSettings
-		 *
-		 * @param $value
-		 * @param $field_id
-		 * @param $field_type
-		 *
-		 * @return mixed|string
-		 */
-		function update_field_value( $value, $field_id, $field_type ) {
-
-			if ( empty( $value ) && 'unique_id' === $field_id && 'text' === $field_type ) {
-				$value = uniqid( date( 'ji' ) );
-			}
-
-			return $value;
-		}
-
 
 		/**
 		 * Download poll report csv
