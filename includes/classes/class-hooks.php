@@ -38,7 +38,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_action( 'pb_settings_liquidpoll-extensions', array( $this, 'render_extensions' ) );
 			add_action( 'wp_ajax_liquidpoll_report_download_csv', array( $this, 'download_csv_report' ) );
 
-			add_filter( 'PBSettings/Filters/field_value', array( $this, 'update_field_value' ), 10, 3 );
+//			add_filter( 'PBSettings/Filters/field_value', array( $this, 'update_field_value' ), 10, 3 );
 		}
 
 		/**

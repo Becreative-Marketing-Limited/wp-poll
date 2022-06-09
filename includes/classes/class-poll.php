@@ -252,8 +252,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			$_poll_options = array();
 			$poll_options  = $this->get_meta( 'poll_meta_options', array() );
 
-			foreach ( $poll_options as $option ) {
-				$_poll_options[ $option['unique_id'] ] = array(
+			foreach ( $poll_options as $option_key => $option ) {
+				$_poll_options[ $option_key ] = array(
 					'label' => isset( $option['label'] ) ? $option['label'] : '',
 					'thumb' => isset( $option['thumb']['url'] ) ? $option['thumb']['url'] : '',
 				);

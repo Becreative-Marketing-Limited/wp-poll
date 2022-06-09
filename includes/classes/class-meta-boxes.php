@@ -115,12 +115,13 @@ class LIQUIDPOLL_Poll_meta {
 					'button_title'    => esc_html__( 'Add option', 'wp-poll' ),
 					'disable_actions' => array( 'clone' ),
 					'fields'          => array(
-						array(
-							'id'      => 'unique_id',
-							'title'   => esc_html__( 'ID', 'wp-poll' ),
-							'type'    => 'text',
-//							'class'    => 'hide-field',
-						),
+//						array(
+//							'id'      => 'unique_id',
+//							'title'   => esc_html__( 'ID', 'wp-poll' ),
+//							'type'    => 'text',
+//							'default' => uniqid( date( 'ji' ) ),
+////							'class'    => 'hide-field',
+//						),
 						array(
 							'id'    => 'label',
 							'title' => esc_html__( 'Label', 'wp-poll' ),
@@ -166,7 +167,7 @@ class LIQUIDPOLL_Poll_meta {
 							'label' => esc_html__( 'Theme Two', 'wp-poll' ),
 						),
 						'3'       => array(
-							'label'        => esc_html__( 'Theme Three', 'wp-poll' ),
+							'label' => esc_html__( 'Theme Three', 'wp-poll' ),
 						),
 						'4'       => array(
 							'label'        => esc_html__( 'Theme Four (Pro)', 'wp-poll' ),
