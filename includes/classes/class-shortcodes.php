@@ -87,15 +87,21 @@ if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
 		public function display_single_poll( $atts, $content = null ) {
 
 			$atts = shortcode_atts( array(
-				'id' => ''
+				'id'    => '',
+				'theme' => '1',
 			), $atts );
 
 			$poll_id = empty( $atts['id'] ) ? '' : $atts['id'];
+			$theme   = empty( $atts['theme'] ) ? '1' : $atts['theme'];
 
-			global $post;
+			global $post, $poll;
 
 			$post = get_post( $poll_id );
 			setup_postdata( $post );
+
+			$poll = liquidpoll_get_poll();
+
+			$poll->set_theme( $theme );
 
 			ob_start();
 

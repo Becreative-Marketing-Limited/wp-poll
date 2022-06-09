@@ -34,6 +34,13 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		public $item_post = null;
 
 
+		/** Base theme
+		 *
+		 * @var null
+		 */
+		public $theme = null;
+
+
 		/**
 		 * LIQUIDPOLLS_Poll constructor.
 		 *
@@ -143,6 +150,21 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 
 
 		/**
+		 * Return theme for this poll
+		 *
+		 * @return mixed|void|null
+		 */
+		function get_theme() {
+
+			if ( empty( $this->theme ) ) {
+				return $this->get_meta( '_theme', 1 );
+			}
+
+			return $this->theme;
+		}
+
+
+		/**
 		 * Return Meta Value
 		 *
 		 * @param string $meta_key
@@ -240,6 +262,16 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		function get_post() {
 
 			return $this->item_post;
+		}
+
+
+		/**
+		 * Set theme for this poll
+		 *
+		 * @param string $theme
+		 */
+		function set_theme( $theme = '' ) {
+			$this->theme = $theme;
 		}
 
 

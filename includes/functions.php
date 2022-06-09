@@ -274,14 +274,14 @@ if ( ! function_exists( 'liquidpoll_single_post_class' ) ) {
 	 */
 	function liquidpoll_single_post_class( $classes = '' ) {
 
+		global $poll;
+
 		if ( ! is_array( $classes ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
 		}
 
-		$classes[] = sprintf( '%s-single', get_post_type() );
-
-		// theme
-		$classes[] = sprintf( 'theme-%s', get_post_meta( get_the_ID(), '_theme', true ) );
+		$classes[] = 'poll-single';
+		$classes[] = sprintf( 'theme-%s', $poll->get_theme() );
 
 		printf( 'class="%s"', liquidpoll_generate_classes( $classes ) );
 	}

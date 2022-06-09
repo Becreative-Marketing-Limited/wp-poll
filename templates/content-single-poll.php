@@ -5,7 +5,10 @@
 
 global $poll, $wp_query;
 
-$poll        = liquidpoll_get_poll();
+if ( ! $poll instanceof LIQUIDPOLL_Poll ) {
+	$poll = liquidpoll_get_poll();
+}
+
 $embed_class = $wp_query->get( 'poll_in_embed', false ) ? 'inside-embed' : '';
 
 /**
