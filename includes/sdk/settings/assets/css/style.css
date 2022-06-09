@@ -180,10 +180,11 @@
  * 01. 04. Navigation
  */
 .pbsettings-nav {
-    display: block;
+    display: flex;
     position: relative;
     z-index: 10;
     float: left;
+    align-items: center;
 }
 
 .pbsettings-nav ul {

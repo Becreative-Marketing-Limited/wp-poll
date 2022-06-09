@@ -36,7 +36,6 @@ $poll_theme   = $poll->get_meta( '_theme', 1 );
                id="<?php echo esc_attr( $unique_id ); ?>"
                value="<?php echo esc_attr( $option_id ); ?>">
 
-
         <label for="<?php echo esc_attr( $unique_id ); ?>">
 			<?php if ( $poll->get_meta( 'hide_option_labels', false ) ) : ?>
 				<span><?php echo esc_html( $label ); ?></span>
