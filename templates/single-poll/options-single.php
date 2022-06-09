@@ -21,7 +21,6 @@ $poll_theme   = $poll->get_meta( '_theme', 1 );
 
 ?>
 
-
 <div class="liquidpoll-option-single <?php echo esc_attr( $thumb_class . ' ' . $label_class ); ?>"
      data-option-id="<?php echo esc_attr( $option_id ); ?>">
 
@@ -36,7 +35,14 @@ $poll_theme   = $poll->get_meta( '_theme', 1 );
                name="<?php echo esc_attr( $option_name ); ?>"
                id="<?php echo esc_attr( $unique_id ); ?>"
                value="<?php echo esc_attr( $option_id ); ?>">
-        <label for="<?php echo esc_attr( $unique_id ); ?>"><?php echo esc_html( $label ); ?></label>
+
+
+        <label for="<?php echo esc_attr( $unique_id ); ?>">
+			<?php if ( $poll->get_meta( 'hide_option_labels', false ) ) : ?>
+				<span><?php echo esc_html( $label ); ?></span>
+			<?php endif; ?>
+        </label>
+
     </div>
 
 	<?php if ( 2 == $poll_theme && ! empty( $thumb ) ) : ?>

@@ -115,13 +115,6 @@ class LIQUIDPOLL_Poll_meta {
 					'button_title'    => esc_html__( 'Add option', 'wp-poll' ),
 					'disable_actions' => array( 'clone' ),
 					'fields'          => array(
-//						array(
-//							'id'      => 'unique_id',
-//							'title'   => esc_html__( 'ID', 'wp-poll' ),
-//							'type'    => 'text',
-//							'default' => uniqid( date( 'ji' ) ),
-////							'class'    => 'hide-field',
-//						),
 						array(
 							'id'    => 'label',
 							'title' => esc_html__( 'Label', 'wp-poll' ),
@@ -144,6 +137,12 @@ class LIQUIDPOLL_Poll_meta {
 //							'desc'    => sprintf( '<span class="shortcode tt--hint tt--top" aria-label="Click to Copy">[poller_list poll_id="%s" option_id="%s"]</span>', '', '' )
 //						),
 					),
+				),
+				array(
+					'id'    => 'hide_option_labels',
+					'title' => esc_html__( 'Hide labels', 'wp-poll' ),
+					'label' => esc_html__( 'Hide labels of all options.', 'wp-poll' ),
+					'type'  => 'switcher',
 				),
 			),
 		);
