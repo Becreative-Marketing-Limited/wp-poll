@@ -4,6 +4,12 @@
 
 (function ($, window, document, pluginObject) {
     "use strict";
+    $(document).on('ready', function () {
+        $('.theme-2 .liquidpoll-option-single ').on('click', function () {
+            $('.theme-2 .liquidpoll-option-single').removeClass("active");
+            $(this).addClass("active");
+        });
+    });
 
     $(document).on('click', '.liquidpoll-get-poll-results', function () {
 
@@ -50,7 +56,7 @@
 
                     if ($.inArray(optionID, response.data.percentages)) {
                         $(this).addClass('has-result').find('.liquidpoll-option-result-bar').css('width', percentageValue + '%');
-                        $(this).find('.liquidpoll-option-result').html(singleVoteCount + ' ' +  pluginObject.voteText);
+                        $(this).find('.liquidpoll-option-result').html(singleVoteCount + ' ' + pluginObject.voteText);
                     }
                 });
 

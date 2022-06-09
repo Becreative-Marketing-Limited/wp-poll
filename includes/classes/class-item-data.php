@@ -187,7 +187,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 */
 		function get_content( $length = false, $more = null ) {
 
-			$content = $this->get_post()->post_content;
+			$content = $this->get_meta( '_content' );
 
 			if ( $length ) {
 				$content = wp_trim_words( $content, $length, $more );
@@ -204,7 +204,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 */
 		function has_content() {
 
-			if( empty( $this->get_content() ) ) {
+			if ( empty( $this->get_content() ) ) {
 				return false;
 			}
 
