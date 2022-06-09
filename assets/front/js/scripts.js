@@ -4,8 +4,14 @@
 
 (function ($, window, document, pluginObject) {
     "use strict";
+    $(document).on('ready', function () {
+        $('.theme-2 .liquidpoll-option-single ').on('click', function () {
+            $('.theme-2 .liquidpoll-option-single').removeClass("active");
+            $(this).addClass("active");
+        });
+    });
 
-    $(document).on('click', '.wpp-get-poll-results', function () {
+    $(document).on('click', '.liquidpoll-get-poll-results', function () {
 
         let resultButton = $(this),
             pollID = resultButton.data('poll-id');
@@ -16,24 +22,24 @@
 
         let singlePoll = $('#poll-' + pollID);
 
-        singlePoll.find('.wpp-responses').slideUp();
+        singlePoll.find('.liquidpoll-responses').slideUp();
 
         $.ajax({
             type: 'POST',
             context: this,
             url: pluginObject.ajaxurl,
             data: {
-                'action': 'wpp_get_poll_results',
+                'action': 'liquidpoll_get_poll_results',
                 'poll_id': pollID,
             },
             success: function (response) {
 
                 if (!response.success) {
-                    singlePoll.find('.wpp-responses').addClass('wpp-error').html(response.data).slideDown();
+                    singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-error').html(response.data).slideDown();
                     return;
                 }
 
-                singlePoll.find('.wpp-options .wpp-option-single').each(function () {
+                singlePoll.find('.liquidpoll-options .liquidpoll-option-single').each(function () {
 
                     let optionID = $(this).data('option-id'),
                         percentageValue = response.data.percentages[optionID],
@@ -48,19 +54,9 @@
                         singleVoteCount = 0;
                     }
 
-                    if (percentageValue <= 25) {
-                        classTobeAdded = 'results-danger';
-                    } else if (percentageValue > 25 && percentageValue <= 50) {
-                        classTobeAdded = 'results-warning';
-                    } else if (percentageValue > 50 && percentageValue <= 75) {
-                        classTobeAdded = 'results-info';
-                    } else {
-                        classTobeAdded = 'results-success';
-                    }
-
-                    if ($.inArray(optionID, response.data.percentages) && percentageValue > 0) {
-                        $(this).addClass('has-result').find('.wpp-option-result-bar').addClass(classTobeAdded).css('width', percentageValue + '%');
-                        $(this).find('.wpp-option-result').html(percentageValue + '%').css('left', 'calc(' + percentageValue + '% - 35px)');
+                    if ($.inArray(optionID, response.data.percentages)) {
+                        $(this).addClass('has-result').find('.liquidpoll-option-result-bar').css('width', percentageValue + '%');
+                        $(this).find('.liquidpoll-option-result').html(singleVoteCount + ' ' + pluginObject.voteText);
                     }
                 });
 
@@ -70,7 +66,7 @@
     });
 
 
-    $(document).on('click', '.wpp-submit-poll', function () {
+    $(document).on('click', '.liquidpoll-submit-poll', function () {
 
         let pollID = $(this).data('poll-id');
 
@@ -80,47 +76,47 @@
 
         let singlePoll = $('#poll-' + pollID), checkedData = [];
 
-        singlePoll.find('.wpp-options .wpp-option-single input[name="submit_poll_option"]').each(function () {
+        singlePoll.find('.liquidpoll-options .liquidpoll-option-single input[name="submit_poll_option"]').each(function () {
             if ($(this).is(':checked')) {
                 checkedData.push(this.value);
             }
         });
 
-        singlePoll.find('.wpp-responses').slideUp();
+        singlePoll.find('.liquidpoll-responses').slideUp();
 
         $.ajax({
             type: 'POST',
             context: this,
             url: pluginObject.ajaxurl,
             data: {
-                'action': 'wpp_submit_poll',
+                'action': 'liquidpoll_submit_poll',
                 'poll_id': pollID,
                 'checked_data': checkedData,
             },
             success: function (response) {
                 if (!response.success) {
-                    singlePoll.find('.wpp-responses').addClass('wpp-error').html(response.data).slideDown();
+                    singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-error').html(response.data).slideDown();
                 } else {
                     /**
                      * Trigger to enhance on Success of Poll Submission
                      *
-                     * @trigger wpp_poll_submission_success
+                     * @trigger liquidpoll_poll_submission_success
                      */
-                    $(document.body).trigger('wpp_poll_submission_success', response);
+                    $(document.body).trigger('liquidpoll_poll_submission_success', response);
 
-                    singlePoll.find('.wpp-responses').addClass('wpp-success').html(response.data).slideDown();
+                    singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-success').html(response.data).slideDown();
                 }
             }
         });
     });
 
 
-    $(document).on('click', 'p.wpp-responses', function () {
+    $(document).on('click', 'p.liquidpoll-responses', function () {
         $(this).slideUp();
     });
 
 
-    $(document).on('click', '.wpp-new-option > button', function () {
+    $(document).on('click', '.liquidpoll-new-option > button', function () {
 
         let popupBoxContainer = $(this).parent().parent().parent(),
             pollID = $(this).data('pollid'),
@@ -139,7 +135,7 @@
             context: this,
             url: pluginObject.ajaxurl,
             data: {
-                'action': 'wpp_front_new_option',
+                'action': 'liquidpoll_front_new_option',
                 'poll_id': pollID,
                 'opt_val': optionValue,
             },
@@ -147,7 +143,7 @@
 
                 if (response.success) {
 
-                    popupBoxContainer.parent().find('.wpp-options').append(response.data);
+                    popupBoxContainer.parent().find('.liquidpoll-options').append(response.data);
                     popupBoxContainer.fadeOut().find('input[type="text"]').val('');
                 }
             }
@@ -156,9 +152,9 @@
     });
 
 
-    $(document).on('keyup', '.wpp-new-option input[type="text"]', function (e) {
+    $(document).on('keyup', '.liquidpoll-new-option input[type="text"]', function (e) {
         if (e.which === 13) {
-            $(this).parent().find('.wpp-button').trigger('click');
+            $(this).parent().find('.liquidpoll-button').trigger('click');
         }
 
         if ($(this).val().length > 0) {
@@ -167,26 +163,26 @@
     });
 
 
-    $(document).on('click', '.wpp-button-new-option', function () {
-        $(this).parent().parent().find('.wpp-popup-container').fadeIn().find('input[type="text"]').focus();
+    $(document).on('click', '.liquidpoll-button-new-option', function () {
+        $(this).parent().parent().find('.liquidpoll-popup-container').fadeIn().find('input[type="text"]').focus();
     });
 
 
-    $(document).on('click', '.wpp-popup-container .box-close', function () {
+    $(document).on('click', '.liquidpoll-popup-container .box-close', function () {
         $(this).parent().parent().fadeOut();
     });
 
 
-    $(document).on('click', '.wpp-options .wpp-option-single', function (e) {
+    $(document).on('click', '.liquidpoll-options .liquidpoll-option-single', function (e) {
 
-        let outsideInputArea = $(this).find('.wpp-option-input');
+        let outsideInputArea = $(this).find('.liquidpoll-option-input');
 
         if (!outsideInputArea.is(e.target) && outsideInputArea.has(e.target).length === 0) {
             $(this).find('label').trigger('click');
         }
     });
 
-})(jQuery, window, document, wpp_object);
+})(jQuery, window, document, liquidpoll_object);
 
 
 

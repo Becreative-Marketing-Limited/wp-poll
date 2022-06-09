@@ -11,39 +11,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
-if ( ! function_exists( 'wpp_export_button' ) ) {
-	function wpp_export_button() {
+if ( ! function_exists( 'liquidpoll_export_button' ) ) {
+	function liquidpoll_export_button() {
 
-		wp_nonce_field( 'wpp_export_nonce', 'wpp_export_nonce_value' );
+		wp_nonce_field( 'liquidpoll_export_nonce', 'liquidpoll_export_nonce_value' );
 
-		printf( "<input type='hidden' name='action' value='wpp_report_download_csv' />" );
+		printf( "<input type='hidden' name='action' value='liquidpoll_report_download_csv' />" );
 		printf( "<input type='submit' class='button' value='Export Report' />" );
 	}
 }
-add_action( 'pb_settings_before_wpp_export_button', 'wpp_export_button' );
+add_action( 'pb_settings_before_liquidpoll_export_button', 'liquidpoll_export_button' );
 
 
-if ( ! function_exists( 'wpp_after_page_export' ) ) {
-	function wpp_after_page_export() {
+if ( ! function_exists( 'liquidpoll_after_page_export' ) ) {
+	function liquidpoll_after_page_export() {
 
 		printf( "</form>" );
 	}
 }
-add_action( 'pb_settings_after_page_wpp-reports', 'wpp_after_page_export' );
+add_action( 'pb_settings_after_page_liquidpoll-reports', 'liquidpoll_after_page_export' );
 
 
-if ( ! function_exists( 'wpp_before_page_export' ) ) {
-	function wpp_before_page_export() {
+if ( ! function_exists( 'liquidpoll_before_page_export' ) ) {
+	function liquidpoll_before_page_export() {
 
 		$action_url = admin_url( 'admin-ajax.php' );
 
 		printf( "<form action='%s' method='get'>", $action_url );
 	}
 }
-add_action( 'pb_settings_before_page_wpp-reports', 'wpp_before_page_export' );
+add_action( 'pb_settings_before_page_liquidpoll-reports', 'liquidpoll_before_page_export' );
 
 
-if ( ! function_exists( 'wpp_is_page' ) ) {
+if ( ! function_exists( 'liquidpoll_is_page' ) ) {
 	/**
 	 * Return whether a page is $searched_page or not
 	 *
@@ -51,13 +51,13 @@ if ( ! function_exists( 'wpp_is_page' ) ) {
 	 *
 	 * @return bool
 	 */
-	function wpp_is_page( $page_for = 'archive' ) {
+	function liquidpoll_is_page( $page_for = 'archive' ) {
 
 		if ( ! in_array( $page_for, array( 'archive' ) ) ) {
 			return false;
 		}
 
-		$page_id = wpp()->get_option( 'wpp_page_' . $page_for );
+		$page_id = liquidpoll()->get_option( 'liquidpoll_page_' . $page_for );
 
 		if ( $page_id == get_the_ID() ) {
 			return true;
@@ -68,52 +68,52 @@ if ( ! function_exists( 'wpp_is_page' ) ) {
 }
 
 
-if ( ! function_exists( 'wpp_get_poll' ) ) {
+if ( ! function_exists( 'liquidpoll_get_poll' ) ) {
 	/**
 	 * Return Single Poll object
 	 *
 	 * @param bool $poll_id
 	 *
-	 * @return bool | WPP_Poll
-	 * @global WPP_Poll $poll
+	 * @return bool | LIQUIDPOLL_Poll
+	 * @global LIQUIDPOLL_Poll $poll
 	 *
 	 */
-	function wpp_get_poll( $poll_id = false ) {
+	function liquidpoll_get_poll( $poll_id = false ) {
 
 		if ( get_post_type( $poll_id ) != 'poll' ) {
 			return false;
 		}
 
-		return new WPP_Poll( $poll_id );
+		return new LIQUIDPOLL_Poll( $poll_id );
 	}
 }
 
 
-if ( ! function_exists( 'wpp_the_poll' ) ) {
+if ( ! function_exists( 'liquidpoll_the_poll' ) ) {
 	/**
 	 * Set poll in global variable
 	 *
 	 * @param bool $poll_id
 	 */
-	function wpp_the_poll( $poll_id = false ) {
+	function liquidpoll_the_poll( $poll_id = false ) {
 
 		global $poll;
 
-		if ( get_post_type( $poll_id ) == 'poll' && ! $poll instanceof WPP_Poll ) {
-			$poll = new WPP_Poll( $poll_id );
+		if ( get_post_type( $poll_id ) == 'poll' && ! $poll instanceof LIQUIDPOLL_Poll ) {
+			$poll = new LIQUIDPOLL_Poll( $poll_id );
 		}
 	}
 }
 
 
-if ( ! function_exists( 'wpp_add_poll_option' ) ) {
+if ( ! function_exists( 'liquidpoll_add_poll_option' ) ) {
 	/**
 	 * Return poll option HTML
 	 *
 	 * @param bool $unique_id
 	 * @param array $args
 	 */
-	function wpp_add_poll_option( $unique_id = false, $args = array() ) {
+	function liquidpoll_add_poll_option( $unique_id = false, $args = array() ) {
 
 		global $post;
 
@@ -152,7 +152,7 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 
         <li class="poll-option-single">
 
-			<?php wpp()->PB_Settings()->generate_fields( array( array( 'options' => apply_filters( 'wpp_filters_poll_options_fields', $options_fields, $poll_id, $unique_id, $args ) ) ) ); ?>
+			<?php liquidpoll()->PB_Settings()->generate_fields( array( array( 'options' => apply_filters( 'liquidpoll_filters_poll_options_fields', $options_fields, $poll_id, $unique_id, $args ) ) ) ); ?>
 
             <div class="poll-option-controls">
                 <span class="option-remove dashicons dashicons-no-alt" data-status=0></span>
@@ -172,48 +172,48 @@ if ( ! function_exists( 'wpp_add_poll_option' ) ) {
 }
 
 
-if ( ! function_exists( 'wpp' ) ) {
+if ( ! function_exists( 'liquidpoll' ) ) {
 	/**
-	 * Return global $wpp
+	 * Return global $liquidpoll
 	 *
-	 * @return WPP_Functions
+	 * @return LIQUIDPOLL_Functions
 	 */
-	function wpp() {
-		global $wpp;
+	function liquidpoll() {
+		global $liquidpoll;
 
-		if ( empty( $wpp ) ) {
-			$wpp = new WPP_Functions();
+		if ( empty( $liquidpoll ) ) {
+			$liquidpoll = new LIQUIDPOLL_Functions();
 		}
 
-		return $wpp;
+		return $liquidpoll;
 	}
 }
 
 
-if ( ! function_exists( 'wpp_get_poller' ) ) {
+if ( ! function_exists( 'liquidpoll_get_poller' ) ) {
 	/**
 	 * Return poller info
 	 *
 	 * @return int|mixed
 	 */
-	function wpp_get_poller() {
+	function liquidpoll_get_poller() {
 
 		if ( is_user_logged_in() ) {
 			return get_current_user_id();
 		}
 
-		return wpp_get_ip_address();
+		return liquidpoll_get_ip_address();
 	}
 }
 
 
-if ( ! function_exists( 'wpp_get_ip_address' ) ) {
+if ( ! function_exists( 'liquidpoll_get_ip_address' ) ) {
 	/**
 	 * Return IP Address
 	 *
 	 * @return mixed
 	 */
-	function wpp_get_ip_address() {
+	function liquidpoll_get_ip_address() {
 
 		if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
 			$ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -228,13 +228,13 @@ if ( ! function_exists( 'wpp_get_ip_address' ) ) {
 }
 
 
-if ( ! function_exists( 'wpp_poll_archive_class' ) ) {
+if ( ! function_exists( 'liquidpoll_poll_archive_class' ) ) {
 	/**
 	 * Return poll archive class container
 	 *
 	 * @param string $classes
 	 */
-	function wpp_poll_archive_class( $classes = '' ) {
+	function liquidpoll_poll_archive_class( $classes = '' ) {
 
 		if ( ! is_array( $classes ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
@@ -242,12 +242,12 @@ if ( ! function_exists( 'wpp_poll_archive_class' ) ) {
 
 		$classes[] = 'archive-poll';
 
-		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'wpp_filters_poll_archive_class', $classes ) ) ) );
+		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'liquidpoll_filters_poll_archive_class', $classes ) ) ) );
 	}
 }
 
 
-if ( ! function_exists( 'wpp_generate_classes' ) ) {
+if ( ! function_exists( 'liquidpoll_generate_classes' ) ) {
 	/**
 	 * Generate and return classes
 	 *
@@ -255,24 +255,24 @@ if ( ! function_exists( 'wpp_generate_classes' ) ) {
 	 *
 	 * @return string
 	 */
-	function wpp_generate_classes( $classes = '' ) {
+	function liquidpoll_generate_classes( $classes = '' ) {
 
 		if ( ! is_array( $classes ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
 		}
 
-		return implode( " ", apply_filters( 'wpp_generate_classes', array_filter( $classes ) ) );
+		return implode( " ", apply_filters( 'liquidpoll_generate_classes', array_filter( $classes ) ) );
 	}
 }
 
 
-if ( ! function_exists( 'wpp_single_post_class' ) ) {
+if ( ! function_exists( 'liquidpoll_single_post_class' ) ) {
 	/**
 	 * Return single post classes
 	 *
 	 * @param string $classes
 	 */
-	function wpp_single_post_class( $classes = '' ) {
+	function liquidpoll_single_post_class( $classes = '' ) {
 
 		if ( ! is_array( $classes ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
@@ -280,19 +280,22 @@ if ( ! function_exists( 'wpp_single_post_class' ) ) {
 
 		$classes[] = sprintf( '%s-single', get_post_type() );
 
-		printf( 'class="%s"', wpp_generate_classes( $classes ) );
+		// theme
+		$classes[] = sprintf( 'theme-%s', get_post_meta( get_the_ID(), '_theme', true ) );
+
+		printf( 'class="%s"', liquidpoll_generate_classes( $classes ) );
 	}
 }
 
 
-if ( ! function_exists( 'wpp_options_single_class' ) ) {
+if ( ! function_exists( 'liquidpoll_options_single_class' ) ) {
 	/**
 	 * Return options single classes
 	 *
 	 * @param string $classes
-	 * @param WPP_Poll|null $poll
+	 * @param LIQUIDPOLL_Poll|null $poll
 	 */
-	function wpp_options_single_class( $classes = '', \WPP_Poll $poll = null ) {
+	function liquidpoll_options_single_class( $classes = '', \LIQUIDPOLL_Poll $poll = null ) {
 
 		if ( ! is_array( $classes ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
@@ -306,36 +309,36 @@ if ( ! function_exists( 'wpp_options_single_class' ) ) {
 
 
 		// Check multiple or single vote
-		$classes[] = $poll->can_vote_multiple() ? 'wpp-checkbox' : 'wpp-radio';
+		$classes[] = $poll->can_vote_multiple() ? 'liquidpoll-checkbox' : 'liquidpoll-radio';
 
 
 		// Add Theme class
-		$classes[] = sprintf( 'wpp-option-list-%s', $options_theme );
+		$classes[] = sprintf( 'liquidpoll-option-list-%s', $options_theme );
 
 
 		// Add common class excluding for Theme - 1
 		if ( $options_theme != 1 && $options_theme != 2 ) {
-			$classes[] = 'wpp-custom';
+			$classes[] = 'liquidpoll-custom';
 		}
 
 
 		// Add checkbox animation class excluding for Theme - 1
 		if ( $options_theme != 1 && $options_theme != 2 && $poll->can_vote_multiple() ) {
-			$classes[] = sprintf( 'wpp-%s', $poll->get_style( 'animation_checkbox' ) );
+			$classes[] = sprintf( 'liquidpoll-%s', $poll->get_style( 'animation_checkbox' ) );
 		}
 
 
 		// Add radio animation class excluding for Theme - 1
 		if ( $options_theme != 1 && $options_theme != 2 && ! $poll->can_vote_multiple() ) {
-			$classes[] = sprintf( 'wpp-%s', $poll->get_style( 'animation_radio' ) );
+			$classes[] = sprintf( 'liquidpoll-%s', $poll->get_style( 'animation_radio' ) );
 		}
 
-		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'wpp_options_single_class', $classes ) ) ) );
+		printf( 'class="%s"', esc_attr( implode( " ", apply_filters( 'liquidpoll_options_single_class', $classes ) ) ) );
 	}
 }
 
 
-if ( ! function_exists( 'wpp_get_template_part' ) ) {
+if ( ! function_exists( 'liquidpoll_get_template_part' ) ) {
 	/**
 	 * Get Template Part
 	 *
@@ -344,10 +347,10 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 	 * @param array $args
 	 * @param bool $main_template | When you call a template from extensions you can use this param as true to check from main template only
 	 */
-	function wpp_get_template_part( $slug, $name = '', $args = array(), $main_template = false ) {
+	function liquidpoll_get_template_part( $slug, $name = '', $args = array(), $main_template = false ) {
 
 		$template   = '';
-		$plugin_dir = WPP_PLUGIN_DIR;
+		$plugin_dir = LIQUIDPOLL_PLUGIN_DIR;
 
 		/**
 		 * Locate template
@@ -355,7 +358,7 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 		if ( $name ) {
 			$template = locate_template( array(
 				"{$slug}-{$name}.php",
-				"wpp/{$slug}-{$name}.php"
+				"liquidpoll/{$slug}-{$name}.php"
 			) );
 		}
 
@@ -368,13 +371,13 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
 
 		// Search in Poll Pro
-		if ( strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'WPPP_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? WPP_PLUGIN_DIR : WPPP_PLUGIN_DIR;
+		if ( strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'LIQUIDPOLLP_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLP_PLUGIN_DIR;
 		}
 
 		// Search in Survey
-		if ( strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'WPPS_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? WPP_PLUGIN_DIR : WPPS_PLUGIN_DIR;
+		if ( strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'LIQUIDPOLLS_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLS_PLUGIN_DIR;
 		}
 
 
@@ -394,16 +397,16 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 		 * @in Theme
 		 */
 		if ( ! $template ) {
-			$template = locate_template( array( "{$slug}.php", "wpp/{$slug}.php" ) );
+			$template = locate_template( array( "{$slug}.php", "liquidpoll/{$slug}.php" ) );
 		}
 
 
 		/**
 		 * Allow 3rd party plugins to filter template file from their plugin.
 		 *
-		 * @filter wpp_filters_get_template_part
+		 * @filter liquidpoll_filters_get_template_part
 		 */
-		$template = apply_filters( 'wpp_filters_get_template_part', $template, $slug, $name );
+		$template = apply_filters( 'liquidpoll_filters_get_template_part', $template, $slug, $name );
 
 
 		if ( $template ) {
@@ -413,7 +416,7 @@ if ( ! function_exists( 'wpp_get_template_part' ) ) {
 }
 
 
-if ( ! function_exists( 'wpp_get_template' ) ) {
+if ( ! function_exists( 'liquidpoll_get_template' ) ) {
 	/**
 	 * Get Template
 	 *
@@ -425,7 +428,7 @@ if ( ! function_exists( 'wpp_get_template' ) ) {
 	 *
 	 * @return WP_Error
 	 */
-	function wpp_get_template( $template_name, $args = array(), $template_path = '', $default_path = '', $main_template = false ) {
+	function liquidpoll_get_template( $template_name, $args = array(), $template_path = '', $default_path = '', $main_template = false ) {
 
 		if ( ! empty( $args ) && is_array( $args ) ) {
 			extract( $args ); // @codingStandardsIgnoreLine
@@ -439,25 +442,25 @@ if ( ! function_exists( 'wpp_get_template' ) ) {
 		$backtrace      = reset( $backtrace );
 		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
 
-		$located = wpp_locate_template( $template_name, $template_path, $default_path, $backtrace_file, $main_template );
+		$located = liquidpoll_locate_template( $template_name, $template_path, $default_path, $backtrace_file, $main_template );
 
 
 		if ( ! file_exists( $located ) ) {
 			return new WP_Error( 'invalid_data', __( '%s does not exist.', 'wp-poll' ), '<code>' . $located . '</code>' );
 		}
 
-		$located = apply_filters( 'wpp_filters_get_template', $located, $template_name, $args, $template_path, $default_path );
+		$located = apply_filters( 'liquidpoll_filters_get_template', $located, $template_name, $args, $template_path, $default_path );
 
-		do_action( 'wpp_before_template_part', $template_name, $template_path, $located, $args );
+		do_action( 'liquidpoll_before_template_part', $template_name, $template_path, $located, $args );
 
 		include $located;
 
-		do_action( 'wpp_after_template_part', $template_name, $template_path, $located, $args );
+		do_action( 'liquidpoll_after_template_part', $template_name, $template_path, $located, $args );
 	}
 }
 
 
-if ( ! function_exists( 'wpp_locate_template' ) ) {
+if ( ! function_exists( 'liquidpoll_locate_template' ) ) {
 	/**
 	 *  Locate template
 	 *
@@ -469,30 +472,30 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 	 *
 	 * @return mixed|void
 	 */
-	function wpp_locate_template( $template_name, $template_path = '', $default_path = '', $backtrace_file = '', $main_template = false ) {
+	function liquidpoll_locate_template( $template_name, $template_path = '', $default_path = '', $backtrace_file = '', $main_template = false ) {
 
-		$plugin_dir = WPP_PLUGIN_DIR;
+		$plugin_dir = LIQUIDPOLL_PLUGIN_DIR;
 
 		/**
 		 * Template path in Theme
 		 */
 		if ( ! $template_path ) {
-			$template_path = 'wpp/';
+			$template_path = 'liquidpoll/';
 		}
 
 		// Check for Poll Pro
-		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'WPPP_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? WPP_PLUGIN_DIR : WPPP_PLUGIN_DIR;
+		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'LIQUIDPOLLP_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLP_PLUGIN_DIR;
 		}
 
 		// Check for survey
-		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'WPPS_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? WPP_PLUGIN_DIR : WPPS_PLUGIN_DIR;
+		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'LIQUIDPOLLS_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLS_PLUGIN_DIR;
 		}
 
 		// Check for MCQ
-		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-quiz' ) !== false && defined( 'WPPQUIZ_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? WPP_PLUGIN_DIR : WPPQUIZ_PLUGIN_DIR;
+		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-quiz' ) !== false && defined( 'LIQUIDPOLLQUIZ_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLQUIZ_PLUGIN_DIR;
 		}
 
 
@@ -523,14 +526,14 @@ if ( ! function_exists( 'wpp_locate_template' ) ) {
 		/**
 		 * Return what we found with allowing 3rd party to override
 		 *
-		 * @filter wpp_filters_locate_template
+		 * @filter liquidpoll_filters_locate_template
 		 */
-		return apply_filters( 'wpp_filters_locate_template', $template, $template_name, $template_path );
+		return apply_filters( 'liquidpoll_filters_locate_template', $template, $template_name, $template_path );
 	}
 }
 
 
-if ( ! function_exists( 'wpp_pagination' ) ) {
+if ( ! function_exists( 'liquidpoll_pagination' ) ) {
 	/**
 	 * Return Pagination HTML Content
 	 *
@@ -539,7 +542,7 @@ if ( ! function_exists( 'wpp_pagination' ) ) {
 	 *
 	 * @return array|string|void
 	 */
-	function wpp_pagination( $query_object = false, $args = array() ) {
+	function liquidpoll_pagination( $query_object = false, $args = array() ) {
 
 		global $wp_query;
 
@@ -560,7 +563,7 @@ if ( ! function_exists( 'wpp_pagination' ) ) {
 			'next_text' => esc_html__( 'Next', 'wp-poll' ),
 		);
 
-		$args           = apply_filters( 'wpp_filters_pagination', array_merge( $defaults, $args ) );
+		$args           = apply_filters( 'liquidpoll_filters_pagination', array_merge( $defaults, $args ) );
 		$paginate_links = paginate_links( $args );
 
 		$wp_query = $previous_query;

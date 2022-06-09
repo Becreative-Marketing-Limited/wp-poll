@@ -11,11 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
-if ( ! class_exists( 'WPP_Item_data' ) ) {
+if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 	/**
-	 * Class WPPS_Hooks
+	 * Class LIQUIDPOLLS_Hooks
 	 */
-	class WPP_Item_data {
+	class LIQUIDPOLL_Item_data {
 
 
 		/**
@@ -35,7 +35,7 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 
 
 		/**
-		 * WPPS_Poll constructor.
+		 * LIQUIDPOLLS_Poll constructor.
 		 *
 		 * @param bool $item_id
 		 */
@@ -54,7 +54,7 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 		 */
 		function get_published_date( $format = 'U' ) {
 
-			return apply_filters( 'wpps_filters_published_date', get_the_date( $format, $this->get_id() ) );
+			return apply_filters( 'liquidpoll_filters_published_date', get_the_date( $format, $this->get_id() ) );
 		}
 
 
@@ -105,7 +105,7 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 		 */
 		function get_permalink() {
 
-			return apply_filters( 'wpps_filter_permalink', get_the_permalink( $this->get_id() ) );
+			return apply_filters( 'liquidpoll_filter_permalink', get_the_permalink( $this->get_id() ) );
 		}
 
 
@@ -138,7 +138,7 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 			$_thumb_url   = ! empty( $_thumb_url ) ? $_thumb_url : array();
 			$thumb_url    = reset( $_thumb_url );
 
-			return apply_filters( 'wpps_filters_thumbnail', $thumb_url, $thumbnail_id, $size );
+			return apply_filters( 'liquidpoll_filters_thumbnail', $thumb_url, $thumbnail_id, $size );
 		}
 
 
@@ -152,9 +152,9 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 		 */
 		function get_meta( $meta_key = '', $default = '' ) {
 
-			$meta_value = wpp()->get_meta( $meta_key, $this->get_id(), $default );
+			$meta_value = liquidpoll()->get_meta( $meta_key, $this->get_id(), $default );
 
-			return apply_filters( 'wpps_filters_get_meta', $meta_value, $meta_key, $this );
+			return apply_filters( 'liquidpoll_filters_get_meta', $meta_value, $meta_key, $this );
 		}
 
 
@@ -168,11 +168,11 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 		 */
 		function update_meta( $meta_key = '', $meta_value = '' ) {
 
-			do_action( 'wpps_before_update_item_meta', $meta_key, $meta_value, $this );
+			do_action( 'liquidpoll_before_update_item_meta', $meta_key, $meta_value, $this );
 
 			$ret = update_post_meta( $this->get_id(), $meta_key, $meta_value );
 
-			do_action( 'wpps_after_update_item_meta', $meta_key, $meta_value, $this );
+			do_action( 'liquidpoll_after_update_item_meta', $meta_key, $meta_value, $this );
 
 			return $ret;
 		}
@@ -187,13 +187,13 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 		 */
 		function get_content( $length = false, $more = null ) {
 
-			$content = $this->get_post()->post_content;
+			$content = $this->get_meta( '_content' );
 
 			if ( $length ) {
 				$content = wp_trim_words( $content, $length, $more );
 			}
 
-			return apply_filters( 'wpp_filters_poll_content', $content );
+			return apply_filters( 'liquidpoll_filters_poll_content', $content );
 		}
 
 
@@ -204,7 +204,7 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 		 */
 		function has_content() {
 
-			if( empty( $this->get_content() ) ) {
+			if ( empty( $this->get_content() ) ) {
 				return false;
 			}
 
@@ -219,7 +219,7 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 		 */
 		function get_name() {
 
-			return apply_filters( 'wpps_filters_item_name', $this->item_post->post_title );
+			return apply_filters( 'liquidpoll_filters_item_name', $this->item_post->post_title );
 		}
 
 		/**
@@ -255,5 +255,5 @@ if ( ! class_exists( 'WPP_Item_data' ) ) {
 		}
 	}
 
-	new WPP_Item_data();
+	new LIQUIDPOLL_Item_data();
 }

@@ -2,6 +2,9 @@
 
 This tool will allow your plugin development more awesome.
 
+## VERSION
+Stable Tag: **1.0.7**
+
 ## FEATURES
 
 Here is a list of features of this SDK.
@@ -39,18 +42,18 @@ function pb_sdk_init_wp_poll() {
 		include_once ABSPATH . '/wp-admin/includes/plugin.php';
 	}
 
-	global $wppoll_sdk;
+	global $liquidpolloll_sdk;
 
-	$wppoll_sdk = new Pluginbazar\Client( esc_html( 'WP Poll Pro' ), 'wp-poll', 34, __FILE__ );
-	$wppoll_sdk->license()->add_settings_page( array( 'parent_slug' => 'edit.php?post_type=poll' ) );;
-	$wppoll_sdk->notifications();
-	$wppoll_sdk->updater();
+	$liquidpolloll_sdk = new Pluginbazar\Client( esc_html( 'WP Poll Pro' ), 'wp-poll', 34, __FILE__ );
+	$liquidpolloll_sdk->license()->add_settings_page( array( 'parent_slug' => 'edit.php?post_type=poll' ) );;
+	$liquidpolloll_sdk->notifications();
+	$liquidpolloll_sdk->updater();
 }
 
 /**
- * @global \Pluginbazar\Client $wppoll_sdk
+ * @global \Pluginbazar\Client $liquidpolloll_sdk
  */
-global $wppoll_sdk;
+global $liquidpolloll_sdk;
 
 pb_sdk_init_wp_poll();
 ```
@@ -58,10 +61,10 @@ pb_sdk_init_wp_poll();
 To check the license status, you can use the following code snippet.
 
 ```
-global $wppoll_sdk;
+global $liquidpolloll_sdk;
 
 
-if ( $wppoll_sdk->license()->is_valid() ) {
+if ( $liquidpolloll_sdk->license()->is_valid() ) {
 	// License key is activated and valid
 }
 ```

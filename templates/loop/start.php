@@ -14,5 +14,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <!-- START POLL ARCHIVE -->
 
-<div id="poll-archive" <?php wpp_poll_archive_class(); ?>>
+<div id="poll-archive" <?php liquidpoll_poll_archive_class(); ?>>
 

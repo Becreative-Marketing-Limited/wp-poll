@@ -14,8 +14,8 @@ global $wp_query;
 
 if( $wp_query->get( 'show_pagination' ) == 'yes' ) : ?>
 
-	<div class="wpp-pagination paginate">
-		<?php echo wpp_pagination(); ?>
+	<div class="liquidpoll-pagination paginate">
+		<?php echo liquidpoll_pagination(); ?>
 	</div>
 
 <?php endif; ?>

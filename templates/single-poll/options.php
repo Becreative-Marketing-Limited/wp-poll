@@ -11,14 +11,14 @@ global $poll;
 
 
 ?>
-    <div <?php wpp_options_single_class( 'wpp-options' ); ?>>
+    <div <?php liquidpoll_options_single_class( 'liquidpoll-options' ); ?>>
 
 		<?php
 		foreach ( $poll->get_poll_options() as $option_id => $option ) :
 
 			$args = array_merge( array( 'option_id' => $option_id ), $option );
 
-			wpp_get_template( 'single-poll/options-single.php', $args );
+			liquidpoll_get_template( 'single-poll/options-single.php', $args );
 
 		endforeach;
 		?>
@@ -27,14 +27,14 @@ global $poll;
 
 <?php if ( $poll->get_poll_type() === 'poll' ) : ?>
 
-    <div class="wpp-popup-container">
-        <div class="wpp-popup-box">
+    <div class="liquidpoll-popup-container">
+        <div class="liquidpoll-popup-box">
             <span class="box-close dashicons dashicons-no-alt"></span>
-            <div class="wpp-new-option">
+            <div class="liquidpoll-new-option">
                 <input type="text" placeholder="<?php esc_attr_e( 'Your option', 'wp-poll' ); ?>">
-                <span class="wpp-notice-warning"
+                <span class="liquidpoll-notice-warning"
                       style="display: none;"><?php esc_html_e( 'Please write some text !', 'wp-poll' ) ?></span>
-                <button class="wpp-button wpp-button-blue"
+                <button class="liquidpoll-button liquidpoll-button-blue"
                         data-pollid="<?php echo esc_attr( $poll->get_id() ); ?>"><?php esc_html_e( 'Add Option', 'wp-poll' ); ?></button>
             </div>
         </div>

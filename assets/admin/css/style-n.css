@@ -25,38 +25,38 @@ body.post-type-poll {
 }
 
 
-.wpp-poll-meta {
+.liquidpoll-poll-meta {
     display: flex;
     justify-content: space-between;
 }
 
-.wpp-poll-meta .meta-sidebar {
+.liquidpoll-poll-meta .meta-sidebar {
     min-width: 280px;
     width: 30%;
     border-right: 1px solid #efefef;
     background: #a1c9fb61;
 }
 
-.wpp-poll-meta .meta-sidebar .header {
+.liquidpoll-poll-meta .meta-sidebar .header {
     text-align: center;
     margin-bottom: 30px;
     padding: 25px 25px 0;
 }
 
-.wpp-poll-meta .meta-sidebar .header img {
+.liquidpoll-poll-meta .meta-sidebar .header img {
     box-shadow: 0 5px 30px 2px rgb(93 127 197 / 50%);
     border-radius: 50%;
     user-select: none;
     -webkit-user-drag: none;
 }
 
-.wpp-poll-meta .meta-sidebar .meta-nav {
+.liquidpoll-poll-meta .meta-sidebar .meta-nav {
     list-style: none;
     margin: 0;
     padding: 0 25px;
 }
 
-.wpp-poll-meta .meta-sidebar .meta-nav > li {
+.liquidpoll-poll-meta .meta-sidebar .meta-nav > li {
     display: inline-block;
     padding: 24px 0 24px 24px;
     cursor: pointer;
@@ -69,13 +69,13 @@ body.post-type-poll {
     margin-bottom: 10px;
 }
 
-.wpp-poll-meta .meta-sidebar .meta-nav > li:hover,
-.wpp-poll-meta .meta-sidebar .meta-nav > li.active {
+.liquidpoll-poll-meta .meta-sidebar .meta-nav > li:hover,
+.liquidpoll-poll-meta .meta-sidebar .meta-nav > li.active {
     background: linear-gradient(to right, #5c68ef 0%, #5fb4f6 100%);
     color: #fff;
 }
 
-.wpp-poll-meta .meta-sidebar .footer {
+.liquidpoll-poll-meta .meta-sidebar .footer {
     padding: 20px 0;
     display: flex;
     justify-content: space-around;
@@ -84,9 +84,9 @@ body.post-type-poll {
     background: #32373c;
 }
 
-.wpp-poll-meta .meta-sidebar .footer > a,
-.wpp-poll-meta .meta-sidebar .footer > a:focus,
-.wpp-poll-meta .meta-sidebar .footer > a:visited {
+.liquidpoll-poll-meta .meta-sidebar .footer > a,
+.liquidpoll-poll-meta .meta-sidebar .footer > a:focus,
+.liquidpoll-poll-meta .meta-sidebar .footer > a:visited {
     text-decoration: none;
     font-size: 16px;
     color: #ffffff;
@@ -95,17 +95,17 @@ body.post-type-poll {
     box-shadow: none;
 }
 
-.wpp-poll-meta .meta-sidebar .footer > a:hover {
+.liquidpoll-poll-meta .meta-sidebar .footer > a:hover {
     color: #F44336;
 }
 
-.wpp-poll-meta .meta-content {
+.liquidpoll-poll-meta .meta-content {
     position: relative;
     width: 75%;
     padding: 20px;
 }
 
-.wpp-poll-meta .meta-content.loading:before {
+.liquidpoll-poll-meta .meta-content.loading:before {
     position: absolute;
     content: ' ';
     top: 0;
@@ -117,7 +117,7 @@ body.post-type-poll {
     opacity: 0.8;
 }
 
-.wpp-poll-meta .meta-content.loading:after {
+.liquidpoll-poll-meta .meta-content.loading:after {
     position: absolute;
     content: url(../../images/loader.gif);
     top: 20%;
@@ -126,16 +126,16 @@ body.post-type-poll {
     z-index: 999;
 }
 
-.wpp-poll-meta .tab-content-item {
+.liquidpoll-poll-meta .tab-content-item {
     display: none;
     transition: 0.3s;
 }
 
-.wpp-poll-meta .tab-content-item.active {
+.liquidpoll-poll-meta .tab-content-item.active {
     display: block;
 }
 
-.wpp-poll-meta .tab-content-item .item-title {
+.liquidpoll-poll-meta .tab-content-item .item-title {
     margin: 0 0 20px 0;
     font-size: 22px;
     line-height: 32px;
@@ -144,7 +144,7 @@ body.post-type-poll {
     padding-bottom: 10px;
 }
 
-.wpp-poll-meta .tab-content-item .item-title:after {
+.liquidpoll-poll-meta .tab-content-item .item-title:after {
     position: absolute;
     content: ' ';
     width: 100%;
@@ -161,7 +161,7 @@ body.post-type-poll {
 }
 
 
-#poll-metabox .wpp-add-poll-option {
+#poll-metabox .liquidpoll-add-poll-option {
     position: relative;
     text-align: center;
     padding: 5px 12px;
@@ -173,7 +173,7 @@ body.post-type-poll {
 }
 
 
-#poll-metabox .wpp-add-poll-option:after {
+#poll-metabox .liquidpoll-add-poll-option:after {
     content: '+';
     position: relative;
     padding-left: 8px;
@@ -275,7 +275,7 @@ body.post-type-poll {
 /**
  * Chart Reporting
  */
-#wpp-chart-report {
+#liquidpoll-chart-report {
     background: #fff;
     border: 1px solid #ddd;
     box-shadow: 0 22px 35px -16px rgba(0, 0, 0, 0.1);
@@ -308,10 +308,10 @@ body.post-type-poll {
     max-width: 100%;
 }
 
-a.wpp-preview-link,
-a.wpp-preview-link:active,
-a.wpp-preview-link:focus,
-a.wpp-preview-link:hover {
+a.liquidpoll-preview-link,
+a.liquidpoll-preview-link:active,
+a.liquidpoll-preview-link:focus,
+a.liquidpoll-preview-link:hover {
     margin-left: 10px;
     text-decoration: none;
     color: #FF5722;
@@ -323,7 +323,7 @@ a.wpp-preview-link:hover {
  * Notices
  */
 
-.wpp-notice {
+.liquidpoll-notice {
     background: #00bcd43b;
     padding: 10px;
     border-left: 3px solid;
@@ -331,15 +331,15 @@ a.wpp-preview-link:hover {
     border-bottom-right-radius: 3px;
 }
 
-.wpp-notice.wpp-warning {
+.liquidpoll-notice.liquidpoll-warning {
     background: #ff98003b;
 }
 
-.wpp-notice.wpp-error {
+.liquidpoll-notice.liquidpoll-error {
     background: #ff57223b;
 }
 
-.wpp-notice.wpp-success {
+.liquidpoll-notice.liquidpoll-success {
     background: #4caf503b;
 }
 
@@ -347,7 +347,7 @@ a.wpp-preview-link:hover {
     width: 160px;
 }
 
-.wps-field.image_select a.wpp-preview-link {
+.wps-field.image_select a.liquidpoll-preview-link {
     margin-left: 0;
 }
 
@@ -435,12 +435,12 @@ span.shortcode {
     box-shadow: none;
 }
 
-a.wpp-support,
-a.wpp-support:focus,
-a.wpp-support:active,
-a.wpp-doc,
-a.wpp-doc:focus,
-a.wpp-doc:active {
+a.liquidpoll-support,
+a.liquidpoll-support:focus,
+a.liquidpoll-support:active,
+a.liquidpoll-doc,
+a.liquidpoll-doc:focus,
+a.liquidpoll-doc:active {
     background: #e61f63;
     color: #fff;
     padding: 3px 12px 5px;
@@ -451,6 +451,6 @@ a.wpp-doc:active {
     border: none;
 }
 
-a.wpp-doc {
+a.liquidpoll-doc {
     background: #292929;
 }

@@ -18,7 +18,7 @@
     });
 
 
-    $(document).on('click', '.wpp-poll-meta .meta-nav > li', function () {
+    $(document).on('click', '.liquidpoll-poll-meta .meta-nav > li', function () {
 
         let thisMetaNav = $(this),
             target = thisMetaNav.data('target'),
@@ -44,7 +44,7 @@
 
         let selectedOption = $(this).find('option:selected').val(),
             thisOption = $(this).parent().parent(),
-            thisPreviewLink = thisOption.find('.wpp-preview-link'),
+            thisPreviewLink = thisOption.find('.liquidpoll-preview-link'),
             demoServer = thisPreviewLink.data('demo-server'),
             target = thisPreviewLink.data('target'),
             finalURL = '';
@@ -79,7 +79,7 @@
     });
 
 
-    $(document).on('change', '#wpp_reports_style', function () {
+    $(document).on('change', '#liquidpoll_reports_style', function () {
 
 
         let parts = location.search.replace('?', '').split('&').reduce(function (s, c) {
@@ -103,7 +103,7 @@
         window.location.replace(redirectURL);
     });
 
-    $(document).on('change', '#wpp_reports_poll_id', function () {
+    $(document).on('change', '#liquidpoll_reports_poll_id', function () {
 
 
         let parts = location.search.replace('?', '').split('&').reduce(function (s, c) {
@@ -131,7 +131,7 @@
     /**
      * Add new option in poll meta box
      */
-    $(document).on('click', '.wpp-add-poll-option', function () {
+    $(document).on('click', '.liquidpoll-add-poll-option', function () {
 
         console.log($(this).data('poll-id'));
 
@@ -140,7 +140,7 @@
             context: this,
             url: pluginObject.ajaxurl,
             data: {
-                "action": "wpp_ajax_add_option",
+                "action": "liquidpoll_ajax_add_option",
                 "poll_id": $(this).data('poll-id'),
             },
             success: function (response) {
@@ -171,7 +171,7 @@
     });
 
 
-})(jQuery, window, document, wpp_object);
+})(jQuery, window, document, liquidpoll_object);
 
 
 

@@ -77,7 +77,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			}, $this->get_data( 'footer_menu', array(), $args ) ) );
 			$_nav_contents = sprintf( '<ul class="meta-nav">%s</ul>', implode( '', $nav_contents ) );
 
-			printf( '<div class="wpp-poll-meta"><div class="meta-sidebar">%s%s%s</div></div>', $_nav_header, $_nav_items, $_nav_footer );
+			printf( '<div class="liquidpoll-poll-meta"><div class="meta-sidebar">%s%s%s</div></div>', $_nav_header, $_nav_items, $_nav_footer );
 		}
 
 

@@ -13,4 +13,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div class="wpp-notifications"></div>
+<div class="liquidpoll-notifications"></div>

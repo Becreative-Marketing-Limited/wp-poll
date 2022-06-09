@@ -8,6 +8,8 @@
 
 namespace Pluginbazar;
 
+use PBSettings;
+
 /**
  * Class Client
  *
@@ -16,19 +18,16 @@ namespace Pluginbazar;
 class Client {
 
 	public $integration_server = 'https://pluginbazar.com';
-	public $notices_prefix = 'pb_notices_';
 	public $plugin_name = null;
 	public $text_domain = null;
 	public $plugin_reference = null;
 	public $plugin_version = null;
-	public $pro__FILE__ = null;
-
+	public $plugin_file = null;
 
 	/**
-	 * @var \Pluginbazar\License
+	 * @var \Pluginbazar\Utils
 	 */
-	private static $license;
-
+	private static $utils;
 
 	/**
 	 * @var \Pluginbazar\Notifications
@@ -37,68 +36,50 @@ class Client {
 
 
 	/**
-	 * @var \Pluginbazar\Updater
-	 */
-	private static $updater;
-
-
-	/**
 	 * Client constructor.
 	 *
 	 * @param $plugin_name
 	 * @param $text_domain
 	 * @param $plugin_reference
-	 * @param $__PLUGIN_FILE__
+	 * @param $file
 	 */
-	function __construct( $plugin_name, $text_domain, $plugin_reference, $__PLUGIN_FILE__ ) {
+	function __construct( $plugin_name, $text_domain, $plugin_reference, $file ) {
 
+		if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
+			require_once __DIR__ . '../../settings/classes/setup.class.php';
+		}
 
 		// Initialize variables
 		$this->plugin_name      = $plugin_name;
 		$this->text_domain      = $text_domain;
 		$this->plugin_reference = $plugin_reference;
-		$this->pro__FILE__      = str_replace( $this->text_domain, $this->text_domain . '-pro', $__PLUGIN_FILE__ );
-		$plugin_data            = get_plugin_data( file_exists( $this->pro__FILE__ ) ? $this->pro__FILE__ : $__PLUGIN_FILE__ );
-
-		$this->plugin_version = isset( $plugin_data['Version'] ) ? $plugin_data['Version'] : '';
+		$this->plugin_file      = $file;
+		$plugin_data            = get_plugin_data( $this->plugin_file );
+		$this->plugin_version   = isset( $plugin_data['Version'] ) ? $plugin_data['Version'] : '';
 
 		add_action( 'admin_init', array( $this, 'manage_permanent_dismissible' ) );
+
+		$this::utils();
+		PBSettings::init( $this );
 	}
 
 
 	/**
-	 * Return Updater class
+	 * Return Utils class
 	 *
-	 * @return \Pluginbazar\Updater
+	 * @return Utils
 	 */
-	public function updater() {
-		if ( ! class_exists( __NAMESPACE__ . '\Updater' ) ) {
-			require_once __DIR__ . '/class-updater.php';
+	public function utils() {
+
+		if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
+			require_once __DIR__ . '/class-utils.php';
 		}
 
-		if ( ! self::$updater ) {
-			self::$updater = new Updater( $this );
+		if ( ! self::$utils ) {
+			self::$utils = new Utils( $this );
 		}
 
-		return self::$updater;
-	}
-
-
-	/**
-	 * Return License class
-	 *
-	 * @return \Pluginbazar\License
-	 */
-	public function license() {
-		if ( ! class_exists( __NAMESPACE__ . '\License' ) ) {
-			require_once __DIR__ . '/class-license.php';
-		}
-
-		if ( ! self::$license ) {
-			self::$license = new License( $this );
-		}
-
-		return self::$license;
+		return self::$utils;
 	}
 
 
@@ -128,7 +109,7 @@ class Client {
 
 		$query_args = wp_unslash( $_GET );
 
-		if ( $this->get_args_option( 'pb_action', $query_args ) == 'permanent_dismissible' && ! empty( $id = $this->get_args_option( 'id', $query_args ) ) ) {
+		if ( Utils::get_args_option( 'pb_action', $query_args ) == 'permanent_dismissible' && ! empty( $id = Utils::get_args_option( 'id', $query_args ) ) ) {
 
 			// update value
 			update_option( $this->get_notices_id( $id ), time() );
@@ -137,10 +118,10 @@ class Client {
 			unset( $query_args['pb_action'] );
 			unset( $query_args['id'] );
 
-			$redirect = parse_url( esc_url_raw( add_query_arg( $query_args, site_url( $_SERVER['REQUEST_URI'] ) ) ) );
+			$redirect = parse_url( esc_url_raw( add_query_arg( $query_args, $this->get_website_url( sanitize_text_field( $_SERVER['REQUEST_URI'] ) ) ) ) );
 
 			// Redirect
-			wp_safe_redirect( esc_url_raw( add_query_arg( $query_args, site_url( $redirect['path'] ) ) ) );
+			wp_safe_redirect( esc_url_raw( add_query_arg( $query_args, $this->get_website_url( $redirect['path'] ) ) ) );
 			exit;
 		}
 	}
@@ -168,7 +149,7 @@ class Client {
 				'httpversion' => '1.0',
 				'blocking'    => $blocking,
 				'headers'     => array(
-					'user-agent' => 'Pluginbazar/' . md5( esc_url( site_url() ) ) . ';',
+					'user-agent' => 'Pluginbazar/' . md5( esc_url( $this->get_website_url() ) ) . ';',
 					'Accept'     => 'application/json',
 				),
 				'body'        => array_merge( $params, array( 'version' => $this->plugin_version ) ),
@@ -208,7 +189,12 @@ class Client {
 		if ( $permanent_dismiss ) {
 			$is_dismissible = 'pb-is-dismissible';
 			$pb_dismissible = sprintf( '<a href="%s" class="notice-dismiss"><span class="screen-reader-text">%s</span></a>',
-				esc_url_raw( add_query_arg( array( 'pb_action' => 'permanent_dismissible', 'id' => $permanent_dismiss ), site_url( $_SERVER['REQUEST_URI'] ) ) ),
+				esc_url_raw( add_query_arg(
+					array(
+						'pb_action' => 'permanent_dismissible',
+						'id'        => $permanent_dismiss
+					), $this->get_website_url( sanitize_text_field( $_SERVER['REQUEST_URI'] ) )
+				) ),
 				esc_html__( 'Dismiss', $this->text_domain )
 			);
 		}
@@ -231,29 +217,6 @@ class Client {
             </style>
 			<?php
 		}
-	}
-
-
-	/**
-	 * Return Arguments Value
-	 *
-	 * @param string $key
-	 * @param string $default
-	 * @param array $args
-	 *
-	 * @return mixed|string
-	 */
-	public function get_args_option( $key = '', $args = array(), $default = '' ) {
-
-		$default = is_array( $default ) && empty( $default ) ? array() : $default;
-		$default = ! is_array( $default ) && empty( $default ) ? '' : $default;
-		$key     = empty( $key ) ? '' : $key;
-
-		if ( isset( $args[ $key ] ) && ! empty( $args[ $key ] ) ) {
-			return $args[ $key ];
-		}
-
-		return $default;
 	}
 
 
@@ -301,19 +264,17 @@ class Client {
 	/**
 	 * Return url of client website
 	 *
-	 * @return mixed|string
+	 * @param $path
+	 *
+	 * @return string|void
 	 */
-	public function get_website_url() {
+	public function get_website_url( $path = '' ) {
 
-//			if ( is_multisite() ) {
-//				return site_url();
-//			}
-
-		if ( isset( $_SERVER['SERVER_NAME'] ) ) {
-			return $_SERVER['SERVER_NAME'];
+		if ( is_multisite() && isset( $_SERVER['SERVER_NAME'] ) ) {
+			return sanitize_text_field( $_SERVER['SERVER_NAME'] ) . '/' . $path;
 		}
 
-		return site_url();
+		return site_url( $path );
 	}
 
 
@@ -338,7 +299,7 @@ class Client {
 	 *
 	 * @return string
 	 */
-	public function basename( $for_pro = true ) {
-		return sprintf( '%1$s%2$s/%1$s%2$s.php', $this->text_domain, $for_pro ? '-pro' : '' );
+	public function basename() {
+		return sprintf( '%1$s/%1$s.php', $this->text_domain );
 	}
 }

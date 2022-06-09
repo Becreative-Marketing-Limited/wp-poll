@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $poll_id   = isset( $args['poll_id'] ) ? $args['poll_id'] : '';
 $option_id = isset( $args['option_id'] ) ? $args['option_id'] : '';
-$poll      = wpp_get_poll( $poll_id );
+$poll      = liquidpoll_get_poll( $poll_id );
 
 if ( ! $poll || empty( $poll ) ) {
 	exit;
@@ -22,13 +22,13 @@ if ( ! $poll || empty( $poll ) ) {
 
 ?>
 
-<div class="wpp-poller-list-single-container">
+<div class="liquidpoll-poller-list-single-container">
 
 	<?php if ( ! empty( $option_id ) ) : ?>
         <p><?php esc_html_e( sprintf( 'You are seeing results for the option \'%s\' only', $poll->get_option_label( $option_id ) ), 'wp-poll' ); ?></p>
 	<?php endif; ?>
 
-    <table class="wpp-poller-list-single">
+    <table class="liquidpoll-poller-list-single">
         <tr>
             <th><?php esc_html_e( sprintf( '%s - %s', $poll->get_name(), $poll->get_option_label( $option_id ) ), 'wp-poll' ); ?></th>
         </tr>

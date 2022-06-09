@@ -10,12 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
-if ( ! class_exists( 'WPP_Shortcodes' ) ) {
-	class WPP_Shortcodes {
+if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
+	class LIQUIDPOLL_Shortcodes {
 
 
 		/**
-		 * WPP_Shortcodes constructor.
+		 * LIQUIDPOLL_Shortcodes constructor.
 		 */
 		public function __construct() {
 
@@ -40,9 +40,9 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 			ob_start();
 
 			if ( isset( $atts['option_id'] ) && ! empty( $atts['option_id'] ) ) {
-				wpp_get_template( 'poller-list-single.php', $atts );
+				liquidpoll_get_template( 'poller-list-single.php', $atts );
 			} else {
-				wpp_get_template( 'poller-list.php', $atts );
+				liquidpoll_get_template( 'poller-list.php', $atts );
 			}
 
 			return ob_get_clean();
@@ -58,15 +58,15 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 		 */
 		public function poll_archive_page_content( $content ) {
 
-			if ( ! wpp_is_page( 'archive' ) ) {
+			if ( ! liquidpoll_is_page( 'archive' ) ) {
 				return $content;
 			}
 
-			$show_results    = wpp()->display_on_archive( 'results' ) ? 'yes' : 'no';
-			$show_pagination = wpp()->display_on_archive( 'pagination' ) ? 'yes' : 'no';
+			$show_results    = liquidpoll()->display_on_archive( 'results' ) ? 'yes' : 'no';
+			$show_pagination = liquidpoll()->display_on_archive( 'pagination' ) ? 'yes' : 'no';
 			$shortcode       = sprintf( '[poll_list show_results="%s" show_pagination="%s"]', $show_results, $show_pagination );
 
-			if ( wpp()->display_on_archive( 'page-content' ) ) {
+			if ( liquidpoll()->display_on_archive( 'page-content' ) ) {
 				$content .= do_shortcode( $shortcode );
 			} else {
 				$content = do_shortcode( $shortcode );
@@ -99,7 +99,7 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 
 			ob_start();
 
-			wpp_get_template( 'content-single-poll.php' );
+			liquidpoll_get_template( 'content-single-poll.php' );
 
 			wp_reset_postdata();
 
@@ -122,7 +122,7 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 
 			$defaults = array(
 				'post_type'       => 'poll',
-				'posts_per_page'  => wpp()->get_polls_per_page(),
+				'posts_per_page'  => liquidpoll()->get_polls_per_page(),
 				'post_status'     => ( ! empty( $atts['status'] ) ) ? $atts['status'] : 'publish',
 				'paged'           => ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1,
 				'show_sorting'    => 'yes',
@@ -131,15 +131,15 @@ if ( ! class_exists( 'WPP_Shortcodes' ) ) {
 				'show_results'    => 'no',
 			);
 
-			$args = apply_filters( 'wpp_filters_poll_archive_query', array_merge( $defaults, $atts ) );
+			$args = apply_filters( 'liquidpoll_filters_poll_archive_query', array_merge( $defaults, $atts ) );
 
 			ob_start();
 
-			wpp_get_template( 'archive-poll.php', $args );
+			liquidpoll_get_template( 'archive-poll.php', $args );
 
 			return ob_get_clean();
 		}
 	}
 
-	new WPP_Shortcodes();
+	new LIQUIDPOLL_Shortcodes();
 }
