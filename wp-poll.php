@@ -24,6 +24,7 @@ defined( 'LIQUIDPOLL_PLUGIN_LINK' ) || define( 'LIQUIDPOLL_PLUGIN_LINK', 'https:
 defined( 'LIQUIDPOLL_DOCS_URL' ) || define( 'LIQUIDPOLL_DOCS_URL', 'https://www.liquidpoll.com/docs' );
 defined( 'LIQUIDPOLL_REVIEW_URL' ) || define( 'LIQUIDPOLL_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
 defined( 'LIQUIDPOLL_TICKET_URL' ) || define( 'LIQUIDPOLL_TICKET_URL', 'https://www.liquidpoll.com/my-account/' );
+defined( 'LIQUIDPOLL_COMMUNITY_URL' ) || define( 'LIQUIDPOLL_COMMUNITY_URL', 'https://www.liquidpoll.com/community/' );
 
 
 if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {

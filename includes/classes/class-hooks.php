@@ -51,7 +51,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			}
 
 			printf( '<li class="pbsettings-extra-nav right"><a href="%s">%s</a></li>', LIQUIDPOLL_DOCS_URL, esc_html__( 'Documentation', 'wp-poll' ) );
-			printf( '<li class="pbsettings-extra-nav right"><a href="%s">%s</a></li>', LIQUIDPOLL_TICKET_URL, esc_html__( 'Community', 'wp-poll' ) );
+			printf( '<li class="pbsettings-extra-nav right"><a href="%s">%s</a></li>', LIQUIDPOLL_COMMUNITY_URL, esc_html__( 'Community', 'wp-poll' ) );
 		}
 
 		/**
