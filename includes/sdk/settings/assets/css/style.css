@@ -661,6 +661,10 @@
     border-color: transparent;
 }
 
+.pbsettings-theme-dark .pbsettings-nav-inline ul li.pbsettings-extra-nav.get-pro a {
+    color: red;
+}
+
 .pbsettings-theme-dark .pbsettings-nav-inline ul li .pbsettings-active:after {
     content: " ";
     position: absolute;

@@ -47,7 +47,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		function add_plugin_promotional_navs() {
 
 			if ( ! liquidpoll()->is_pro() ) {
-				printf( '<li class="pbsettings-extra-nav"><a href="%s">%s</a></li>', LIQUIDPOLL_PLUGIN_LINK, esc_html__( 'Get Pro', 'wp-poll' ) );
+				printf( '<li class="pbsettings-extra-nav get-pro"><a href="%s">%s</a></li>', LIQUIDPOLL_PLUGIN_LINK, esc_html__( 'Get Pro', 'wp-poll' ) );
 			}
 
 			printf( '<li class="pbsettings-extra-nav right"><a href="%s">%s</a></li>', LIQUIDPOLL_DOCS_URL, esc_html__( 'Documentation', 'wp-poll' ) );

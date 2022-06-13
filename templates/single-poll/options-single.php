@@ -38,7 +38,7 @@ $poll_theme   = $poll->get_meta( '_theme', 1 );
 
         <label for="<?php echo esc_attr( $unique_id ); ?>">
 			<?php if ( ! $poll->get_meta( 'hide_option_labels', false ) ) : ?>
-				<span><?php echo esc_html( $label ); ?></span>
+                <span><?php echo esc_html( $label ); ?></span>
 			<?php endif; ?>
         </label>
 
@@ -52,8 +52,16 @@ $poll_theme   = $poll->get_meta( '_theme', 1 );
 
 
 	<?php if ( ! $poll->hide_results() ) : ?>
-        <div class="liquidpoll-option-result"></div>
-        <div class="liquidpoll-option-result-bar"></div>
+
+		<?php if ( in_array( $poll_theme, array( 1 ) ) ): ?>
+            <div class="liquidpoll-option-result"></div>
+            <div class="liquidpoll-option-result-bar"></div>
+		<?php endif; ?>
+
+		<?php if ( in_array( $poll_theme, array( 2, 3 ) ) ): ?>
+            <span class="liquidpoll-votes-count"></span>
+		<?php endif; ?>
+
 	<?php endif; ?>
 
 </div> <!-- .liquidpoll-option-single -->

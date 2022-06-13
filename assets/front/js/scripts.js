@@ -43,8 +43,7 @@
 
                     let optionID = $(this).data('option-id'),
                         percentageValue = response.data.percentages[optionID],
-                        singleVoteCount = response.data.singles[optionID],
-                        classTobeAdded = '';
+                        singleVoteCount = response.data.singles[optionID];
 
                     if (typeof percentageValue === 'undefined') {
                         percentageValue = 0;
@@ -54,9 +53,10 @@
                         singleVoteCount = 0;
                     }
 
-                    if ($.inArray(optionID, response.data.percentages)) {
+                    if ($.inArray(optionID, response.data.percentages) && percentageValue > 0) {
                         $(this).addClass('has-result').find('.liquidpoll-option-result-bar').css('width', percentageValue + '%');
-                        $(this).find('.liquidpoll-option-result').html(singleVoteCount + ' ' + pluginObject.voteText);
+                        $(this).addClass('has-result').find('.liquidpoll-votes-count').html(singleVoteCount + ' ' + pluginObject.voteText);
+                        $(this).find('.liquidpoll-option-result').html(percentageValue + '%').css('left', 'calc(' + percentageValue + '% - 50px)');
                     }
                 });
 

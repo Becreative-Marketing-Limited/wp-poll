@@ -1262,6 +1262,7 @@ p.liquidpoll-responses.liquidpoll-success {
     margin-bottom: 55px;
 }
 
+
 .liquidpoll-option-single.has-result .liquidpoll-option-result {
     bottom: -58px;
 }
@@ -1400,6 +1401,22 @@ p.liquidpoll-responses.liquidpoll-success {
     top: 32px;
 }
 
+.poll-single .liquidpoll-option-single span.liquidpoll-votes-count {
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    transition: 0.3s;
+    color: #000000;
+    font-size: 20px;
+}
+
+.poll-single .liquidpoll-option-single.has-result span.liquidpoll-votes-count {
+    opacity: 1;
+}
+
+.poll-single .liquidpoll-option-list-1 .liquidpoll-option-single:hover span.liquidpoll-votes-count {
+    color: #fff;
+}
 
 /**
  * Theme - 2
@@ -1468,6 +1485,7 @@ p.liquidpoll-responses.liquidpoll-success {
     background: #5F64EB;
 }
 
+
 /**
  * Theme - 3
  */
@@ -1523,6 +1541,14 @@ p.liquidpoll-responses.liquidpoll-success {
     top: 50%;
     transform: translateY(-50%);
     z-index: -1;
+}
+
+.poll-single.theme-3 .liquidpoll-option-single span.liquidpoll-votes-count {
+    color: #9E9E9E;
+}
+
+.poll-single.theme-3 .liquidpoll-option-list-1 .liquidpoll-option-single:hover span.liquidpoll-votes-count {
+    color: #24BE58;
 }
 
 /**

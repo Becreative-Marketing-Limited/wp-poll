@@ -24,7 +24,7 @@ defined( 'LIQUIDPOLL_PLUGIN_LINK' ) || define( 'LIQUIDPOLL_PLUGIN_LINK', 'https:
 defined( 'LIQUIDPOLL_DOCS_URL' ) || define( 'LIQUIDPOLL_DOCS_URL', 'https://www.liquidpoll.com/docs' );
 defined( 'LIQUIDPOLL_REVIEW_URL' ) || define( 'LIQUIDPOLL_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
 defined( 'LIQUIDPOLL_TICKET_URL' ) || define( 'LIQUIDPOLL_TICKET_URL', 'https://www.liquidpoll.com/my-account/' );
-defined( 'LIQUIDPOLL_COMMUNITY_URL' ) || define( 'LIQUIDPOLL_COMMUNITY_URL', 'https://www.liquidpoll.com/community/' );
+defined( 'LIQUIDPOLL_COMMUNITY_URL' ) || define( 'LIQUIDPOLL_COMMUNITY_URL', 'https://www.facebook.com/groups/liquidpoll/' );
 
 
 if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
@@ -103,7 +103,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			return array(
 				'ajaxurl'            => admin_url( 'admin-ajax.php' ),
 				'copyText'           => esc_html__( 'Copied !', 'wp-poll' ),
-				'voteText'           => esc_html__( 'Vote(s)', 'wp-poll' ),
+				'voteText'           => esc_html__( 'votes', 'wp-poll' ),
 				'tempProDownload'    => esc_url( 'https://pluginbazar.com/my-account/downloads/' ),
 				'tempProDownloadTxt' => esc_html__( 'Download Version 1.1.0', 'wp-poll' ),
 			);
