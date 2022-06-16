@@ -17,14 +17,13 @@ $label_class  = ! empty( $label ) ? ' has-label' : '';
 $option_name  = 'submit_poll_option';
 $option_name  = $poll->get_poll_type() == 'survey' ? sprintf( '%s[%s]', $option_name, $poll->get_id() ) : $option_name;
 $option_name  = $poll->get_poll_type() == 'survey' && $options_type == 'checkbox' ? $option_name . "[]" : $option_name;
-$poll_theme   = $poll->get_meta( '_theme', 1 );
 
 ?>
 
 <div class="liquidpoll-option-single <?php echo esc_attr( $thumb_class . ' ' . $label_class ); ?>"
      data-option-id="<?php echo esc_attr( $option_id ); ?>">
 
-	<?php if ( 2 != $poll_theme && ! empty( $thumb ) ) : ?>
+	<?php if ( 2 != $poll->get_theme() && ! empty( $thumb ) ) : ?>
         <div class="liquidpoll-option-thumb">
             <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
         </div>
@@ -44,7 +43,7 @@ $poll_theme   = $poll->get_meta( '_theme', 1 );
 
     </div>
 
-	<?php if ( 2 == $poll_theme && ! empty( $thumb ) ) : ?>
+	<?php if ( 2 == $poll->get_theme() && ! empty( $thumb ) ) : ?>
         <div class="liquidpoll-option-thumb">
             <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
         </div>
@@ -53,12 +52,12 @@ $poll_theme   = $poll->get_meta( '_theme', 1 );
 
 	<?php if ( ! $poll->hide_results() ) : ?>
 
-		<?php if ( in_array( $poll_theme, array( 1 ) ) ): ?>
+		<?php if ( in_array( $poll->get_theme(), array( 1 ) ) ): ?>
             <div class="liquidpoll-option-result"></div>
             <div class="liquidpoll-option-result-bar"></div>
 		<?php endif; ?>
 
-		<?php if ( in_array( $poll_theme, array( 2, 3 ) ) ): ?>
+		<?php if ( in_array( $poll->get_theme(), array( 2, 3 ) ) ): ?>
             <span class="liquidpoll-votes-count"></span>
 		<?php endif; ?>
 

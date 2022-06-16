@@ -17,14 +17,14 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 	 */
 	class LIQUIDPOLL_Poll extends LIQUIDPOLL_Item_data {
 
-
 		/**
 		 * LIQUIDPOLL_Poll constructor.
 		 *
-		 * @param bool $poll_id
+		 * @param int $poll_id
+		 * @param array $args
 		 */
-		function __construct( $poll_id = false ) {
-			parent::__construct( $poll_id );
+		function __construct( $poll_id = 0, $args = array() ) {
+			parent::__construct( $poll_id, $args );
 		}
 
 

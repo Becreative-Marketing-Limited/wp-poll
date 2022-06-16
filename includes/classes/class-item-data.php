@@ -6,6 +6,8 @@
  * @package includes/classes/class-item-data
  */
 
+use Pluginbazar\Utils;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
@@ -44,11 +46,12 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		/**
 		 * LIQUIDPOLLS_Poll constructor.
 		 *
-		 * @param bool $item_id
+		 * @param int $item_id
+		 * @param array $args
 		 */
-		function __construct( $item_id = false ) {
+		function __construct( $item_id = 0, $args = array() ) {
 
-			$this->init( $item_id );
+			$this->init( $item_id, $args );
 		}
 
 
@@ -155,11 +158,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 * @return mixed|void|null
 		 */
 		function get_theme() {
-
-			if ( empty( $this->theme ) ) {
-				return $this->get_meta( '_theme', 1 );
-			}
-
 			return $this->theme;
 		}
 
@@ -173,12 +171,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 * @return mixed|void
 		 */
 		function get_meta( $meta_key = '', $default = '' ) {
-
-			$meta_value = liquidpoll()->get_meta( $meta_key, $this->get_id(), $default );
-
-			return apply_filters( 'liquidpoll_filters_get_meta', $meta_value, $meta_key, $this );
+			return apply_filters( 'liquidpoll_filters_get_meta', Utils::get_meta( $meta_key, $this->get_id(), $default ), $meta_key, $this );
 		}
-
 
 		/**
 		 * Update meta value
@@ -240,7 +234,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 * @return mixed|void
 		 */
 		function get_name() {
-
 			return apply_filters( 'liquidpoll_filters_item_name', $this->item_post->post_title );
 		}
 
@@ -260,18 +253,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 * @return null|WP_Post
 		 */
 		function get_post() {
-
 			return $this->item_post;
-		}
-
-
-		/**
-		 * Set theme for this poll
-		 *
-		 * @param string $theme
-		 */
-		function set_theme( $theme = '' ) {
-			$this->theme = $theme;
 		}
 
 
@@ -279,11 +261,13 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 * Initialize item
 		 *
 		 * @param $item_id
+		 * @param $args
 		 */
-		function init( $item_id ) {
+		function init( $item_id, $args = array() ) {
 
 			$this->item_id   = ! $item_id ? get_the_ID() : $item_id;
 			$this->item_post = get_post( $this->item_id );
+			$this->theme     = isset( $args['theme'] ) && ! empty( $args['theme'] ) ? $args['theme'] : $this->get_meta( '_theme', 1 );
 		}
 	}
 

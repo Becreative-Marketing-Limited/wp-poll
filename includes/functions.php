@@ -76,15 +76,14 @@ if ( ! function_exists( 'liquidpoll_get_poll' ) ) {
 	 *
 	 * @return bool | LIQUIDPOLL_Poll
 	 * @global LIQUIDPOLL_Poll $poll
-	 *
 	 */
-	function liquidpoll_get_poll( $poll_id = false ) {
+	function liquidpoll_get_poll( $poll_id = false, $args = array() ) {
 
 		if ( get_post_type( $poll_id ) != 'poll' ) {
 			return false;
 		}
 
-		return new LIQUIDPOLL_Poll( $poll_id );
+		return new LIQUIDPOLL_Poll( $poll_id, $args );
 	}
 }
 
