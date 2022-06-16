@@ -195,3 +195,5 @@ LiquidPoll allows you to integrate highly customisable polling system with so ma
 = 3.3.18 =
 * 12/06/2022 - ADD - New 3 themes added on free version.
 * 13/06/2022 - FIX - Fixed countdown timer hours issues and add showing days.
+* 16/06/2022 - FIX - Shortcode issue with custom attributes has been resolved.
+* 17/06/2022 - FIX - Updated notices to new styles.

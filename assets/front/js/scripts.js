@@ -35,7 +35,7 @@
             success: function (response) {
 
                 if (!response.success) {
-                    singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-error').html(response.data).slideDown();
+                    singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-error').find('span.message').html(response.data).parent().slideDown();
                     return;
                 }
 
@@ -95,7 +95,7 @@
             },
             success: function (response) {
                 if (!response.success) {
-                    singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-error').html(response.data).slideDown();
+                    singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-error').find('span.message').html(response.data).parent().slideDown();
                 } else {
                     /**
                      * Trigger to enhance on Success of Poll Submission
@@ -104,15 +104,15 @@
                      */
                     $(document.body).trigger('liquidpoll_poll_submission_success', response);
 
-                    singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-success').html(response.data).slideDown();
+                    singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-success').find('span.message').html(response.data).parent().slideDown();
                 }
             }
         });
     });
 
 
-    $(document).on('click', 'p.liquidpoll-responses', function () {
-        $(this).slideUp();
+    $(document).on('click', 'p.liquidpoll-responses .close', function () {
+        $(this).parent().slideUp();
     });
 
 

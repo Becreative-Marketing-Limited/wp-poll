@@ -72,6 +72,10 @@ td, th {
     width: 50%;
 }
 
+.liquidpoll-button.liquidpoll-get-poll-results {
+    margin-right: 0;
+}
+
 .liquidpoll-poll-title {
     font-family: Roboto, serif;
     font-size: 35px;
@@ -131,33 +135,71 @@ td, th {
     margin: 0 !important;
 }
 
-
 p.liquidpoll-responses {
+    text-align: center;
     margin: 10px 0 20px;
-    background: #f1f1f1;
-    border-left: 5px solid;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    padding: 12px;
+    background: #CAFCCF;
+    color: #49617C;
+    border-radius: 5px;
+    padding: 17px 0;
     display: none;
-    cursor: pointer;
+    font-size: 18px;
+    line-height: 21px;
+    transition: 0.3s;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
 }
 
 p.liquidpoll-responses.display {
     display: block;
 }
 
-p.liquidpoll-responses.liquidpoll-error {
-    color: #000;
-    background: #ff57225c;
+p.liquidpoll-responses .icon-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #22D153;
+    width: 55px;
+    height: 55px;
 }
 
+p.liquidpoll-responses .icon-box:before {
+    content: url(../../images/response-success.svg);
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/** Notice Error */
+p.liquidpoll-responses.liquidpoll-error,
 p.liquidpoll-responses.liquidpoll-warning {
-    background: #ffc1075c;
+    background: #FFF0DA;
 }
 
-p.liquidpoll-responses.liquidpoll-success {
-    background: #4caf505c;
+p.liquidpoll-responses.liquidpoll-error .icon-box,
+p.liquidpoll-responses.liquidpoll-warning .icon-box {
+    background: #FFB547;
+}
+
+p.liquidpoll-responses.liquidpoll-error .icon-box:before,
+p.liquidpoll-responses.liquidpoll-warning .icon-box:before {
+    content: url(../../images/response-error.svg);
+}
+
+p.liquidpoll-responses .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+p.liquidpoll-responses.liquidpoll-error .close > path,
+p.liquidpoll-responses.liquidpoll-warning .close > path {
+    stroke: #FFB547;
 }
 
 

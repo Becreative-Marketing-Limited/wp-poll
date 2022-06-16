@@ -6,18 +6,16 @@
  * @author Pluginbazar
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
+defined( 'ABSPATH' ) || exit;
 
 global $poll;
 
-
-if ( $poll->hide_countdown_timer() || empty( $poll_deadline = $poll->get_poll_deadline() ) ) {
+if ( $poll->hide_countdown_timer() || ! $poll->ready_to_vote() ) {
 	return;
 }
 
-$unique_id = uniqid();
+$poll_deadline = $poll->get_poll_deadline();
+$unique_id     = uniqid();
 
 ?>
 
