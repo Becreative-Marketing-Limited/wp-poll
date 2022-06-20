@@ -340,7 +340,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 }
 
 .poll-single:not(.inside-embed) {
-    /*margin: 70px 0;*/
+    margin: 70px 0;
 }
 
 .poll-single .liquidpoll-content {
