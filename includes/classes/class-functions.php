@@ -548,7 +548,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 								'disabled' => ! liquidpoll()->is_pro(),
 							),
 							array(
-								'id'       => 'wppp_popup_poll',
+								'id'       => 'liquidpoll_pro_popup_poll',
 								'title'    => esc_html__( 'Popup Poll on Scroll', 'wp-poll-pro' ),
 								'details'  => esc_html__( 'Set a poll that will popup when users / visitors scroll and come to end on your website. Leave empty to disable this option.', 'wp-poll-pro' ),
 								'type'     => 'select2',
@@ -675,7 +675,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 		 * @return bool
 		 */
 		function is_pro() {
-			return apply_filters( 'liquidpoll_filters_is_pro', class_exists( 'LiquidPoll_Pro' ) );
+			return apply_filters( 'liquidpoll_filters_is_pro', class_exists( 'LIQUIDPOLL_Pro_Main' ) );
 		}
 
 

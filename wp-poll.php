@@ -58,6 +58,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 		 * @return \LIQUIDPOLL_Main|null
 		 */
 		public static function instance() {
+
 			if ( is_null( self::$_instance ) ) {
 				self::$_instance = new self();
 			}
@@ -171,18 +172,18 @@ function pb_sdk_init_wp_poll() {
 		include_once ABSPATH . '/wp-admin/includes/plugin.php';
 	}
 
-	global $liquidpolloll_sdk;
+	global $liquidpoll_sdk;
 
-	$liquidpolloll_sdk = new Pluginbazar\Client( esc_html( 'LiquidPoll Pro' ), 'wp-poll', 126, __FILE__ );
-	$liquidpolloll_sdk->notifications();
+	$liquidpoll_sdk = new Pluginbazar\Client( esc_html( 'LiquidPoll Pro' ), 'wp-poll', 126, __FILE__ );
+	$liquidpoll_sdk->notifications();
 
-	do_action( 'pb_sdk_init_wp_poll', $liquidpolloll_sdk );
+	do_action( 'pb_sdk_init_wp_poll', $liquidpoll_sdk );
 }
 
 /**
- * @global \Pluginbazar\Client $liquidpolloll_sdk
+ * @global \Pluginbazar\Client $liquidpoll_sdk
  */
-global $liquidpolloll_sdk;
+global $liquidpoll_sdk;
 
 pb_sdk_init_wp_poll();
 

@@ -156,34 +156,47 @@ class LIQUIDPOLL_Poll_meta {
 					'title'    => esc_html__( 'Theme Style', 'wp-poll' ),
 					'subtitle' => esc_html__( 'By default it will apply from global settings.', 'wp-poll' ),
 					'type'     => 'select',
-					'options'  => array(
-						'default' => array(
-							'label' => esc_html__( 'Default (Global settings)', 'wp-poll' ),
-						),
-						'1'       => array(
-							'label' => esc_html__( 'Theme One', 'wp-poll' ),
-						),
-						'2'       => array(
-							'label' => esc_html__( 'Theme Two', 'wp-poll' ),
-						),
-						'3'       => array(
-							'label' => esc_html__( 'Theme Three', 'wp-poll' ),
-						),
-						'4'       => array(
-							'label'        => esc_html__( 'Theme Four (Pro)', 'wp-poll' ),
-							'availability' => 'pro',
-						),
-						'x'       => array(
-							'label'        => esc_html__( '10+ are coming soon', 'wp-poll' ),
-							'availability' => 'upcoming',
-						),
-					),
+					'options'  => $this->get_poll_themes(),
 					'default'  => 'default',
 				),
 			),
 		);
 
 		return apply_filters( 'LiquidPoll/Filters/poll_meta_field_sections', $field_sections );
+	}
+
+
+	/**
+	 * Return poll themes
+	 *
+	 * @return mixed|void
+	 */
+	function get_poll_themes() {
+
+		$themes = array(
+			1   => array(
+				'label' => esc_html__( 'Theme 1', 'wp-poll' ),
+			),
+			2   => array(
+				'label' => esc_html__( 'Theme 2', 'wp-poll' ),
+			),
+			3   => array(
+				'label' => esc_html__( 'Theme 3', 'wp-poll' ),
+			),
+			998 => array(
+				'label'        => esc_html__( '10+ are in pro', 'wp-poll' ),
+				'availability' => 'pro',
+			),
+			999 => array(
+				'label'        => esc_html__( '20+ are in pro', 'wp-poll' ),
+				'availability' => 'upcoming',
+			),
+		);
+		$themes = apply_filters( 'LiquidPoll/Filters/poll_themes', $themes );
+
+		ksort( $themes );
+
+		return $themes;
 	}
 }
 
