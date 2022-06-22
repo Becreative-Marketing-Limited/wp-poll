@@ -55,7 +55,21 @@
 
                     if ($.inArray(optionID, response.data.percentages) && percentageValue > 0) {
                         $(this).addClass('has-result').find('.liquidpoll-option-result-bar').css('width', percentageValue + '%');
-                        $(this).addClass('has-result').find('.liquidpoll-votes-count').html(singleVoteCount + ' ' + pluginObject.voteText);
+
+                        if ($(this).parent().parent().hasClass('theme-4')) {
+
+                            let progressBar = $(this).addClass('has-result').find('.liquidpoll-votes-count'),
+                                radius = progressBar.find('circle.complete').attr('r'),
+                                circumference = 2 * Math.PI * radius,
+                                strokeDashOffset = circumference - ((percentageValue * circumference) / 100);
+
+                            progressBar.find('.percentage').html(percentageValue + '%');
+                            progressBar.find('circle.complete').removeAttr('style');
+                            progressBar.find('circle.complete').animate({'stroke-dashoffset': strokeDashOffset}, 1250);
+                        } else {
+                            $(this).addClass('has-result').find('.liquidpoll-votes-count').html(singleVoteCount + ' ' + pluginObject.voteText);
+                        }
+
                         $(this).find('.liquidpoll-option-result').html(percentageValue + '%').css('left', 'calc(' + percentageValue + '% - 50px)');
                     }
                 });

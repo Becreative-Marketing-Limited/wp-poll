@@ -1503,6 +1503,10 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     font-weight: 700;
 }
 
+.poll-single .liquidpoll-option-single.has-result span.liquidpoll-votes-count {
+    right: 30px;
+}
+
 .poll-single.theme-2 .liquidpoll-countdown-timer-1 .count-number,
 .poll-single.theme-2 .liquidpoll-countdown-timer-2 .count-number,
 .poll-single.theme-2 .liquidpoll-countdown-timer-3 .count-number,
@@ -1510,7 +1514,6 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 .poll-single.theme-2 .liquidpoll-countdown-timer-5 .count-number {
     color: #000000;
 }
-
 
 .poll-single.theme-2 .liquidpoll-button-green {
     background: #4CAF50;

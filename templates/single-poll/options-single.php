@@ -57,9 +57,18 @@ $option_name  = $poll->get_poll_type() == 'survey' && $options_type == 'checkbox
             <div class="liquidpoll-option-result-bar"></div>
 		<?php endif; ?>
 
-		<?php if ( in_array( $poll->get_theme(), array( 2, 3 ) ) ): ?>
-            <span class="liquidpoll-votes-count"></span>
+		<?php if ( in_array( $poll->get_theme(), array( 2, 3, 5 ) ) ): ?>
+            <span class="liquidpoll-votes-count" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></span>
 		<?php endif; ?>
+
+		<?php if ( in_array( $poll->get_theme(), array( 4 ) ) ): ?>
+            <svg class="liquidpoll-votes-count" viewBox="0 0 80 80">
+                <circle class="incomplete" cx="40" cy="40" r="35"></circle>
+                <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
+                <text class="percentage" x="50%" y="57%"></text>
+            </svg>
+		<?php endif; ?>
+
 
 	<?php endif; ?>
 

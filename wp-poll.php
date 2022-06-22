@@ -117,15 +117,17 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 		 */
 		function admin_scripts() {
 
+			$version        = defined( 'WP_DEBUG' ) && WP_DEBUG ? date( 'j:s' ) : LIQUIDPOLL_VERSION;
+
 			wp_enqueue_style( 'jquery-ui' );
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_style( 'jquery-ui', LIQUIDPOLL_PLUGIN_URL . 'assets/jquery-ui.css' );
 			wp_enqueue_style( 'tooltip', LIQUIDPOLL_PLUGIN_URL . 'assets/tool-tip.min.css' );
-			wp_enqueue_style( 'liquidpoll-admin', LIQUIDPOLL_PLUGIN_URL . 'assets/admin/css/style.css' );
+			wp_enqueue_style( 'liquidpoll-admin', LIQUIDPOLL_PLUGIN_URL . 'assets/admin/css/style.css', array(), $version );
 
 			wp_enqueue_script( 'jquery-ui-sortable' );
 			wp_enqueue_script( 'apexcharts', plugins_url( 'assets/apexcharts.js', __FILE__ ) );
-			wp_enqueue_script( 'liquidpoll-admin', plugins_url( 'assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ) );
+			wp_enqueue_script( 'liquidpoll-admin', plugins_url( 'assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ), $version );
 			wp_localize_script( 'liquidpoll-admin', 'liquidpoll_object', $this->localize_scripts_data() );
 		}
 
@@ -137,16 +139,17 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 
 			global $wp_query;
 
+			$version        = defined( 'WP_DEBUG' ) && WP_DEBUG ? date( 'j:s' ) : LIQUIDPOLL_VERSION;
 			$load_in_footer = $wp_query->get( 'poll_in_embed' ) ? false : $wp_query->get( 'poll_in_embed' );
 
-			wp_enqueue_script( 'liquidpoll-front-cb', LIQUIDPOLL_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), LIQUIDPOLL_VERSION, $load_in_footer );
-			wp_enqueue_script( 'liquidpoll-front', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), LIQUIDPOLL_VERSION, $load_in_footer );
+			wp_enqueue_script( 'liquidpoll-front-cb', LIQUIDPOLL_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), $version, $load_in_footer );
+			wp_enqueue_script( 'liquidpoll-front', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
 			wp_localize_script( 'liquidpoll-front', 'liquidpoll_object', $this->localize_scripts_data() );
 
 			wp_enqueue_style( 'dashicons' );
 			wp_enqueue_style( 'tooltip', LIQUIDPOLL_PLUGIN_URL . 'assets/tool-tip.min.css' );
-			wp_enqueue_style( 'liquidpoll-front-cb', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/checkbox.css', array(), LIQUIDPOLL_VERSION );
-			wp_enqueue_style( 'liquidpoll-front', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style.css', array(), LIQUIDPOLL_VERSION );
+			wp_enqueue_style( 'liquidpoll-front-cb', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/checkbox.css', array(), $version );
+			wp_enqueue_style( 'liquidpoll-front', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style.css', array(), $version );
 		}
 
 

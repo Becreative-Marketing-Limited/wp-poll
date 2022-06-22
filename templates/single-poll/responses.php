@@ -10,6 +10,7 @@ defined( 'ABSPATH' ) || exit;
 
 global $poll;
 
+
 ?>
 
 

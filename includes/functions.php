@@ -483,8 +483,8 @@ if ( ! function_exists( 'liquidpoll_locate_template' ) ) {
 		}
 
 		// Check for Poll Pro
-		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'LIQUIDPOLLP_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLP_PLUGIN_DIR;
+		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'LIQUIDPOLL_PRO_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLL_PRO_PLUGIN_DIR;
 		}
 
 		// Check for survey
