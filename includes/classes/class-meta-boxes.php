@@ -102,6 +102,16 @@ class LIQUIDPOLL_Poll_meta {
 						'dateFormat' => 'yy-mm-dd',
 					),
 				),
+				array(
+					'id'      => '_countdown_position',
+					'title'   => esc_html__( 'Countdown Position', 'wp-poll' ),
+					'type'    => 'select',
+					'options' => array(
+						'below_options' => array( 'label' => esc_html__( 'Below options', 'wp-poll' ) ),
+						'above_options' => array( 'label' => esc_html__( 'Above options (Pro)', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
+					),
+					'default' => 'below_options',
+				),
 			), $poll_setting_fields )
 		);
 		$field_sections['poll_options']     = array(

@@ -110,10 +110,18 @@ if ( ! class_exists( 'PBSettings_Field_select' ) ) {
 
 					foreach ( $options as $option_key => $option ) {
 						$availability = isset( $option['availability'] ) ? $option['availability'] : '';
-						$is_disabled  = empty( $availability ) ? '' : 'disabled';
-						$selected     = ( in_array( $option_key, $this->value ) ) ? ' selected' : '';
+
+						if ( false === $availability ) {
+							$is_disabled = 'disabled';
+						} elseif ( true === $availability ) {
+							$is_disabled = '';
+						} else {
+							$is_disabled = empty( $availability ) ? '' : 'disabled';
+						}
+
+						$selected = ( in_array( $option_key, $this->value ) ) ? ' selected' : '';
 						if ( $is_disabled || isset( $option['label'] ) ) {
-							echo '<option value="' . esc_attr( $option_key ) . '" ' . esc_attr( $selected ) . esc_attr( $is_disabled ) . '>' . esc_attr( $option['label'] ) . '</option>';
+							echo '<option value="' . esc_attr( $option_key ) . '" ' . esc_attr( $selected ) . ' ' . esc_attr( $is_disabled ) . '>' . esc_attr( $option['label'] ) . '</option>';
 						} else {
 							echo '<option value="' . esc_attr( $option_key ) . '" ' . esc_attr( $selected ) . '>' . esc_attr( $option ) . '</option>';
 						}

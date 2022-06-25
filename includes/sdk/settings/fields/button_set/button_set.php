@@ -44,7 +44,14 @@ if ( ! class_exists( 'PBSettings_Field_button_set' ) ) {
 						$active       = ( in_array( $key, $value ) || ( empty( $value ) && empty( $key ) ) ) ? ' pbsettings--active' : '';
 						$checked      = ( in_array( $key, $value ) || ( empty( $value ) && empty( $key ) ) ) ? ' checked' : '';
 						$availability = isset( $option['availability'] ) ? $option['availability'] : '';
-						$is_disabled  = empty( $availability ) ? '' : 'disabled';
+						
+						if ( false === $availability ) {
+							$is_disabled = 'disabled';
+						} elseif ( true === $availability ) {
+							$is_disabled = '';
+						} else {
+							$is_disabled = empty( $availability ) ? '' : 'disabled';
+						}
 
 						echo '<div class="pbsettings--sibling pbsettings--button' . esc_attr( $active ) . ' ' . esc_attr( $availability ) . '" ' . esc_attr( $is_disabled ) . '>';
 						echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name( $extra ) ) . '" value="' . esc_attr( $key ) . '"' . $this->field_attributes() . esc_attr( $checked ) . '/>';
