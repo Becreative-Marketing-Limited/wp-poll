@@ -441,6 +441,10 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				),
 			) );
 
+			// Add image size
+			add_image_size( 'poll-square', 267, 258, true );
+			add_image_size( 'poll-long-width', 555, 120, true );
+
 			do_action( 'liquidpoll_after_settings_menu' );
 		}
 	}
