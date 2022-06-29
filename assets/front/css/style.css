@@ -336,7 +336,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 */
 
 .poll-single {
-    max-width: 560px !important;
+    max-width: 570px !important;
 }
 
 .poll-single:not(.inside-embed) {
@@ -484,10 +484,6 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 /**
 * Poll Option - 1
 */
-.liquidpoll-option-list-1 {
-    max-width: 550px;
-}
-
 .liquidpoll-option-list-1 .liquidpoll-option-single {
     margin-bottom: 30px;
 }
@@ -1456,6 +1452,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     opacity: 1;
 }
 
+.poll-single .liquidpoll-option-list-1 .liquidpoll-option-single.active span.liquidpoll-votes-count,
 .poll-single .liquidpoll-option-list-1 .liquidpoll-option-single:hover span.liquidpoll-votes-count {
     color: #fff;
 }
@@ -1470,7 +1467,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 }
 
 .poll-single.theme-2 .liquidpoll-option-list-1 .liquidpoll-option-single {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     background-color: #EDF1FD;
     padding: 12px 15px;
     border-radius: 5px;
@@ -1488,6 +1485,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     color: #FFFFFF;
 }
 
+.poll-single.theme-2 .liquidpoll-option-list-1 .liquidpoll-option-single.active,
 .poll-single.theme-2 .liquidpoll-option-list-1 .liquidpoll-option-single:hover {
     background-color: #5F64EB;
     width: calc(100% + 15px);

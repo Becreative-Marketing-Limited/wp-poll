@@ -39,7 +39,7 @@
                     return;
                 }
 
-                singlePoll.find('.liquidpoll-options .liquidpoll-option-single').each(function () {
+                singlePoll.addClass('rendered-results').find('.liquidpoll-options .liquidpoll-option-single').each(function () {
 
                     let optionID = $(this).data('option-id'),
                         percentageValue = response.data.percentages[optionID],
