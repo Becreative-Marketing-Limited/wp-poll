@@ -9,6 +9,10 @@
             $('.theme-2 .liquidpoll-option-single').removeClass("active");
             $(this).addClass("active");
         });
+
+        $('.theme-6, .theme-7').on('click', function () {
+            $(this).find('.liquidpoll-option-single input[name="submit_poll_option"]').not(':checked').prop("checked", true);
+        });
     });
 
     $(document).on('click', '.liquidpoll-get-poll-results', function () {
