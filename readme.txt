@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 5.9.3
-	Stable tag: 3.3.22
+	Stable tag: 3.3.23
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -211,3 +211,6 @@ LiquidPoll allows you to integrate highly customisable polling system with so ma
 
 = 3.3.22 =
 * 04/07/2022 - FIX - Fix theme 4 and 9.
+
+= 3.3.23 =
+* 06/07/2022 - FIX - Fix theme responsive issues.

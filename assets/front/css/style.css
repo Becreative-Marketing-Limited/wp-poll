@@ -502,6 +502,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     line-height: 23px;
     font-weight: 600;
     color: #000000;
+	transition: .6s;
 }
 
 .liquidpoll-option-list-1 .liquidpoll-option-single input + label:before {
@@ -1533,15 +1534,15 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
  * Theme - 3
  */
 .poll-single.theme-3 .liquidpoll-option-single {
-    min-height: 45px;
-    margin-bottom: 50px;
+    padding: 25px 0 25px 0;
+	margin-bottom: 0;
 }
 
 .poll-single.theme-3 .liquidpoll-option-single::after {
     position: absolute;
     content: '';
     left: 0;
-    bottom: -25px;
+    bottom: 0;
     background-color: #E3E3E3;
     width: 100%;
     height: 1px;
@@ -1559,11 +1560,8 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     content: '';
     right: auto;
     left: 0;
-    top: 15px;
-    position: absolute;
+    top: 50%;
     transform: translateY(-50%);
-    width: 35px;
-    height: 35px;
 }
 
 .poll-single.theme-3 .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
@@ -1613,8 +1611,39 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
         margin-top: 17px;
         margin-bottom: 0;
     }
-
     [class*="liquidpoll-countdown-timer"] {
         text-align: center;
     }
+	p.liquidpoll-responses {
+    	font-size: 16px;
+		padding: 17px 0 17px 20px;
+	}
+	.theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
+    	top: -15px;
+		transition: .6s;
+	}
+	.poll-single.theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single.has-result.active span.liquidpoll-votes-count {
+		right: 160px;
+	}
+	.theme-2.rendered-results .liquidpoll-option-single.has-result span.liquidpoll-votes-count {
+		right: 150px;
+		top: 30px;
+		transition: .6s;
+	}
+	.poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label:before {
+		display: none;
+	}
+	.poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
+    	padding-left: 115px;
+   	    top: -10px;
+	}
+	.poll-single.theme-3.rendered-results .liquidpoll-option-thumb {
+    	left: 15px;
+		transition: .3s;
+	}
+	.theme-3.rendered-results .liquidpoll-option-single.has-result span.liquidpoll-votes-count {
+		right: 150px;
+		top: 30px;
+		transition: .6s;
+	}
 }
