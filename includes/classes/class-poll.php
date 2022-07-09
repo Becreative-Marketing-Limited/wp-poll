@@ -177,6 +177,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			$polled_data  = $this->get_polled_data();
 			$total_voted  = count( $polled_data );
 			$poll_results = array( 'total' => $total_voted, 'singles' => array(), 'percentages' => array() );
+			$poll_options = $this->get_meta( 'poll_meta_options', array() );
+			$option_ids   = array_keys( $poll_options );
 
 			/**
 			 * Calculate vote count per single option
@@ -188,7 +190,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 				}
 
 				foreach ( $polled_options as $option_id ) {
-
 					if ( ! isset( $poll_results['singles'][ $option_id ] ) ) {
 						$poll_results['singles'][ $option_id ] = 0;
 					}
@@ -204,7 +205,18 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			$singles = ! empty( $singles ) ? $singles : array();
 
 			foreach ( $singles as $option_id => $single_count ) {
-				$poll_results['percentages'][ $option_id ] = floor( ( $single_count * 100 ) / $total_voted );
+				$poll_results['percentages'][ $option_id ] = round( ( $single_count * 100 ) / $total_voted );
+			}
+
+			foreach ( $option_ids as $_option_id ) {
+
+				if ( is_array( $poll_results['singles'] ) && ! in_array( $_option_id, array_keys( $poll_results['singles'] ) ) ) {
+					$poll_results['singles'][ $_option_id ] = 0;
+				}
+
+				if ( is_array( $poll_results['percentages'] ) && ! in_array( $_option_id, array_keys( $poll_results['percentages'] ) ) ) {
+					$poll_results['percentages'][ $_option_id ] = 0;
+				}
 			}
 
 			return apply_filters( 'liquidpoll_filters_poll_results', $poll_results, $this->get_id(), $this );

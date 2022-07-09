@@ -4,10 +4,14 @@
 
 (function ($, window, document, pluginObject) {
     "use strict";
+
     $(document).on('ready', function () {
-        $('.theme-2 .liquidpoll-option-single ').on('click', function () {
-            $('.theme-2 .liquidpoll-option-single').removeClass("active");
-            $(this).addClass("active");
+
+        let optionSingle = $('.liquidpoll-option-single');
+
+        optionSingle.on('click', function () {
+            optionSingle.removeClass('active');
+            $(this).addClass('active');
         });
 
         $('.theme-6, .theme-7').on('click', function () {
@@ -18,7 +22,8 @@
     $(document).on('click', '.liquidpoll-get-poll-results', function () {
 
         let resultButton = $(this),
-            pollID = resultButton.data('poll-id');
+            pollID = resultButton.data('poll-id'),
+            marginLeft = 50;
 
         if (typeof pollID === 'undefined') {
             return;
@@ -57,7 +62,7 @@
                         singleVoteCount = 0;
                     }
 
-                    if ($.inArray(optionID, response.data.percentages) && percentageValue > 0) {
+                    if ($.inArray(optionID, response.data.percentages)) {
                         $(this).addClass('has-result').find('.liquidpoll-option-result-bar').css('width', percentageValue + '%');
 
                         let pollSIngle = $(this).parent().parent();
@@ -80,7 +85,10 @@
                             $(this).addClass('has-result').find('.liquidpoll-votes-count').html(singleVoteCount + ' ' + pluginObject.voteText);
                         }
 
-                        $(this).find('.liquidpoll-option-result').html(percentageValue + '%').css('left', 'calc(' + percentageValue + '% - 50px)');
+                        if (percentageValue === 0) {
+                            marginLeft = 0;
+                        }
+                        $(this).find('.liquidpoll-option-result').html(percentageValue + '%').css('left', 'calc(' + percentageValue + '% - ' + marginLeft + 'px)');
                     }
                 });
 
@@ -100,9 +108,9 @@
 
         let singlePoll = $('#poll-' + pollID), checkedData = [];
 
-        singlePoll.find('.liquidpoll-options .liquidpoll-option-single input[name="submit_poll_option"]').each(function () {
-            if ($(this).is(':checked')) {
-                checkedData.push(this.value);
+        singlePoll.find('.liquidpoll-options .liquidpoll-option-single').each(function () {
+            if ($(this).hasClass('active')) {
+                checkedData.push($(this).find('input[name="submit_poll_option"]').attr('value'));
             }
         });
 
