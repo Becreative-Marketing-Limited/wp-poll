@@ -214,3 +214,4 @@ LiquidPoll allows you to integrate highly customisable polling system with so ma
 
 = 3.3.23 =
 * 06/07/2022 - FIX - Fix theme responsive issues.
+* 09/07/2022 - FIX - Fix reset results on pro version
