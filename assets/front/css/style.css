@@ -1584,6 +1584,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     z-index: -1;
 }
 
+.poll-single.theme-3 .liquidpoll-option-single.active span.liquidpoll-votes-count,
 .poll-single.theme-3 .liquidpoll-option-single span.liquidpoll-votes-count {
     color: #9E9E9E;
 }
