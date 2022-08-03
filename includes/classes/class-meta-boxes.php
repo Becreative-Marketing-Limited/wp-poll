@@ -81,7 +81,6 @@ class LIQUIDPOLL_Poll_meta {
 						'reaction'     => array( 'label' => esc_html__( 'Reaction', 'wp-poll' ), 'availability' => 'upcoming', ),
 						'subscription' => array( 'label' => esc_html__( 'Subscription', 'wp-poll' ), 'availability' => 'upcoming', ),
 						'feedback'     => array( 'label' => esc_html__( 'Feedback', 'wp-poll' ), 'availability' => 'upcoming', ),
-						'survey'       => array( 'label' => esc_html__( 'Survey', 'wp-poll' ), 'availability' => 'upcoming', ),
 						'nps'          => array( 'label' => esc_html__( 'NPS Score', 'wp-poll' ), 'availability' => 'upcoming', ),
 					),
 					'default' => 'poll',

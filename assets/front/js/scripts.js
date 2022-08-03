@@ -64,6 +64,8 @@
 
                     if ($.inArray(optionID, response.data.percentages)) {
                         $(this).addClass('has-result').find('.liquidpoll-option-result-bar').css('width', percentageValue + '%');
+                        // $(this).append('<span class="percentage-bar" style="width: ' + percentageValue + '% ;"></span>');
+                        $(this).find('.percentage-bar').css('width', percentageValue + '%');
 
                         let pollSIngle = $(this).parent().parent();
 
@@ -72,7 +74,6 @@
                             pollSIngle.hasClass('theme-6') ||
                             pollSIngle.hasClass('theme-7')
                         ) {
-
                             let progressBar = $(this).addClass('has-result').find('.liquidpoll-votes-count'),
                                 radius = progressBar.find('circle.complete').attr('r'),
                                 circumference = 2 * Math.PI * radius,

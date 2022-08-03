@@ -502,7 +502,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     line-height: 23px;
     font-weight: 600;
     color: #000000;
-	transition: .6s;
+	transition: .2s;
 }
 
 .liquidpoll-option-list-1 .liquidpoll-option-single input + label:before {

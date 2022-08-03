@@ -487,16 +487,6 @@ if ( ! function_exists( 'liquidpoll_locate_template' ) ) {
 			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLL_PRO_PLUGIN_DIR;
 		}
 
-		// Check for survey
-		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'LIQUIDPOLLS_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLS_PLUGIN_DIR;
-		}
-
-		// Check for MCQ
-		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'wp-poll-quiz' ) !== false && defined( 'LIQUIDPOLLQUIZ_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLQUIZ_PLUGIN_DIR;
-		}
-
 
 		/**
 		 * Template default path from Plugin

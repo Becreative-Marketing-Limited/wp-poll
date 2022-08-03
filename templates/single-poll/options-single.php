@@ -11,7 +11,7 @@ $options_type = $poll->can_vote_multiple() ? 'checkbox' : 'radio';
 $option_id    = isset( $args['option_id'] ) ? $args['option_id'] : '';
 $unique_id    = uniqid( 'option-' );
 $label        = isset( $args['label'] ) ? $args['label'] : '';
-$thumb        = isset( $args['thumb'] ) ? $args['thumb'] : '';
+$thumb        = isset( $args['thumb'] ) && ! in_array( $poll->get_theme(), array( 10 ) ) ? $args['thumb'] : '';
 $thumb_class  = ! empty( $thumb ) ? ' has-thumb' : '';
 $label_class  = ! empty( $label ) ? ' has-label' : '';
 $option_name  = 'submit_poll_option';
@@ -57,9 +57,12 @@ $option_name  = $poll->get_poll_type() == 'survey' && $options_type == 'checkbox
             <div class="liquidpoll-option-result-bar"></div>
 		<?php endif; ?>
 
-		<?php if ( in_array( $poll->get_theme(), array( 2, 3, 5, 8, 9 ) ) ): ?>
+		<?php if ( in_array( $poll->get_theme(), array( 2, 3, 5, 8, 9, 10 ) ) ): ?>
             <span class="liquidpoll-votes-count" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></span>
-		<?php endif; ?>
+            <?php if( 10 == $poll->get_theme() ) :  ?>
+                <span class="percentage-bar" style="width: 0 ;"></span>
+            <?php endif; ?>
+        <?php endif; ?>
 
 		<?php if ( in_array( $poll->get_theme(), array( 4, 6, 7 ) ) ): ?>
             <svg class="liquidpoll-votes-count" viewBox="0 0 80 80">
