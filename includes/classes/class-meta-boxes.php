@@ -158,7 +158,7 @@ class LIQUIDPOLL_Poll_meta {
 			),
 		);
 		$field_sections['poll_styling']     = array(
-			'title'  => __( 'Styling', 'wp-poll' ),
+			'title'  => __( 'Poll Styling', 'wp-poll' ),
 			'icon'   => 'fa fa-bolt',
 			'fields' => array(
 				array(
@@ -199,21 +199,36 @@ class LIQUIDPOLL_Poll_meta {
 					'type'     => 'typography',
 				),
 				array(
-					'id'      => 'subheading_typography_buttons',
+					'id'      => 'subheading_typography_button_submit',
 					'type'    => 'subheading',
-					'content' => esc_html__( 'Typography Controls - Buttons', 'slider-x-woo' ),
+					'content' => esc_html__( 'Typography Controls - Buttons - Submit', 'slider-x-woo' ),
 				),
 				array(
-					'id'       => '_typography_button_submit',
+					'id'       => '_typography_btn_submit',
 					'title'    => esc_html__( 'Submit Button', 'wp-poll' ),
 					'subtitle' => esc_html__( 'Control typography settings for poll submit button.', 'wp-poll' ),
 					'type'     => 'typography',
 				),
 				array(
-					'id'       => '_typography_button_results',
+					'id'    => '_typography_btn_submit_bg',
+					'title' => esc_html__( 'Background color', 'wp-poll' ),
+					'type'  => 'color',
+				),
+				array(
+					'id'      => 'subheading_typography_button_results',
+					'type'    => 'subheading',
+					'content' => esc_html__( 'Typography Controls - Buttons - Results', 'slider-x-woo' ),
+				),
+				array(
+					'id'       => '_typography_btn_results',
 					'title'    => esc_html__( 'Results Button', 'wp-poll' ),
 					'subtitle' => esc_html__( 'Control typography settings for poll results button.', 'wp-poll' ),
 					'type'     => 'typography',
+				),
+				array(
+					'id'    => '_typography_btn_results_bg',
+					'title' => esc_html__( 'Background color', 'wp-poll' ),
+					'type'  => 'color',
 				),
 			),
 		);
