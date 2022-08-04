@@ -6,6 +6,8 @@
  */
 
 
+use Pluginbazar\Utils;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
@@ -561,3 +563,31 @@ if ( ! function_exists( 'liquidpoll_pagination' ) ) {
 	}
 }
 
+
+function liquidpoll_apply_css( $selector = '', $css_arr = array() ) {
+
+	global $poll;
+
+	if ( empty( $selector ) || empty( $css_arr ) || ! is_array( $css_arr ) ) {
+		return;
+	}
+
+	ob_start();
+
+	foreach ( $css_arr as $property => $value ) {
+
+		if ( in_array( $property, array( 'type', 'unit' ) ) ) {
+			continue;
+		}
+
+		if ( in_array( $property, array( 'font-size', 'line-height', 'letter-spacing' ) ) ) {
+			$value = $value . Utils::get_args_option( 'unit', $css_arr );
+		}
+
+		if ( ! empty( $value ) ) {
+			printf( '%s: %s;', $property, $value );
+		}
+	}
+
+	printf( '<style>#poll-%s %s {%s}</style>', $poll->get_id(), $selector, ob_get_clean() );
+}

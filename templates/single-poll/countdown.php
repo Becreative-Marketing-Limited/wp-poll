@@ -20,7 +20,7 @@ $unique_id     = uniqid();
 ?>
 
 <div id="liquidpoll-countdown-timer-<?php echo esc_attr( $unique_id ); ?>"
-     class="liquidpoll-countdown-timer-<?php echo esc_attr( $poll->get_style( 'countdown' ) ); ?>"></div>
+     class="liquidpoll-countdown-timer liquidpoll-countdown-timer-<?php echo esc_attr( $poll->get_style( 'countdown' ) ); ?>"></div>
 
 <script>
     (function ($,) {
@@ -50,3 +50,6 @@ $unique_id     = uniqid();
 
     })(jQuery);
 </script>
+
+
+<?php liquidpoll_apply_css( '.liquidpoll-countdown-timer > span', $poll->get_meta( '_typography_countdown_timer' ) ); ?>

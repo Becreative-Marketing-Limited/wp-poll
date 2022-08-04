@@ -6,18 +6,18 @@
  * @author Pluginbazar
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
+defined( 'ABSPATH' ) || exit;
 
 global $poll;
 
 
 if ( $poll->has_content() ) : ?>
 
-    <div class="liquidpoll-content">
+<div class="liquidpoll-content">
 		<?php echo apply_filters( 'the_content', wp_kses_post( $poll->get_content() ) ); ?>
     </div>
+
+	<?php liquidpoll_apply_css( '.liquidpoll-content', $poll->get_meta( '_typography_content' ) ); ?>
 
 <?php endif; ?>
 

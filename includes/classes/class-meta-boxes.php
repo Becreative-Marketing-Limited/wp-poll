@@ -169,6 +169,52 @@ class LIQUIDPOLL_Poll_meta {
 					'options'  => $this->get_poll_themes(),
 					'default'  => 'default',
 				),
+				array(
+					'id'      => 'subheading_typography',
+					'type'    => 'subheading',
+					'content' => esc_html__( 'Typography Controls', 'slider-x-woo' ),
+				),
+				array(
+					'id'       => '_typography_title',
+					'title'    => esc_html__( 'Poll Title', 'wp-poll' ),
+					'subtitle' => esc_html__( 'Control typography settings for poll title.', 'wp-poll' ),
+					'type'     => 'typography',
+				),
+				array(
+					'id'       => '_typography_content',
+					'title'    => esc_html__( 'Poll Content', 'wp-poll' ),
+					'subtitle' => esc_html__( 'Control typography settings for poll content.', 'wp-poll' ),
+					'type'     => 'typography',
+				),
+				array(
+					'id'       => '_typography_options',
+					'title'    => esc_html__( 'Poll Options', 'wp-poll' ),
+					'subtitle' => esc_html__( 'Control typography settings for poll options.', 'wp-poll' ),
+					'type'     => 'typography',
+				),
+				array(
+					'id'       => '_typography_countdown_timer',
+					'title'    => esc_html__( 'Countdown Timer', 'wp-poll' ),
+					'subtitle' => esc_html__( 'Control typography settings for poll count down timer.', 'wp-poll' ),
+					'type'     => 'typography',
+				),
+				array(
+					'id'      => 'subheading_typography_buttons',
+					'type'    => 'subheading',
+					'content' => esc_html__( 'Typography Controls - Buttons', 'slider-x-woo' ),
+				),
+				array(
+					'id'       => '_typography_button_submit',
+					'title'    => esc_html__( 'Submit Button', 'wp-poll' ),
+					'subtitle' => esc_html__( 'Control typography settings for poll submit button.', 'wp-poll' ),
+					'type'     => 'typography',
+				),
+				array(
+					'id'       => '_typography_button_results',
+					'title'    => esc_html__( 'Results Button', 'wp-poll' ),
+					'subtitle' => esc_html__( 'Control typography settings for poll results button.', 'wp-poll' ),
+					'type'     => 'typography',
+				),
 			),
 		);
 

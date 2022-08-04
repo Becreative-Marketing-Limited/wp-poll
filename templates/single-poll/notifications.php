@@ -6,10 +6,7 @@
  * @author Pluginbazar
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
-
+defined( 'ABSPATH' ) || exit;
 
 ?>
 

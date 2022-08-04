@@ -3,9 +3,7 @@
  * Single Poll - Options
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
+defined( 'ABSPATH' ) || exit;
 
 global $poll;
 
@@ -22,6 +20,8 @@ global $poll;
 
 		endforeach;
 		?>
+
+		<?php liquidpoll_apply_css( '.liquidpoll-option-list-1 .liquidpoll-option-single input + label', $poll->get_meta( '_typography_options' ) ); ?>
 
     </div>
 
