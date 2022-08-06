@@ -3,6 +3,8 @@
  * Single Poll - Options
  */
 
+use Pluginbazar\Utils;
+
 defined( 'ABSPATH' ) || exit;
 
 global $poll;
@@ -21,7 +23,15 @@ global $poll;
 		endforeach;
 		?>
 
-		<?php liquidpoll_apply_css( '.liquidpoll-option-list-1 .liquidpoll-option-single input + label', $poll->get_meta( '_typography_options' ) ); ?>
+		<?php
+		$typography_options = $poll->get_meta( '_typography_options' );
+
+		liquidpoll_apply_css( '.liquidpoll-option-list-1 .liquidpoll-option-single input + label', $typography_options );
+
+		liquidpoll_apply_css( '.poll-single.theme-4 .liquidpoll-option-single.has-result svg.liquidpoll-votes-count circle', array(
+			'stroke' => Utils::get_args_option( 'color', $typography_options ),
+		) );
+		?>
 
     </div>
 
