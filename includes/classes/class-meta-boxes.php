@@ -179,24 +179,28 @@ class LIQUIDPOLL_Poll_meta {
 					'title'    => esc_html__( 'Poll Title', 'wp-poll' ),
 					'subtitle' => esc_html__( 'Control typography settings for poll title.', 'wp-poll' ),
 					'type'     => 'typography',
+					'class'    => ! liquidpoll()->is_pro() ? 'pro' : '',
 				),
 				array(
 					'id'       => '_typography_content',
 					'title'    => esc_html__( 'Poll Content', 'wp-poll' ),
 					'subtitle' => esc_html__( 'Control typography settings for poll content.', 'wp-poll' ),
 					'type'     => 'typography',
+					'class'    => ! liquidpoll()->is_pro() ? 'pro' : '',
 				),
 				array(
 					'id'       => '_typography_options',
 					'title'    => esc_html__( 'Poll Options', 'wp-poll' ),
 					'subtitle' => esc_html__( 'Control typography settings for poll options.', 'wp-poll' ),
 					'type'     => 'typography',
+					'class'    => ! liquidpoll()->is_pro() ? 'pro' : '',
 				),
 				array(
 					'id'       => '_typography_countdown_timer',
 					'title'    => esc_html__( 'Countdown Timer', 'wp-poll' ),
 					'subtitle' => esc_html__( 'Control typography settings for poll count down timer.', 'wp-poll' ),
 					'type'     => 'typography',
+					'class'    => ! liquidpoll()->is_pro() ? 'pro' : '',
 				),
 				array(
 					'id'      => 'subheading_typography_button_submit',
@@ -208,11 +212,13 @@ class LIQUIDPOLL_Poll_meta {
 					'title'    => esc_html__( 'Submit Button', 'wp-poll' ),
 					'subtitle' => esc_html__( 'Control typography settings for poll submit button.', 'wp-poll' ),
 					'type'     => 'typography',
+					'class'    => ! liquidpoll()->is_pro() ? 'pro' : '',
 				),
 				array(
 					'id'    => '_typography_btn_submit_bg',
 					'title' => esc_html__( 'Background color', 'wp-poll' ),
 					'type'  => 'color',
+					'class' => ! liquidpoll()->is_pro() ? 'pro' : '',
 				),
 				array(
 					'id'      => 'subheading_typography_button_results',
@@ -224,11 +230,13 @@ class LIQUIDPOLL_Poll_meta {
 					'title'    => esc_html__( 'Results Button', 'wp-poll' ),
 					'subtitle' => esc_html__( 'Control typography settings for poll results button.', 'wp-poll' ),
 					'type'     => 'typography',
+					'class'    => ! liquidpoll()->is_pro() ? 'pro' : '',
 				),
 				array(
 					'id'    => '_typography_btn_results_bg',
 					'title' => esc_html__( 'Background color', 'wp-poll' ),
 					'type'  => 'color',
+					'class' => ! liquidpoll()->is_pro() ? 'pro' : '',
 				),
 			),
 		);

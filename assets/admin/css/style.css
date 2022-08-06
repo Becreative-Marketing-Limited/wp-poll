@@ -326,3 +326,35 @@ a.liquidpoll-doc:active {
 a.liquidpoll-doc {
     background: #292929;
 }
+
+
+.pb_settings.pbsettings-metabox .pbsettings-field.pro:before {
+    background: #000;
+    z-index: 99999;
+    position: absolute;
+    content: ' ';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: no-drop;
+}
+
+.pb_settings.pbsettings-metabox .pbsettings-field.pro:after {
+    content: 'Pro Feature';
+    position: absolute;
+    background: #c60f02;
+    color: #c6c6c6;
+    padding: 12px 30px;
+    border-radius: 3px;
+    top: 50%;
+    left: 50%;
+    z-index: 999999;
+    transform: translate(-50%, -50%);
+}
+
+.pb_settings.pbsettings-metabox .pbsettings-field.pro .pbsettings-fieldset {
+    pointer-events: none;
+}

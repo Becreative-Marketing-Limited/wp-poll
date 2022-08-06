@@ -745,7 +745,6 @@ if ( ! class_exists( 'PBSettings' ) ) {
 				$depend .= ( ! empty( $data_global ) ) ? ' data-depend-global="true"' : '';
 
 				$visible = ( ! empty( $depend_visible ) ) ? ' pbsettings-depend-visible' : ' pbsettings-depend-hidden';
-
 			}
 
 			// These attributes has been sanitized above.

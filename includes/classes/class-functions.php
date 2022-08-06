@@ -15,7 +15,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 
 
 		/**
-		 * Return human readable user information
+		 * Return human-readable user information
 		 *
 		 * @param bool $user_id
 		 * @param string $info_to_get
