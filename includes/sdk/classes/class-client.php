@@ -2,7 +2,7 @@
 /**
  * Pluginbazar SDK Client
  *
- * @version 1.0.7
+ * @version 1.0.9
  * @author Pluginbazar
  */
 
@@ -23,6 +23,7 @@ class Client {
 	public $plugin_reference = null;
 	public $plugin_version = null;
 	public $plugin_file = null;
+	public $plugin_unique_id = null;
 
 	/**
 	 * @var \Pluginbazar\Utils
@@ -33,6 +34,12 @@ class Client {
 	 * @var \Pluginbazar\Notifications
 	 */
 	private static $notifications;
+
+
+	/**
+	 * @var \Pluginbazar\License
+	 */
+	private static $license;
 
 
 	/**
@@ -56,6 +63,7 @@ class Client {
 		$this->plugin_file      = $file;
 		$plugin_data            = get_plugin_data( $this->plugin_file );
 		$this->plugin_version   = isset( $plugin_data['Version'] ) ? $plugin_data['Version'] : '';
+		$this->plugin_unique_id = str_replace( '-', '_', $this->text_domain );
 
 		add_action( 'admin_init', array( $this, 'manage_permanent_dismissible' ) );
 
@@ -101,13 +109,31 @@ class Client {
 		return self::$notifications;
 	}
 
+	/**
+	 * Return Notifications class
+	 *
+	 * @return \Pluginbazar\License
+	 */
+	public function license( $plugin_file = '' ) {
+
+		if ( ! class_exists( __NAMESPACE__ . '\License' ) ) {
+			require_once __DIR__ . '/class-license.php';
+		}
+
+		if ( ! self::$license ) {
+			self::$license = new License( $this, $plugin_file );
+		}
+
+		return self::$license;
+	}
+
 
 	/**
 	 * Manage permanent dismissible of any notice
 	 */
 	function manage_permanent_dismissible() {
 
-		$query_args = wp_unslash( $_GET );
+		$query_args = wp_unslash( array_map( 'sanitize_text_field', $_GET ) );
 
 		if ( Utils::get_args_option( 'pb_action', $query_args ) == 'permanent_dismissible' && ! empty( $id = Utils::get_args_option( 'id', $query_args ) ) ) {
 

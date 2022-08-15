@@ -224,7 +224,7 @@ if ( ! class_exists( 'PBSettings_Metabox' ) ) {
 					$tab_error = ( ! empty( $errors['sections'][ $tab_key ] ) ) ? '<i class="pbsettings-label-error pbsettings-error">!</i>' : '';
 					$tab_icon  = ( ! empty( $section['icon'] ) ) ? '<i class="pbsettings-tab-icon ' . esc_attr( $section['icon'] ) . '"></i>' : '';
 
-					echo '<li><a href="#">' . $tab_icon . $section['title'] . $tab_error . '</a></li>';
+					printf( '<li><a href="#" data-section="%s">%s%s%s</a></li>', ( $this->unique . '_' . $tab_key ), $tab_icon, $section['title'], $tab_error );
 
 					$tab_key ++;
 				}
@@ -256,8 +256,8 @@ if ( ! class_exists( 'PBSettings_Metabox' ) ) {
 
 				echo '<div class="pbsettings-section hidden' . esc_attr( $section_onload . $section_class ) . '">';
 
-				echo ( $section_title || $section_icon ) ? '<div class="pbsettings-section-title"><h3>' . $section_icon . $section_title . '</h3></div>' : '';
-				echo ( ! empty( $section['description'] ) ) ? '<div class="pbsettings-field pbsettings-section-description">' . $section['description'] . '</div>' : '';
+				echo ( $section_title || $section_icon ) ? '<div class="pbsettings-section-title"><h3>' . esc_html( $section_icon . $section_title ) . '</h3></div>' : '';
+				echo ( ! empty( $section['description'] ) ) ? '<div class="pbsettings-field pbsettings-section-description">' . esc_html( $section['description'] ) . '</div>' : '';
 
 				if ( ! empty( $section['fields'] ) ) {
 
@@ -328,7 +328,7 @@ if ( ! class_exists( 'PBSettings_Metabox' ) ) {
 
 			// XSS ok.
 			// No worries, This "POST" requests is sanitizing in the below foreach.
-			$request = ( ! empty( $_POST[ $this->unique ] ) ) ? $_POST[ $this->unique ] : array();
+			$request = ( ! empty( $_POST[ $this->unique ] ) ) ? map_deep( wp_unslash( $_POST[ $this->unique ] ), 'sanitize_text_field' ) : array();
 
 			if ( ! empty( $request ) ) {
 

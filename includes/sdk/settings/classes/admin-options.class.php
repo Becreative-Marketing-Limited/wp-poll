@@ -23,7 +23,7 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 		public $args = array(
 
 			// framework title
-			'framework_title'    => 'Codestar Framework <small>by Codestar</small>',
+			'framework_title'    => 'Pluginbazar Settings Panel',
 			'framework_class'    => '',
 
 			// menu settings
@@ -46,8 +46,8 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 			'show_search'             => true,
 			'show_reset_all'          => true,
 			'show_reset_section'      => true,
-			'show_footer'             => true,
-			'show_all_options'        => true,
+			'show_footer'             => false,
+			'show_all_options'        => false,
 			'show_form_warning'       => true,
 			'sticky_header'           => true,
 			'save_defaults'           => true,
@@ -59,9 +59,9 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 			'admin_bar_menu_priority' => 50,
 
 			// footer
-			'footer_text'             => 'Thank you for creating with Codestar Framework',
+			'footer_text'             => 'Thank you for using Pluginbazar Settings Framework',
 			'footer_after'            => '',
-			'footer_credit'           => '',
+			'footer_credit'           => 'Thank you for creating with <a href="https://pluginbazar.com" target="_blank">Pluginbazar</a>',
 
 			// database model
 			'database'                => '', // options, transient, theme_mod, network
@@ -266,14 +266,14 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 
 			// XSS ok.
 			// No worries, This "POST" requests is sanitizing in the below foreach. see #L337 - #L341
-			$response = ( $ajax && ! empty( $_POST['data'] ) ) ? json_decode( wp_unslash( trim( $_POST['data'] ) ), true ) : $_POST;
+			$response = ( $ajax && ! empty( $_POST['data'] ) ) ? json_decode( wp_unslash( trim( $_POST['data'] ) ), true ) : map_deep( $_POST, 'sanitize_text_field' );
 
 			// Set variables.
 			$data      = array();
 			$noncekey  = 'pb_settings_options_nonce' . $this->unique;
-			$nonce     = ( ! empty( $response[ $noncekey ] ) ) ? $response[ $noncekey ] : '';
+			$nonce     = ( ! empty( $response[ $noncekey ] ) ) ? sanitize_text_field( $response[ $noncekey ] ) : '';
 			$options   = ( ! empty( $response[ $this->unique ] ) ) ? $response[ $this->unique ] : array();
-			$transient = ( ! empty( $response['pb_settings_transient'] ) ) ? $response['pb_settings_transient'] : array();
+			$transient = ( ! empty( $response['pb_settings_transient'] ) ) ? array_map( 'sanitize_text_field', $response['pb_settings_transient'] ) : array();
 
 			if ( wp_verify_nonce( $nonce, 'pb_settings_options_nonce' ) ) {
 
@@ -346,13 +346,9 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 								}
 
 							} else if ( isset( $field['sanitize'] ) && is_callable( $field['sanitize'] ) ) {
-
 								$data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
-
 							} else {
-
 								$data[ $field_id ] = $field_value;
-
 							}
 
 							// Validate "post" request of field.
@@ -556,8 +552,16 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 			echo '<div class="pbsettings-header' . esc_attr( $sticky_class ) . '">';
 			echo '<div class="pbsettings-header-inner">';
 
+			$product_url         = isset( $this->args['product_url'] ) ? $this->args['product_url'] : '';
+			$product_version     = isset( $this->args['product_version'] ) ? $this->args['product_version'] : '';
+			$product_version_pro = isset( $this->args['product_version_pro'] ) ? $this->args['product_version_pro'] : '';
+
 			echo '<div class="pbsettings-header-left">';
-			echo '<h1>' . $this->args['framework_title'] . '</h1>';
+			echo '<h1>' .
+			     esc_html( $this->args['framework_title'] ) .
+			     ( empty( $product_version ) ? '' : sprintf( '<a href="%s" target="_blank" class="pbsettings-version-free">Version %s</a>', $product_url, $product_version ) ) .
+			     ( empty( $product_version_pro ) ? '' : sprintf( '<a href="%s" target="_blank" class="pbsettings-version-pro">Pro %s</a>', $product_url, $product_version_pro ) ) .
+			     '</h1>';
 			echo '</div>';
 
 			echo '<div class="pbsettings-header-right">';
@@ -565,15 +569,22 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 			$notice_class = ( ! empty( $this->notice ) ) ? 'pbsettings-form-show' : '';
 			$notice_text  = ( ! empty( $this->notice ) ) ? $this->notice : '';
 
-			echo '<div class="pbsettings-form-result pbsettings-form-success ' . esc_attr( $notice_class ) . '">' . $notice_text . '</div>';
+			echo '<div class="pbsettings-form-result pbsettings-form-success ' . esc_attr( $notice_class ) . '">' . esc_html( $notice_text ) . '</div>';
 
-			echo ( $this->args['show_form_warning'] ) ? '<div class="pbsettings-form-result pbsettings-form-warning">' . esc_html__( 'You have unsaved changes, save your changes!' ) . '</div>' : '';
+			echo ( $this->args['show_form_warning'] ) ? '<div class="pbsettings-form-result pbsettings-form-warning">' . esc_html__( 'Save your changes!' ) . '</div>' : '';
 
 			echo ( $has_nav && $this->args['show_all_options'] ) ? '<div class="pbsettings-expand-all" title="' . esc_html__( 'show all settings' ) . '"><i class="fas fa-outdent"></i></div>' : '';
 
 			echo ( $this->args['show_search'] ) ? '<div class="pbsettings-search"><input type="text" name="pbsettings-search" placeholder="' . esc_html__( 'Search...' ) . '" autocomplete="off" /></div>' : '';
 
 			echo '<div class="pbsettings-buttons">';
+
+			if ( ! empty( $this->args['quick_links'] ) && is_array( $this->args['quick_links'] ) ) {
+				foreach ( $this->args['quick_links'] as $quick_link ) {
+					echo '<a class="pbsettings-quick-link" href="' . esc_url( $quick_link['url'] ) . '" target="_blank">' . esc_html( $quick_link['label'] ) . '</a>';
+				}
+			}
+
 			echo '<input type="submit" name="' . esc_attr( $this->unique ) . '[_nonce][save]" class="button button-primary pbsettings-top-save pbsettings-save' . esc_attr( $ajax_class ) . '" value="' . esc_html__( 'Save' ) . '" data-save="' . esc_html__( 'Saving...' ) . '">';
 			echo ( $this->args['show_reset_section'] ) ? '<input type="submit" name="pb_settings_transient[reset_section]" class="button button-secondary pbsettings-reset-section pbsettings-confirm" value="' . esc_html__( 'Reset Section' ) . '" data-confirm="' . esc_html__( 'Are you sure to reset this section options?' ) . '">' : '';
 			echo ( $this->args['show_reset_all'] ) ? '<input type="submit" name="pb_settings_transient[reset]" class="button pbsettings-warning-primary pbsettings-reset-all pbsettings-confirm" value="' . ( ( $this->args['show_reset_section'] ) ? esc_html__( 'Reset All' ) : esc_html__( 'Reset' ) ) . '" data-confirm="' . esc_html__( 'Are you sure you want to reset all settings to default values?' ) . '">' : '';
@@ -594,7 +605,6 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 				echo '<ul>';
 
 				foreach ( $this->pre_tabs as $tab ) {
-
 					$tab_id    = sanitize_title( $tab['title'] );
 					$tab_error = $this->error_check( $tab );
 					$tab_icon  = ( ! empty( $tab['icon'] ) ) ? '<i class="pbsettings-tab-icon ' . esc_attr( $tab['icon'] ) . '"></i>' : '';
@@ -603,7 +613,7 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 
 						echo '<li class="pbsettings-tab-item">';
 
-						echo '<a href="#tab=' . esc_attr( $tab_id ) . '" data-tab-id="' . esc_attr( $tab_id ) . '" class="pbsettings-arrow">' . $tab_icon . $tab['title'] . $tab_error . '</a>';
+						echo '<a href="#tab=' . esc_attr( $tab_id ) . '" data-tab-id="' . esc_attr( $tab_id ) . '" class="pbsettings-arrow">' . wp_kses_post( $tab_icon . $tab['title'] . $tab_error ) . '</a>';
 
 						echo '<ul>';
 
@@ -613,7 +623,7 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 							$sub_error = $this->error_check( $sub );
 							$sub_icon  = ( ! empty( $sub['icon'] ) ) ? '<i class="pbsettings-tab-icon ' . esc_attr( $sub['icon'] ) . '"></i>' : '';
 
-							echo '<li><a href="#tab=' . esc_attr( $sub_id ) . '" data-tab-id="' . esc_attr( $sub_id ) . '">' . $sub_icon . $sub['title'] . $sub_error . '</a></li>';
+							echo '<li><a href="#tab=' . esc_attr( $sub_id ) . '" data-tab-id="' . esc_attr( $sub_id ) . '">' . wp_kses_post( $sub_icon . $sub['title'] . $sub_error ) . '</a></li>';
 
 						}
 
@@ -623,7 +633,7 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 
 					} else {
 
-						echo '<li class="pbsettings-tab-item"><a href="#tab=' . esc_attr( $tab_id ) . '" data-tab-id="' . esc_attr( $tab_id ) . '">' . $tab_icon . $tab['title'] . $tab_error . '</a></li>';
+						echo '<li class="pbsettings-tab-item"><a href="#tab=' . esc_attr( $tab_id ) . '" data-tab-id="' . esc_attr( $tab_id ) . '">' . esc_html( $tab_icon . $tab['title'] . $tab_error ) . '</a></li>';
 
 					}
 
@@ -649,8 +659,8 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 				$section_slug   = ( ! empty( $section['title'] ) ) ? sanitize_title( $section_title ) : '';
 
 				echo '<div class="pbsettings-section hidden' . esc_attr( $section_onload . $section_class ) . '" data-section-id="' . esc_attr( $section_parent . $section_slug ) . '">';
-				echo ( $has_nav ) ? '<div class="pbsettings-section-title"><h3>' . $section_icon . $section_title . '</h3></div>' : '';
-				echo ( ! empty( $section['description'] ) ) ? '<div class="pbsettings-field pbsettings-section-description">' . $section['description'] . '</div>' : '';
+				echo ( $has_nav ) ? '<div class="pbsettings-section-title"><h3>' . wp_kses_data( $section_icon . $section_title ) . '</h3></div>' : '';
+				echo ( ! empty( $section['description'] ) ) ? '<div class="pbsettings-field pbsettings-section-description">' . wp_kses_data( $section['description'] ) . '</div>' : '';
 
 				if ( ! empty( $section['fields'] ) ) {
 
@@ -696,11 +706,13 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 
 				echo '<div class="pbsettings-footer">';
 
-				echo '<div class="pbsettings-buttons">';
-				echo '<input type="submit" name="pb_settings_transient[save]" class="button button-primary pbsettings-save' . esc_attr( $ajax_class ) . '" value="' . esc_html__( 'Save' ) . '" data-save="' . esc_html__( 'Saving...' ) . '">';
-				echo ( $this->args['show_reset_section'] ) ? '<input type="submit" name="pb_settings_transient[reset_section]" class="button button-secondary pbsettings-reset-section pbsettings-confirm" value="' . esc_html__( 'Reset Section' ) . '" data-confirm="' . esc_html__( 'Are you sure to reset this section options?' ) . '">' : '';
-				echo ( $this->args['show_reset_all'] ) ? '<input type="submit" name="pb_settings_transient[reset]" class="button pbsettings-warning-primary pbsettings-reset-all pbsettings-confirm" value="' . ( ( $this->args['show_reset_section'] ) ? esc_html__( 'Reset All' ) : esc_html__( 'Reset' ) ) . '" data-confirm="' . esc_html__( 'Are you sure you want to reset all settings to default values?' ) . '">' : '';
-				echo '</div>';
+				if ( ! empty( $this->args['show_footer_buttons'] ) ) {
+					echo '<div class="pbsettings-buttons">';
+					echo '<input type="submit" name="pb_settings_transient[save]" class="button button-primary pbsettings-save' . esc_attr( $ajax_class ) . '" value="' . esc_html__( 'Save' ) . '" data-save="' . esc_html__( 'Saving...' ) . '">';
+					echo ( $this->args['show_reset_section'] ) ? '<input type="submit" name="pb_settings_transient[reset_section]" class="button button-secondary pbsettings-reset-section pbsettings-confirm" value="' . esc_html__( 'Reset Section' ) . '" data-confirm="' . esc_html__( 'Are you sure to reset this section options?' ) . '">' : '';
+					echo ( $this->args['show_reset_all'] ) ? '<input type="submit" name="pb_settings_transient[reset]" class="button pbsettings-warning-primary pbsettings-reset-all pbsettings-confirm" value="' . ( ( $this->args['show_reset_section'] ) ? esc_html__( 'Reset All' ) : esc_html__( 'Reset' ) ) . '" data-confirm="' . esc_html__( 'Are you sure you want to reset all settings to default values?' ) . '">' : '';
+					echo '</div>';
+				}
 
 				echo ( ! empty( $this->args['footer_text'] ) ) ? '<div class="pbsettings-copyright">' . $this->args['footer_text'] . '</div>' : '';
 

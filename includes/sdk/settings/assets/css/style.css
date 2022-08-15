@@ -85,10 +85,6 @@
  * 01. Base
  */
 
-:root {
-    --pbsettings-primary-color: var(--sliderxwoo-primary-color);
-}
-
 .pb_settings {
     position: relative;
 }
@@ -108,8 +104,9 @@
 }
 
 .pbsettings-options {
-    margin-top: 20px;
-    margin-right: 20px;
+    margin-top: 40px;
+    margin-right: 40px;
+    margin-left: 20px;
 }
 
 /**
@@ -130,6 +127,28 @@
     line-height: 26px;
     font-weight: 400;
     margin: 0;
+}
+
+.pbsettings-header-inner h1 > a,
+.pbsettings-header-inner h1 > a:hover,
+.pbsettings-header-inner h1 > a:active,
+.pbsettings-header-inner h1 > a:focus,
+.pbsettings-header-inner h1 > a:visited {
+    color: #fff;
+    margin-left: 10px;
+    font-size: 12px;
+    line-height: 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: #774ea9;
+    padding: 4px 12px;
+    border-radius: 100px;
+    outline: none;
+    box-shadow: none;
+}
+
+.pbsettings-header-inner h1 > a.pbsettings-version-pro {
+    background: #dc3644;
 }
 
 .pbsettings-header-inner h1 small {
@@ -196,13 +215,18 @@
     margin-bottom: 0;
 }
 
+li.pbsettings-tab-item.pbsettings-tab-expanded {
+    border-left: 3px solid var(--pbsettings-primary-color);
+}
+
 .pbsettings-nav ul li a {
     font-size: 15px;
     font-weight: 500;
     position: relative;
     display: block;
-    padding: 12px 12px 16px;
+    padding: 20px 16px 20px;
     text-decoration: none;
+    transition: 0.3s;
 }
 
 .pbsettings-nav ul li a:focus {
@@ -237,8 +261,9 @@
 }
 
 .pbsettings-nav ul ul li a {
-    font-size: 12px;
-    padding: 12px 14px 12px 24px;
+    font-size: 13px;
+    line-height: 23px;
+    padding: 16px 14px 16px 24px;
 }
 
 .pbsettings-nav .pbsettings-tab-icon {
@@ -312,7 +337,6 @@
 .pbsettings-sections {
     float: left;
     width: 100%;
-    box-shadow: 3px 5px 15px 5px rgb(0 0 0 / 7%);
 }
 
 .pbsettings-section-title {
@@ -692,14 +716,11 @@
  * 02. 02. Theme Light
  */
 .pbsettings-theme-light .pbsettings-container {
-    border: 1px solid #ccd0d4;
-    box-shadow: 0 0 15 rgba(0, 0, 0, 0.04);
+    box-shadow: 3px 5px 15px 5px rgb(0 0 0 / 7%);
 }
 
 .pbsettings-theme-light .pbsettings-header-inner {
-    border-bottom: 1px solid #ccd0d4;
-    background-color: #f5f5f5;
-    background: linear-gradient(#fefefe, #f5f5f5);
+    background-color: var(--pbsettings-primary-color-dim);
 }
 
 .pbsettings-theme-light .pbsettings-header-inner h1 small {
@@ -726,22 +747,23 @@
 
 .pbsettings-theme-light .pbsettings-nav ul li a {
     font-weight: 500;
-    color: #444;
-    background-color: #f5f5f5;
+    color: #fff;
+    background-color: var(--pbsettings-primary-color);
 }
 
-.pbsettings-theme-light .pbsettings-nav ul li a:hover {
-    color: #111;
-    background-color: #fff;
-}
+/*.pbsettings-theme-light .pbsettings-nav ul li a:hover {*/
+/*    color: #111;*/
+/*    background-color: #fff;*/
+/*}*/
 
 .pbsettings-theme-light .pbsettings-nav ul li .pbsettings-active {
-    color: #111;
+    color: var(--pbsettings-primary-color);
     background-color: #fff;
 }
 
 .pbsettings-theme-light .pbsettings-nav ul ul li a {
-    background-color: #eee;
+    background-color: var(--pbsettings-primary-color-dim);
+    color: var(--pbsettings-primary-color);
 }
 
 .pbsettings-theme-light .pbsettings-nav-normal > ul {
@@ -750,8 +772,11 @@
 }
 
 .pbsettings-theme-light .pbsettings-nav-normal > ul li a {
-    border-bottom: 1px solid #ccd0d4;
-    border-right: 1px solid #ccd0d4;
+    border-bottom: 1px solid #fefefe;
+}
+
+.pbsettings-theme-light .pbsettings-nav-normal > ul > li > ul > li:last-child > a {
+    border-bottom: none;
 }
 
 .pbsettings-theme-light .pbsettings-nav-normal > ul li .pbsettings-active {
@@ -786,8 +811,7 @@
 }
 
 .pbsettings-theme-light .pbsettings-nav-background {
-    background-color: #f5f5f5;
-    border-right: 1px solid #ccd0d4;
+    background-color: transparent;
 }
 
 .pbsettings-theme-light .pbsettings-footer {
@@ -824,6 +848,68 @@
 
 .pbsettings-field:after {
     clear: both;
+}
+
+.pbsettings-field.pro {
+}
+
+.pbsettings-field.availability:before {
+    content: ' ';
+    position: absolute;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    border: 1px solid #ffd8d8;
+    left: 15px;
+    top: 15px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.pbsettings-field.availability a.pbsettings-availability-notice,
+.pbsettings-field.availability a.pbsettings-availability-notice:focus,
+.pbsettings-field.availability a.pbsettings-availability-notice:active,
+.pbsettings-field.availability a.pbsettings-availability-notice:visited,
+.pbsettings-field.availability a.pbsettings-availability-notice:hover {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    width: 90px;
+    height: 22px;
+    z-index: 999999;
+    font-size: 12px;
+    line-height: 22px;
+    background: #ed6f6f;
+    text-align: center;
+    color: #f2f2f2;
+    border: 1px solid #ed6f6f;
+    border-radius: 0 3px 0 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    outline: none;
+    box-shadow: none;
+}
+
+/*.pbsettings-field.pro:after {*/
+/*    content: 'Pro';*/
+/*}*/
+
+.pbsettings-field.upcoming:before {
+    border-color: #acd0cd;
+}
+
+.pbsettings-field.upcoming:after {
+    /*content: 'Upcoming';*/
+    /*background: #009688;*/
+    /*border-color: #009688;*/
+}
+
+.pbsettings-field.availability .pbsettings-title,
+.pbsettings-field.availability .pbsettings-fieldset {
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .pbsettings-field h4 {
@@ -5755,6 +5841,42 @@ span.flatpickr-weekday {
     display: none;
 }
 
+.pbsettings-theme-light .pbsettings-nav-normal > ul > li:last-child > a,
+.pbsettings-theme-light .pbsettings-nav-normal > ul > li.pbsettings-tab-expanded > a {
+    border-bottom: none;
+}
 
+span.pbsettings-quick-links {
 
+}
 
+a.pbsettings-quick-link,
+a.pbsettings-quick-link:focus,
+a.pbsettings-quick-link:hover,
+a.pbsettings-quick-link:visited,
+a.pbsettings-quick-link:active {
+    font-size: 16px;
+    line-height: 26px;
+    text-decoration: none;
+    margin-right: 18px;
+    color: var(--pbsettings-primary-color);
+    outline: none;
+    box-shadow: none;
+    padding: 10px 0;
+    position: relative;
+}
+
+a.pbsettings-quick-link:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--pbsettings-primary-color);
+    bottom: 0;
+    left: 0;
+    transition: 0.3s;
+}
+
+a.pbsettings-quick-link:hover:before {
+    width: 100%;
+}

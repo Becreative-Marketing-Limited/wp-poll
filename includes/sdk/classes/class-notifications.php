@@ -98,7 +98,12 @@ class Notifications {
 			return $data;
 		}
 
-		return false;
+		return array(
+			'id'      => 10000,
+			'message' => sprintf( '<p>Thanks for using <strong>%s</strong>. Checkout pro version with <a href="%s/offers-and-coupons/"><strong>discounts and coupons</strong></a></p>',
+				$this->client->plugin_name, $this->client->integration_server
+			),
+		);
 	}
 
 

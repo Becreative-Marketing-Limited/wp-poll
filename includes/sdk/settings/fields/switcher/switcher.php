@@ -8,7 +8,7 @@
  *
  */
 if ( ! class_exists( 'PBSettings_Field_switcher' ) ) {
-  class PBSettings_Field_switcher extends PBSettings_Fields {
+  class  PBSettings_Field_switcher extends PBSettings_Fields {
 
     public function __construct( $field, $value = '', $unique = '', $where = '', $parent = '' ) {
       parent::__construct( $field, $value, $unique, $where, $parent );
