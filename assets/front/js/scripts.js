@@ -82,6 +82,8 @@
                             progressBar.find('.percentage').html(percentageValue + '%');
                             progressBar.find('circle.complete').removeAttr('style');
                             progressBar.find('circle.complete').animate({'stroke-dashoffset': strokeDashOffset}, 1250);
+                        } else if (pollSIngle.hasClass('theme-10')) {
+                            $(this).addClass('has-result').find('.liquidpoll-votes-count').html(percentageValue + '%');
                         } else {
                             $(this).addClass('has-result').find('.liquidpoll-votes-count').html(singleVoteCount + ' ' + pluginObject.voteText);
                         }
