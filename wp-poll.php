@@ -29,11 +29,6 @@ defined( 'LIQUIDPOLL_VERSION' ) || define( 'LIQUIDPOLL_VERSION', '3.3.24' );
 
 
 if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/sdk/classes/class-client.php';
-}
-
-
-if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 	/**
 	 * Class LIQUIDPOLL_Main
 	 */
@@ -117,7 +112,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 		 */
 		function admin_scripts() {
 
-			$version        = defined( 'WP_DEBUG' ) && WP_DEBUG ? current_time('U') : LIQUIDPOLL_VERSION;
+			$version = defined( 'WP_DEBUG' ) && WP_DEBUG ? current_time( 'U' ) : LIQUIDPOLL_VERSION;
 
 			wp_enqueue_style( 'jquery-ui' );
 			wp_enqueue_style( 'wp-color-picker' );
@@ -139,7 +134,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 
 			global $wp_query;
 
-			$version        = defined( 'WP_DEBUG' ) && WP_DEBUG ? current_time('U') : LIQUIDPOLL_VERSION;
+			$version        = defined( 'WP_DEBUG' ) && WP_DEBUG ? current_time( 'U' ) : LIQUIDPOLL_VERSION;
 			$load_in_footer = $wp_query->get( 'poll_in_embed' ) ? false : $wp_query->get( 'poll_in_embed' );
 
 			wp_enqueue_script( 'liquidpoll-front-cb', LIQUIDPOLL_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), $version, $load_in_footer );
@@ -165,19 +160,30 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 
 add_action( 'plugins_loaded', array( 'LIQUIDPOLL_Main', 'instance' ), 90 );
 
-function pb_sdk_init_wp_poll() {
+// Update license server
+add_filter( 'PBSettings/Filters/integration_server', function () {
+	return esc_url( 'https://www.liquidpoll.com' );
+} );
 
-	if ( ! class_exists( 'Pluginbazar\Client' ) ) {
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/sdk/class-client.php' );
-	}
+// Update license secret key
+add_filter( 'PBSettings/Filters/license_secret_key', function () {
+	return '6287d0ca3125a4.96767836';
+} );
+
+
+function pb_sdk_init_wp_poll() {
 
 	if ( ! function_exists( 'get_plugins' ) ) {
 		include_once ABSPATH . '/wp-admin/includes/plugin.php';
 	}
 
+	if ( ! class_exists( 'Pluginbazar\Client' ) ) {
+		require_once( plugin_dir_path( __FILE__ ) . 'includes/sdk/classes/class-client.php' );
+	}
+
 	global $liquidpoll_sdk;
 
-	$liquidpoll_sdk = new Pluginbazar\Client( esc_html( 'LiquidPoll Pro' ), 'wp-poll', 126, __FILE__ );
+	$liquidpoll_sdk = new Pluginbazar\Client( esc_html( 'LiquidPoll' ), 'wp-poll', 126, __FILE__ );
 	$liquidpoll_sdk->notifications();
 
 	do_action( 'pb_sdk_init_wp_poll', $liquidpoll_sdk );
@@ -189,4 +195,3 @@ function pb_sdk_init_wp_poll() {
 global $liquidpoll_sdk;
 
 pb_sdk_init_wp_poll();
-

@@ -20,9 +20,6 @@ class License {
 	protected $option_key = null;
 	protected $menu_args = array();
 	protected $license_page_url = null;
-	protected $license_server = 'https://pluginbazar.com';
-	protected $secret_key = '5beed4ad27fd52.16817105';
-
 
 	/**
 	 * License constructor.
@@ -238,7 +235,7 @@ class License {
 		}
 
 		$license_message = sprintf( __( '<p>You must activate <strong>%s</strong> to unlock the premium features, enable single-click download, and etc. Dont have your key? <a href="%s" target="_blank">Your license keys</a></p><p><a class="button-primary" href="%s">Activate License</a></p>' ),
-			$this->plugin_name, sprintf( '%s/my-account/license-keys/', $this->license_server ), $this->license_page_url
+			$this->plugin_name, sprintf( '%s/my-account/license-keys/', $this->client->integration_server ), $this->license_page_url
 		);
 
 		$this->client->print_notice( $license_message, 'warning' );
@@ -378,10 +375,10 @@ class License {
                         </div>
                     </form>
                     <p>
-						<?php printf( __( 'Find your license key from <a target="_blank" href="%s/my-account/license-keys/"><strong>Pluginbazar.com > My Account > License Keys</strong></a>', $this->text_domain ), $this->license_server ); ?>
+						<?php printf( __( 'Find your license key from <a target="_blank" href="%s/my-account/license-keys/"><strong>Pluginbazar.com > My Account > License Keys</strong></a>', $this->text_domain ), $this->client->integration_server ); ?>
                     </p>
                     <p>
-						<?php printf( __( 'Download latest version manually from <a target="_blank" href="%s/my-account/downloads/"><strong>Pluginbazar.com > My Account > Downloads</strong></a>', $this->text_domain ), $this->license_server ); ?>
+						<?php printf( __( 'Download latest version manually from <a target="_blank" href="%s/my-account/downloads/"><strong>Pluginbazar.com > My Account > Downloads</strong></a>', $this->text_domain ), $this->client->integration_server ); ?>
                     </p>
                 </div>
             </div>
@@ -465,13 +462,13 @@ class License {
 
 		$defaults = array(
 			'slm_action'     => 'slm_check',
-			'secret_key'     => $this->secret_key,
+			'secret_key'     => $this->client->license_secret_key,
 			'license_key'    => $this->get_license_data( 'license_key' ),
 			'item_reference' => $this->client->plugin_reference,
 		);
 
 		$api_params = wp_parse_args( $api_params, $defaults );
-		$api_query  = esc_url_raw( add_query_arg( $api_params, $this->license_server ) );
+		$api_query  = esc_url_raw( add_query_arg( $api_params, $this->client->integration_server ) );
 		$response   = wp_remote_post( $api_query, array( 'timeout' => 30, 'sslverify' => false ) );
 
 		if ( is_wp_error( $response ) ) {

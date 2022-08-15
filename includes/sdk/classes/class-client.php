@@ -17,13 +17,14 @@ use PBSettings;
  */
 class Client {
 
-	public $integration_server = 'https://pluginbazar.com';
+	public $integration_server = '';
 	public $plugin_name = null;
 	public $text_domain = null;
 	public $plugin_reference = null;
 	public $plugin_version = null;
 	public $plugin_file = null;
 	public $plugin_unique_id = null;
+	public $license_secret_key = '';
 
 	/**
 	 * @var \Pluginbazar\Utils
@@ -57,13 +58,15 @@ class Client {
 		}
 
 		// Initialize variables
-		$this->plugin_name      = $plugin_name;
-		$this->text_domain      = $text_domain;
-		$this->plugin_reference = $plugin_reference;
-		$this->plugin_file      = $file;
-		$plugin_data            = get_plugin_data( $this->plugin_file );
-		$this->plugin_version   = isset( $plugin_data['Version'] ) ? $plugin_data['Version'] : '';
-		$this->plugin_unique_id = str_replace( '-', '_', $this->text_domain );
+		$this->plugin_name        = $plugin_name;
+		$this->text_domain        = $text_domain;
+		$this->plugin_reference   = $plugin_reference;
+		$this->plugin_file        = $file;
+		$plugin_data              = get_plugin_data( $this->plugin_file );
+		$this->plugin_version     = isset( $plugin_data['Version'] ) ? $plugin_data['Version'] : '';
+		$this->plugin_unique_id   = str_replace( '-', '_', $this->text_domain );
+		$this->integration_server = apply_filters( 'PBSettings/Filters/integration_server', esc_url( 'https://pluginbazar.com' ) );
+		$this->license_secret_key = apply_filters( 'PBSettings/Filters/license_secret_key', '' );
 
 		add_action( 'admin_init', array( $this, 'manage_permanent_dismissible' ) );
 
