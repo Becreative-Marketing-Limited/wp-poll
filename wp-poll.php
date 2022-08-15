@@ -80,6 +80,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-functions.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/functions.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-hooks.php';
+			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-plugin-settings.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-meta-boxes.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-shortcodes.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-poll.php';

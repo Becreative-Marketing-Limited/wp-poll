@@ -283,6 +283,7 @@ if ( ! function_exists( 'liquidpoll_single_post_class' ) ) {
 
 		$classes[] = 'poll-single';
 		$classes[] = sprintf( 'theme-%s', $poll->get_theme() );
+		$classes[] = sprintf( 'results-type-%s', $poll->get_meta( '_results_type', 'votes' ) );
 
 		printf( 'class="%s"', liquidpoll_generate_classes( $classes ) );
 	}

@@ -23,7 +23,7 @@
 
         let resultButton = $(this),
             pollID = resultButton.data('poll-id'),
-            marginLeft = 50;
+            marginLeft = 60;
 
         if (typeof pollID === 'undefined') {
             return;
@@ -52,7 +52,7 @@
 
                     let optionID = $(this).data('option-id'),
                         percentageValue = response.data.percentages[optionID],
-                        singleVoteCount = response.data.singles[optionID];
+                        singleVoteCount = response.data.singles[optionID], optionResultsText = '';
 
                     if (typeof percentageValue === 'undefined') {
                         percentageValue = 0;
@@ -60,6 +60,11 @@
 
                     if (typeof singleVoteCount === 'undefined' || singleVoteCount.length === 0) {
                         singleVoteCount = 0;
+                    }
+
+                    optionResultsText = singleVoteCount + ' ' + pluginObject.voteText;
+                    if (singlePoll.hasClass('results-type-percentage')) {
+                        optionResultsText = percentageValue + '%';
                     }
 
                     if ($.inArray(optionID, response.data.percentages)) {
@@ -82,16 +87,15 @@
                             progressBar.find('.percentage').html(percentageValue + '%');
                             progressBar.find('circle.complete').removeAttr('style');
                             progressBar.find('circle.complete').animate({'stroke-dashoffset': strokeDashOffset}, 1250);
-                        } else if (pollSIngle.hasClass('theme-10')) {
-                            $(this).addClass('has-result').find('.liquidpoll-votes-count').html(percentageValue + '%');
                         } else {
-                            $(this).addClass('has-result').find('.liquidpoll-votes-count').html(singleVoteCount + ' ' + pluginObject.voteText);
+                            $(this).addClass('has-result').find('.liquidpoll-votes-count').html(optionResultsText);
                         }
 
                         if (percentageValue === 0) {
                             marginLeft = 0;
                         }
-                        $(this).find('.liquidpoll-option-result').html(percentageValue + '%').css('left', 'calc(' + percentageValue + '% - ' + marginLeft + 'px)');
+
+                        $(this).find('.liquidpoll-option-result').html(optionResultsText).css('left', 'calc(' + percentageValue + '% - ' + marginLeft + 'px)');
                     }
                 });
 

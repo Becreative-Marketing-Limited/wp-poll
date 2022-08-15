@@ -24,7 +24,7 @@ global $poll;
 		?>
 
 		<?php
-		$typography_options = $poll->get_meta( '_typography_options' );
+		$typography_options = $poll->get_css_args( '_typography_options' );
 
 		liquidpoll_apply_css( '.liquidpoll-option-list-1 .liquidpoll-option-single input + label', $typography_options );
 

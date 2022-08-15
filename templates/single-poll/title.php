@@ -15,4 +15,4 @@ printf( '<%1$s itemprop="name" class="liquidpoll-poll-title">%2$s</%1$s>',
 /**
  * Apply dynamic typography css
  */
-liquidpoll_apply_css( '.liquidpoll-poll-title', $poll->get_meta( '_typography_title' ) );
+liquidpoll_apply_css( '.liquidpoll-poll-title', $poll->get_css_args( '_typography_title' ) );

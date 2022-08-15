@@ -281,7 +281,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		 * @return bool
 		 */
 		function can_vote_multiple() {
-			return $this->get_meta( 'settings_multiple_votes', false );
+			return $this->get_meta( '_settings_multiple_votes', false );
 		}
 
 
