@@ -12,11 +12,9 @@ class License {
 	protected $client;
 	protected $cache_key;
 	protected $data;
-	protected $plugin_name = null;
 	public $plugin_version = '1.0.0';
 	protected $plugin_file = null;
 	public $plugin_basename = null;
-	public $text_domain = null;
 	protected $option_key = null;
 	protected $menu_args = array();
 	protected $license_page_url = null;
@@ -33,13 +31,11 @@ class License {
 		$plugin_data = get_plugin_data( $plugin_file );
 
 		$this->client          = $client;
-		$this->text_domain     = $this->client->text_domain . '-pro';
 		$this->plugin_file     = $plugin_file;
 		$this->plugin_basename = plugin_basename( $plugin_file );
-		$this->plugin_name     = $this->client->plugin_name . ' ' . esc_html__( 'Pro', $this->text_domain );
 		$this->plugin_version  = Utils::get_args_option( 'Version', $plugin_data );
-		$this->option_key      = sprintf( 'pb_%s_license_data', md5( $this->text_domain ) );
-		$this->cache_key       = sprintf( 'pb_%s_version_info', md5( $this->text_domain ) );
+		$this->option_key      = sprintf( 'pb_%s_license_data', md5( $this->client->text_domain ) );
+		$this->cache_key       = sprintf( 'pb_%s_version_info', md5( $this->client->text_domain ) );
 		$this->data            = get_option( $this->option_key, array() );
 
 		add_action( 'rest_api_init', array( $this, 'add_license_activation_endpoint' ) );
@@ -220,7 +216,7 @@ class License {
 	function add_plugin_action_links( $links ) {
 
 		return array_merge( array(
-			'license' => sprintf( '<a href="%s">%s</a>', $this->license_page_url, esc_html__( 'License', $this->text_domain ) ),
+			'license' => sprintf( '<a href="%s">%s</a>', $this->license_page_url, esc_html__( 'License', $this->client->text_domain ) ),
 		), $links );
 	}
 
@@ -235,7 +231,7 @@ class License {
 		}
 
 		$license_message = sprintf( __( '<p>You must activate <strong>%s</strong> to unlock the premium features, enable single-click download, and etc. Dont have your key? <a href="%s" target="_blank">Your license keys</a></p><p><a class="button-primary" href="%s">Activate License</a></p>' ),
-			$this->plugin_name, sprintf( '%s/my-account/license-keys/', $this->client->integration_server ), $this->license_page_url
+			$this->client->plugin_name, sprintf( '%s/my-account/license-keys/', $this->client->integration_server ), $this->license_page_url
 		);
 
 		$this->client->print_notice( $license_message, 'warning' );
@@ -251,10 +247,10 @@ class License {
 
 		$defaults = array(
 			'type'        => 'submenu', // Can be: menu, options, submenu
-			'page_title'  => sprintf( __( 'Manage License - %s', $this->text_domain ), $this->plugin_name ),
-			'menu_title'  => __( 'Manage License', $this->text_domain ),
+			'page_title'  => sprintf( __( 'Manage License - %s', $this->client->text_domain ), $this->client->plugin_name ),
+			'menu_title'  => __( 'Manage License', $this->client->text_domain ),
 			'capability'  => 'manage_options',
-			'menu_slug'   => $this->text_domain . '-manage-license',
+			'menu_slug'   => $this->client->text_domain . '-manage-license',
 			'position'    => null,
 			'icon_url'    => '',
 			'parent_slug' => '',
@@ -329,12 +325,12 @@ class License {
 		$license_form_url   = add_query_arg( $get_string, admin_url( basename( $script_name ) ) );
 		$license_action     = $this->is_valid() ? 'slm_deactivate' : 'slm_activate';
 		$license_readonly   = $this->is_valid() ? 'readonly="readonly"' : '';
-		$license_submit_btn = $this->is_valid() ? __( 'Deactivate License', $this->text_domain ) : __( 'Activate License', $this->text_domain );
+		$license_submit_btn = $this->is_valid() ? __( 'Deactivate License', $this->client->text_domain ) : __( 'Activate License', $this->client->text_domain );
 
 		?>
         <div class="wrap pb-license-settings-wrapper">
             <h1>
-				<?php printf( __( 'License settings for <strong>%s</strong>', $this->text_domain ), $this->plugin_name ); ?>
+				<?php printf( __( 'License settings for <strong>%s</strong>', $this->client->text_domain ), $this->client->plugin_name ); ?>
 				<?php printf( __( '<sub style="font-size: 12px; vertical-align: middle;">%s</sub>' ), $this->plugin_version ); ?>
             </h1>
 
@@ -346,13 +342,13 @@ class License {
                         <path d="m150 85.849c-13.111 0-23.775 10.665-23.775 23.775v25.319h47.548v-25.319c-1e-3 -13.108-10.665-23.775-23.773-23.775z"/>
                         <path d="m150 1e-3c-82.839 0-150 67.158-150 150 0 82.837 67.156 150 150 150s150-67.161 150-150c0-82.839-67.161-150-150-150zm46.09 227.12h-92.173c-9.734 0-17.626-7.892-17.626-17.629v-56.919c0-8.491 6.007-15.582 14.003-17.25v-25.697c0-27.409 22.3-49.711 49.711-49.711 27.409 0 49.709 22.3 49.709 49.711v25.697c7.993 1.673 14 8.759 14 17.25v56.919h2e-3c0 9.736-7.892 17.629-17.626 17.629z"/>
                     </svg>
-                    <span><?php esc_html_e( 'Manage License', $this->text_domain ); ?></span>
+                    <span><?php esc_html_e( 'Manage License', $this->client->text_domain ); ?></span>
                 </div>
 
                 <div class="pb-license-details">
                     <p>
                         <label for="pb-license-field">
-							<?php printf( __( 'Activate or Deactivate <strong>%s</strong> by your license key to get support and automatic update from your WordPress dashboard.' ), $this->plugin_name ); ?>
+							<?php printf( __( 'Activate or Deactivate <strong>%s</strong> by your license key to get support and automatic update from your WordPress dashboard.' ), $this->client->plugin_name ); ?>
                         </label>
                     </p>
                     <form method="post" action="<?php echo esc_url_raw( $license_form_url ); ?>" novalidate="novalidate" spellcheck="false">
@@ -369,16 +365,16 @@ class License {
                                         id="pb-license-field"
                                         autocomplete="off"
                                         value="<?php echo esc_attr( $this->get_license_key_for_input_field( $license_action ) ); ?>"
-                                        placeholder="<?php echo esc_attr( __( 'Enter your license key to activate', $this->text_domain ) ); ?>"/>
+                                        placeholder="<?php echo esc_attr( __( 'Enter your license key to activate', $this->client->text_domain ) ); ?>"/>
                             </div>
                             <button type="submit" name="submit"><?php echo esc_html( $license_submit_btn ); ?></button>
                         </div>
                     </form>
                     <p>
-						<?php printf( __( 'Find your license key from <a target="_blank" href="%s/my-account/license-keys/"><strong>Pluginbazar.com > My Account > License Keys</strong></a>', $this->text_domain ), $this->client->integration_server ); ?>
-                    </p>
-                    <p>
-						<?php printf( __( 'Download latest version manually from <a target="_blank" href="%s/my-account/downloads/"><strong>Pluginbazar.com > My Account > Downloads</strong></a>', $this->text_domain ), $this->client->integration_server ); ?>
+						<?php printf( __( 'Find your %s and %s latest version from your account.', $this->client->text_domain ),
+							sprintf( '<a target="_blank" href="%s/my-account/license-keys/"><strong>%s</strong></a>', $this->client->integration_server, esc_html__( 'License keys', $this->client->text_domain ) ),
+							sprintf( '<a target="_blank" href="%s/my-account/downloads/"><strong>%s</strong></a>', $this->client->integration_server, esc_html__( 'Download', $this->client->text_domain ) )
+						); ?>
                     </p>
                 </div>
             </div>
@@ -401,7 +397,7 @@ class License {
 		$license_action = isset( $_POST['license_action'] ) ? sanitize_text_field( $_POST['license_action'] ) : '';
 
 		if ( empty( $license_key ) || empty( $license_action ) ) {
-			$this->client->print_notice( sprintf( '<p>%s</p>', __( 'Invalid license key', $this->text_domain ) ), 'error' );
+			$this->client->print_notice( sprintf( '<p>%s</p>', __( 'Invalid license key', $this->client->text_domain ) ), 'error' );
 
 			return;
 		}
@@ -523,7 +519,7 @@ class License {
 	 * @return string
 	 */
 	private function license_nonce() {
-		return sprintf( 'pb_license_%s', str_replace( '-', '_', $this->text_domain ) );
+		return sprintf( 'pb_license_%s', str_replace( '-', '_', $this->client->text_domain ) );
 	}
 
 
