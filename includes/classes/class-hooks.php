@@ -424,22 +424,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				'hierarchical' => true,
 			) ) );
 
-			// Add Settings Menu
-			liquidpoll()->PB_Settings( array(
-				'add_in_menu'     => true,
-				'menu_type'       => 'submenu',
-				'menu_title'      => esc_html__( 'Settings', 'wp-poll' ),
-				'page_title'      => esc_html__( 'Settings', 'wp-poll' ),
-				'menu_page_title' => esc_html__( 'WP Poll - Control Panel', 'wp-poll' ),
-				'capability'      => "manage_options",
-				'menu_slug'       => 'liquidpoll-settings',
-				'parent_slug'     => "edit.php?post_type=poll",
-				'pages'           => liquidpoll()->get_plugin_settings(),
-				'disabled_notice' => sprintf( '%s <a href="%s?ref=%s" target="_blank">%s</a>',
-					esc_html__( 'This feature is locked.', 'wp-poll' ), LIQUIDPOLL_PLUGIN_LINK, get_site_url(),
-					esc_html__( 'Get pro', 'wp-poll' )
-				),
-			) );
 
 			// Add image size
 			add_image_size( 'poll-square', 267, 258, true );

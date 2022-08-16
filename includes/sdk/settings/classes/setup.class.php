@@ -9,6 +9,7 @@
  */
 
 use Pluginbazar\Client;
+use Pluginbazar\Utils;
 
 if ( ! class_exists( 'PBSettings' ) ) {
 	class PBSettings {
@@ -248,7 +249,40 @@ if ( ! class_exists( 'PBSettings' ) ) {
 			}
 
 			do_action( 'pb_settings_loaded' );
+		}
 
+		/**
+		 * Generate settings page
+		 *
+		 * @param $id
+		 * @param array $args
+		 * @param array $sections
+		 */
+		public static function createSettingsPage( $id, $args = array(), $sections = array() ) {
+
+			self::createOptions( $id, $args );
+
+			foreach ( $sections as $section_index => $pages ) {
+
+				self::createSection( $id, array(
+					'id'    => 'primary_' . $section_index,
+					'title' => Utils::get_args_option( 'title', $pages ),
+					'icon'  => Utils::get_args_option( 'icon', $pages ),
+				) );
+
+				foreach ( Utils::get_args_option( 'sections', $pages, array() ) as $section ) {
+					self::createSection( $id, array_merge(
+						array(
+							'parent' => 'primary_' . $section_index,
+							'icon'   => Utils::get_args_option( 'icon', $section, 'fa fa-hand-o-right' ),
+						), $section ) );
+				}
+			}
+
+			// Adding custom data
+			self::$args['pro_url']             = isset( $args['pro_url'] ) ? $args['pro_url'] : '';
+			self::$args['product_url']         = isset( $args['product_url'] ) ? $args['product_url'] : '';
+			self::$args['product_version_pro'] = isset( $args['product_version_pro'] ) ? $args['product_version_pro'] : '';
 		}
 
 		// Create options
@@ -709,22 +743,17 @@ if ( ! class_exists( 'PBSettings' ) ) {
 
 			}
 
-			$depend     = '';
-			$visible    = '';
-			$unique     = ( ! empty( $unique ) ) ? $unique : '';
-			$class      = ( ! empty( $field['class'] ) ) ? ' ' . esc_attr( $field['class'] ) : '';
-			$is_pseudo  = ( ! empty( $field['pseudo'] ) ) ? ' pbsettings-pseudo-field' : '';
-			$field_type = ( ! empty( $field['type'] ) ) ? esc_attr( $field['type'] ) : '';
+			$depend           = '';
+			$visible          = '';
+			$unique           = ( ! empty( $unique ) ) ? $unique : '';
+			$class            = ( ! empty( $field['class'] ) ) ? ' ' . esc_attr( $field['class'] ) : '';
+			$is_pseudo        = ( ! empty( $field['pseudo'] ) ) ? ' pbsettings-pseudo-field' : '';
+			$field_type       = ( ! empty( $field['type'] ) ) ? esc_attr( $field['type'] ) : '';
+			$availability     = ( ! empty( $field['availability'] ) ) ? esc_attr( $field['availability'] ) : '';
+			$has_availability = empty( $availability ) ? '' : ' availability ' . $availability;
 
 			if ( ! empty( $field['dependency'] ) ) {
-
-				$dependency      = $field['dependency'];
-				$depend_visible  = '';
-				$data_controller = '';
-				$data_condition  = '';
-				$data_value      = '';
-				$data_global     = '';
-
+				$dependency = $field['dependency'];
 				if ( is_array( $dependency[0] ) ) {
 					$data_controller = implode( '|', array_column( $dependency, 0 ) );
 					$data_condition  = implode( '|', array_column( $dependency, 1 ) );
@@ -748,14 +777,14 @@ if ( ! class_exists( 'PBSettings' ) ) {
 			}
 
 			// These attributes has been sanitized above.
-			echo '<div class="pbsettings-field pbsettings-field-' . $field_type . $is_pseudo . $class . $visible . '"' . $depend . '>';
+			echo '<div class="pbsettings-field pbsettings-field-' . esc_attr( $field_type . $is_pseudo . $class . $visible . $has_availability ) . '"' . $depend . '>';
 
 			if ( ! empty( $field_type ) ) {
 
 				if ( ! empty( $field['title'] ) ) {
 					echo '<div class="pbsettings-title">';
-					echo '<h4>' . $field['title'] . '</h4>';
-					echo ( ! empty( $field['subtitle'] ) ) ? '<div class="pbsettings-subtitle-text">' . $field['subtitle'] . '</div>' : '';
+					echo '<h4>' . esc_html( $field['title'] ) . '</h4>';
+					echo ( ! empty( $field['subtitle'] ) ) ? '<div class="pbsettings-subtitle-text">' . esc_html( $field['subtitle'] ) . '</div>' : '';
 					echo '</div>';
 				}
 
@@ -769,6 +798,8 @@ if ( ! class_exists( 'PBSettings' ) ) {
 				if ( class_exists( $classname ) ) {
 					$instance = new $classname( $field, $value, $unique, $where, $parent );
 					$instance->render();
+
+					do_action( 'PBSettings/after_field/field_' . $field['id'] );
 				} else {
 					echo '<p>' . esc_html__( 'Field not found!' ) . '</p>';
 				}
@@ -778,9 +809,20 @@ if ( ! class_exists( 'PBSettings' ) ) {
 			}
 
 			echo ( ! empty( $field['title'] ) ) ? '</div>' : '';
+
+			if ( ! empty( $has_availability ) ) {
+
+				$notice_url = '';
+
+				if ( 'pro' == $availability ) {
+					$notice_url = isset( self::$args['pro_url'] ) ? self::$args['pro_url'] : '';
+				}
+
+				echo '<a class="pbsettings-availability-notice" href="' . esc_url( $notice_url ) . '" target="_blank">' . esc_html( $availability ) . '</a>';
+			}
+
 			echo '<div class="clear"></div>';
 			echo '</div>';
-
 		}
 
 	}

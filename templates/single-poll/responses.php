@@ -10,9 +10,7 @@ defined( 'ABSPATH' ) || exit;
 
 global $poll;
 
-
 ?>
-
 
 <?php if ( ! $poll->ready_to_vote() ) : ?>
     <p class="liquidpoll-responses display liquidpoll-warning">

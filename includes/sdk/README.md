@@ -3,7 +3,7 @@
 This tool will allow your plugin development more awesome.
 
 ## VERSION
-Stable Tag: **1.0.7**
+**1.0.9**
 
 ## FEATURES
 
@@ -19,13 +19,9 @@ _This feature is still under development and doesn't added yet to the repository
 
 This SDK will receive notifications and display as admin notices from server. The notifications can be sent based on **version number** and/or **specific product**.
 
-### 3. ONE-CLICK-DOWNLOAD
+### 3. ONE-CLICK-UPDATE
 
 This SDK will allow users to download the latest version without leaving WordPress interface. Once they activate the plugin with their license key, then they will able to receive new version warning as like other plugins do.
-
-### 4. LICENSE MANAGEMENT
-
-The SDK will add a custom license page, from where they can **activate** or **deactivate** the plugin.
 
 ## USAGES
 
@@ -45,7 +41,6 @@ function pb_sdk_init_wp_poll() {
 	global $liquidpoll_sdk;
 
 	$liquidpoll_sdk = new Pluginbazar\Client( esc_html( 'WP Poll Pro' ), 'wp-poll', 34, __FILE__ );
-	$liquidpoll_sdk->license()->add_settings_page( array( 'parent_slug' => 'edit.php?post_type=poll' ) );;
 	$liquidpoll_sdk->notifications();
 	$liquidpoll_sdk->updater();
 }
@@ -71,6 +66,6 @@ if ( $liquidpoll_sdk->license()->is_valid() ) {
 
 ## SUPPORT
 
-For any issues please create an support issue here https://pluginbazar.com/forum/sdk/
+For any issues please create an support issue here https://pluginbazar.com
 
     

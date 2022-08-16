@@ -17,7 +17,7 @@ if ( $poll->has_content() ) : ?>
 		<?php echo apply_filters( 'the_content', wp_kses_post( $poll->get_content() ) ); ?>
     </div>
 
-	<?php liquidpoll_apply_css( '.liquidpoll-content', $poll->get_meta( '_typography_content' ) ); ?>
+	<?php liquidpoll_apply_css( '.liquidpoll-content', $poll->get_css_args( '_typography_content' ) ); ?>
 
 <?php endif; ?>
 

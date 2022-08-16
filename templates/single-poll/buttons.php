@@ -32,13 +32,13 @@ global $poll, $liquidpoll;
 	if ( $poll->ready_to_vote() ) {
 		printf( '<button class="liquidpoll-button liquidpoll-submit-poll" data-poll-id="%s">%s</button>', $poll->get_id(), $liquidpoll->get_button_text( 'submit' ) );
 
-		liquidpoll_apply_css( '.liquidpoll-submit-poll', $poll->get_meta( '_typography_button_submit', array() ) );
+		liquidpoll_apply_css( '.liquidpoll-submit-poll', $poll->get_css_args( '_typography_button_submit', array() ) );
 
 		liquidpoll_apply_css( '.liquidpoll-submit-poll',
 			array_merge(
 				$poll->get_meta( '_typography_btn_submit', array() ),
 				array(
-					'background-color' => $poll->get_meta( '_typography_btn_submit_bg' ),
+					'background-color' => $poll->get_css_args( '_typography_btn_submit_bg' ),
 				)
 			)
 		);
@@ -52,9 +52,9 @@ global $poll, $liquidpoll;
 
 		liquidpoll_apply_css( '.liquidpoll-get-poll-results',
 			array_merge(
-				$poll->get_meta( '_typography_btn_results', array() ),
+				$poll->get_css_args( '_typography_btn_results' ),
 				array(
-					'background-color' => $poll->get_meta( '_typography_btn_results_bg' ),
+					'background-color' => $poll->get_css_args( '_typography_btn_results_bg' ),
 				)
 			)
 		);

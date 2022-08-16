@@ -17,13 +17,16 @@ class Utils {
 	 */
 	private $client = null;
 
+	private static $settings_id = null;
+
 
 	/**
 	 * Notifications constructor.
 	 */
 	function __construct( Client $client ) {
 
-		$this->client = $client;
+		$this->client      = $client;
+		self::$settings_id = $client->plugin_unique_id;
 	}
 
 
@@ -172,14 +175,18 @@ class Utils {
 	public static function get_args_option( $key = '', $args = array(), $default = '' ) {
 
 		$default = is_array( $default ) && empty( $default ) ? array() : $default;
-		$default = ! is_array( $default ) && empty( $default ) ? '' : $default;
+		$value   = ! is_array( $default ) && ! is_bool( $default ) && empty( $default ) ? '' : $default;
 		$key     = empty( $key ) ? '' : $key;
 
 		if ( isset( $args[ $key ] ) && ! empty( $args[ $key ] ) ) {
-			return $args[ $key ];
+			$value = $args[ $key ];
 		}
 
-		return $default;
+		if ( isset( $args[ $key ] ) && is_bool( $default ) ) {
+			$value = ! ( 0 == $args[ $key ] || '' == $args[ $key ] );
+		}
+
+		return $value;
 	}
 
 
@@ -195,13 +202,57 @@ class Utils {
 	public static function get_meta( $meta_key = false, $post_id = false, $default = '' ) {
 
 		if ( ! $meta_key ) {
-			return '';
+			return false;
 		}
 
 		$post_id    = ! $post_id ? get_the_ID() : $post_id;
 		$meta_value = get_post_meta( $post_id, $meta_key, true );
-		$meta_value = empty( $meta_value ) ? $default : $meta_value;
+		$meta_value = "" === $meta_value ? $default : $meta_value;
 
 		return apply_filters( 'Pluginbazar/Utils/get_meta', $meta_value, $meta_key, $post_id, $default );
+	}
+
+
+	/**
+	 * Return option value
+	 *
+	 * @param string $option_key
+	 * @param string $default
+	 *
+	 * @return mixed|string|void
+	 */
+	public static function get_option( $option_key = '', $default = '' ) {
+
+		if ( empty( $option_key ) ) {
+			return '';
+		}
+
+		$all_options  = get_option( self::$settings_id, array() );
+		$option_value = self::get_args_option( $option_key, $all_options, $default );
+
+		return apply_filters( 'Pluginbazar/Utils/get_option' . $option_key, $option_value );
+
+	}
+
+
+	/**
+	 * Update option for settings panel
+	 *
+	 * @param string $option_key
+	 * @param string $new_value
+	 *
+	 * @return bool|string
+	 */
+	public static function update_option( $option_key = '', $new_value = '' ) {
+
+		if ( empty( $option_key ) ) {
+			return '';
+		}
+
+		$all_options                = get_option( self::$settings_id, array() );
+		$all_options[ $option_key ] = $new_value;
+		$all_options                = apply_filters( 'Pluginbazar/Utils/update_option', $all_options, $option_key, $new_value );
+
+		return update_option( self::$settings_id, $all_options );
 	}
 }

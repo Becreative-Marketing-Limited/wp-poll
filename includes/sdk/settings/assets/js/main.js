@@ -95,6 +95,69 @@
             };
         },
 
+        //
+        // Get a cookie
+        //
+        get_cookie: function (name) {
+
+            var e, b, cookie = document.cookie, p = name + '=';
+
+            if (!cookie) {
+                return;
+            }
+
+            b = cookie.indexOf('; ' + p);
+
+            if (b === -1) {
+                b = cookie.indexOf(p);
+
+                if (b !== 0) {
+                    return null;
+                }
+            } else {
+                b += 2;
+            }
+
+            e = cookie.indexOf(';', b);
+
+            if (e === -1) {
+                e = cookie.length;
+            }
+
+            return decodeURIComponent(cookie.substring(b + p.length, e));
+
+        },
+
+        //
+        // Set a cookie
+        //
+        set_cookie: function (name, value, expires, path, domain, secure) {
+
+            var d = new Date();
+
+            if (typeof (expires) === 'object' && expires.toGMTString) {
+                expires = expires.toGMTString();
+            } else if (parseInt(expires, 10)) {
+                d.setTime(d.getTime() + (parseInt(expires, 10) * 1000));
+                expires = d.toGMTString();
+            } else {
+                expires = '';
+            }
+
+            document.cookie = name + '=' + encodeURIComponent(value) +
+                (expires ? '; expires=' + expires : '') +
+                (path ? '; path=' + path : '') +
+                (domain ? '; domain=' + domain : '') +
+                (secure ? '; secure' : '');
+
+        },
+        //
+        // Remove a cookie
+        //
+        remove_cookie: function (name, path, domain, secure) {
+            PBSettings.helper.set_cookie(name, '', -1000, path, domain, secure);
+        },
+
     };
 
     //
@@ -206,6 +269,7 @@
             var $nav = $(this),
                 $links = $nav.find('a'),
                 $sections = $nav.parent().find('.pbsettings-section'),
+                post_id = $('#post_ID').val() || 'global',
                 $last;
 
             $links.each(function (index) {
@@ -227,9 +291,11 @@
                         }
 
                         var $section = $sections.eq(index);
+                        var section_id = $link.data('section');
 
                         $section.removeClass('hidden');
                         $section.pb_settings_reload_script();
+                        PBSettings.helper.set_cookie('sxwoo-last-metabox-tab-' + post_id, section_id);
 
                         $last = $section;
                     }
@@ -237,7 +303,12 @@
 
             });
 
-            $links.first().trigger('click');
+            var get_cookie = PBSettings.helper.get_cookie('sxwoo-last-metabox-tab-' + post_id);
+            if (get_cookie) {
+                $nav.find('a[data-section="' + get_cookie + '"]').trigger('click');
+            } else {
+                $links.first().trigger('click');
+            }
 
         });
     };

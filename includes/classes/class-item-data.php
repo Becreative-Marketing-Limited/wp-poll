@@ -163,6 +163,33 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 
 
 		/**
+		 * Return CSS Arguments
+		 *
+		 * @param string $key
+		 *
+		 * @return array
+		 */
+		function get_css_args( $key = '' ) {
+
+			if ( empty( $key ) ) {
+				return array();
+			}
+
+			$css_args_mixed  = array();
+			$css_args_option = Utils::get_option( $key, array() );
+			$css_args_option = ! is_array( $css_args_option ) ? array() : $css_args_option;
+			$css_args_meta   = $this->get_meta( $key, array() );
+			$css_args_meta   = ! is_array( $css_args_meta ) ? array() : $css_args_meta;
+
+			foreach ( $css_args_meta as $key => $value ) {
+				$css_args_mixed[ $key ] = empty( $value ) ? ( isset( $css_args_option[ $key ] ) ? $css_args_option[ $key ] : '' ) : $value;
+			}
+
+			return $css_args_mixed;
+		}
+
+
+		/**
 		 * Return Meta Value
 		 *
 		 * @param string $meta_key

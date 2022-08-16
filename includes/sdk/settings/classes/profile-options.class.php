@@ -1,4 +1,6 @@
-<?php if ( ! defined( 'ABSPATH' ) ) { die; } // Cannot access directly.
+<?php if ( ! defined( 'ABSPATH' ) ) {
+	die;
+} // Cannot access directly.
 /**
  *
  * Profile Option Class
@@ -8,238 +10,238 @@
  *
  */
 if ( ! class_exists( 'PBSettings_Profile_Options' ) ) {
-  class PBSettings_Profile_Options extends PBSettings_Abstract{
+	class PBSettings_Profile_Options extends PBSettings_Abstract {
 
-    // constans
-    public $unique   = '';
-    public $abstract = 'profile';
-    public $sections = array();
-    public $args     = array(
-      'data_type'    => 'serialize',
-      'class'        => '',
-      'defaults'     => array(),
-    );
+		// constans
+		public $unique = '';
+		public $abstract = 'profile';
+		public $sections = array();
+		public $args = array(
+			'data_type' => 'serialize',
+			'class'     => '',
+			'defaults'  => array(),
+		);
 
-    // run profile construct
-    public function __construct( $key, $params ) {
+		// run profile construct
+		public function __construct( $key, $params ) {
 
-      $this->unique   = $key;
-      $this->args     = apply_filters( "pb_settings_{$this->unique}_args", wp_parse_args( $params['args'], $this->args ), $this );
-      $this->sections = apply_filters( "pb_settings_{$this->unique}_sections", $params['sections'], $this );
+			$this->unique   = $key;
+			$this->args     = apply_filters( "pb_settings_{$this->unique}_args", wp_parse_args( $params['args'], $this->args ), $this );
+			$this->sections = apply_filters( "pb_settings_{$this->unique}_sections", $params['sections'], $this );
 
-      add_action( 'admin_init', array( $this, 'add_profile_options' ) );
+			add_action( 'admin_init', array( $this, 'add_profile_options' ) );
 
-    }
+		}
 
-    // instance
-    public static function instance( $key, $params ) {
-      return new self( $key, $params );
-    }
+		// instance
+		public static function instance( $key, $params ) {
+			return new self( $key, $params );
+		}
 
-    // add profile add/edit fields
-    public function add_profile_options() {
+		// add profile add/edit fields
+		public function add_profile_options() {
 
-      add_action( 'show_user_profile', array( $this, 'render_profile_form_fields' ) );
-      add_action( 'edit_user_profile', array( $this, 'render_profile_form_fields' ) );
+			add_action( 'show_user_profile', array( $this, 'render_profile_form_fields' ) );
+			add_action( 'edit_user_profile', array( $this, 'render_profile_form_fields' ) );
 
-      add_action( 'personal_options_update', array( $this, 'save_profile' ) );
-      add_action( 'edit_user_profile_update', array( $this, 'save_profile' ) );
+			add_action( 'personal_options_update', array( $this, 'save_profile' ) );
+			add_action( 'edit_user_profile_update', array( $this, 'save_profile' ) );
 
-    }
+		}
 
-    // get default value
-    public function get_default( $field ) {
+		// get default value
+		public function get_default( $field ) {
 
-      $default = ( isset( $field['default'] ) ) ? $field['default'] : '';
-      $default = ( isset( $this->args['defaults'][$field['id']] ) ) ? $this->args['defaults'][$field['id']] : $default;
+			$default = ( isset( $field['default'] ) ) ? $field['default'] : '';
+			$default = ( isset( $this->args['defaults'][ $field['id'] ] ) ) ? $this->args['defaults'][ $field['id'] ] : $default;
 
-      return $default;
+			return $default;
 
-    }
+		}
 
-    // get meta value
-    public function get_meta_value( $user_id, $field ) {
+		// get meta value
+		public function get_meta_value( $user_id, $field ) {
 
-      $value = null;
+			$value = null;
 
-      if ( ! empty( $user_id ) && ! empty( $field['id'] ) ) {
+			if ( ! empty( $user_id ) && ! empty( $field['id'] ) ) {
 
-        if ( $this->args['data_type'] !== 'serialize' ) {
-          $meta  = get_user_meta( $user_id, $field['id'] );
-          $value = ( isset( $meta[0] ) ) ? $meta[0] : null;
-        } else {
-          $meta  = get_user_meta( $user_id, $this->unique, true );
-          $value = ( isset( $meta[$field['id']] ) ) ? $meta[$field['id']] : null;
-        }
+				if ( $this->args['data_type'] !== 'serialize' ) {
+					$meta  = get_user_meta( $user_id, $field['id'] );
+					$value = ( isset( $meta[0] ) ) ? $meta[0] : null;
+				} else {
+					$meta  = get_user_meta( $user_id, $this->unique, true );
+					$value = ( isset( $meta[ $field['id'] ] ) ) ? $meta[ $field['id'] ] : null;
+				}
 
-      }
+			}
 
-      $default = ( isset( $field['id'] ) ) ? $this->get_default( $field ) : '';
-      $value   = ( isset( $value ) ) ? $value : $default;
+			$default = ( isset( $field['id'] ) ) ? $this->get_default( $field ) : '';
+			$value   = ( isset( $value ) ) ? $value : $default;
 
-      return $value;
+			return $value;
 
-    }
+		}
 
-    // render profile add/edit form fields
-    public function render_profile_form_fields( $profileuser ) {
+		// render profile add/edit form fields
+		public function render_profile_form_fields( $profileuser ) {
 
-      $is_profile = ( is_object( $profileuser ) && isset( $profileuser->ID ) ) ? true : false;
-      $profile_id = ( $is_profile ) ? $profileuser->ID : 0;
-      $errors     = ( ! empty( $profile_id ) ) ? get_user_meta( $profile_id, '_pb_settings_errors_'. $this->unique, true ) : array();
-      $errors     = ( ! empty( $errors ) ) ? $errors : array();
-      $class      = ( $this->args['class'] ) ? ''. $this->args['class'] : '';
+			$is_profile = ( is_object( $profileuser ) && isset( $profileuser->ID ) ) ? true : false;
+			$profile_id = ( $is_profile ) ? $profileuser->ID : 0;
+			$errors     = ( ! empty( $profile_id ) ) ? get_user_meta( $profile_id, '_pb_settings_errors_' . $this->unique, true ) : array();
+			$errors     = ( ! empty( $errors ) ) ? $errors : array();
+			$class      = ( $this->args['class'] ) ? '' . $this->args['class'] : '';
 
-      if ( ! empty( $errors ) ) {
-        delete_user_meta( $profile_id, '_pb_settings_errors_'. $this->unique );
-      }
+			if ( ! empty( $errors ) ) {
+				delete_user_meta( $profile_id, '_pb_settings_errors_' . $this->unique );
+			}
 
-      echo '<div class="pb_settings pbsettings-profile-options pbsettings-onload'. esc_attr( $class ) .'">';
+			echo '<div class="pb_settings pbsettings-profile-options pbsettings-onload' . esc_attr( $class ) . '">';
 
-      wp_nonce_field( 'pb_settings_profile_nonce', 'pb_settings_profile_nonce'. $this->unique );
+			wp_nonce_field( 'pb_settings_profile_nonce', 'pb_settings_profile_nonce' . $this->unique );
 
-      foreach ( $this->sections as $section ) {
+			foreach ( $this->sections as $section ) {
 
-        $section_icon  = ( ! empty( $section['icon'] ) ) ? '<i class="pbsettings-section-icon '. esc_attr( $section['icon'] ) .'"></i>' : '';
-        $section_title = ( ! empty( $section['title'] ) ) ? $section['title'] : '';
+				$section_icon  = ( ! empty( $section['icon'] ) ) ? '<i class="pbsettings-section-icon ' . esc_attr( $section['icon'] ) . '"></i>' : '';
+				$section_title = ( ! empty( $section['title'] ) ) ? $section['title'] : '';
 
-        echo ( $section_title || $section_icon ) ? '<h2>'. $section_icon . $section_title .'</h2>' : '';
-        echo ( ! empty( $section['description'] ) ) ? '<div class="pbsettings-field pbsettings-section-description">'. $section['description'] .'</div>' : '';
+				echo ( $section_title || $section_icon ) ? '<h2>' . esc_html( $section_icon . $section_title ) . '</h2>' : '';
+				echo ( ! empty( $section['description'] ) ) ? '<div class="pbsettings-field pbsettings-section-description">' . esc_html( $section['description'] ) . '</div>' : '';
 
-        if ( ! empty( $section['fields'] ) ) {
+				if ( ! empty( $section['fields'] ) ) {
 
-          foreach ( $section['fields'] as $field ) {
+					foreach ( $section['fields'] as $field ) {
 
-            if ( ! empty( $field['id'] ) && ! empty( $errors['fields'][$field['id']] ) ) {
-              $field['_error'] = $errors['fields'][$field['id']];
-            }
+						if ( ! empty( $field['id'] ) && ! empty( $errors['fields'][ $field['id'] ] ) ) {
+							$field['_error'] = $errors['fields'][ $field['id'] ];
+						}
 
-            if ( ! empty( $field['id'] ) ) {
-              $field['default'] = $this->get_default( $field );
-            }
+						if ( ! empty( $field['id'] ) ) {
+							$field['default'] = $this->get_default( $field );
+						}
 
-            PBSettings::field( $field, $this->get_meta_value( $profile_id, $field ), $this->unique, 'profile' );
+						PBSettings::field( $field, $this->get_meta_value( $profile_id, $field ), $this->unique, 'profile' );
 
-          }
+					}
 
-        }
+				}
 
-      }
+			}
 
-      echo '</div>';
+			echo '</div>';
 
-    }
+		}
 
-    // save profile form fields
-    public function save_profile( $user_id ) {
+		// save profile form fields
+		public function save_profile( $user_id ) {
 
-      $count    = 1;
-      $data     = array();
-      $errors   = array();
-      $noncekey = 'pb_settings_profile_nonce'. $this->unique;
-      $nonce    = ( ! empty( $_POST[ $noncekey ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ $noncekey ] ) ) : '';
+			$count    = 1;
+			$data     = array();
+			$errors   = array();
+			$noncekey = 'pb_settings_profile_nonce' . $this->unique;
+			$nonce    = ( ! empty( $_POST[ $noncekey ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ $noncekey ] ) ) : '';
 
-      if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ! wp_verify_nonce( $nonce, 'pb_settings_profile_nonce' ) ) {
-        return $user_id;
-      }
+			if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ! wp_verify_nonce( $nonce, 'pb_settings_profile_nonce' ) ) {
+				return $user_id;
+			}
 
-      // XSS ok.
-      // No worries, This "POST" requests is sanitizing in the below foreach.
-      $request = ( ! empty( $_POST[ $this->unique ] ) ) ? $_POST[ $this->unique ] : array();
+			// XSS ok.
+			// No worries, This "POST" requests is sanitizing in the below foreach.
 
-      if ( ! empty( $request ) ) {
+			$request = ( ! empty( $_POST[ $this->unique ] ) ) ? map_deep(  wp_unslash($_POST[ $this->unique ]),'sanitize_text_field' ) : array();
+			if ( ! empty( $request ) ) {
 
-        foreach ( $this->sections as $section ) {
+				foreach ( $this->sections as $section ) {
 
-          if ( ! empty( $section['fields'] ) ) {
+					if ( ! empty( $section['fields'] ) ) {
 
-            foreach ( $section['fields'] as $field ) {
+						foreach ( $section['fields'] as $field ) {
 
-              if ( ! empty( $field['id'] ) ) {
+							if ( ! empty( $field['id'] ) ) {
 
-                $field_id    = $field['id'];
-                $field_value = isset( $request[$field_id] ) ? $request[$field_id] : '';
+								$field_id    = $field['id'];
+								$field_value = isset( $request[ $field_id ] ) ? $request[ $field_id ] : '';
 
-                // Sanitize "post" request of field.
-                if ( ! isset( $field['sanitize'] ) ) {
+								// Sanitize "post" request of field.
+								if ( ! isset( $field['sanitize'] ) ) {
 
-                  if( is_array( $field_value ) ) {
-                    $data[$field_id] = wp_kses_post_deep( $field_value );
-                  } else {
-                    $data[$field_id] = wp_kses_post( $field_value );
-                  }
+									if ( is_array( $field_value ) ) {
+										$data[ $field_id ] = wp_kses_post_deep( $field_value );
+									} else {
+										$data[ $field_id ] = wp_kses_post( $field_value );
+									}
 
-                } else if( isset( $field['sanitize'] ) && is_callable( $field['sanitize'] ) ) {
+								} else if ( isset( $field['sanitize'] ) && is_callable( $field['sanitize'] ) ) {
 
-                  $data[$field_id] = call_user_func( $field['sanitize'], $field_value );
+									$data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
 
-                } else {
+								} else {
 
-                  $data[$field_id] = $field_value;
+									$data[ $field_id ] = $field_value;
 
-                }
+								}
 
-                // Validate "post" request of field.
-                if ( isset( $field['validate'] ) && is_callable( $field['validate'] ) ) {
+								// Validate "post" request of field.
+								if ( isset( $field['validate'] ) && is_callable( $field['validate'] ) ) {
 
-                  $has_validated = call_user_func( $field['validate'], $field_value );
+									$has_validated = call_user_func( $field['validate'], $field_value );
 
-                  if ( ! empty( $has_validated ) ) {
+									if ( ! empty( $has_validated ) ) {
 
-                    $errors['sections'][$count] = true;
-                    $errors['fields'][$field_id] = $has_validated;
-                    $data[$field_id] = $this->get_meta_value( $user_id, $field );
+										$errors['sections'][ $count ]  = true;
+										$errors['fields'][ $field_id ] = $has_validated;
+										$data[ $field_id ]             = $this->get_meta_value( $user_id, $field );
 
-                  }
+									}
 
-                }
+								}
 
-              }
+							}
 
-            }
+						}
 
-          }
+					}
 
-          $count++;
+					$count ++;
 
-        }
+				}
 
-      }
+			}
 
-      $data = apply_filters( "pb_settings_{$this->unique}_save", $data, $user_id, $this );
+			$data = apply_filters( "pb_settings_{$this->unique}_save", $data, $user_id, $this );
 
-      do_action( "pb_settings_{$this->unique}_save_before", $data, $user_id, $this );
+			do_action( "pb_settings_{$this->unique}_save_before", $data, $user_id, $this );
 
-      if ( empty( $data ) ) {
+			if ( empty( $data ) ) {
 
-        if ( $this->args['data_type'] !== 'serialize' ) {
-          foreach ( $data as $key => $value ) {
-            delete_user_meta( $user_id, $key );
-          }
-        } else {
-          delete_user_meta( $user_id, $this->unique );
-        }
+				if ( $this->args['data_type'] !== 'serialize' ) {
+					foreach ( $data as $key => $value ) {
+						delete_user_meta( $user_id, $key );
+					}
+				} else {
+					delete_user_meta( $user_id, $this->unique );
+				}
 
-      } else {
+			} else {
 
-        if ( $this->args['data_type'] !== 'serialize' ) {
-          foreach ( $data as $key => $value ) {
-            update_user_meta( $user_id, $key, $value );
-          }
-        } else {
-          update_user_meta( $user_id, $this->unique, $data );
-        }
+				if ( $this->args['data_type'] !== 'serialize' ) {
+					foreach ( $data as $key => $value ) {
+						update_user_meta( $user_id, $key, $value );
+					}
+				} else {
+					update_user_meta( $user_id, $this->unique, $data );
+				}
 
-        if ( ! empty( $errors ) ) {
-          update_user_meta( $user_id, '_pb_settings_errors_'. $this->unique, $errors );
-        }
+				if ( ! empty( $errors ) ) {
+					update_user_meta( $user_id, '_pb_settings_errors_' . $this->unique, $errors );
+				}
 
-      }
+			}
 
-      do_action( "pb_settings_{$this->unique}_saved", $data, $user_id, $this );
+			do_action( "pb_settings_{$this->unique}_saved", $data, $user_id, $this );
 
-      do_action( "pb_settings_{$this->unique}_save_after", $data, $user_id, $this );
+			do_action( "pb_settings_{$this->unique}_save_after", $data, $user_id, $this );
 
-    }
-  }
+		}
+	}
 }
