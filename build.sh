@@ -1,7 +1,7 @@
 #!/bin/bash
 
-COMMIT_MESSAGE_SDK="";
-COMMIT_MESSAGE="";
+COMMIT_MESSAGE_SDK="pull";
+COMMIT_MESSAGE="pull";
 
 for i in "$@"; do
 	if [ "${i:0:9}" = "--cm-sdk=" ]; then COMMIT_MESSAGE_SDK=${i:9}

@@ -34,8 +34,8 @@ class License {
 		$this->plugin_file     = $plugin_file;
 		$this->plugin_basename = plugin_basename( $plugin_file );
 		$this->plugin_version  = Utils::get_args_option( 'Version', $plugin_data );
-		$this->option_key      = sprintf( 'pb_%s_license_data', md5( $this->client->text_domain ) );
-		$this->cache_key       = sprintf( 'pb_%s_version_info', md5( $this->client->text_domain ) );
+		$this->option_key      = sprintf( 'pb_%s_license_data', md5( $this->client->text_domain . esc_attr( '-pro' ) ) );
+		$this->cache_key       = sprintf( 'pb_%s_version_info', md5( $this->client->text_domain . esc_attr( '-pro' ) ) );
 		$this->data            = get_option( $this->option_key, array() );
 
 		add_action( 'rest_api_init', array( $this, 'add_license_activation_endpoint' ) );
