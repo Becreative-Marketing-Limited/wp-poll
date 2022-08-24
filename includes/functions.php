@@ -81,6 +81,8 @@ if ( ! function_exists( 'liquidpoll_get_poll' ) ) {
 	 */
 	function liquidpoll_get_poll( $poll_id = false, $args = array() ) {
 
+		$poll_id = ! $poll_id || 0 == $poll_id ? get_the_ID() : $poll_id;
+
 		if ( get_post_type( $poll_id ) != 'poll' ) {
 			return false;
 		}
@@ -281,7 +283,7 @@ if ( ! function_exists( 'liquidpoll_single_post_class' ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
 		}
 
-		$classes[] = 'poll-single';
+		$classes[] = sprintf( '%s-single', $poll->get_poll_type() );
 		$classes[] = sprintf( 'theme-%s', $poll->get_theme() );
 		$classes[] = sprintf( 'results-type-%s', $poll->get_meta( '_results_type', 'votes' ) );
 
@@ -357,7 +359,7 @@ if ( ! function_exists( 'liquidpoll_get_template_part' ) ) {
 		/**
 		 * Locate template
 		 */
-		if ( $name ) {
+		if ( ! empty( $name ) ) {
 			$template = locate_template( array(
 				"{$slug}-{$name}.php",
 				"liquidpoll/{$slug}-{$name}.php"
@@ -372,9 +374,10 @@ if ( ! function_exists( 'liquidpoll_get_template_part' ) ) {
 		$backtrace      = reset( $backtrace );
 		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
 
+
 		// Search in Poll Pro
-		if ( strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'LIQUIDPOLLP_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLP_PLUGIN_DIR;
+		if ( strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'LIQUIDPOLL_PRO_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLL_PRO_PLUGIN_DIR;
 		}
 
 		// Search in Survey

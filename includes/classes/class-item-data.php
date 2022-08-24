@@ -239,6 +239,20 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 			return apply_filters( 'liquidpoll_filters_poll_content', $content );
 		}
 
+		/**
+		 * Return if an item has name or not
+		 *
+		 * @return bool
+		 */
+		function has_name() {
+
+			if ( empty( $this->get_name() ) ) {
+				return false;
+			}
+
+			return true;
+		}
+
 
 		/**
 		 * Return if an item has content or not
@@ -294,7 +308,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 
 			$this->item_id   = ! $item_id ? get_the_ID() : $item_id;
 			$this->item_post = get_post( $this->item_id );
-			$this->theme     = isset( $args['theme'] ) && ! empty( $args['theme'] ) ? $args['theme'] : $this->get_meta( '_theme', 1 );
+			$this->theme     = ( isset( $args['theme'] ) && ! empty( $args['theme'] ) ) ? $args['theme'] : ( $this->get_meta( '_type', 'poll' ) == 'nps' ? $this->get_meta( '_theme_nps', 1 ) : $this->get_meta( '_theme', 1 ) );
 		}
 	}
 

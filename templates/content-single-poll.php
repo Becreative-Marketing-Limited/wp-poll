@@ -23,7 +23,7 @@ if ( post_password_required() ) {
 }
 
 ?>
-    <div id="poll-<?php the_ID(); ?>" <?php liquidpoll_single_post_class( $embed_class ); ?>>
+    <div id="<?php echo esc_attr( $poll->get_poll_type() ); ?>-<?php the_ID(); ?>" <?php liquidpoll_single_post_class( $embed_class ); ?>>
 		<?php
 		/**
 		 * Before Single poll main content
@@ -32,18 +32,27 @@ if ( post_password_required() ) {
 
 
 		if ( apply_filters( 'liquidpoll_filters_display_single_poll_main', true ) ) {
-			/**
-			 * Hook: liquidpoll_single_poll_main
-			 *
-			 * @hooked liquidpoll_single_poll_title
-			 * @hooked liquidpoll_single_poll_thumb
-			 * @hooked liquidpoll_single_poll_content
-			 * @hooked liquidpoll_single_poll_options
-			 * @hooked liquidpoll_single_poll_notice
-			 * @hooked liquidpoll_single_poll_message
-			 * @hooked liquidpoll_single_poll_buttons
-			 */
-			do_action( 'liquidpoll_single_poll_main' );
+
+			if ( 'nps' == $poll->get_poll_type() ) {
+				?>
+                <div class="nps-container">
+					<?php liquidpoll_get_template_part( 'single-nps/theme', $poll->get_theme() ); ?>
+                </div>
+				<?php
+			} else {
+				/**
+				 * Hook: liquidpoll_single_poll_main
+				 *
+				 * @hooked liquidpoll_single_poll_title
+				 * @hooked liquidpoll_single_poll_thumb
+				 * @hooked liquidpoll_single_poll_content
+				 * @hooked liquidpoll_single_poll_options
+				 * @hooked liquidpoll_single_poll_notice
+				 * @hooked liquidpoll_single_poll_message
+				 * @hooked liquidpoll_single_poll_buttons
+				 */
+				do_action( 'liquidpoll_single_poll_main' );
+			}
 		}
 
 

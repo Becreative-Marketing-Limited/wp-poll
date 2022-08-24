@@ -81,9 +81,9 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/functions.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-hooks.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-plugin-settings.php';
+			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-poll.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-meta-boxes.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-shortcodes.php';
-			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-poll.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-poll-widgets.php';
 
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/template-hooks.php';
@@ -146,6 +146,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			wp_enqueue_style( 'tooltip', LIQUIDPOLL_PLUGIN_URL . 'assets/tool-tip.min.css' );
 			wp_enqueue_style( 'liquidpoll-front-cb', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/checkbox.css', array(), $version );
 			wp_enqueue_style( 'liquidpoll-front', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style.css', array(), $version );
+			wp_enqueue_style( 'liquidpoll-front-nps', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style-nps.css', array(), $version );
 		}
 
 

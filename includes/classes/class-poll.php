@@ -36,7 +36,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		function get_poll_type() {
 
 			$poll_type = 'poll';
-			$poll_type = $this->get_meta( 'poll_type', $poll_type );
+			$poll_type = $this->get_meta( '_type', $poll_type );
 
 			if ( $poll_type == 'survey' && ! defined( 'LIQUIDPOLLS_PLUGIN_FILE' ) ) {
 				$poll_type = 'poll';
@@ -262,7 +262,12 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		function get_poll_options() {
 
 			$_poll_options = array();
-			$poll_options  = $this->get_meta( 'poll_meta_options', array() );
+
+			if ( 'nps' == $this->get_poll_type() ) {
+				$poll_options = $this->get_meta( 'poll_meta_options_nps', array() );
+			} else {
+				$poll_options = $this->get_meta( 'poll_meta_options', array() );
+			}
 
 			foreach ( $poll_options as $option_key => $option ) {
 				$_poll_options[ $option_key ] = array(

@@ -1,0 +1,168 @@
+/**
+ * Style - NPS
+ */
+
+.nps-single {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.nps-single .nps-container {
+    width: 690px;
+}
+
+.nps-single .liquidpoll-poll-title {
+    text-align: center;
+}
+
+.nps-single .liquidpoll-content {
+    text-align: center;
+}
+
+
+.nps-single input[type="radio"] {
+    display: none;
+}
+
+.nps-single ul.liquidpoll-nps-options {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.nps-single textarea {
+    color: #000000;
+    background: #F4F4F4;
+    border: 1px solid #F4F4F4;
+    height: 210px;
+    padding: 28px 23px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.nps-single .nps-button-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.nps-single .nps-button-wrap .liquidpoll-button.liquidpoll-submit-poll {
+    margin: 0 auto;
+    width: 264px;
+}
+
+.nps-single textarea::placeholder {
+    color: #ACACAC;
+    font-size: 18px;
+}
+
+/**
+ * Theme 1
+ */
+.nps-single.theme-1 ul.liquidpoll-nps-options li {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 10px;
+    border: 1px solid #5f64eb;
+    border-radius: 10px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    line-height: 1;
+    transition: .3s;
+}
+
+.nps-single.theme-1 ul.liquidpoll-nps-options li:hover {
+    background: linear-gradient(138.32deg, #5F64EB 23.82%, #946EE6 88.62%);
+}
+
+.nps-single.theme-1 ul.liquidpoll-nps-options li:last-child {
+    margin-right: 0;
+}
+
+.nps-single.theme-1 ul.liquidpoll-nps-options li label {
+    text-align: center;
+    display: block;
+    line-height: 56px;
+    color: #5F64EB;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.nps-single.theme-1 ul.liquidpoll-nps-options li:hover label {
+    color: #FFFFFF;
+}
+
+.nps-single.theme-1 .liquidpoll-nps-score-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+.nps-single.theme-1 .nps-button-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.nps-single.theme-1 .liquidpoll-button {
+    font-weight: 500;
+    width: 264px;
+}
+
+
+/**
+ * Theme 2
+ */
+.nps-single.theme-2 ul.liquidpoll-nps-options li {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 10px;
+    border: 1px dashed #5f64eb;
+    border-radius: 999999px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    line-height: 1;
+    transition: .3s;
+}
+
+.nps-single.theme-2 ul.liquidpoll-nps-options li:hover {
+    background: linear-gradient(138.32deg, #5F64EB 23.82%, #946EE6 88.62%);
+}
+
+.nps-single.theme-2 ul.liquidpoll-nps-options li:last-child {
+    margin-right: 0;
+}
+
+.nps-single.theme-2 ul.liquidpoll-nps-options li label {
+    text-align: center;
+    display: block;
+    line-height: 56px;
+    color: #5F64EB;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.nps-single.theme-2 ul.liquidpoll-nps-options li:hover label {
+    color: #FFFFFF;
+}
+
+.nps-single.theme-2 .liquidpoll-nps-score-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+.nps-single.theme-2 textarea {
+    color: #000000;
+    background: #FBFBFB;
+    border: 1px solid #FBFBFB;
+    height: 245px;
+    padding: 28px 23px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
