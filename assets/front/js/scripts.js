@@ -221,6 +221,37 @@
         }
     });
 
+
+    $(document).on('change', '.nps-single input[name="nps_score"]', function () {
+
+        let npsSelectionFIeld = $(this),
+            npsSelectionFieldVal = npsSelectionFIeld.val(),
+            npsSelectionLI = npsSelectionFIeld.parent(),
+            npsSelectionUL = npsSelectionLI.parent(),
+            npsSingle = npsSelectionUL.parent().parent(),
+            npsCommentBox = npsSingle.find('.liquidpoll-comment-box'),
+            npsSubmitButton = npsSingle.find('.nps-button-wrap > .liquidpoll-submit-poll');
+
+        npsSelectionUL.find('> li').removeClass('active');
+        npsSelectionLI.toggleClass('active');
+
+        if (npsSelectionFieldVal.length > 0) {
+            npsCommentBox.fadeIn('300', function () {
+                npsSubmitButton.fadeIn('300');
+            });
+        }
+    });
+
+    $(document).on('click', '.nps-single ul.liquidpoll-nps-options li', function (e) {
+
+        // let outsideInputArea = $(this).find('.liquidpoll-option-input');
+        //
+        // if (!outsideInputArea.is(e.target) && outsideInputArea.has(e.target).length === 0) {
+        //     $(this).find('label').trigger('click');
+        // }
+    });
+
+
 })(jQuery, window, document, liquidpoll_object);
 
 

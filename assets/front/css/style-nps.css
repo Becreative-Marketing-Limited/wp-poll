@@ -31,7 +31,11 @@
     margin-bottom: 15px;
 }
 
-.nps-single textarea {
+.nps-single .liquidpoll-comment-box {
+    display: none;
+}
+
+.nps-single .liquidpoll-comment-box textarea {
     color: #000000;
     background: #F4F4F4;
     border: 1px solid #F4F4F4;
@@ -49,6 +53,7 @@
 .nps-single .nps-button-wrap .liquidpoll-button.liquidpoll-submit-poll {
     margin: 0 auto;
     width: 264px;
+    display: none;
 }
 
 .nps-single textarea::placeholder {
@@ -128,7 +133,8 @@
     transition: .3s;
 }
 
-.nps-single.theme-2 ul.liquidpoll-nps-options li:hover {
+.nps-single.theme-2 ul.liquidpoll-nps-options li:hover,
+.nps-single.theme-2 ul.liquidpoll-nps-options li.active {
     background: linear-gradient(138.32deg, #5F64EB 23.82%, #946EE6 88.62%);
 }
 
@@ -143,9 +149,11 @@
     color: #5F64EB;
     font-size: 25px;
     font-weight: 500;
+    transition: 0.3s;
 }
 
-.nps-single.theme-2 ul.liquidpoll-nps-options li:hover label {
+.nps-single.theme-2 ul.liquidpoll-nps-options li:hover label,
+.nps-single.theme-2 ul.liquidpoll-nps-options li.active label {
     color: #FFFFFF;
 }
 
@@ -157,12 +165,6 @@
     margin-bottom: 30px;
 }
 
-.nps-single.theme-2 textarea {
-    color: #000000;
+.nps-single.theme-2 .liquidpoll-comment-box textarea {
     background: #FBFBFB;
-    border: 1px solid #FBFBFB;
-    height: 245px;
-    padding: 28px 23px;
-    border-radius: 10px;
-    margin-bottom: 20px;
 }
