@@ -31,6 +31,38 @@
     margin-bottom: 15px;
 }
 
+.nps-single ul.liquidpoll-nps-options li {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 10px;
+    border: 1px solid #5f64eb;
+    border-radius: 10px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    line-height: 1;
+    transition: .3s;
+}
+
+.nps-single .liquidpoll-nps-score-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+.nps-single ul.liquidpoll-nps-options li label {
+    text-align: center;
+    display: block;
+    line-height: 56px;
+    color: #5F64EB;
+    font-size: 25px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+
 .nps-single .liquidpoll-comment-box {
     display: none;
 }
@@ -64,18 +96,6 @@
 /**
  * Theme 1
  */
-.nps-single.theme-1 ul.liquidpoll-nps-options li {
-    display: inline-block;
-    margin-bottom: 0;
-    margin-right: 10px;
-    border: 1px solid #5f64eb;
-    border-radius: 10px;
-    text-align: center;
-    width: 60px;
-    height: 60px;
-    line-height: 1;
-    transition: .3s;
-}
 
 .nps-single.theme-1 ul.liquidpoll-nps-options li:hover {
     background: linear-gradient(138.32deg, #5F64EB 23.82%, #946EE6 88.62%);
@@ -85,26 +105,11 @@
     margin-right: 0;
 }
 
-.nps-single.theme-1 ul.liquidpoll-nps-options li label {
-    text-align: center;
-    display: block;
-    line-height: 56px;
-    color: #5F64EB;
-    font-size: 25px;
-    font-weight: 500;
-}
 
 .nps-single.theme-1 ul.liquidpoll-nps-options li:hover label {
     color: #FFFFFF;
 }
 
-.nps-single.theme-1 .liquidpoll-nps-score-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 15px;
-    color: #000000;
-    margin-bottom: 30px;
-}
 
 .nps-single.theme-1 .nps-button-wrap {
     display: flex;
@@ -121,16 +126,8 @@
  * Theme 2
  */
 .nps-single.theme-2 ul.liquidpoll-nps-options li {
-    display: inline-block;
-    margin-bottom: 0;
-    margin-right: 10px;
     border: 1px dashed #5f64eb;
     border-radius: 999999px;
-    text-align: center;
-    width: 60px;
-    height: 60px;
-    line-height: 1;
-    transition: .3s;
 }
 
 .nps-single.theme-2 ul.liquidpoll-nps-options li:hover,
@@ -142,27 +139,9 @@
     margin-right: 0;
 }
 
-.nps-single.theme-2 ul.liquidpoll-nps-options li label {
-    text-align: center;
-    display: block;
-    line-height: 56px;
-    color: #5F64EB;
-    font-size: 25px;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
 .nps-single.theme-2 ul.liquidpoll-nps-options li:hover label,
 .nps-single.theme-2 ul.liquidpoll-nps-options li.active label {
     color: #FFFFFF;
-}
-
-.nps-single.theme-2 .liquidpoll-nps-score-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 15px;
-    color: #000000;
-    margin-bottom: 30px;
 }
 
 .nps-single.theme-2 .liquidpoll-comment-box textarea {
