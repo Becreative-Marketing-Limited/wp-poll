@@ -119,6 +119,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_style( 'jquery-ui', LIQUIDPOLL_PLUGIN_URL . 'assets/jquery-ui.css' );
 			wp_enqueue_style( 'tooltip', LIQUIDPOLL_PLUGIN_URL . 'assets/tool-tip.min.css' );
+			wp_enqueue_style( 'roundslider-css', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/roundslider.min.css' );
 			wp_enqueue_style( 'liquidpoll-admin', LIQUIDPOLL_PLUGIN_URL . 'assets/admin/css/style.css', array(), $version );
 
 			wp_enqueue_script( 'jquery-ui-sortable' );
@@ -139,11 +140,15 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			$load_in_footer = $wp_query->get( 'poll_in_embed' ) ? false : $wp_query->get( 'poll_in_embed' );
 
 			wp_enqueue_script( 'liquidpoll-front-cb', LIQUIDPOLL_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), $version, $load_in_footer );
+			wp_enqueue_script( 'rangeslider-js', plugins_url( 'assets/front/js/rangeslider.min.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
+			wp_enqueue_script( 'roundslider-js', plugins_url( 'assets/front/js/roundslider.min.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
 			wp_enqueue_script( 'liquidpoll-front', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
 			wp_localize_script( 'liquidpoll-front', 'liquidpoll_object', $this->localize_scripts_data() );
 
 			wp_enqueue_style( 'dashicons' );
 			wp_enqueue_style( 'tooltip', LIQUIDPOLL_PLUGIN_URL . 'assets/tool-tip.min.css' );
+			wp_enqueue_style( 'rangeslider-css', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/rangeslider.css', array(), $version );
+			wp_enqueue_style( 'roundslider-css', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/roundslider.min.css', array(), $version );
 			wp_enqueue_style( 'liquidpoll-front-cb', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/checkbox.css', array(), $version );
 			wp_enqueue_style( 'liquidpoll-front', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style.css', array(), $version );
 			wp_enqueue_style( 'liquidpoll-front-nps', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style-nps.css', array(), $version );

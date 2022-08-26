@@ -154,6 +154,72 @@
         $(this).parent().slideUp();
     });
 
+    // Round Slider js
+    $(document).ready(function () {
+        $.fn.roundSlider.prototype._invertRange = true;
+        var roundHandle = $('#handle1');
+
+        // this is core functionality to generate the numbers
+        $.fn.roundSlider.prototype.defaults.create = function () {
+            var o = this.options, tickInterval = 1;
+
+            for (var i = o.min; i <= o.max; i += tickInterval) {
+                var angle = this._valueToAngle(i);
+                var numberTag = this._addSeperator(angle, "rs-custom");
+                var number = numberTag.children();
+                number.clone().css({
+                    "width": o.width + this._border(),
+                    "margin-top": this._border(true) / -2
+                });
+                number.removeClass().addClass("rs-number").html(i).rsRotate(-angle);
+            }
+        }
+        roundHandle.roundSlider({
+            sliderType: "min-range",
+            editableTooltip: false,
+            showTooltip: false,
+            radius: 300,
+            width: 30,
+            value: 7,
+            handleShape: "square",
+            handleSize: 20,
+            circleShape: "half-top",
+            startAngle: 0,
+            min: 0,
+            max: 10,
+            step: 1,
+            change: "onValueChange",
+        });
+        roundHandle.on("change", function (e) {
+            var colors = ['#6265ea', '#6866e8', '#6766e9', '#6d68e8', '#7369e6', '#7a6be4', '#7f6be2', '#866de1', '#876ddf', '#8a6ddf', '#8b6edf'];
+            document.documentElement.style.setProperty('--bgcolor', colors[e.value]);
+        });
+
+        //Range Slider
+        var $r = $('input[type="range"]');
+        var $ruler = $('<div class="rangeslider__ruler" />');
+
+        // Initialize
+        $r.rangeslider({
+            polyfill: false,
+            onInit: function () {
+                $ruler[0].innerHTML = getRulerRange(this.min, this.max, this.step);
+                this.$range.prepend($ruler);
+            }
+        });
+
+        function getRulerRange(min, max, step) {
+            var range = '';
+            var i = 0;
+
+            while (i <= max) {
+                range += i + ' ';
+                i = i + step;
+            }
+            return range;
+        }
+
+    });
 
     $(document).on('click', '.liquidpoll-new-option > button', function () {
 
@@ -224,9 +290,9 @@
 
     $(document).on('change', '.nps-single input[name="nps_score"]', function () {
 
-        let npsSelectionFIeld = $(this),
-            npsSelectionFieldVal = npsSelectionFIeld.val(),
-            npsSelectionLI = npsSelectionFIeld.parent(),
+        let npsSelectionField = $(this),
+            npsSelectionFieldVal = npsSelectionField.val(),
+            npsSelectionLI = npsSelectionField.parent(),
             npsSelectionUL = npsSelectionLI.parent(),
             npsSingle = npsSelectionUL.parent().parent(),
             npsCommentBox = npsSingle.find('.liquidpoll-comment-box'),

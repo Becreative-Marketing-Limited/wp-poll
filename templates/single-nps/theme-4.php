@@ -33,15 +33,17 @@ if ( $poll->has_content() ) {
 
 if ( ! empty( $poll->get_poll_options() ) && is_array( $poll->get_poll_options() ) ) {
 
-	echo '<ul class="liquidpoll-nps-options">';
+//	echo '<ul class="liquidpoll-nps-options">';
+	echo '<div id="handle1"></div>';
 
-	foreach ( $poll->get_poll_options() as $option_id => $option ) :
-		printf( '<li><label for="liquidpoll-nps-%1$s">%2$s</label><input id="liquidpoll-nps-%1$s" type="radio" name="nps_score" value="%1$s"></li>', $option_id, Utils::get_args_option( 'label', $option, '0' ) );
-	endforeach;
-
-	echo '</ul>';
+//	foreach ( $poll->get_poll_options() as $option_id => $option ) :
+//		printf( '<li><label>%s <input type="radio" name="nps_score" value="%s"></label></li>', Utils::get_args_option( 'label', $option, '0' ), $option_id );
+//	endforeach;
+//
+//	echo '</ul>';
 
 	echo '<div class="liquidpoll-nps-score-labels"><span>It was terrible</span><span>Absolutely love it</span></div>';
+
 
 	echo '<div class="liquidpoll-comment-box"><textarea placeholder="Tell us a little bit about your feedback" name="nps_feedback"></textarea></div>';
 }

@@ -47,9 +47,14 @@
 .nps-single .liquidpoll-nps-score-labels {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.nps-single .liquidpoll-nps-score-labels span {
+    display: inline-block;
     font-size: 15px;
     color: #000000;
-    margin-bottom: 30px;
+    font-weight: 500;
 }
 
 .nps-single ul.liquidpoll-nps-options li label {
@@ -62,7 +67,6 @@
     transition: 0.3s;
 }
 
-
 .nps-single .liquidpoll-comment-box {
     display: none;
 }
@@ -71,7 +75,7 @@
     color: #000000;
     background: #F4F4F4;
     border: 1px solid #F4F4F4;
-    height: 210px;
+    height: 245px;
     padding: 28px 23px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -93,6 +97,7 @@
     font-size: 18px;
 }
 
+
 /**
  * Theme 1
  */
@@ -111,11 +116,6 @@
 }
 
 
-.nps-single.theme-1 .nps-button-wrap {
-    display: flex;
-    justify-content: center;
-}
-
 .nps-single.theme-1 .liquidpoll-button {
     font-weight: 500;
     width: 264px;
@@ -125,6 +125,7 @@
 /**
  * Theme 2
  */
+
 .nps-single.theme-2 ul.liquidpoll-nps-options li {
     border: 1px dashed #5f64eb;
     border-radius: 999999px;
@@ -146,4 +147,125 @@
 
 .nps-single.theme-2 .liquidpoll-comment-box textarea {
     background: #FBFBFB;
+    height: 210px;
+}
+
+/**
+ * Theme 3
+ */
+
+
+.nps-single.theme-3 .rangeslider,
+.nps-single.theme-3 input[type=range] {
+    margin-bottom: 50px;
+}
+
+.nps-single.theme-3 .rangeslider__ruler {
+    cursor: pointer;
+    margin: 20px 0;
+    position: relative;
+    top: 20px;
+    text-align: justify;
+    font-size: 16px;
+    color: #CCCCD1;
+}
+
+.nps-single.theme-3 .rangeslider__ruler:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+}
+
+.nps-single.theme-3 .liquidpoll-comment-box textarea {
+    background: #FFFFFF;
+    height: 210px;
+    border: 1px solid #C9C9C9;
+}
+
+
+/**
+ * Theme 4
+ */
+:root {
+    --bgcolor: #866de1;
+}
+
+#handle1 {
+    display: block;
+    margin: 70px auto 30px auto;
+}
+
+#handle1 .rs-handle {
+
+    background-color: transparent;
+    border: 8px solid transparent;
+    border-right-color: #424f6b;
+    margin: -10px 0 0 31px !important;
+    border-width: 6px 225px 10px 25px;;
+    /* position: relative; */
+}
+
+#handle1 .rs-border {
+    border: 1px solid transparent;
+}
+
+#handle1 .rs-handle:before {
+    display: block;
+    content: " ";
+    position: absolute;
+    height: 44px;
+    width: 44px;
+    background: #ffffff;
+    right: -22px;
+    bottom: -22px;
+    border-radius: 50%;
+    border: 10px solid #424f6b;
+    outline: 10px solid #eeeeee;
+    z-index: -5;
+}
+
+#handle1 .rs-handle:after {
+    display: block;
+    content: " ";
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background: var(--bgcolor);
+    top: -13px;
+    left: 1px;
+    border-radius: 50%;
+    border: none;
+    z-index: -5;
+}
+
+.rs-handle[aria-valuenow="100"]:after {
+    display: none !important;
+}
+
+
+#handle1 .rs-tooltip {
+    top: 75%;
+    font-size: 12px;
+}
+
+#handle1 .rs-range-color {
+    background: linear-gradient(76.51deg, #6165EB 4.74%, #916FDD 100.97%);
+}
+
+#handle1 .rs-path-color {
+    background-color: #f1f3f5;
+}
+
+#handle1 span.rs-number {
+    position: absolute;
+    top: -8px;
+    left: -25px;
+    font-size: 15px;
+    color: #7E6BE3;
+}
+
+.nps-single.theme-4 .liquidpoll-comment-box textarea {
+    background: #FFFFFF;
+    height: 160px;
+    border: 1px solid #E7E7E7;
 }

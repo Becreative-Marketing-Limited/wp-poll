@@ -33,13 +33,12 @@ if ( $poll->has_content() ) {
 
 if ( ! empty( $poll->get_poll_options() ) && is_array( $poll->get_poll_options() ) ) {
 
-	echo '<ul class="liquidpoll-nps-options">';
+	echo '<div class="liquidpoll-nps-options">';
 
-	foreach ( $poll->get_poll_options() as $option_id => $option ) :
-		printf( '<li><label>%s <input type="radio" name="nps_score" value="%s"></label></li>', Utils::get_args_option( 'label', $option, '0' ), $option_id );
-	endforeach;
+//	echo '<input type="range" min="0" max="10" step="1">';
+	printf('<input type="range" min="0" max="%s" step="1">',count($poll->get_poll_options()));
 
-	echo '</ul>';
+	echo '</div>';
 
 	echo '<div class="liquidpoll-nps-score-labels"><span>It was terrible</span><span>Absolutely love it</span></div>';
 
@@ -50,7 +49,7 @@ if ( ! empty( $poll->get_poll_options() ) && is_array( $poll->get_poll_options()
 
 if ( $poll->ready_to_vote() ) {
 
-	printf( '<button class="liquidpoll-button liquidpoll-submit-poll" data-poll-id="%s">%s</button>', $poll->get_id(), $liquidpoll->get_button_text( 'submit' ) );
+	printf( '<div class="nps-button-wrap"><button class="liquidpoll-button liquidpoll-submit-poll" data-poll-id="%s">%s</button> </div>', $poll->get_id(), $liquidpoll->get_button_text( 'submit' ) );
 
 	liquidpoll_apply_css( '.liquidpoll-submit-poll', $poll->get_css_args( '_typography_button_submit' ) );
 
