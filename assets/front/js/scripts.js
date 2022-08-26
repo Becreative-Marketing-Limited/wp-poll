@@ -154,72 +154,6 @@
         $(this).parent().slideUp();
     });
 
-    // Round Slider js
-    $(document).ready(function () {
-        $.fn.roundSlider.prototype._invertRange = true;
-        var roundHandle = $('#handle1');
-
-        // this is core functionality to generate the numbers
-        $.fn.roundSlider.prototype.defaults.create = function () {
-            var o = this.options, tickInterval = 1;
-
-            for (var i = o.min; i <= o.max; i += tickInterval) {
-                var angle = this._valueToAngle(i);
-                var numberTag = this._addSeperator(angle, "rs-custom");
-                var number = numberTag.children();
-                number.clone().css({
-                    "width": o.width + this._border(),
-                    "margin-top": this._border(true) / -2
-                });
-                number.removeClass().addClass("rs-number").html(i).rsRotate(-angle);
-            }
-        }
-        roundHandle.roundSlider({
-            sliderType: "min-range",
-            editableTooltip: false,
-            showTooltip: false,
-            radius: 300,
-            width: 30,
-            value: 7,
-            handleShape: "square",
-            handleSize: 20,
-            circleShape: "half-top",
-            startAngle: 0,
-            min: 0,
-            max: 10,
-            step: 1,
-            change: "onValueChange",
-        });
-        roundHandle.on("change", function (e) {
-            var colors = ['#6265ea', '#6866e8', '#6766e9', '#6d68e8', '#7369e6', '#7a6be4', '#7f6be2', '#866de1', '#876ddf', '#8a6ddf', '#8b6edf'];
-            document.documentElement.style.setProperty('--bgcolor', colors[e.value]);
-        });
-
-        //Range Slider
-        var $r = $('input[type="range"]');
-        var $ruler = $('<div class="rangeslider__ruler" />');
-
-        // Initialize
-        $r.rangeslider({
-            polyfill: false,
-            onInit: function () {
-                $ruler[0].innerHTML = getRulerRange(this.min, this.max, this.step);
-                this.$range.prepend($ruler);
-            }
-        });
-
-        function getRulerRange(min, max, step) {
-            var range = '';
-            var i = 0;
-
-            while (i <= max) {
-                range += i + ' ';
-                i = i + step;
-            }
-            return range;
-        }
-
-    });
 
     $(document).on('click', '.liquidpoll-new-option > button', function () {
 
@@ -302,19 +236,135 @@
         npsSelectionLI.toggleClass('active');
 
         if (npsSelectionFieldVal.length > 0) {
-            npsCommentBox.fadeIn('300', function () {
-                npsSubmitButton.fadeIn('300');
-            });
+            npsCommentBox.fadeIn('300');
+            npsSubmitButton.fadeIn('300');
         }
     });
 
-    $(document).on('click', '.nps-single ul.liquidpoll-nps-options li', function (e) {
 
-        // let outsideInputArea = $(this).find('.liquidpoll-option-input');
-        //
-        // if (!outsideInputArea.is(e.target) && outsideInputArea.has(e.target).length === 0) {
-        //     $(this).find('label').trigger('click');
-        // }
+    $(document).on('ready', function () {
+
+        let $r = $('input[type="range"]'),
+            $ruler = $('<div class="rangeslider__ruler" />');
+
+        $r.rangeslider({
+            polyfill: false,
+            onInit: function () {
+                $ruler[0].innerHTML = getRulerRange(this.min, this.max, this.step);
+                this.$range.prepend($ruler);
+            },
+            onSlide: function (position, value) {
+
+                let npsSingle = $r.parent().parent(),
+                    npsCommentBox = npsSingle.find('.liquidpoll-comment-box'),
+                    npsSubmitButton = npsSingle.find('.nps-button-wrap > .liquidpoll-submit-poll');
+
+                if (value > 0) {
+                    npsCommentBox.fadeIn('300');
+                    npsSubmitButton.fadeIn('300');
+                }
+            }
+        });
+
+        function getRulerRange(min, max, step) {
+            let range = '', i = 0;
+            while (i <= max) {
+                range += i + ' ';
+                i = i + step;
+            }
+            return range;
+        }
+
+
+        $.fn.roundSlider.prototype._invertRange = true;
+        let roundHandle = $('#nps_score');
+
+        // this is core functionality to generate the numbers
+        $.fn.roundSlider.prototype.defaults.create = function () {
+            let o = this.options, tickInterval = 1;
+
+            for (let i = o.min; i <= o.max; i += tickInterval) {
+                let angle = this._valueToAngle(i),
+                    numberTag = this._addSeperator(angle, "rs-custom"),
+                    number = numberTag.children();
+
+                number.clone().css({
+                    "width": o.width + this._border(),
+                    "margin-top": this._border(true) / -2
+                });
+                number.removeClass().addClass("rs-number").html(i).rsRotate(-angle);
+            }
+        }
+        roundHandle.roundSlider({
+            sliderType: "min-range",
+            editableTooltip: false,
+            showTooltip: false,
+            radius: 300,
+            width: 30,
+            value: 0,
+            handleShape: "square",
+            handleSize: 20,
+            circleShape: "half-top",
+            startAngle: 0,
+            min: 0,
+            max: 10,
+            step: 1,
+            change: "onValueChange",
+        });
+        roundHandle.on('change', function (e) {
+            let colors = ['#6265ea', '#6866e8', '#6766e9', '#6d68e8', '#7369e6', '#7a6be4', '#7f6be2', '#866de1', '#876ddf', '#8a6ddf', '#8b6edf'];
+            document.documentElement.style.setProperty('--bgcolor', colors[e.value]);
+
+            if (e.value > 0) {
+
+                let npsSingle = roundHandle.parent(),
+                    npsCommentBox = npsSingle.find('.liquidpoll-comment-box'),
+                    npsSubmitButton = npsSingle.find('.nps-button-wrap > .liquidpoll-submit-poll');
+
+                roundHandle.attr('val', 'yes-' + e.value);
+                npsCommentBox.fadeIn('300');
+                npsSubmitButton.fadeIn('300');
+            } else {
+                roundHandle.attr('val', '0');
+            }
+        });
+    });
+
+
+    $(document).on('click', '.nps-single.theme-4 #handle1 span.rs-number', function () {
+        $(this).parent().trigger("click");
+    });
+
+
+    $(document).on('submit', '.nps-single form.nps-container', function () {
+
+        let npsForm = $(this),
+            poll_id = npsForm.data('poll-id'),
+            npsFormData = npsForm.serialize();
+
+        npsForm.find('.liquidpoll-responses').slideUp();
+
+        $.ajax({
+            type: 'POST',
+            context: this,
+            url: pluginObject.ajaxurl,
+            data: {
+                'action': 'liquidpoll_submit_nps',
+                'poll_id': poll_id,
+                'form_data': npsFormData,
+            },
+            success: function (response) {
+                if (!response.success) {
+                    npsForm.find('.liquidpoll-responses').addClass('liquidpoll-error').find('span.message').html(response.data).parent().slideDown();
+                } else {
+                    $(document.body).trigger('liquidpoll_poll_submission_success', response);
+
+                    npsForm.find('.liquidpoll-responses').addClass('liquidpoll-success').find('span.message').html(response.data).parent().slideDown();
+                }
+            }
+        });
+
+        return false;
     });
 
 

@@ -4,6 +4,8 @@
  */
 
 
+use Pluginbazar\Utils;
+
 if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 	/**
 	 * Class LIQUIDPOLL_Hooks
@@ -39,6 +41,36 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_action( 'wp_ajax_liquidpoll_report_download_csv', array( $this, 'download_csv_report' ) );
 
 			add_action( 'pbsettings_after_meta_navs', array( $this, 'add_plugin_promotional_navs' ) );
+
+			// NPS
+			add_action( 'wp_ajax_liquidpoll_submit_nps', array( $this, 'liquidpoll_submit_nps' ) );
+		}
+
+		/**
+		 * Ajax Submit NPS
+		 */
+		function liquidpoll_submit_nps() {
+
+			$poll_id    = isset( $_POST['poll_id'] ) ? sanitize_text_field( $_POST['poll_id'] ) : '';
+			$_form_data = isset( $_POST['form_data'] ) ? wp_unslash( $_POST['form_data'] ) : '';
+
+			parse_str( $_form_data, $form_data );
+
+			$data_args = array(
+				'poll_id'         => $poll_id,
+				'poll_type'       => 'nps',
+				'polled_value'    => Utils::get_args_option( 'nps_score', $form_data ),
+				'polled_comments' => Utils::get_args_option( 'nps_feedback', $form_data ),
+			);
+			$response  = liquidpoll_insert_results( $data_args );
+
+			if ( is_wp_error( $response ) ) {
+				wp_send_json_error( $response->get_error_message() );
+			}
+
+			do_action( 'liquidpoll_after_vote_nps', $data_args, $response );
+
+			wp_send_json_success( esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ) );
 		}
 
 		/**
@@ -430,6 +462,9 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_image_size( 'poll-long-width', 555, 120, true );
 
 			do_action( 'liquidpoll_after_settings_menu' );
+
+			// Create data table if not exists
+			liquidpoll_create_table();
 		}
 	}
 

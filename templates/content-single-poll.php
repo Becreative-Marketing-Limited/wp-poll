@@ -35,9 +35,9 @@ if ( post_password_required() ) {
 
 			if ( 'nps' == $poll->get_poll_type() ) {
 				?>
-                <div class="nps-container">
-					<?php liquidpoll_get_template_part( 'single-nps/theme', $poll->get_theme() ); ?>
-                </div>
+                <form action="" class="nps-container" data-poll-id="<?php echo esc_attr( $poll->get_id() ); ?>" method="get">
+					<?php liquidpoll_get_template_part( 'single-nps/theme', $poll->get_theme(), ( $poll->get_theme() > 1 && liquidpoll()->is_pro() ) ); ?>
+                </form>
 				<?php
 			} else {
 				/**

@@ -23,6 +23,7 @@
 .rangeslider__fill {
     background: #5f64eb;
     position: absolute;
+    transition: 0.3s;
 }
 
 .rangeslider--horizontal .rangeslider__fill {
@@ -52,4 +53,5 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
+    transition: 0.3s;
 }

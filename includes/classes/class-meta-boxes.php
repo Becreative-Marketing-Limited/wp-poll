@@ -257,6 +257,36 @@ class LIQUIDPOLL_Poll_meta {
 					'dependency' => array( '_type', '==', 'nps', 'all' ),
 				),
 				array(
+					'id'          => '_nps_lowest_marking_text',
+					'title'       => esc_html__( 'Lowest Marking Text', 'wp-poll' ),
+					'subtitle'    => esc_html__( 'Edit the text for indicating lowest value.', 'wp-poll' ),
+					'placeholder' => esc_html__( 'It was terrible', 'wp-poll' ),
+					'type'        => 'text',
+					'dependency'  => array( '_type', '==', 'nps', 'all' ),
+				),
+				array(
+					'id'          => '_nps_highest_marking_text',
+					'title'       => esc_html__( 'Highest Marking Text', 'wp-poll' ),
+					'subtitle'    => esc_html__( 'Edit the text for indicating highest value.', 'wp-poll' ),
+					'placeholder' => esc_html__( 'Absolutely love it', 'wp-poll' ),
+					'type'        => 'text',
+					'dependency'  => array( '_type', '==', 'nps', 'all' ),
+				),
+				array(
+					'id'         => '_nps_commentbox',
+					'title'      => esc_html__( 'Comment Box', 'wp-poll' ),
+					'subtitle'   => esc_html__( 'Receive feedback from users.', 'wp-poll' ),
+					'type'       => 'button_set',
+					'options'    => array(
+						'disabled' => array( 'label' => esc_html__( 'Disable', 'wp-poll' ) ),
+						'enabled'  => array( 'label' => esc_html__( 'Enable, Not Mendatory', 'wp-poll' ) ),
+						'obvious'  => array( 'label' => esc_html__( 'Enable, Mendatory', 'wp-poll' ) ),
+					),
+					'default'    => 'enabled',
+					'dependency' => array( '_type', '==', 'nps', 'all' ),
+				),
+
+				array(
 					'id'           => '_results_type',
 					'title'        => esc_html__( 'Results Type', 'wp-poll' ),
 					'subtitle'     => esc_html__( 'Display percentage or votes count in results screen.', 'wp-poll' ),

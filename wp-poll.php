@@ -3,7 +3,7 @@
  * Plugin Name: LiquidPoll - Advanced Polls for Creators and Brands
  * Plugin URI: https://liquidpoll.com
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.27
+ * Version: 3.3.28
  * Author: LiquidPoll
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -16,17 +16,16 @@ defined( 'ABSPATH' ) || exit;
 
 global $wpdb;
 
-defined( 'LIQUIDPOLL_TABLE_RESULTS' ) || define( 'LIQUIDPOLL_TABLE_RESULTS', sprintf( '%spoll_results', $wpdb->prefix ) );
 defined( 'LIQUIDPOLL_PLUGIN_URL' ) || define( 'LIQUIDPOLL_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
 defined( 'LIQUIDPOLL_PLUGIN_DIR' ) || define( 'LIQUIDPOLL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 defined( 'LIQUIDPOLL_PLUGIN_FILE' ) || define( 'LIQUIDPOLL_PLUGIN_FILE', plugin_basename( __FILE__ ) );
+defined( 'LIQUIDPOLL_RESULTS_TABLE' ) || define( 'LIQUIDPOLL_RESULTS_TABLE', sprintf( '%sliquidpoll_results', $wpdb->prefix ) );
 defined( 'LIQUIDPOLL_PLUGIN_LINK' ) || define( 'LIQUIDPOLL_PLUGIN_LINK', 'https://www.liquidpoll.com/pro' );
 defined( 'LIQUIDPOLL_DOCS_URL' ) || define( 'LIQUIDPOLL_DOCS_URL', 'https://www.liquidpoll.com/docs' );
 defined( 'LIQUIDPOLL_REVIEW_URL' ) || define( 'LIQUIDPOLL_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
 defined( 'LIQUIDPOLL_TICKET_URL' ) || define( 'LIQUIDPOLL_TICKET_URL', 'https://www.liquidpoll.com/my-account/' );
 defined( 'LIQUIDPOLL_COMMUNITY_URL' ) || define( 'LIQUIDPOLL_COMMUNITY_URL', 'https://www.facebook.com/groups/liquidpoll/' );
 defined( 'LIQUIDPOLL_VERSION' ) || define( 'LIQUIDPOLL_VERSION', '3.3.26' );
-
 
 if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 	/**
