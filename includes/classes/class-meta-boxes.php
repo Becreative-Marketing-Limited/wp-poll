@@ -274,8 +274,8 @@ class LIQUIDPOLL_Poll_meta {
 					'type'       => 'button_set',
 					'options'    => array(
 						'disabled' => array( 'label' => esc_html__( 'Disable', 'wp-poll' ) ),
-						'enabled'  => array( 'label' => esc_html__( 'Enable, Not Mendatory', 'wp-poll' ) ),
-						'obvious'  => array( 'label' => esc_html__( 'Enable, Mendatory', 'wp-poll' ) ),
+						'enabled'  => array( 'label' => esc_html__( 'Enable, Not Mandatory', 'wp-poll' ) ),
+						'obvious'  => array( 'label' => esc_html__( 'Enable, Mandatory', 'wp-poll' ) ),
 					),
 					'default'    => 'enabled',
 					'dependency' => array( '_type', '==', 'nps', 'all' ),

@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 6.0.1
-	Stable tag: 3.3.29
+	Stable tag: 3.3.30
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,47 +12,66 @@
 
 == Description ==
 
-LiquidPoll allows you to integrate highly customisable polling system with so many options to control each poll to your WordPress website/blog. It's a super easy solution for taking opinions from your visitors/users with multiple styles/themes.
+LiquidPoll allows you to integrate a highly customisable polling system with so many options to control each poll to your WordPress website/blog. It’s a super easy solution to take opinions from visitors/users with multiple styles/themes.
 
 [BUY PRO](https://www.liquidpoll.com/pro/) | [DOCUMENTATION](https://www.liquidpoll.com/docs/) | [COMMUNITY & SUPPORT](https://www.facebook.com/groups/liquidpoll/)
 
 ### FREE PLUGIN FEATURES
 * Single and Multi votes
+* NPS Score Poll to collect feedback (NEW)
 * Ability to create Unlimited Poll options
-* 10+ Themes variations
-* 5+ Timer styles
+* Ability to use images for Poll Options
+* 4+ Poll Themes variations (NEW DESIGNS)
+* 1 NPS Poll Theme
+* A countdown timer for each Poll
 * 7+ Input type animation styles
-* Ability to create new option from users on Frontend
-* Graphically Poll reporting on Backend
-* Possibility to generate 1000+ variations
+* Ability to create new options from users on Frontend
+* Graphical Poll reporting on Backend
+* Possibility to generate 100+ variations
 * Export reports as CSV
-* Ready Widget
+* Plug and Play Widget
 * Display results for a single poll with short-code
 * Display results for an option of a single poll with short-code
 
 
 ### PRO PLUGIN FEATURES
-* Progress bar with counter
-* Additional form with multiple fields controlling
-* 8 Different themes for each survey
-* Control custom header with site logo and navigation menu depending on survey theme
-* Terms and Conditions management for each survey
-* List of responses in a single place
-* And many more are coming soon
+* 6+ Pro Poll Themes (Enabling more options for the Free themes)
+* 4+ Pro NPS Themes.
+* Show results as Percentages or Votes (Pro themes only)
+* Feedback Forms Options: Enabled, Mandatory or Optional.
+* Typography Control: Font size, Font Family (Google Font integration), Bold, Italic, etc.
+* Colour Control: Pick a colour for each element of your Poll.
+* List of responses in one single place
+* Reactions Poll Type to go live during September.
 
 
-### FEATURES ON PIPELINE
-* Integration with Contact Form 7
-* Front-end Poll Management
-* Gutenberg Compatibility
-* WP Bakery Page Builder Compatibility
-* Elementor Widget Compatibility
-* Startup Wizard
+#### ENGAGE THE AUDIENCE ON YOUR WEBSITE WITH POLLS
+Make your blog posts or your website pages more dynamic for your visitors. Adding a poll into your content allows your readers not only to engage with your content but also to draw conclusions. It is such a creative tool that once you start using it, your content will never be the same.
+
+#### CHECK YOUR BRAND HEALTH WITH NPS SURVEYS
+LiquidPoll also supports survey formats in multiple themes so you can tag along any kind of content on your website and actively monitor how your company, brand or product is performing. This can become a very useful tool to understand your happiness score.
+
+#### CUSTOMIZE IN ANY STYLE
+There are more than 10 themes, but you can also customize your polls and themes to any style suitable for your website or branding. Add images, change between displaying progress bars or percentages or both, and add a countdown timer - there are more than 100 ways to design the same poll. You get a live preview of your typography changes as you edit the font, spacing, size, style, colour, background and more.
+
+#### CATEGORIZE AND MANAGE
+LiquidPoll has adequate features to quickly organize all your polls and surveys into one place so that you can navigate easily from the backend.
+
+#### POLL LISTING
+Display all your polls in one place so that you can create a landing page where people can simply come and play. Having multiple polls on a page opens possibilities for gamification of your website.
+
+#### FEATURES IN THE PIPELINE
+* Video Option for Polls
+* Lead Generation Forms
+* Reactions Polls to be placed on blog articles, pages, or anywhere on your site.
+* Integrations with Forms: FluentForms, GravityForms, WSForms and Contact Form 7.
+* BuddyBoss / BuddyPress Integration
+* Gutenberg Blocks
+* Elementor Widget
 * Hide results
-* Integration with MailChimp, twilio, Zapier and so on....
+* Integration with Convertkit, ActiveCampaign, MailChimp, Twilio, Zapier and so on….
 
 [REPORT ANY ISSUE](https://liquidpoll.com/contact)
-
 
 == Installation ==
 
@@ -234,3 +253,6 @@ LiquidPoll allows you to integrate highly customisable polling system with so ma
 = 3.3.29 =
 * 29/08/2022 - NEW - Theme 5 added in pro version.
 * 30/08/2022 - NEW - NPS dynamic colors added.
+
+= 3.3.30 =
+* 29/08/2022 - FIX - Bug fixed.
