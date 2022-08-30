@@ -248,12 +248,7 @@ class LIQUIDPOLL_Poll_meta {
 					'title'      => esc_html__( 'NPS Theme', 'wp-poll' ),
 					'subtitle'   => esc_html__( 'By default it will apply from global settings.', 'wp-poll' ),
 					'type'       => 'select',
-					'options'    => array(
-						1 => array( 'label' => esc_html__( 'Theme 1', 'wp-poll' ) ),
-						2 => array( 'label' => esc_html__( 'Theme 2', 'wp-poll' ) ),
-						3 => array( 'label' => esc_html__( 'Theme 3', 'wp-poll' ) ),
-						4 => array( 'label' => esc_html__( 'Theme 4', 'wp-poll' ) ),
-					),
+					'options'    => $this->get_nps_themes(),
 					'dependency' => array( '_type', '==', 'nps', 'all' ),
 				),
 				array(
@@ -285,7 +280,6 @@ class LIQUIDPOLL_Poll_meta {
 					'default'    => 'enabled',
 					'dependency' => array( '_type', '==', 'nps', 'all' ),
 				),
-
 				array(
 					'id'           => '_results_type',
 					'title'        => esc_html__( 'Results Type', 'wp-poll' ),
@@ -301,6 +295,107 @@ class LIQUIDPOLL_Poll_meta {
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 					'dependency'   => array( '_theme|_type', 'any|==', '1,2,3,5,8,9,10|poll', 'all' ),
 				),
+				array(
+					'id'         => 'subheading_nps_colors',
+					'type'       => 'subheading',
+					'content'    => esc_html__( 'NPS Colors', 'slider-x-woo' ),
+					'dependency' => array( '_type', '==', 'poll', 'all' ),
+				),
+				array(
+					'id'           => '_nps_labels_color',
+					'title'        => esc_html__( 'Labels Color', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add custom NPS labels color.', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'normal'       => esc_html__( 'Normal Color', 'wp-poll' ),
+						'hover_active' => esc_html__( 'Hover/Active Color', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '1,2|nps', 'all' ),
+				),
+				array(
+					'id'           => '_nps_labels_colors',
+					'title'        => esc_html__( 'Labels Color', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add custom NPS labels color.', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'normal'      => esc_html__( 'Label color', 'wp-poll' ),
+						'active'      => esc_html__( 'Hover/Active color', 'wp-poll' ),
+						'selected_bg' => esc_html__( 'Selected background color', 'wp-poll' ),
+						'border'      => esc_html__( 'Wrapper border', 'wp-poll' ),
+						'wrapper_bg'  => esc_html__( 'Wrapper background', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '5|nps', 'all' ),
+				),
+				array(
+					'id'           => '_nps_slider_color',
+					'title'        => esc_html__( 'Slider Color', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add custom NPS slider color.', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'bar'              => esc_html__( 'Bar Color', 'wp-poll' ),
+						'circle_indicator' => esc_html__( 'Circle Indicator Color', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '3|nps', 'all' ),
+				),
+				array(
+					'id'           => '_nps_progress_bar_colors',
+					'title'        => esc_html__( 'Progress Bar Color', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add progress bar color.', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'background' => esc_html__( 'Bar Color', 'wp-poll' ),
+						'indicator'  => esc_html__( 'Circle Indicator Color', 'wp-poll' ),
+						'bar_fill_1' => esc_html__( 'Bar Active Color 1', 'wp-poll' ),
+						'bar_fill_2' => esc_html__( 'Bar Active Color 2', 'wp-poll' ),
+						'bar_fill_3' => esc_html__( 'Bar Active Color 3', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '4|nps', 'all' ),
+				),
+
+				array(
+					'id'           => '_nps_labels_bg_color',
+					'title'        => esc_html__( 'Labels Background Color', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add background colors for labels. ', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'normal_1'       => esc_html__( 'Normal Color 1', 'wp-poll' ),
+						'normal_2'       => esc_html__( 'Normal Color 2', 'wp-poll' ),
+						'hover_active_1' => esc_html__( 'Hover/Active Color 1', 'wp-poll' ),
+						'hover_active_2' => esc_html__( 'Hover/Active 2', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '1,2|nps', 'all' ),
+				),
+				array(
+					'id'           => '_nps_marking_text_colors',
+					'title'        => esc_html__( 'Marking Texts', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add marking texts colors, "Not Happy" or "Fully Satisfied"', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'lowest'  => esc_html__( 'Lowest text color', 'wp-poll' ),
+						'highest' => esc_html__( 'Highest text color', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '1,2,3,4,5|nps', 'all' ),
+				),
+				array(
+					'id'           => '_nps_comment_box_colors',
+					'title'        => esc_html__( 'Comment / Feedback Box', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add colors for comment box. ', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'text_color'   => esc_html__( 'Text color', 'wp-poll' ),
+						'bg_color'     => esc_html__( 'Background color', 'wp-poll' ),
+						'border_color' => esc_html__( 'Border color', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '1,2,3,4,5|nps', 'all' ),
+				),
+
 				array(
 					'id'      => 'subheading_typography',
 					'type'    => 'subheading',
@@ -381,6 +476,33 @@ class LIQUIDPOLL_Poll_meta {
 		return apply_filters( 'LiquidPoll/Filters/poll_meta_field_sections', $field_sections );
 	}
 
+	/**
+	 * Return NPS themes
+	 *
+	 * @return mixed|void
+	 */
+	function get_nps_themes() {
+
+		$themes = array(
+			1   => array(
+				'label' => esc_html__( 'Theme 1', 'wp-poll' ),
+			),
+			998 => array(
+				'label'        => esc_html__( '4+ are in pro', 'wp-poll' ),
+				'availability' => 'pro',
+			),
+			999 => array(
+				'label'        => esc_html__( '10+ are coming soon', 'wp-poll' ),
+				'availability' => 'upcoming',
+			),
+		);
+		$themes = apply_filters( 'LiquidPoll/Filters/nps_themes', $themes );
+
+		ksort( $themes );
+
+		return $themes;
+	}
+
 
 	/**
 	 * Return poll themes
@@ -404,7 +526,7 @@ class LIQUIDPOLL_Poll_meta {
 				'availability' => 'pro',
 			),
 			999 => array(
-				'label'        => esc_html__( '20+ are in pro', 'wp-poll' ),
+				'label'        => esc_html__( '20+ are coming soon', 'wp-poll' ),
 				'availability' => 'upcoming',
 			),
 		);

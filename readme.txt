@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 6.0.1
-	Stable tag: 3.3.28
+	Stable tag: 3.3.29
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -229,4 +229,8 @@ LiquidPoll allows you to integrate highly customisable polling system with so ma
 * 16/08/2022 - FIX - Fix license key bug with urls.
 
 = 3.3.28 =
-* 26/08/2022 - NEW - NPS type added.
+* 28/08/2022 - NEW - NPS type added.
+
+= 3.3.29 =
+* 29/08/2022 - NEW - Theme 5 added in pro version.
+* 30/08/2022 - NEW - NPS dynamic colors added.

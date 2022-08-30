@@ -422,7 +422,7 @@
                         winWidth = $window.innerWidth();
 
                     if (stickyTop <= offset && winWidth > 782) {
-                        $inner.css({width: $this.outerWidth() - padding});
+                        $inner.css({width: $this.outerWidth()});
                         $this.css({height: $this.outerHeight()}).addClass('pbsettings-sticky');
                     } else {
                         $inner.removeAttr('style');

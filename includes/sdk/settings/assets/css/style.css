@@ -114,10 +114,12 @@
  */
 .pbsettings-header {
     position: relative;
+    box-sizing: border-box !important;
 }
 
 .pbsettings-header-inner {
     padding: 25px;
+    box-sizing: border-box !important;
     transition: box-shadow .3s ease;
 }
 
@@ -163,6 +165,7 @@
     position: fixed;
     z-index: 99;
     top: 32px;
+    box-sizing: border-box !important;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -1319,7 +1322,7 @@ li.pbsettings-tab-item.pbsettings-tab-expanded {
  */
 .pbsettings-field-color_group .pbsettings--left {
     float: left;
-    margin-right: 10px;
+    margin-right: 30px;
     margin-bottom: 5px;
 }
 

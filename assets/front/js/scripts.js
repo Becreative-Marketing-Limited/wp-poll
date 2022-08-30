@@ -275,7 +275,6 @@
             return range;
         }
 
-
         $.fn.roundSlider.prototype._invertRange = true;
         let roundHandle = $('#nps_score');
 
@@ -315,7 +314,7 @@
             let colors = ['#6265ea', '#6866e8', '#6766e9', '#6d68e8', '#7369e6', '#7a6be4', '#7f6be2', '#866de1', '#876ddf', '#8a6ddf', '#8b6edf'];
             document.documentElement.style.setProperty('--bgcolor', colors[e.value]);
 
-            if (e.value > 0) {
+            if (e.value > 0 && e.value < 10) {
 
                 let npsSingle = roundHandle.parent(),
                     npsCommentBox = npsSingle.find('.liquidpoll-comment-box'),
@@ -336,11 +335,31 @@
     });
 
 
+    // $(document).on('click', '.nps-single .liquidpoll-submit-poll', function () {
+    //     $('.nps-single form.nps-container').submit();
+    // });
+
+    $(document).on('keyup', '.nps-single .liquidpoll-comment-box textarea', function () {
+        let npsCommentBox = $(this),
+            npsCommentBoxWrap = npsCommentBox.parent(),
+            npsCommentValue = npsCommentBox.val(),
+            npsButtonSubmit = npsCommentBoxWrap.parent().find('.liquidpoll-submit-poll');
+
+        if (npsCommentBoxWrap.hasClass('obvious')) {
+            if (npsCommentValue.length > 0) {
+                npsButtonSubmit.removeClass('disabled');
+            } else {
+                npsButtonSubmit.addClass('disabled');
+            }
+        }
+    });
+
     $(document).on('submit', '.nps-single form.nps-container', function () {
 
         let npsForm = $(this),
             poll_id = npsForm.data('poll-id'),
-            npsFormData = npsForm.serialize();
+            npsFormData = npsForm.serialize(),
+            submissionButton = npsForm.find('.liquidpoll-submit-poll');
 
         npsForm.find('.liquidpoll-responses').slideUp();
 
@@ -360,6 +379,9 @@
                     $(document.body).trigger('liquidpoll_poll_submission_success', response);
 
                     npsForm.find('.liquidpoll-responses').addClass('liquidpoll-success').find('span.message').html(response.data).parent().slideDown();
+
+                    submissionButton.fadeOut();
+                    npsForm.addClass('submission-done');
                 }
             }
         });

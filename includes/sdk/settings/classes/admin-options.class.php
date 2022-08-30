@@ -649,7 +649,7 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 
 			echo '<div class="pbsettings-sections">';
 
-			foreach ( $this->pre_sections as $section ) {
+			foreach ( $this->pre_sections as $section_id => $section ) {
 
 				$section_onload = ( ! $has_nav ) ? ' pbsettings-onload' : '';
 				$section_class  = ( ! empty( $section['class'] ) ) ? ' ' . $section['class'] : '';
@@ -679,13 +679,11 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 						$value = ( ! empty( $field['id'] ) && isset( $this->options[ $field['id'] ] ) ) ? $this->options[ $field['id'] ] : '';
 
 						PBSettings::field( $field, $value, $this->unique, 'options' );
-
 					}
-
+				} elseif ( $section['external'] && isset( $section['id'] ) ) {
+					do_action( 'PBSettings/section/' . $section['id'] );
 				} else {
-
 					echo '<div class="pbsettings-no-option">' . esc_html__( 'No data available.' ) . '</div>';
-
 				}
 
 				echo '</div>';

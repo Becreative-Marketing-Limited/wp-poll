@@ -44,7 +44,18 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 			// NPS
 			add_action( 'wp_ajax_liquidpoll_submit_nps', array( $this, 'liquidpoll_submit_nps' ) );
+
+			add_action( 'wp_footer', array( $this, 'render_global_css' ) );
 		}
+
+
+		/**
+		 * Render global CSS
+		 */
+		function render_global_css() {
+			printf( '<style>%s</style>', implode( liquidpoll()->get_global_css() ) );
+		}
+
 
 		/**
 		 * Ajax Submit NPS

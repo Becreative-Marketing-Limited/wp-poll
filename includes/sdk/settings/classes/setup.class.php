@@ -274,7 +274,7 @@ if ( ! class_exists( 'PBSettings' ) ) {
 					self::createSection( $id, array_merge(
 						array(
 							'parent' => 'primary_' . $section_index,
-							'icon'   => Utils::get_args_option( 'icon', $section, 'fa fa-hand-o-right' ),
+							'icon'   => Utils::get_args_option( 'icon', $section ),
 						), $section ) );
 				}
 			}

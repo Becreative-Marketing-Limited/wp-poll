@@ -643,6 +643,6 @@ if ( ! function_exists( 'liquidpoll_apply_css' ) ) {
 			}
 		}
 
-		printf( '<style>#poll-%s %s {%s}</style>', $poll->get_id(), $selector, ob_get_clean() );
+		liquidpoll()->add_global_style( sprintf( '%s {%s}', $selector, ob_get_clean() ) );
 	}
 }

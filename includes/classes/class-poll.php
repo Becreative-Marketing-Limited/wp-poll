@@ -35,12 +35,11 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		 */
 		function get_poll_type() {
 
-			$poll_type = 'poll';
-			$poll_type = $this->get_meta( '_type', $poll_type );
+			$poll_type = $this->get_meta( '_type', 'poll' );
 
-			if ( $poll_type == 'survey' && ! defined( 'LIQUIDPOLLS_PLUGIN_FILE' ) ) {
-				$poll_type = 'poll';
-			}
+//			if ( $poll_type == 'survey' && ! defined( 'LIQUIDPOLLS_PLUGIN_FILE' ) ) {
+//				$poll_type = 'poll';
+//			}
 
 			return apply_filters( 'liquidpoll_filters_poll_type', $poll_type, $this->get_id() );
 		}
