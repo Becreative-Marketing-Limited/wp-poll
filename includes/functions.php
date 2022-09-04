@@ -81,6 +81,8 @@ if ( ! function_exists( 'liquidpoll_get_poll' ) ) {
 	 */
 	function liquidpoll_get_poll( $poll_id = false, $args = array() ) {
 
+		$poll_id = ! $poll_id || 0 == $poll_id ? get_the_ID() : $poll_id;
+
 		if ( get_post_type( $poll_id ) != 'poll' ) {
 			return false;
 		}
@@ -281,7 +283,7 @@ if ( ! function_exists( 'liquidpoll_single_post_class' ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
 		}
 
-		$classes[] = 'poll-single';
+		$classes[] = sprintf( '%s-single', $poll->get_poll_type() );
 		$classes[] = sprintf( 'theme-%s', $poll->get_theme() );
 		$classes[] = sprintf( 'results-type-%s', $poll->get_meta( '_results_type', 'votes' ) );
 
@@ -346,10 +348,9 @@ if ( ! function_exists( 'liquidpoll_get_template_part' ) ) {
 	 *
 	 * @param $slug
 	 * @param string $name
-	 * @param array $args
-	 * @param bool $main_template | When you call a template from extensions you can use this param as true to check from main template only
+	 * @param bool $ext_template When you call a template from extensions you can use this param as true to check from main template only
 	 */
-	function liquidpoll_get_template_part( $slug, $name = '', $args = array(), $main_template = false ) {
+	function liquidpoll_get_template_part( $slug, $name = '', $ext_template = false ) {
 
 		$template   = '';
 		$plugin_dir = LIQUIDPOLL_PLUGIN_DIR;
@@ -357,31 +358,17 @@ if ( ! function_exists( 'liquidpoll_get_template_part' ) ) {
 		/**
 		 * Locate template
 		 */
-		if ( $name ) {
+		if ( ! empty( $name ) ) {
 			$template = locate_template( array(
 				"{$slug}-{$name}.php",
 				"liquidpoll/{$slug}-{$name}.php"
 			) );
 		}
 
-		/**
-		 * Check directory for templates from Addons
-		 */
-		$backtrace      = debug_backtrace( 2, true );
-		$backtrace      = empty( $backtrace ) ? array() : $backtrace;
-		$backtrace      = reset( $backtrace );
-		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
-
-		// Search in Poll Pro
-		if ( strpos( $backtrace_file, 'wp-poll-pro' ) !== false && defined( 'LIQUIDPOLLP_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLP_PLUGIN_DIR;
+		// Search in external
+		if ( $ext_template ) {
+			$plugin_dir = LIQUIDPOLL_PRO_PLUGIN_DIR;
 		}
-
-		// Search in Survey
-		if ( strpos( $backtrace_file, 'wp-poll-survey' ) !== false && defined( 'LIQUIDPOLLS_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? LIQUIDPOLL_PLUGIN_DIR : LIQUIDPOLLS_PLUGIN_DIR;
-		}
-
 
 		/**
 		 * Search for Template in Plugin
@@ -565,30 +552,97 @@ if ( ! function_exists( 'liquidpoll_pagination' ) ) {
 }
 
 
-function liquidpoll_apply_css( $selector = '', $css_arr = array() ) {
+if ( ! function_exists( 'liquidpoll_create_table' ) ) {
+	/**
+	 * Create table if not exists
+	 */
+	function liquidpoll_create_table() {
 
-	global $poll;
+		if ( ! function_exists( 'maybe_create_table' ) ) {
+			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		}
 
-	if ( empty( $selector ) || empty( $css_arr ) || ! is_array( $css_arr ) ) {
-		return;
+		$sql = "CREATE TABLE IF NOT EXISTS " . LIQUIDPOLL_RESULTS_TABLE . " (
+			id int(100) NOT NULL AUTO_INCREMENT,
+			poll_id int(100) NOT NULL,
+			poll_type VARCHAR(255) NOT NULL,
+			poller_id_ip VARCHAR(255) NOT NULL,
+			polled_value VARCHAR(255) NOT NULL,
+			polled_comments VARCHAR(255),
+			datetime DATETIME NOT NULL,
+			UNIQUE KEY id (id)
+		)";
+
+		maybe_create_table( LIQUIDPOLL_RESULTS_TABLE, $sql );
 	}
+}
 
-	ob_start();
 
-	foreach ( $css_arr as $property => $value ) {
+if ( ! function_exists( 'liquidpoll_insert_results' ) ) {
+	/**
+	 * Insert poll results in database
+	 *
+	 * @param array $args
+	 * @param bool $allow_multi_submission
+	 *
+	 * @return WP_Error|bool
+	 */
+	function liquidpoll_insert_results( $args = array(), $allow_multi_submission = false ) {
 
-		if ( in_array( $property, array( 'type', 'unit' ) ) ) {
-			continue;
+		global $wpdb, $poll;
+
+		$defaults = array(
+			'poll_id'         => $poll instanceof LIQUIDPOLL_Poll ? $poll->get_id() : '',
+			'poll_type'       => 'poll',
+			'poller_id_ip'    => liquidpoll_get_poller(),
+			'polled_value'    => '',
+			'polled_comments' => '',
+			'datetime'        => current_time( 'mysql' ),
+		);
+		$args     = wp_parse_args( $args, $defaults );
+		$response = $wpdb->insert( LIQUIDPOLL_RESULTS_TABLE, $args );
+
+		if ( ! $response ) {
+			return new WP_Error( 'database_error', $wpdb->last_error );
 		}
 
-		if ( in_array( $property, array( 'font-size', 'line-height', 'letter-spacing' ) ) ) {
-			$value = $value . Utils::get_args_option( 'unit', $css_arr );
-		}
-
-		if ( ! empty( $value ) ) {
-			printf( '%s: %s;', $property, $value );
-		}
+		return true;
 	}
+}
 
-	printf( '<style>#poll-%s %s {%s}</style>', $poll->get_id(), $selector, ob_get_clean() );
+
+if ( ! function_exists( 'liquidpoll_apply_css' ) ) {
+	/**
+	 * Appdly dynamic CSS
+	 *
+	 * @param string $selector
+	 * @param array $css_arr
+	 */
+	function liquidpoll_apply_css( $selector = '', $css_arr = array() ) {
+
+		global $poll;
+
+		if ( empty( $selector ) || empty( $css_arr ) || ! is_array( $css_arr ) ) {
+			return;
+		}
+
+		ob_start();
+
+		foreach ( $css_arr as $property => $value ) {
+
+			if ( in_array( $property, array( 'type', 'unit' ) ) ) {
+				continue;
+			}
+
+			if ( in_array( $property, array( 'font-size', 'line-height', 'letter-spacing' ) ) ) {
+				$value = $value . Utils::get_args_option( 'unit', $css_arr );
+			}
+
+			if ( ! empty( $value ) ) {
+				printf( '%s: %s;', $property, $value );
+			}
+		}
+
+		liquidpoll()->add_global_style( sprintf( '%s {%s}', $selector, ob_get_clean() ) );
+	}
 }

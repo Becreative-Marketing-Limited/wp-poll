@@ -3,9 +3,7 @@
  * Template - Single Poll
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+defined( 'ABSPATH' ) || exit;
 
 global $liquidpoll;
 
@@ -45,4 +43,3 @@ do_action( 'liquidpoll_after_single_poll_template' );
  */
 
 get_footer();
-?>

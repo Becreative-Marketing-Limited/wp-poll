@@ -1,0 +1,57 @@
+.rangeslider,
+.rangeslider__fill {
+    display: block;
+    border-radius: 10px;
+}
+
+.rangeslider {
+    background: #F2F2F2;
+    position: relative;
+}
+
+.rangeslider--horizontal {
+    height: 5px;
+    width: 100%;
+}
+
+
+.rangeslider--disabled {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+    opacity: 0.4;
+}
+
+.rangeslider__fill {
+    background: #5f64eb;
+    position: absolute;
+    transition: 0.3s;
+}
+
+.rangeslider--horizontal .rangeslider__fill {
+    top: 0;
+    height: 100%;
+}
+
+.rangeslider--vertical .rangeslider__fill {
+    bottom: 0;
+    width: 100%;
+}
+
+.rangeslider__handle {
+    background: #7E6BE3;
+    border: 5px solid #F1F1F1;
+    cursor: pointer;
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    background-size: 100%;
+    border-radius: 50%;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rangeslider--horizontal .rangeslider__handle {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: 0.3s;
+}

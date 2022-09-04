@@ -13,6 +13,26 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 	 */
 	class LIQUIDPOLL_Functions {
 
+		protected $global_css = array();
+
+		/**
+		 * Add css to global scope
+		 *
+		 * @param $style_rule
+		 */
+		function add_global_style( $style_rule ) {
+			$this->global_css[] = $style_rule;
+		}
+
+		/**
+		 * Return global css array
+		 *
+		 * @return array
+		 */
+		function get_global_css() {
+			return $this->global_css;
+		}
+
 
 		/**
 		 * Return human-readable user information

@@ -7,13 +7,17 @@
 defined( 'ABSPATH' ) || exit;
 
 class LIQUIDPOLL_Poll_meta {
-
+	/**
+	 * LIQUIDPOLL_Poll_meta constructor.
+	 */
 	public function __construct() {
-
 		$this->generate_poll_meta_box();
 	}
 
 
+	/**
+	 * Generate poll meta box
+	 */
 	public function generate_poll_meta_box() {
 
 		$prefix = 'liquidpoll_poll_meta';
@@ -35,14 +39,20 @@ class LIQUIDPOLL_Poll_meta {
 	}
 
 
+	/**
+	 * Return poll meta fields
+	 *
+	 * @return mixed|void
+	 */
 	public function get_meta_field_sections() {
 
 		$poll_setting_fields = array(
 			array(
-				'id'    => 'settings_vote_after_deadline',
-				'title' => esc_html__( 'Poll settings', 'wp-poll' ),
-				'label' => esc_html__( 'Allow users to vote after deadline.', 'wp-poll' ),
-				'type'  => 'switcher',
+				'id'         => 'settings_vote_after_deadline',
+				'title'      => esc_html__( 'Poll settings', 'wp-poll' ),
+				'label'      => esc_html__( 'Allow users to vote after deadline.', 'wp-poll' ),
+				'type'       => 'switcher',
+				'dependency' => array( '_type', '==', 'poll', 'all' ),
 			),
 //			array(
 //				'id'    => 'settings_multiple_votes',
@@ -52,18 +62,20 @@ class LIQUIDPOLL_Poll_meta {
 //				'class' => 'padding-top-none',
 //			),
 			array(
-				'id'    => 'settings_new_options',
-				'title' => ' ',
-				'label' => esc_html__( 'Allow users to add new option.', 'wp-poll' ),
-				'type'  => 'switcher',
-				'class' => 'padding-top-none',
+				'id'         => 'settings_new_options',
+				'title'      => ' ',
+				'label'      => esc_html__( 'Allow users to add new option.', 'wp-poll' ),
+				'type'       => 'switcher',
+				'class'      => 'padding-top-none',
+				'dependency' => array( '_type', '==', 'poll', 'all' ),
 			),
 			array(
-				'id'    => 'settings_hide_timer',
-				'title' => ' ',
-				'label' => esc_html__( 'Hide countdown timer for this poll.', 'wp-poll' ),
-				'type'  => 'switcher',
-				'class' => 'padding-top-none',
+				'id'         => 'settings_hide_timer',
+				'title'      => ' ',
+				'label'      => esc_html__( 'Hide countdown timer for this poll.', 'wp-poll' ),
+				'type'       => 'switcher',
+				'class'      => 'padding-top-none',
+				'dependency' => array( '_type', '==', 'poll', 'all' ),
 			),
 		);
 		$poll_setting_fields = apply_filters( 'LiquidPoll/Filters/poll_setting_fields', $poll_setting_fields );
@@ -77,11 +89,26 @@ class LIQUIDPOLL_Poll_meta {
 					'title'   => esc_html__( 'Poll type', 'wp-poll' ),
 					'type'    => 'button_set',
 					'options' => array(
-						'poll'         => array( 'label' => esc_html__( 'Poll', 'wp-poll' ) ),
-						'reaction'     => array( 'label' => esc_html__( 'Reaction', 'wp-poll' ), 'availability' => 'upcoming', ),
-						'subscription' => array( 'label' => esc_html__( 'Subscription', 'wp-poll' ), 'availability' => 'upcoming', ),
-						'feedback'     => array( 'label' => esc_html__( 'Feedback', 'wp-poll' ), 'availability' => 'upcoming', ),
-						'nps'          => array( 'label' => esc_html__( 'NPS Score', 'wp-poll' ), 'availability' => 'upcoming', ),
+						'poll'         => array(
+							'label' => esc_html__( 'Poll', 'wp-poll' )
+						),
+						'nps'          => array(
+							'label'        => esc_html__( 'NPS Score', 'wp-poll' ),
+							'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+//							'availability' => 'pro',
+						),
+						'reaction'     => array(
+							'label'        => esc_html__( 'Reaction', 'wp-poll' ),
+							'availability' => 'upcoming',
+						),
+						'subscription' => array(
+							'label'        => esc_html__( 'Subscription', 'wp-poll' ),
+							'availability' => 'upcoming',
+						),
+						'feedback'     => array(
+							'label'        => esc_html__( 'Feedback', 'wp-poll' ),
+							'availability' => 'upcoming',
+						),
 					),
 					'default' => 'poll',
 				),
@@ -101,21 +128,24 @@ class LIQUIDPOLL_Poll_meta {
 					'field_options' => array(
 						'dateFormat' => 'yy-mm-dd',
 					),
+					'dependency'    => array( '_type', '==', 'poll', 'all' ),
 				),
 				array(
-					'id'      => '_countdown_position',
-					'title'   => esc_html__( 'Countdown Position', 'wp-poll' ),
-					'type'    => 'select',
-					'options' => array(
+					'id'         => '_countdown_position',
+					'title'      => esc_html__( 'Countdown Position', 'wp-poll' ),
+					'type'       => 'select',
+					'options'    => array(
 						'below_options' => array( 'label' => esc_html__( 'Below options', 'wp-poll' ) ),
 						'above_options' => array( 'label' => esc_html__( 'Above options (Pro)', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
 					),
-					'default' => 'below_options',
+					'default'    => 'below_options',
+					'dependency' => array( '_type', '==', 'poll', 'all' ),
 				),
 			), $poll_setting_fields )
 		);
-		$field_sections['poll_options']     = array(
-			'title'  => __( 'Poll Options', 'wp-poll' ),
+
+		$field_sections['poll_options'] = array(
+			'title'  => __( 'Options', 'wp-poll' ),
 			'icon'   => 'fa fa-th-large',
 			'fields' => array(
 				array(
@@ -139,35 +169,116 @@ class LIQUIDPOLL_Poll_meta {
 							'library'      => 'image',
 							'url'          => false,
 						),
-//						array(
-//							'id'      => 'shortcode',
-//							'title'   => esc_html__( 'Shortcode', 'wp-poll' ),
-//							'type'    => 'text',
-//							'class'   => 'hide-input-field',
-//							'default' => '',
-//							'desc'    => sprintf( '<span class="shortcode tt--hint tt--top" aria-label="Click to Copy">[poller_list poll_id="%s" option_id="%s"]</span>', '', '' )
-//						),
 					),
+					'dependency'      => array( '_type', '==', 'poll', 'all' ),
 				),
 				array(
-					'id'    => 'hide_option_labels',
-					'title' => esc_html__( 'Hide labels', 'wp-poll' ),
-					'label' => esc_html__( 'Hide labels of all options.', 'wp-poll' ),
-					'type'  => 'switcher',
-				),
+					'id'              => 'poll_meta_options_nps',
+					'title'           => esc_html__( 'Options (NPS)', 'wp-poll' ),
+					'label'           => esc_html__( 'Add poll options here. You can skip using media if you do not need this.', 'wp-poll' ),
+					'type'            => 'repeater',
+					'button_title'    => esc_html__( 'Add option', 'wp-poll' ),
+					'disable_actions' => array( 'clone' ),
+					'fields'          => array(
+						array(
+							'id'    => 'label',
+							'title' => esc_html__( 'Label', 'wp-poll' ),
+							'type'  => 'text',
+						),
+					),
+					'max'             => 10,
+					'default'         => array(
+						array(
+							'label' => esc_html__( '1', 'wp-poll' ),
+						),
+						array(
+							'label' => esc_html__( '2', 'wp-poll' ),
+						),
+						array(
+							'label' => esc_html__( '3', 'wp-poll' ),
+						),
+						array(
+							'label' => esc_html__( '4', 'wp-poll' ),
+						),
+						array(
+							'label' => esc_html__( '5', 'wp-poll' ),
+						),
+						array(
+							'label' => esc_html__( '6', 'wp-poll' ),
+						),
+						array(
+							'label' => esc_html__( '7', 'wp-poll' ),
+						),
+						array(
+							'label' => esc_html__( '8', 'wp-poll' ),
+						),
+						array(
+							'label' => esc_html__( '9', 'wp-poll' ),
+						),
+						array(
+							'label' => esc_html__( '10', 'wp-poll' ),
+						),
+					),
+					'dependency'      => array( '_type', '==', 'nps', 'all' ),
+				)
+			),
+			array(
+				'id'    => 'hide_option_labels',
+				'title' => esc_html__( 'Hide labels', 'wp-poll' ),
+				'label' => esc_html__( 'Hide labels of all options.', 'wp-poll' ),
+				'type'  => 'switcher',
 			),
 		);
-		$field_sections['poll_styling']     = array(
-			'title'  => __( 'Poll Styling', 'wp-poll' ),
+
+		$field_sections['poll_styling'] = array(
+			'title'  => __( 'Style Settings', 'wp-poll' ),
 			'icon'   => 'fa fa-bolt',
 			'fields' => array(
 				array(
-					'id'       => '_theme',
-					'title'    => esc_html__( 'Theme Style', 'wp-poll' ),
-					'subtitle' => esc_html__( 'By default it will apply from global settings.', 'wp-poll' ),
-					'type'     => 'select',
-					'options'  => $this->get_poll_themes(),
-					'default'  => 'default',
+					'id'         => '_theme',
+					'title'      => esc_html__( 'Poll Theme', 'wp-poll' ),
+					'subtitle'   => esc_html__( 'By default it will apply from global settings.', 'wp-poll' ),
+					'type'       => 'select',
+					'options'    => $this->get_poll_themes(),
+					'default'    => 'default',
+					'dependency' => array( '_type', '==', 'poll', 'all' ),
+				),
+				array(
+					'id'         => '_theme_nps',
+					'title'      => esc_html__( 'NPS Theme', 'wp-poll' ),
+					'subtitle'   => esc_html__( 'By default it will apply from global settings.', 'wp-poll' ),
+					'type'       => 'select',
+					'options'    => $this->get_nps_themes(),
+					'dependency' => array( '_type', '==', 'nps', 'all' ),
+				),
+				array(
+					'id'          => '_nps_lowest_marking_text',
+					'title'       => esc_html__( 'Lowest Marking Text', 'wp-poll' ),
+					'subtitle'    => esc_html__( 'Edit the text for indicating lowest value.', 'wp-poll' ),
+					'placeholder' => esc_html__( 'It was terrible', 'wp-poll' ),
+					'type'        => 'text',
+					'dependency'  => array( '_type', '==', 'nps', 'all' ),
+				),
+				array(
+					'id'          => '_nps_highest_marking_text',
+					'title'       => esc_html__( 'Highest Marking Text', 'wp-poll' ),
+					'subtitle'    => esc_html__( 'Edit the text for indicating highest value.', 'wp-poll' ),
+					'placeholder' => esc_html__( 'Absolutely love it', 'wp-poll' ),
+					'type'        => 'text',
+					'dependency'  => array( '_type', '==', 'nps', 'all' ),
+				),
+				array(
+					'id'         => '_nps_commentbox',
+					'title'      => esc_html__( 'Comment Box', 'wp-poll' ),
+					'subtitle'   => esc_html__( 'Receive feedback from users.', 'wp-poll' ),
+					'type'       => 'button_set',
+					'options'    => array(
+						'disabled' => array( 'label' => esc_html__( 'Disable', 'wp-poll' ) ),
+						'enabled'  => array( 'label' => esc_html__( 'Enable, Not Mandatory', 'wp-poll' ) ),
+						'obvious'  => array( 'label' => esc_html__( 'Enable, Mandatory', 'wp-poll' ) ),
+					),
+					'default'    => 'enabled',
+					'dependency' => array( '_type', '==', 'nps', 'all' ),
 				),
 				array(
 					'id'           => '_results_type',
@@ -182,17 +293,109 @@ class LIQUIDPOLL_Poll_meta {
 					'text_width'   => 150,
 					'default'      => 'votes',
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
-					'dependency'   => array( '_theme', 'any', '1,2,3,5,8,9,10' ),
+					'dependency'   => array( '_theme|_type', 'any|==', '1,2,3,5,8,9,10|poll', 'all' ),
 				),
-//				array(
-//					'id'          => '_votes_count_text',
-//					'title'       => esc_html__( 'Votes Count Text', 'wp-poll' ),
-//					'subtitle'    => esc_html__( 'Change votes count text in results screen.', 'wp-poll' ),
-//					'desc'        => esc_html__( 'You can use replacer "{votes_count}" which will replace with actual votes count number.', 'wp-poll' ),
-//					'placeholder' => esc_html__( '{votes_count} votes', 'wp-poll' ),
-//					'type'        => 'text',
-//					'dependency'  => array( '_results_type', '==', 'votes' ),
-//				),
+				array(
+					'id'         => 'subheading_nps_colors',
+					'type'       => 'subheading',
+					'content'    => esc_html__( 'NPS Colors', 'slider-x-woo' ),
+					'dependency' => array( '_type', '==', 'poll', 'all' ),
+				),
+				array(
+					'id'           => '_nps_labels_color',
+					'title'        => esc_html__( 'Labels Color', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add custom NPS labels color.', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'normal'       => esc_html__( 'Normal Color', 'wp-poll' ),
+						'hover_active' => esc_html__( 'Hover/Active Color', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '1,2|nps', 'all' ),
+				),
+				array(
+					'id'           => '_nps_labels_colors',
+					'title'        => esc_html__( 'Labels Color', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add custom NPS labels color.', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'normal'      => esc_html__( 'Label color', 'wp-poll' ),
+						'active'      => esc_html__( 'Hover/Active color', 'wp-poll' ),
+						'selected_bg' => esc_html__( 'Selected background color', 'wp-poll' ),
+						'border'      => esc_html__( 'Wrapper border', 'wp-poll' ),
+						'wrapper_bg'  => esc_html__( 'Wrapper background', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '5|nps', 'all' ),
+				),
+				array(
+					'id'           => '_nps_slider_color',
+					'title'        => esc_html__( 'Slider Color', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add custom NPS slider color.', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'bar'              => esc_html__( 'Bar Color', 'wp-poll' ),
+						'circle_indicator' => esc_html__( 'Circle Indicator Color', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '3|nps', 'all' ),
+				),
+				array(
+					'id'           => '_nps_progress_bar_colors',
+					'title'        => esc_html__( 'Progress Bar Color', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add progress bar color.', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'background' => esc_html__( 'Bar Color', 'wp-poll' ),
+						'indicator'  => esc_html__( 'Circle Indicator Color', 'wp-poll' ),
+						'bar_fill_1' => esc_html__( 'Bar Active Color 1', 'wp-poll' ),
+						'bar_fill_2' => esc_html__( 'Bar Active Color 2', 'wp-poll' ),
+						'bar_fill_3' => esc_html__( 'Bar Active Color 3', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '4|nps', 'all' ),
+				),
+
+				array(
+					'id'           => '_nps_labels_bg_color',
+					'title'        => esc_html__( 'Labels Background Color', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add background colors for labels. ', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'normal_1'       => esc_html__( 'Normal Color 1', 'wp-poll' ),
+						'normal_2'       => esc_html__( 'Normal Color 2', 'wp-poll' ),
+						'hover_active_1' => esc_html__( 'Hover/Active Color 1', 'wp-poll' ),
+						'hover_active_2' => esc_html__( 'Hover/Active 2', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '1,2|nps', 'all' ),
+				),
+				array(
+					'id'           => '_nps_marking_text_colors',
+					'title'        => esc_html__( 'Marking Texts', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add marking texts colors, "Not Happy" or "Fully Satisfied"', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'lowest'  => esc_html__( 'Lowest text color', 'wp-poll' ),
+						'highest' => esc_html__( 'Highest text color', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '1,2,3,4,5|nps', 'all' ),
+				),
+				array(
+					'id'           => '_nps_comment_box_colors',
+					'title'        => esc_html__( 'Comment / Feedback Box', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Add colors for comment box. ', 'wp-poll' ),
+					'type'         => 'color_group',
+					'options'      => array(
+						'text_color'   => esc_html__( 'Text color', 'wp-poll' ),
+						'bg_color'     => esc_html__( 'Background color', 'wp-poll' ),
+						'border_color' => esc_html__( 'Border color', 'wp-poll' ),
+					),
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme_nps|_type', 'any|==', '1,2,3,4,5|nps', 'all' ),
+				),
+
 				array(
 					'id'      => 'subheading_typography',
 					'type'    => 'subheading',
@@ -218,6 +421,7 @@ class LIQUIDPOLL_Poll_meta {
 					'subtitle'     => esc_html__( 'Control typography settings for poll options.', 'wp-poll' ),
 					'type'         => 'typography',
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_type', '==', 'poll', 'all' ),
 				),
 				array(
 					'id'           => '_typography_countdown_timer',
@@ -225,6 +429,7 @@ class LIQUIDPOLL_Poll_meta {
 					'subtitle'     => esc_html__( 'Control typography settings for poll count down timer.', 'wp-poll' ),
 					'type'         => 'typography',
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_type', '==', 'poll', 'all' ),
 				),
 				array(
 					'id'      => 'subheading_typography_button_submit',
@@ -245,9 +450,10 @@ class LIQUIDPOLL_Poll_meta {
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 				),
 				array(
-					'id'      => 'subheading_typography_button_results',
-					'type'    => 'subheading',
-					'content' => esc_html__( 'Typography Controls - Buttons - Results', 'slider-x-woo' ),
+					'id'         => 'subheading_typography_button_results',
+					'type'       => 'subheading',
+					'content'    => esc_html__( 'Typography Controls - Buttons - Results', 'slider-x-woo' ),
+					'dependency' => array( '_type', '==', 'poll', 'all' ),
 				),
 				array(
 					'id'           => '_typography_btn_results',
@@ -255,17 +461,46 @@ class LIQUIDPOLL_Poll_meta {
 					'subtitle'     => esc_html__( 'Control typography settings for poll results button.', 'wp-poll' ),
 					'type'         => 'typography',
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_type', '==', 'poll', 'all' ),
 				),
 				array(
 					'id'           => '_typography_btn_results_bg',
 					'title'        => esc_html__( 'Background color', 'wp-poll' ),
 					'type'         => 'color',
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_type', '==', 'poll', 'all' ),
 				),
 			),
 		);
 
 		return apply_filters( 'LiquidPoll/Filters/poll_meta_field_sections', $field_sections );
+	}
+
+	/**
+	 * Return NPS themes
+	 *
+	 * @return mixed|void
+	 */
+	function get_nps_themes() {
+
+		$themes = array(
+			1   => array(
+				'label' => esc_html__( 'Theme 1', 'wp-poll' ),
+			),
+			998 => array(
+				'label'        => esc_html__( '4+ are in pro', 'wp-poll' ),
+				'availability' => 'pro',
+			),
+			999 => array(
+				'label'        => esc_html__( '10+ are coming soon', 'wp-poll' ),
+				'availability' => 'upcoming',
+			),
+		);
+		$themes = apply_filters( 'LiquidPoll/Filters/nps_themes', $themes );
+
+		ksort( $themes );
+
+		return $themes;
 	}
 
 
@@ -291,7 +526,7 @@ class LIQUIDPOLL_Poll_meta {
 				'availability' => 'pro',
 			),
 			999 => array(
-				'label'        => esc_html__( '20+ are in pro', 'wp-poll' ),
+				'label'        => esc_html__( '20+ are coming soon', 'wp-poll' ),
 				'availability' => 'upcoming',
 			),
 		);

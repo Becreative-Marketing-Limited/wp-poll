@@ -18,6 +18,12 @@
     });
 
 
+    $(document).on('change', 'input[name="liquidpoll_poll_meta[_type]"]', function () {
+
+        console.log($(this).val());
+    });
+
+
     $(document).on('click', '.liquidpoll-poll-meta .meta-nav > li', function () {
 
         let thisMetaNav = $(this),
