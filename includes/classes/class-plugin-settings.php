@@ -31,7 +31,7 @@ class LIQUIDPOLL_Settings {
 			'product_version_pro' => liquidpoll()->is_pro() ? $liquidpoll_sdk->license()->plugin_version : '',
 			'quick_links'         => array(
 				'supports' => array(
-					'label' => esc_html__( 'Supports', 'wp-poll' ),
+					'label' => esc_html__( 'Support', 'wp-poll' ),
 					'url'   => LIQUIDPOLL_TICKET_URL,
 				),
 				'docs'     => array(
@@ -86,7 +86,7 @@ class LIQUIDPOLL_Settings {
 							'id'          => 'liquidpoll_btn_text_results',
 							'title'       => esc_html__( 'Button Text - Results', 'wp-poll' ),
 							'subtitle'    => esc_html__( 'Customize "Results" button text.', 'wp-poll' ),
-							'placeholder' => esc_html__( 'Vew Results', 'wp-poll' ),
+							'placeholder' => esc_html__( 'View Results', 'wp-poll' ),
 							'type'        => 'text',
 						),
 						array(
