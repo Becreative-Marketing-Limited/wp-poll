@@ -48,6 +48,6 @@ add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_buttons', 45 
  * Backend Template Hooks
  */
 
-add_action( 'liquidpoll-reports', 'liquidpoll_admin_render_reports' );
+add_action( 'PBSettings/section/primary_reports', 'liquidpoll_admin_render_reports' );
 
 add_action( 'post_submitbox_start', 'liquidpoll_poll_submitbox' );

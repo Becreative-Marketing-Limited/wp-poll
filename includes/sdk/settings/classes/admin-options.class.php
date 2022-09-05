@@ -681,11 +681,11 @@ if ( ! class_exists( 'PBSettings_Options' ) ) {
 						PBSettings::field( $field, $value, $this->unique, 'options' );
 
 					}
+				} elseif ( $section['external'] && isset( $section['id'] ) ) {
+					do_action( 'PBSettings/section/' . $section['id'] );
 
 				} else {
-
 					echo '<div class="pbsettings-no-option">' . esc_html__( 'No data available.' ) . '</div>';
-
 				}
 
 				echo '</div>';

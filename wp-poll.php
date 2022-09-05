@@ -3,7 +3,7 @@
  * Plugin Name: LiquidPoll - Advanced Polls for Creators and Brands
  * Plugin URI: https://liquidpoll.com
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.30
+ * Version: 3.3.31
  * Author: LiquidPoll
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -75,7 +75,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 		function define_classes_functions() {
 
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-pb-settings.php';
-            require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/aq_resizer.php';
+            require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-resizer.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-item-data.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-functions.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/functions.php';

@@ -3,8 +3,8 @@
 	Donate link: https://www.paypal.com/paypalme/frankopazo
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
-	Tested up to: 6.0.1
-	Stable tag: 3.3.30
+	Tested up to: 6.0.2
+	Stable tag: 3.3.31
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -256,3 +256,6 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.30 =
 * 29/08/2022 - FIX - Bug fixed.
+
+= 3.3.31 =
+* 05/09/2022 - FIX - Bug fixed.

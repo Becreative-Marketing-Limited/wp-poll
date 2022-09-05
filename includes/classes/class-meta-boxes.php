@@ -296,12 +296,6 @@ class LIQUIDPOLL_Poll_meta {
 					'dependency'   => array( '_theme|_type', 'any|==', '1,2,3,5,8,9,10|poll', 'all' ),
 				),
 				array(
-					'id'         => 'subheading_nps_colors',
-					'type'       => 'subheading',
-					'content'    => esc_html__( 'NPS Colors', 'slider-x-woo' ),
-					'dependency' => array( '_type', '==', 'poll', 'all' ),
-				),
-				array(
 					'id'           => '_nps_labels_color',
 					'title'        => esc_html__( 'Labels Color', 'wp-poll' ),
 					'subtitle'     => esc_html__( 'Add custom NPS labels color.', 'wp-poll' ),

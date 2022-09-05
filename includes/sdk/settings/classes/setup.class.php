@@ -265,9 +265,10 @@ if ( ! class_exists( 'PBSettings' ) ) {
 			foreach ( $sections as $section_index => $pages ) {
 
 				self::createSection( $id, array(
-					'id'    => 'primary_' . $section_index,
-					'title' => Utils::get_args_option( 'title', $pages ),
-					'icon'  => Utils::get_args_option( 'icon', $pages ),
+					'id'       => 'primary_' . $section_index,
+					'title'    => Utils::get_args_option( 'title', $pages ),
+					'icon'     => Utils::get_args_option( 'icon', $pages ),
+					'external' => Utils::get_args_option( 'external', $pages, false ),
 				) );
 
 				foreach ( Utils::get_args_option( 'sections', $pages, array() ) as $section ) {

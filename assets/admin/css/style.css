@@ -156,7 +156,7 @@ body.post-type-poll #submitdiv .hndle {
     border: 1px solid #ddd;
     box-shadow: 0 22px 35px -16px rgba(0, 0, 0, 0.1);
     max-width: 795px;
-    margin: 10px auto 20px auto;
+    margin: 20px;
 }
 
 /**
@@ -329,4 +329,9 @@ a.liquidpoll-doc:active {
 
 a.liquidpoll-doc {
     background: #292929;
+}
+
+
+#menu-posts-poll .wp-submenu .wp-first-item {
+    display: none;
 }

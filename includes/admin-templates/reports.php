@@ -10,6 +10,8 @@
 $poll_id = isset( $_GET['poll-id'] ) ? sanitize_text_field( $_GET['poll-id'] ) : '';
 
 if ( empty( $poll_id ) ) {
+	echo "<p style='margin: 20px;'>No item selected!</p>";
+
 	return;
 }
 
@@ -33,7 +35,7 @@ if ( $chart_type == 'pie' ) {
 
 
 ?>
-
+<h2 style="margin: 20px;">Reports for <?= get_the_title( $poll_id ); ?></h2>
 <div id="liquidpoll-chart-report"></div>
 
 

@@ -409,7 +409,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 				echo sprintf( "<i>%d %s</i>", count( $polled_data ), esc_html__( 'people polled on this', 'wp-poll' ) );
 				echo '<div class="row-actions">';
-				echo sprintf( '<span class="view_report"><a href="%s" rel="permalink">' . esc_html__( 'View Reports', 'wp-poll' ) . '</a></span>', "edit.php?post_type=poll&page=liquidpoll-settings&tab=liquidpoll-reports&poll-id=" . $post_id );
+				echo sprintf( '<span class="view_report"><a href="%s" rel="permalink">' . esc_html__( 'View Reports', 'wp-poll' ) . '</a></span>', "admin.php?page=settings&poll-id={$post_id}#tab=reports" );
 				echo '</div>';
 
 			endif;
@@ -466,7 +466,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				'plural'       => esc_html__( 'Poll Categories', 'wp-poll' ),
 				'hierarchical' => true,
 			) ) );
-
 
 			// Add image size
 			add_image_size( 'poll-square', 267, 258, true );

@@ -90,10 +90,10 @@ if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
 
 			$atts    = shortcode_atts( array(
 				'id'    => '',
-				'theme' => '1',
+				'theme' => '',
 			), $atts );
 			$poll_id = empty( $atts['id'] ) ? '' : $atts['id'];
-			$theme   = empty( $atts['theme'] ) ? '1' : $atts['theme'];
+			$theme   = empty( $atts['theme'] ) ? '' : $atts['theme'];
 			$poll    = liquidpoll_get_poll( $poll_id, array( 'theme' => $theme ) );
 			$post    = $poll->get_post();
 

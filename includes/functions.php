@@ -5,12 +5,9 @@
  * @author Pluginbazar
  */
 
-
 use Pluginbazar\Utils;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
+defined( 'ABSPATH' ) || exit;
 
 
 if ( ! function_exists( 'liquidpoll_export_button' ) ) {
@@ -644,5 +641,36 @@ if ( ! function_exists( 'liquidpoll_apply_css' ) ) {
 		}
 
 		liquidpoll()->add_global_style( sprintf( '%s {%s}', $selector, ob_get_clean() ) );
+	}
+}
+
+
+if ( ! function_exists( 'liquidpoll_resizer' ) ) {
+	/**
+	 * Resize images
+	 *
+	 * @param $url
+	 * @param null $width
+	 * @param null $height
+	 * @param null $crop
+	 * @param bool $single
+	 * @param false $upscale
+	 *
+	 * @return array|false|mixed|string
+	 */
+	function liquidpoll_resizer( $url, $width = null, $height = null, $crop = null, $single = true, $upscale = false ) {
+
+		if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
+			global $sitepress;
+			$url = $sitepress->convert_url( $url, $sitepress->get_default_language() );
+		}
+
+		$liquidpoll_resize = LIQUIDPOLL_Resizer::getInstance();
+
+		try {
+			return $liquidpoll_resize->process( $url, $width, $height, $crop, $single, $upscale );
+		} catch ( LIQUIDPOLL_Exception $e ) {
+			return false;
+		}
 	}
 }

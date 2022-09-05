@@ -256,6 +256,11 @@ class LIQUIDPOLL_Settings {
 			),
 		);
 
+		$field_sections['reports'] = array(
+			'external' => true,
+			'title'    => esc_html__( 'Reports', 'wp-poll' ),
+		);
+
 		return apply_filters( 'woc_filters_settings_pages', $field_sections );
 	}
 }

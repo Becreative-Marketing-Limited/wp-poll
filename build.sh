@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMMIT_MESSAGE_SDK="pull";
+COMMIT_MESSAGE_SDK="";
 COMMIT_MESSAGE="pull";
 
 for i in "$@"; do
