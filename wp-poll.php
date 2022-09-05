@@ -75,6 +75,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 		function define_classes_functions() {
 
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-pb-settings.php';
+            require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/aq_resizer.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-item-data.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-functions.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/functions.php';

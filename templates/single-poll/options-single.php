@@ -17,15 +17,18 @@ $label_class  = ! empty( $label ) ? ' has-label' : '';
 $option_name  = 'submit_poll_option';
 $option_name  = $poll->get_poll_type() == 'survey' ? sprintf( '%s[%s]', $option_name, $poll->get_id() ) : $option_name;
 $option_name  = $poll->get_poll_type() == 'survey' && $options_type == 'checkbox' ? $option_name . "[]" : $option_name;
-
+$theme_args = $poll->get_theme_args($poll->get_theme());
+$theme_width = isset($theme_args) && !empty($theme_args) ? $theme_args['width'] : '';
+$theme_height = isset($theme_args) && !empty($theme_args) ? $theme_args['height'] : '';
+$resized_thumb = pb_resize($thumb, $theme_width, $theme_height,true,true,true);
 ?>
 
 <div class="liquidpoll-option-single <?php echo esc_attr( $thumb_class . ' ' . $label_class ); ?>"
      data-option-id="<?php echo esc_attr( $option_id ); ?>">
 
-	<?php if ( 2 != $poll->get_theme() && ! empty( $thumb ) ) : ?>
+	<?php if ( 2 != $poll->get_theme() && ! empty( $resized_thumb ) ) : ?>
         <div class="liquidpoll-option-thumb">
-            <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
+            <img src="<?php echo esc_url( $resized_thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
         </div>
 	<?php endif; ?>
 
@@ -43,9 +46,9 @@ $option_name  = $poll->get_poll_type() == 'survey' && $options_type == 'checkbox
 
     </div>
 
-	<?php if ( 2 == $poll->get_theme() && ! empty( $thumb ) ) : ?>
+	<?php if ( 2 == $poll->get_theme() && ! empty( $resized_thumb ) ) : ?>
         <div class="liquidpoll-option-thumb">
-            <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
+            <img src="<?php echo esc_url( $resized_thumb ); ?>" alt="<?php echo esc_attr( $label ); ?>">
         </div>
 	<?php endif; ?>
 

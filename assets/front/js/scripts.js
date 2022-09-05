@@ -5,7 +5,7 @@
 (function ($, window, document, pluginObject) {
     "use strict";
 
-    $(document).on('ready', function () {
+    $(document).on('ready elementor/popup/show', function () {
 
         let optionSingle = $('.liquidpoll-option-single');
 
