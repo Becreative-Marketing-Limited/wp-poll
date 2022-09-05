@@ -330,8 +330,3 @@ a.liquidpoll-doc:active {
 a.liquidpoll-doc {
     background: #292929;
 }
-
-
-#menu-posts-poll .wp-submenu .wp-first-item {
-    display: none;
-}

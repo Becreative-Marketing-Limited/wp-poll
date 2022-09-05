@@ -256,10 +256,12 @@ class LIQUIDPOLL_Settings {
 			),
 		);
 
-		$field_sections['reports'] = array(
-			'external' => true,
-			'title'    => esc_html__( 'Reports', 'wp-poll' ),
-		);
+		if ( isset( $_GET['poll-id'] ) && ! empty( sanitize_text_field( $_GET['poll-id'] ) ) ) {
+			$field_sections['reports'] = array(
+				'external' => true,
+				'title'    => esc_html__( 'Reports', 'wp-poll' ),
+			);
+		}
 
 		return apply_filters( 'woc_filters_settings_pages', $field_sections );
 	}
