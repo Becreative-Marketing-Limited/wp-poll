@@ -161,48 +161,50 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 			return $this->theme;
 		}
 
-        /**
-         * @param $theme
-         * @return array|int[]
-         */
-        function get_theme_args($theme)
-        {
-            $theme_args = array();
+		/**
+		 * @param $theme
+		 *
+		 * @return array|int[]
+		 */
+		function get_theme_args( $theme ) {
+			$theme_args = array();
 
-            switch ($theme) {
-                case '1':
-                case '2':
-                case '3':
-                case '5':
-                    $theme_args = array(
-                        'width' => 75,
-                        'height' => 45,
-                    );
-                    break;
-                case '4':
-                    $theme_args = array(
-                        'width' => 125,
-                        'height' => 75,
-                    );
-                    break;
-                case '6':
-                case '7':
-                    $theme_args = array(
-                        'width' => 267,
-                        'height' => 258,
-                    );
-                    break;
-                case '8':
-                    $theme_args = array(
-                        'width' => 555,
-                        'height' => 120,
-                    );
-                    break;
-                default:
-                    $theme_args = array();
-            }
-            return $theme_args;
-        }
+			switch ( $theme ) {
+				case '1':
+				case '2':
+				case '3':
+				case '5':
+					$theme_args = array(
+						'width'  => 75,
+						'height' => 45,
+					);
+					break;
+				case '4':
+					$theme_args = array(
+						'width'  => 125,
+						'height' => 75,
+					);
+					break;
+				case '6':
+				case '7':
+					$theme_args = array(
+						'width'  => 267,
+						'height' => 258,
+					);
+					break;
+				case '8':
+				case '9':
+					$theme_args = array(
+						'width'  => 555,
+						'height' => 120,
+					);
+					break;
+				default:
+					$theme_args = array();
+			}
+
+			return $theme_args;
+		}
 
 
 		/**
