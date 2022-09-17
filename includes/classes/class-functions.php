@@ -15,6 +15,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 
 		protected $global_css = array();
 
+
 		/**
 		 * Add css to global scope
 		 *

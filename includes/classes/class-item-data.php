@@ -55,6 +55,47 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		}
 
 
+		function get_reports() {
+
+		}
+
+
+		/**
+		 * Return poll options as array
+		 *
+		 * @return mixed|void
+		 */
+		function get_poll_options() {
+
+			$_poll_options = array();
+
+			if ( 'nps' == $this->get_type() ) {
+				$poll_options = $this->get_meta( 'poll_meta_options_nps', array() );
+			} else {
+				$poll_options = $this->get_meta( 'poll_meta_options', array() );
+			}
+
+			foreach ( $poll_options as $option_key => $option ) {
+				$_poll_options[ $option_key ] = array(
+					'label' => isset( $option['label'] ) ? $option['label'] : '',
+					'thumb' => isset( $option['thumb']['url'] ) ? $option['thumb']['url'] : '',
+				);
+			}
+
+			return apply_filters( 'liquidpoll_filters_poll_options', $_poll_options );
+		}
+
+
+		/**
+		 * Return Poll type
+		 *
+		 * @return string
+		 */
+		function get_type() {
+			return apply_filters( 'liquidpoll_filters_poll_type', $this->get_meta( '_type', 'poll' ), $this->get_id() );
+		}
+
+
 		/**
 		 * Return Poll published date
 		 *

@@ -23,7 +23,7 @@ if ( post_password_required() ) {
 }
 
 ?>
-    <div id="<?php echo esc_attr( $poll->get_poll_type() ); ?>-<?php the_ID(); ?>" <?php liquidpoll_single_post_class( $embed_class ); ?>>
+    <div id="<?php echo esc_attr( $poll->get_type() ); ?>-<?php the_ID(); ?>" <?php liquidpoll_single_post_class( $embed_class ); ?>>
 		<?php
 		/**
 		 * Before Single poll main content
@@ -33,7 +33,7 @@ if ( post_password_required() ) {
 
 		if ( apply_filters( 'liquidpoll_filters_display_single_poll_main', true ) ) {
 
-			if ( 'nps' == $poll->get_poll_type() ) {
+			if ( 'nps' == $poll->get_type() ) {
 				?>
                 <form action="" class="nps-container" data-poll-id="<?php echo esc_attr( $poll->get_id() ); ?>" method="get">
 					<?php liquidpoll_get_template_part( 'single-nps/theme', $poll->get_theme(), ( $poll->get_theme() > 1 && liquidpoll()->is_pro() ) ); ?>

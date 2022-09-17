@@ -29,23 +29,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 
 
 		/**
-		 * Return Poll type
-		 *
-		 * @return string
-		 */
-		function get_poll_type() {
-
-			$poll_type = $this->get_meta( '_type', 'poll' );
-
-//			if ( $poll_type == 'survey' && ! defined( 'LIQUIDPOLLS_PLUGIN_FILE' ) ) {
-//				$poll_type = 'poll';
-//			}
-
-			return apply_filters( 'liquidpoll_filters_poll_type', $poll_type, $this->get_id() );
-		}
-
-
-		/**
 		 * Return whether a poll is ready to vote or not checking deadline
 		 *
 		 * @return mixed|void
@@ -82,6 +65,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			$poll_reports = array();
 			$poll_options = $this->get_poll_options();
 			$poll_results = $this->get_poll_results();
+
 
 			foreach ( $poll_options as $option_id => $option ) {
 
@@ -173,10 +157,25 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		 */
 		function get_poll_results() {
 
-			$polled_data  = $this->get_polled_data();
+			global $wpdb;
+
+			if ( 'nps' == $this->get_type() ) {
+				$polled_data   = array();
+				$poll_options  = $this->get_meta( 'poll_meta_options_nps', array() );
+				$query_results = $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_id = {$this->get_id()}", ARRAY_A );
+
+				foreach ( $query_results as $query_result ) {
+					if ( ! empty( $poller_id_ip = ( $query_result['poller_id_ip'] ?? '' ) ) ) {
+						$polled_data[ $poller_id_ip ][] = $query_result['polled_value'] ?? '';
+					}
+				}
+			} else {
+				$polled_data  = $this->get_polled_data();
+				$poll_options = $this->get_meta( 'poll_meta_options', array() );
+			}
+
 			$total_voted  = count( $polled_data );
 			$poll_results = array( 'total' => $total_voted, 'singles' => array(), 'percentages' => array() );
-			$poll_options = $this->get_meta( 'poll_meta_options', array() );
 			$option_ids   = array_keys( $poll_options );
 
 			/**
@@ -250,32 +249,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			} else {
 				return false;
 			}
-		}
-
-
-		/**
-		 * Return poll options as array
-		 *
-		 * @return mixed|void
-		 */
-		function get_poll_options() {
-
-			$_poll_options = array();
-
-			if ( 'nps' == $this->get_poll_type() ) {
-				$poll_options = $this->get_meta( 'poll_meta_options_nps', array() );
-			} else {
-				$poll_options = $this->get_meta( 'poll_meta_options', array() );
-			}
-
-			foreach ( $poll_options as $option_key => $option ) {
-				$_poll_options[ $option_key ] = array(
-					'label' => isset( $option['label'] ) ? $option['label'] : '',
-					'thumb' => isset( $option['thumb']['url'] ) ? $option['thumb']['url'] : '',
-				);
-			}
-
-			return apply_filters( 'liquidpoll_filters_poll_options', $_poll_options );
 		}
 
 

@@ -35,7 +35,7 @@ global $poll;
 
     </div>
 
-<?php if ( $poll->get_poll_type() === 'poll' ) : ?>
+<?php if ( $poll->get_type() === 'poll' ) : ?>
 
     <div class="liquidpoll-popup-container">
         <div class="liquidpoll-popup-box">

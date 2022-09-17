@@ -15,8 +15,7 @@ if ( empty( $poll_id ) ) {
 	return;
 }
 
-$poll = liquidpoll_get_poll( $poll_id );
-
+$poll         = liquidpoll_get_poll( $poll_id );
 $seriesVotes  = array_values( $poll->get_poll_reports( 'counts' ) );
 $seriesLabels = array_values( $poll->get_poll_reports( 'labels' ) );
 $totalVotes   = $poll->get_poll_reports( 'total_votes' );
@@ -35,9 +34,7 @@ if ( $chart_type == 'pie' ) {
 
 
 ?>
-<h2 style="margin: 20px;">Reports for <?= get_the_title( $poll_id ); ?></h2>
 <div id="liquidpoll-chart-report"></div>
-
 
 <script>
     let pollTitle = '<?php printf( esc_html__( 'Poll : %s', 'wp-poll' ), $poll->get_name() ); ?>',

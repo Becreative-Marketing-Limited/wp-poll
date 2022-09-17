@@ -15,8 +15,8 @@ $thumb         = isset( $args['thumb'] ) && ! in_array( $poll->get_theme(), arra
 $thumb_class   = ! empty( $thumb ) ? ' has-thumb' : '';
 $label_class   = ! empty( $label ) ? ' has-label' : '';
 $option_name   = 'submit_poll_option';
-$option_name   = $poll->get_poll_type() == 'survey' ? sprintf( '%s[%s]', $option_name, $poll->get_id() ) : $option_name;
-$option_name   = $poll->get_poll_type() == 'survey' && $options_type == 'checkbox' ? $option_name . "[]" : $option_name;
+$option_name   = $poll->get_type() == 'survey' ? sprintf( '%s[%s]', $option_name, $poll->get_id() ) : $option_name;
+$option_name   = $poll->get_type() == 'survey' && $options_type == 'checkbox' ? $option_name . "[]" : $option_name;
 $theme_args    = $poll->get_theme_args( $poll->get_theme() );
 $theme_width   = isset( $theme_args ) && ! empty( $theme_args ) ? $theme_args['width'] : '';
 $theme_height  = isset( $theme_args ) && ! empty( $theme_args ) ? $theme_args['height'] : '';

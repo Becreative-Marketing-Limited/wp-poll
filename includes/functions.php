@@ -280,7 +280,7 @@ if ( ! function_exists( 'liquidpoll_single_post_class' ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
 		}
 
-		$classes[] = sprintf( '%s-single', $poll->get_poll_type() );
+		$classes[] = sprintf( '%s-single', $poll->get_type() );
 		$classes[] = sprintf( 'theme-%s', $poll->get_theme() );
 		$classes[] = sprintf( 'results-type-%s', $poll->get_meta( '_results_type', 'votes' ) );
 
