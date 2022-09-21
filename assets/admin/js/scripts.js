@@ -5,9 +5,19 @@
 (function ($, window, document, pluginObject) {
     "use strict";
 
+
     $(function () {
         $(".poll-options").sortable({handle: ".option-move", revert: true});
         $(".poll_option_container").sortable({handle: ".poll_option_single_sorter"});
+    });
+
+    $(document).on('change', '#liquidpoll-poll-selection', function () {
+        let pollSelectionField = $(this),
+            pollSelectionFieldValue = pollSelectionField.val(),
+            currentPageURL = pollSelectionField.data('url');
+
+        window.onbeforeunload = null;
+        window.location.href = currentPageURL + '&poll-id=' + pollSelectionFieldValue + '#tab=reports';
     });
 
     $(window).on('load', function () {

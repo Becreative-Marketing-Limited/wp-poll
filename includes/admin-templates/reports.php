@@ -6,12 +6,26 @@
  * @author Pluginbazar
  */
 
+if ( empty( $poll_id = isset( $_GET['poll-id'] ) ? sanitize_text_field( $_GET['poll-id'] ) : '' ) ) {
+	liquidpoll()->print_notice( esc_html__( 'Please select a poll.', 'wp-poll' ), 'error', false );
+}
 
-$poll_id = isset( $_GET['poll-id'] ) ? sanitize_text_field( $_GET['poll-id'] ) : '';
+?>
 
+
+<div class="liquidpoll-reports-field">
+    <label for="liquidpoll-poll-selection"><?php esc_html_e( 'Select Poll', 'wp-poll' ); ?></label>
+    <select name="poll-id" id="liquidpoll-poll-selection" data-url="<?php echo esc_url( admin_url( 'edit.php?post_type=poll&page=settings' ) ); ?>">
+        <option value=""><?php esc_html_e( 'Choose a Poll', 'wp-poll' ); ?></option>
+		<?php foreach ( get_posts( 'post_type=poll&posts_per_page=-1&fields=ids' ) as $__p_id ) : ?>
+            <option value="<?php echo esc_attr( $__p_id ); ?>" <?php selected( $poll_id, $__p_id ); ?>><?php echo esc_html( get_the_title( $__p_id ) ); ?></option>
+		<?php endforeach; ?>
+    </select>
+</div>
+
+
+<?php
 if ( empty( $poll_id ) ) {
-	echo "<p style='margin: 20px;'>No item selected!</p>";
-
 	return;
 }
 
@@ -31,9 +45,9 @@ if ( $chart_type == 'pie' ) {
 	);
 	$series = sprintf( '[%s]', preg_replace( '/"([a-zA-Z]+[a-zA-Z0-9_]*)":/', '$1:', json_encode( $series ) ) );
 }
-
-
 ?>
+
+
 <div id="liquidpoll-chart-report"></div>
 
 <script>
@@ -155,8 +169,6 @@ if ( $chart_type == 'pie' ) {
             document.querySelector("#liquidpoll-chart-report"),
             options
         );
-
-    console.log(options);
 
     chart.render();
 </script>

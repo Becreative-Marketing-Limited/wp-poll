@@ -330,3 +330,18 @@ a.liquidpoll-doc:active {
 a.liquidpoll-doc {
     background: #292929;
 }
+
+.pbsettings-section[data-section-id="reports"] {
+    padding: 30px;
+}
+
+.pbsettings-section[data-section-id="reports"] .notice {
+    margin: 5px 5px 20px 0;
+}
+
+.pbsettings-section[data-section-id="reports"] .liquidpoll-reports-field label {
+    margin-right: 15px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 600;
+}

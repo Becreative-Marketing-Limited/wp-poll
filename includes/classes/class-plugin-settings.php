@@ -183,6 +183,43 @@ class LIQUIDPOLL_Settings {
 						),
 					),
 				),
+				array(
+					'title'  => esc_html__( 'NPS Settings', 'wp-poll' ),
+					'fields' => array(
+						array(
+							'id'           => 'liquidpoll_nps_text_min',
+							'title'        => esc_html__( 'Minimum Identifier Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'This will be replacer for identifying the min value.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'It was terrible!', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+						array(
+							'id'           => 'liquidpoll_nps_text_max',
+							'title'        => esc_html__( 'Maximum Identifier Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'This will be replacer for identifying the max value.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'Absolutely love it!', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+						array(
+							'id'           => 'liquidpoll_nps_text_success',
+							'title'        => esc_html__( 'Success Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'Display once submission is successfull.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+						array(
+							'id'           => 'liquidpoll_nps_text_failed',
+							'title'        => esc_html__( 'Failed Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'Display once submission is failed.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'Something went wrong!', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+					),
+				),
 			),
 		);
 
@@ -256,12 +293,13 @@ class LIQUIDPOLL_Settings {
 			),
 		);
 
-		if ( isset( $_GET['poll-id'] ) && ! empty( sanitize_text_field( $_GET['poll-id'] ) ) ) {
-			$field_sections['reports'] = array(
-				'external' => true,
-				'title'    => esc_html__( 'Reports', 'wp-poll' ),
-			);
-		}
+		$field_sections['reports'] = array(
+			'external' => true,
+			'title'    => esc_html__( 'Reports', 'wp-poll' ),
+		);
+
+//		if ( isset( $_GET['poll-id'] ) && ! empty( sanitize_text_field( $_GET['poll-id'] ) ) ) {
+//		}
 
 		return apply_filters( 'woc_filters_settings_pages', $field_sections );
 	}

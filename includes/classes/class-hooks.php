@@ -76,12 +76,12 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			$response  = liquidpoll_insert_results( $data_args );
 
 			if ( is_wp_error( $response ) ) {
-				wp_send_json_error( $response->get_error_message() );
+				wp_send_json_error( Utils::get_option( 'liquidpoll_nps_text_failed', $response->get_error_message() ) );
 			}
 
 			do_action( 'liquidpoll_after_vote_nps', $data_args, $response );
 
-			wp_send_json_success( esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ) );
+			wp_send_json_success( Utils::get_option( 'liquidpoll_nps_text_success', esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ) ) );
 		}
 
 		/**

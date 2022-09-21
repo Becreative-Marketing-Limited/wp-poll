@@ -18,7 +18,7 @@ if ( $post->post_type != 'poll' ) {
     <div class="liquidpoll-item results">
         <label><?php esc_html_e( 'Results / Report', 'wp-poll' ); ?></label>
         <a class="tt--hint tt--top"
-           href="<?php echo esc_url( admin_url( 'edit.php?post_type=poll&page=liquidpoll-settings&tab=liquidpoll-reports&poll-id=' . $post->ID ) ); ?>"
+           href="<?php echo esc_url( admin_url( "edit.php?post_type=poll&page=settings&poll-id={$post->ID}#tab=reports" ) ); ?>"
            aria-label="<?php esc_attr_e( 'Click to see Results', 'wp-poll' ); ?>">
 			<?php esc_html_e( 'View Results', 'wp-poll' ); ?>
         </a>
