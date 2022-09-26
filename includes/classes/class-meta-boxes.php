@@ -218,6 +218,9 @@ class LIQUIDPOLL_Poll_meta {
 						array(
 							'label' => esc_html__( '10', 'wp-poll' ),
 						),
+						array(
+							'label' => esc_html__( '11', 'wp-poll' ),
+						),
 					),
 					'dependency'      => array( '_type', '==', 'nps', 'all' ),
 				)
@@ -293,7 +296,7 @@ class LIQUIDPOLL_Poll_meta {
 					'text_width'   => 150,
 					'default'      => 'votes',
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
-					'dependency'   => array( '_theme|_type', 'any|==', '1,2,3,5,8,9,10|poll', 'all' ),
+					'dependency'   => array( '_theme|_type', 'any|==', '1,2,3,5,8,9,10,11|poll', 'all' ),
 				),
 				array(
 					'id'           => '_nps_labels_color',

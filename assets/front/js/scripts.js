@@ -68,16 +68,22 @@
                     }
 
                     if ($.inArray(optionID, response.data.percentages)) {
-                        $(this).addClass('has-result').find('.liquidpoll-option-result-bar').css('width', percentageValue + '%');
+
+                        let pollSingle = $(this).parent().parent();
+
+                        if (pollSingle.hasClass('theme-11')) {
+                            $(this).addClass('has-result').find('.liquidpoll-option-result-bar-inner').css('width', percentageValue + '%');
+                        } else {
+                            $(this).addClass('has-result').find('.liquidpoll-option-result-bar').css('width', percentageValue + '%');
+                        }
+
                         // $(this).append('<span class="percentage-bar" style="width: ' + percentageValue + '% ;"></span>');
                         $(this).find('.percentage-bar').css('width', percentageValue + '%');
 
-                        let pollSIngle = $(this).parent().parent();
-
                         if (
-                            pollSIngle.hasClass('theme-4') ||
-                            pollSIngle.hasClass('theme-6') ||
-                            pollSIngle.hasClass('theme-7')
+                            pollSingle.hasClass('theme-4') ||
+                            pollSingle.hasClass('theme-6') ||
+                            pollSingle.hasClass('theme-7')
                         ) {
                             let progressBar = $(this).addClass('has-result').find('.liquidpoll-votes-count'),
                                 radius = progressBar.find('circle.complete').attr('r'),
@@ -95,7 +101,12 @@
                             marginLeft = 0;
                         }
 
-                        $(this).find('.liquidpoll-option-result').html(optionResultsText).css('left', 'calc(' + percentageValue + '% - ' + marginLeft + 'px)');
+                        if (pollSingle.hasClass('theme-11')) {
+                            $(this).find('.liquidpoll-option-result').html(optionResultsText);
+                            $(this).find('.liquidpoll-votes-count').html(singleVoteCount + ' ' + pluginObject.voteText);
+                        } else {
+                            $(this).find('.liquidpoll-option-result').html(optionResultsText).css('left', 'calc(' + percentageValue + '% - ' + marginLeft + 'px)');
+                        }
                     }
                 });
 

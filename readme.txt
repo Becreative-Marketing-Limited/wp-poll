@@ -269,3 +269,6 @@ Display all your polls in one place so that you can create a landing page where 
 = 3.3.34 =
 * 22/09/2022 - NEW - Added strings for NPS.
 * 22/09/2022 - FIX - Fixed bug in NPS.
+
+= 3.3.35 =
+* 26/09/2022 - NEW - Poll theme 11 added on pro version.
