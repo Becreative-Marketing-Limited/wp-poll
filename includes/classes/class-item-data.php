@@ -36,11 +36,20 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		public $item_post = null;
 
 
-		/** Base theme
+		/**
+		 * Base theme
 		 *
 		 * @var null
 		 */
 		public $theme = null;
+
+
+		/**
+		 * Container classes
+		 *
+		 * @var null
+		 */
+		public $class = null;
 
 
 		/**
@@ -52,11 +61,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		function __construct( $item_id = 0, $args = array() ) {
 
 			$this->init( $item_id, $args );
-		}
-
-
-		function get_reports() {
-
 		}
 
 
@@ -394,19 +398,24 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 
 			$this->item_id   = ! $item_id ? get_the_ID() : $item_id;
 			$this->item_post = get_post( $this->item_id );
+			$this->class     = isset( $args['class'] ) ? $args['class'] : '';
 
-			switch ( $this->get_type() ) {
-				case 'nps':
-					$this->theme = $this->get_meta( '_theme_nps', 1 );
-					break;
+			if ( isset( $args['theme'] ) && ! empty( $args['theme'] ) ) {
+				$this->theme = $args['theme'];
+			} else {
+				switch ( $this->get_type() ) {
+					case 'nps':
+						$this->theme = $this->get_meta( '_theme_nps', 1 );
+						break;
 
-				case 'reaction':
-					$this->theme = $this->get_meta( '_theme_reaction', 1 );
-					break;
+					case 'reaction':
+						$this->theme = $this->get_meta( '_theme_reaction', 1 );
+						break;
 
-				default:
-					$this->theme = $this->get_meta( '_theme', 1 );
-					break;
+					default:
+						$this->theme = $this->get_meta( '_theme', 1 );
+						break;
+				}
 			}
 		}
 	}

@@ -3,7 +3,7 @@
  * Plugin Name: LiquidPoll - Advanced Polls for Creators and Brands
  * Plugin URI: https://liquidpoll.com
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.35
+ * Version: 3.3.36
  * Author: LiquidPoll
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -25,7 +25,7 @@ defined( 'LIQUIDPOLL_DOCS_URL' ) || define( 'LIQUIDPOLL_DOCS_URL', 'https://www.
 defined( 'LIQUIDPOLL_REVIEW_URL' ) || define( 'LIQUIDPOLL_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
 defined( 'LIQUIDPOLL_TICKET_URL' ) || define( 'LIQUIDPOLL_TICKET_URL', 'https://www.liquidpoll.com/my-account/' );
 defined( 'LIQUIDPOLL_COMMUNITY_URL' ) || define( 'LIQUIDPOLL_COMMUNITY_URL', 'https://www.facebook.com/groups/liquidpoll/' );
-defined( 'LIQUIDPOLL_VERSION' ) || define( 'LIQUIDPOLL_VERSION', '3.3.35' );
+defined( 'LIQUIDPOLL_VERSION' ) || define( 'LIQUIDPOLL_VERSION', '3.3.36' );
 
 if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 	/**
@@ -75,7 +75,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 		function define_classes_functions() {
 
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-pb-settings.php';
-            require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-resizer.php';
+			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-resizer.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-item-data.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-functions.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/functions.php';

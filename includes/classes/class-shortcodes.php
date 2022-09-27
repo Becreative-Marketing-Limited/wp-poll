@@ -91,14 +91,16 @@ if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
 			$atts    = shortcode_atts( array(
 				'id'    => '',
 				'theme' => '',
+				'class' => '',
 			), $atts );
 			$poll_id = empty( $atts['id'] ) ? '' : $atts['id'];
 			$theme   = empty( $atts['theme'] ) ? '' : $atts['theme'];
-			$poll    = liquidpoll_get_poll( $poll_id, array( 'theme' => $theme ) );
+			$class   = empty( $atts['class'] ) ? '' : $atts['class'];
+			$poll    = liquidpoll_get_poll( $poll_id, array( 'theme' => $theme, 'class' => $class ) );
 			$post    = $poll->get_post();
 
 			ob_start();
-			
+
 			setup_postdata( $post );
 
 			liquidpoll_get_template( 'content-single-poll.php' );

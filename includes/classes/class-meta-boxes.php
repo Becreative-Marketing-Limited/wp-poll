@@ -141,6 +141,38 @@ class LIQUIDPOLL_Poll_meta {
 					'default'    => 'below_options',
 					'dependency' => array( '_type', '==', 'poll', 'all' ),
 				),
+				array(
+					'id'          => '_reaction_position',
+					'title'       => esc_html__( 'Reaction Position', 'wp-poll' ),
+					'type'        => 'select',
+					'placeholder' => esc_html__( 'Select position', 'wp-poll' ),
+					'options'     => array(
+						'below_content' => array( 'label' => esc_html__( 'Below Content', 'wp-poll' ) ),
+						'above_content' => array( 'label' => esc_html__( 'Above Content', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
+						'floating'      => array( 'label' => esc_html__( 'Floating Position', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
+					),
+					'dependency'  => array( '_type', '==', 'reaction', 'all' ),
+				),
+				array(
+					'id'          => '_reaction_post_type',
+					'title'       => esc_html__( 'Post Type', 'wp-poll' ),
+					'type'        => 'select',
+					'placeholder' => esc_html__( 'Select post type', 'wp-poll' ),
+					'options'     => 'post_types',
+					'dependency'  => array( '_type|_reaction_position', '==|any', 'reaction|below_content,above_content', 'all' ),
+				),
+				array(
+					'id'         => '_reaction_floating_position',
+					'title'      => esc_html__( 'Floating Position', 'wp-poll' ),
+					'type'       => 'spacing',
+					'options'    => array(
+						'below_content' => array( 'label' => esc_html__( 'Below Content', 'wp-poll' ) ),
+						'above_content' => array( 'label' => esc_html__( 'Above Content', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
+						'floating'      => array( 'label' => esc_html__( 'Floating Position', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
+					),
+					'units'      => array( 'px' ),
+					'dependency' => array( '_type|_reaction_position', '==|==', 'reaction|floating', 'all' ),
+				),
 			), $poll_setting_fields )
 		);
 

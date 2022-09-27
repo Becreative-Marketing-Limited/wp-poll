@@ -588,7 +588,7 @@ if ( ! function_exists( 'liquidpoll_insert_results' ) ) {
 
 		global $wpdb, $poll;
 
-		$defaults = array(
+		$defaults    = array(
 			'poll_id'         => $poll instanceof LIQUIDPOLL_Poll ? $poll->get_id() : '',
 			'poll_type'       => 'poll',
 			'poller_id_ip'    => liquidpoll_get_poller(),
@@ -596,7 +596,13 @@ if ( ! function_exists( 'liquidpoll_insert_results' ) ) {
 			'polled_comments' => '',
 			'datetime'        => current_time( 'mysql' ),
 		);
-		$args     = wp_parse_args( $args, $defaults );
+		$args        = wp_parse_args( $args, $defaults );
+		$entry_count = $wpdb->get_var( "SELECT COUNT(*) FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_type = '{$args['poll_type']}' AND poller_id_ip = '{$args['poller_id_ip']}'" );
+
+		if ( $entry_count > 0 ) {
+			return new WP_Error( 'duplicate_try', esc_html__( 'Already voted', 'wp-poll' ) );
+		}
+
 		$response = $wpdb->insert( LIQUIDPOLL_RESULTS_TABLE, $args );
 
 		if ( ! $response ) {
@@ -674,3 +680,6 @@ if ( ! function_exists( 'liquidpoll_resizer' ) ) {
 		}
 	}
 }
+
+
+
