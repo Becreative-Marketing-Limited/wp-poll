@@ -9,6 +9,12 @@ if ( ! $poll instanceof LIQUIDPOLL_Poll ) {
 	$poll = liquidpoll_get_poll();
 }
 
+if ( 'reaction' == $poll->get_type() && is_singular( 'poll' ) ) {
+	liquidpoll()->print_notice( esc_html__( 'This poll type does not have any single view.', 'wp-poll' ), 'error liquidpoll-notice liquidpoll-warning' );
+
+	return;
+}
+
 $embed_class = $wp_query->get( 'poll_in_embed', false ) ? 'inside-embed' : '';
 
 /**
@@ -34,12 +40,20 @@ if ( post_password_required() ) {
 		if ( apply_filters( 'liquidpoll_filters_display_single_poll_main', true ) ) {
 
 			if ( 'nps' == $poll->get_type() ) {
-				?>
-                <form action="" class="nps-container" data-poll-id="<?php echo esc_attr( $poll->get_id() ); ?>" method="get">
-					<?php liquidpoll_get_template_part( 'single-nps/theme', $poll->get_theme(), ( $poll->get_theme() > 1 && liquidpoll()->is_pro() ) ); ?>
-                </form>
-				<?php
+
+				ob_start();
+				liquidpoll_get_template_part( 'single-nps/theme', $poll->get_theme(), ( $poll->get_theme() > 1 && liquidpoll()->is_pro() ) );
+				printf( '<form action="" class="nps-container" data-poll-id="%s" method="get">%s</form>', $poll->get_id(), ob_get_clean() );
+
+			} elseif ( 'reaction' == $poll->get_type() ) {
+
+				ob_start();
+				liquidpoll_get_template_part( 'single-reaction/theme', $poll->get_theme(), ( $poll->get_theme() > 0 && liquidpoll()->is_pro() ) );
+				printf( '<input type="hidden" name="poll_id" value="%s">', $poll->get_id() );
+				printf( '<form action="" class="reaction-container" data-poll-id="%s" method="get">%s</form>', $poll->get_id(), ob_get_clean() );
+
 			} else {
+
 				/**
 				 * Hook: liquidpoll_single_poll_main
 				 *

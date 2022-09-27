@@ -1399,6 +1399,10 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     border-bottom-right-radius: 3px;
 }
 
+.liquidpoll-notice > p {
+    margin-bottom: 0;
+}
+
 .liquidpoll-notice.liquidpoll-warning {
     background: #ff98003b;
 }

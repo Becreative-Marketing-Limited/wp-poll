@@ -13,6 +13,11 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 	 */
 	class LIQUIDPOLL_Functions {
 
+		/**
+		 * @var LIQUIDPOLL_Poll_meta|null
+		 */
+		public $metaboxes = null;
+
 		protected $global_css = array();
 
 

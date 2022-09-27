@@ -19,6 +19,7 @@
         });
     });
 
+
     $(document).on('click', '.liquidpoll-get-poll-results', function () {
 
         let resultButton = $(this),

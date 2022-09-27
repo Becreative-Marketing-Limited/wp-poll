@@ -216,7 +216,7 @@
 }
 
 li.pbsettings-tab-item.pbsettings-tab-expanded {
-    border-left: 3px solid var(--pbsettings-primary-color);
+    border-left: 4px solid var(--pbsettings-primary-color);
 }
 
 .pbsettings-nav ul li a {
@@ -237,7 +237,7 @@ li.pbsettings-tab-item.pbsettings-tab-expanded {
 .pbsettings-nav ul li .pbsettings-arrow:after {
     content: "\f054";
     display: inline-block;
-    font-family: "Font Awesome 5 Pro", "Font Awesome 5 Free", "FontAwesome";
+    font-family: "Font Awesome 5 Pro", "Font Awesome 5 Free", "FontAwesome", serif;
     font-weight: 900;
     font-size: 9px;
     line-height: 1;
@@ -875,7 +875,7 @@ li.pbsettings-tab-item.pbsettings-tab-expanded {
     right: 18px;
     width: 90px;
     height: 22px;
-    z-index: 999999;
+    z-index: 9;
     font-size: 12px;
     line-height: 22px;
     background: #ed6f6f;
@@ -1768,11 +1768,99 @@ li.pbsettings-tab-item.pbsettings-tab-expanded {
     max-width: 100%;
     height: auto;
     vertical-align: top;
+    width: 80px;
+    border: 1px solid #dedede;
 }
 
 .pbsettings-field-image_select input {
     display: none;
 }
+
+
+
+/**
+ * 03. 17. Field: image_select
+ */
+.pbsettings-field-image_select_sortable .pbsettings--sibling-wrap {
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    position: relative;
+}
+
+.pbsettings-field-image_select_sortable .pbsettings--sibling-wrap .sortable {
+    position: absolute;
+    z-index: 9;
+    top: 2px;
+    right: 2px;
+    font-size: 11px;
+    font-weight: 900;
+    width: 20px;
+    height: 20px;
+    line-height: 18px;
+    color: #fff;
+    background-color: #8bc34a;
+    transition: opacity .2s;
+    text-align: center;
+    cursor: move;
+}
+
+
+.pbsettings-field-image_select_sortable .pbsettings--inline-list .pbsettings--image {
+    display: block;
+}
+
+.pbsettings-field-image_select_sortable figure {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0;
+    vertical-align: bottom;
+    border: 2px solid transparent;
+    background-color: #fff;
+    user-select: none;
+    transition: all .2s;
+}
+
+.pbsettings-field-image_select_sortable figure:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    font-size: 10px;
+    font-family: "Font Awesome 5 Pro", "Font Awesome 5 Free", "FontAwesome";
+    font-weight: 900;
+    content: "\f00c";
+    width: 16px;
+    height: 16px;
+    line-height: 14px;
+    opacity: 0;
+    color: #fff;
+    background-color: #222;
+    transition: opacity .2s;
+}
+
+.pbsettings-field-image_select_sortable .pbsettings--active figure {
+    border-color: #222;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.pbsettings-field-image_select_sortable .pbsettings--active figure:before {
+    opacity: 1;
+}
+
+.pbsettings-field-image_select_sortable img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+    width: 80px;
+    border: 1px solid #dedede;
+}
+
+.pbsettings-field-image_select_sortable input {
+    display: none;
+}
+
 
 /**
  * 03. 18. Field: link_color

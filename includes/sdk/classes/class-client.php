@@ -65,8 +65,8 @@ class Client {
 		$plugin_data              = get_plugin_data( $this->plugin_file );
 		$this->plugin_version     = isset( $plugin_data['Version'] ) ? $plugin_data['Version'] : '';
 		$this->plugin_unique_id   = str_replace( '-', '_', $this->text_domain );
-		$this->integration_server = apply_filters( 'PBSettings/Filters/integration_server', esc_url( 'https://pluginbazar.com' ) );
-		$this->license_secret_key = apply_filters( 'PBSettings/Filters/license_secret_key', '' );
+		$this->integration_server = apply_filters( 'PBSettings/Filters/integration_server_' . $this->plugin_unique_id, esc_url( 'https://pluginbazar.com' ) );
+		$this->license_secret_key = apply_filters( 'PBSettings/Filters/license_secret_key_' . $this->plugin_unique_id, '' );
 
 		add_action( 'admin_init', array( $this, 'manage_permanent_dismissible' ) );
 

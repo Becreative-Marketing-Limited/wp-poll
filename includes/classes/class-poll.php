@@ -162,11 +162,21 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			if ( 'nps' == $this->get_type() ) {
 				$polled_data   = array();
 				$poll_options  = $this->get_meta( 'poll_meta_options_nps', array() );
-				$query_results = $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_id = {$this->get_id()}", ARRAY_A );
+				$query_results = $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_id = {$this->get_id()} AND poll_type = 'nps'", ARRAY_A );
 
 				foreach ( $query_results as $query_result ) {
-					if ( ! empty( $poller_id_ip = ( $query_result['poller_id_ip'] ?? '' ) ) ) {
-						$polled_data[ $poller_id_ip ][] = $query_result['polled_value'] ?? '';
+					if ( ! empty( $poller_id_ip = $query_result['poller_id_ip'] ) ) {
+						$polled_data[ $poller_id_ip ][] = $query_result['polled_value'];
+					}
+				}
+			} else if ( 'reaction' == $this->get_type() ) {
+				$polled_data   = array();
+				$poll_options  = $this->get_meta( 'poll_meta_options_raction', array() );
+				$query_results = $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_id = {$this->get_id()} AND poll_type = 'reaction'", ARRAY_A );
+
+				foreach ( $query_results as $query_result ) {
+					if ( ! empty( $poller_id_ip = $query_result['poller_id_ip'] ) ) {
+						$polled_data[ $poller_id_ip ][] = $query_result['polled_value'];
 					}
 				}
 			} else {

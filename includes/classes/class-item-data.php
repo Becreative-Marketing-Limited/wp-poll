@@ -394,7 +394,20 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 
 			$this->item_id   = ! $item_id ? get_the_ID() : $item_id;
 			$this->item_post = get_post( $this->item_id );
-			$this->theme     = ( isset( $args['theme'] ) && ! empty( $args['theme'] ) ) ? $args['theme'] : ( $this->get_meta( '_type', 'poll' ) == 'nps' ? $this->get_meta( '_theme_nps', 1 ) : $this->get_meta( '_theme', 1 ) );
+
+			switch ( $this->get_type() ) {
+				case 'nps':
+					$this->theme = $this->get_meta( '_theme_nps', 1 );
+					break;
+
+				case 'reaction':
+					$this->theme = $this->get_meta( '_theme_reaction', 1 );
+					break;
+
+				default:
+					$this->theme = $this->get_meta( '_theme', 1 );
+					break;
+			}
 		}
 	}
 

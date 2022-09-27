@@ -95,11 +95,10 @@ class LIQUIDPOLL_Poll_meta {
 						'nps'          => array(
 							'label'        => esc_html__( 'NPS Score', 'wp-poll' ),
 							'availability' => liquidpoll()->is_pro() ? '' : 'pro',
-//							'availability' => 'pro',
 						),
 						'reaction'     => array(
 							'label'        => esc_html__( 'Reaction', 'wp-poll' ),
-							'availability' => 'upcoming',
+							'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 						),
 						'subscription' => array(
 							'label'        => esc_html__( 'Subscription', 'wp-poll' ),
@@ -113,10 +112,11 @@ class LIQUIDPOLL_Poll_meta {
 					'default' => 'poll',
 				),
 				array(
-					'id'       => '_content',
-					'title'    => esc_html__( 'Poll Content', 'wp-poll' ),
-					'subtitle' => esc_html__( 'Description about this poll', 'wp-poll' ),
-					'type'     => 'wp_editor',
+					'id'         => '_content',
+					'title'      => esc_html__( 'Poll Content', 'wp-poll' ),
+					'subtitle'   => esc_html__( 'Description about this poll', 'wp-poll' ),
+					'type'       => 'wp_editor',
+					'dependency' => array( '_type', '!=', 'reaction', 'all' ),
 				),
 				array(
 					'id'            => '_deadline',
@@ -218,12 +218,20 @@ class LIQUIDPOLL_Poll_meta {
 						array(
 							'label' => esc_html__( '10', 'wp-poll' ),
 						),
-						array(
-							'label' => esc_html__( '11', 'wp-poll' ),
-						),
 					),
 					'dependency'      => array( '_type', '==', 'nps', 'all' ),
-				)
+				),
+				array(
+					'id'         => 'poll_meta_options_reaction',
+					'title'      => esc_html__( 'Options (Reaction)', 'wp-poll' ),
+					'label'      => esc_html__( 'Add reactions here. You can skip using media if you do not need this.', 'wp-poll' ),
+					'desc'       => esc_html__( 'Drag items to set the ordering. Items that are not selected are automatically placed at the end.', 'wp-poll' ),
+					'type'       => 'image_select_sortable',
+					'multiple'   => true,
+					'class'      => 'liquidpoll-reaction-options',
+					'options'    => $this->get_reaction_emojis(),
+					'dependency' => array( '_type', '==', 'reaction', 'all' ),
+				),
 			),
 			array(
 				'id'    => 'hide_option_labels',
@@ -253,6 +261,14 @@ class LIQUIDPOLL_Poll_meta {
 					'type'       => 'select',
 					'options'    => $this->get_nps_themes(),
 					'dependency' => array( '_type', '==', 'nps', 'all' ),
+				),
+				array(
+					'id'         => '_theme_reaction',
+					'title'      => esc_html__( 'Reaction Theme', 'wp-poll' ),
+					'subtitle'   => esc_html__( 'Update your preference on the reaction.', 'wp-poll' ),
+					'type'       => 'select',
+					'options'    => $this->get_reaction_themes(),
+					'dependency' => array( '_type', '==', 'reaction', 'all' ),
 				),
 				array(
 					'id'          => '_nps_lowest_marking_text',
@@ -394,15 +410,17 @@ class LIQUIDPOLL_Poll_meta {
 				),
 
 				array(
-					'id'      => 'subheading_typography',
-					'type'    => 'subheading',
-					'content' => esc_html__( 'Typography Controls', 'slider-x-woo' ),
+					'id'         => 'subheading_typography',
+					'type'       => 'subheading',
+					'content'    => esc_html__( 'Typography Controls', 'slider-x-woo' ),
+					'dependency' => array( '_type', '!=', 'reaction', 'all' ),
 				),
 				array(
 					'id'           => '_typography_title',
 					'title'        => esc_html__( 'Poll Title', 'wp-poll' ),
 					'subtitle'     => esc_html__( 'Control typography settings for poll title.', 'wp-poll' ),
 					'type'         => 'typography',
+					'dependency'   => array( '_type', '!=', 'reaction', 'all' ),
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 				),
 				array(
@@ -410,6 +428,7 @@ class LIQUIDPOLL_Poll_meta {
 					'title'        => esc_html__( 'Poll Content', 'wp-poll' ),
 					'subtitle'     => esc_html__( 'Control typography settings for poll content.', 'wp-poll' ),
 					'type'         => 'typography',
+					'dependency'   => array( '_type', '!=', 'reaction', 'all' ),
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 				),
 				array(
@@ -478,6 +497,27 @@ class LIQUIDPOLL_Poll_meta {
 	 *
 	 * @return mixed|void
 	 */
+	function get_reaction_themes() {
+
+		$themes = array(
+			999 => array(
+				'label'        => esc_html__( '3+ are coming soon', 'wp-poll' ),
+				'availability' => 'upcoming',
+			),
+		);
+		$themes = apply_filters( 'LiquidPoll/Filters/reaction_themes', $themes );
+
+		ksort( $themes );
+
+		return $themes;
+	}
+
+
+	/**
+	 * Return NPS themes
+	 *
+	 * @return mixed|void
+	 */
 	function get_nps_themes() {
 
 		$themes = array(
@@ -533,6 +573,37 @@ class LIQUIDPOLL_Poll_meta {
 
 		return $themes;
 	}
+
+
+	/**
+	 * Return reaction emojis
+	 *
+	 * @param int $total_count
+	 *
+	 * @return array
+	 */
+	function get_reaction_emojis( $total_count = 10 ) {
+
+		$emojis = array();
+
+		for ( $index = 1; $index <= $total_count; $index ++ ) {
+			$emojis[ $index ] = $this->get_reaction_emoji_url( 'emoji-' . $index );
+		}
+
+		return $emojis;
+	}
+
+
+	/**
+	 * @param string $emoji
+	 *
+	 * @return string
+	 */
+	function get_reaction_emoji_url( $emoji = '' ) {
+		return apply_filters( 'LiquidPoll/Filters/get_reaction_emoji_url', LIQUIDPOLL_PLUGIN_URL . 'assets/images/emojis/' . $emoji . '.svg' );
+	}
 }
 
-new LIQUIDPOLL_Poll_meta();
+global $liquidpoll;
+
+$liquidpoll->metaboxes = new LIQUIDPOLL_Poll_meta();

@@ -3553,6 +3553,7 @@
                 // Field Siblings
                 $this.children('.pbsettings-field-button_set').find('.pbsettings-siblings').pb_settings_siblings();
                 $this.children('.pbsettings-field-image_select').find('.pbsettings-siblings').pb_settings_siblings();
+                $this.children('.pbsettings-field-image_select_sortable').find('.pbsettings-siblings').pb_settings_siblings();
                 $this.children('.pbsettings-field-palette').find('.pbsettings-siblings').pb_settings_siblings();
 
                 // Help Tooptip

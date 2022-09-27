@@ -8,6 +8,7 @@
 
     $(function () {
         $(".poll-options").sortable({handle: ".option-move", revert: true});
+        $('.liquidpoll-reaction-options .pbsettings-siblings').sortable({handle: '.sortable', revert: true});
         $(".poll_option_container").sortable({handle: ".poll_option_single_sorter"});
     });
 

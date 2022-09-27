@@ -460,6 +460,7 @@ if ( ! class_exists( 'PBSettings' ) ) {
 				'heading',
 				'icon',
 				'image_select',
+				'image_select_sortable',
 				'link',
 				'link_color',
 				'map',

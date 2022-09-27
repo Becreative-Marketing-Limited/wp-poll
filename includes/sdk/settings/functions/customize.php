@@ -105,6 +105,7 @@ if ( ! class_exists( 'WP_Customize_Control_PBSettings' ) && class_exists( 'WP_Cu
 				'fieldset',
 				'group',
 				'image_select',
+				'image_select_sortable',
 				'link',
 				'link_color',
 				'media',
