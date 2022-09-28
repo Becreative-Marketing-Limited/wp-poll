@@ -9,11 +9,11 @@ if ( ! $poll instanceof LIQUIDPOLL_Poll ) {
 	$poll = liquidpoll_get_poll();
 }
 
-if ( 'reaction' == $poll->get_type() && is_singular( 'poll' ) ) {
-	liquidpoll()->print_notice( esc_html__( 'This poll type does not have any single view.', 'wp-poll' ), 'error liquidpoll-notice liquidpoll-warning' );
-
-	return;
-}
+//if ( 'reaction' == $poll->get_type() && is_singular( 'poll' ) ) {
+//	liquidpoll()->print_notice( esc_html__( 'This poll type does not have any single view.', 'wp-poll' ), 'error liquidpoll-notice liquidpoll-warning' );
+//
+//	return;
+//}
 
 $embed_class = $wp_query->get( 'poll_in_embed', false ) ? 'inside-embed' : '';
 
@@ -37,7 +37,7 @@ if ( post_password_required() ) {
 		do_action( 'liquidpoll_before_single_poll_main' );
 
 
-		if ( apply_filters( 'liquidpoll_filters_display_single_poll_main', true ) ) {
+		if ( apply_filters( 'liquidpoll_filters_display_single_poll_main', true, $poll ) ) {
 
 			if ( 'nps' == $poll->get_type() ) {
 

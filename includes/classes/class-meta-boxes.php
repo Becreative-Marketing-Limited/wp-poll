@@ -48,19 +48,20 @@ class LIQUIDPOLL_Poll_meta {
 
 		$poll_setting_fields = array(
 			array(
+				'id'      => 'settings_hide_for_logged_out_users',
+				'title'   => esc_html__( 'Settings', 'wp-poll' ),
+				'label'   => esc_html__( 'Hide for logged out users.', 'wp-poll' ),
+				'type'    => 'switcher',
+				'default' => false,
+			),
+			array(
 				'id'         => 'settings_vote_after_deadline',
-				'title'      => esc_html__( 'Poll settings', 'wp-poll' ),
+				'title'      => ' ',
 				'label'      => esc_html__( 'Allow users to vote after deadline.', 'wp-poll' ),
 				'type'       => 'switcher',
+				'class'      => 'padding-top-none',
 				'dependency' => array( '_type', '==', 'poll', 'all' ),
 			),
-//			array(
-//				'id'    => 'settings_multiple_votes',
-//				'title' => ' ',
-//				'label' => esc_html__( 'Allow users to vote on multiple options in a single poll.', 'wp-poll' ),
-//				'type'  => 'switcher',
-//				'class' => 'padding-top-none',
-//			),
 			array(
 				'id'         => 'settings_new_options',
 				'title'      => ' ',
@@ -76,6 +77,24 @@ class LIQUIDPOLL_Poll_meta {
 				'type'       => 'switcher',
 				'class'      => 'padding-top-none',
 				'dependency' => array( '_type', '==', 'poll', 'all' ),
+			),
+			array(
+				'id'         => 'settings_reaction_hide_title',
+				'title'      => ' ',
+				'label'      => esc_html__( 'Hide title for this reaction.', 'wp-poll' ),
+				'type'       => 'switcher',
+				'class'      => 'padding-top-none',
+				'default'    => true,
+				'dependency' => array( '_type', '==', 'reaction', 'all' ),
+			),
+			array(
+				'id'         => 'settings_reaction_hide_content',
+				'title'      => ' ',
+				'label'      => esc_html__( 'Hide content for this reaction.', 'wp-poll' ),
+				'type'       => 'switcher',
+				'default'    => true,
+				'class'      => 'padding-top-none',
+				'dependency' => array( '_type', '==', 'reaction', 'all' ),
 			),
 		);
 		$poll_setting_fields = apply_filters( 'LiquidPoll/Filters/poll_setting_fields', $poll_setting_fields );
@@ -112,11 +131,11 @@ class LIQUIDPOLL_Poll_meta {
 					'default' => 'poll',
 				),
 				array(
-					'id'         => '_content',
-					'title'      => esc_html__( 'Poll Content', 'wp-poll' ),
-					'subtitle'   => esc_html__( 'Description about this poll', 'wp-poll' ),
-					'type'       => 'wp_editor',
-					'dependency' => array( '_type', '!=', 'reaction', 'all' ),
+					'id'       => '_content',
+					'title'    => esc_html__( 'Poll Content', 'wp-poll' ),
+					'subtitle' => esc_html__( 'Description about this poll', 'wp-poll' ),
+					'type'     => 'wp_editor',
+					'height'   => '150px',
 				),
 				array(
 					'id'            => '_deadline',
@@ -142,16 +161,16 @@ class LIQUIDPOLL_Poll_meta {
 					'dependency' => array( '_type', '==', 'poll', 'all' ),
 				),
 				array(
-					'id'          => '_reaction_position',
-					'title'       => esc_html__( 'Reaction Position', 'wp-poll' ),
-					'type'        => 'select',
-					'placeholder' => esc_html__( 'Select position', 'wp-poll' ),
-					'options'     => array(
+					'id'         => '_reaction_position',
+					'title'      => esc_html__( 'Reaction Position', 'wp-poll' ),
+					'type'       => 'select',
+					'options'    => array(
+						'shortcode'     => array( 'label' => esc_html__( 'Shortcode', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
 						'below_content' => array( 'label' => esc_html__( 'Below Content', 'wp-poll' ) ),
 						'above_content' => array( 'label' => esc_html__( 'Above Content', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
 						'floating'      => array( 'label' => esc_html__( 'Floating Position', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
 					),
-					'dependency'  => array( '_type', '==', 'reaction', 'all' ),
+					'dependency' => array( '_type', '==', 'reaction', 'all' ),
 				),
 				array(
 					'id'          => '_reaction_post_type',
@@ -165,12 +184,6 @@ class LIQUIDPOLL_Poll_meta {
 					'id'         => '_reaction_floating_position',
 					'title'      => esc_html__( 'Floating Position', 'wp-poll' ),
 					'type'       => 'spacing',
-					'options'    => array(
-						'below_content' => array( 'label' => esc_html__( 'Below Content', 'wp-poll' ) ),
-						'above_content' => array( 'label' => esc_html__( 'Above Content', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
-						'floating'      => array( 'label' => esc_html__( 'Floating Position', 'wp-poll' ), 'availability' => liquidpoll()->is_pro(), ),
-					),
-					'units'      => array( 'px' ),
 					'dependency' => array( '_type|_reaction_position', '==|==', 'reaction|floating', 'all' ),
 				),
 			), $poll_setting_fields )
@@ -445,7 +458,7 @@ class LIQUIDPOLL_Poll_meta {
 					'id'         => 'subheading_typography',
 					'type'       => 'subheading',
 					'content'    => esc_html__( 'Typography Controls', 'slider-x-woo' ),
-					'dependency' => array( '_type', '!=', 'reaction', 'all' ),
+					'dependency' => array( '_type', '==', 'poll,nps', 'all' ),
 				),
 				array(
 					'id'           => '_typography_title',
@@ -480,9 +493,10 @@ class LIQUIDPOLL_Poll_meta {
 					'dependency'   => array( '_type', '==', 'poll', 'all' ),
 				),
 				array(
-					'id'      => 'subheading_typography_button_submit',
-					'type'    => 'subheading',
-					'content' => esc_html__( 'Typography Controls - Buttons - Submit', 'slider-x-woo' ),
+					'id'         => 'subheading_typography_button_submit',
+					'type'       => 'subheading',
+					'content'    => esc_html__( 'Typography Controls - Buttons - Submit', 'slider-x-woo' ),
+					'dependency' => array( '_type', '==', 'poll,nps', 'all' ),
 				),
 				array(
 					'id'           => '_typography_btn_submit',
@@ -490,12 +504,14 @@ class LIQUIDPOLL_Poll_meta {
 					'subtitle'     => esc_html__( 'Control typography settings for poll submit button.', 'wp-poll' ),
 					'type'         => 'typography',
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_type', '==', 'poll,nps', 'all' ),
 				),
 				array(
 					'id'           => '_typography_btn_submit_bg',
 					'title'        => esc_html__( 'Background color', 'wp-poll' ),
 					'type'         => 'color',
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_type', '==', 'poll,nps', 'all' ),
 				),
 				array(
 					'id'         => 'subheading_typography_button_results',
