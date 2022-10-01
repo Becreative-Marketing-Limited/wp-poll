@@ -282,6 +282,7 @@ if ( ! function_exists( 'liquidpoll_single_post_class' ) ) {
 
 		$classes[] = sprintf( '%s-single', $poll->get_type() );
 		$classes[] = sprintf( 'theme-%s', $poll->get_theme() );
+		$classes[] = sprintf( 'poll-type-%s', $poll->get_type() );
 		$classes[] = sprintf( 'results-type-%s', $poll->get_meta( '_results_type', 'votes' ) );
 
 		printf( 'class="%s"', liquidpoll_generate_classes( $classes ) );
@@ -559,7 +560,7 @@ if ( ! function_exists( 'liquidpoll_create_table' ) ) {
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		}
 
-		$sql = "CREATE TABLE IF NOT EXISTS " . LIQUIDPOLL_RESULTS_TABLE . " (
+		$sql_results_table = "CREATE TABLE IF NOT EXISTS " . LIQUIDPOLL_RESULTS_TABLE . " (
 			id int(100) NOT NULL AUTO_INCREMENT,
 			poll_id int(100) NOT NULL,
 			poll_type VARCHAR(255) NOT NULL,
@@ -570,7 +571,19 @@ if ( ! function_exists( 'liquidpoll_create_table' ) ) {
 			UNIQUE KEY id (id)
 		)";
 
-		maybe_create_table( LIQUIDPOLL_RESULTS_TABLE, $sql );
+		$sql_emails_table = "CREATE TABLE IF NOT EXISTS " . LIQUIDPOLL_EMAILS_TABLE . " (
+			id int(100) NOT NULL AUTO_INCREMENT,
+			poll_id int(100) NOT NULL,
+			poller_id_ip VARCHAR(255) NOT NULL,
+			first_name VARCHAR(255) NOT NULL,
+			last_name VARCHAR(255) NOT NULL,
+			email_address VARCHAR(255) NOT NULL,
+			datetime DATETIME NOT NULL,
+			UNIQUE KEY id (id)
+		)";
+
+		maybe_create_table( LIQUIDPOLL_RESULTS_TABLE, $sql_results_table );
+		maybe_create_table( LIQUIDPOLL_EMAILS_TABLE, $sql_emails_table );
 	}
 }
 
@@ -608,6 +621,46 @@ if ( ! function_exists( 'liquidpoll_insert_results' ) ) {
 		if ( ! $response ) {
 			return new WP_Error( 'database_error', $wpdb->last_error );
 		}
+
+		return true;
+	}
+}
+
+
+if ( ! function_exists( 'liquidpoll_insert_email' ) ) {
+	/**
+	 * Insert poll email in database
+	 *
+	 * @param array $args
+	 *
+	 * @return WP_Error|bool
+	 */
+	function liquidpoll_insert_email( $args = array() ) {
+
+		global $wpdb;
+
+		$defaults    = array(
+			'poll_id'       => '',
+			'poller_id_ip'  => liquidpoll_get_poller(),
+			'first_name'    => '',
+			'last_name'     => '',
+			'email_address' => '',
+			'datetime'      => current_time( 'mysql' ),
+		);
+		$args        = wp_parse_args( $args, $defaults );
+		$entry_count = $wpdb->get_var( "SELECT COUNT(*) FROM " . LIQUIDPOLL_EMAILS_TABLE . " WHERE poll_id = '{$args['poll_id']}' AND email_address = '{$args['email_address']}'" );
+
+		if ( $entry_count > 0 ) {
+			return new WP_Error( 'duplicate_try', esc_html__( 'Already in the list', 'wp-poll' ) );
+		}
+
+		$response = $wpdb->insert( LIQUIDPOLL_EMAILS_TABLE, $args );
+
+		if ( ! $response ) {
+			return new WP_Error( 'database_error', $wpdb->last_error );
+		}
+
+		do_action( 'liquidpoll_email_added_local', $args, $response );
 
 		return true;
 	}

@@ -502,7 +502,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     line-height: 23px;
     font-weight: 600;
     color: #000000;
-	transition: .2s;
+    transition: .2s;
 }
 
 .liquidpoll-option-list-1 .liquidpoll-option-single input + label:before {
@@ -1618,45 +1618,103 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
         margin-top: 17px;
         margin-bottom: 0;
     }
+
     [class*="liquidpoll-countdown-timer"] {
         text-align: center;
     }
-	p.liquidpoll-responses {
-    	font-size: 16px;
-		padding: 17px 0 17px 20px;
-	}
+
+    p.liquidpoll-responses {
+        font-size: 16px;
+        padding: 17px 0 17px 20px;
+    }
+
     .poll-single.theme-2 .liquidpoll-option-list-1 .liquidpoll-option-single.active,
     .poll-single.theme-2 .liquidpoll-option-list-1 .liquidpoll-option-single:hover {
         background-color: #5F64EB;
         width: 100%;
         margin-left: 0;
     }
-	.theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
-    	top: -20px;
-		transition: .6s;
-	}
-	.poll-single.theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single.has-result.active span.liquidpoll-votes-count {
-		right: 200px;
-	}
-	.theme-2.rendered-results .liquidpoll-option-single.has-result span.liquidpoll-votes-count {
+
+    .theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
+        top: -20px;
+        transition: .6s;
+    }
+
+    .poll-single.theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single.has-result.active span.liquidpoll-votes-count {
+        right: 200px;
+    }
+
+    .theme-2.rendered-results .liquidpoll-option-single.has-result span.liquidpoll-votes-count {
         right: 209px;
         top: 40px;
         transition: .6s;
-	}
-	.poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label:before {
-		display: none;
-	}
-	.poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
-    	padding-left: 115px;
-   	    top: -10px;
-	}
-	.poll-single.theme-3.rendered-results .liquidpoll-option-thumb {
-    	left: 15px;
-		transition: .3s;
-	}
-	.theme-3.rendered-results .liquidpoll-option-single.has-result span.liquidpoll-votes-count {
+    }
+
+    .poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label:before {
+        display: none;
+    }
+
+    .poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
+        padding-left: 115px;
+        top: -10px;
+    }
+
+    .poll-single.theme-3.rendered-results .liquidpoll-option-thumb {
+        left: 15px;
+        transition: .3s;
+    }
+
+    .theme-3.rendered-results .liquidpoll-option-single.has-result span.liquidpoll-votes-count {
         right: 209px;
         top: 45px;
         transition: .6s;
-	}
+    }
+}
+
+
+/**
+ * Form Style
+ */
+/**
+ * Form Style
+ */
+.liquidpoll-form {
+    background: #e1e0fa;
+    padding: 30px 50px;
+    border-radius: 5px;
+    margin: 20px 0;
+    display: none;
+}
+
+.liquidpoll-form .liquidpoll-form-field {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.liquidpoll-form .liquidpoll-form-field:last-child {
+    margin-bottom: 0;
+}
+
+.liquidpoll-form .liquidpoll-form-field > p {
+    margin-bottom: 40px;
+}
+
+.liquidpoll-form .liquidpoll-form-field label:not(.notice) {
+    display: none;
+}
+
+.liquidpoll-form .liquidpoll-form-field input[type="text"],
+.liquidpoll-form .liquidpoll-form-field input[type="text"]:active,
+.liquidpoll-form .liquidpoll-form-field input[type="text"]:focus,
+.liquidpoll-form .liquidpoll-form-field input[type="email"],
+.liquidpoll-form .liquidpoll-form-field input[type="email"]:active,
+.liquidpoll-form .liquidpoll-form-field input[type="email"]:focus {
+    background: #fefefe;
+    border: 1px solid #fefefe;
+    border-radius: 3px;
+    outline: none;
+    box-shadow: none;
+}
+
+.liquidpoll-form .liquidpoll-form-field input[type="submit"] {
 }

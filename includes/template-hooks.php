@@ -23,6 +23,7 @@ add_action( 'liquidpoll_after_poll_archive', 'liquidpoll_poll_archive_pagination
 /**
  * Hooks for Single Poll
  *
+ * @see liquidpoll_single_poll_form()
  * @see liquidpoll_single_poll_title()
  * @see liquidpoll_single_poll_thumb()
  * @see liquidpoll_single_poll_content()
@@ -34,6 +35,7 @@ add_action( 'liquidpoll_after_poll_archive', 'liquidpoll_poll_archive_pagination
  * @on Frontend
  */
 
+add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_form', 5 );
 add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_title', 10 );
 add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_thumb', 15 );
 add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_content', 20 );
@@ -42,6 +44,28 @@ add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_notice', 30 )
 add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_countdown', 35 );
 add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_responses', 40 );
 add_action( 'liquidpoll_single_poll_main', 'liquidpoll_single_poll_buttons', 45 );
+
+
+add_action( 'liquidpoll_single_poll_main', function () {
+
+	global $poll;
+
+	if ( 'poll' == $poll->get_type() ) {
+		echo '<div class="poll-content">';
+	}
+}, 6 );
+
+
+add_action( 'liquidpoll_single_poll_main', function () {
+
+	global $poll;
+
+	if ( 'poll' == $poll->get_type() ) {
+		echo '</div>'; // .poll-content
+	}
+}, 100 );
+
+
 
 
 /**

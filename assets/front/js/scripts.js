@@ -117,6 +117,39 @@
     });
 
 
+    $(document).on('submit', '.liquidpoll-form', function () {
+
+        let optinForm = $(this),
+            optinFormData = optinForm.serialize(),
+            singlePoll = optinForm.parent();
+
+        if (!singlePoll.hasClass('poll-type-poll')) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            context: this,
+            url: pluginObject.ajaxurl,
+            data: {
+                'action': 'liquidpoll_submit_optin_form',
+                'form_data': optinFormData,
+            },
+            success: function (response) {
+                if (response.success) {
+                    $('.liquidpoll-get-poll-results').trigger('click');
+
+                    singlePoll.find('.liquidpoll-form').fadeOut(100);
+                    setTimeout(function () {
+                        singlePoll.find('.poll-content').fadeIn(100);
+                    }, 150);
+                }
+            }
+        });
+
+        return false;
+    });
+
     $(document).on('click', '.liquidpoll-submit-poll', function () {
 
         let pollID = $(this).data('poll-id');
@@ -156,6 +189,11 @@
                     $(document.body).trigger('liquidpoll_poll_submission_success', response);
 
                     singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-success').find('span.message').html(response.data).parent().slideDown();
+
+                    singlePoll.find('.poll-content').fadeOut(100);
+                    setTimeout(function () {
+                        singlePoll.find('.liquidpoll-form').fadeIn(100);
+                    }, 150);
                 }
             }
         });

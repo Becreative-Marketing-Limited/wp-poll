@@ -801,7 +801,7 @@ if ( ! class_exists( 'PBSettings' ) ) {
 					$instance = new $classname( $field, $value, $unique, $where, $parent );
 					$instance->render();
 
-					do_action( 'PBSettings/after_field/field_' . $field['id'] );
+					do_action( 'PBSettings/after_field/field_' . ( $field['id'] ?? '' ) );
 				} else {
 					echo '<p>' . esc_html__( 'Field not found!' ) . '</p>';
 				}

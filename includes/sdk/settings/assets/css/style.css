@@ -1193,12 +1193,14 @@ li.pbsettings-tab-item.pbsettings-tab-expanded {
     background-color: #eee;
 }
 
+.pbsettings-field-button_set .pbsettings--button.fixed,
 .pbsettings-field-button_set .pbsettings--button.upcoming,
 .pbsettings-field-button_set .pbsettings--button.pro {
     pointer-events: none;
     opacity: 0.7;
 }
 
+.pbsettings-field-button_set .pbsettings--sibling.fixed .pbsettings--name:after,
 .pbsettings-field-button_set .pbsettings--sibling.upcoming .pbsettings--name:after,
 .pbsettings-field-button_set .pbsettings--sibling.pro .pbsettings--name:after {
     content: 'Pro';
@@ -1213,6 +1215,10 @@ li.pbsettings-tab-item.pbsettings-tab-expanded {
 
 .pbsettings-field-button_set .pbsettings--sibling.upcoming .pbsettings--name:after {
     content: 'Upcoming';
+}
+
+.pbsettings-field-button_set .pbsettings--sibling.fixed .pbsettings--name:after {
+    content: 'Fixed';
 }
 
 .pbsettings-field-button_set .pbsettings--active:hover,
@@ -2593,7 +2599,6 @@ li.pbsettings-tab-item.pbsettings-tab-expanded {
 .pbsettings-field-textarea textarea {
     width: 100%;
     max-width: 100%;
-    min-height: 125px;
 }
 
 .pbsettings-field-textarea .pbsettings-shortcode-button {

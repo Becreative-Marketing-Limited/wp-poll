@@ -8,9 +8,20 @@
  * Frontend Templates Hooks
  */
 
+if ( ! function_exists( 'liquidpoll_single_poll_form' ) ) {
+	/**
+	 * @hook liquidpoll_single_poll_main - 5
+	 */
+	function liquidpoll_single_poll_form() {
+
+		liquidpoll_get_template( 'single-poll/form.php' );
+	}
+}
+
+
 if ( ! function_exists( 'liquidpoll_single_poll_title' ) ) {
 	/**
-	 * Hook: liquidpoll_single_poll_main - 10
+	 * @hook liquidpoll_single_poll_main - 10
 	 */
 	function liquidpoll_single_poll_title() {
 
@@ -21,7 +32,7 @@ if ( ! function_exists( 'liquidpoll_single_poll_title' ) ) {
 
 if ( ! function_exists( 'liquidpoll_single_poll_thumb' ) ) {
 	/**
-	 * Hook: liquidpoll_single_poll_main - 10
+	 * @hook liquidpoll_single_poll_main - 10
 	 */
 	function liquidpoll_single_poll_thumb() {
 
@@ -32,7 +43,7 @@ if ( ! function_exists( 'liquidpoll_single_poll_thumb' ) ) {
 
 if ( ! function_exists( 'liquidpoll_single_poll_content' ) ) {
 	/**
-	 * Hook: liquidpoll_single_poll_main - 10
+	 * @hook liquidpoll_single_poll_main - 10
 	 */
 	function liquidpoll_single_poll_content() {
 
@@ -43,7 +54,7 @@ if ( ! function_exists( 'liquidpoll_single_poll_content' ) ) {
 
 if ( ! function_exists( 'liquidpoll_single_poll_options' ) ) {
 	/**
-	 * Hook: liquidpoll_single_poll_main - 10
+	 * @hook liquidpoll_single_poll_main - 10
 	 */
 	function liquidpoll_single_poll_options() {
 
@@ -54,7 +65,7 @@ if ( ! function_exists( 'liquidpoll_single_poll_options' ) ) {
 
 if ( ! function_exists( 'liquidpoll_single_poll_notice' ) ) {
 	/**
-	 * Hook: liquidpoll_single_poll_main - 10
+	 * @hook liquidpoll_single_poll_main - 10
 	 */
 	function liquidpoll_single_poll_notice() {
 
@@ -65,7 +76,7 @@ if ( ! function_exists( 'liquidpoll_single_poll_notice' ) ) {
 
 if ( ! function_exists( 'liquidpoll_single_poll_countdown' ) ) {
 	/**
-	 * Hook: liquidpoll_single_poll_main - 10
+	 * @hook liquidpoll_single_poll_main - 10
 	 */
 	function liquidpoll_single_poll_countdown() {
 
@@ -76,7 +87,7 @@ if ( ! function_exists( 'liquidpoll_single_poll_countdown' ) ) {
 
 if ( ! function_exists( 'liquidpoll_single_poll_buttons' ) ) {
 	/**
-	 * Hook: liquidpoll_single_poll_main - 10
+	 * @hook liquidpoll_single_poll_main - 10
 	 */
 	function liquidpoll_single_poll_buttons() {
 
@@ -87,7 +98,7 @@ if ( ! function_exists( 'liquidpoll_single_poll_buttons' ) ) {
 
 if ( ! function_exists( 'liquidpoll_single_poll_responses' ) ) {
 	/**
-	 * Hook: liquidpoll_single_poll_main - 10
+	 * @hook liquidpoll_single_poll_main - 10
 	 */
 	function liquidpoll_single_poll_responses() {
 
@@ -98,7 +109,7 @@ if ( ! function_exists( 'liquidpoll_single_poll_responses' ) ) {
 
 if ( ! function_exists( 'liquidpoll_poll_archive_single_thumb' ) ) {
 	/**
-	 * Hook: liquidpoll_poll_archive_single_main - 10
+	 * @hook liquidpoll_poll_archive_single_main - 10
 	 */
 	function liquidpoll_poll_archive_single_thumb() {
 
@@ -109,7 +120,7 @@ if ( ! function_exists( 'liquidpoll_poll_archive_single_thumb' ) ) {
 
 if ( ! function_exists( 'liquidpoll_poll_archive_single_summary' ) ) {
 	/**
-	 * Hook: liquidpoll_poll_archive_single_main - 20
+	 * @hook liquidpoll_poll_archive_single_main - 20
 	 */
 	function liquidpoll_poll_archive_single_summary() {
 
@@ -120,7 +131,7 @@ if ( ! function_exists( 'liquidpoll_poll_archive_single_summary' ) ) {
 
 if ( ! function_exists( 'liquidpoll_poll_archive_single_title' ) ) {
 	/**
-	 * Hook: liquidpoll_poll_archive_single_summary - 10
+	 * @hook liquidpoll_poll_archive_single_summary - 10
 	 */
 	function liquidpoll_poll_archive_single_title() {
 
@@ -131,7 +142,7 @@ if ( ! function_exists( 'liquidpoll_poll_archive_single_title' ) ) {
 
 if ( ! function_exists( 'liquidpoll_poll_archive_single_meta' ) ) {
 	/**
-	 * Hook: liquidpoll_poll_archive_single_summary - 15
+	 * @hook liquidpoll_poll_archive_single_summary - 15
 	 */
 	function liquidpoll_poll_archive_single_meta() {
 
@@ -142,7 +153,7 @@ if ( ! function_exists( 'liquidpoll_poll_archive_single_meta' ) ) {
 
 if ( ! function_exists( 'liquidpoll_poll_archive_single_excerpt' ) ) {
 	/**
-	 * Hook: liquidpoll_poll_archive_single_summary - 20
+	 * @hook liquidpoll_poll_archive_single_summary - 20
 	 */
 	function liquidpoll_poll_archive_single_excerpt() {
 
@@ -153,7 +164,7 @@ if ( ! function_exists( 'liquidpoll_poll_archive_single_excerpt' ) ) {
 
 if ( ! function_exists( 'liquidpoll_poll_archive_single_options' ) ) {
 	/**
-	 * Hook: liquidpoll_poll_archive_single_summary - 25
+	 * @hook liquidpoll_poll_archive_single_summary - 25
 	 */
 	function liquidpoll_poll_archive_single_options() {
 
@@ -163,7 +174,7 @@ if ( ! function_exists( 'liquidpoll_poll_archive_single_options' ) ) {
 
 if ( ! function_exists( 'liquidpoll_poll_archive_pagination' ) ) {
 	/**
-	 * Hook: liquidpoll_after_poll_archive - 10
+	 * @hook liquidpoll_after_poll_archive - 10
 	 */
 	function liquidpoll_poll_archive_pagination() {
 
@@ -182,6 +193,7 @@ if ( ! function_exists( 'liquidpoll_admin_render_reports' ) ) {
 		require( LIQUIDPOLL_PLUGIN_DIR . 'includes/admin-templates/reports.php' );
 	}
 }
+
 
 if ( ! function_exists( 'liquidpoll_poll_submitbox' ) ) {
 	function liquidpoll_poll_submitbox() {

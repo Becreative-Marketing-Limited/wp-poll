@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 6.0.2
-	Stable tag: 3.3.36
+	Stable tag: 3.3.37
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -275,3 +275,7 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.36 =
 * 27/09/2022 - NEW - Reaction type added in pro version.
+
+= 3.3.37 =
+* 02/10/2022 - NEW - Email collection form added for type poll.
+* 02/10/2022 - NEW - Fluent CRM integration added.

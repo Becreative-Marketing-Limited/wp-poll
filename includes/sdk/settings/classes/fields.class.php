@@ -12,7 +12,7 @@ if ( ! class_exists( 'PBSettings_Fields' ) ) {
 
 		public function __construct( $field = array(), $value = '', $unique = '', $where = '', $parent = '' ) {
 			$this->field  = $field;
-			$this->value  = apply_filters( 'PBSettings/Filters/field_value', $value, $field['id'], $field['type'] );
+			$this->value  = apply_filters( 'PBSettings/Filters/field_value', $value, ( $field['id'] ?? '' ), $field['type'] );
 			$this->unique = $unique;
 			$this->where  = $where;
 			$this->parent = $parent;
