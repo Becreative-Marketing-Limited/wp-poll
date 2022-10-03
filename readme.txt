@@ -277,5 +277,4 @@ Display all your polls in one place so that you can create a landing page where 
 * 27/09/2022 - NEW - Reaction type added in pro version.
 
 = 3.3.37 =
-* 02/10/2022 - NEW - Email collection form added for type poll.
-* 02/10/2022 - NEW - Fluent CRM integration added.
+* 03/10/2022 - NEW - Email collection form added for type poll.
