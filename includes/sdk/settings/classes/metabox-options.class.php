@@ -328,7 +328,7 @@ if ( ! class_exists( 'PBSettings_Metabox' ) ) {
 
 			// XSS ok.
 			// No worries, This "POST" requests is sanitizing in the below foreach.
-			$request = ( ! empty( $_POST[ $this->unique ] ) ) ? map_deep( wp_unslash( $_POST[ $this->unique ] ), 'sanitize_text_field' ) : array();
+			$request = ( ! empty( $_POST[ $this->unique ] ) ) ? wp_unslash( $_POST[ $this->unique ] ) : array();
 
 			if ( ! empty( $request ) ) {
 
@@ -361,6 +361,15 @@ if ( ! class_exists( 'PBSettings_Metabox' ) ) {
 									$data[ $field_id ] = $field_value;
 
 								}
+
+//								if( $field_id == 'poll_form_content' ) {
+//
+//									echo "<pre>";
+//									print_r( $request );
+//									echo "</pre>";
+//
+//									die();
+//								}
 
 								// Validate "post" request of field.
 								if ( isset( $field['validate'] ) && is_callable( $field['validate'] ) ) {

@@ -70,7 +70,7 @@
 
                     if ($.inArray(optionID, response.data.percentages)) {
 
-                        let pollSingle = $(this).parent().parent();
+                        let pollSingle = $(this).parent().parent().parent();
 
                         if (pollSingle.hasClass('theme-11')) {
                             $(this).addClass('has-result').find('.liquidpoll-option-result-bar-inner').css('width', percentageValue + '%');
@@ -190,10 +190,12 @@
 
                     singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-success').find('span.message').html(response.data).parent().slideDown();
 
-                    singlePoll.find('.poll-content').fadeOut(100);
-                    setTimeout(function () {
-                        singlePoll.find('.liquidpoll-form').fadeIn(100);
-                    }, 150);
+                    if (singlePoll.hasClass('has-form')) {
+                        singlePoll.find('.poll-content').fadeOut(100);
+                        setTimeout(function () {
+                            singlePoll.find('.liquidpoll-form').fadeIn(100);
+                        }, 150);
+                    }
                 }
             }
         });

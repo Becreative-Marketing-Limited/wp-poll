@@ -285,6 +285,10 @@ if ( ! function_exists( 'liquidpoll_single_post_class' ) ) {
 		$classes[] = sprintf( 'poll-type-%s', $poll->get_type() );
 		$classes[] = sprintf( 'results-type-%s', $poll->get_meta( '_results_type', 'votes' ) );
 
+		if ( '1' == $poll->get_meta( 'poll_form_enable', '0' ) ) {
+			$classes[] = 'has-form';
+		}
+
 		printf( 'class="%s"', liquidpoll_generate_classes( $classes ) );
 	}
 }

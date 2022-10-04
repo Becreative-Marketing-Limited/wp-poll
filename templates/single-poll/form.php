@@ -3,12 +3,15 @@
  * Single Poll - Form
  */
 
-use FluentCrm\App\Http\Controllers\SubscriberController;
 use Pluginbazar\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
 global $poll;
+
+if ( '1' != $poll->get_meta( 'poll_form_enable', '0' ) ) {
+	return;
+}
 
 $poll_form_fields           = $poll->get_meta( 'poll_form_fields', array( 'first_name', 'email_address' ) );
 $poll_form_label_first_name = $poll->get_meta( 'poll_form_label_first_name', esc_html__( 'First Name', 'wp-poll' ) );
@@ -18,6 +21,7 @@ $poll_form_label_button     = $poll->get_meta( 'poll_form_label_button', esc_htm
 $poll_form_content          = $poll->get_meta( 'poll_form_content' );
 $poll_form_notice           = $poll->get_meta( 'poll_form_notice', esc_html__( 'I have accept the terms and condition', 'wp-poll' ) );
 $poll_form_style_colors     = $poll->get_meta( 'poll_form_style_colors' );
+
 
 ?>
     <form class="liquidpoll-form" action="" enctype="multipart/form-data" method="get">
