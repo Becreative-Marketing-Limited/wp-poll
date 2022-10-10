@@ -180,14 +180,6 @@ class LIQUIDPOLL_Poll_meta {
 					'options'     => 'post_types',
 					'dependency'  => array( '_type|_reaction_position', '==|any', 'reaction|below_content,above_content', 'all' ),
 				),
-//				array(
-//					'id'          => '_reaction_posts',
-//					'title'       => esc_html__( 'Posts', 'wp-poll' ),
-//					'type'        => 'select2',
-//					'placeholder' => esc_html__( 'Select post type', 'wp-poll' ),
-//					'options'     => 'posts',
-//					'dependency'  => array( '_type|_reaction_position', '==|==', 'reaction|floating', 'all' ),
-//				),
 				array(
 					'id'         => '_reaction_floating_position',
 					'title'      => esc_html__( 'Floating Position', 'wp-poll' ),
@@ -368,9 +360,6 @@ class LIQUIDPOLL_Poll_meta {
 					'title'         => esc_html__( 'Form Content', 'wp-poll' ),
 					'subtitle'      => esc_html__( 'Add some contents before the form fields.', 'wp-poll' ),
 					'type'          => 'wp_editor',
-//					'sanitize'      => 'wp_kses_post',
-//					'tinymce'       => false,
-//					'quicktags'     => false,
 					'media_buttons' => false,
 					'height'        => '100px',
 					'dependency'    => array( '_type|poll_form_enable', '==|==', 'poll|true', 'all' ),
@@ -380,9 +369,6 @@ class LIQUIDPOLL_Poll_meta {
 					'title'         => esc_html__( 'Form Notice', 'wp-poll' ),
 					'subtitle'      => esc_html__( 'Let the users know about your policy', 'wp-poll' ),
 					'type'          => 'wp_editor',
-					'sanitize'      => false,
-//					'tinymce'       => false,
-//					'quicktags'     => false,
 					'media_buttons' => false,
 					'height'        => '100px',
 					'dependency'    => array( '_type|poll_form_enable', '==|==', 'poll|true', 'all' ),
@@ -444,6 +430,46 @@ class LIQUIDPOLL_Poll_meta {
 				),
 			),
 		);
+
+		if ( function_exists( 'FluentCrmApi' ) ) {
+
+			$field_sections['poll_form']['fields'][] = array(
+				'type'       => 'subheading',
+				'content'    => esc_html__( 'Integration - Fluent CRM', 'wp-poll' ),
+				'dependency' => array( '_type', '==', 'poll', 'all' ),
+			);
+
+			$field_sections['poll_form']['fields'][] = array(
+				'id'         => 'poll_form_int_fcrm_enable',
+				'title'      => esc_html__( 'Enable Integration', 'wp-poll' ),
+				'label'      => esc_html__( 'This will store the submissions in Fluent CRM.', 'wp-poll' ),
+				'type'       => 'switcher',
+				'default'    => false,
+				'dependency' => array( '_type', '==', 'poll', 'all' ),
+			);
+
+			$field_sections['poll_form']['fields'][] = array(
+				'id'         => 'poll_form_int_fcrm_lists',
+				'title'      => esc_html__( 'Select Lists', 'wp-poll' ),
+				'subtitle'   => esc_html__( 'Select FluentCRM lists', 'wp-poll' ),
+				'type'       => 'select',
+				'multiple'   => true,
+				'chosen'     => true,
+				'options'    => liquidpoll()->get_fluent_crm_lists(),
+				'dependency' => array( '_type|poll_form_int_fcrm_enable', '==|==', 'poll|true', 'all' ),
+			);
+
+			$field_sections['poll_form']['fields'][] = array(
+				'id'         => 'poll_form_int_fcrm_tags',
+				'title'      => esc_html__( 'Select Tags', 'wp-poll' ),
+				'subtitle'   => esc_html__( 'Select FluentCRM tags', 'wp-poll' ),
+				'type'       => 'select',
+				'multiple'   => true,
+				'chosen'     => true,
+				'options'    => liquidpoll()->get_fluent_crm_tags(),
+				'dependency' => array( '_type|poll_form_int_fcrm_enable', '==|==', 'poll|true', 'all' ),
+			);
+		}
 
 		$field_sections['poll_styling'] = array(
 			'title'  => __( 'Style Settings', 'wp-poll' ),

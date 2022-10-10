@@ -44,8 +44,28 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 			// NPS
 			add_action( 'wp_ajax_liquidpoll_submit_nps', array( $this, 'liquidpoll_submit_nps' ) );
+			add_action( 'wp_ajax_nopriv_liquidpoll_submit_nps', array( $this, 'liquidpoll_submit_nps' ) );
+
+			add_filter( 'liquidpoll_filters_display_single_poll_main', array( $this, 'control_display_single_poll_main' ), 10, 2 );
 
 			add_action( 'wp_footer', array( $this, 'render_global_css' ) );
+		}
+
+		/**
+		 * Control whether the poll will show or not
+		 *
+		 * @param bool $is_display
+		 * @param LIQUIDPOLL_Poll $poll
+		 *
+		 * @return bool
+		 */
+		function control_display_single_poll_main( $is_display, LIQUIDPOLL_Poll $poll ) {
+
+			if ( '1' == $poll->get_meta( 'settings_hide_for_logged_out_users', '0' ) && ! is_user_logged_in() ) {
+				$is_display = false;
+			}
+
+			return $is_display;
 		}
 
 

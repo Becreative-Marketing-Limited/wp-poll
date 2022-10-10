@@ -62,7 +62,7 @@ $poll_form_style_colors     = $poll->get_meta( 'poll_form_style_colors' );
 
         <div class="liquidpoll-form-field">
             <input type="hidden" name="poll_id" value="<?php echo esc_attr( $poll->get_id() ); ?>">
-            <input id="liquidpoll_submit" type="submit" value="<?php echo esc_attr__( 'View Results', 'wp-poll' ); ?>">
+            <input id="liquidpoll_submit" class="liquidpoll-button" type="submit" value="<?php echo esc_attr__( 'View Results', 'wp-poll' ); ?>">
         </div>
 
     </form>

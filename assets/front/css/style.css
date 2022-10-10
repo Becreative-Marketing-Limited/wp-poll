@@ -53,7 +53,7 @@ td, th {
 
 .liquidpoll-button {
     display: inline-block;
-    padding: 16px 18px;
+    padding: 16px 18px !important;
     background: #5F64EB;
     border: 0;
     border-radius: 5px;
@@ -1717,4 +1717,8 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 }
 
 .liquidpoll-form .liquidpoll-form-field input[type="submit"] {
+}
+
+.liquidpoll-form-field.liquidpoll-form-notice {
+    text-align: left;
 }
