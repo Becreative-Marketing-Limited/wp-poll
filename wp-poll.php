@@ -124,6 +124,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			wp_enqueue_style( 'roundslider-css', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/roundslider.min.css' );
 			wp_enqueue_style( 'liquidpoll-admin', LIQUIDPOLL_PLUGIN_URL . 'assets/admin/css/style.css', array(), $version );
 
+			wp_enqueue_script('jquery-ui-datepicker');
 			wp_enqueue_script( 'jquery-ui-sortable' );
 			wp_enqueue_script( 'apexcharts', plugins_url( 'assets/apexcharts.js', __FILE__ ) );
 			wp_enqueue_script( 'liquidpoll-admin', plugins_url( 'assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ), $version );

@@ -34,6 +34,11 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 				$filter_type  = isset( $_REQUEST['type'] ) ? sanitize_text_field( $_REQUEST['type'] ) : '';
 				$object_id    = isset( $_REQUEST['object'] ) ? sanitize_text_field( $_REQUEST['object'] ) : '';
 				$value_id     = isset( $_REQUEST['value'] ) ? sanitize_text_field( $_REQUEST['value'] ) : '';
+				$date         = isset( $_REQUEST['date'] ) ? sanitize_text_field( $_REQUEST['date'] ) : '';
+				$date_1       = isset( $_REQUEST['date_1'] ) ? sanitize_text_field( $_REQUEST['date_1'] ) : '';
+				$date_2       = isset( $_REQUEST['date_2'] ) ? sanitize_text_field( $_REQUEST['date_2'] ) : '';
+				$date_1       = 'custom' == $date ? $date_1 : '';
+				$date_2       = 'custom' == $date ? $date_2 : '';
 				$all_objects  = array();
 				$all_values   = array();
 
@@ -98,6 +103,22 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 								?>
                             </select>
                         </label>
+
+                        <label>
+                            <select name="date">
+                                <option value=""><?php esc_html_e( 'All time', 'wp-poll' ); ?></option>
+                                <option <?php selected( $date, 'last_7' ); ?> value="last_7"><?php esc_html_e( 'Last 7 days', 'wp-poll' ); ?></option>
+                                <option <?php selected( $date, 'last_15' ); ?> value="last_15"><?php esc_html_e( 'Last 15 days', 'wp-poll' ); ?></option>
+                                <option <?php selected( $date, 'last_30' ); ?> value="last_30"><?php esc_html_e( 'Last 30 days', 'wp-poll' ); ?></option>
+                                <option <?php selected( $date, 'custom' ); ?> value="custom"><?php esc_html_e( 'Custom', 'wp-poll' ); ?></option>
+                            </select>
+                        </label>
+
+                        <label>
+                            <input value="<?php echo esc_attr( $date_1 ); ?>" class="<?php echo ! empty( $date_1 ) ? '' : esc_attr( 'no-display' ); ?>" type="text" name="date_1" placeholder="YYYY-MM-DD">
+                            <input value="<?php echo esc_attr( $date_2 ); ?>" class="<?php echo ! empty( $date_2 ) ? '' : esc_attr( 'no-display' ); ?>" type="text" name="date_2" placeholder="YYYY-MM-DD">
+                        </label>
+
                         <input type="hidden" name="page" value="<?php echo esc_attr( $current_page ); ?>">
                         <input type="hidden" name="post_type" value="<?php echo esc_attr( 'poll' ); ?>">
                         <button class="button" type="submit"><?php echo esc_html__( 'Filter', 'wp-poll' ); ?></button>
@@ -109,6 +130,9 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
                         <input type="hidden" name="type" value="<?php echo esc_attr( $filter_type ); ?>">
                         <input type="hidden" name="object" value="<?php echo esc_attr( $object_id ); ?>">
                         <input type="hidden" name="value" value="<?php echo esc_attr( $value_id ); ?>">
+                        <input type="hidden" name="date" value="<?php echo esc_attr( $date ); ?>">
+                        <input type="hidden" name="date_1" value="<?php echo esc_attr( $date_1 ); ?>">
+                        <input type="hidden" name="date_2" value="<?php echo esc_attr( $date_2 ); ?>">
 						<?php wp_nonce_field( 'liquidpoll_export_nonce', 'liquidpoll_export_nonce' ); ?>
                         <button type="submit" class="primary button liquidpoll-report-export"><span class="dashicons dashicons-download"></span><?php esc_html_e( 'Export', 'wp-poll' ); ?></button>
                     </form>
@@ -179,7 +203,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 
 			$row_actions[] = sprintf( '<span class="type %1$s">%1$s</span>', $poll->get_type() );
 
-			printf( '<strong><a href="#" class="row-title">%s</a></strong>', $poll->get_name() );
+			printf( '<strong><a href="%s" class="row-title">%s</a></strong>', $poll->get_permalink(), $poll->get_name() );
 			printf( '<div class="row-actions visible">%s</div>', implode( ' | ', $row_actions ) );
 		}
 
@@ -231,6 +255,9 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 			$poll_type       = isset( $_REQUEST['type'] ) ? sanitize_text_field( $_REQUEST['type'] ) : '';
 			$object_id       = isset( $_REQUEST['object'] ) ? sanitize_text_field( $_REQUEST['object'] ) : '';
 			$value_id        = isset( $_REQUEST['value'] ) ? sanitize_text_field( $_REQUEST['value'] ) : '';
+			$date            = isset( $_REQUEST['date'] ) ? sanitize_text_field( $_REQUEST['date'] ) : '';
+			$date_1          = isset( $_REQUEST['date_1'] ) ? sanitize_text_field( $_REQUEST['date_1'] ) : '';
+			$date_2          = isset( $_REQUEST['date_2'] ) ? sanitize_text_field( $_REQUEST['date_2'] ) : '';
 			$where_clauses[] = '1=1';
 
 			if ( in_array( $poll_type, array( 'poll', 'nps', 'reaction' ) ) ) {
@@ -243,6 +270,21 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 
 			if ( ! empty( $value_id ) ) {
 				$where_clauses[] = "polled_value = '{$value_id}'";
+			}
+
+			if ( 'last_30' == $date ) {
+				$date_1 = date( 'Y-m-d', strtotime( '-30 days' ) );
+				$date_2 = date( 'Y-m-d' );
+			} else if ( 'last_15' == $date ) {
+				$date_1 = date( 'Y-m-d', strtotime( '-15 days' ) );
+				$date_2 = date( 'Y-m-d' );
+			} else if ( 'last_7' == $date ) {
+				$date_1 = date( 'Y-m-d', strtotime( '-7 days' ) );
+				$date_2 = date( 'Y-m-d' );
+			}
+
+			if ( ! empty( $date_1 ) && ! empty( $date_2 ) ) {
+				$where_clauses[] = "datetime between '{$date_1}' AND '{$date_2}'";
 			}
 
 			$where_conditions = implode( ' AND ', $where_clauses );
@@ -281,7 +323,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 		 *
 		 * @return string
 		 */
-		protected function get_human_readable_ip_info( $ip_address ) {
+		public static function get_human_readable_ip_info( $ip_address ) {
 
 			if ( empty( $ipinfo_token = Utils::get_option( 'liquidpoll_ipinfo_token' ) ) ) {
 				return esc_html__( 'Someone from the Earth', 'wp-poll' );

@@ -426,3 +426,15 @@ a.liquidpoll-doc {
 .poll_page_reports .polled_value img {
     max-width: 36px;
 }
+
+.liquidpoll-sort-form input[name="date_1"].no-display,
+.liquidpoll-sort-form input[name="date_2"].no-display {
+    display: none;
+}
+
+.liquidpoll-sort-form input[name="date_1"],
+.liquidpoll-sort-form input[name="date_2"] {
+    width: 98px;
+    font-size: 12px;
+    line-height: 22px;
+}

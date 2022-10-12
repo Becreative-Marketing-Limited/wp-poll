@@ -5,13 +5,44 @@
 (function ($, window, document, pluginObject) {
     "use strict";
 
-
     $(function () {
         $(".poll-options").sortable({handle: ".option-move", revert: true});
         $('.liquidpoll-reaction-options .pbsettings-siblings').sortable({handle: '.sortable', revert: true});
         $(".poll_option_container").sortable({handle: ".poll_option_single_sorter"});
+
+        let date_picker_1 = $('.liquidpoll-sort-form input[name="date_1"]'),
+            date_picker_2 = $('.liquidpoll-sort-form input[name="date_2"]');
+
+        if (date_picker_1.length > 0) {
+            date_picker_1.datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+        }
+
+        if (date_picker_2.length > 0) {
+            date_picker_2.datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+        }
     });
 
+
+    $(document).on('change', '.liquidpoll-sort-form select[name="date"]', function () {
+        let this_selection = $(this),
+            date_picker_1 = $('.liquidpoll-sort-form input[name="date_1"]'),
+            date_picker_2 = $('.liquidpoll-sort-form input[name="date_2"]'),
+            date_selected = this_selection.val();
+
+        if ('custom' === date_selected) {
+            date_picker_1.fadeIn(100);
+            date_picker_2.fadeIn(100);
+        } else {
+            date_picker_1.val('').fadeOut(100);
+            date_picker_2.val('').fadeOut(100);
+        }
+
+        // $('.liquidpoll-export-form input[name="date"]').val(value_id);
+    });
 
     $(document).on('change', '.liquidpoll-sort-form select[name="type"]', function () {
 
