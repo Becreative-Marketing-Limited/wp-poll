@@ -284,3 +284,6 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.39 =
 * 10/10/2022 - FIX - Fix bugs of hide poll setting and incognito submission for nps.
+
+= 3.3.40 =
+* 12/10/2022 - NEW - Complete reporting and exporting added.

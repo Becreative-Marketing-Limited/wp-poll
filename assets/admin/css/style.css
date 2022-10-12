@@ -1,7 +1,6 @@
 /*
-Admin css
+* Admin css
 */
-
 
 :root {
     --sliderxwoo-primary-color: #774ea9;
@@ -344,4 +343,86 @@ a.liquidpoll-doc {
     font-size: 14px;
     line-height: 24px;
     font-weight: 600;
+}
+
+.poll_page_reports th#id {
+    width: 30px;
+}
+
+.poll_page_reports th#poll {
+    width: 30%;
+    min-width: 170px;
+}
+
+.poll_page_reports th#polled_by {
+    width: 15%;
+    min-width: 150px;
+}
+
+.poll_page_reports th#polled_comments {
+    width: 35%;
+    min-width: 200px;
+}
+
+.poll_page_reports .row-actions .type {
+    background: #607d8b;
+    color: #fff;
+    padding: 2px 8px 3px;
+    font-size: 13px;
+    line-height: 23px;
+    text-transform: capitalize;
+    border-radius: 50px;
+}
+
+.poll_page_reports .row-actions .type.nps {
+    background: #2196f3;
+    text-transform: uppercase;
+}
+
+.poll_page_reports .row-actions .type.reaction {
+    background: #9c27b0;
+}
+
+.poll_page_reports .liquidpoll-report-export {
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.poll_page_reports .liquidpoll-report-export .dashicons {
+    font-size: 18px;
+    line-height: 23px;
+    margin-right: 5px;
+}
+
+.poll_page_reports .liquidpoll-export-form.disabled .liquidpoll-report-export {
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #868686;
+    border-color: #868686;
+    outline: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.poll_page_reports .liquidpoll-export-form.disabled .liquidpoll-report-export {
+    position: relative;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.poll_page_reports .liquidpoll-export-form.disabled .liquidpoll-report-export:after {
+    content: 'pro';
+    position: absolute;
+    top: 0;
+    right: -36px;
+    text-transform: uppercase;
+    color: red;
+}
+
+.poll_page_reports .polled_value img {
+    max-width: 36px;
 }

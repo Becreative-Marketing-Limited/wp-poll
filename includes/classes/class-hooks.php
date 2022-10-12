@@ -49,6 +49,90 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_filter( 'liquidpoll_filters_display_single_poll_main', array( $this, 'control_display_single_poll_main' ), 10, 2 );
 
 			add_action( 'wp_footer', array( $this, 'render_global_css' ) );
+			add_action( 'admin_menu', array( $this, 'add_reports_menu' ) );
+
+			add_action( 'wp_ajax_liquidpoll_get_polls', array( $this, 'reports_get_polls' ) );
+			add_action( 'wp_ajax_liquidpoll_get_option_values', array( $this, 'reports_get_option_values' ) );
+		}
+
+
+		/**
+		 * Return values on ajaox for filter in report page
+		 */
+		function reports_get_option_values() {
+
+			$object_id        = isset( $_POST['object_id'] ) ? sanitize_text_field( $_POST['object_id'] ) : '';
+			$poll             = liquidpoll_get_poll( $object_id );
+			$select_options[] = sprintf( '<option value="">%s</option>', esc_html__( 'All Values', 'wp-poll' ) );
+
+			foreach ( $poll->get_poll_options() as $option_id => $option ) {
+				$select_options[] = sprintf( '<option value="%s">%s</option>', $option_id, Utils::get_args_option( 'label', $option ) );
+			}
+
+			wp_send_json_success( implode( '', $select_options ) );
+		}
+
+
+		/**
+		 * Return polls on ajaox for filter in report page
+		 */
+		function reports_get_polls() {
+
+			$poll_type = isset( $_POST['poll_type'] ) ? sanitize_text_field( $_POST['poll_type'] ) : '';
+			$all_polls = get_posts( array(
+				'post_type'      => 'poll',
+				'posts_per_page' => - 1,
+				'post_status'    => 'publish',
+				'meta_query'     => array(
+					array(
+						'key'     => '_type',
+						'value'   => $poll_type,
+						'compare' => '=',
+					),
+				),
+			) );
+
+			if ( empty( $poll_type ) ) {
+				$select_options[] = sprintf( '<option value="">%s</option>', esc_html__( 'Select Poll', 'wp-poll' ) );
+			} else {
+				$select_options[] = sprintf( '<option value="">%s</option>', esc_html__( 'All ' . ucfirst( $poll_type ), 'wp-poll' ) );
+			}
+
+			foreach ( $all_polls as $poll_item ) {
+				$select_options[] = sprintf( '<option value="%s">%s</option>', $poll_item->ID, $poll_item->post_title );
+			}
+
+			wp_send_json_success( implode( '', $select_options ) );
+		}
+
+
+		/**
+		 * Display reports menu contnet
+		 */
+		function render_complete_report() {
+
+			$report_table = new LIQUIDPOLL_Poll_reports();
+			$current_page = isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
+
+			ob_start();
+
+			printf( '<h2>%s</h2>', esc_html__( 'LiquidPoll - Reports', 'wp-poll' ) );
+			printf( '<p>%s</p>', esc_html__( 'Complete poll reports.', 'wp-poll' ) );
+
+			$report_table->prepare_items();
+
+			printf( '<form><input type="hidden" name="page" value="%s"></form>', $current_page );
+
+			$report_table->display();
+
+			printf( '<div class="wrap monster-downloadertable-colum">%s</div>', ob_get_clean() );
+		}
+
+		/**
+		 * Add reports submenu
+		 */
+		function add_reports_menu() {
+			add_submenu_page( 'edit.php?post_type=poll', esc_html__( 'Reports', 'wp-poll' ), esc_html__( 'Reports', 'wp-poll' ), 'manage_options', 'reports', array( $this, 'render_complete_report' ), 10 );
 		}
 
 		/**
@@ -251,8 +335,9 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			$poll_id      = isset( $_POST['poll_id'] ) ? sanitize_text_field( $_POST['poll_id'] ) : '';
 			$checked_data = isset( $_POST['checked_data'] ) ? stripslashes_deep( $_POST['checked_data'] ) : array();
 			$poll         = liquidpoll_get_poll( $poll_id );
+			$checked_data = isset( $checked_data[0] ) ? $checked_data[0] : '';
 
-			if ( empty( $poll_id ) || empty( $checked_data ) || ! is_array( $checked_data ) ) {
+			if ( empty( $poll_id ) || empty( $checked_data ) ) {
 				wp_send_json_error( esc_html__( 'Invalid data found !', 'wp-poll' ) );
 			}
 
@@ -266,7 +351,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				wp_send_json_error( esc_html__( 'You already voted on this poll.', 'wp-poll' ) );
 			}
 
-
 			/**
 			 * Check ready to vote or not
 			 */
@@ -274,14 +358,18 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				wp_send_json_error( esc_html__( 'This poll has expired.', 'wp-poll' ) );
 			}
 
-
 			/**
 			 * Add vote into polled data
 			 */
-			foreach ( $checked_data as $option_id ) {
-				$polled_data[ $poller ][] = $option_id;
-			}
+			$polled_data[ $poller ][] = $checked_data;
 
+			// insert into result table
+			liquidpoll_insert_results(
+				array(
+					'poll_id'      => $poll_id,
+					'polled_value' => $checked_data,
+				)
+			);
 
 			/**
 			 * Action before saving a vote

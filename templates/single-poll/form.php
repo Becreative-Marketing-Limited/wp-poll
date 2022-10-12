@@ -19,7 +19,7 @@ $poll_form_label_last_name  = $poll->get_meta( 'poll_form_label_last_name', esc_
 $poll_form_label_email      = $poll->get_meta( 'poll_form_label_email', esc_html__( 'Email Address', 'wp-poll' ) );
 $poll_form_label_button     = $poll->get_meta( 'poll_form_label_button', esc_html__( 'View Results', 'wp-poll' ) );
 $poll_form_content          = $poll->get_meta( 'poll_form_content' );
-$poll_form_notice           = $poll->get_meta( 'poll_form_notice', esc_html__( 'I have accept the terms and condition', 'wp-poll' ) );
+$poll_form_notice           = $poll->get_meta( 'poll_form_notice' );
 $poll_form_style_colors     = $poll->get_meta( 'poll_form_style_colors' );
 
 
@@ -55,7 +55,7 @@ $poll_form_style_colors     = $poll->get_meta( 'poll_form_style_colors' );
 
 		<?php if ( ! empty( $poll_form_notice ) ) : ?>
             <div class="liquidpoll-form-field liquidpoll-form-notice">
-                <input type="checkbox" id="liquidpoll-form-notice" name="notice">
+                <input type="checkbox" id="liquidpoll-form-notice" name="notice" required>
                 <label for="liquidpoll-form-notice" class="notice"><?php echo wp_kses_data( $poll_form_notice ); ?></label>
             </div>
 		<?php endif; ?>

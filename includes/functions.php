@@ -569,8 +569,8 @@ if ( ! function_exists( 'liquidpoll_create_table' ) ) {
 			poll_id int(100) NOT NULL,
 			poll_type VARCHAR(255) NOT NULL,
 			poller_id_ip VARCHAR(255) NOT NULL,
-			polled_value VARCHAR(255) NOT NULL,
-			polled_comments VARCHAR(255),
+			polled_value VARCHAR(1024) NOT NULL,
+			polled_comments VARCHAR(1024),
 			datetime DATETIME NOT NULL,
 			UNIQUE KEY id (id)
 		)";
@@ -614,11 +614,10 @@ if ( ! function_exists( 'liquidpoll_insert_results' ) ) {
 			'datetime'        => current_time( 'mysql' ),
 		);
 		$args        = wp_parse_args( $args, $defaults );
-		$entry_count = $wpdb->get_var( "SELECT COUNT(*) FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_type = '{$args['poll_type']}' AND poller_id_ip = '{$args['poller_id_ip']}'" );
-
-		if ( $entry_count > 0 ) {
-			return new WP_Error( 'duplicate_try', esc_html__( 'Already voted', 'wp-poll' ) );
-		}
+//		$entry_count = $wpdb->get_var( "SELECT COUNT(*) FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_type = '{$args['poll_type']}' AND poller_id_ip = '{$args['poller_id_ip']}'" );
+//		if ( $entry_count > 0 ) {
+//			return new WP_Error( 'duplicate_try', esc_html__( 'Already voted', 'wp-poll' ) );
+//		}
 
 		$response = $wpdb->insert( LIQUIDPOLL_RESULTS_TABLE, $args );
 

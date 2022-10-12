@@ -12,6 +12,64 @@
         $(".poll_option_container").sortable({handle: ".poll_option_single_sorter"});
     });
 
+
+    $(document).on('change', '.liquidpoll-sort-form select[name="type"]', function () {
+
+        let this_selection = $(this),
+            this_selection_target = this_selection.parent().parent().find('select[name="object"]'),
+            poll_type = this_selection.val();
+
+        $('.liquidpoll-export-form input[name="type"]').val(poll_type);
+
+        $.ajax({
+            type: 'POST',
+            context: this,
+            url: pluginObject.ajaxurl,
+            data: {
+                'action': 'liquidpoll_get_polls',
+                'poll_type': poll_type,
+            },
+            success: function (response) {
+                if (response.success) {
+                    this_selection_target.html(response.data);
+                }
+            }
+        });
+    });
+
+
+    $(document).on('change', '.liquidpoll-sort-form select[name="object"]', function () {
+
+        let this_selection = $(this),
+            this_selection_target = this_selection.parent().parent().find('select[name="value"]'),
+            object_id = this_selection.val();
+
+        $('.liquidpoll-export-form input[name="object"]').val(object_id);
+
+        $.ajax({
+            type: 'POST',
+            context: this,
+            url: pluginObject.ajaxurl,
+            data: {
+                'action': 'liquidpoll_get_option_values',
+                'object_id': object_id,
+            },
+            success: function (response) {
+                if (response.success) {
+                    this_selection_target.html(response.data);
+                }
+            }
+        });
+    });
+
+    $(document).on('change', '.liquidpoll-sort-form select[name="value"]', function () {
+        let this_selection = $(this),
+            value_id = this_selection.val();
+
+        $('.liquidpoll-export-form input[name="value"]').val(value_id);
+    });
+
+
     $(document).on('change', '#liquidpoll-poll-selection', function () {
         let pollSelectionField = $(this),
             pollSelectionFieldValue = pollSelectionField.val(),

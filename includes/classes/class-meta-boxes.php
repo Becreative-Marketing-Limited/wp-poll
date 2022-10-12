@@ -811,16 +811,14 @@ class LIQUIDPOLL_Poll_meta {
 	/**
 	 * Return reaction emojis
 	 *
-	 * @param int $total_count
-	 *
 	 * @return array
 	 */
-	function get_reaction_emojis( $total_count = 10 ) {
+	function get_reaction_emojis() {
 
-		$emojis = array();
+		$_emojis = array( 'angry', 'cry', 'dislike', 'halo', 'like', 'love', 'party', 'smile', 'thinking', 'zany', );
 
-		for ( $index = 1; $index <= $total_count; $index ++ ) {
-			$emojis[ $index ] = $this->get_reaction_emoji_url( 'emoji-' . $index );
+		foreach ( $_emojis as $emoji ) {
+			$emojis[ $emoji ] = $this->get_reaction_emoji_url( $emoji );
 		}
 
 		return $emojis;

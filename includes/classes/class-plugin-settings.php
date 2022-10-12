@@ -96,6 +96,19 @@ class LIQUIDPOLL_Settings {
 							'placeholder' => esc_html__( 'Add new option', 'wp-poll' ),
 							'type'        => 'text',
 						),
+						array(
+							'id'      => 'liquidpoll_heading_ipinfo',
+							'content' => esc_html__( 'IPinfo Settings', 'wp-poll' ),
+							'type'    => 'subheading',
+						),
+						array(
+							'id'          => 'liquidpoll_ipinfo_token',
+							'title'       => esc_html__( 'API Token', 'wp-poll' ),
+							'subtitle'    => esc_html__( 'IPinfor api access token.', 'wp-poll' ),
+							'desc'        => esc_html__( 'Get your token from', 'wp-poll' ) . ' ' . sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( 'https://ipinfo.io/' ), 'ipinfo.io' ),
+							'placeholder' => '93u867df431io7',
+							'type'        => 'text',
+						),
 					),
 				),
 				array(

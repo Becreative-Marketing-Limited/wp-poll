@@ -132,7 +132,12 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			}
 
 			$poll_options = $this->get_poll_options();
-			$option_label = isset( $poll_options[ $option_id ]['label'] ) ? $poll_options[ $option_id ]['label'] : '';
+
+			if ( 'reaction' == $this->get_type() ) {
+				$option_label = $option_id;
+			} else {
+				$option_label = $poll_options[ $option_id ]['label'] ?? '';
+			}
 
 			if ( empty( $option_label ) ) {
 				return apply_filters( 'liquidpoll_filter_get_option_label', esc_html__( 'N/A', 'wp-poll' ), $option_id, $this->get_id(), $this );

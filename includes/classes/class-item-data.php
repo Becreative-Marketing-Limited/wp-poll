@@ -75,15 +75,27 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 
 			if ( 'nps' == $this->get_type() ) {
 				$poll_options = $this->get_meta( 'poll_meta_options_nps', array() );
+			} else if ( 'reaction' == $this->get_type() ) {
+				$poll_options = $this->get_meta( 'poll_meta_options_reaction', array() );
 			} else {
 				$poll_options = $this->get_meta( 'poll_meta_options', array() );
 			}
 
-			foreach ( $poll_options as $option_key => $option ) {
-				$_poll_options[ $option_key ] = array(
-					'label' => isset( $option['label'] ) ? $option['label'] : '',
-					'thumb' => isset( $option['thumb']['url'] ) ? $option['thumb']['url'] : '',
-				);
+			if ( 'reaction' == $this->get_type() ) {
+				foreach ( $poll_options as $option_key ) {
+					$_poll_options[ $option_key ] = array(
+						'label' => ucfirst( $option_key ),
+						'thumb' => liquidpoll()->metaboxes->get_reaction_emoji_url( $option_key ),
+					);
+				}
+			} else {
+				foreach ( $poll_options as $option_key => $option ) {
+					$thumb                        = Utils::get_args_option( 'thumb', $option );
+					$_poll_options[ $option_key ] = array(
+						'label' => Utils::get_args_option( 'label', $option ),
+						'thumb' => Utils::get_args_option( 'url', $thumb ),
+					);
+				}
 			}
 
 			return apply_filters( 'liquidpoll_filters_poll_options', $_poll_options );

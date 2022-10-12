@@ -21,6 +21,12 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 		 */
 		public $metaboxes = null;
 
+		/**
+		 * @var LIQUIDPOLL_Poll_reports|null
+		 */
+		public $reports_table = null;
+
+
 		protected $global_css = array();
 
 
