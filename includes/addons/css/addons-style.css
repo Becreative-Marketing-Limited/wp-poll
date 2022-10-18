@@ -1,0 +1,80 @@
+/**
+ * Addons Style
+ */
+.liquidpoll-addons {
+    margin-top: 40px;
+}
+
+.wrap.liquidpoll-addons > h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 38px;
+}
+
+.liquidpoll-addons .all-addons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+    min-width: 320px;
+}
+
+.liquidpoll-addons .all-addons .addon {
+    background: #fff;
+    border-radius: 4px;
+    margin: 15px;
+    padding: 30px;
+    position: relative;
+    text-align: center;
+    box-shadow: 3px 5px 30px 5px rgb(0 0 0 / 7%);
+    transition: 0.3s;
+    width: calc(33% - 90px);
+}
+
+.liquidpoll-addons .all-addons .addon:hover {
+    transform: translateY(-5px);
+}
+
+.liquidpoll-addons .all-addons .addon > h3 {
+    margin: 0 0 20px;
+    color: #4a4a4a;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.liquidpoll-addons .all-addons .addon > p {
+    margin: 0 0 20px;
+}
+
+.liquidpoll-addons .all-addons .addon > a.link,
+.liquidpoll-addons .all-addons .addon > a.link:focus,
+.liquidpoll-addons .all-addons .addon > a.link:visited,
+.liquidpoll-addons .all-addons .addon > a.link:active {
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+    margin: 0;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 12px 20px;
+    text-align: center;
+    transition: 0.3s;
+    background-color: #774ea9;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.liquidpoll-addons .all-addons .addon > a.link:hover {
+    background-color: #47385b;
+}
+
+.liquidpoll-addons .all-addons .addon.comingsoon > a.link {
+    background-color: #9f9f9f;
+}

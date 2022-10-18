@@ -4,6 +4,8 @@
 * Copyright: 	2015 Jaed Mosharraf
 */
 
+use Pluginbazar\Utils;
+
 defined( 'ABSPATH' ) || exit;
 
 class LIQUIDPOLL_Poll_meta {
@@ -46,7 +48,9 @@ class LIQUIDPOLL_Poll_meta {
 	 */
 	public function get_meta_field_sections() {
 
-		$poll_setting_fields = array(
+		global $wpdb;
+
+		$poll_setting_fields   = array(
 			array(
 				'id'      => 'settings_hide_for_logged_out_users',
 				'title'   => esc_html__( 'Settings', 'wp-poll' ),
@@ -97,7 +101,47 @@ class LIQUIDPOLL_Poll_meta {
 				'dependency' => array( '_type', '==', 'reaction', 'all' ),
 			),
 		);
-		$poll_setting_fields = apply_filters( 'LiquidPoll/Filters/poll_setting_fields', $poll_setting_fields );
+		$poll_setting_fields   = apply_filters( 'LiquidPoll/Filters/poll_setting_fields', $poll_setting_fields );
+		$post_selection_fields = array();
+		$registered_post_types = $wpdb->get_results( "SELECT DISTINCT( post_type ) FROM {$wpdb->posts}", ARRAY_A );
+
+		foreach ( $registered_post_types as $post_type ) {
+
+			$post_type   = Utils::get_args_option( 'post_type', $post_type );
+			$all_options = array();
+			$skip_types  = array(
+				'revision',
+				'nav_menu_item',
+				'custom_css',
+				'customize_changeset',
+				'oembed_cache',
+				'user_request',
+				'wp_block',
+				'wp_template',
+				'wp_template_part',
+				'wp_global_styles',
+				'wp_navigation',
+			);
+
+			if ( in_array( $post_type, $skip_types ) ) {
+				continue;
+			}
+
+			foreach ( get_posts( "post_type={$post_type}&posts_per_page=-1" ) as $_post ) {
+				$all_options[ $_post->ID ] = $_post->post_title;
+			}
+
+			$post_selection_fields[] = array(
+				'id'          => '_reaction_post_id_' . $post_type,
+				'title'       => sprintf( esc_html__( 'Select %s', 'wp-poll' ), ucfirst( $post_type ) ),
+				'type'        => 'select',
+				'placeholder' => sprintf( esc_html__( 'Select a %s', 'wp-poll' ), ucfirst( $post_type ) ),
+				'options'     => $all_options,
+				'ajax'        => true,
+				'chosen'      => true,
+				'dependency'  => array( '_type|_reaction_position|_reaction_post_type', '==|any|==', 'reaction|below_content,above_content|' . $post_type, 'all' ),
+			);
+		}
 
 		$field_sections['general_settings'] = array(
 			'title'  => __( 'General Settings', 'wp-poll' ),
@@ -186,7 +230,7 @@ class LIQUIDPOLL_Poll_meta {
 					'type'       => 'spacing',
 					'dependency' => array( '_type|_reaction_position', '==|==', 'reaction|floating', 'all' ),
 				),
-			), $poll_setting_fields )
+			), $post_selection_fields, $poll_setting_fields )
 		);
 
 		$field_sections['poll_options'] = array(
@@ -430,46 +474,6 @@ class LIQUIDPOLL_Poll_meta {
 				),
 			),
 		);
-
-		if ( function_exists( 'FluentCrmApi' ) ) {
-
-			$field_sections['poll_form']['fields'][] = array(
-				'type'       => 'subheading',
-				'content'    => esc_html__( 'Integration - Fluent CRM', 'wp-poll' ),
-				'dependency' => array( '_type', '==', 'poll', 'all' ),
-			);
-
-			$field_sections['poll_form']['fields'][] = array(
-				'id'         => 'poll_form_int_fcrm_enable',
-				'title'      => esc_html__( 'Enable Integration', 'wp-poll' ),
-				'label'      => esc_html__( 'This will store the submissions in Fluent CRM.', 'wp-poll' ),
-				'type'       => 'switcher',
-				'default'    => false,
-				'dependency' => array( '_type', '==', 'poll', 'all' ),
-			);
-
-			$field_sections['poll_form']['fields'][] = array(
-				'id'         => 'poll_form_int_fcrm_lists',
-				'title'      => esc_html__( 'Select Lists', 'wp-poll' ),
-				'subtitle'   => esc_html__( 'Select FluentCRM lists', 'wp-poll' ),
-				'type'       => 'select',
-				'multiple'   => true,
-				'chosen'     => true,
-				'options'    => liquidpoll()->get_fluent_crm_lists(),
-				'dependency' => array( '_type|poll_form_int_fcrm_enable', '==|==', 'poll|true', 'all' ),
-			);
-
-			$field_sections['poll_form']['fields'][] = array(
-				'id'         => 'poll_form_int_fcrm_tags',
-				'title'      => esc_html__( 'Select Tags', 'wp-poll' ),
-				'subtitle'   => esc_html__( 'Select FluentCRM tags', 'wp-poll' ),
-				'type'       => 'select',
-				'multiple'   => true,
-				'chosen'     => true,
-				'options'    => liquidpoll()->get_fluent_crm_tags(),
-				'dependency' => array( '_type|poll_form_int_fcrm_enable', '==|==', 'poll|true', 'all' ),
-			);
-		}
 
 		$field_sections['poll_styling'] = array(
 			'title'  => __( 'Style Settings', 'wp-poll' ),

@@ -7,9 +7,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-use FluentCrm\App\Models\Lists;
-use FluentCrm\App\Models\Tag;
-
 if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 	/**
 	 * Class LIQUIDPOLL_Functions
@@ -22,54 +19,17 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 		public $metaboxes = null;
 
 		/**
+		 * @var LIQUIDPOLL_Addons|null
+		 */
+		public $addons = null;
+
+		/**
 		 * @var LIQUIDPOLL_Poll_reports|null
 		 */
 		public $reports_table = null;
 
 
 		protected $global_css = array();
-
-
-		/**
-		 * Return Fluent CRM tags
-		 *
-		 * @return array
-		 */
-		function get_fluent_crm_tags() {
-
-			if ( ! function_exists( 'FluentCrmApi' ) ) {
-				return array();
-			}
-
-			$tags          = Tag::orderBy( 'title', 'ASC' )->get();
-			$formattedTags = [];
-			foreach ( $tags as $tag ) {
-				$formattedTags[ strval( $tag->id ) ] = $tag->title;
-			}
-
-			return $formattedTags;
-		}
-
-
-		/**
-		 * Return Fluent CRM lists
-		 *
-		 * @return array
-		 */
-		function get_fluent_crm_lists() {
-
-			if ( ! function_exists( 'FluentCrmApi' ) ) {
-				return array();
-			}
-
-			$lists          = Lists::orderBy( 'title', 'ASC' )->get();
-			$formattedLists = [];
-			foreach ( $lists as $list ) {
-				$formattedLists[ $list->id ] = $list->title;
-			}
-
-			return $formattedLists;
-		}
 
 
 		/**

@@ -3,7 +3,7 @@
  * Plugin Name: LiquidPoll - Advanced Polls for Creators and Brands
  * Plugin URI: https://liquidpoll.com
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.40
+ * Version: 3.3.41
  * Author: LiquidPoll
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -26,7 +26,7 @@ defined( 'LIQUIDPOLL_DOCS_URL' ) || define( 'LIQUIDPOLL_DOCS_URL', 'https://www.
 defined( 'LIQUIDPOLL_REVIEW_URL' ) || define( 'LIQUIDPOLL_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
 defined( 'LIQUIDPOLL_TICKET_URL' ) || define( 'LIQUIDPOLL_TICKET_URL', 'https://www.liquidpoll.com/my-account/' );
 defined( 'LIQUIDPOLL_COMMUNITY_URL' ) || define( 'LIQUIDPOLL_COMMUNITY_URL', 'https://www.facebook.com/groups/liquidpoll/' );
-defined( 'LIQUIDPOLL_VERSION' ) || define( 'LIQUIDPOLL_VERSION', '3.3.40' );
+defined( 'LIQUIDPOLL_VERSION' ) || define( 'LIQUIDPOLL_VERSION', '3.3.41' );
 
 if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 	/**
@@ -87,6 +87,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-shortcodes.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-poll-widgets.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/classes/class-poll-reports.php';
+
+			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/addons/class-addons.php';
 
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/template-hooks.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/template-hook-functions.php';
@@ -168,17 +170,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 	}
 }
 
-add_action( 'plugins_loaded', array( 'LIQUIDPOLL_Main', 'instance' ), 90 );
-
-// Update license server
-add_filter( 'PBSettings/Filters/integration_server_wp_poll', function () {
-	return esc_url( 'https://www.liquidpoll.com' );
-} );
-
-// Update license secret key
-add_filter( 'PBSettings/Filters/license_secret_key_wp_poll', function () {
-	return '6287d0ca3125a4.96767836';
-} );
 
 
 function pb_sdk_init_wp_poll() {
@@ -205,3 +196,18 @@ function pb_sdk_init_wp_poll() {
 global $liquidpoll_sdk;
 
 pb_sdk_init_wp_poll();
+
+
+
+
+add_action( 'plugins_loaded', array( 'LIQUIDPOLL_Main', 'instance' ), 90 );
+
+// Update license server
+add_filter( 'PBSettings/Filters/integration_server_wp_poll', function () {
+	return esc_url( 'https://www.liquidpoll.com' );
+} );
+
+// Update license secret key
+add_filter( 'PBSettings/Filters/license_secret_key_wp_poll', function () {
+	return '6287d0ca3125a4.96767836';
+} );

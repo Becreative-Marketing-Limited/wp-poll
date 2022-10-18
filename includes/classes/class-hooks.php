@@ -18,6 +18,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		function __construct() {
 
 			add_action( 'init', array( $this, 'register_everything' ) );
+
 			add_action( 'manage_poll_posts_columns', array( $this, 'add_core_poll_columns' ), 16, 1 );
 			add_action( 'manage_poll_posts_custom_column', array( $this, 'custom_columns_content' ), 10, 2 );
 			add_filter( 'post_row_actions', array( $this, 'remove_row_actions' ), 10, 1 );
@@ -553,8 +554,10 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function register_everything() {
 
+			global $liquidpoll_sdk;
+
 			// Register post type - Poll
-			liquidpoll()->PB_Settings()->register_post_type( 'poll', apply_filters( 'liquidpoll_filters_post_type_poll', array(
+			$liquidpoll_sdk->utils()->register_post_type( 'poll', apply_filters( 'liquidpoll_filters_post_type_poll', array(
 				'singular'      => esc_html__( 'LiquidPoll', 'wp-poll' ),
 				'plural'        => esc_html__( 'All Polls', 'wp-poll' ),
 				'labels'        => array(
@@ -566,10 +569,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				'supports'      => array( 'title', 'thumbnail' ),
 			) ) );
 
-			do_action( 'liquidpoll_register_post_types', liquidpoll()->PB_Settings() );
-
 			// Register Taxonomy - poll_cat
-			liquidpoll()->PB_Settings()->register_taxonomy( 'poll_cat', 'poll', apply_filters( 'liquidpoll_filters_tax_poll_cat', array(
+			$liquidpoll_sdk->utils()->register_taxonomy( 'poll_cat', 'poll', apply_filters( 'liquidpoll_filters_tax_poll_cat', array(
 				'singular'     => esc_html__( 'Poll Category', 'wp-poll' ),
 				'plural'       => esc_html__( 'Poll Categories', 'wp-poll' ),
 				'hierarchical' => true,
