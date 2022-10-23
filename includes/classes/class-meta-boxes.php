@@ -264,7 +264,7 @@ class LIQUIDPOLL_Poll_meta {
 				array(
 					'id'              => 'poll_meta_options_nps',
 					'title'           => esc_html__( 'Options (NPS)', 'wp-poll' ),
-					'label'           => esc_html__( 'Add poll options here. You can skip using media if you do not need this.', 'wp-poll' ),
+					'label'           => esc_html__( 'Add nps options here. You can skip using media if you do not need this.', 'wp-poll' ),
 					'type'            => 'repeater',
 					'button_title'    => esc_html__( 'Add option', 'wp-poll' ),
 					'disable_actions' => array( 'clone' ),

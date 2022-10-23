@@ -293,3 +293,4 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.42 =
 * 23/10/2022 - FIX - Image resizer issue fix.
+* 23/10/2022 - NEW - Tags added in poll options.
