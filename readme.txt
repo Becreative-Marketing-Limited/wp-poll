@@ -4,7 +4,7 @@
 	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
 	Requires at least: 4.6
 	Tested up to: 6.0.2
-	Stable tag: 3.3.41
+	Stable tag: 3.3.42
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -290,3 +290,6 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.41 =
 * 18/10/2022 - NEW - Addon plugins are added.
+
+= 3.3.42 =
+* 23/10/2022 - FIX - Image resizer issue fix.

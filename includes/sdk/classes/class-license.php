@@ -38,7 +38,62 @@ class License {
 		$this->cache_key       = sprintf( 'pb_%s_version_info', md5( $this->client->text_domain . esc_attr( '-pro' ) ) );
 		$this->data            = get_option( $this->option_key, array() );
 
+		add_action( 'init', array( $this, 'schedule_event' ) );
 		add_action( 'rest_api_init', array( $this, 'add_license_activation_endpoint' ) );
+		add_filter( 'cron_schedules', array( $this, 'add_cron_interval' ) );
+		add_action( 'pb_license_check', array( $this, 'check_license_validity' ) );
+
+	}
+
+	/**
+	 * check the license validity.
+	 * @return void
+	 */
+	function check_license_validity() {
+		$response = $this->license_api_request( array() );
+
+		if ( $response instanceof \WP_Error ) {
+            $this->flush_license_data();
+			return;
+		}
+
+		$registered_domains  = isset( $response['registered_domains'] ) ? Utils::get_args_option( 'registered_domains', $response ) : array();
+		$site_url            = $this->client->get_website_url();
+		$_registered_domains = array_column( $registered_domains, 'registered_domain' );
+
+		if ( isset($_registered_domains) && ! in_array( $site_url, $_registered_domains ) ) {
+			$this->flush_license_data();
+		}
+
+	}
+
+	/**
+	 *check the crone schedule and  fire the crone hook.
+	 *
+	 * @return void
+	 */
+	function schedule_event() {
+		if ( ! wp_next_scheduled( 'pb_license_check' ) ) {
+			wp_schedule_event( time(), 'daily', 'pb_license_check' );
+		}
+	}
+
+	/**
+	 * Adds a custom cron schedule for every day.
+	 *
+	 * @param array $schedules An array of non-default cron schedules.
+	 *
+	 * @return array of non-default cron schedules.
+	 */
+	function add_cron_interval( $schedules ) {
+		if ( ! isset( $schedules['daily'] ) ) {
+			$schedules['daily'] = array(
+				'interval' => 24* HOUR_IN_SECONDS,
+				'display'  => esc_html__( 'Daily' ),
+			);
+		}
+
+		return $schedules;
 	}
 
 
@@ -69,7 +124,7 @@ class License {
 			'callback'            => array( $this, 'handle_activation_endpoint' ),
 			'permission_callback' => function () {
 				return '';
-			}
+			},
 		) );
 	}
 

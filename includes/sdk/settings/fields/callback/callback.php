@@ -20,7 +20,7 @@ if ( ! class_exists( 'PBSettings_Field_callback' ) ) {
 
         $args = ( isset( $this->field['args'] ) ) ? $this->field['args'] : null;
 
-        call_user_func( $this->field['function'], $args );
+        call_user_func( $this->field['function'], $this->field );
 
       }
 
