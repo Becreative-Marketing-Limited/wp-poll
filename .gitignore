@@ -1,5 +1,6 @@
 *.log
-.DS_Store
 *.lock
+
+**/.DS_Store
 
 vendor/pluginbazar/sdk

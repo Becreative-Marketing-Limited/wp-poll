@@ -171,6 +171,15 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 }
 
 
+// Update license server
+add_filter( 'PBSettings/Filters/integration_server_wp_poll', function () {
+    return esc_url( 'https://www.liquidpoll.com' );
+} );
+
+// Update license secret key
+add_filter( 'PBSettings/Filters/license_secret_key_wp_poll', function () {
+    return '6287d0ca3125a4.96767836';
+} );
 
 function pb_sdk_init_wp_poll() {
 
@@ -197,17 +206,4 @@ global $liquidpoll_sdk;
 
 pb_sdk_init_wp_poll();
 
-
-
-
 add_action( 'plugins_loaded', array( 'LIQUIDPOLL_Main', 'instance' ), 90 );
-
-// Update license server
-add_filter( 'PBSettings/Filters/integration_server_wp_poll', function () {
-	return esc_url( 'https://www.liquidpoll.com' );
-} );
-
-// Update license secret key
-add_filter( 'PBSettings/Filters/license_secret_key_wp_poll', function () {
-	return '6287d0ca3125a4.96767836';
-} );
