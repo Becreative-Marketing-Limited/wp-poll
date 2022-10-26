@@ -40,13 +40,13 @@ if ( ! class_exists( 'LIQUIDPOLL_Addons' ) ) {
 
 			$addons = array(
 				array(
-					'id'      => 'liquidpoll-fluent-crm',
-					'title'   => esc_html__( 'FluentCRM', 'wp-poll' ),
+					'id'      => 'liquidpoll-fluent-crm-integration',
+					'title'   => esc_html__( 'FluentCRM Integration', 'wp-poll' ),
 					'details' => esc_html__( 'Integration with Fluent CRM to Liquidpoll plugin.', 'wp-poll' ),
 					'thumb'   => '',
 					'status'  => 'available',
 					'is_pro'  => false,
-					'link'    => '',
+					'link'    => 'https://wordpress.org/plugins/liquidpoll-fluent-crm-integration/',
 					'class'   => '',
 				),
 				array(

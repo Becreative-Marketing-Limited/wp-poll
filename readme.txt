@@ -1,7 +1,7 @@
 === LiquidPoll - Advanced Polls for Creators and Brands ===
 	Contributors: frankopazo,liquidpoll
 	Donate link: https://www.paypal.com/paypalme/frankopazo
-	Tags: poll, polls, democracy, survey, vote, justice, booth, opinion
+	Tags: poll, polls, survey, NPS, vote
 	Requires at least: 4.6
 	Tested up to: 6.0.2
 	Stable tag: 3.3.42
