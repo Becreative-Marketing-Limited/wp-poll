@@ -4,7 +4,7 @@
 	Tags: poll, polls, survey, NPS, vote
 	Requires at least: 4.6
 	Tested up to: 6.0.2
-	Stable tag: 3.3.42
+	Stable tag: 3.3.43
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,11 +14,10 @@
 
 LiquidPoll allows you to integrate a highly customisable polling system with so many options to control each poll to your WordPress website/blog. It’s a super easy solution to take opinions from visitors/users with multiple styles/themes.
 
-[BUY PRO](https://www.liquidpoll.com/pro/) | [DOCUMENTATION](https://www.liquidpoll.com/docs/) | [COMMUNITY & SUPPORT](https://www.facebook.com/groups/liquidpoll/)
+[GET PRO](https://www.liquidpoll.com/pro/) | [DOCUMENTATION](https://www.liquidpoll.com/docs/) | [COMMUNITY & SUPPORT](https://www.facebook.com/groups/liquidpoll/)
 
 ### FREE PLUGIN FEATURES
-* Single and Multi votes
-* NPS Score Poll to collect feedback (NEW)
+* Single and Multi vote polls
 * Ability to create Unlimited Poll options
 * Ability to use images for Poll Options
 * 4+ Poll Themes variations (NEW DESIGNS)
@@ -28,7 +27,7 @@ LiquidPoll allows you to integrate a highly customisable polling system with so 
 * Ability to create new options from users on Frontend
 * Graphical Poll reporting on Backend
 * Possibility to generate 100+ variations
-* Export reports as CSV
+* View reports
 * Plug and Play Widget
 * Display results for a single poll with short-code
 * Display results for an option of a single poll with short-code
@@ -36,13 +35,19 @@ LiquidPoll allows you to integrate a highly customisable polling system with so 
 
 ### PRO PLUGIN FEATURES
 * 6+ Pro Poll Themes (Enabling more options for the Free themes)
-* 4+ Pro NPS Themes.
+* 6+ Pro NPS Themes.
 * Show results as Percentages or Votes (Pro themes only)
 * Feedback Forms Options: Enabled, Mandatory or Optional.
 * Typography Control: Font size, Font Family (Google Font integration), Bold, Italic, etc.
 * Colour Control: Pick a colour for each element of your Poll.
 * List of responses in one single place
-* Reactions Poll Type to go live during September.
+* Reactions Poll Type.
+* NPS Poll type.
+* Export reports as CSV.
+* Lead generation forms.
+* Integration with Fluent CRM.
+
+For exporting reports, you can trim down the CSV file with filters on response time range and pick specific responses as well.
 
 
 #### ENGAGE THE AUDIENCE ON YOUR WEBSITE WITH POLLS
@@ -62,8 +67,6 @@ Display all your polls in one place so that you can create a landing page where 
 
 #### FEATURES IN THE PIPELINE
 * Video Option for Polls
-* Lead Generation Forms
-* Reactions Polls to be placed on blog articles, pages, or anywhere on your site.
 * Integrations with Forms: FluentForms, GravityForms, WSForms and Contact Form 7.
 * BuddyBoss / BuddyPress Integration
 * Gutenberg Blocks
@@ -73,10 +76,6 @@ Display all your polls in one place so that you can create a landing page where 
 
 [REPORT ANY ISSUE](https://liquidpoll.com/contact)
 
-== Installation ==
-
-1. Install as regular WordPress plugin.<br />
-2. Go your plugin settings via WordPress Dashboard and find "<strong>LiquidPoll </strong>" activate it.<br />
 
 
 == Screenshots ==
@@ -294,3 +293,6 @@ Display all your polls in one place so that you can create a landing page where 
 = 3.3.42 =
 * 23/10/2022 - FIX - Image resizer issue fix.
 * 23/10/2022 - NEW - Tags added in poll options.
+
+= 3.3.43 =
+* 26/10/2022 - TWEAK - readme file updated.

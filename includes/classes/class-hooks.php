@@ -230,7 +230,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				}
 
 				$single_row   = array();
-				$single_row[] = is_int( $poller ) ? liquidpoll()->get_human_readable_info( $poller ) : $poller;;
+				$single_row[] = is_int( $poller ) ? liquidpoll()->get_human_readable_info( $poller ) : $poller;
 
 				foreach ( $poll_options as $option_id => $option_label ) {
 					$single_row[] = in_array( $option_id, $polled_options ) ? 'yes' : '';
