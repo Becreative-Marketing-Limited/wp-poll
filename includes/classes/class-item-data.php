@@ -218,6 +218,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 			return $this->theme;
 		}
 
+
 		/**
 		 * @param $theme
 		 *
@@ -303,6 +304,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 			return apply_filters( 'liquidpoll_filters_get_meta', Utils::get_meta( $meta_key, $this->get_id(), $default ), $meta_key, $this );
 		}
 
+
 		/**
 		 * Update meta value
 		 *
@@ -322,6 +324,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 			return $ret;
 		}
 
+
 		/**
 		 * Return content
 		 *
@@ -340,6 +343,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 
 			return apply_filters( 'liquidpoll_filters_poll_content', $content );
 		}
+
 
 		/**
 		 * Return if an item has name or not
@@ -379,6 +383,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		function get_name() {
 			return apply_filters( 'liquidpoll_filters_item_name', $this->item_post->post_title );
 		}
+
 
 		/**
 		 * Return ID

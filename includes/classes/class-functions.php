@@ -41,6 +41,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 			$this->global_css[] = $style_rule;
 		}
 
+
 		/**
 		 * Return global css array
 		 *
