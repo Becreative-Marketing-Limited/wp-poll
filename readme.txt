@@ -4,7 +4,7 @@
 	Tags: poll, polls, survey, NPS, vote
 	Requires at least: 4.6
 	Tested up to: 6.0.2
-	Stable tag: 3.3.44
+	Stable tag: 3.3.45
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -299,3 +299,6 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.44 =
 * 30/10/2022 - NEW - Groundhoog integration added.
+
+= 3.3.45 =
+* 31/10/2022 - NEW - Funnelkit integration added.
