@@ -72,7 +72,10 @@
 
                         let pollSingle = $(this).parent().parent().parent();
 
-                        if (pollSingle.hasClass('theme-11')) {
+                        if (
+                            pollSingle.hasClass('theme-11') ||
+                            pollSingle.hasClass('theme-12')
+                        ) {
                             $(this).addClass('has-result').find('.liquidpoll-option-result-bar-inner').css('width', percentageValue + '%');
                         } else {
                             $(this).addClass('has-result').find('.liquidpoll-option-result-bar').css('width', percentageValue + '%');
@@ -102,7 +105,10 @@
                             marginLeft = 0;
                         }
 
-                        if (pollSingle.hasClass('theme-11')) {
+                        if (
+                            pollSingle.hasClass('theme-11') ||
+                            pollSingle.hasClass('theme-12')
+                        ) {
                             $(this).find('.liquidpoll-option-result').html(optionResultsText);
                             $(this).find('.liquidpoll-votes-count').html(singleVoteCount + ' ' + pluginObject.voteText);
                         } else {
@@ -111,7 +117,11 @@
                     }
                 });
 
-                resultButton.parent().fadeOut('slow', 'linear');
+                if (singlePoll.hasClass('theme-12') && singlePoll.hasClass('auto-populate')) {
+                    return false;
+                } else {
+                    resultButton.parent().fadeOut('slow', 'linear');
+                }
             }
         });
     });
@@ -149,6 +159,7 @@
 
         return false;
     });
+
 
     $(document).on('click', '.liquidpoll-submit-poll', function () {
 
@@ -379,6 +390,13 @@
                 roundHandle.attr('val', '0');
             }
         });
+
+
+        let pollSingle = $('.poll-single');
+
+        if (pollSingle.length > 0 && pollSingle.hasClass('theme-12')) {
+            pollSingle.addClass('auto-populate').find('.liquidpoll-get-poll-results').trigger('click');
+        }
     });
 
 
