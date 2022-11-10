@@ -101,11 +101,23 @@ $resized_thumb = $thumb ? liquidpoll_resizer( $thumb, $theme_width, $theme_heigh
                     <img src="<?php echo plugins_url( 'wp-poll/assets/images/author.png', LIQUIDPOLL_PLUGIN_DIR ); ?>" alt="<?php echo esc_attr( $label ); ?>">
                 </li>
                 <li>
-                    <img src="<?php echo plugins_url( 'wp-poll/assets/images/authorplus.png', LIQUIDPOLL_PLUGIN_DIR ); ?>" alt="<?php echo esc_attr( $label ); ?>">
+                    <span>+42</span>
                 </li>
             </ul>
         </div>
 	<?php endif; ?>
 
 </div> <!-- .liquidpoll-option-single -->
+
+<?php if ( in_array( $poll->get_theme(), array( 12 ) ) ): ?>
+    <div class="liquidpoll-vote-survey">
+        <ul>
+            <li>89 <span>votes</span></li>
+            <li><span class="dots"></span></li>
+            <li>6<span>d left</span></li>
+        </ul>
+        <!--            -->
+    </div>
+<?php endif; ?>
+
 
