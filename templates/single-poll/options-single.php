@@ -107,17 +107,10 @@ $resized_thumb = $thumb ? liquidpoll_resizer( $thumb, $theme_width, $theme_heigh
         </div>
 	<?php endif; ?>
 
+
+
 </div> <!-- .liquidpoll-option-single -->
 
-<?php if ( in_array( $poll->get_theme(), array( 12 ) ) ): ?>
-    <div class="liquidpoll-vote-survey">
-        <ul>
-            <li>89 <span>votes</span></li>
-            <li><span class="dots"></span></li>
-            <li>6<span>d left</span></li>
-        </ul>
-        <!--            -->
-    </div>
-<?php endif; ?>
+
 
 

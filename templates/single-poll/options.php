@@ -50,4 +50,16 @@ global $poll;
         </div>
     </div>
 
+	<?php if ( in_array( $poll->get_theme(), array( 12 ) ) ): ?>
+        <div class="liquidpoll-vote-survey">
+            <ul>
+                <li>89 <span>votes</span></li>
+                <li><span class="dots"></span></li>
+                <li>6<span>d left</span></li>
+            </ul>
+        </div>
+	<?php endif; ?>
+
 <?php endif; ?>
+
+
