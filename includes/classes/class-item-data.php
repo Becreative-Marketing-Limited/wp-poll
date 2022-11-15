@@ -51,6 +51,13 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 */
 		public $class = null;
 
+		/**
+		 * timer_type
+		 *
+		 * @var null
+		 */
+		public $timer_type = null;
+
 
 		/**
 		 * LIQUIDPOLLS_Poll constructor.
@@ -417,7 +424,11 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 
 			$this->item_id   = ! $item_id ? get_the_ID() : $item_id;
 			$this->item_post = get_post( $this->item_id );
-			$this->class     = isset( $args['class'] ) ? $args['class'] : '';
+			$this->class     = Utils::get_args_option( 'class', $args );
+
+			if ( ! empty( $timer_left = Utils::get_args_option( 'timer_type', $args ) ) ) {
+				$this->timer_type = $timer_left;
+			}
 
 			if ( isset( $args['theme'] ) && ! empty( $args['theme'] ) ) {
 				$this->theme = $args['theme'];

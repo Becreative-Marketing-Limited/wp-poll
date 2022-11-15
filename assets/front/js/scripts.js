@@ -392,11 +392,11 @@
         });
 
 
-        let pollSingle = $('.poll-single');
-
-        if (pollSingle.length > 0 && pollSingle.hasClass('theme-12')) {
-            pollSingle.addClass('auto-populate').find('.liquidpoll-get-poll-results').trigger('click');
-        }
+        // let pollSingle = $('.poll-single');
+        //
+        // if (pollSingle.length > 0 && pollSingle.hasClass('theme-12')) {
+        //     pollSingle.addClass('auto-populate').find('.liquidpoll-get-poll-results').trigger('click');
+        // }
     });
 
 

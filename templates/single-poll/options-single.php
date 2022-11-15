@@ -7,20 +7,22 @@ defined( 'ABSPATH' ) || exit;
 
 global $poll;
 
-$options_type  = $poll->can_vote_multiple() ? 'checkbox' : 'radio';
-$option_id     = isset( $args['option_id'] ) ? $args['option_id'] : '';
-$unique_id     = uniqid( 'option-' );
-$label         = isset( $args['label'] ) ? $args['label'] : '';
-$thumb         = isset( $args['thumb'] ) && ! in_array( $poll->get_theme(), array( 10 ) ) ? $args['thumb'] : '';
-$thumb_class   = ! empty( $thumb ) ? ' has-thumb' : '';
-$label_class   = ! empty( $label ) ? ' has-label' : '';
-$option_name   = 'submit_poll_option';
-$option_name   = $poll->get_type() == 'survey' ? sprintf( '%s[%s]', $option_name, $poll->get_id() ) : $option_name;
-$option_name   = $poll->get_type() == 'survey' && $options_type == 'checkbox' ? $option_name . "[]" : $option_name;
-$theme_args    = $poll->get_theme_args( $poll->get_theme() );
-$theme_width   = isset( $theme_args ) && ! empty( $theme_args ) ? $theme_args['width'] : '';
-$theme_height  = isset( $theme_args ) && ! empty( $theme_args ) ? $theme_args['height'] : '';
-$resized_thumb = $thumb ? liquidpoll_resizer( $thumb, $theme_width, $theme_height, true, true, true ) : '';
+$options_type   = $poll->can_vote_multiple() ? 'checkbox' : 'radio';
+$poller_details = isset( $args['poller_details'] ) ? $args['poller_details'] : array();
+$poller_count   = isset( $args['poller_count'] ) ? $args['poller_count'] : 0;
+$option_id      = isset( $args['option_id'] ) ? $args['option_id'] : '';
+$unique_id      = uniqid( 'option-' );
+$label          = isset( $args['label'] ) ? $args['label'] : '';
+$thumb          = isset( $args['thumb'] ) && ! in_array( $poll->get_theme(), array( 10 ) ) ? $args['thumb'] : '';
+$thumb_class    = ! empty( $thumb ) ? ' has-thumb' : '';
+$label_class    = ! empty( $label ) ? ' has-label' : '';
+$option_name    = 'submit_poll_option';
+$option_name    = $poll->get_type() == 'survey' ? sprintf( '%s[%s]', $option_name, $poll->get_id() ) : $option_name;
+$option_name    = $poll->get_type() == 'survey' && $options_type == 'checkbox' ? $option_name . "[]" : $option_name;
+$theme_args     = $poll->get_theme_args( $poll->get_theme() );
+$theme_width    = isset( $theme_args ) && ! empty( $theme_args ) ? $theme_args['width'] : '';
+$theme_height   = isset( $theme_args ) && ! empty( $theme_args ) ? $theme_args['height'] : '';
+$resized_thumb  = $thumb ? liquidpoll_resizer( $thumb, $theme_width, $theme_height, true, true, true ) : '';
 
 ?>
 
@@ -91,22 +93,24 @@ $resized_thumb = $thumb ? liquidpoll_resizer( $thumb, $theme_width, $theme_heigh
 	<?php if ( in_array( $poll->get_theme(), array( 12 ) ) ): ?>
         <div class="liquidpoll-option-submitting-person">
             <ul>
-                <li>
-                    <img src="<?php echo plugins_url( 'wp-poll/assets/images/author.png', LIQUIDPOLL_PLUGIN_DIR ); ?>" alt="<?php echo esc_attr( $label ); ?>">
-                </li>
-                <li>
-                    <img src="<?php echo plugins_url( 'wp-poll/assets/images/author.png', LIQUIDPOLL_PLUGIN_DIR ); ?>" alt="<?php echo esc_attr( $label ); ?>">
-                </li>
-                <li>
-                    <img src="<?php echo plugins_url( 'wp-poll/assets/images/author.png', LIQUIDPOLL_PLUGIN_DIR ); ?>" alt="<?php echo esc_attr( $label ); ?>">
-                </li>
-                <li>
-                    <span>+42</span>
-                </li>
+				<?php foreach ( $poller_details as $index => $poller_detail )  :
+					if ( $index > 2 ) {
+						continue;
+					}
+					?>
+                    <li>
+                        <img src="<?php echo get_avatar_url( $poller_detail ); ?>" alt="<?php echo esc_attr( $poller_detail ); ?>">
+                    </li>
+				<?php endforeach; ?>
+
+				<?php if ( $poller_count > 3 ) : ?>
+                    <li>
+                        <span>+<?php echo esc_html( $poller_count - 3 ); ?></span>
+                    </li>
+				<?php endif; ?>
             </ul>
         </div>
 	<?php endif; ?>
-
 
 
 </div> <!-- .liquidpoll-option-single -->

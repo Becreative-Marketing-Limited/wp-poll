@@ -88,16 +88,24 @@ if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
 
 			global $post, $poll;
 
-			$atts    = shortcode_atts( array(
-				'id'    => '',
-				'theme' => '',
-				'class' => '',
+			$atts       = shortcode_atts( array(
+				'id'         => '',
+				'theme'      => '',
+				'class'      => '',
+				'timer_type' => '',
 			), $atts );
-			$poll_id = empty( $atts['id'] ) ? '' : $atts['id'];
-			$theme   = empty( $atts['theme'] ) ? '' : $atts['theme'];
-			$class   = empty( $atts['class'] ) ? '' : $atts['class'];
-			$poll    = liquidpoll_get_poll( $poll_id, array( 'theme' => $theme, 'class' => $class ) );
-			$post    = $poll->get_post();
+			$poll_id    = empty( $atts['id'] ) ? '' : $atts['id'];
+			$theme      = empty( $atts['theme'] ) ? '' : $atts['theme'];
+			$class      = empty( $atts['class'] ) ? '' : $atts['class'];
+			$timer_type = empty( $atts['timer_type'] ) ? '' : $atts['timer_type'];
+			$poll       = liquidpoll_get_poll( $poll_id,
+				array(
+					'theme'      => $theme,
+					'class'      => $class,
+					'timer_type' => $timer_type,
+				)
+			);
+			$post       = $poll->get_post();
 
 			ob_start();
 

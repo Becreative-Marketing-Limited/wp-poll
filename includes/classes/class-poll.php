@@ -147,6 +147,21 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		}
 
 
+		function get_poller_details() {
+
+			$poller_details = array();
+
+			foreach ( $this->get_polled_data() as $poller_id_ip => $polled_option ) {
+				$polled_option = reset( $polled_option );
+//				$poller_id_ip  = is_string( $poller_id_ip ) ? $poller_id_ip : get_user_by( 'ID', $poller_id_ip )->user_email;
+
+				$poller_details[ $polled_option ][] = $poller_id_ip;
+			}
+
+			return $poller_details;
+		}
+
+
 		function get_polled_data() {
 
 			$polled_data = $this->get_meta( 'polled_data', array() );

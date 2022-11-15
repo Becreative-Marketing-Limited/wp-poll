@@ -9,31 +9,39 @@ defined( 'ABSPATH' ) || exit;
 
 global $poll;
 
+$poller_details = $poll->get_poller_details();
 
 ?>
-    <div <?php liquidpoll_options_single_class( 'liquidpoll-options' ); ?>>
+<div <?php liquidpoll_options_single_class( 'liquidpoll-options' ); ?>>
 
-		<?php
-		foreach ( $poll->get_poll_options() as $option_id => $option ) :
+	<?php
+	foreach ( $poll->get_poll_options() as $option_id => $option ) :
 
-			$args = array_merge( array( 'option_id' => $option_id ), $option );
+		$pollers = $poller_details[ $option_id ] ?? array();
+		$args    = array_merge(
+			array(
+				'option_id'      => $option_id,
+				'poller_details' => $pollers,
+				'poller_count'   => count( $pollers ),
+			), $option
+		);
 
-			liquidpoll_get_template( 'single-poll/options-single.php', $args );
+		liquidpoll_get_template( 'single-poll/options-single.php', $args );
 
-		endforeach;
-		?>
+	endforeach;
+	?>
 
-		<?php
-		$typography_options = $poll->get_css_args( '_typography_options' );
+	<?php
+	$typography_options = $poll->get_css_args( '_typography_options' );
 
-		liquidpoll_apply_css( '.liquidpoll-option-list-1 .liquidpoll-option-single input + label', $typography_options );
+	liquidpoll_apply_css( '.liquidpoll-option-list-1 .liquidpoll-option-single input + label', $typography_options );
 
-		liquidpoll_apply_css( '.poll-single.theme-4 .liquidpoll-option-single.has-result svg.liquidpoll-votes-count circle', array(
-			'stroke' => Utils::get_args_option( 'color', $typography_options ),
-		) );
-		?>
+	liquidpoll_apply_css( '.poll-single.theme-4 .liquidpoll-option-single.has-result svg.liquidpoll-votes-count circle', array(
+		'stroke' => Utils::get_args_option( 'color', $typography_options ),
+	) );
+	?>
 
-    </div>
+</div>
 
 <?php if ( $poll->get_type() === 'poll' ) : ?>
 
@@ -49,16 +57,6 @@ global $poll;
             </div>
         </div>
     </div>
-
-	<?php if ( in_array( $poll->get_theme(), array( 12 ) ) ): ?>
-        <div class="liquidpoll-vote-survey">
-            <ul>
-                <li>89 <span>votes</span></li>
-                <li><span class="dots"></span></li>
-                <li>6<span>d left</span></li>
-            </ul>
-        </div>
-	<?php endif; ?>
 
 <?php endif; ?>
 

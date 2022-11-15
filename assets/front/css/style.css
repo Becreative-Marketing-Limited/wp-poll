@@ -1722,3 +1722,41 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 .liquidpoll-form-field.liquidpoll-form-notice {
     text-align: left;
 }
+
+/**
+ * Countdown timer style
+ */
+
+.poll-single .liquidpoll-vote-survey {
+    text-align: left;
+    margin: 0 0 20px 0 !important;
+}
+
+.poll-single .liquidpoll-vote-survey ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.poll-single .liquidpoll-vote-survey ul li {
+    display: inline-block;
+    margin: 0;
+    color: #181818;
+    font-weight: 700;
+}
+
+.poll-single .liquidpoll-vote-survey ul li span {
+    display: inline-block;
+    color: #9B9B9B;
+    font-weight: 500;
+}
+
+.poll-single .liquidpoll-vote-survey ul li span.dots {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: #8b8b8b;
+    margin: 0 10px;
+}

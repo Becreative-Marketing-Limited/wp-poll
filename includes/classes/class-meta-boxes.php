@@ -549,6 +549,21 @@ class LIQUIDPOLL_Poll_meta {
 					'dependency'   => array( '_theme|_type', 'any|==', '1,2,3,5,8,9,10|poll', 'all' ),
 				),
 				array(
+					'id'           => '_timer_type',
+					'title'        => esc_html__( 'Countdown Timer Type', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Select countdown timer type..', 'wp-poll' ),
+					'type'         => 'button_set',
+					'options'      => array(
+						'regular'    => array( 'label' => esc_html__( 'Regular', 'wp-poll' ) ),
+						'with_votes' => array( 'label' => esc_html__( 'Timer with votes count', 'wp-poll' ) ),
+					),
+					'text_off'     => esc_html__( 'Percentage', 'wp-poll' ),
+					'text_width'   => 150,
+					'default'      => 'regular',
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme|_type', 'any|==', '10,11,12|poll', 'all' ),
+				),
+				array(
 					'id'           => '_nps_labels_color',
 					'title'        => esc_html__( 'Labels Color', 'wp-poll' ),
 					'subtitle'     => esc_html__( 'Add custom NPS labels color.', 'wp-poll' ),
