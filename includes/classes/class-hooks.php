@@ -338,7 +338,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			$poll         = liquidpoll_get_poll( $poll_id );
 			$checked_data = isset( $checked_data[0] ) ? $checked_data[0] : '';
 
-			if ( empty( $poll_id ) || empty( $checked_data ) ) {
+			if ( empty( $poll_id ) ) {
 				wp_send_json_error( esc_html__( 'Invalid data found !', 'wp-poll' ) );
 			}
 
