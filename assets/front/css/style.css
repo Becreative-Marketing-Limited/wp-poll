@@ -1660,7 +1660,9 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 /**
  * Form Style
  */
+
 .liquidpoll-form {
+    width: 570px;
     background: #e1e0fa;
     padding: 30px 50px;
     border-radius: 5px;

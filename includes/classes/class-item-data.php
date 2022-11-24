@@ -98,11 +98,14 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 			} else {
 				foreach ( $poll_options as $option_key => $option ) {
 					$_poll_options[ $option_key ] = array(
-						'label'           => Utils::get_args_option( 'label', $option ),
-						'thumb'           => Utils::get_args_option( 'url', Utils::get_args_option( 'thumb', $option, array() ) ),
-						'fcrm_tags'       => Utils::get_args_option( 'fcrm_tags', $option ),
-						'groundhogg_tags' => Utils::get_args_option( 'groundhogg_tags', $option ),
-						'funnelkit_tags'  => Utils::get_args_option( 'funnelkit_tags', $option ),
+						'label'               => Utils::get_args_option( 'label', $option ),
+						'thumb'               => Utils::get_args_option( 'url', Utils::get_args_option( 'thumb', $option, array() ) ),
+						'fcrm_tags'           => Utils::get_args_option( 'fcrm_tags', $option ),
+						'fcrm_nps_tags'       => Utils::get_args_option( 'fcrm_nps_tags', $option ),
+						'groundhogg_tags'     => Utils::get_args_option( 'groundhogg_tags', $option ),
+						'groundhogg_nps_tags' => Utils::get_args_option( 'groundhogg_nps_tags', $option ),
+						'funnelkit_tags'      => Utils::get_args_option( 'funnelkit_tags', $option ),
+						'funnelkit_nps_tags'  => Utils::get_args_option( 'funnelkit_nps_tags', $option ),
 					);
 				}
 			}

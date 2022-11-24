@@ -101,7 +101,6 @@ if ( ! empty( $poll->get_poll_options() ) && is_array( $poll->get_poll_options()
 	}
 }
 
-
 if ( $poll->ready_to_vote() ) {
 
 	printf( '<p class="liquidpoll-responses"><span class="icon-box"></span><span class="message"></span></p>' );

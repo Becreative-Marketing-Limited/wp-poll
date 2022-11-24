@@ -133,29 +133,28 @@
             optinFormData = optinForm.serialize(),
             singlePoll = optinForm.parent();
 
-        if (!singlePoll.hasClass('poll-type-poll')) {
-            return false;
-        }
+        if (singlePoll.hasClass('poll-type-poll') || singlePoll.hasClass('poll-type-nps')) {
+            $.ajax({
+                type: 'POST',
+                context: this,
+                url: pluginObject.ajaxurl,
+                data: {
+                    'action': 'liquidpoll_submit_optin_form',
+                    'form_data': optinFormData,
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $('.liquidpoll-get-poll-results').trigger('click');
 
-        $.ajax({
-            type: 'POST',
-            context: this,
-            url: pluginObject.ajaxurl,
-            data: {
-                'action': 'liquidpoll_submit_optin_form',
-                'form_data': optinFormData,
-            },
-            success: function (response) {
-                if (response.success) {
-                    $('.liquidpoll-get-poll-results').trigger('click');
-
-                    singlePoll.find('.liquidpoll-form').fadeOut(100);
-                    setTimeout(function () {
-                        singlePoll.find('.poll-content').fadeIn(100);
-                    }, 150);
+                        singlePoll.find('.liquidpoll-form').fadeOut(100);
+                        setTimeout(function () {
+                            singlePoll.find('.poll-content').fadeIn(100);
+                            singlePoll.find('.nps-form').fadeIn(100);
+                        }, 150);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         return false;
     });
@@ -405,10 +404,6 @@
     });
 
 
-    // $(document).on('click', '.nps-single .liquidpoll-submit-poll', function () {
-    //     $('.nps-single form.nps-container').submit();
-    // });
-
     $(document).on('keyup', '.nps-single .liquidpoll-comment-box textarea', function () {
         let npsCommentBox = $(this),
             npsCommentBoxWrap = npsCommentBox.parent(),
@@ -424,10 +419,12 @@
         }
     });
 
-    $(document).on('submit', '.nps-single form.nps-container', function () {
+
+    $(document).on('submit', '.nps-single form.nps-form', function () {
 
         let npsForm = $(this),
             poll_id = npsForm.data('poll-id'),
+            single_poll = $('#nps-' + poll_id),
             npsFormData = npsForm.serialize(),
             submissionButton = npsForm.find('.liquidpoll-submit-poll');
 
@@ -452,6 +449,14 @@
 
                     submissionButton.fadeOut();
                     npsForm.addClass('submission-done');
+
+
+                    if (single_poll.hasClass('has-form')) {
+                        single_poll.find('.nps-form').fadeOut(100);
+                        setTimeout(function () {
+                            single_poll.find('.liquidpoll-form').fadeIn(100);
+                        }, 150);
+                    }
                 }
             }
         });

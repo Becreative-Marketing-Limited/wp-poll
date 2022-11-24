@@ -43,7 +43,7 @@ if ( post_password_required() ) {
 
 				ob_start();
 				liquidpoll_get_template_part( 'single-nps/theme', $poll->get_theme(), ( $poll->get_theme() > 1 && liquidpoll()->is_pro() ) );
-				printf( '<form action="" class="nps-container" data-poll-id="%s" method="get">%s</form>', $poll->get_id(), ob_get_clean() );
+				printf( '%s <form action="" class="nps-form" data-poll-id="%s" method="get">%s</form>', liquidpoll_get_feedback_form(), $poll->get_id(), ob_get_clean() );
 
 			} elseif ( 'reaction' == $poll->get_type() ) {
 

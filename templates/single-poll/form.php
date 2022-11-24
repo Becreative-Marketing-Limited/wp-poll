@@ -21,7 +21,11 @@ $poll_form_label_button     = $poll->get_meta( 'poll_form_label_button', esc_htm
 $poll_form_content          = $poll->get_meta( 'poll_form_content' );
 $poll_form_notice           = $poll->get_meta( 'poll_form_notice' );
 $poll_form_style_colors     = $poll->get_meta( 'poll_form_style_colors' );
+$submit_button_text         = esc_attr__( 'View Results', 'wp-poll' );
 
+if ( 'nps' == $poll->get_type() ) {
+	$submit_button_text = esc_attr__( 'Confirm Optin', 'wp-poll' );
+}
 
 ?>
     <form class="liquidpoll-form" action="" enctype="multipart/form-data" method="get">
@@ -62,7 +66,7 @@ $poll_form_style_colors     = $poll->get_meta( 'poll_form_style_colors' );
 
         <div class="liquidpoll-form-field">
             <input type="hidden" name="poll_id" value="<?php echo esc_attr( $poll->get_id() ); ?>">
-            <input id="liquidpoll_submit" class="liquidpoll-button" type="submit" value="<?php echo esc_attr__( 'View Results', 'wp-poll' ); ?>">
+            <input id="liquidpoll_submit" class="liquidpoll-button" type="submit" value="<?php echo $submit_button_text; ?>">
         </div>
 
     </form>

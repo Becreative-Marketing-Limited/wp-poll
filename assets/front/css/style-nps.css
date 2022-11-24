@@ -8,11 +8,11 @@
     margin: 50px 0;
 }
 
-.nps-single .nps-container {
+.nps-single .nps-form {
     width: 700px;
 }
 
-form.nps-container.submission-done {
+.nps-form.submission-done {
     pointer-events: none;
 }
 
@@ -97,7 +97,7 @@ form.nps-container.submission-done {
     display: none;
 }
 
-.nps-single .nps-container .liquidpoll-submit-poll.disabled {
+.nps-single .nps-form .liquidpoll-submit-poll.disabled {
     pointer-events: none;
     background: #bbb;
 }
