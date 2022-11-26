@@ -3,8 +3,8 @@
 	Donate link: https://www.paypal.com/paypalme/frankopazo
 	Tags: poll, polls, survey, NPS, vote
 	Requires at least: 4.6
-	Tested up to: 6.1
-	Stable tag: 3.3.46
+	Tested up to: 6.1.1
+	Stable tag: 3.3.47
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -306,4 +306,7 @@ Display all your polls in one place so that you can create a landing page where 
 = 3.3.46 =
 * 14/11/2022 - NEW - Poll theme 12 added.
 * 14/11/2022 - NEW - Countdown timer style added in poll theme 10, 11 and 12.
+
+= 3.3.47 =
+* 26/11/2022 - NEW - Form added for nps and reaction.
 
