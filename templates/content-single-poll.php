@@ -50,7 +50,7 @@ if ( post_password_required() ) {
 				ob_start();
 				liquidpoll_get_template_part( 'single-reaction/theme', $poll->get_theme(), ( $poll->get_theme() > 0 && liquidpoll()->is_pro() ) );
 				printf( '<input type="hidden" name="poll_id" value="%s">', $poll->get_id() );
-				printf( '<form action="" class="reaction-container" data-poll-id="%s" method="get">%s</form>', $poll->get_id(), ob_get_clean() );
+				printf( '%s <form action="" class="reaction-container" data-poll-id="%s" method="get">%s</form>', liquidpoll_get_feedback_form(), $poll->get_id(), ob_get_clean() );
 
 			} else {
 

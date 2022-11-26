@@ -133,7 +133,7 @@
             optinFormData = optinForm.serialize(),
             singlePoll = optinForm.parent();
 
-        if (singlePoll.hasClass('poll-type-poll') || singlePoll.hasClass('poll-type-nps')) {
+        if (singlePoll.hasClass('poll-type-poll') || singlePoll.hasClass('poll-type-nps') || singlePoll.hasClass('poll-type-reaction')) {
             $.ajax({
                 type: 'POST',
                 context: this,
@@ -150,6 +150,7 @@
                         setTimeout(function () {
                             singlePoll.find('.poll-content').fadeIn(100);
                             singlePoll.find('.nps-form').fadeIn(100);
+                            singlePoll.find('.reaction-container').fadeIn(100);
                         }, 150);
                     }
                 }
