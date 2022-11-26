@@ -339,7 +339,7 @@ class LIQUIDPOLL_Poll_meta {
 					'type'       => 'notice',
 					'style'      => 'danger',
 					'content'    => esc_html__( 'Form is available only for poll type.', 'wp-poll' ),
-					'dependency' => array( '_type', 'not-any', 'poll,nps', 'all' ),
+					'dependency' => array( '_type', 'not-any', 'poll,nps,reaction', 'all' ),
 				),
 				array(
 					'id'         => 'poll_form_enable',
@@ -347,7 +347,7 @@ class LIQUIDPOLL_Poll_meta {
 					'label'      => esc_html__( 'Enable email collection form.', 'wp-poll' ),
 					'type'       => 'switcher',
 					'default'    => false,
-					'dependency' => array( '_type', 'any', 'poll,nps', 'all' ),
+					'dependency' => array( '_type', 'any', 'poll,nps,reaction', 'all' ),
 				),
 				array(
 					'id'         => 'poll_form_fields',
@@ -369,35 +369,35 @@ class LIQUIDPOLL_Poll_meta {
 						),
 					),
 					'default'    => array( 'first_name', 'email_address' ),
-					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
 					'id'         => 'poll_form_label_first_name',
 					'title'      => esc_html__( 'First Name Label', 'wp-poll' ),
 					'subtitle'   => esc_html__( 'Label for first name in the form', 'wp-poll' ),
 					'type'       => 'text',
-					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
 					'id'         => 'poll_form_label_last_name',
 					'title'      => esc_html__( 'Last Name Label', 'wp-poll' ),
 					'subtitle'   => esc_html__( 'Label for last name in the form', 'wp-poll' ),
 					'type'       => 'text',
-					'dependency' => array( '_type|poll_form_fields|poll_form_enable', 'any|any|==', 'poll,nps|last_name|true', 'all' ),
+					'dependency' => array( '_type|poll_form_fields|poll_form_enable', 'any|any|==', 'poll,nps,reaction|last_name|true', 'all' ),
 				),
 				array(
 					'id'         => 'poll_form_label_email',
 					'title'      => esc_html__( 'Email Address Label', 'wp-poll' ),
 					'subtitle'   => esc_html__( 'Label for email address in the form', 'wp-poll' ),
 					'type'       => 'text',
-					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
 					'id'         => 'poll_form_label_button',
 					'title'      => esc_html__( 'Submit Button Label', 'wp-poll' ),
 					'subtitle'   => esc_html__( 'Label for submit button in the form.', 'wp-poll' ),
 					'type'       => 'text',
-					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
 					'id'            => 'poll_form_content',
@@ -406,7 +406,7 @@ class LIQUIDPOLL_Poll_meta {
 					'type'          => 'wp_editor',
 					'media_buttons' => false,
 					'height'        => '100px',
-					'dependency'    => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency'    => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
 					'id'            => 'poll_form_notice',
@@ -415,12 +415,12 @@ class LIQUIDPOLL_Poll_meta {
 					'type'          => 'wp_editor',
 					'media_buttons' => false,
 					'height'        => '100px',
-					'dependency'    => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency'    => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
 					'type'       => 'subheading',
 					'content'    => esc_html__( 'Form Stylying', 'wp-poll' ),
-					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
 					'id'         => 'poll_form_style_colors',
@@ -434,7 +434,7 @@ class LIQUIDPOLL_Poll_meta {
 						'button_bg'       => esc_html__( 'Button Bg', 'wp-poll' ),
 						'button_bg_hover' => esc_html__( 'Button Bg (Hover))', 'wp-poll' ),
 					),
-					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
 					'id'             => 'poll_form_style_typography_content',
@@ -446,7 +446,7 @@ class LIQUIDPOLL_Poll_meta {
 					'text_transform' => false,
 					'text_align'     => false,
 					'letter_spacing' => false,
-					'dependency'     => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency'     => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
 					'id'             => 'poll_form_style_typography_gdpr',
@@ -458,7 +458,7 @@ class LIQUIDPOLL_Poll_meta {
 					'text_transform' => false,
 					'text_align'     => false,
 					'letter_spacing' => false,
-					'dependency'     => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency'     => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
 					'id'             => 'poll_form_style_typography_button',
@@ -470,7 +470,7 @@ class LIQUIDPOLL_Poll_meta {
 					'text_transform' => false,
 					'text_align'     => false,
 					'letter_spacing' => false,
-					'dependency'     => array( '_type|poll_form_enable', 'any|==', 'poll,nps|true', 'all' ),
+					'dependency'     => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 			),
 		);
