@@ -23,7 +23,7 @@ $poll_form_notice           = $poll->get_meta( 'poll_form_notice' );
 $poll_form_style_colors     = $poll->get_meta( 'poll_form_style_colors' );
 $submit_button_text         = esc_attr__( 'View Results', 'wp-poll' );
 
-if ( 'nps' == $poll->get_type() ) {
+if ( 'nps' == $poll->get_type() || 'reaction' == $poll->get_type() ) {
 	$submit_button_text = esc_attr__( 'Confirm Optin', 'wp-poll' );
 }
 
