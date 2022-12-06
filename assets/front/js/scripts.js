@@ -200,6 +200,7 @@
                     $(document.body).trigger('liquidpoll_poll_submission_success', response);
 
                     singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-success').find('span.message').html(response.data).parent().slideDown();
+                    singlePoll.find('.voted-users-only').removeClass('voted-users-only');
 
                     if (singlePoll.hasClass('has-form')) {
                         singlePoll.find('.poll-content').fadeOut(100);

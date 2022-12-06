@@ -490,6 +490,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				$count ++;
 
 				if ( $count == 3 ) {
+					$new['poll-type']   = esc_html__( 'Poll Type', 'wp-poll' );
 					$new['poll-report'] = esc_html__( 'Poll Report', 'wp-poll' );
 				}
 
@@ -511,6 +512,14 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		function custom_columns_content( $column, $post_id ) {
 
 			global $liquidpoll;
+
+			$poll = liquidpoll_get_poll( $post_id );
+
+			if ( $column == 'poll-type' ):
+
+				echo sprintf( '<span class="poll-type type-%1$s">%1$s</span>', $poll->get_type() );
+
+			endif;
 
 			if ( $column == 'poll-report' ):
 

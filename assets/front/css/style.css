@@ -58,6 +58,11 @@ img {
     margin-right: 0;
 }
 
+.liquidpoll-button.liquidpoll-get-poll-results.voted-users-only {
+    pointer-events: none;
+    user-select: none;
+}
+
 .liquidpoll-poll-title {
     font-family: Roboto, serif;
     font-size: 35px;

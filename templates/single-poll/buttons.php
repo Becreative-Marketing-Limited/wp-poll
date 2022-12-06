@@ -48,7 +48,11 @@ global $poll, $liquidpoll;
 	 * Results button
 	 */
 	if ( ! $poll->hide_results() ) {
-		printf( '<button class="liquidpoll-button liquidpoll-button-gray liquidpoll-get-poll-results" data-poll-id="%s">%s</button>', $poll->get_id(), $liquidpoll->get_button_text( 'results' ) );
+
+
+		$voted_users_only = '1' == ( $poll->get_meta( 'settings_poll_view_results_to_voted_users_only' ) && ! $poll->is_users_voted() ) ? 'voted-users-only' : '';
+
+		printf( '<button class="liquidpoll-button liquidpoll-button-gray liquidpoll-get-poll-results %s" data-poll-id="%s">%s</button>', $voted_users_only, $poll->get_id(), $liquidpoll->get_button_text( 'results' ) );
 
 		liquidpoll_apply_css( '.liquidpoll-get-poll-results',
 			array_merge(

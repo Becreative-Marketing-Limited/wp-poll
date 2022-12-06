@@ -438,3 +438,21 @@ a.liquidpoll-doc {
     font-size: 12px;
     line-height: 22px;
 }
+
+span.poll-type {
+    background: var(--sliderxwoo-primary-color);
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    line-height: 22px;
+    text-transform: capitalize;
+    border-radius: 3px;
+}
+
+span.poll-type.type-reaction {
+    background: #0690ce;
+}
+
+span.poll-type.type-nps {
+    background: #795548;
+}

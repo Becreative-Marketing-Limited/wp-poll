@@ -171,6 +171,20 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 
 
 		/**
+		 * If current user voted this poll
+		 *
+		 * @return bool
+		 */
+		function is_users_voted() {
+
+			$all_pollers    = array_keys( $this->get_polled_data() );
+			$current_poller = liquidpoll_get_poller();
+
+			return in_array( $current_poller, $all_pollers );
+		}
+
+
+		/**
 		 * Return poll results
 		 *
 		 * @return mixed|void

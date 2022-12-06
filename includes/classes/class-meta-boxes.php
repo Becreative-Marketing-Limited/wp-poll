@@ -83,6 +83,15 @@ class LIQUIDPOLL_Poll_meta {
 				'dependency' => array( '_type', '==', 'poll', 'all' ),
 			),
 			array(
+				'id'         => 'settings_poll_view_results_to_voted_users_only',
+				'title'      => ' ',
+				'label'      => esc_html__( 'View results to voted users only.', 'wp-poll' ),
+				'type'       => 'switcher',
+				'default'    => false,
+				'class'      => 'padding-top-none',
+				'dependency' => array( '_type', '==', 'poll', 'all' ),
+			),
+			array(
 				'id'         => 'settings_reaction_hide_title',
 				'title'      => ' ',
 				'label'      => esc_html__( 'Hide title for this reaction.', 'wp-poll' ),
