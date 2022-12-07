@@ -92,6 +92,9 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/template-hooks.php';
 			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/template-hook-functions.php';
+
+			// Elementor
+			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/elementor/class-elementor.php';
 		}
 
 

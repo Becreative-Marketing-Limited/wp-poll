@@ -5,6 +5,8 @@
  * @author Pluginbazar
  */
 
+use Pluginbazar\Utils;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
@@ -361,6 +363,22 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 		 */
 		function is_pro() {
 			return apply_filters( 'liquidpoll_filters_is_pro', class_exists( 'LIQUIDPOLL_Pro_Main' ) );
+		}
+
+
+		/**
+		 * Return elementor widget argument
+		 *
+		 * @param $key
+		 * @param $default
+		 *
+		 * @return array|bool|mixed|string
+		 */
+		function get_widget_arg_val( $key = '', $default = '' ) {
+
+			global $liquidpoll_widget_settings;
+
+			return Utils::get_args_option( $key, $liquidpoll_widget_settings, $default );
 		}
 
 

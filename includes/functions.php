@@ -435,7 +435,6 @@ if ( ! function_exists( 'liquidpoll_get_template' ) ) {
 
 		$located = liquidpoll_locate_template( $template_name, $template_path, $default_path, $backtrace_file, $main_template );
 
-
 		if ( ! file_exists( $located ) ) {
 			return new WP_Error( 'invalid_data', __( '%s does not exist.', 'wp-poll' ), '<code>' . $located . '</code>' );
 		}
