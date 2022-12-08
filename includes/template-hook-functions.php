@@ -14,7 +14,13 @@ if ( ! function_exists( 'liquidpoll_single_poll_form' ) ) {
 	 */
 	function liquidpoll_single_poll_form() {
 
-		liquidpoll_get_template( 'single-poll/form.php' );
+		global $poll;
+
+		$poll_form_enable = $poll->get_meta( 'poll_form_enable', '0' );
+
+		if ( '1' == $poll_form_enable || 'yes' == $poll_form_enable ) {
+			liquidpoll_get_template( 'single-poll/form.php' );
+		}
 	}
 }
 

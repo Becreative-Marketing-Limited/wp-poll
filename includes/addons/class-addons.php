@@ -4,7 +4,7 @@
  */
 
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 if ( ! class_exists( 'LIQUIDPOLL_Addons' ) ) {
 	/**

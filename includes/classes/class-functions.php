@@ -5,7 +5,7 @@
  * @author Pluginbazar
  */
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -363,6 +363,89 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 		 */
 		function is_pro() {
 			return apply_filters( 'liquidpoll_filters_is_pro', class_exists( 'LIQUIDPOLL_Pro_Main' ) );
+		}
+
+
+		/**
+		 * Return NPS themes
+		 *
+		 * @return mixed|void
+		 */
+		function get_reaction_themes() {
+
+			$themes = array(
+				999 => array(
+					'label'        => esc_html__( '3+ are coming soon', 'wp-poll' ),
+					'availability' => 'upcoming',
+				),
+			);
+			$themes = apply_filters( 'LiquidPoll/Filters/reaction_themes', $themes );
+
+			ksort( $themes );
+
+			return $themes;
+		}
+
+
+		/**
+		 * Return NPS themes
+		 *
+		 * @return mixed|void
+		 */
+		function get_nps_themes() {
+
+			$themes = array(
+				1   => array(
+					'label' => esc_html__( 'Theme 1', 'wp-poll' ),
+				),
+				998 => array(
+					'label'        => esc_html__( '4+ are in pro', 'wp-poll' ),
+					'availability' => 'pro',
+				),
+				999 => array(
+					'label'        => esc_html__( '10+ are coming soon', 'wp-poll' ),
+					'availability' => 'upcoming',
+				),
+			);
+			$themes = apply_filters( 'LiquidPoll/Filters/nps_themes', $themes );
+
+			ksort( $themes );
+
+			return $themes;
+		}
+
+
+		/**
+		 * Return poll themes
+		 *
+		 * @return mixed|void
+		 */
+		function get_poll_themes() {
+
+			$themes = array(
+				1   => array(
+					'label' => esc_html__( 'Theme 1', 'wp-poll' ),
+				),
+				2   => array(
+					'label' => esc_html__( 'Theme 2', 'wp-poll' ),
+				),
+				3   => array(
+					'label' => esc_html__( 'Theme 3', 'wp-poll' ),
+				),
+				998 => array(
+					'label'        => esc_html__( '10+ are in pro', 'wp-poll' ),
+					'availability' => 'pro',
+				),
+				999 => array(
+					'label'        => esc_html__( '20+ are coming soon', 'wp-poll' ),
+					'availability' => 'upcoming',
+				),
+			);
+			$themes = apply_filters( 'LiquidPoll/Filters/poll_themes', $themes );
+
+			ksort( $themes );
+
+			return $themes;
 		}
 
 

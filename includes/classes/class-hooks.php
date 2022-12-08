@@ -4,7 +4,7 @@
  */
 
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 	/**
@@ -41,7 +41,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_action( 'pb_settings_liquidpoll-extensions', array( $this, 'render_extensions' ) );
 			add_action( 'wp_ajax_liquidpoll_report_download_csv', array( $this, 'download_csv_report' ) );
 
-			add_action( 'pbsettings_after_meta_navs', array( $this, 'add_plugin_promotional_navs' ) );
+			add_action( 'wpdk_settings_after_meta_navs', array( $this, 'add_plugin_promotional_navs' ) );
 
 			// NPS
 			add_action( 'wp_ajax_liquidpoll_submit_nps', array( $this, 'liquidpoll_submit_nps' ) );
@@ -195,11 +195,11 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		function add_plugin_promotional_navs() {
 
 			if ( ! liquidpoll()->is_pro() ) {
-				printf( '<li class="pbsettings-extra-nav get-pro"><a href="%s">%s</a></li>', LIQUIDPOLL_PLUGIN_LINK, esc_html__( 'Get Pro', 'wp-poll' ) );
+				printf( '<li class="wpdk_settings-extra-nav get-pro"><a href="%s">%s</a></li>', LIQUIDPOLL_PLUGIN_LINK, esc_html__( 'Get Pro', 'wp-poll' ) );
 			}
 
-			printf( '<li class="pbsettings-extra-nav right"><a href="%s">%s</a></li>', LIQUIDPOLL_DOCS_URL, esc_html__( 'Documentation', 'wp-poll' ) );
-			printf( '<li class="pbsettings-extra-nav right"><a href="%s">%s</a></li>', LIQUIDPOLL_COMMUNITY_URL, esc_html__( 'Community', 'wp-poll' ) );
+			printf( '<li class="wpdk_settings-extra-nav right"><a href="%s">%s</a></li>', LIQUIDPOLL_DOCS_URL, esc_html__( 'Documentation', 'wp-poll' ) );
+			printf( '<li class="wpdk_settings-extra-nav right"><a href="%s">%s</a></li>', LIQUIDPOLL_COMMUNITY_URL, esc_html__( 'Community', 'wp-poll' ) );
 		}
 
 		/**
@@ -563,10 +563,10 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function register_everything() {
 
-			global $liquidpoll_sdk;
+			global $liquidpoll_wpdk;
 
 			// Register post type - Poll
-			$liquidpoll_sdk->utils()->register_post_type( 'poll', apply_filters( 'liquidpoll_filters_post_type_poll', array(
+			$liquidpoll_wpdk->utils()->register_post_type( 'poll', apply_filters( 'liquidpoll_filters_post_type_poll', array(
 				'singular'      => esc_html__( 'LiquidPoll', 'wp-poll' ),
 				'plural'        => esc_html__( 'All Polls', 'wp-poll' ),
 				'labels'        => array(
@@ -579,7 +579,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			) ) );
 
 			// Register Taxonomy - poll_cat
-			$liquidpoll_sdk->utils()->register_taxonomy( 'poll_cat', 'poll', apply_filters( 'liquidpoll_filters_tax_poll_cat', array(
+			$liquidpoll_wpdk->utils()->register_taxonomy( 'poll_cat', 'poll', apply_filters( 'liquidpoll_filters_tax_poll_cat', array(
 				'singular'     => esc_html__( 'Poll Category', 'wp-poll' ),
 				'plural'       => esc_html__( 'Poll Categories', 'wp-poll' ),
 				'hierarchical' => true,

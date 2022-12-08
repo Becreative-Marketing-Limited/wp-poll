@@ -3,7 +3,7 @@
  * Single Poll - Options
  */
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
 

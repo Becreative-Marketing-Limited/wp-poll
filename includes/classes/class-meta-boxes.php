@@ -4,7 +4,7 @@
 * Copyright: 	2015 Jaed Mosharraf
 */
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,7 +24,7 @@ class LIQUIDPOLL_Poll_meta {
 
 		$prefix = 'liquidpoll_poll_meta';
 
-		PBSettings::createMetabox( $prefix,
+		WPDK_Settings::createMetabox( $prefix,
 			array(
 				'title'     => __( 'Slider Options', 'wp-poll' ),
 				'post_type' => 'poll',
@@ -36,7 +36,7 @@ class LIQUIDPOLL_Poll_meta {
 		);
 
 		foreach ( $this->get_meta_field_sections() as $section ) {
-			PBSettings::createSection( $prefix, $section );
+			WPDK_Settings::createSection( $prefix, $section );
 		}
 	}
 
@@ -62,14 +62,6 @@ class LIQUIDPOLL_Poll_meta {
 				'id'         => 'settings_vote_after_deadline',
 				'title'      => ' ',
 				'label'      => esc_html__( 'Allow users to vote after deadline.', 'wp-poll' ),
-				'type'       => 'switcher',
-				'class'      => 'padding-top-none',
-				'dependency' => array( '_type', '==', 'poll', 'all' ),
-			),
-			array(
-				'id'         => 'settings_new_options',
-				'title'      => ' ',
-				'label'      => esc_html__( 'Allow users to add new option.', 'wp-poll' ),
 				'type'       => 'switcher',
 				'class'      => 'padding-top-none',
 				'dependency' => array( '_type', '==', 'poll', 'all' ),
@@ -428,7 +420,7 @@ class LIQUIDPOLL_Poll_meta {
 				),
 				array(
 					'type'       => 'subheading',
-					'content'    => esc_html__( 'Form Stylying', 'wp-poll' ),
+					'content'    => esc_html__( 'Form Styling', 'wp-poll' ),
 					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(

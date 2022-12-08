@@ -6,7 +6,7 @@
  * @package includes/classes/class-item-data
  */
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -120,7 +120,16 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 * @return string
 		 */
 		function get_type() {
-			return apply_filters( 'liquidpoll_filters_poll_type', $this->get_meta( '_type', 'poll' ), $this->get_id() );
+
+			global $liquidpoll_inside_elementor;
+
+			$type = $this->get_meta( '_type', 'poll' );
+
+			if ( $liquidpoll_inside_elementor ) {
+				$type = liquidpoll()->get_widget_arg_val( '_type', $type );
+			}
+
+			return apply_filters( 'liquidpoll_filters_poll_type', $type, $this->get_id() );
 		}
 
 
@@ -313,7 +322,16 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 * @return mixed|void
 		 */
 		function get_meta( $meta_key = '', $default = '' ) {
-			return apply_filters( 'liquidpoll_filters_get_meta', Utils::get_meta( $meta_key, $this->get_id(), $default ), $meta_key, $this );
+
+			global $liquidpoll_inside_elementor;
+
+			$meta_value = Utils::get_meta( $meta_key, $this->get_id(), $default );
+
+			if ( $liquidpoll_inside_elementor ) {
+				$meta_value = liquidpoll()->get_widget_arg_val( $meta_key, $meta_value );
+			}
+
+			return apply_filters( 'liquidpoll_filters_get_meta', $meta_value, $meta_key, $this );
 		}
 
 
@@ -347,7 +365,13 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 		 */
 		function get_content( $length = false, $more = null ) {
 
+			global $liquidpoll_inside_elementor;
+
 			$content = $this->get_meta( '_content' );
+
+			if ( $liquidpoll_inside_elementor && ! empty( $el_content = liquidpoll()->get_widget_arg_val( 'poll_content' ) ) ) {
+				$content = $el_content;
+			}
 
 			if ( $length ) {
 				$content = wp_trim_words( $content, $length, $more );

@@ -6,8 +6,8 @@
     --sliderxwoo-primary-color: #774ea9;
     --sliderxwoo-red-color: #ff6a5f;
     --sliderxwoo-primary-color-dim: #e3dbed;
-    --pbsettings-primary-color: var(--sliderxwoo-primary-color);
-    --pbsettings-primary-color-dim: var(--sliderxwoo-primary-color-dim);
+    --wpdk_settings-primary-color: var(--sliderxwoo-primary-color);
+    --wpdk_settings-primary-color-dim: var(--sliderxwoo-primary-color-dim);
 }
 
 body.post-type-poll #titlediv #title,

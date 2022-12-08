@@ -3,7 +3,7 @@
  * Settings class
  */
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -14,7 +14,7 @@ class LIQUIDPOLL_Settings {
 	 */
 	public function __construct() {
 
-		global $liquidpoll_sdk;
+		global $liquidpoll_wpdk;
 
 		// Generate settings page
 		$settings_args = array(
@@ -27,8 +27,8 @@ class LIQUIDPOLL_Settings {
 			'theme'               => 'light',
 			'show_search'         => false,
 			'product_url'         => LIQUIDPOLL_PLUGIN_LINK,
-			'product_version'     => $liquidpoll_sdk->plugin_version,
-			'product_version_pro' => liquidpoll()->is_pro() ? $liquidpoll_sdk->license()->plugin_version : '',
+			'product_version'     => $liquidpoll_wpdk->plugin_version,
+			'product_version_pro' => liquidpoll()->is_pro() ? $liquidpoll_wpdk->license()->plugin_version : '',
 			'quick_links'         => array(
 				'supports' => array(
 					'label' => esc_html__( 'Support', 'wp-poll' ),
@@ -42,7 +42,7 @@ class LIQUIDPOLL_Settings {
 			'pro_url'             => LIQUIDPOLL_PLUGIN_LINK,
 		);
 
-		PBSettings::createSettingsPage( $liquidpoll_sdk->plugin_unique_id, $settings_args, $this->get_settings_pages() );
+		WPDK_Settings::createSettingsPage( $liquidpoll_wpdk->plugin_unique_id, $settings_args, $this->get_settings_pages() );
 	}
 
 

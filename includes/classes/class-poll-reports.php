@@ -3,7 +3,7 @@
  * Class Poll Reports
  */
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
 

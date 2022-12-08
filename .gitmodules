@@ -1,3 +1,6 @@
 [submodule "includes/sdk"]
 	path = includes/sdk
 	url = git@github.com:pluginbazar/sdk.git
+[submodule "includes/wpdk"]
+	path = includes/wpdk
+	url = git@github.com:jaedm97/wpdk.git

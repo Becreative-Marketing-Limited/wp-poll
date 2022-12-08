@@ -24,6 +24,9 @@
     text-align: center;
 }
 
+.nps-single .liquidpoll-content p {
+    margin-bottom: 1.5em !important;
+}
 
 .nps-single input[type="radio"] {
     display: none;

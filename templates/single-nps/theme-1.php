@@ -3,7 +3,7 @@
  * Single NPS - Title
  */
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
 

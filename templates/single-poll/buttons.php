@@ -21,9 +21,9 @@ global $poll, $liquidpoll;
 	/**
 	 * New option button
 	 */
-	if ( $poll->visitors_can_add_option() ) {
-		printf( '<button class="liquidpoll-button liquidpoll-button-new-option">%s</button>', $liquidpoll->get_button_text( 'new_option' ) );
-	}
+//	if ( $poll->visitors_can_add_option() ) {
+//		printf( '<button class="liquidpoll-button liquidpoll-button-new-option">%s</button>', $liquidpoll->get_button_text( 'new_option' ) );
+//	}
 
 
 	/**

@@ -3,17 +3,14 @@
  * Single Poll - Form
  */
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
 global $poll;
 
-if ( '1' != $poll->get_meta( 'poll_form_enable', '0' ) ) {
-	return;
-}
-
 $poll_form_fields           = $poll->get_meta( 'poll_form_fields', array( 'first_name', 'email_address' ) );
+$enable_last_name           = $poll->get_meta( 'enable_last_name', 'no' );
 $poll_form_label_first_name = $poll->get_meta( 'poll_form_label_first_name', esc_html__( 'First Name', 'wp-poll' ) );
 $poll_form_label_last_name  = $poll->get_meta( 'poll_form_label_last_name', esc_html__( 'Last Name', 'wp-poll' ) );
 $poll_form_label_email      = $poll->get_meta( 'poll_form_label_email', esc_html__( 'Email Address', 'wp-poll' ) );
@@ -21,11 +18,16 @@ $poll_form_label_button     = $poll->get_meta( 'poll_form_label_button', esc_htm
 $poll_form_content          = $poll->get_meta( 'poll_form_content' );
 $poll_form_notice           = $poll->get_meta( 'poll_form_notice' );
 $poll_form_style_colors     = $poll->get_meta( 'poll_form_style_colors' );
-$submit_button_text         = esc_attr__( 'View Results', 'wp-poll' );
+$submit_button_text         = $poll->get_meta( 'poll_form_label_button', esc_attr__( 'View Results', 'wp-poll' ) );
 
 if ( 'nps' == $poll->get_type() || 'reaction' == $poll->get_type() ) {
 	$submit_button_text = esc_attr__( 'Confirm Optin', 'wp-poll' );
 }
+
+if ( 'yes' != $enable_last_name && ( $key = array_search( 'last_name', $poll_form_fields ) ) !== false ) {
+	unset( $poll_form_fields[ $key ] );
+}
+
 
 ?>
     <form class="liquidpoll-form" action="" enctype="multipart/form-data" method="get">

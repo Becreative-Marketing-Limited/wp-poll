@@ -5,7 +5,7 @@
  * @author Pluginbazar
  */
 
-use Pluginbazar\Utils;
+use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -390,7 +390,6 @@ if ( ! function_exists( 'liquidpoll_get_template_part' ) ) {
 		if ( ! $template ) {
 			$template = locate_template( array( "{$slug}.php", "liquidpoll/{$slug}.php" ) );
 		}
-
 
 		/**
 		 * Allow 3rd party plugins to filter template file from their plugin.

@@ -72,6 +72,6 @@ add_action( 'liquidpoll_single_poll_main', function () {
  * Backend Template Hooks
  */
 
-add_action( 'PBSettings/section/primary_reports', 'liquidpoll_admin_render_reports' );
+add_action( 'WPDK_Settings/section/primary_reports', 'liquidpoll_admin_render_reports' );
 
 add_action( 'post_submitbox_start', 'liquidpoll_poll_submitbox' );
