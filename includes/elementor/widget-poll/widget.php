@@ -100,6 +100,33 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 			'type'    => Controls_Manager::SELECT,
 			'options' => $options,
 		) );
+
+		$this->add_control(
+			'poll_type',
+			[
+				'label' => esc_html__( 'Poll Type', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'textdomain' ),
+						'icon' => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'textdomain' ),
+						'icon' => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'textdomain' ),
+						'icon' => 'eicon-text-align-right',
+					],
+				],
+				'default' => 'center',
+				'toggle' => true,
+				'selectors' => [
+					'{{WRAPPER}} .your-class' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
 	}
 
 
