@@ -5,6 +5,8 @@
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes\Color;
+use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 
 
@@ -330,6 +332,166 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 			'type'      => Controls_Manager::SELECT,
 			'options'   => $themes_reaction,
 			'condition' => [ '_type' => [ 'reaction' ] ],
+		] );
+
+		$this->add_control( '_results_type', [
+			'label'     => esc_html__( 'Results Type', 'wp-poll' ),
+			'type'      => Controls_Manager::SELECT,
+			'options'   => [
+				'votes'      => esc_html__( 'Votes Count', 'wp-poll' ),
+				'percentage' => esc_html__( 'Percentage', 'wp-poll' ),
+			],
+			'default'   => 'votes',
+			'condition' => [ '_theme' => [ '1', '2', '3', '5', '8', '9', '10' ], '_type' => 'poll' ],
+		] );
+
+		$this->add_control( '_timer_type', [
+			'label'     => esc_html__( 'Countdown Timer Type', 'wp-poll' ),
+			'type'      => Controls_Manager::SELECT,
+			'options'   => [
+				'regular'    => esc_html__( 'Regular', 'wp-poll' ),
+				'with_votes' => esc_html__( 'Timer with votes count', 'wp-poll' ),
+			],
+			'default'   => 'regular',
+			'condition' => [ '_theme' => [ '10', '11', '12' ], '_type' => 'poll' ],
+		] );
+
+
+		/**
+		 * Poll Title
+		 */
+		$this->add_control( 'typography_poll_title', [
+			'label'     => esc_html__( 'Poll Title', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'after',
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'poll_title_typography',
+			'selector' => '{{WRAPPER}} .liquidpoll-poll-title',
+		] );
+
+		$this->add_control( 'poll_title_color', [
+			'label'     => esc_html__( 'Text Color', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-poll-title' => 'color: {{VALUE}}', ],
+		] );
+
+
+		/**
+		 * Poll Content
+		 */
+		$this->add_control( 'typography_poll_content', [
+			'label'     => esc_html__( 'Poll Content', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'after',
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'poll_content_typography',
+			'selector' => '{{WRAPPER}} .liquidpoll-content',
+		] );
+
+		$this->add_control( 'poll_content_color', [
+			'label'     => esc_html__( 'Text Color', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-content' => 'color: {{VALUE}}', ],
+		] );
+
+
+		/**
+		 * Poll Options
+		 */
+		$this->add_control( 'typography_poll_options', [
+			'label'     => esc_html__( 'Poll Options', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'after',
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'poll_options_typography',
+			'selector' => '{{WRAPPER}} .liquidpoll-option-single label',
+		] );
+
+		$this->add_control( 'poll_options_color', [
+			'label'     => esc_html__( 'Text Color', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-option-single label' => 'color: {{VALUE}}', ],
+		] );
+
+
+		/**
+		 * Countdown timer
+		 */
+		$this->add_control( 'typography_poll_countdown', [
+			'label'     => esc_html__( 'Poll Count Down', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'after',
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'poll_countdown_typography',
+			'selector' => '{{WRAPPER}} .liquidpoll-countdown-timer > span',
+		] );
+
+		$this->add_control( 'poll_countdown_color', [
+			'label'     => esc_html__( 'Color', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-countdown-timer > span' => 'color: {{VALUE}}', ],
+		] );
+
+
+		/**
+		 * Submit Button
+		 */
+		$this->add_control( 'typography_poll_btn_submit', [
+			'label'     => esc_html__( 'Button  - Submit', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'after',
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'poll_btn_submit_typography',
+			'selector' => '{{WRAPPER}} .liquidpoll-submit-poll',
+		] );
+
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => 'poll_btn_submit_bg',
+			'types'    => [ 'classic', 'gradient' ],
+			'selector' => '{{WRAPPER}} .liquidpoll-get-poll-results',
+		] );
+
+		$this->add_control( 'poll_btn_submit_color', [
+			'label'     => esc_html__( 'Text Color', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-submit-poll' => 'color: {{VALUE}}', ],
+		] );
+
+
+		/**
+		 * Results Button
+		 */
+		$this->add_control( 'typography_poll_btn_results', [
+			'label'     => esc_html__( 'Button  - Submit', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'after',
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'poll_btn_results_typography',
+			'selector' => '{{WRAPPER}} .liquidpoll-get-poll-results',
+		] );
+
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => 'poll_btn_results_bg',
+			'types'    => [ 'classic', 'gradient' ],
+			'selector' => '{{WRAPPER}} .liquidpoll-get-poll-results',
+		] );
+
+		$this->add_control( 'poll_btn_results_color', [
+			'label'     => esc_html__( 'Text Color', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-get-poll-results' => 'color: {{VALUE}}', ],
 		] );
 	}
 }
