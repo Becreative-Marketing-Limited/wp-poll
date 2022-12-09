@@ -2,7 +2,7 @@
 /**
  * All Functions
  *
- * @author Pluginbazar
+ * @author Liquidpoll
  */
 
 use WPDK\Utils;

@@ -3,7 +3,7 @@
  * Admin Template: Poll Submitbox
  *
  * @package includes/admin-templates/poll-submitbox
- * @author Pluginbazar
+ * @author Liquidpoll
  */
 
 global $post;

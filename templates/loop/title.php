@@ -3,7 +3,7 @@
  * Template - Archive - title
  *
  * @package loop/title
- * @author Pluginbazar
+ * @author Liquidpoll
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

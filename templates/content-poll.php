@@ -3,7 +3,7 @@
  * Template - Content Poll
  *
  * @package content-poll.php
- * @author Pluginbazar
+ * @author Liquidpoll
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

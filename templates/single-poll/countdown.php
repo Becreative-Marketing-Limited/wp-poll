@@ -3,7 +3,7 @@
  * Template - Single Poll - Countdown
  *
  * @package single-poll/countdown
- * @author Pluginbazar
+ * @author Liquidpoll
  */
 
 use WPDK\Utils;

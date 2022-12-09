@@ -6,7 +6,7 @@
  *
  * @package PB_Settings
  * @version 3.3.2
- * @author Pluginbazar
+ * @author Liquidpoll
  * @copyright 2019 Pluginbazar.com
  * @see https://github.com/jaedm97/PB-Settings
  */

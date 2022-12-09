@@ -3,7 +3,7 @@
  * Template - Single Poll - Content
  *
  * @package single-poll/buttons
- * @author Pluginbazar
+ * @author Liquidpoll
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

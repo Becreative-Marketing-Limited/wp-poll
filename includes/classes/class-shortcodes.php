@@ -2,7 +2,7 @@
 /**
  * Class Shortcodes
  *
- * @author Pluginbazar
+ * @author Liquidpoll
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

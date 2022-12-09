@@ -3,7 +3,7 @@
  * Template - Single Poll - Responses
  *
  * @package single-poll/responses
- * @author Pluginbazar
+ * @author Liquidpoll
  */
 
 defined( 'ABSPATH' ) || exit;

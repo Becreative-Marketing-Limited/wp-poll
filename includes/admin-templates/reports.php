@@ -3,7 +3,7 @@
  * Admin Template: Reports
  *
  * @package includes/admin-templates/reports
- * @author Pluginbazar
+ * @author Liquidpoll
  */
 
 if ( empty( $poll_id = isset( $_GET['poll-id'] ) ? sanitize_text_field( $_GET['poll-id'] ) : '' ) ) {

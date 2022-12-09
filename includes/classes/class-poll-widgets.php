@@ -2,7 +2,7 @@
 /**
  * Class LIQUIDPOLL_Widgets
  *
- * @author Pluginbazar
+ * @author Liquidpoll
  * @package includes/classes/class-poll
  */
 

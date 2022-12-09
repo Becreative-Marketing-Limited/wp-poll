@@ -2,7 +2,7 @@
 /**
  * Class Item Data
  *
- * @author Pluginbazar
+ * @author Liquidpoll
  * @package includes/classes/class-item-data
  */
 

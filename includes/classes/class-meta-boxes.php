@@ -158,7 +158,6 @@ class LIQUIDPOLL_Poll_meta {
 						),
 						'nps'          => array(
 							'label'        => esc_html__( 'NPS Score', 'wp-poll' ),
-							'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 						),
 						'reaction'     => array(
 							'label'        => esc_html__( 'Reaction', 'wp-poll' ),

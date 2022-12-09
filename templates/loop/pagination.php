@@ -3,7 +3,7 @@
  * Template - Archive - pagination
  *
  * @package loop/pagination
- * @author Pluginbazar
+ * @author Liquidpoll
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

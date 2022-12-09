@@ -8,6 +8,7 @@ use Elementor\Core\Schemes\Color;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
+use WPDK\Utils;
 
 
 class LIQUIDPOLL_Widget_poll extends Widget_base {
@@ -202,10 +203,19 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 
 	protected function controls_for_content_settings() {
 
-		$options = array();
+		$options    = array();
+		$poll_types = array(
+			'poll'     => esc_html__( 'Poll', 'wp-poll' ),
+			'reaction' => esc_html__( 'Reaction', 'wp-poll' ),
+			'nps'      => esc_html__( 'NPS', 'wp-poll' ),
+		);
 
 		foreach ( get_posts( array( 'post_type' => 'poll', 'showposts' => - 1 ) ) as $post ) {
 			$options[ $post->ID ] = $post->post_title;
+		}
+
+		if ( ! liquidpoll()->is_pro() ) {
+			unset( $poll_types['reaction'] );
 		}
 
 		$this->add_control( 'poll_id', [
@@ -218,11 +228,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 			'label'   => esc_html__( 'Poll Type', 'wp-poll' ),
 			'type'    => Controls_Manager::SELECT,
 			'default' => 'poll',
-			'options' => [
-				'poll'     => esc_html__( 'Poll', 'wp-poll' ),
-				'reaction' => esc_html__( 'Reaction', 'wp-poll' ),
-				'nps'      => esc_html__( 'NPS', 'wp-poll' ),
-			],
+			'options' => $poll_types,
 		] );
 
 		$this->add_control( 'poll_content', [
@@ -295,42 +301,47 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 	}
 
 
+	protected function calculate_themes( $themes ) {
+
+		$calculated_themes = array();
+
+		foreach ( $themes as $theme_id => $theme ) {
+
+			$availability = Utils::get_args_option( 'availability', $theme );
+			$theme_label  = Utils::get_args_option( 'label', $theme );
+
+			if ( 'pro' == $availability && ! liquidpoll()->is_pro() ) {
+				$calculated_themes[998] = esc_html__( '7+ are in pro', 'wp-poll' );
+				continue;
+			}
+
+			$calculated_themes[ $theme_id ] = $theme_label;
+		}
+
+		return $calculated_themes;
+	}
+
+
 	protected function controls_for_style() {
-
-		$themes_poll     = array();
-		$themes_nps      = array();
-		$themes_reaction = array();
-
-		foreach ( liquidpoll()->get_poll_themes() as $key => $value ) {
-			$themes_poll[ $key ] = $value['label'];
-		}
-
-		foreach ( liquidpoll()->get_nps_themes() as $key => $value ) {
-			$themes_nps[ $key ] = $value['label'];
-		}
-
-		foreach ( liquidpoll()->get_reaction_themes() as $key => $value ) {
-			$themes_reaction[ $key ] = $value['label'];
-		}
 
 		$this->add_control( '_theme', [
 			'label'     => esc_html__( 'Poll Theme', 'wp-poll' ),
 			'type'      => Controls_Manager::SELECT,
-			'options'   => $themes_poll,
+			'options'   => $this->calculate_themes( liquidpoll()->get_poll_themes() ),
 			'condition' => [ '_type' => [ 'poll' ] ],
 		] );
 
 		$this->add_control( '_theme_nps', [
 			'label'     => esc_html__( 'NPS Theme', 'wp-poll' ),
 			'type'      => Controls_Manager::SELECT,
-			'options'   => $themes_nps,
+			'options'   => $this->calculate_themes( liquidpoll()->get_nps_themes() ),
 			'condition' => [ '_type' => [ 'nps' ] ],
 		] );
 
 		$this->add_control( '_theme_reaction', [
 			'label'     => esc_html__( 'Reaction Theme', 'wp-poll' ),
 			'type'      => Controls_Manager::SELECT,
-			'options'   => $themes_reaction,
+			'options'   => $this->calculate_themes( liquidpoll()->get_reaction_themes() ),
 			'condition' => [ '_type' => [ 'reaction' ] ],
 		] );
 
