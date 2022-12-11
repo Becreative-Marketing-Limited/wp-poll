@@ -310,3 +310,6 @@ Display all your polls in one place so that you can create a landing page where 
 = 3.3.47 =
 * 26/11/2022 - NEW - Form added for nps and reaction.
 
+= 3.3.48 =
+* 09/12/2022 - NEW - Elementor widget added for Poll, NPS and Reaction.
+
