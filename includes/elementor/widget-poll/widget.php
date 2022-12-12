@@ -6,6 +6,7 @@
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes\Color;
 use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use WPDK\Utils;
@@ -34,11 +35,11 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 	}
 
 	public function get_style_depends() {
-		return array( 'widget-poll', 'rangeslider', 'roundslider' );
+		return array( 'widget-poll' );
 	}
 
 	public function get_script_depends() {
-		return array( 'widget-poll', 'rangeslider', 'roundslider' );
+		return array( 'widget-poll' );
 	}
 
 
@@ -111,7 +112,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 			'label'     => esc_html__( 'Form Fields', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
 			'condition' => [ 'poll_form_enable' => 'yes', ],
-			'separator' => 'after',
+			'separator' => 'before',
 		] );
 
 		$this->add_control( 'poll_form_label_first_name', [
@@ -160,7 +161,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 			'label'     => esc_html__( 'Form Styling', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
 			'condition' => [ 'poll_form_enable' => 'yes', ],
-			'separator' => 'after',
+			'separator' => 'before',
 		] );
 
 		$this->add_control( 'poll_form_style_colors', [
@@ -261,7 +262,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$this->add_control( 'poll_settings', [
 			'label'     => esc_html__( 'Settings', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 		] );
 
 		$this->add_control( 'settings_hide_for_logged_out_users', [
@@ -395,112 +396,102 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 			'condition' => [ '_type' => 'nps' ],
 		] );
 
-		$this->add_control( '_nps_labels_color', [
-			'label'     => esc_html__( 'Labels Color', 'wp-poll' ),
+
+		$this->add_control( '_nps_label_styles', [
+			'label'     => esc_html__( 'Label Styles', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ],
 		] );
 
-		$this->add_control( 'labels_color_normal', [
-			'label'     => esc_html__( 'Normal Color', 'wp-poll' ),
+
+		$this->start_controls_tabs( '_nps_label_styles_tabs', [ 'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ] ] );
+
+		// Tab - normal
+		$this->start_controls_tab( '_nps_label_styles_tabs_normal', [ 'label' => esc_html__( 'Normal', 'wp-poll' ), ] );
+
+		$this->add_control( '_nps_label_styles_tabs_normal_color', [
+			'label'     => esc_html__( 'Color', 'wp-poll' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ '{{WRAPPER}} ul.liquidpoll-nps-options li label' => 'color: {{VALUE}}', ],
 			'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ],
 		] );
 
-		$this->add_control( 'hover_active', [
-			'label'     => esc_html__( 'Hover/Active Color', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				'{{WRAPPER}} .liquidpoll-nps-options li.active label' => 'color: {{VALUE}}',
-				'{{WRAPPER}} .liquidpoll-nps-options li:hover label'  => 'color: {{VALUE}}',
-			],
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => '_nps_label_styles_tabs_normal_bg',
+			'types'     => [ 'gradient' ],
+			'selector'  => '{{WRAPPER}} ul.liquidpoll-nps-options > li',
 			'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ],
 		] );
 
-		$this->add_control( '_nps_labels_colors', [
-			'label'     => esc_html__( 'Labels Color', 'wp-poll' ),
-			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
-			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
-		] );
-
-		$this->add_control( 'labels_colors_normal', [
-			'label'     => esc_html__( 'Label color', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-nps-options li > label > span:first-child' => 'color: {{VALUE}}', ],
-			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
-		] );
-
-		$this->add_control( 'active', [
-			'label'     => esc_html__( 'Hover/Active color', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-nps-options li span.liquidpoll-nps-tooltip' => 'color: {{VALUE}}', ],
-			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
-		] );
-
-		$this->add_control( 'selected_bg', [
-			'label'     => esc_html__( 'Selected background color', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-nps-options li:hover, ul.liquidpoll-nps-options li.active, ul.liquidpoll-nps-options li span.liquidpoll-nps-tooltip::before' => 'background: {{VALUE}}', ],
-			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
-		] );
-
-		$this->add_control( 'border', [
-			'label'     => esc_html__( 'Wrapper border', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-poll-title' => 'color: {{VALUE}}', ],
-			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
-		] );
-
-		$this->add_control( 'wrapper_bg', [
-			'label'     => esc_html__( 'Wrapper background', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-poll-title' => 'color: {{VALUE}}', ],
-			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
-		] );
-
-
-		$this->add_control( '_nps_labels_bg_color', [
-			'label'     => esc_html__( 'Labels Background Color', 'wp-poll' ),
-			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => '_nps_label_styles_tabs_normal_border',
+			'selector'  => '{{WRAPPER}} ul.liquidpoll-nps-options > li:hover',
 			'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ],
 		] );
 
-		$this->add_control( 'normal_1', [
-			'label'     => esc_html__( 'Normal Color 1', 'wp-poll' ),
+		$this->end_controls_tab(); // tabs_normal
+
+
+		// Tab - hover
+		$this->start_controls_tab( '_nps_label_styles_tabs_hover', [ 'label' => esc_html__( 'Hover', 'wp-poll' ), ] );
+
+		$this->add_control( '_nps_label_styles_tabs_hover_color', [
+			'label'     => esc_html__( 'Color', 'wp-poll' ),
 			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-nps-options li' => 'background: {{VALUE}}', ],
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-nps-options li:hover label' => 'color: {{VALUE}}' ],
 			'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ],
 		] );
 
-		$this->add_control( 'normal_2', [
-			'label'     => esc_html__( 'Normal Color 2', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-nps-options li' => 'background: {{VALUE}}', ],
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => '_nps_label_styles_tabs_hover_bg',
+			'types'     => [ 'gradient' ],
+			'selector'  => '{{WRAPPER}} ul.liquidpoll-nps-options > li:hover',
 			'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ],
 		] );
 
-		$this->add_control( 'hover_active_1', [
-			'label'     => esc_html__( 'Hover/Active Color 1', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-poll-title' => 'color: {{VALUE}}', ],
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => '_nps_label_styles_tabs_hover_border',
+			'selector'  => '{{WRAPPER}} ul.liquidpoll-nps-options > li:hover',
 			'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ],
 		] );
 
-		$this->add_control( 'hover_active_2', [
-			'label'     => esc_html__( 'Hover/Active 2', 'wp-poll' ),
+		$this->end_controls_tab(); // tabs_hover
+
+
+		// Tab - active
+		$this->start_controls_tab( '_nps_label_styles_tabs_active', [ 'label' => esc_html__( 'Active', 'wp-poll' ), ] );
+
+		$this->add_control( '_nps_label_styles_tabs_active_color', [
+			'label'     => esc_html__( 'Color', 'wp-poll' ),
 			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-poll-title' => 'color: {{VALUE}}', ],
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-nps-options li.active label' => 'color: {{VALUE}}' ],
 			'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ],
 		] );
+
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => '_nps_label_styles_tabs_active_bg',
+			'types'     => [ 'gradient' ],
+			'selector'  => '{{WRAPPER}} ul.liquidpoll-nps-options > li.active',
+			'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ],
+		] );
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => '_nps_label_styles_tabs_active_border',
+			'selector'  => '{{WRAPPER}} ul.liquidpoll-nps-options > li:hover',
+			'condition' => [ '_theme_nps' => [ '1', '2' ], '_type' => [ 'nps' ] ],
+		] );
+
+		$this->end_controls_tab(); // tabs_active
+
+
+		$this->end_controls_tabs();
+
 
 		$this->add_control( '_nps_slider_color', [
 			'label'     => esc_html__( 'Slider Color', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_theme_nps' => [ '3' ], '_type' => [ 'nps' ] ],
 		] );
 
@@ -521,49 +512,90 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$this->add_control( '_nps_progress_bar_colors', [
 			'label'     => esc_html__( 'Progress Bar Color', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
 
 		$this->add_control( 'background', [
 			'label'     => esc_html__( 'Bar Color', 'wp-poll' ),
 			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .rs-path-color' => 'border-color: {{VALUE}}', ],
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
 
 		$this->add_control( 'indicator', [
 			'label'     => esc_html__( 'Circle Indicator Color', 'wp-poll' ),
 			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} #nps_score .rs-handle' => 'border-right-color: {{VALUE}}', ],
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
 
 		$this->add_control( 'bar_fill_1', [
 			'label'     => esc_html__( 'Bar Active Color 1', 'wp-poll' ),
 			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-poll-title' => 'color: {{VALUE}}', ],
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
 
 		$this->add_control( 'bar_fill_2', [
 			'label'     => esc_html__( 'Bar Active Color 2', 'wp-poll' ),
 			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-poll-title' => 'color: {{VALUE}}', ],
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
 
 		$this->add_control( 'bar_fill_3', [
 			'label'     => esc_html__( 'Bar Active Color 3', 'wp-poll' ),
 			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-poll-title' => 'color: {{VALUE}}', ],
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
+
+
+		$this->add_control( 'labels_colors_normal', [
+			'label'     => esc_html__( 'Label color', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-nps-options li > label > span:first-child' => 'color: {{VALUE}}', ],
+			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
+		] );
+
+		$this->add_control( 'active', [
+			'label'     => esc_html__( 'Hover/Active Color', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} .liquidpoll-nps-options li span.liquidpoll-nps-tooltip' => 'color: {{VALUE}}',
+				'{{WRAPPER}} .liquidpoll-nps-options li::before'                     => 'background: {{VALUE}}',
+			],
+			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
+		] );
+
+		$this->add_control( 'selected_bg', [
+			'label'     => esc_html__( 'Hover/Active Background', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} .liquidpoll-nps-options li:hover > label > span:first-child'    => 'color: {{VALUE}}',
+				'{{WRAPPER}} .liquidpoll-nps-options li.active > label > span:first-child'   => 'color: {{VALUE}}',
+				'{{WRAPPER}} .liquidpoll-nps-options li:hover'                               => 'background: {{VALUE}}',
+				'{{WRAPPER}} .liquidpoll-nps-options li.active'                              => 'background: {{VALUE}}',
+				'{{WRAPPER}} .liquidpoll-nps-options li span.liquidpoll-nps-tooltip::before' => 'background: {{VALUE}}',
+			],
+			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
+		] );
+
+		$this->add_control( 'border', [
+			'label'     => esc_html__( 'Wrapper Border', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-nps-options li' => 'border-color: {{VALUE}}', ],
+			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
+		] );
+
+		$this->add_control( 'wrapper_bg', [
+			'label'     => esc_html__( 'Wrapper Background', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .liquidpoll-nps-options li' => 'background: {{VALUE}}', ],
+			'condition' => [ '_theme_nps' => [ '5' ], '_type' => [ 'nps' ] ],
+		] );
+
 
 		$this->add_control( '_nps_marking_text_colors', [
 			'label'     => esc_html__( 'Marking Texts', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_type' => [ 'nps' ] ],
 		] );
 
@@ -584,7 +616,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$this->add_control( '_nps_comment_box_colors', [
 			'label'     => esc_html__( 'Comment / Feedback Box', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_type' => [ 'nps' ] ],
 		] );
 
@@ -616,7 +648,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$this->add_control( 'typography_poll_title', [
 			'label'     => esc_html__( 'Poll Title', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_type' => [ 'poll', 'nps' ] ],
 		] );
 
@@ -640,7 +672,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$this->add_control( 'typography_poll_content', [
 			'label'     => esc_html__( 'Poll Content', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_type' => [ 'poll', 'nps' ] ],
 		] );
 
@@ -664,7 +696,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$this->add_control( 'typography_poll_options', [
 			'label'     => esc_html__( 'Poll Options', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_type' => [ 'poll' ] ],
 		] );
 
@@ -688,7 +720,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$this->add_control( 'typography_poll_countdown', [
 			'label'     => esc_html__( 'Poll Count Down', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_type' => [ 'poll' ] ],
 		] );
 
@@ -712,7 +744,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$this->add_control( 'typography_poll_btn_submit', [
 			'label'     => esc_html__( 'Button  - Submit', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_type' => [ 'poll' ] ],
 		] );
 
@@ -743,7 +775,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$this->add_control( 'typography_poll_btn_results', [
 			'label'     => esc_html__( 'Button  - View Results', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
-			'separator' => 'after',
+			'separator' => 'before',
 			'condition' => [ '_type' => [ 'poll' ] ],
 		] );
 

@@ -22,7 +22,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Elementor' ) ) {
 			$this->version = defined( 'WP_DEBUG' ) && WP_DEBUG ? current_time( 'U' ) : LIQUIDPOLL_VERSION;
 
 			add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'register_styles' ] );
-			add_action( 'elementor/frontend/after_register_scripts', [ $this, 'register_scripts' ] );
+			add_action( 'elementor/frontend/before_register_scripts', [ $this, 'register_scripts' ] );
 
 			add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
 		}
