@@ -4,7 +4,7 @@
 	Tags: poll, polls, survey, NPS, vote
 	Requires at least: 4.6
 	Tested up to: 6.1.1
-	Stable tag: 3.3.47
+	Stable tag: 3.3.49
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -312,4 +312,7 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.48 =
 * 09/12/2022 - NEW - Elementor widget added for Poll, NPS and Reaction.
+
+= 3.3.49 =
+* 12/12/2022 - NEW - Fix CSS issue with NPS themes.
 
