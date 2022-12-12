@@ -77,7 +77,7 @@ if ( ! empty( $poll->get_poll_options() ) && is_array( $poll->get_poll_options()
 
 	// Normal label color
 	liquidpoll_apply_css( '.nps-single.theme-1 ul.liquidpoll-nps-options li label', array(
-		'color' => Utils::get_args_option( 'normal', $poll->get_css_args( '_nps_labels_color' ) ),
+		'color' => Utils::get_args_option( 'labels_color_normal', $poll->get_css_args( '_nps_labels_color' ) ),
 	) );
 	// Hover or active label color
 	liquidpoll_apply_css( '.nps-single.theme-1 ul.liquidpoll-nps-options li:hover label, .nps-single.theme-1 ul.liquidpoll-nps-options li.active label', array(
