@@ -35,7 +35,7 @@ img {
 
 .liquidpoll-button {
     display: inline-block;
-    padding: 16px 18px !important;
+    padding: 16px 18px;
     background: #5F64EB;
     border: 0;
     border-radius: 5px;

@@ -3,10 +3,12 @@
  * Widget Poll Template - 1
  */
 
-global $poll;
+global $poll, $liquidpoll_widget_settings;
 
-$poll_id = liquidpoll()->get_widget_arg_val( 'poll_id' );
-$poll    = liquidpoll_get_poll( $poll_id );
+$poll_type = isset( $liquidpoll_widget_settings['_type'] ) ? $liquidpoll_widget_settings['_type'] : '';
+$key       = 'poll_id_' . $poll_type;
+$poll_id   = liquidpoll()->get_widget_arg_val( $key );
+$poll      = liquidpoll_get_poll( $poll_id );
 
 if ( ! $poll instanceof LIQUIDPOLL_Poll ) {
 	return;
