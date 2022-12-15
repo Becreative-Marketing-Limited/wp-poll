@@ -21,8 +21,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Elementor' ) ) {
 
 			$this->version = defined( 'WP_DEBUG' ) && WP_DEBUG ? current_time( 'U' ) : LIQUIDPOLL_VERSION;
 
-			add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'register_styles' ] );
-			add_action( 'elementor/frontend/before_register_scripts', [ $this, 'register_scripts' ] );
+			add_action( 'elementor/frontend/after_enqueue_styles', [ $this, 'register_styles' ] );
+			add_action( 'elementor/frontend/after_register_scripts', [ $this, 'register_scripts' ] );
 
 			add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
 		}
@@ -45,6 +45,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Elementor' ) ) {
 		 * @return void
 		 */
 		public function register_scripts() {
+			wp_enqueue_script( 'rangeslider-el', LIQUIDPOLL_PLUGIN_URL . 'assets/front/js/rangeslider.min.js', array( 'jquery' ) );
 			wp_register_script( 'widget-poll', LIQUIDPOLL_PLUGIN_URL . 'includes/elementor/widget-poll/js/scripts.js', array( 'jquery' ), $this->version );
 		}
 
@@ -55,6 +56,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Elementor' ) ) {
 		 * @return void
 		 */
 		public function register_styles() {
+			wp_enqueue_style( 'rangeslider', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/rangeslider.css' );
 			wp_register_style( 'widget-poll', LIQUIDPOLL_PLUGIN_URL . 'includes/elementor/widget-poll/css/style.css', array(), $this->version );
 		}
 	}

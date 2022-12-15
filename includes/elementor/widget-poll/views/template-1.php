@@ -14,4 +14,12 @@ if ( ! $poll instanceof LIQUIDPOLL_Poll ) {
 	return;
 }
 
+//wp_enqueue_script( 'rangeslider', LIQUIDPOLL_PLUGIN_URL . 'assets/front/js/rangeslider.min.js', array( 'jquery', 'elementor-frontend' ) );
+//wp_enqueue_style( 'rangeslider', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/rangeslider.css' );
+
 printf( '<div class="liquidpoll-elementor-poll">%s</div>', do_shortcode( '[poll id="' . $poll->get_id() . '"]' ) );
+
+?>
+<script>
+
+</script>

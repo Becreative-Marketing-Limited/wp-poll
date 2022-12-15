@@ -204,9 +204,9 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 
 	protected function controls_for_content_settings() {
 
-		$options_poll     = array();
-		$options_nps      = array();
-		$options_reaction = array();
+		$options_poll     = array( '0' => esc_html__( 'Select a Poll', 'wp-poll' ) );
+		$options_nps      = array( '0' => esc_html__( 'Select a NPS', 'wp-poll' ) );
+		$options_reaction = array( '0' => esc_html__( 'Select a Reaction', 'wp-poll' ) );
 		$poll_types       = array(
 			'poll'     => esc_html__( 'Poll', 'wp-poll' ),
 			'reaction' => esc_html__( 'Reaction', 'wp-poll' ),
@@ -240,20 +240,23 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 			'label'     => esc_html__( 'Select Poll', 'wp-poll' ),
 			'type'      => Controls_Manager::SELECT,
 			'options'   => $options_poll,
+			'default'   => '0',
 			'condition' => [ '_type' => [ 'poll' ] ],
 		] );
 
 		$this->add_control( 'poll_id_nps', [
-			'label'     => esc_html__( 'Select Poll', 'wp-poll' ),
+			'label'     => esc_html__( 'Select NPS', 'wp-poll' ),
 			'type'      => Controls_Manager::SELECT,
 			'options'   => $options_nps,
+			'default'   => '0',
 			'condition' => [ '_type' => [ 'nps' ] ],
 		] );
 
 		$this->add_control( 'poll_id_reaction', [
-			'label'     => esc_html__( 'Select Poll', 'wp-poll' ),
+			'label'     => esc_html__( 'Select Reaction', 'wp-poll' ),
 			'type'      => Controls_Manager::SELECT,
 			'options'   => $options_reaction,
+			'default'   => '0',
 			'condition' => [ '_type' => [ 'reaction' ] ],
 		] );
 
@@ -373,6 +376,36 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 			'options'   => $this->calculate_themes( liquidpoll()->get_reaction_themes() ),
 			'default'   => 1,
 			'condition' => [ '_type' => [ 'reaction' ] ],
+		] );
+
+		$this->add_control( '_box_overlay_heading', [
+			'label'     => esc_html__( 'Box Overlay', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+			'condition' => [ '_theme' => [ '7', '9' ], '_type' => 'poll' ],
+		] );
+
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => '_box_overlay',
+			'label'     => esc_html__( 'Overlay', 'wp-poll' ),
+			'types'     => [ 'gradient' ],
+			'selector'  => '{{WRAPPER}} .liquidpoll-option-thumb::before',
+			'condition' => [ '_theme' => [ '7', '9' ], '_type' => 'poll' ],
+		] );
+
+		$this->add_control( '_box_background_heading', [
+			'label'     => esc_html__( 'Box Background or Border', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+			'condition' => [ '_theme' => [ '6', '7', '8', '9' ], '_type' => 'poll' ],
+		] );
+
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => '_box_background',
+			'label'     => esc_html__( 'Overlay', 'wp-poll' ),
+			'types'     => [ 'classic', 'gradient' ],
+			'selector'  => '{{WRAPPER}} .liquidpoll-option-single::before',
+			'condition' => [ '_theme' => [ '6', '7', '8', '9' ], '_type' => 'poll' ],
 		] );
 
 		$this->add_control( '_results_type', [
@@ -544,32 +577,70 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$this->add_control( 'background', [
 			'label'     => esc_html__( 'Bar Color', 'wp-poll' ),
 			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} #nps_score .rs-path-color'    => 'border-color: {{VALUE}}',
+				'{{WRAPPER}} #nps_score .rs-handle:before' => 'outline-color: {{VALUE}}',
+			],
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
 
 		$this->add_control( 'indicator', [
 			'label'     => esc_html__( 'Circle Indicator Color', 'wp-poll' ),
 			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				'{{WRAPPER}} #nps_score .rs-handle'        => 'border-right-color: {{VALUE}}',
+				'{{WRAPPER}} #nps_score .rs-handle:before' => 'border-color: {{VALUE}}',
+			],
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
 
-		$this->add_control( 'bar_fill_1', [
-			'label'     => esc_html__( 'Bar Active Color 1', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
+
+		$this->add_control( 'progress_bar_background_heading', [
+			'label'     => esc_html__( 'Progress Bar Background', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
 
-		$this->add_control( 'bar_fill_2', [
-			'label'     => esc_html__( 'Bar Active Color 2', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => 'progress_bar_fill_color',
+			'types'     => [ 'gradient' ],
+			'selector'  => '{{WRAPPER}} #nps_score .rs-range-color',
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
 
-		$this->add_control( 'bar_fill_3', [
-			'label'     => esc_html__( 'Bar Active Color 3', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
+		$this->add_control( 'progress_ball_background_heading', [
+			'label'     => esc_html__( 'Progress Ball Background', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
 			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
 		] );
+
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => 'progress_ball_fill_color',
+			'types'     => [ 'gradient' ],
+			'selector'  => '{{WRAPPER}} #nps_score .rs-handle:after',
+			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
+		] );
+
+
+//		$this->add_control( 'bar_fill_1', [
+//			'label'     => esc_html__( 'Bar Active Color 1', 'wp-poll' ),
+//			'type'      => Controls_Manager::COLOR,
+//			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
+//		] );
+//
+//		$this->add_control( 'bar_fill_2', [
+//			'label'     => esc_html__( 'Bar Active Color 2', 'wp-poll' ),
+//			'type'      => Controls_Manager::COLOR,
+//			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
+//		] );
+//
+//		$this->add_control( 'bar_fill_3', [
+//			'label'     => esc_html__( 'Bar Active Color 3', 'wp-poll' ),
+//			'type'      => Controls_Manager::COLOR,
+//			'condition' => [ '_theme_nps' => [ '4' ], '_type' => [ 'nps' ] ],
+//		] );
 
 
 		$this->add_control( 'labels_colors_normal', [
