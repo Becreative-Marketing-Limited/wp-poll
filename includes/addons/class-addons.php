@@ -50,7 +50,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Addons' ) ) {
 					'class'   => '',
 				),
 				array(
-					'id'      => '',
+					'id'      => 'liquidpoll-groundhogg',
 					'title'   => esc_html__( 'GroundHogg - CRM & Email Automation', 'wp-poll' ),
 					'details' => esc_html__( 'Integration of Liquidpoll for GroundHogg plugin.', 'wp-poll' ),
 					'thumb'   => '',
@@ -60,7 +60,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Addons' ) ) {
 					'class'   => '',
 				),
 				array(
-					'id'      => '',
+					'id'      => 'liquidpoll-funnelkit-integration',
 					'title'   => esc_html__( 'Autonami - Automation & CRM for WooFunnels', 'wp-poll' ),
 					'details' => esc_html__( 'Integration of Liquidpoll and Autonami plugin.', 'wp-poll' ),
 					'thumb'   => '',
