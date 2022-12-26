@@ -50,7 +50,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Addons' ) ) {
 					'class'   => '',
 				),
 				array(
-					'id'      => 'liquidpoll-groundhogg',
+					'id'      => 'liquidpoll-groundhogg-integration',
 					'title'   => esc_html__( 'GroundHogg - CRM & Email Automation', 'wp-poll' ),
 					'details' => esc_html__( 'Integration of Liquidpoll for GroundHogg plugin.', 'wp-poll' ),
 					'thumb'   => '',
