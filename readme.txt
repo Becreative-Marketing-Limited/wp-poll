@@ -4,7 +4,7 @@
 	Tags: poll, polls, survey, NPS, vote
 	Requires at least: 4.6
 	Tested up to: 6.1.1
-	Stable tag: 3.3.50
+	Stable tag: 3.3.51
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -318,4 +318,7 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.50 =
 * 26/12/2022 - FIX - Bug fixed.
+
+= 3.3.51 =
+* 26/12/2022 - TWEAK - Version updated.
 
