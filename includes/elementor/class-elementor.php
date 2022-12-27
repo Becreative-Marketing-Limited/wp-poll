@@ -33,9 +33,13 @@ if ( ! class_exists( 'LIQUIDPOLL_Elementor' ) ) {
 		 */
 		function register_widgets() {
 
+			include_once LIQUIDPOLL_PLUGIN_DIR . 'includes/elementor/widget-nps/widget.php';
 			include_once LIQUIDPOLL_PLUGIN_DIR . 'includes/elementor/widget-poll/widget.php';
+			include_once LIQUIDPOLL_PLUGIN_DIR . 'includes/elementor/widget-reaction/widget.php';
 
+			Plugin::instance()->widgets_manager->register( new LIQUIDPOLL_Widget_nps );
 			Plugin::instance()->widgets_manager->register( new LIQUIDPOLL_Widget_poll );
+			Plugin::instance()->widgets_manager->register( new LIQUIDPOLL_Widget_reaction );
 		}
 
 

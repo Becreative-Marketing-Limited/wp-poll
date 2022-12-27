@@ -12,18 +12,18 @@ use Elementor\Widget_Base;
 use WPDK\Utils;
 
 
-class LIQUIDPOLL_Widget_poll extends Widget_base {
+class LIQUIDPOLL_Widget_reaction extends Widget_base {
 
 	public function get_name() {
-		return 'liquidpoll-widget-poll';
+		return 'liquidpoll-widget-reaction';
 	}
 
 	public function get_title() {
-		return esc_html__( 'Liquidpoll - Poll', 'wp-poll' );
+		return esc_html__( 'Liquidpoll - Reaction', 'wp-poll' );
 	}
 
 	public function get_icon() {
-		return 'eicon-checkbox';
+		return 'eicon-facebook-like-box';
 	}
 
 	public function get_categories() {
@@ -31,15 +31,15 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 	}
 
 	public function get_keywords() {
-		return array( 'poll', 'liquidpoll' );
+		return array( 'reaction', 'liquidpoll' );
 	}
 
 	public function get_style_depends() {
-		return array( 'widget-poll' );
+		return array( 'widget-reaction' );
 	}
 
 	public function get_script_depends() {
-		return array( 'widget-poll' );
+		return array( 'widget-reaction' );
 	}
 
 
@@ -57,7 +57,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		$liquidpoll_widget_settings           = $this->get_settings_for_display();
 		$liquidpoll_widget_settings['widget'] = $this->get_name();
 
-		liquidpoll_get_template( 'widget-poll/views/template-1.php', array(), '', LIQUIDPOLL_PLUGIN_DIR . 'includes/elementor/' );
+		liquidpoll_get_template( 'widget-reaction/views/template-1.php', array(), '', LIQUIDPOLL_PLUGIN_DIR . 'includes/elementor/' );
 	}
 
 
@@ -98,146 +98,6 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		] );
 		$this->controls_for_style();
 		$this->end_controls_section();
-
-		/**
-		 * Main Tab - Form Style
-		 */
-		$this->start_controls_section( 'section_form_style', [
-			'label'     => esc_html__( 'Form Style', 'wp-poll' ),
-			'tab'       => Controls_Manager::TAB_STYLE,
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-		$this->controls_for_style_form();
-		$this->end_controls_section();
-	}
-
-
-	protected function controls_for_style_form() {
-
-		$this->add_control( 'poll_form_preview', [
-			'label'     => esc_html__( 'Enable Preview', 'wp-poll' ),
-			'type'      => Controls_Manager::SWITCHER,
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'      => 'poll_form_background',
-			'types'     => [ 'classic', 'gradient' ],
-			'selector'  => '{{WRAPPER}} .liquidpoll-form',
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_control( 'poll_form_content_heading', [
-			'label'     => esc_html__( 'Form Content', 'wp-poll' ),
-			'type'      => Controls_Manager::HEADING,
-			'separator' => 'before',
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-			'name'      => 'poll_form_content_typography',
-			'selector'  => '{{WRAPPER}} .liquidpoll-form-content',
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_control( 'poll_form_content_color', [
-			'label'     => esc_html__( 'Color', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-form-content' => 'color: {{VALUE}}', ],
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_control( 'poll_form_field_heading', [
-			'label'     => esc_html__( 'Form Fields', 'wp-poll' ),
-			'type'      => Controls_Manager::HEADING,
-			'separator' => 'before',
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-			'name'      => 'poll_form_field_typography',
-			'selector'  => '{{WRAPPER}} .liquidpoll-form-field input',
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_control( 'poll_form_field_color', [
-			'label'     => esc_html__( 'Color', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-form-field input' => 'color: {{VALUE}}', ],
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_control( 'poll_form_notice_heading', [
-			'label'     => esc_html__( 'Form Notice', 'wp-poll' ),
-			'type'      => Controls_Manager::HEADING,
-			'separator' => 'before',
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-			'name'      => 'poll_form_notice_typography',
-			'selector'  => '{{WRAPPER}} .liquidpoll-form-notice .notice',
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_control( 'poll_form_notice_color', [
-			'label'     => esc_html__( 'Color', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} ..liquidpoll-form-notice .notice' => 'color: {{VALUE}}', ],
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_control( 'poll_form_submit_heading', [
-			'label'     => esc_html__( 'Submit Button', 'wp-poll' ),
-			'type'      => Controls_Manager::HEADING,
-			'separator' => 'before',
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-			'name'      => 'poll_form_submit_typography',
-			'selector'  => '{{WRAPPER}} .liquidpoll-form-field .liquidpoll-button',
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'      => 'poll_form_submit_background',
-			'types'     => [ 'classic', 'gradient' ],
-			'selector'  => '{{WRAPPER}} .liquidpoll-form-field .liquidpoll-button',
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_control( 'poll_form_submit_color', [
-			'label'     => esc_html__( 'Color', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-form-field .liquidpoll-button' => 'color: {{VALUE}}', ],
-			'condition' => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-
-		$this->add_control( 'poll_form_submit_margin', [
-			'label'      => esc_html__( 'Margin', 'wp-poll' ),
-			'type'       => Controls_Manager::DIMENSIONS,
-			'size_units' => [ 'px', '%', 'em' ],
-			'selectors'  => [ '{{WRAPPER}} .liquidpoll-form-field .liquidpoll-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};', ],
-			'condition'  => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_control( 'poll_form_submit_padding', [
-			'label'      => esc_html__( 'Padding', 'wp-poll' ),
-			'type'       => Controls_Manager::DIMENSIONS,
-			'size_units' => [ 'px', '%', 'em' ],
-			'selectors'  => [ '{{WRAPPER}} .liquidpoll-form-field .liquidpoll-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};', ],
-			'condition'  => [ 'poll_form_enable' => 'yes', ],
-		] );
-
-		$this->add_control( 'poll_btn_submit_border_radius', [
-			'label'      => esc_html__( 'Border Radius', 'wp-poll' ),
-			'type'       => Controls_Manager::DIMENSIONS,
-			'size_units' => [ 'px', '%', 'em' ],
-			'selectors'  => [ '{{WRAPPER}} .liquidpoll-form-field .liquidpoll-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};', ],
-			'condition'  => [ 'poll_form_enable' => 'yes', ],
-		] );
 	}
 
 
@@ -295,6 +155,49 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 			'label'     => esc_html__( 'Form Notice', 'wp-poll' ),
 			'type'      => Controls_Manager::TEXTAREA,
 			'condition' => [ 'poll_form_enable' => 'yes', ],
+		] );
+
+		$this->add_control( 'form_styling', [
+			'label'     => esc_html__( 'Form Styling', 'wp-poll' ),
+			'type'      => Controls_Manager::HEADING,
+			'condition' => [ 'poll_form_enable' => 'yes', ],
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'poll_form_style_colors', [
+			'label'     => esc_html__( 'Colors', 'wp-poll' ),
+			'type'      => Controls_Manager::SWITCHER,
+			'condition' => [ 'poll_form_enable' => 'yes', ],
+		] );
+
+		$this->add_control( 'form_bg', [
+			'label'     => esc_html__( 'Form Bg', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'condition' => [ 'poll_form_enable' => 'yes', 'poll_form_style_colors' => 'yes' ],
+		] );
+
+		$this->add_control( 'content', [
+			'label'     => esc_html__( 'Content', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'condition' => [ 'poll_form_enable' => 'yes', 'poll_form_style_colors' => 'yes' ],
+		] );
+
+		$this->add_control( 'button_normal', [
+			'label'     => esc_html__( 'Button', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'condition' => [ 'poll_form_enable' => 'yes', 'poll_form_style_colors' => 'yes' ],
+		] );
+
+		$this->add_control( 'button_bg', [
+			'label'     => esc_html__( 'Button Bg', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'condition' => [ 'poll_form_enable' => 'yes', 'poll_form_style_colors' => 'yes' ],
+		] );
+
+		$this->add_control( 'button_bg_hover', [
+			'label'     => esc_html__( 'Button Bg (Hover))', 'wp-poll' ),
+			'type'      => Controls_Manager::COLOR,
+			'condition' => [ 'poll_form_enable' => 'yes', 'poll_form_style_colors' => 'yes' ],
 		] );
 	}
 
@@ -415,7 +318,7 @@ class LIQUIDPOLL_Widget_poll extends Widget_base {
 		] );
 
 		$this->add_control( 'settings_reaction_hide_title', [
-			'label'     => esc_html__( 'Show title for this reaction.', 'wp-poll' ),
+			'label'     => esc_html__( 'Hide title for this reaction.', 'wp-poll' ),
 			'type'      => Controls_Manager::SWITCHER,
 			'condition' => [ '_type' => [ 'reaction' ] ],
 		] );

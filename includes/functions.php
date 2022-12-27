@@ -736,7 +736,7 @@ if ( ! function_exists( 'liquidpoll_resizer' ) ) {
 }
 
 
-if( ! function_exists('liquidpoll_get_feedback_form')) {
+if ( ! function_exists( 'liquidpoll_get_feedback_form' ) ) {
 	/**
 	 * Return html content for feedback form
 	 *
@@ -749,5 +749,35 @@ if( ! function_exists('liquidpoll_get_feedback_form')) {
 
 		return ob_get_clean();
 
+	}
+}
+
+
+if ( ! function_exists( 'liquidpoll_calculate_themes' ) ) {
+	/**
+     * Calculate themes for each type
+     *
+	 * @param $themes
+	 *
+	 * @return array
+	 */
+	function liquidpoll_calculate_themes( $themes ) {
+
+		$calculated_themes = array();
+
+		foreach ( $themes as $theme_id => $theme ) {
+
+			$availability = Utils::get_args_option( 'availability', $theme );
+			$theme_label  = Utils::get_args_option( 'label', $theme );
+
+			if ( 'pro' == $availability && ! liquidpoll()->is_pro() ) {
+				$calculated_themes[998] = esc_html__( '7+ are in pro', 'wp-poll' );
+				continue;
+			}
+
+			$calculated_themes[ $theme_id ] = $theme_label;
+		}
+
+		return $calculated_themes;
 	}
 }
