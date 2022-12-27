@@ -21,6 +21,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 			add_action( 'manage_poll_posts_columns', array( $this, 'add_core_poll_columns' ), 16, 1 );
 			add_action( 'manage_poll_posts_custom_column', array( $this, 'custom_columns_content' ), 10, 2 );
+			add_action( 'restrict_manage_posts', array( $this, 'add_dropdown_for_poll_type' ), 10, 2 );
+			add_filter( 'parse_query', array( $this, 'filter_poll_type' ), 10, 2 );
 			add_filter( 'post_row_actions', array( $this, 'remove_row_actions' ), 10, 1 );
 
 			add_filter( 'single_template', array( $this, 'single_poll_template' ) );
@@ -478,6 +480,53 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			}
 
 			return apply_filters( 'liquidpoll_filters_single_poll_template', $single_template, $original_template );
+		}
+
+
+		/**
+		 * Filter poll type
+		 *
+		 * @param $query
+		 *
+		 * @return void
+		 */
+		function filter_poll_type( $query ) {
+
+			global $pagenow;
+
+			$post_type   = isset( $_GET['post_type'] ) ? sanitize_text_field( $_GET['post_type'] ) : '';
+			$filter_type = isset( $_REQUEST['poll_type'] ) ? sanitize_text_field( $_REQUEST['poll_type'] ) : '';
+
+			if ( is_admin() && 'poll' == $post_type && 'edit.php' == $pagenow && $filter_type ) {
+				$query->query_vars['meta_key']   = '_type';
+				$query->query_vars['meta_value'] = $filter_type;
+			}
+		}
+
+
+		/**
+		 * Add dropdown filter for poll type
+		 *
+		 * @return void
+		 */
+		function add_dropdown_for_poll_type() {
+
+			$filter_type = isset( $_REQUEST['poll_type'] ) ? sanitize_text_field( $_REQUEST['poll_type'] ) : '';
+
+			?>
+            <div class="alignleft ">
+                <form action="<?php echo admin_url( 'edit.php?post_type=poll' ); ?>" method="get">
+                    <label>
+                        <select name="poll_type">
+                            <option value=""><?php esc_html_e( 'All Types', 'wp-poll' ); ?></option>
+                            <option <?php selected( $filter_type, 'poll' ); ?> value="poll"><?php esc_html_e( 'Poll', 'wp-poll' ); ?></option>
+                            <option <?php selected( $filter_type, 'nps' ); ?> value="nps"><?php esc_html_e( 'NPS', 'wp-poll' ); ?></option>
+                            <option <?php selected( $filter_type, 'reaction' ); ?> value="reaction"><?php esc_html_e( 'Reaction', 'wp-poll' ); ?></option>
+                        </select>
+                    </label>
+                </form>
+            </div>
+			<?php
 		}
 
 

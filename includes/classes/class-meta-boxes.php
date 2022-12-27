@@ -163,12 +163,8 @@ class LIQUIDPOLL_Poll_meta {
 							'label'        => esc_html__( 'Reaction', 'wp-poll' ),
 							'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 						),
-						'subscription' => array(
-							'label'        => esc_html__( 'Subscription', 'wp-poll' ),
-							'availability' => 'upcoming',
-						),
-						'feedback'     => array(
-							'label'        => esc_html__( 'Feedback', 'wp-poll' ),
+						'reviews' => array(
+							'label'        => esc_html__( 'Reviews', 'wp-poll' ),
 							'availability' => 'upcoming',
 						),
 					),
