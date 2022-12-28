@@ -6,7 +6,7 @@
 
     $(window).on('elementor/frontend/init', function () {
 
-        elementorFrontend.hooks.addAction('frontend/element_ready/liquidpoll-widget-poll.default', function (scope, $) {
+        elementorFrontend.hooks.addAction('frontend/element_ready/liquidpoll-widget-nps.default', function (scope, $) {
 
             let $r = $(scope).find('input[type="range"]'), $ruler = $('<div class="rangeslider__ruler" />');
 
