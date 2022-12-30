@@ -50,7 +50,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Elementor' ) ) {
 		 */
 		public function register_scripts() {
 			wp_enqueue_script( 'rangeslider-el', LIQUIDPOLL_PLUGIN_URL . 'assets/front/js/rangeslider.min.js', array( 'jquery' ) );
-			wp_register_script( 'widget-poll', LIQUIDPOLL_PLUGIN_URL . 'includes/elementor/widget-poll/js/scripts.js', array( 'jquery' ), $this->version );
+			wp_register_script( 'widget-poll', LIQUIDPOLL_PLUGIN_URL . 'includes/elementor/widget-nps/js/scripts.js', array( 'jquery' ), $this->version );
 		}
 
 

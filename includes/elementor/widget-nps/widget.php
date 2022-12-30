@@ -116,7 +116,7 @@ class LIQUIDPOLL_Widget_nps extends Widget_base {
 		] );
 
 		$this->add_control( 'poll_content', [
-			'label' => esc_html__( 'Poll Content', 'wp-poll' ),
+			'label' => esc_html__( 'NPS Content', 'wp-poll' ),
 			'type'  => Controls_Manager::TEXTAREA,
 		] );
 
@@ -432,7 +432,7 @@ class LIQUIDPOLL_Widget_nps extends Widget_base {
 		 * Poll Title
 		 */
 		$this->add_control( 'typography_poll_title', [
-			'label'     => esc_html__( 'Poll Title', 'wp-poll' ),
+			'label'     => esc_html__( 'NPS Title', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 		] );
@@ -453,7 +453,7 @@ class LIQUIDPOLL_Widget_nps extends Widget_base {
 		 * Poll Content
 		 */
 		$this->add_control( 'typography_poll_content', [
-			'label'     => esc_html__( 'Poll Content', 'wp-poll' ),
+			'label'     => esc_html__( 'NPS Content', 'wp-poll' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 		] );
@@ -469,28 +469,6 @@ class LIQUIDPOLL_Widget_nps extends Widget_base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ '{{WRAPPER}} .liquidpoll-content' => 'color: {{VALUE}}', ],
 
-		] );
-
-
-		/**
-		 * Countdown timer
-		 */
-		$this->add_control( 'typography_poll_countdown', [
-			'label'     => esc_html__( 'Poll Count Down', 'wp-poll' ),
-			'type'      => Controls_Manager::HEADING,
-			'separator' => 'before',
-		] );
-
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-			'name'      => 'poll_countdown_typography',
-			'selector'  => '{{WRAPPER}} .liquidpoll-countdown-timer > span',
-			'condition' => [ '_type' => [ 'poll' ] ],
-		] );
-
-		$this->add_control( 'poll_countdown_color', [
-			'label'     => esc_html__( 'Color', 'wp-poll' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ '{{WRAPPER}} .liquidpoll-countdown-timer > span' => 'color: {{VALUE}}', ],
 		] );
 
 
