@@ -33,6 +33,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Elementor' ) ) {
 		 */
 		function register_widgets() {
 
+			require_once LIQUIDPOLL_PLUGIN_DIR . 'includes/elementor/class-widget-base.php';
 			include_once LIQUIDPOLL_PLUGIN_DIR . 'includes/elementor/widget-nps/widget.php';
 			include_once LIQUIDPOLL_PLUGIN_DIR . 'includes/elementor/widget-poll/widget.php';
 			include_once LIQUIDPOLL_PLUGIN_DIR . 'includes/elementor/widget-reaction/widget.php';

@@ -3,6 +3,7 @@
  * Single Poll - Form
  */
 
+use Elementor\Plugin;
 use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
@@ -28,9 +29,14 @@ if ( 'yes' != $enable_last_name && ( $key = array_search( 'last_name', $poll_for
 	unset( $poll_form_fields[ $key ] );
 }
 
+$form_classes = array( 'liquidpoll-form' );
+
+if ( 'yes' == $poll->get_meta( 'poll_form_preview' ) && Plugin::$instance->editor->is_edit_mode() ) {
+	$form_classes[] = 'display';
+}
 
 ?>
-    <form class="liquidpoll-form" action="" enctype="multipart/form-data" method="get">
+    <form class="<?php echo esc_attr( liquidpoll_generate_classes( $form_classes ) ); ?>" action="" enctype="multipart/form-data" method="get">
 
 		<?php if ( ! empty( $poll_form_content ) ) : ?>
             <div class="liquidpoll-form-field liquidpoll-form-content">

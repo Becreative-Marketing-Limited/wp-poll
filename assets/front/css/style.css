@@ -1669,7 +1669,8 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     .poll-single:not(.inside-embed) {
         margin: 70px 15px !important;
     }
-    p.liquidpoll-responses{
+
+    p.liquidpoll-responses {
         font-size: 14px;
         padding: 15px 0 15px 20px;
     }
@@ -1682,14 +1683,15 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 
 @media (max-width: 320px) {
 
-    .liquidpoll-button{
+    .liquidpoll-button {
         font-size: 16px;
     }
 
     .poll-single:not(.inside-embed) {
         margin: 70px 15px !important;
     }
-    p.liquidpoll-responses{
+
+    p.liquidpoll-responses {
         font-size: 12px;
         padding: 12px 0 12px 25px;
     }
@@ -1710,6 +1712,10 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     padding: 30px 50px;
     border-radius: 5px;
     margin: 20px 0;
+    display: inline-block;
+}
+
+.liquidpoll-form:not(.display) {
     display: none;
 }
 

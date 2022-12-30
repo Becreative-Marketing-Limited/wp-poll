@@ -251,11 +251,11 @@ if ( ! function_exists( 'liquidpoll_generate_classes' ) ) {
 	/**
 	 * Generate and return classes
 	 *
-	 * @param string $classes
+	 * @param $classes
 	 *
 	 * @return string
 	 */
-	function liquidpoll_generate_classes( $classes = '' ) {
+	function liquidpoll_generate_classes( $classes ) {
 
 		if ( ! is_array( $classes ) ) {
 			$classes = explode( "~", str_replace( array( ' ', ',', ', ' ), '~', $classes ) );
@@ -755,8 +755,8 @@ if ( ! function_exists( 'liquidpoll_get_feedback_form' ) ) {
 
 if ( ! function_exists( 'liquidpoll_calculate_themes' ) ) {
 	/**
-     * Calculate themes for each type
-     *
+	 * Calculate themes for each type
+	 *
 	 * @param $themes
 	 *
 	 * @return array
