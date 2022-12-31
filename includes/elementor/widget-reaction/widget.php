@@ -83,7 +83,6 @@ class LIQUIDPOLL_Widget_reaction extends LIQUIDPOLL_Widget_base {
 		$this->start_controls_section( 'section_content_form', array(
 			'label'     => esc_html__( 'Form', 'wp-poll' ),
 			'tab'       => Controls_Manager::TAB_CONTENT,
-			'condition' => [ '_type' => [ 'poll' ] ],
 		) );
 		$this->controls_for_content_form();
 		$this->end_controls_section();

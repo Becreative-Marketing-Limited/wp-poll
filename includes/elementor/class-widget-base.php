@@ -17,12 +17,6 @@ class LIQUIDPOLL_Widget_base extends Widget_Base {
 	}
 
 
-	public function get_submit_btn_style() {
-
-
-	}
-
-
 	public function controls_for_content_form() {
 
 		$this->add_control( 'poll_form_enable', [
@@ -200,7 +194,7 @@ class LIQUIDPOLL_Widget_base extends Widget_Base {
 			'condition'  => [ 'poll_form_enable' => 'yes', ],
 		] );
 
-		$this->add_control( 'poll_btn_submit_border_radius', [
+		$this->add_control( 'poll_form_submit_border_radius', [
 			'label'      => esc_html__( 'Border Radius', 'wp-poll' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [ 'px', '%', 'em' ],

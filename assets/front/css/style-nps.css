@@ -10,6 +10,7 @@
 
 .nps-single .nps-form {
     width: 700px;
+    margin: auto;
 }
 
 .nps-form.submission-done {

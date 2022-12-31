@@ -1711,8 +1711,8 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     background: #e1e0fa;
     padding: 30px 50px;
     border-radius: 5px;
-    margin: 20px 0;
-    display: inline-block;
+    margin: 20px auto;
+    display: block;
 }
 
 .liquidpoll-form:not(.display) {
