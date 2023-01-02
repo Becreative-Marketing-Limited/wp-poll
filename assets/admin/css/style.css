@@ -455,4 +455,5 @@ span.poll-type.type-reaction {
 
 span.poll-type.type-nps {
     background: #795548;
+    text-transform: uppercase;
 }
