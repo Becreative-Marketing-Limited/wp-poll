@@ -326,5 +326,5 @@ Display all your polls in one place so that you can create a landing page where 
 * 30/12/2022 - NEW - Added Poll widget, NPS widget, and Reaction widget for Elementor page builder.
 
 = 3.3.53 =
-* 26/12/2022 - FIX - Fix CSS.
+* 02/01/2023 - FIX - Fix CSS.
 
