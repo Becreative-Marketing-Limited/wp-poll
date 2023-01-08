@@ -128,7 +128,7 @@ p.liquidpoll-responses {
     background: #CAFCCF;
     color: #49617C;
     border-radius: 5px;
-    padding: 17px 0;
+    padding: 17px 0 17px 60px;
     display: none;
     font-size: 18px;
     line-height: 21px;
@@ -148,7 +148,7 @@ p.liquidpoll-responses .icon-box {
     left: 0;
     background: #22D153;
     width: 55px;
-    height: 55px;
+    height: 100%;
 }
 
 p.liquidpoll-responses .icon-box:before {
@@ -495,7 +495,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 .liquidpoll-option-list-1 .liquidpoll-option-single input + label:before {
     content: '';
     right: 0;
-    top: 15px;
+    top: 50%;
     position: absolute;
     transform: translateY(-50%);
     width: 35px;
@@ -1449,6 +1449,13 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 .poll-single .liquidpoll-option-list-1 .liquidpoll-option-single:hover span.liquidpoll-votes-count {
     color: #fff;
 }
+/**
+ * Theme - 1
+ */
+.poll-single.theme-1 .liquidpoll-option-single .liquidpoll-option-input span {
+    display: inline-block;
+    width: calc(100% - 40px);
+}
 
 /**
  * Theme - 2
@@ -1466,8 +1473,15 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     border-radius: 5px;
     display: flex;
     flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
     transition: .3s;
+    min-height: 70px;
 }
+.poll-single.theme-2 .liquidpoll-option-list-1 .liquidpoll-option-single.has-thumb .liquidpoll-option-thumb {
+    margin-right: 26px;
+}
+
 
 .poll-single.theme-2 .liquidpoll-option-list-1 .liquidpoll-option-single.active {
     background-color: #5F64EB;
@@ -1521,13 +1535,26 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     background: #5F64EB;
 }
 
+.poll-single.results-type-votes.rendered-results .liquidpoll-option-single.has-thumb.has-label.has-result .liquidpoll-option-input {
+    width: calc(100% - 195px);
+}
+
+.poll-single.rendered-results .liquidpoll-option-single.has-thumb.has-label.has-result .liquidpoll-option-input {
+    width: calc(100% - 160px);
+}
+
+.poll-single.rendered-results .liquidpoll-option-single.has-label.has-result .liquidpoll-option-input {
+    width: calc(100% - 100px);
+}
 
 /**
  * Theme - 3
  */
 .poll-single.theme-3 .liquidpoll-option-single {
-    padding: 11px 0 11px 0;
+    padding: 34px 0;
     margin-bottom: 0;
+}
+.poll-single.theme-3 .liquidpoll-option-single.has-thumb {
     min-height: 95px;
 }
 
@@ -1557,6 +1584,14 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     transform: translateY(-50%);
 }
 
+.poll-single.theme-3 .liquidpoll-option-list-1 .liquidpoll-option-single.has-label input + label {
+    padding-left: 50px;
+}
+
+.poll-single.theme-3 .liquidpoll-option-list-1 .liquidpoll-option-single.has-thumb.has-label input + label {
+    padding-left: 170px;
+}
+
 .poll-single.theme-3 .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
     position: relative;
     cursor: pointer;
@@ -1566,7 +1601,6 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
     line-height: 23px;
     font-weight: 600;
     color: #000000;
-    padding-left: 170px;
 }
 
 .poll-single.theme-3 .liquidpoll-option-thumb {
@@ -1612,7 +1646,7 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
 
     p.liquidpoll-responses {
         font-size: 16px;
-        padding: 17px 0 17px 20px;
+        padding: 17px 0 17px 60px;
     }
 
     .poll-single.theme-2 .liquidpoll-option-list-1 .liquidpoll-option-single.active,
@@ -1655,50 +1689,6 @@ p.liquidpoll-responses.liquidpoll-warning .close > path {
         right: 209px;
         top: 45px;
         transition: .6s;
-    }
-}
-
-@media (max-width: 425px) {
-    .poll-single:not(.inside-embed) {
-        margin: 70px 15px !important;
-    }
-}
-
-@media (max-width: 375px) {
-
-    .poll-single:not(.inside-embed) {
-        margin: 70px 15px !important;
-    }
-
-    p.liquidpoll-responses {
-        font-size: 14px;
-        padding: 15px 0 15px 20px;
-    }
-
-    p.liquidpoll-responses .icon-box {
-        width: 50px;
-        height: 50px;
-    }
-}
-
-@media (max-width: 320px) {
-
-    .liquidpoll-button {
-        font-size: 16px;
-    }
-
-    .poll-single:not(.inside-embed) {
-        margin: 70px 15px !important;
-    }
-
-    p.liquidpoll-responses {
-        font-size: 12px;
-        padding: 12px 0 12px 25px;
-    }
-
-    p.liquidpoll-responses .icon-box {
-        width: 45px;
-        height: 45px;
     }
 }
 
