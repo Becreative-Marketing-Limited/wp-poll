@@ -199,6 +199,7 @@
                      */
                     $(document.body).trigger('liquidpoll_poll_submission_success', response);
 
+                    singlePoll.addClass('vote-done');
                     singlePoll.find('.liquidpoll-responses').addClass('liquidpoll-success').find('span.message').html(response.data).parent().slideDown();
                     singlePoll.find('.voted-users-only').removeClass('voted-users-only');
 
