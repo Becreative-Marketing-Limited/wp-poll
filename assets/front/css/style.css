@@ -1391,9 +1391,26 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
     color: #fff;
 }
 
+
+.poll-single.rendered-results .liquidpoll-option-single.has-thumb.has-label.has-result .liquidpoll-option-input {
+    width: calc(100% - 195px);
+}
+
+.poll-single.rendered-results .liquidpoll-option-single.has-thumb.has-label.has-result .liquidpoll-option-input {
+    width: calc(100% - 160px);
+}
+
+.poll-single.rendered-results .liquidpoll-option-single.has-label.has-result .liquidpoll-option-input {
+    width: calc(100% - 100px);
+}
+
 /**
  * Theme - 1
  */
+.poll-single.theme-1.rendered-results .liquidpoll-option-single.has-label.has-result .liquidpoll-option-input {
+    width: 100%;
+}
+
 .poll-single.theme-1 .liquidpoll-option-single .liquidpoll-option-input span {
     display: inline-block;
     width: calc(100% - 40px);
@@ -1470,17 +1487,6 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
     background: #5F64EB;
 }
 
-.poll-single.results-type-votes.rendered-results .liquidpoll-option-single.has-thumb.has-label.has-result .liquidpoll-option-input {
-    width: calc(100% - 195px);
-}
-
-.poll-single.rendered-results .liquidpoll-option-single.has-thumb.has-label.has-result .liquidpoll-option-input {
-    width: calc(100% - 160px);
-}
-
-.poll-single.rendered-results .liquidpoll-option-single.has-label.has-result .liquidpoll-option-input {
-    width: calc(100% - 100px);
-}
 
 /**
  * Theme - 3
@@ -1509,7 +1515,7 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
 }
 
 .poll-single.theme-3 .liquidpoll-option-input {
-    width: 100% !important;
+    width: 100%;
 }
 
 .poll-single.theme-3 .liquidpoll-option-list-1 .liquidpoll-option-single input + label:before {
@@ -1532,8 +1538,12 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
     padding-left: 135px;
 }
 
+.poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single.has-label input + label {
+    padding-left: 50px;
+}
+
 .poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single.has-thumb.has-label input + label {
-    padding-left: 85px;
+    padding-left: 135px;
 }
 
 .poll-single.theme-3 .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
@@ -1596,22 +1606,42 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
     }
 
     .theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
-        top: -20px;
+        top: -15px;
         transition: .6s;
     }
 
     .poll-single.theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single.has-result.active span.liquidpoll-votes-count {
-        right: 200px;
+        right: 50%;
     }
 
     .theme-2.rendered-results .liquidpoll-option-single.has-result span.liquidpoll-votes-count {
-        right: 209px;
+        right: 50%;
         top: 40px;
         transition: .6s;
     }
 
+    .poll-single.theme-3 .has-label.has-thumb .liquidpoll-option-input {
+        width: 100%;
+    }
+
     .poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label:before {
         display: none;
+    }
+
+    .poll-single.theme-3.rendered-results .liquidpoll-option-single.has-label.has-result .liquidpoll-option-input {
+        width: 100%;
+    }
+
+    .poll-single.theme-3.rendered-results .liquidpoll-option-single.has-thumb.has-label.has-result .liquidpoll-option-input {
+        width: 100%;
+    }
+
+    .poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single.has-label input + label {
+        padding-left: 0;
+    }
+
+    .poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single.has-thumb.has-label input + label {
+        padding-left: 85px;
     }
 
     .poll-single.theme-3.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
@@ -1638,7 +1668,7 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
  * Form Style
  */
 .liquidpoll-form {
-    width: 570px;
+    max-width: 570px;
     background: #e1e0fa;
     padding: 30px 50px;
     border-radius: 5px;
@@ -1723,6 +1753,8 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
  * Mobile Responsive
  */
 @media (max-width: 460px) {
+    .poll-single.theme-1,
+    .poll-single.theme-2,
     .poll-single.theme-3 {
         padding: 0 15px;
     }

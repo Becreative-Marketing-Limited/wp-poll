@@ -407,13 +407,13 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			 * Return if all goes well
 			 */
 			if ( $response ) {
-				wp_send_json_success( esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ) );
+				wp_send_json_success( Utils::get_option( 'liquidpoll_poll_text_success', esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ) ) );
 			}
 
 			/**
 			 * Something must be wrong
 			 */
-			wp_send_json_error( esc_html__( 'Something went wrong.', 'wp-poll' ) );
+			wp_send_json_error( Utils::get_option( 'liquidpoll_poll_text_failed', esc_html__( 'Something went wrong.', 'wp-poll' ) ) );
 		}
 
 

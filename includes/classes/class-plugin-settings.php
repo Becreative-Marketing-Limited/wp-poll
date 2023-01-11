@@ -97,6 +97,22 @@ class LIQUIDPOLL_Settings {
 							'type'        => 'text',
 						),
 						array(
+							'id'           => 'liquidpoll_poll_text_success',
+							'title'        => esc_html__( 'Poll Success Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'Display once submission is successfull.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+						array(
+							'id'           => 'liquidpoll_poll_text_failed',
+							'title'        => esc_html__( 'Poll Failed Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'Display once submission is failed.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'Something went wrong!', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+						array(
 							'id'      => 'liquidpoll_heading_ipinfo',
 							'content' => esc_html__( 'IPinfo Settings', 'wp-poll' ),
 							'type'    => 'subheading',

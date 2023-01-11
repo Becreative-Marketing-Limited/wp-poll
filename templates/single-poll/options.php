@@ -33,8 +33,9 @@ $poller_details = $poll->get_poller_details();
 
 	<?php
 	$typography_options = $poll->get_css_args( '_typography_options' );
+	$selector           = '.poll-single.theme-' . $poll->get_theme() . ' .liquidpoll-option-list-1 .liquidpoll-option-single input + label';
 
-	liquidpoll_apply_css( '.liquidpoll-option-list-1 .liquidpoll-option-single input + label', $typography_options );
+	liquidpoll_apply_css( $selector, $typography_options );
 
 	liquidpoll_apply_css( '.poll-single.theme-4 .liquidpoll-option-single.has-result svg.liquidpoll-votes-count circle', array(
 		'stroke' => Utils::get_args_option( 'color', $typography_options ),
