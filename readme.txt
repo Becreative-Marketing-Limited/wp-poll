@@ -4,7 +4,7 @@
 	Tags: poll, polls, survey, NPS, vote
 	Requires at least: 4.6
 	Tested up to: 6.1.1
-	Stable tag: 3.3.53
+	Stable tag: 3.3.54
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
