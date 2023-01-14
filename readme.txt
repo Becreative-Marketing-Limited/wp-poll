@@ -328,3 +328,6 @@ Display all your polls in one place so that you can create a landing page where 
 = 3.3.53 =
 * 02/01/2023 - FIX - Fix CSS.
 
+= 3.3.54 =
+* 14/01/2023 - FIX - Fix responsive issues.
+
