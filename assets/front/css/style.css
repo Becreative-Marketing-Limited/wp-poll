@@ -1577,6 +1577,11 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
 * Responsive Media
  */
 @media (max-width: 767px) {
+    .liquidpoll-form {
+        width: 100%;
+        padding: 30px 40px !important;
+    }
+
     .liquidpoll-countdown-timer-4 > span, .liquidpoll-countdown-timer-5 > span {
         font-size: 14px;
         min-width: 80px;
@@ -1608,6 +1613,14 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
     .theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
         top: -15px;
         transition: .6s;
+    }
+
+    .poll-single.theme-2.rendered-results .liquidpoll-option-single.has-thumb.has-label.has-result .liquidpoll-option-input {
+        width: 100%;
+    }
+
+    .poll-single.theme-2.rendered-results .liquidpoll-option-single.has-label.has-result .liquidpoll-option-input {
+        width: 100%;
     }
 
     .poll-single.theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single.has-result.active span.liquidpoll-votes-count {

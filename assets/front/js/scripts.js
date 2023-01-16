@@ -467,7 +467,6 @@
         return false;
     });
 
-
 })(jQuery, window, document, liquidpoll_object);
 
 

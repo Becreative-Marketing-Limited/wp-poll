@@ -9,7 +9,7 @@
 }
 
 .nps-single .nps-form {
-    width: 700px;
+    max-width: 700px;
     margin: auto;
 }
 
@@ -139,5 +139,12 @@
 
 
 @media (max-width: 460px) {
+    .nps-single .nps-form {
+        width: 100%;
+        padding: 0 5px;
+    }
 
+    .nps-single.theme-1 ul.liquidpoll-nps-options li:last-child {
+        margin-right: 10px;
+    }
 }
