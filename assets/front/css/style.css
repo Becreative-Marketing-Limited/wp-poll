@@ -324,9 +324,9 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
 
 .poll-single.rendered-results,
 .poll-single.vote-done {
-    pointer-events: none;
-    user-select: none;
-    -webkit-user-select: none;
+    /*pointer-events: none;*/
+    /*user-select: none;*/
+    /*-webkit-user-select: none;*/
 }
 
 /**
@@ -1610,9 +1610,14 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
         margin-left: 0;
     }
 
+    .theme-1.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
+        margin-left: 10px !important;
+    }
+
     .theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single input + label {
-        top: -15px;
+        top: -8px;
         transition: .6s;
+        font-size: 16px;
     }
 
     .poll-single.theme-2.rendered-results .liquidpoll-option-single.has-thumb.has-label.has-result .liquidpoll-option-input {
@@ -1627,10 +1632,15 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
         right: 50%;
     }
 
+    .theme-2.rendered-results .liquidpoll-option-list-1 .liquidpoll-option-single.has-thumb .liquidpoll-option-thumb {
+        margin-right: 10px;
+    }
+
     .theme-2.rendered-results .liquidpoll-option-single.has-result span.liquidpoll-votes-count {
-        right: 50%;
+        left: 80px;
         top: 40px;
         transition: .6s;
+        font-size: 16px;
     }
 
     .poll-single.theme-3 .has-label.has-thumb .liquidpoll-option-input {

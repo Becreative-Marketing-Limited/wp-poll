@@ -94,7 +94,7 @@ $resized_thumb  = $thumb ? liquidpoll_resizer( $thumb, $theme_width, $theme_heig
         <div class="liquidpoll-option-submitting-person">
             <ul>
 				<?php foreach ( $poller_details as $index => $poller_detail )  :
-					if ( $index > 2 ) {
+					if ( $index > 0 ) {
 						continue;
 					}
 					?>
@@ -103,9 +103,9 @@ $resized_thumb  = $thumb ? liquidpoll_resizer( $thumb, $theme_width, $theme_heig
                     </li>
 				<?php endforeach; ?>
 
-				<?php if ( $poller_count > 3 ) : ?>
+				<?php if ( $poller_count > 1 ) : ?>
                     <li>
-                        <span>+<?php echo esc_html( $poller_count - 3 ); ?></span>
+                        <span>+<?php echo esc_html( $poller_count - 1 ); ?></span>
                     </li>
 				<?php endif; ?>
             </ul>

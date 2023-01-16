@@ -272,10 +272,15 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 					);
 					break;
 				case '8':
+					$theme_args = array(
+						'width'  => 555,
+						'height' => 180,
+					);
+					break;
 				case '9':
 					$theme_args = array(
 						'width'  => 555,
-						'height' => 120,
+						'height' => 180,
 					);
 					break;
 				default:
