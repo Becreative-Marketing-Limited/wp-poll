@@ -129,7 +129,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			wp_enqueue_style( 'roundslider-css', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/roundslider.min.css' );
 			wp_enqueue_style( 'liquidpoll-admin', LIQUIDPOLL_PLUGIN_URL . 'assets/admin/css/style.css', array(), $version );
 
-			wp_enqueue_script('jquery-ui-datepicker');
+			wp_enqueue_script( 'jquery-ui-datepicker' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
 			wp_enqueue_script( 'apexcharts', plugins_url( 'assets/apexcharts.js', __FILE__ ) );
 			wp_enqueue_script( 'liquidpoll-admin', plugins_url( 'assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ), $version );
@@ -176,12 +176,12 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 
 // Update license server
 add_filter( 'WPDK_Settings/Filters/integration_server_wp_poll', function () {
-    return esc_url( 'https://www.liquidpoll.com' );
+	return esc_url( 'https://www.liquidpoll.com' );
 } );
 
 // Update license secret key
 add_filter( 'WPDK_Settings/Filters/license_secret_key_wp_poll', function () {
-    return '6287d0ca3125a4.96767836';
+	return '6287d0ca3125a4.96767836';
 } );
 
 function wpdk_init_wp_poll() {
@@ -197,7 +197,6 @@ function wpdk_init_wp_poll() {
 	global $liquidpoll_wpdk;
 
 	$liquidpoll_wpdk = new WPDK\Client( esc_html( 'LiquidPoll' ), 'wp-poll', 126, __FILE__ );
-	$liquidpoll_wpdk->notifications();
 
 	do_action( 'wpdk_init_wp_poll', $liquidpoll_wpdk );
 }
@@ -209,4 +208,4 @@ global $liquidpoll_wpdk;
 
 wpdk_init_wp_poll();
 
-add_action( 'plugins_loaded', array( 'LIQUIDPOLL_Main', 'instance' ), 90 );
+add_action( 'plugins_loaded', array( 'LIQUIDPOLL_Main', 'instance' ), 80 );
