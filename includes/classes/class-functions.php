@@ -227,12 +227,12 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 			}
 
 			if ( $button == 'new_option' ) {
-				$button_text = $this->get_option( 'liquidpoll_btn_text_new_option', esc_html__( 'New option', 'wp-poll' ) );
+				$button_text = Utils::get_option( 'liquidpoll_btn_text_new_option', esc_html__( 'New option', 'wp-poll' ) );
 			} else if ( $button == 'submit' ) {
-				$button_text = $this->get_option( 'liquidpoll_btn_text_submit', esc_html__( 'Submit', 'wp-poll' ) );
+				$button_text = Utils::get_option( 'liquidpoll_btn_text_submit', esc_html__( 'Submit', 'wp-poll' ) );
 			}
 			if ( $button == 'results' ) {
-				$button_text = $this->get_option( 'liquidpoll_btn_text_results', esc_html__( 'Results', 'wp-poll' ) );
+				$button_text = Utils::get_option( 'liquidpoll_btn_text_results', esc_html__( 'Results', 'wp-poll' ) );
 			}
 
 			return apply_filters( 'liquidpoll_filters_button_text', $button_text, $button );
