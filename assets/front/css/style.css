@@ -323,10 +323,10 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
 }
 
 .poll-single.rendered-results,
-.poll-single.vote-done {
-    /*pointer-events: none;*/
-    /*user-select: none;*/
-    /*-webkit-user-select: none;*/
+.poll-single.vote-done.rendered-results {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 /**

@@ -37,6 +37,9 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_action( 'wp_ajax_liquidpoll_get_poll_results', array( $this, 'liquidpoll_get_poll_results' ) );
 			add_action( 'wp_ajax_nopriv_liquidpoll_get_poll_results', array( $this, 'liquidpoll_get_poll_results' ) );
 
+			add_action( 'wp_ajax_liquidpoll_submit_optin_form', array( $this, 'handle_submit_optin_form' ) );
+			add_action( 'wp_ajax_nopriv_liquidpoll_submit_optin_form', array( $this, 'handle_submit_optin_form' ) );
+
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta' ), 10, 2 );
 			add_filter( 'plugin_action_links_' . LIQUIDPOLL_PLUGIN_FILE, array( $this, 'add_plugin_actions' ), 10, 2 );
 
@@ -310,6 +313,32 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			}
 
 			return (array) $links;
+		}
+
+
+		/**
+		 * Handle optin form submission
+		 */
+		function handle_submit_optin_form() {
+
+			$_form_data = Utils::get_args_option( 'form_data', wp_unslash( $_POST ) );
+
+			parse_str( $_form_data, $form_data );
+
+			$response = liquidpoll_insert_email(
+				array(
+					'poll_id'       => Utils::get_args_option( 'poll_id', $form_data ),
+					'first_name'    => Utils::get_args_option( 'first_name', $form_data ),
+					'last_name'     => Utils::get_args_option( 'last_name', $form_data ),
+					'email_address' => Utils::get_args_option( 'email_address', $form_data ),
+				)
+			);
+
+			if ( $response ) {
+				wp_send_json_success( $response );
+			}
+
+			wp_send_json_error( esc_html__( 'Something went wrong.', 'wp-poll-pro' ) );
 		}
 
 
