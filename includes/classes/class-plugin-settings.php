@@ -28,7 +28,7 @@ class LIQUIDPOLL_Settings {
 			'show_search'         => false,
 			'product_url'         => LIQUIDPOLL_PLUGIN_LINK,
 			'product_version'     => $liquidpoll_wpdk->plugin_version,
-			'product_version_pro' => liquidpoll()->is_pro() ? $liquidpoll_wpdk->license()->plugin_version : '',
+			'product_version_pro' => liquidpoll()->is_pro() ? LIQUIDPOLL_PRO_VERSION : '',
 			'quick_links'         => array(
 				'supports' => array(
 					'label' => esc_html__( 'Support', 'wp-poll' ),
