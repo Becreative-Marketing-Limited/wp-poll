@@ -43,8 +43,8 @@ if ( ! empty( $poll->get_poll_options() ) && is_array( $poll->get_poll_options()
 	echo '</ul>';
 
 	printf( '<div class="liquidpoll-nps-score-labels"><span class="lowest">%s</span><span class="highest">%s</span></div>',
-		esc_html( $poll->get_meta( '_nps_lowest_marking_text', Utils::get_option( 'liquidpoll_nps_text_min' ) ) ),
-		esc_html( $poll->get_meta( '_nps_highest_marking_text', Utils::get_option( 'liquidpoll_nps_text_max' ) ) )
+		esc_html( $poll->get_meta( '_nps_lowest_marking_text', Utils::get_option( 'liquidpoll_nps_text_min', esc_html__( 'It was terrible', 'wp-poll' ) ) ) ),
+		esc_html( $poll->get_meta( '_nps_highest_marking_text', Utils::get_option( 'liquidpoll_nps_text_max', esc_html__( 'Absolutely love it', 'wp-poll' ) ) ) )
 	);
 
 	$marking_text_colors = $poll->get_css_args( '_nps_marking_text_colors' );

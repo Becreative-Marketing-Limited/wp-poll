@@ -28,7 +28,7 @@ class LIQUIDPOLL_Settings {
 			'show_search'         => false,
 			'product_url'         => LIQUIDPOLL_PLUGIN_LINK,
 			'product_version'     => $liquidpoll_wpdk->plugin_version,
-			'product_version_pro' => liquidpoll()->is_pro() ? $liquidpoll_wpdk->license()->plugin_version : '',
+			'product_version_pro' => liquidpoll()->is_pro() ? LIQUIDPOLL_PRO_VERSION : '',
 			'quick_links'         => array(
 				'supports' => array(
 					'label' => esc_html__( 'Support', 'wp-poll' ),
@@ -95,22 +95,6 @@ class LIQUIDPOLL_Settings {
 							'subtitle'    => esc_html__( 'Customize "New Option" button text.', 'wp-poll' ),
 							'placeholder' => esc_html__( 'Add new option', 'wp-poll' ),
 							'type'        => 'text',
-						),
-						array(
-							'id'           => 'liquidpoll_poll_text_success',
-							'title'        => esc_html__( 'Poll Success Text', 'wp-poll' ),
-							'subtitle'     => esc_html__( 'Display once submission is successfull.', 'wp-poll' ),
-							'type'         => 'text',
-							'placeholder'  => esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ),
-							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
-						),
-						array(
-							'id'           => 'liquidpoll_poll_text_failed',
-							'title'        => esc_html__( 'Poll Failed Text', 'wp-poll' ),
-							'subtitle'     => esc_html__( 'Display once submission is failed.', 'wp-poll' ),
-							'type'         => 'text',
-							'placeholder'  => esc_html__( 'Something went wrong!', 'wp-poll' ),
-							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
 						),
 						array(
 							'id'      => 'liquidpoll_heading_ipinfo',
@@ -212,43 +196,6 @@ class LIQUIDPOLL_Settings {
 						),
 					),
 				),
-				array(
-					'title'  => esc_html__( 'NPS Settings', 'wp-poll' ),
-					'fields' => array(
-						array(
-							'id'           => 'liquidpoll_nps_text_min',
-							'title'        => esc_html__( 'Minimum Identifier Text', 'wp-poll' ),
-							'subtitle'     => esc_html__( 'This will be replacer for identifying the min value.', 'wp-poll' ),
-							'type'         => 'text',
-							'placeholder'  => esc_html__( 'It was terrible!', 'wp-poll' ),
-							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
-						),
-						array(
-							'id'           => 'liquidpoll_nps_text_max',
-							'title'        => esc_html__( 'Maximum Identifier Text', 'wp-poll' ),
-							'subtitle'     => esc_html__( 'This will be replacer for identifying the max value.', 'wp-poll' ),
-							'type'         => 'text',
-							'placeholder'  => esc_html__( 'Absolutely love it!', 'wp-poll' ),
-							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
-						),
-						array(
-							'id'           => 'liquidpoll_nps_text_success',
-							'title'        => esc_html__( 'Success Text', 'wp-poll' ),
-							'subtitle'     => esc_html__( 'Display once submission is successfull.', 'wp-poll' ),
-							'type'         => 'text',
-							'placeholder'  => esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ),
-							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
-						),
-						array(
-							'id'           => 'liquidpoll_nps_text_failed',
-							'title'        => esc_html__( 'Failed Text', 'wp-poll' ),
-							'subtitle'     => esc_html__( 'Display once submission is failed.', 'wp-poll' ),
-							'type'         => 'text',
-							'placeholder'  => esc_html__( 'Something went wrong!', 'wp-poll' ),
-							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
-						),
-					),
-				),
 			),
 		);
 
@@ -316,6 +263,70 @@ class LIQUIDPOLL_Settings {
 							'title'        => esc_html__( 'Background color', 'wp-poll' ),
 							'type'         => 'color',
 							'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+						),
+					),
+				),
+			),
+		);
+
+		$field_sections['languages'] = array(
+			'title'    => esc_html__( 'Language', 'wp-poll' ),
+			'sections' => array(
+				array(
+					'title'  => esc_html__( 'Poll', 'wp-poll' ),
+					'fields' => array(
+						array(
+							'id'           => 'liquidpoll_poll_text_success',
+							'title'        => esc_html__( 'Poll Success Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'Display once submission is successfull.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+						array(
+							'id'           => 'liquidpoll_poll_text_failed',
+							'title'        => esc_html__( 'Poll Failed Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'Display once submission is failed.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'Something went wrong!', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+					),
+				),
+				array(
+					'title'  => esc_html__( 'NPS', 'wp-poll' ),
+					'fields' => array(
+						array(
+							'id'           => 'liquidpoll_nps_text_min',
+							'title'        => esc_html__( 'Minimum Identifier Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'This will be replacer for identifying the min value.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'It was terrible!', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+						array(
+							'id'           => 'liquidpoll_nps_text_max',
+							'title'        => esc_html__( 'Maximum Identifier Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'This will be replacer for identifying the max value.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'Absolutely love it!', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+						array(
+							'id'           => 'liquidpoll_nps_text_success',
+							'title'        => esc_html__( 'Success Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'Display once submission is successfull.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'Congratulations, Successfully voted.', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
+						),
+						array(
+							'id'           => 'liquidpoll_nps_text_failed',
+							'title'        => esc_html__( 'Failed Text', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'Display once submission is failed.', 'wp-poll' ),
+							'type'         => 'text',
+							'placeholder'  => esc_html__( 'Something went wrong!', 'wp-poll' ),
+							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
 						),
 					),
 				),

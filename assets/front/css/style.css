@@ -1408,7 +1408,7 @@ p.liquidpoll-responses.liquidpoll-error .close > path, p.liquidpoll-responses.li
  * Theme - 1
  */
 .poll-single.theme-1.rendered-results .liquidpoll-option-single.has-label.has-result .liquidpoll-option-input {
-    width: 100%;
+    width: calc(100% - 100px);
 }
 
 .poll-single.theme-1 .liquidpoll-option-single .liquidpoll-option-input span {

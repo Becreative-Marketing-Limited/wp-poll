@@ -457,3 +457,7 @@ span.poll-type.type-nps {
     background: #795548;
     text-transform: uppercase;
 }
+
+.wpdk_settings-section[data-section-id="reports"] .liquidpoll-reports-field{
+    padding: 15px 0 0 15px;
+}
