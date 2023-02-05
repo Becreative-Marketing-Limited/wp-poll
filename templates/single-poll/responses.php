@@ -6,6 +6,8 @@
  * @author Liquidpoll
  */
 
+use WPDK\Utils;
+
 defined( 'ABSPATH' ) || exit;
 
 global $poll;
@@ -15,7 +17,7 @@ global $poll;
 <?php if ( ! $poll->ready_to_vote() ) : ?>
     <p class="liquidpoll-responses display liquidpoll-warning">
         <span class="icon-box"></span>
-        <span class="message"><?php esc_html_e( 'This poll has expired.', 'wp-poll' ); ?></span>
+        <span class="message"><?php esc_html_e( Utils::get_option( 'liquidpoll_poll_text_expired', 'This poll has expired.' ), 'wp-poll' ); ?></span>
     </p>
 <?php endif; ?>
 

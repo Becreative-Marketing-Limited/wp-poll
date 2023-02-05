@@ -59,7 +59,7 @@ if ( ! empty( $poll->get_poll_options() ) && is_array( $poll->get_poll_options()
 		printf( '<div class="liquidpoll-comment-box %s"><textarea %s placeholder="%s" name="nps_feedback"></textarea></div>',
 			esc_attr( $nps_commentbox ),
 			( ( 'obvious' == $nps_commentbox ) ? 'required' : '' ),
-			esc_html__( 'Tell us a little bit about your feedback', 'wp-poll' )
+			esc_html__( Utils::get_option( 'liquidpoll_nps_comment_box_placeholder', 'Tell us a little bit about your feedback' ), 'wp-poll' )
 		);
 
 		$comment_box_colors = $poll->get_css_args( '_nps_comment_box_colors' );
@@ -105,7 +105,7 @@ if ( $poll->ready_to_vote() ) {
 
 	printf( '<p class="liquidpoll-responses"><span class="icon-box"></span><span class="message"></span></p>' );
 
-	printf( '<div class="nps-button-wrap"><button class="liquidpoll-button liquidpoll-submit-poll %s">%s</button></div>', ( 'obvious' == $nps_commentbox ? 'disabled' : '' ), $liquidpoll->get_button_text( 'submit' ) );
+	printf( '<div class="nps-button-wrap"><button class="liquidpoll-button liquidpoll-submit-poll %s">%s</button></div>', ( 'obvious' == $nps_commentbox ? 'disabled' : '' ), $liquidpoll->get_button_text( 'nps_submit' ) );
 
 	liquidpoll_apply_css( '.liquidpoll-submit-poll', $poll->get_css_args( '_typography_button_submit' ) );
 

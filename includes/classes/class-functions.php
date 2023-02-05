@@ -222,7 +222,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 
 			$button_text = esc_html__( 'Submit', 'wp-poll' );
 
-			if ( ! in_array( $button, array( 'new_option', 'submit', 'results' ) ) || empty( $button ) ) {
+			if ( ! in_array( $button, array( 'new_option', 'submit','nps_submit', 'results' ) ) || empty( $button ) ) {
 				return $button_text;
 			}
 
@@ -230,6 +230,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Functions' ) ) {
 				$button_text = Utils::get_option( 'liquidpoll_btn_text_new_option', esc_html__( 'New option', 'wp-poll' ) );
 			} else if ( $button == 'submit' ) {
 				$button_text = Utils::get_option( 'liquidpoll_btn_text_submit', esc_html__( 'Submit', 'wp-poll' ) );
+			} else if ( $button == 'nps_submit' ) {
+				$button_text = Utils::get_option( 'liquidpoll_nps_btn_text_submit', esc_html__( 'Submit', 'wp-poll' ) );
 			}
 			if ( $button == 'results' ) {
 				$button_text = Utils::get_option( 'liquidpoll_btn_text_results', esc_html__( 'Results', 'wp-poll' ) );

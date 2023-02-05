@@ -380,14 +380,14 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			 * Check if already voted
 			 */
 			if ( array_key_exists( $poller, $polled_data ) ) {
-				wp_send_json_error( esc_html__( 'You already voted on this poll.', 'wp-poll' ) );
+				wp_send_json_error( esc_html__( Utils::get_option( 'liquidpoll_poll_text_voted', 'You already voted on this poll.' ), 'wp-poll' ) );
 			}
 
 			/**
 			 * Check ready to vote or not
 			 */
 			if ( ! $poll->ready_to_vote() ) {
-				wp_send_json_error( esc_html__( 'This poll has expired.', 'wp-poll' ) );
+				wp_send_json_error( esc_html__( Utils::get_option( 'liquidpoll_poll_text_expired', 'This poll has expired.' ), 'wp-poll' ) );
 			}
 
 			/**
