@@ -360,7 +360,16 @@ a.liquidpoll-doc {
 }
 
 .poll_page_reports th#polled_comments {
-    width: 35%;
+    width: 14%;
+    min-width: 200px;
+}
+
+.poll_page_reports th#poller_name {
+    min-width: 100px;
+    width: 6%;
+}
+
+.poll_page_reports th#poller_email {
     min-width: 200px;
 }
 

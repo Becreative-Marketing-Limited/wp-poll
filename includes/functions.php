@@ -580,6 +580,7 @@ if ( ! function_exists( 'liquidpoll_create_table' ) ) {
 			first_name VARCHAR(255) NOT NULL,
 			last_name VARCHAR(255) NOT NULL,
 			email_address VARCHAR(255) NOT NULL,
+			consent VARCHAR(255),
 			datetime DATETIME NOT NULL,
 			UNIQUE KEY id (id)
 		)";
@@ -779,5 +780,43 @@ if ( ! function_exists( 'liquidpoll_calculate_themes' ) ) {
 		}
 
 		return $calculated_themes;
+	}
+
+
+	/**
+     * Get poller name from form table
+     *
+	 * @param $poll_id
+	 * @param $poller_id_ip
+	 *
+	 * @return string|null
+	 */
+	if ( ! function_exists( 'liquidpoll_get_poller_name' ) ) {
+		function liquidpoll_get_poller_name( $poll_id, $poller_id_ip ) {
+			global $wpdb;
+
+			$poller_name = $wpdb->get_var( $wpdb->prepare( "SELECT first_name FROM " . LIQUIDPOLL_EMAILS_TABLE . " WHERE poll_id = %s AND poller_id_ip = %s", $poll_id, $poller_id_ip ) );
+
+			return $poller_name;
+		}
+	}
+
+
+	/**
+     * Get poller email from form table
+     *
+	 * @param $poll_id
+	 * @param $poller_id_ip
+	 *
+	 * @return string|null
+	 */
+	if ( ! function_exists( 'liquidpoll_get_poller_email' ) ) {
+		function liquidpoll_get_poller_email( $poll_id, $poller_id_ip ) {
+			global $wpdb;
+
+			$poller_name = $wpdb->get_var( $wpdb->prepare( "SELECT email_address FROM " . LIQUIDPOLL_EMAILS_TABLE . " WHERE poll_id = %s AND poller_id_ip = %s", $poll_id, $poller_id_ip ) );
+
+			return $poller_name;
+		}
 	}
 }

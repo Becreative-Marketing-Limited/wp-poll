@@ -164,6 +164,47 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 
 
 		/**
+		 * Column poller_email
+		 *
+		 * @param $item
+		 *
+		 * @return void
+		 */
+		function column_poller_email( $item ) {
+
+			$poll_id = Utils::get_args_option( 'poll_id', $item );
+			$poller  = Utils::get_args_option( 'poller_id_ip', $item );
+
+			if ( ! filter_var( $poller, FILTER_VALIDATE_IP ) !== false ) {
+				$poller_user = get_user_by( 'ID', $poller );
+				printf( '<a href="%s">%s</a>', admin_url( 'user-edit.php?user_id=' . $poller ), $poller_user->user_email );
+			} else {
+				printf( '<span>%s</span>', liquidpoll_get_poller_email( $poll_id, $poller ) );
+			}
+		}
+
+
+		/**
+         * Column poller_name
+         *
+		 * @param $item
+		 *
+		 * @return void
+		 */
+		function column_poller_name( $item ) {
+			$poll_id = Utils::get_args_option( 'poll_id', $item );
+			$poller  = Utils::get_args_option( 'poller_id_ip', $item );
+
+			if ( ! filter_var( $poller, FILTER_VALIDATE_IP ) !== false ) {
+				$poller_user = get_user_by( 'ID', $poller );
+				printf( '<a href="%s">%s</a>', admin_url( 'user-edit.php?user_id=' . $poller ), $poller_user->display_name );
+			} else {
+				printf( '<span>%s</span>', liquidpoll_get_poller_name( $poll_id, $poller ) );
+			}
+		}
+
+
+		/**
 		 * Column object_name
 		 *
 		 * @param $item
@@ -221,6 +262,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 				case 'polled_by':
 				case 'polled_value':
 				case 'polled_comments':
+				case 'poller_name':
+				case 'poller_email':
 				default:
 					return Utils::get_args_option( $column_name, $item );
 			}
@@ -238,6 +281,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 					'polled_by'       => esc_html__( 'Polled By', 'wp-poll' ),
 					'polled_value'    => esc_html__( 'Polled Value', 'wp-poll' ),
 					'polled_comments' => esc_html__( 'Comments', 'wp-poll' ),
+					'poller_name'     => esc_html__( 'Poller Name', 'wp-poll' ),
+					'poller_email'    => esc_html__( 'Poller Email', 'wp-poll' ),
 				)
 			);
 		}
