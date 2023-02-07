@@ -281,8 +281,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 					'polled_by'       => esc_html__( 'Polled By', 'wp-poll' ),
 					'polled_value'    => esc_html__( 'Polled Value', 'wp-poll' ),
 					'polled_comments' => esc_html__( 'Comments', 'wp-poll' ),
-					'poller_name'     => esc_html__( 'Poller Name', 'wp-poll' ),
-					'poller_email'    => esc_html__( 'Poller Email', 'wp-poll' ),
+					'poller_name'     => esc_html__( 'Name', 'wp-poll' ),
+					'poller_email'    => esc_html__( 'Email', 'wp-poll' ),
 				)
 			);
 		}
