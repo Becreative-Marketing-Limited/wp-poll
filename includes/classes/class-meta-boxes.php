@@ -415,6 +415,14 @@ class LIQUIDPOLL_Poll_meta {
 					'dependency'    => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
+					'id'         => 'poll_form_require_notice_consent',
+					'title'      => esc_html__( 'Require consent', 'wp-poll' ),
+					'label'      => esc_html__( 'Require notice consent.', 'wp-poll' ),
+					'type'       => 'switcher',
+					'default'    => false,
+					'dependency' => array( '_type', 'any', 'poll,nps,reaction', 'all' ),
+				),
+				array(
 					'type'       => 'subheading',
 					'content'    => esc_html__( 'Form Styling', 'wp-poll' ),
 					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),

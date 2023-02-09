@@ -587,6 +587,14 @@ if ( ! function_exists( 'liquidpoll_create_table' ) ) {
 
 		maybe_create_table( LIQUIDPOLL_RESULTS_TABLE, $sql_results_table );
 		maybe_create_table( LIQUIDPOLL_EMAILS_TABLE, $sql_emails_table );
+
+		if ( ! function_exists( 'maybe_add_column' ) ) {
+			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		}
+
+		$sql_add_column = "ALTER TABLE " . LIQUIDPOLL_EMAILS_TABLE . " ADD consent VARCHAR(255) AFTER email_address";
+
+		maybe_add_column( LIQUIDPOLL_EMAILS_TABLE, 'consent', $sql_add_column );
 	}
 }
 
@@ -647,6 +655,7 @@ if ( ! function_exists( 'liquidpoll_insert_email' ) ) {
 			'first_name'    => '',
 			'last_name'     => '',
 			'email_address' => '',
+			'consent'       => '',
 			'datetime'      => current_time( 'mysql' ),
 		);
 		$args        = wp_parse_args( $args, $defaults );
@@ -803,20 +812,20 @@ if ( ! function_exists( 'liquidpoll_calculate_themes' ) ) {
 
 
 	/**
-     * Get poller email from form table
-     *
+	 * Get poller info from form table
+	 *
 	 * @param $poll_id
 	 * @param $poller_id_ip
 	 *
 	 * @return string|null
 	 */
-	if ( ! function_exists( 'liquidpoll_get_poller_email' ) ) {
-		function liquidpoll_get_poller_email( $poll_id, $poller_id_ip ) {
+	if ( ! function_exists( 'liquidpoll_get_data_from_email_table' ) ) {
+		function liquidpoll_get_data_from_email_table( $poll_id, $poller_id_ip ) {
 			global $wpdb;
 
-			$poller_name = $wpdb->get_var( $wpdb->prepare( "SELECT email_address FROM " . LIQUIDPOLL_EMAILS_TABLE . " WHERE poll_id = %s AND poller_id_ip = %s", $poll_id, $poller_id_ip ) );
+			$poller_info = $wpdb->get_results( $wpdb->prepare( "SELECT first_name,last_name,email_address,consent FROM " . LIQUIDPOLL_EMAILS_TABLE . " WHERE poll_id = %s AND poller_id_ip = %s", $poll_id, $poller_id_ip ), ARRAY_A );
 
-			return $poller_name;
+			return end( $poller_info );
 		}
 	}
 }

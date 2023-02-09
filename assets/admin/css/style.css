@@ -350,7 +350,7 @@ a.liquidpoll-doc {
 }
 
 .poll_page_reports th#poll {
-    width: 30%;
+    width: 28%;
     min-width: 170px;
 }
 
@@ -371,6 +371,10 @@ a.liquidpoll-doc {
 
 .poll_page_reports th#poller_email {
     min-width: 200px;
+}
+
+.poll_page_reports th#consent {
+    width: 60px;
 }
 
 .poll_page_reports .row-actions .type {

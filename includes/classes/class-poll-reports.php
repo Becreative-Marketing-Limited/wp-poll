@@ -164,6 +164,24 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 
 
 		/**
+		 * Column consent
+		 *
+		 * @param $item
+		 *
+		 * @return void
+		 */
+		function column_consent( $item ) {
+
+			$poll_id     = Utils::get_args_option( 'poll_id', $item );
+			$poller      = Utils::get_args_option( 'poller_id_ip', $item );
+			$poller_info = liquidpoll_get_data_from_email_table( $poll_id, $poller );
+			$consent     = ! empty( Utils::get_args_option( 'consent', $poller_info ) ) ? Utils::get_args_option( 'consent', $poller_info ) : 'no';
+
+			printf( '<span>%s</span>', ucwords( $consent ) );
+		}
+
+
+		/**
 		 * Column poller_email
 		 *
 		 * @param $item
@@ -172,14 +190,16 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 		 */
 		function column_poller_email( $item ) {
 
-			$poll_id = Utils::get_args_option( 'poll_id', $item );
-			$poller  = Utils::get_args_option( 'poller_id_ip', $item );
+			$poll_id      = Utils::get_args_option( 'poll_id', $item );
+			$poller       = Utils::get_args_option( 'poller_id_ip', $item );
+			$poller_info  = liquidpoll_get_data_from_email_table( $poll_id, $poller );
+			$poller_email = Utils::get_args_option( 'email_address', $poller_info );
 
 			if ( ! filter_var( $poller, FILTER_VALIDATE_IP ) !== false ) {
 				$poller_user = get_user_by( 'ID', $poller );
 				printf( '<a href="%s">%s</a>', admin_url( 'user-edit.php?user_id=' . $poller ), $poller_user->user_email );
 			} else {
-				printf( '<span>%s</span>', liquidpoll_get_poller_email( $poll_id, $poller ) );
+				printf( '<span>%s</span>', $poller_email );
 			}
 		}
 
@@ -192,14 +212,18 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 		 * @return void
 		 */
 		function column_poller_name( $item ) {
-			$poll_id = Utils::get_args_option( 'poll_id', $item );
-			$poller  = Utils::get_args_option( 'poller_id_ip', $item );
+
+			$poll_id     = Utils::get_args_option( 'poll_id', $item );
+			$poller      = Utils::get_args_option( 'poller_id_ip', $item );
+			$poller_info = liquidpoll_get_data_from_email_table( $poll_id, $poller );
+			$first_name  = Utils::get_args_option( 'first_name', $poller_info );
+			$last_name   = Utils::get_args_option( 'last_name', $poller_info );
 
 			if ( ! filter_var( $poller, FILTER_VALIDATE_IP ) !== false ) {
 				$poller_user = get_user_by( 'ID', $poller );
 				printf( '<a href="%s">%s</a>', admin_url( 'user-edit.php?user_id=' . $poller ), $poller_user->display_name );
 			} else {
-				printf( '<span>%s</span>', liquidpoll_get_poller_name( $poll_id, $poller ) );
+				printf( '<span>%s %s</span>', $first_name, $last_name );
 			}
 		}
 
@@ -264,6 +288,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 				case 'polled_comments':
 				case 'poller_name':
 				case 'poller_email':
+				case 'consent':
 				default:
 					return Utils::get_args_option( $column_name, $item );
 			}
@@ -283,6 +308,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 					'polled_comments' => esc_html__( 'Comments', 'wp-poll' ),
 					'poller_name'     => esc_html__( 'Name', 'wp-poll' ),
 					'poller_email'    => esc_html__( 'Email', 'wp-poll' ),
+					'consent'         => esc_html__( 'Consent', 'wp-poll' ),
 				)
 			);
 		}

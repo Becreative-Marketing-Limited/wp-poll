@@ -8,7 +8,7 @@ use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
-global $poll;
+global $poll, $liquidpoll_inside_elementor;
 
 $poll_form_fields           = $poll->get_meta( 'poll_form_fields', array( 'first_name', 'email_address' ) );
 $enable_last_name           = $poll->get_meta( 'enable_last_name', 'no' );
@@ -18,15 +18,19 @@ $poll_form_label_email      = $poll->get_meta( 'poll_form_label_email', esc_html
 $poll_form_label_button     = $poll->get_meta( 'poll_form_label_button', esc_html__( 'View Results', 'wp-poll' ) );
 $poll_form_content          = $poll->get_meta( 'poll_form_content' );
 $poll_form_notice           = $poll->get_meta( 'poll_form_notice' );
+$poll_form_notice_consent   = $poll->get_meta( 'poll_form_require_notice_consent' );
 $poll_form_style_colors     = $poll->get_meta( 'poll_form_style_colors' );
 $submit_button_text         = $poll->get_meta( 'poll_form_label_button', esc_attr__( 'View Results', 'wp-poll' ) );
+$require_consent            = ($poll_form_notice_consent == '1') ? 'required' : '';
 
 if ( 'nps' == $poll->get_type() || 'reaction' == $poll->get_type() ) {
 	$submit_button_text = esc_attr__( 'Confirm Optin', 'wp-poll' );
 }
 
-if ( 'yes' != $enable_last_name && ( $key = array_search( 'last_name', $poll_form_fields ) ) !== false ) {
-	unset( $poll_form_fields[ $key ] );
+if ( $liquidpoll_inside_elementor ) {
+	if ( 'yes' != $enable_last_name && ( $key = array_search( 'last_name', $poll_form_fields ) ) !== false ) {
+		unset( $poll_form_fields[ $key ] );
+	}
 }
 
 $form_classes = array( 'liquidpoll-form' );
@@ -36,7 +40,8 @@ if ( 'yes' == $poll->get_meta( 'poll_form_preview' ) && Plugin::$instance->edito
 }
 
 ?>
-    <form class="<?php echo esc_attr( liquidpoll_generate_classes( $form_classes ) ); ?>" action="" enctype="multipart/form-data" method="get">
+    <form class="<?php echo esc_attr( liquidpoll_generate_classes( $form_classes ) ); ?>" action=""
+          enctype="multipart/form-data" method="get">
 
 		<?php if ( ! empty( $poll_form_content ) ) : ?>
             <div class="liquidpoll-form-field liquidpoll-form-content">
@@ -67,7 +72,7 @@ if ( 'yes' == $poll->get_meta( 'poll_form_preview' ) && Plugin::$instance->edito
 
 		<?php if ( ! empty( $poll_form_notice ) ) : ?>
             <div class="liquidpoll-form-field liquidpoll-form-notice">
-                <input type="checkbox" id="liquidpoll-form-notice" name="notice" required>
+                <input type="checkbox" id="liquidpoll-form-notice" name="notice" value="yes" <?php echo esc_attr($require_consent) ?>>
                 <label for="liquidpoll-form-notice" class="notice"><?php echo wp_kses_data( $poll_form_notice ); ?></label>
             </div>
 		<?php endif; ?>

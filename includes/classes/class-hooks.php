@@ -331,6 +331,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 					'first_name'    => Utils::get_args_option( 'first_name', $form_data ),
 					'last_name'     => Utils::get_args_option( 'last_name', $form_data ),
 					'email_address' => Utils::get_args_option( 'email_address', $form_data ),
+					'consent'       => Utils::get_args_option( 'notice', $form_data ),
 				)
 			);
 
