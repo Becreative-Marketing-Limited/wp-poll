@@ -47,10 +47,10 @@
     margin: 0 0 20px;
 }
 
-.liquidpoll-addons .all-addons .addon > a.link,
-.liquidpoll-addons .all-addons .addon > a.link:focus,
-.liquidpoll-addons .all-addons .addon > a.link:visited,
-.liquidpoll-addons .all-addons .addon > a.link:active {
+.liquidpoll-addons .all-addons .addon > button.link,
+.liquidpoll-addons .all-addons .addon > button.link:focus,
+.liquidpoll-addons .all-addons .addon > button.link:visited,
+.liquidpoll-addons .all-addons .addon > button.link:active {
     border-radius: 4px;
     display: inline-block;
     font-size: 14px;
@@ -71,10 +71,35 @@
     user-select: none;
 }
 
-.liquidpoll-addons .all-addons .addon > a.link:hover {
+.liquidpoll-addons .all-addons .addon > button.link.active {
+    background-color: #52b788;
+}
+
+
+.liquidpoll-addons .all-addons .addon > button.link:hover {
     background-color: #47385b;
 }
 
-.liquidpoll-addons .all-addons .addon.comingsoon > a.link {
+.liquidpoll-addons .all-addons .addon.comingsoon > button.link {
     background-color: #9f9f9f;
+}
+
+.liquidpoll-addons .loader {
+    margin: 0 0 -3px 5px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #52b788;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: spin 2s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

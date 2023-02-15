@@ -276,6 +276,39 @@
         }
     });
 
+    /**
+     * Install and activate add-on.
+     */
+    $(document).on('click', '.liquidpoll-activate-addon', function () {
+
+        let addOnID = $(this).data('addon-id');
+
+        if (typeof addOnID === 'undefined') {
+            return;
+        }
+
+        let loader = $('.loader');
+
+        $(this).html('Activating').append(loader)
+        loader.css('display','inline-block')
+
+        $.ajax({
+            type: 'POST',
+            context: this,
+            url: pluginObject.ajaxurl,
+            data: {
+                'action': 'liquidpoll-activate-addon',
+                'addon_id': addOnID,
+            },
+            success: function (response) {
+                if(response.success){
+                    console.log('done')
+                    $(this).removeClass('liquidpoll-activate-addon').addClass('active').removeAttr('data-addon-id').text('Active');
+                }
+            }
+        });
+    });
+
 
 })(jQuery, window, document, liquidpoll_object);
 

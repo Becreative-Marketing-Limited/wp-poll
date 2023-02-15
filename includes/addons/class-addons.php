@@ -134,15 +134,17 @@ if ( ! class_exists( 'LIQUIDPOLL_Addons' ) ) {
 				printf( '<p>%s</p>', Utils::get_args_option( 'details', $addon ) );
 
 				if ( is_plugin_active( "{$addon_id}/{$addon_id}.php" ) ) {
-					printf( '<a class="link" href="%s">%s</a>', $addon_link, esc_html__( 'Learn More', 'wp-poll' ) );
+					printf( '<button class="link active" >%s</button>', esc_html__( 'Active', 'wp-poll' ) );
 				} else if ( 'comingsoon' == $addon_status ) {
-					printf( '<a class="link" disabled>%s</a>', esc_html__( 'Coming soon', 'wp-poll' ) );
+					printf( '<button class="link" disabled>%s</button>', esc_html__( 'Coming soon', 'wp-poll' ) );
 				} else {
-					printf( '<a class="link" href="%s">%s</a>', $addon_link, sprintf( esc_html__( 'Try %s', 'wp-poll' ), $addon_title ) );
+					printf( '<button class="link liquidpoll-activate-addon" data-addon-id="%s">%s</button>', $addon_id, esc_html__( 'Install & Activate', 'wp-poll' ) );
 				}
 
 				return sprintf( '<div class="addon %s">%s</div>', implode( ' ', $classes ), ob_get_clean() );
 			}, $this->get_addons() );
+
+			echo '<span class="loader"></span>';
 
 			printf( '<div class="all-addons">%s</div>', implode( ' ', $addons ) );
 
