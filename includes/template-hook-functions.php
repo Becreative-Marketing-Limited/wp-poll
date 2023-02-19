@@ -16,11 +16,20 @@ if ( ! function_exists( 'liquidpoll_single_poll_form' ) ) {
 
 		global $poll;
 
-		$poll_form_enable = $poll->get_meta( 'poll_form_enable', '0' );
+		$poll_form_enable          = $poll->get_meta( 'poll_form_enable', '0' );
+		$poll_external_form_enable = $poll->get_meta( 'poll_external_form_enable', '0' );
+		$form_shortcode            = $poll->get_meta( 'external_form_shortcode_field' );
 
-		if ( '1' == $poll_form_enable || 'yes' == $poll_form_enable ) {
+		if ( ( '1' == $poll_form_enable || 'yes' == $poll_form_enable ) && '1' != $poll_external_form_enable ) {
 			liquidpoll_get_template( 'single-poll/form.php' );
 		}
+
+		if (( '1' == $poll_form_enable || 'yes' == $poll_form_enable ) && ( '1' == $poll_external_form_enable || 'yes' == $poll_external_form_enable ) ) {
+			echo '<div class="liquidpoll-form">';
+			echo do_shortcode( $form_shortcode );
+			echo '</div>';
+		}
+
 	}
 }
 
