@@ -1,0 +1,12 @@
+/**
+ * Style - Reviews
+ */
+
+.reviews-single {
+    margin: 50px 0;
+}
+
+.reviews-single .reviews-main {
+    max-width: 860px;
+    margin: auto;
+}

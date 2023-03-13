@@ -45,6 +45,12 @@ if ( post_password_required() ) {
 				liquidpoll_get_template_part( 'single-nps/theme', $poll->get_theme(), ( $poll->get_theme() > 1 && liquidpoll()->is_pro() ) );
 				printf( '%s <form action="" class="nps-form" data-poll-id="%s" method="get">%s</form>', liquidpoll_get_feedback_form(), $poll->get_id(), ob_get_clean() );
 
+			} elseif ( 'reviews' == $poll->get_type() ) {
+
+				ob_start();
+				liquidpoll_get_template_part( 'single-reviews/theme', $poll->get_theme(), ( $poll->get_theme() > 1 && liquidpoll()->is_pro() ) );
+				printf( '<div class="reviews-main" data-poll-id="%s">%s</div>', $poll->get_id(), ob_get_clean() );
+
 			} elseif ( 'reaction' == $poll->get_type() ) {
 
 				ob_start();

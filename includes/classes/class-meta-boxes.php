@@ -153,19 +153,18 @@ class LIQUIDPOLL_Poll_meta {
 					'title'   => esc_html__( 'Poll type', 'wp-poll' ),
 					'type'    => 'button_set',
 					'options' => array(
-						'poll'         => array(
+						'poll'     => array(
 							'label' => esc_html__( 'Poll', 'wp-poll' )
 						),
-						'nps'          => array(
+						'nps'      => array(
 							'label' => esc_html__( 'NPS Score', 'wp-poll' ),
 						),
-						'reaction'     => array(
+						'reaction' => array(
 							'label'        => esc_html__( 'Reaction', 'wp-poll' ),
 							'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 						),
-						'reviews' => array(
-							'label'        => esc_html__( 'Reviews', 'wp-poll' ),
-							'availability' => 'upcoming',
+						'reviews'  => array(
+							'label' => esc_html__( 'Reviews', 'wp-poll' ),
 						),
 					),
 					'default' => 'poll',
@@ -234,6 +233,13 @@ class LIQUIDPOLL_Poll_meta {
 			'title'  => __( 'Options', 'wp-poll' ),
 			'icon'   => 'fa fa-th-large',
 			'fields' => array(
+				array(
+					'id'         => 'notice_form',
+					'type'       => 'notice',
+					'style'      => 'danger',
+					'content'    => esc_html__( 'Options is not available for review type.', 'wp-poll' ),
+					'dependency' => array( '_type', 'not-any', 'poll,nps,reaction', 'all' ),
+				),
 				array(
 					'id'              => 'poll_meta_options',
 					'title'           => esc_html__( 'Options', 'wp-poll' ),
@@ -335,7 +341,7 @@ class LIQUIDPOLL_Poll_meta {
 					'id'         => 'notice_form',
 					'type'       => 'notice',
 					'style'      => 'danger',
-					'content'    => esc_html__( 'Form is available only for poll type.', 'wp-poll' ),
+					'content'    => esc_html__( 'Form is not available for review type.', 'wp-poll' ),
 					'dependency' => array( '_type', 'not-any', 'poll,nps,reaction', 'all' ),
 				),
 				array(
@@ -355,16 +361,16 @@ class LIQUIDPOLL_Poll_meta {
 					'dependency' => array( '_type|poll_form_enable', 'any|==', 'poll,nps,reaction|true', 'all' ),
 				),
 				array(
-					'id'         => 'external_form_shortcode_field',
-					'title'      => ' ',
-					'type'       => 'textarea',
-					'placeholder'=>'[INSERT_FORM_SHORTCODE_HERE]',
-					'attributes'=>array(
+					'id'          => 'external_form_shortcode_field',
+					'title'       => ' ',
+					'type'        => 'textarea',
+					'placeholder' => '[INSERT_FORM_SHORTCODE_HERE]',
+					'attributes'  => array(
 						'rows'  => '2',
 						'cols'  => '50',
 						'style' => 'width:35%;min-height: auto;',
 					),
-					'dependency' => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|true', 'all' ),
+					'dependency'  => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|true', 'all' ),
 				),
 				array(
 					'id'         => 'poll_form_fields',
@@ -423,7 +429,7 @@ class LIQUIDPOLL_Poll_meta {
 					'type'          => 'wp_editor',
 					'media_buttons' => false,
 					'height'        => '100px',
-					'dependency' => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|false', 'all' ),
+					'dependency'    => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|false', 'all' ),
 				),
 				array(
 					'id'            => 'poll_form_notice',
@@ -432,7 +438,7 @@ class LIQUIDPOLL_Poll_meta {
 					'type'          => 'wp_editor',
 					'media_buttons' => false,
 					'height'        => '100px',
-					'dependency' => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|false', 'all' ),
+					'dependency'    => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|false', 'all' ),
 				),
 				array(
 					'id'         => 'poll_form_require_notice_consent',
@@ -471,7 +477,7 @@ class LIQUIDPOLL_Poll_meta {
 					'text_transform' => false,
 					'text_align'     => false,
 					'letter_spacing' => false,
-					'dependency' => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|false', 'all' ),
+					'dependency'     => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|false', 'all' ),
 				),
 				array(
 					'id'             => 'poll_form_style_typography_gdpr',
@@ -483,7 +489,7 @@ class LIQUIDPOLL_Poll_meta {
 					'text_transform' => false,
 					'text_align'     => false,
 					'letter_spacing' => false,
-					'dependency' => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|false', 'all' ),
+					'dependency'     => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|false', 'all' ),
 				),
 				array(
 					'id'             => 'poll_form_style_typography_button',
@@ -495,7 +501,7 @@ class LIQUIDPOLL_Poll_meta {
 					'text_transform' => false,
 					'text_align'     => false,
 					'letter_spacing' => false,
-					'dependency' => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|false', 'all' ),
+					'dependency'     => array( '_type|poll_form_enable|poll_external_form_enable', 'any|==|==', 'poll,nps,reaction|true|false', 'all' ),
 				),
 			),
 		);
@@ -528,6 +534,14 @@ class LIQUIDPOLL_Poll_meta {
 					'type'       => 'select',
 					'options'    => $this->get_reaction_themes(),
 					'dependency' => array( '_type', '==', 'reaction', 'all' ),
+				),
+				array(
+					'id'         => '_theme_reviews',
+					'title'      => esc_html__( 'Reviews Theme', 'wp-poll' ),
+					'subtitle'   => esc_html__( 'By default it will apply from global settings.', 'wp-poll' ),
+					'type'       => 'select',
+					'options'    => $this->get_reviews_themes(),
+					'dependency' => array( '_type', '==', 'reviews', 'all' ),
 				),
 				array(
 					'id'          => '_nps_lowest_marking_text',
@@ -694,7 +708,7 @@ class LIQUIDPOLL_Poll_meta {
 					'title'        => esc_html__( 'Poll Title', 'wp-poll' ),
 					'subtitle'     => esc_html__( 'Control typography settings for poll title.', 'wp-poll' ),
 					'type'         => 'typography',
-					'dependency'   => array( '_type', '!=', 'reaction', 'all' ),
+					'dependency'   => array( '_type', 'not-any', 'reaction,reviews', 'all' ),
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 				),
 				array(
@@ -702,7 +716,7 @@ class LIQUIDPOLL_Poll_meta {
 					'title'        => esc_html__( 'Poll Content', 'wp-poll' ),
 					'subtitle'     => esc_html__( 'Control typography settings for poll content.', 'wp-poll' ),
 					'type'         => 'typography',
-					'dependency'   => array( '_type', '!=', 'reaction', 'all' ),
+					'dependency'   => array( '_type', 'not-any', 'reaction,reviews', 'all' ),
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 				),
 				array(
@@ -767,6 +781,34 @@ class LIQUIDPOLL_Poll_meta {
 		);
 
 		return apply_filters( 'LiquidPoll/Filters/poll_meta_field_sections', $field_sections );
+	}
+
+
+	/**
+	 * Return Reviews themes
+	 *
+	 * @return mixed|void
+	 */
+	function get_reviews_themes() {
+
+		$themes = array(
+			1   => array(
+				'label' => esc_html__( 'Theme 1', 'wp-poll' ),
+			),
+			998 => array(
+				'label'        => esc_html__( '4+ are in pro', 'wp-poll' ),
+				'availability' => 'pro',
+			),
+			999 => array(
+				'label'        => esc_html__( '10+ are coming soon', 'wp-poll' ),
+				'availability' => 'upcoming',
+			),
+		);
+		$themes = apply_filters( 'LiquidPoll/Filters/reviews_themes', $themes );
+
+		ksort( $themes );
+
+		return $themes;
 	}
 
 	/**

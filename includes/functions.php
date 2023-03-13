@@ -585,8 +585,18 @@ if ( ! function_exists( 'liquidpoll_create_table' ) ) {
 			UNIQUE KEY id (id)
 		)";
 
+		$sql_meta_table = "CREATE TABLE IF NOT EXISTS " . LIQUIDPOLL_META_TABLE . " (
+			id int(100) NOT NULL AUTO_INCREMENT,
+			result_id int(100) NOT NULL,
+			meta_key VARCHAR(255) NOT NULL,
+			meta_value VARCHAR(1024) NOT NULL,
+			datetime DATETIME NOT NULL,
+			UNIQUE KEY id (id)
+		)";
+
 		maybe_create_table( LIQUIDPOLL_RESULTS_TABLE, $sql_results_table );
 		maybe_create_table( LIQUIDPOLL_EMAILS_TABLE, $sql_emails_table );
+		maybe_create_table( LIQUIDPOLL_META_TABLE, $sql_meta_table );
 
 		if ( ! function_exists( 'maybe_add_column' ) ) {
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
@@ -793,8 +803,8 @@ if ( ! function_exists( 'liquidpoll_calculate_themes' ) ) {
 
 
 	/**
-     * Get poller name from form table
-     *
+	 * Get poller name from form table
+	 *
 	 * @param $poll_id
 	 * @param $poller_id_ip
 	 *
