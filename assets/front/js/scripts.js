@@ -467,6 +467,52 @@
         return false;
     });
 
+
+    $(document).on('ready', function (e) {
+        e.preventDefault();
+
+        const stars = document.querySelectorAll(".star");
+        let currentRating = 0;
+
+        stars.forEach((star) =>
+            star.addEventListener("click", (e) => {
+                currentRating = parseInt(e.target.value);
+                setRating();
+            })
+        );
+
+        stars.forEach((star) =>
+            star.addEventListener("mouseover", (e) => {
+                const hoverRating = parseInt(star.children[0].value);
+
+                for (let i = 0; i < stars.length; i++) {
+                    if (i < hoverRating) {
+                        stars[i].classList.add("active");
+                    } else {
+                        stars[i].classList.remove("active");
+                    }
+                }
+            })
+        );
+
+        stars.forEach((star) =>
+            star.addEventListener("mouseout", (e) => {
+                setRating();
+            })
+        );
+
+        function setRating() {
+            for (let i = 0; i < stars.length; i++) {
+                if (i < currentRating) {
+                    stars[i].classList.add("active");
+                } else {
+                    stars[i].classList.remove("active");
+                }
+            }
+        }
+
+    });
+
 })(jQuery, window, document, liquidpoll_object);
 
 
