@@ -11,7 +11,7 @@
     margin: auto;
 }
 
-.liquidpoll-reviews-rating {
+.reviews-main .liquidpoll-reviews-rating {
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
@@ -59,9 +59,8 @@ span.user-reviews-count {
     padding-left: 20px;
 }
 
-.rating {
+.reviews-main .rating {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 10px;
     width: 100%;
@@ -125,19 +124,20 @@ form.review-form {
     border: 2px solid #F5F5F5;
     border-radius: 10px;
     margin: auto;
+    padding-left: 30px;
 }
 
-.service {
+.review-form .service {
     display: flex;
     align-items: center;
-    padding: 30px 0 30px 30px;
+    padding: 30px 0;
 }
 
-.service-logo {
+.review-form .service .service-logo {
     padding: 0 20px 0 30px;
 }
 
-span.service-name {
+.review-form .service span.service-name {
     display: block;
     font-family: 'Roboto';
     font-style: normal;
@@ -148,7 +148,7 @@ span.service-name {
     color: #000000;
 }
 
-a {
+.service .service-info a {
     text-decoration: none;
     font-family: 'Roboto';
     font-style: normal;
@@ -158,22 +158,22 @@ a {
     color: #5F64EB;
 }
 
-.divider {
+.review-form .divider {
     /* width: 100%; */
     height: 1px;
     background: #D7D7D7;
-    padding: 0 30px 0 30px;
+    padding-right: 30px;
 }
 
-.rating-wrap {
-    padding: 30px 0 0 30px;
+.review-form .rating-wrap {
+    padding-top: 30px;
 }
 
-.rating-label {
+.review-form .rating-wrap .rating-label {
     padding-bottom: 30px;
 }
 
-label.rating-header {
+.rating-wrap .rating-label label.rating-header {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 600;
@@ -182,7 +182,7 @@ label.rating-header {
     color: #000000;
 }
 
-.rating {
+.review-form .rating-wrap .rating {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -193,11 +193,11 @@ span {
     display: inline-block;
 }
 
-.review-title {
-    padding: 40px 0 40px 30px;
+.review-form .review-title {
+    padding: 40px 0;
 }
 
-label.review-title-label {
+.review-title label.review-title-label {
     display: block;
     font-family: 'Roboto';
     font-style: normal;
@@ -206,9 +206,10 @@ label.review-title-label {
     line-height: 30px;
     color: #000000;
     padding-bottom: 30px;
+    margin: 0;
 }
 
-input#title {
+.review-title .title-label input#title {
     background: #FFFFFF;
     border: 1px solid #C4C4C4;
     border-radius: 5px;
@@ -216,7 +217,7 @@ input#title {
     height: 50px;
 }
 
-input#title::placeholder {
+.review-title .title-label input#title::placeholder {
     padding: 14px 0 14px 20px;
     font-family: 'Roboto';
     font-style: normal;
@@ -226,7 +227,7 @@ input#title::placeholder {
     color: #000000;
 }
 
-label.review--label {
+.review-textarea label.review-label {
     display: block;
     font-family: 'Roboto';
     font-style: normal;
@@ -235,9 +236,10 @@ label.review--label {
     line-height: 30px;
     color: #000000;
     padding-bottom: 20px;
+    margin: 0;
 }
 
-textarea#review {
+.review-textarea textarea#review {
     background: #FFFFFF;
     border: 1px solid #C4C4C4;
     border-radius: 5px;
@@ -245,15 +247,27 @@ textarea#review {
     width: 640px;
 }
 
-.review-textarea {
-    padding: 0 30px 40px 30px;
+.review-form .review-textarea {
+    padding: 0 30px 40px 0;
 }
 
-.experience-date {
-    padding: 0 0 50px 30px;
+.review-form .experience-date {
+    padding-bottom: 50px;
 }
 
-input#experience-time {
+.experience-date label.review-label {
+    display: block;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 30px;
+    color: #000000;
+    padding-bottom: 20px;
+    margin: 0;
+}
+
+.experience-date input#experience-time {
     width: 640px;
     height: 50px;
     background: #FFFFFF;
@@ -261,15 +275,15 @@ input#experience-time {
     border-radius: 5px;
 }
 
-.consent {
-    padding: 0 30px 60px 30px;
+.review-form .consent {
+    padding: 0 30px 60px 0;
 }
 
-.submit-section {
+.review-form .submit-section {
     padding: 25px 0 53px 0;
 }
 
-img.user-logo {
+.review-form .submit-section img.user-logo {
     display: block;
     width: 100px;
     height: 100px;
@@ -277,7 +291,11 @@ img.user-logo {
     padding-bottom: 20px;
 }
 
-p.user-name {
+.review-form .submit-section p {
+   margin-bottom: 0;
+}
+
+.review-form .submit-section p.user-name {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 600;
@@ -288,7 +306,7 @@ p.user-name {
     text-align: center;
 }
 
-button.review-submit {
+.review-form .submit-section button.review-submit {
     display: block;
     margin: auto;
     background: #5F64EB;

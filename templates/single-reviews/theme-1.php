@@ -113,18 +113,18 @@ global $poll, $liquidpoll;
         </div>
     </div>
     <div class="review-title">
-        <div class="title-lable">
+        <div class="title-label">
             <label for="title" class="review-title-label">Give your review a title</label>
             <input type="text" id="title" name="title" placeholder="Impressed with the service!">
         </div>
     </div>
     <div class="review-textarea">
-        <label for="review" class="review--label">Briefly tell us about your experience</label>
+        <label for="review" class="review-label">Briefly tell us about your experience</label>
         <textarea id="review" name="review"></textarea>
     </div>
 
     <div class="experience-date">
-        <label for="experience-time" class="review--label">When did you have this experience?</label>
+        <label for="experience-time" class="review-label">When did you have this experience?</label>
         <input type="datetime-local" id="experience-time" name="experience-time">
     </div>
 
