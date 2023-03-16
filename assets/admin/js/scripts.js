@@ -302,8 +302,10 @@
             },
             success: function (response) {
                 if(response.success){
-                    console.log('done')
-                    $(this).removeClass('liquidpoll-activate-addon').addClass('active').removeAttr('data-addon-id').text('Active');
+                    $(this).removeClass('liquidpoll-activate-addon').addClass('active').removeAttr('data-addon-id');
+                    loader.css('display','none')
+                    $(this).parent().parent().parent().append(loader)
+                    $(this).text("Active");
                 }
             }
         });
