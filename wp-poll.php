@@ -112,6 +112,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 				'voteText'           => esc_html__( 'votes', 'wp-poll' ),
 				'tempProDownload'    => esc_url( 'https://liquidpoll.com/my-account/downloads/' ),
 				'tempProDownloadTxt' => esc_html__( 'Download Version 1.1.0', 'wp-poll' ),
+				'starFill'           => get_star_fill(),
+				'starEmpty'           => get_star_empty(),
 			);
 		}
 

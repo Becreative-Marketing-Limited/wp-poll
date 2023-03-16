@@ -21,21 +21,25 @@
     padding: 32px 30px 26px 30px;
 }
 
-.user-meta {
+.liquidpoll-reviews-rating .user-meta {
     display: flex;
     align-items: center;
 }
 
-.avatar {
+.liquidpoll-reviews-rating .user-meta .avatar {
     max-width: 80px;
     max-height: 80px;
 }
 
-img {
+.liquidpoll-reviews-rating .user-meta .avatar img {
     border-radius: 50%;
 }
 
-span.user-name {
+.liquidpoll-reviews-rating .user {
+    padding-left: 20px;
+}
+
+.liquidpoll-reviews-rating .user span.user-name {
     display: block;
     font-family: 'Roboto';
     font-style: normal;
@@ -45,7 +49,7 @@ span.user-name {
     color: #000000;
 }
 
-span.user-reviews-count {
+.liquidpoll-reviews-rating .user span.user-reviews-count {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
@@ -55,18 +59,14 @@ span.user-reviews-count {
     color: #5F64EB;
 }
 
-.user {
-    padding-left: 20px;
-}
-
-.reviews-main .rating {
+.reviews-main .rating-wrap .rating {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 100%;
 }
 
-.star {
+.reviews-main .rating-wrap .rating .star {
     cursor: pointer;
     transition: color 0.2s, background-color 0.2s;
     border: none;
@@ -77,32 +77,32 @@ span.user-reviews-count {
     font-size: 0;
 }
 
-.star img {
+.reviews-main .rating-wrap .rating .star img {
     margin: 7px 2px 1px 7px;
 }
 
-.star svg {
+.reviews-main .rating-wrap .rating .star svg {
     margin: 9px 9px 12px;
 }
 
-.star.active svg {
-    margin: 6px 6px 8px;
+.reviews-main .rating-wrap .rating .star.active svg {
+    margin: 6px 6px 2px;
 }
 
-.star:hover,
-.star.active {
+.reviews-main .rating-wrap .rating .star:hover,
+.reviews-main .rating-wrap .rating .star.active {
     background-color: #8488F0;
 }
 
-.star input[type="radio"] {
+.reviews-main .rating-wrap .rating .star input[type="radio"] {
     display: none;
 }
 
-.star img {
+.reviews-main .rating-wrap .rating .star img {
 
 }
 
-p.rating-label {
+.reviews-main .rating-wrap p.rating-label {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;

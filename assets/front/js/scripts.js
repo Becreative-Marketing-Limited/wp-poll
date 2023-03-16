@@ -470,43 +470,52 @@
 
     $(document).on('ready', function (e) {
         e.preventDefault();
-
+        const starFill = new DOMParser().parseFromString(pluginObject.starFill,'text/html').body.innerHTML,
+            starEmpty = new DOMParser().parseFromString(pluginObject.starFill,'text/html').body.innerHTML;
+        var sfill = document.createElement('div');
+        var sempty = document.createElement('div');
+        sfill.innerHTML= starFill
+        sempty.innerHTML= starEmpty
         const stars = document.querySelectorAll(".star");
         let currentRating = 0;
 
         stars.forEach((star) =>
             star.addEventListener("click", (e) => {
                 currentRating = parseInt(e.target.value);
-                setRating();
+                console.log(currentRating)
+                // setRating(sfill,sempty);
             })
         );
 
-        stars.forEach((star) =>
-            star.addEventListener("mouseover", (e) => {
-                const hoverRating = parseInt(star.children[0].value);
+        // stars.forEach((star) =>
+        //     star.addEventListener("mouseover", (e) => {
+        //         const hoverRating = parseInt(star.children[0].value);
+        //
+        //         for (let i = 0; i < stars.length; i++) {
+        //             if (i < hoverRating) {
+        //                 stars[i].classList.add("active");
+        //             } else {
+        //                 stars[i].classList.remove("active");
+        //             }
+        //         }
+        //     })
+        // );
 
-                for (let i = 0; i < stars.length; i++) {
-                    if (i < hoverRating) {
-                        stars[i].classList.add("active");
-                    } else {
-                        stars[i].classList.remove("active");
-                    }
-                }
-            })
-        );
+        // stars.forEach((star) =>
+        //     star.addEventListener("mouseout", (e) => {
+        //         setRating();
+        //     })
+        // );
 
-        stars.forEach((star) =>
-            star.addEventListener("mouseout", (e) => {
-                setRating();
-            })
-        );
-
-        function setRating() {
+        function setRating(starFill,starEmpty) {
             for (let i = 0; i < stars.length; i++) {
                 if (i < currentRating) {
                     stars[i].classList.add("active");
+                    // stars[i].replace(stars[i].children[1],pluginObject.starFill)
+                    stars[i].children[1].replaceWith(starFill)
                 } else {
                     stars[i].classList.remove("active");
+                    // stars[i].children[1].replaceWith(starEmpty)
                 }
             }
         }
