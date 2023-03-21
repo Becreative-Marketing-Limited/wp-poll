@@ -9,7 +9,7 @@ global $poll, $liquidpoll, $current_user;
 
 ?>
 
-<div class="liquidpoll-reviews-rating">
+<div class="liquidpoll-reviews-rating liquidpoll-review-box">
     <div class="user-meta">
         <div class="avatar">
             <img src="<?php echo esc_url( get_avatar_url( $current_user->user_email ) ); ?>" alt="<?php echo esc_attr( 'poller' ); ?>">
@@ -19,11 +19,14 @@ global $poll, $liquidpoll, $current_user;
             <span class="user-reviews-count">47 Reviews</span>
         </div>
     </div>
-	<?php echo liquidpoll_get_review_stars(); ?>
-    <p class="rating-label">Leave a review</p>
+
+    <div class="review-icons">
+		<?php echo liquidpoll_get_review_stars(); ?>
+        <p class="rating-label">Leave a review</p>
+    </div>
 </div>
 
-<div class="liquidpoll-reviews-stat">
+<div class="liquidpoll-reviews-stat liquidpoll-review-box">
     <div class="review-stat-heading">
         <div class="stat-heading">
             <h2>Reviews</h2>
@@ -37,6 +40,59 @@ global $poll, $liquidpoll, $current_user;
             </div>
             <span class="stat"><span class="rating">4.9</span>out of 5</span>
         </div>
+    </div>
+
+    <div class="review-stat-filter">
+
+        <label class="stat-filter-item">
+            <input type="radio" name="rating" value="5">
+            <span class="rating-value">5</span>
+            <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                <use xlink:href="#star"></use>
+            </svg>
+            <span class="rating-value-bar"><span style="width: 75%"></span></span>
+            <span class="rating-result-value">75%</span>
+        </label>
+
+        <label class="stat-filter-item">
+            <input type="radio" name="rating" value="4">
+            <span class="rating-value">4</span>
+            <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                <use xlink:href="#star"></use>
+            </svg>
+            <span class="rating-value-bar"><span style="width: 52%"></span></span>
+            <span class="rating-result-value">52%</span>
+        </label>
+
+        <label class="stat-filter-item">
+            <input type="radio" name="rating" value="3">
+            <span class="rating-value">3</span>
+            <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                <use xlink:href="#star"></use>
+            </svg>
+            <span class="rating-value-bar"><span style="width: 5%"></span></span>
+            <span class="rating-result-value">5%></span>
+        </label>
+
+        <label class="stat-filter-item">
+            <input type="radio" name="rating" value="2">
+            <span class="rating-value">2</span>
+            <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                <use xlink:href="#star"></use>
+            </svg>
+            <span class="rating-value-bar"><span style="width: 1%"></span></span>
+            <span class="rating-result-value"><1%></span>
+        </label>
+
+        <label class="stat-filter-item">
+            <input type="radio" name="rating" value="1">
+            <span class="rating-value">1</span>
+            <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                <use xlink:href="#star"></use>
+            </svg>
+            <span class="rating-value-bar"><span style="width: 1%"></span></span>
+            <span class="rating-result-value"><1%></span>
+        </label>
     </div>
 </div>
 
@@ -59,20 +115,27 @@ global $poll, $liquidpoll, $current_user;
 
 
 <div class="liquidpoll-reviews-items">
-    <div class="reviews-items-heading">
-        <div class="user-meta">
-            <div class="avatar">
-                <img src="<?php echo esc_url( get_avatar_url( $current_user->user_email ) ); ?>"
-                     alt="<?php echo esc_attr( 'poller' ); ?>">
+
+
+    <div class="liquidpoll-reviews-item liquidpoll-review-box">
+        <div class="review-box-heading">
+            <div class="user-details">
+                <div class="user-avatar">
+                    <img src="<?php echo esc_url( get_avatar_url( $current_user->user_email ) ); ?>" alt="<?php echo esc_attr( 'poller' ); ?>">
+                </div>
+                <div class="user-stat">
+                    <p class="user-name"><?php echo esc_html( $current_user->display_name ); ?> <span class="location">New York, US</span></p>
+                    <p class="user-reviews-count">47 Reviews</p>
+                </div>
             </div>
-            <div class="user">
-                <span class="user-name"><?php echo esc_html( $current_user->display_name ); ?></span>
-                <span class="user-reviews-count">47 Reviews</span>
+            <div class="review-published">
+                <p class="published-time"><strong>Posted</strong> a day ago</p>
+                <p class="experienced-time"><strong>Experienced</strong> August 12, 2022</p>
             </div>
         </div>
-    </div>
-    <div class="liquidpoll-reviews-item">
-
+        <div class="review-stars">
+			<?php echo liquidpoll_get_review_stars( 4.5 ); ?>
+        </div>
     </div>
 
 </div>

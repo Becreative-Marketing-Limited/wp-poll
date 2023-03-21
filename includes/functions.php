@@ -841,83 +841,47 @@ if ( ! function_exists( 'liquidpoll_get_data_from_email_table' ) ) {
 }
 
 
-function liquidpoll_get_review_stars( $theme = 1 ) {
+function liquidpoll_get_review_stars( $rating = 0, $theme = 1 ) {
 
 	ob_start();
 
+	echo '<div class="rating-wrap">';
+
+	for ( $index = 5; $index > 0; -- $index ) {
+
+		$unique_id_full  = uniqid();
+		$unique_id_half  = $unique_id_full . '2';
+		$is_checked_full = $index <= $rating ? 'checked' : '';
+		$is_checked_half = $rating - $index == 0.5 ? 'checked' : '';
+		$value_full      = $index;
+		$value_half      = ( $index + 0.5 ) - 1;
+		$active_class    = ! empty( $is_checked_full ) ? 'active' : '';
+
+		echo "<pre>";
+		print_r( [
+			'$index'           => $index,
+			'$is_checked_full' => $is_checked_full,
+			'$is_checked_half' => $is_checked_half,
+			'$value_full'      => $value_full,
+			'$value_half'      => $value_half,
+		] );
+		echo "</pre>";
+//
+
+		echo '<div class="rating-item ' . esc_attr( $active_class ) . '">';
+
+		echo '<input type="radio" id="' . $unique_id_full . '" class="rating-checkbox" ' . $is_checked_full . ' value="' . $value_full . '" name="star"/>';
+		echo '<label class="full" for="' . $unique_id_full . '"><svg role="img" aria-label="rating"><use xlink:href="#star"></use></svg></label>';
+
+		echo '<input type="radio" id="' . $unique_id_half . '" class="rating-checkbox" ' . $is_checked_half . ' value="' . $value_half . '" name="star"/>';
+		echo '<label class="half" for="' . $unique_id_half . '" name="star"><svg role="img" aria-label="rating"><use xlink:href="#star"></use></svg></label>';
+
+		echo '</div>';
+	}
+
+	echo '</div>';
+
 	?>
-    <div class="rating-wrap">
-        <div class="rating-item">
-            <input type="radio" id="star5" class="rating-checkbox" value="5" name="star"/>
-            <label class="full" for="star5" title="Awesome - 5 stars">
-                <svg role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-            </label>
-            <input type="radio" id="star4half" class="rating-checkbox" value="4.5" name="star"/>
-            <label class="half" for="star4half" title="Pretty good - 4.5 stars" name="star">
-                <svg role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-            </label>
-        </div>
-        <div class="rating-item">
-            <input type="radio" id="star4" class="rating-checkbox" value="4" name="star"/>
-            <label class="full" for="star4" title="Pretty good - 4 stars">
-                <svg role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-            </label>
-            <input type="radio" id="star3half" class="rating-checkbox" value="3.5" name="star"/>
-            <label class="half" for="star3half" title="Meh - 3.5 stars">
-                <svg role="img" aria-label="rating" fill="red">
-                    <use xlink:href="#star"></use>
-                </svg>
-            </label>
-        </div>
-        <div class="rating-item">
-            <input type="radio" id="star3" class="rating-checkbox" value="3" name="star"/>
-            <label class="full" for="star3" title="Meh - 3 stars" name="star">
-                <svg role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-            </label>
-            <input type="radio" id="star2half" class="rating-checkbox" value="2.5" name="star"/>
-            <label class="half" for="star2half" title="Kinda bad - 2.5 stars">
-                <svg role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-            </label>
-        </div>
-        <div class="rating-item">
-            <input type="radio" id="star2" class="rating-checkbox" value="2" name="star"/>
-            <label class="full" for="star2" title="Kinda bad - 2 stars">
-                <svg role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-            </label>
-            <input type="radio" id="star1half" class="rating-checkbox" value="1.5" name="star"/>
-            <label class="half" for="star1half" title="Meh - 1.5 stars">
-                <svg role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-            </label>
-        </div>
-        <div class="rating-item">
-            <input type="radio" id="star1" class="rating-checkbox" value="1" name="star"/>
-            <label class="full" for="star1" title="Sucks big time - 1 star">
-                <svg role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-            </label>
-            <input type="radio" id="starhalf" class="rating-checkbox" value="0.5" name="star"/>
-            <label class="half" for="starhalf" title="Sucks big time - 0.5 stars">
-                <svg role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-            </label>
-        </div>
-    </div>
     <svg style="position: absolute; width: 0; height: 0; overflow: hidden" width="42" height="42" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
         <symbol id="star">
             <path d="M19.554 3.74151C20.0186 2.75426 20.2509 2.26063 20.5662 2.10291C20.8406 1.9657 21.1594 1.9657 21.4338 2.10291C21.7491 2.26063 21.9814 2.75426 22.446 3.74151L26.8538 13.1078C26.991 13.3993 27.0595 13.545 27.1598 13.6582C27.2485 13.7584 27.3549 13.8395 27.4732 13.8972C27.6067 13.9623 27.76 13.9858 28.0666 14.0328L37.9262 15.5444C38.9644 15.7036 39.4835 15.7832 39.7238 16.0492C39.9328 16.2806 40.0311 16.5986 39.9913 16.9146C39.9456 17.2779 39.5698 17.6618 38.8181 18.4298L31.6863 25.7157C31.464 25.9429 31.3529 26.0564 31.2811 26.1916C31.2176 26.3112 31.1769 26.4426 31.1612 26.5786C31.1434 26.7321 31.1696 26.8925 31.2221 27.2134L32.9049 37.5045C33.0824 38.5899 33.1711 39.1326 33.0043 39.4547C32.8592 39.7349 32.6013 39.9314 32.3024 39.9896C31.9588 40.0564 31.4942 39.8001 30.5649 39.2875L21.7506 34.4255C21.4759 34.274 21.3386 34.1982 21.194 34.1685C21.0659 34.1421 20.9341 34.1421 20.806 34.1685C20.6614 34.1982 20.524 34.274 20.2494 34.4255L11.4351 39.2875C10.5058 39.8001 10.0412 40.0564 9.69763 39.9896C9.39872 39.9314 9.14078 39.7349 8.99568 39.4547C8.8289 39.1326 8.91764 38.5899 9.09513 37.5045L10.7779 27.2134C10.8304 26.8925 10.8566 26.7321 10.8388 26.5786C10.8231 26.4426 10.7824 26.3112 10.7189 26.1916C10.6471 26.0564 10.536 25.9429 10.3137 25.7157L3.18191 18.4298C2.43025 17.6618 2.05442 17.2779 2.00868 16.9146C1.96889 16.5986 2.06719 16.2806 2.27622 16.0492C2.51647 15.7832 3.03559 15.7036 4.07385 15.5444L13.9334 14.0328C14.24 13.9858 14.3933 13.9623 14.5268 13.8972C14.6451 13.8395 14.7515 13.7584 14.8402 13.6582C14.9405 13.545 15.009 13.3993 15.1462 13.1078L19.554 3.74151Z"
