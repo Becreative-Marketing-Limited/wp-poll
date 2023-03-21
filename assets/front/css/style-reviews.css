@@ -1,9 +1,13 @@
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 :root {
     --liquidpoll-reviews-theme-1-color-1: #5F64EB;
     --liquidpoll-reviews-theme-1-color-2: #CED0EB;
     --liquidpoll-reviews-theme-1-color-3: #8488F0;
+}
+
+.rating-wrap.not-selectable {
+    user-select: none;
+    pointer-events: none;
 }
 
 .liquidpoll-review-box {

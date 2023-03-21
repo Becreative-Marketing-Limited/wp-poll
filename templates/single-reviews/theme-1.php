@@ -134,7 +134,7 @@ global $poll, $liquidpoll, $current_user;
             </div>
         </div>
         <div class="review-stars">
-			<?php echo liquidpoll_get_review_stars( 4.5 ); ?>
+			<?php echo liquidpoll_get_review_stars( 3.5 ); ?>
         </div>
     </div>
 
