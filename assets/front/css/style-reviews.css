@@ -128,3 +128,178 @@
     background: #8488F0;
 }
 
+/**
+ * Review Stat
+ */
+
+.reviews-main .liquidpoll-reviews-stat {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border: 2px solid #F5F5F5;
+    border-radius: 10px;
+    background: #FFFFFF;
+    padding: 40px 30px 50px 30px;
+    margin-top: 20px;
+}
+
+.reviews-main .liquidpoll-reviews-stat .review-stat-heading {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.reviews-main .liquidpoll-reviews-stat .review-stat-heading .stat-heading h2 {
+    font-family: 'Roboto', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 47px;
+    color: #000000;
+    margin: 0;
+}
+
+.reviews-main .liquidpoll-reviews-stat .review-stat-heading .stat-heading span {
+    font-family: 'Roboto', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #5F64EB;
+    padding-top: 5px;
+}
+
+.reviews-main .liquidpoll-reviews-stat .stat-rating {
+    display: flex;
+    align-items: center;
+}
+
+.reviews-main .liquidpoll-reviews-stat .stat-rating .star {
+    display: inline-block;
+    position: relative;
+    padding: 4px 4px;
+    background: #8488F0;
+    border-radius: 10px;
+    margin-right: 15px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.reviews-main .liquidpoll-reviews-stat .stat-rating .star svg {
+    fill: #8488F0;
+    color: transparent;
+    transition: 0.3s;
+    width: 42px;
+    height: 42px;
+    stroke: #FFF0EA;
+    stroke-width: 3;
+    display: inherit;
+}
+
+.reviews-main .liquidpoll-reviews-stat .stat-rating span.stat {
+    font-family: 'Roboto', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #8B8B8B;
+}
+
+.reviews-main .liquidpoll-reviews-stat .stat-rating span.stat span.rating {
+    font-family: 'Roboto', serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 47px;
+    color: #000000;
+    padding-right: 5px;
+}
+
+.reviews-main .liquidpoll-reviews-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.reviews-main .liquidpoll-reviews-filter .reviews-filter {
+    display: flex;
+    background: #FFFFFF;
+    border: 2px solid #F5F5F5;
+    border-radius: 5px;
+    align-items: center;
+    padding: 24px 20px;
+    gap: 20px;
+}
+
+.reviews-main .liquidpoll-reviews-filter .reviews-filter span.filter {
+    font-family: 'Roboto', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+}
+
+.reviews-main .liquidpoll-reviews-filter .reviews-filter svg {
+    height: 18px;
+    width: 22px;
+}
+
+.reviews-main .liquidpoll-reviews-filter .reviews-relevant {
+    display: flex;
+    background: #FFFFFF;
+    border: 2px solid #F5F5F5;
+    border-radius: 5px;
+    align-items: center;
+    padding: 24px 20px;
+    gap: 20px;
+}
+
+.reviews-main .liquidpoll-reviews-items {
+    background: #FFFFFF;
+    border: 2px solid #F5F5F5;
+    border-radius: 10px;
+}
+
+.reviews-main .liquidpoll-reviews-items .reviews-items-heading {
+    padding: 35px 30px 45px;
+}
+
+.reviews-main .liquidpoll-reviews-items .user-meta {
+    display: flex;
+    align-items: center;
+}
+
+.reviews-main .liquidpoll-reviews-items .user-meta .avatar {
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.reviews-main .liquidpoll-reviews-items .user-meta .avatar img {
+    border-radius: 50%;
+}
+
+.reviews-main .liquidpoll-reviews-items .user {
+    padding-left: 20px;
+}
+
+.reviews-main .liquidpoll-reviews-items .user span.user-name {
+    display: block;
+    font-family: 'Roboto', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 30px;
+    color: #000000;
+}
+
+.reviews-main .liquidpoll-reviews-items .user span.user-reviews-count {
+    font-family: 'Roboto', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    text-align: center;
+    color: #5F64EB;
+}
