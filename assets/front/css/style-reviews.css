@@ -1,3 +1,5 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
 /**
  * Style - Reviews
  */
@@ -41,7 +43,7 @@
 
 .liquidpoll-reviews-rating .user span.user-name {
     display: block;
-    font-family: 'Roboto';
+    font-family: 'Roboto', serif;
     font-style: normal;
     font-weight: 600;
     font-size: 26px;
@@ -50,325 +52,79 @@
 }
 
 .liquidpoll-reviews-rating .user span.user-reviews-count {
-    font-family: 'Roboto';
+    font-family: 'Roboto', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 19px;
     line-height: 22px;
     text-align: center;
     color: #5F64EB;
-}
-
-.reviews-main .rating-wrap .rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-}
-
-.reviews-main .rating-wrap .rating .star {
-    cursor: pointer;
-    transition: color 0.2s, background-color 0.2s;
-    border: none;
-    background-color: #ced0eb;
-    max-width: 60px;
-    max-height: 60px;
-    border-radius: 10px;
-    font-size: 0;
-}
-
-.reviews-main .rating-wrap .rating .star svg {
-    margin: 6px 6px 2px;
-}
-.reviews-main .rating-wrap .rating .star.empty-star svg g {
-    filter: none;
-    fill: #CED0EB;
-}
-
-.reviews-main .rating-wrap .rating .star.empty-star svg path {
-    stroke: #FFF;
-}
-
-.reviews-main .rating-wrap .rating .star:hover,
-.reviews-main .rating-wrap .rating .star.active {
-    background-color: #8488F0;
-}
-
-.reviews-main .rating-wrap .rating .star input[type="radio"] {
-    display: none;
-}
-
-.reviews-main .rating-wrap p.rating-label {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 19px;
-    line-height: 22px;
-    text-align: center;
-    color: #5F64EB;
-    padding-top: 20px;
-    margin: 0;
 }
 
 /**
-*Reviews form
-*/
-
-form.review-form {
-    max-width: 700px;
-    box-sizing: border-box;
-    border: 2px solid #F5F5F5;
-    border-radius: 10px;
-    margin: auto;
-    padding-left: 30px;
-}
-
-.review-form .service {
-    display: flex;
-    align-items: center;
-    padding: 30px 0;
-}
-
-.review-form .service .service-logo {
-    padding: 0 20px 0 30px;
-}
-
-.review-form .service span.service-name {
-    display: block;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 33px;
-    /* identical to box height */
-    color: #000000;
-}
-
-.service .service-info a {
-    text-decoration: none;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 19px;
-    line-height: 22px;
-    color: #5F64EB;
-}
-
-.review-form .divider {
-    /* width: 100%; */
-    height: 1px;
-    background: #D7D7D7;
-    padding-right: 30px;
-}
-
-.review-form .rating-wrap {
-    padding-top: 30px;
-}
-
-.review-form .rating-wrap .rating-label {
-    padding-bottom: 30px;
-}
-
-.rating-wrap .rating-label label.rating-header {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 30px;
-    color: #000000;
-}
-
-.review-form .rating-wrap .rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-}
-
-span {
-    display: inline-block;
-}
-
-.review-form .review-title {
-    padding: 40px 0;
-}
-
-.review-title label.review-title-label {
-    display: block;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 30px;
-    color: #000000;
-    padding-bottom: 30px;
-    margin: 0;
-}
-
-.review-title .title-label input#title {
-    background: #FFFFFF;
-    border: 1px solid #C4C4C4;
-    border-radius: 5px;
-    width: 640px;
-    height: 50px;
-}
-
-.review-title .title-label input#title::placeholder {
-    padding: 14px 0 14px 20px;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
-    color: #000000;
-}
-
-.review-textarea label.review-label {
-    display: block;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 30px;
-    color: #000000;
-    padding-bottom: 20px;
-    margin: 0;
-}
-
-.review-textarea textarea#review {
-    background: #FFFFFF;
-    border: 1px solid #C4C4C4;
-    border-radius: 5px;
-    height: 195px;
-    width: 640px;
-}
-
-.review-form .review-textarea {
-    padding: 0 30px 40px 0;
-}
-
-.review-form .experience-date {
-    padding-bottom: 50px;
-}
-
-.experience-date label.review-label {
-    display: block;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 30px;
-    color: #000000;
-    padding-bottom: 20px;
-    margin: 0;
-}
-
-.experience-date input#experience-time {
-    width: 640px;
-    height: 50px;
-    background: #FFFFFF;
-    border: 1px solid #C4C4C4;
-    border-radius: 5px;
-}
-
-.review-form .consent {
-    padding: 0 30px 60px 0;
-}
-
-.review-form .submit-section {
-    padding: 25px 0 53px 0;
-}
-
-.review-form .submit-section img.user-logo {
-    display: block;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    padding-bottom: 20px;
-}
-
-.review-form .submit-section p {
-   margin-bottom: 0;
-}
-
-.review-form .submit-section p.user-name {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 28px;
-    color: #000000;
-    padding-bottom: 30px;
-    text-align: center;
-}
-
-.review-form .submit-section button.review-submit {
-    display: block;
-    margin: auto;
-    background: #5F64EB;
-    border-radius: 10px;
-    border: 1px solid;
-    padding: 15px 25px;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: center;
-    color: #FFFFFF;
-}
-
-.rdo {
-    position: relative;
-    display: block;
-    float: left;
-    width: 30px;
-    height: 30px;
-    border: 2px solid #CACACA;
-    border-radius: 50%;
-    background-color: #DFDFDF;
-    transition: all 0.15s ease;
-}
-.rdo:after {
-    content: "";
-    position: absolute;
-    display: block;
-    top:8px;
-    left:8px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: #fff;
+ * Rating Start
+ */
+.reviews-main .rating-wrap input[type=radio] {
+    display: none;
+    width: 0;
     opacity: 0;
-    transform: scale(0);
-    transition: all .15s ease;
+    margin-left: -2px;
 }
 
-.rdo + span {
-    display: block;
-    margin-left: 45px;
-}
-.forms {
-    margin: auto;
-    user-select: none;
-}
-.forms label {
+.reviews-main .rating-wrap .rating-item {
     display: inline-block;
-    margin: 10px;
+    position: relative;
+    float: right;
+    padding: 10px;
+    background: #CED0EB;
+    border-radius: 10px;
+    margin-right: 10px;
+    transition: 0.3s;
     cursor: pointer;
 }
 
-input[type="checkbox"] {
+.reviews-main .rating-wrap .rating-item label {
+    float: right;
+    cursor: pointer;
+    margin: 0;
+}
+
+.reviews-main .rating-wrap .rating-item label svg {
+    fill: #CED0EB;
+    color: transparent;
+    transition: 0.3s;
+    width: 42px;
+    height: 42px;
+    stroke: white;
+    stroke-width: 3;
+    display: inherit;
+}
+
+.reviews-main .rating-wrap .rating-item label.half {
+    overflow: hidden;
     position: absolute;
-    opacity: 0;
+    width: 21px;
 }
-input[type="checkbox"]:checked + .rdo {
-    background-color: #5F64EB;
-    border:none;
-    transition: all .15s ease;
+
+.reviews-main .rating-wrap .rating-item label.half svg {
+    fill: none;
 }
-input[type="checkbox"]:checked + .rdo:after {
-    opacity: 1;
-    transform: scale(1);
-    transition: all .15s ease;
+
+.reviews-main .rating-wrap .rating-item label:hover svg,
+.reviews-main .rating-wrap .rating-item label:hover ~ label svg,
+.reviews-main .rating-wrap .rating-item label:hover ~ label.half svg,
+.reviews-main .rating-wrap .rating-item label.half:hover svg,
+.reviews-main .rating-wrap input[name=star]:focus ~ label svg,
+.reviews-main .rating-wrap input[name=star]:checked ~ label svg,
+.reviews-main .rating-wrap .rating-item:hover ~ .rating-item label svg,
+.reviews-main .rating-wrap .rating-item.active ~ .rating-item label svg {
+    fill: #8488F0;
 }
+
+.reviews-main .rating-wrap .rating-item:hover,
+.reviews-main .rating-wrap .rating-item:hover ~ .rating-item,
+.reviews-main .rating-wrap .rating-item.active,
+.reviews-main .rating-wrap .rating-item.active ~ .rating-item {
+    background: #8488F0;
+}
+

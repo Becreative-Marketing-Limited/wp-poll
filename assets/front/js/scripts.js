@@ -468,51 +468,38 @@
     });
 
 
-    $(document).on('ready', function (e) {
-        e.preventDefault();
-        const stars = document.querySelectorAll(".star");
-        let currentRating = 0;
+    $(document).on('ready', function () {
 
-        stars.forEach((star) =>
-            star.addEventListener("click", (e) => {
-                currentRating = parseInt(e.target.value);
-                setRating();
-            })
-        );
+        let el_rating = $('input[name="star"]'), el_rating_item = $('.rating-item');
 
-        stars.forEach((star) =>
-            star.addEventListener("mouseover", (e) => {
-                const hoverRating = parseInt(star.children[0].value);
-                for (let i = 0; i < stars.length; i++) {
-                    if (i < hoverRating) {
-                        stars[i].classList.add("active");
-                        stars[i].classList.remove("empty-star");
-                    } else {
-                        stars[i].classList.remove("active");
-                        stars[i].classList.add("empty-star");
-                    }
-                }
-            })
-        );
+        el_rating_item.click(function (e) {
+            let el_this_rating_item = $(this),
+                el_selected_id = null,
+                parentOffset = $(this).offset(),
+                relative_x = e.pageX - parentOffset.left;
 
-        stars.forEach((star) =>
-            star.addEventListener("mouseout", (e) => {
-                setRating();
-            })
-        );
-
-        function setRating() {
-            for (let i = 0; i < stars.length; i++) {
-                if (i < currentRating) {
-                    stars[i].classList.add("active");
-                    stars[i].classList.remove("empty-star");
-                } else {
-                    stars[i].classList.remove("active");
-                    stars[i].classList.add("empty-star");
-                }
+            if (relative_x >= 30) {
+                el_this_rating_item.addClass('active');
+                el_selected_id = el_this_rating_item.find('label.full').attr('for');
+                el_this_rating_item.find('#' + el_selected_id).prop("checked", true);
+            } else {
+                el_this_rating_item.addClass('active');
+                el_selected_id = el_this_rating_item.find('label.half').attr('for');
+                el_this_rating_item.find('#' + el_selected_id).prop("checked", true);
             }
-        }
+        });
 
+        el_rating.change(function () {
+            let el_this_rating = $(this),
+                el_this_rating_wrap = el_this_rating.parent(),
+                el_all_rating = el_this_rating_wrap.parent().find('.rating-item');
+
+            el_all_rating.removeClass('active');
+
+            if (this.checked) {
+                el_this_rating_wrap.addClass("active");
+            }
+        });
     });
 
 
