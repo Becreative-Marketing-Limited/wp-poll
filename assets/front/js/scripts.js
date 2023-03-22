@@ -502,6 +502,22 @@
         });
     });
 
+    $(document).on('click', '.reviews-relevant', function () {
+
+        let relevant_filter = $('.liquidpoll-relevant-wrap');
+        relevant_filter.show();
+
+    });
+
+    $(document).on('mouseup', function (e) {
+
+        let relevant_filter = $('.liquidpoll-relevant-wrap');
+
+        if (relevant_filter.has(e.target).length === 0) {
+            relevant_filter.hide();
+        }
+    });
+
 
 })(jQuery, window, document, liquidpoll_object);
 

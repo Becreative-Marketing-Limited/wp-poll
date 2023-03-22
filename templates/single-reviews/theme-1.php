@@ -115,6 +115,25 @@ global $poll, $liquidpoll, $current_user;
             <path d="M5.33333 8.66667H18.6667M2 2H22M8.66667 15.3333H15.3333" stroke="#5F64EB" stroke-width="3"
                   stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
+        <div class="liquidpoll-relevant-wrap">
+            <div class="relevant-items">
+                <label class="relevant-item">
+                    <input type="checkbox" name="relevant" value="most-relevant">
+                    <span class="liquidpoll-checkbox"></span>
+                    <span>Most Relevant</span>
+                </label>
+                <label class="relevant-item">
+                    <input type="checkbox" name="newest" value="newest">
+                    <span class="liquidpoll-checkbox"></span>
+                    <span>Newest</span>
+                </label>
+                <label class="relevant-item">
+                    <input type="checkbox" name="oldest" value="oldest">
+                    <span class="liquidpoll-checkbox"></span>
+                    <span>Oldest</span>
+                </label>
+            </div>
+        </div>
     </div>
 </div>
 

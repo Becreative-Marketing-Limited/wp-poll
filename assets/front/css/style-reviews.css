@@ -398,8 +398,35 @@ input[type="checkbox"]:checked + .liquidpoll-checkbox:after {
     align-items: center;
     padding: 24px 20px;
     gap: 20px;
+    position: relative;
 }
 
+.reviews-main .liquidpoll-relevant-wrap {
+    position: absolute;
+    display: none;
+    z-index: 99;
+    top: 115%;
+    left: -15%;
+}
+
+.reviews-main .liquidpoll-relevant-wrap .relevant-items {
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    box-shadow: 0 0 8px 0 #0000004d;
+    border-radius: 10px;
+    border: 2px solid #FFF;
+    padding: 35px 30px;
+    max-width: 248px;
+}
+
+.reviews-main .liquidpoll-relevant-wrap .relevant-items .relevant-item span {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+}
 
 .reviews-main .review-box-heading {
     display: flex;
