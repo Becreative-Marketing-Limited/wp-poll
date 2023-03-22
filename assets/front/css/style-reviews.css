@@ -19,6 +19,64 @@
     padding: 40px 30px;
 }
 
+.liquidpoll-divider {
+    display: block;
+    height: 1px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    background: #D7D7D7;
+}
+
+.liquidpoll-checkbox {
+    position: relative;
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #CACACA;
+    border-radius: 50%;
+    background-color: #DFDFDF;
+    transition: all 0.15s ease;
+}
+
+.liquidpoll-checkbox:after {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 7px;
+    left: 7px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0;
+    transform: scale(0);
+    transition: all .15s ease;
+}
+
+.liquidpoll-checkbox + span {
+    margin-left: 10px;
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+input[type="checkbox"]:checked + .liquidpoll-checkbox {
+    background-color: #5F64EB;
+    transition: all .15s ease;
+    border-color: #5f64eb;
+}
+
+input[type="checkbox"]:checked + .liquidpoll-checkbox:after {
+    opacity: 1;
+    transform: scale(1);
+    transition: all .15s ease;
+}
+
 .star-icon {
     display: inline-block;
     position: relative;
@@ -223,6 +281,7 @@
     stroke: #FFF0EA;
     stroke-width: 3;
     display: inherit;
+    transform: scale(0.8);
 }
 
 .reviews-main .liquidpoll-reviews-stat .stat-rating span.stat {
@@ -257,20 +316,13 @@
     cursor: pointer;
 }
 
-.reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item input[type=radio] {
-    /*display: none;*/
-    width: 30px;
+.reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .liquidpoll-checkbox {
+    width: 31px;
+    background-color: #FFF;
 }
 
-.reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .rating-value:before {
-    /*position: absolute;*/
-    /*content: ' ';*/
-    /*left: 0%;*/
-    /*right: 96.25%;*/
-    /*top: 0%;*/
-    /*bottom: 86.96%;*/
-    /*border: 10px solid #5F64EB;*/
-    /*border-radius: 60px;*/
+.reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item input[type="checkbox"]:checked + .liquidpoll-checkbox {
+    background-color: #5F64EB;
 }
 
 .reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .rating-value {
@@ -397,4 +449,118 @@
 .reviews-main .liquidpoll-reviews-item .review-stars {
     display: inline-block;
     margin: 30px 0;
+}
+
+.reviews-main .liquidpoll-reviews-item .comment-heading {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 30px;
+    color: #000000;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-comment > p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #444444;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 25px;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share .useful {
+    border: none;
+    background: none;
+    padding-right: 25px;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share .useful span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    color: #5A5A5A;
+    padding-left: 15px;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share .share {
+    border: none;
+    background: none;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share .share span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    color: #5A5A5A;
+    padding-left: 15px;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-replay {
+    padding: 20px 0;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-replay .replay-info-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-replay .replay-info-wrap .replay-info .replay-icon {
+    display: inline-block;
+    padding-right: 30px;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-replay .replay-info-wrap .replay-info .service-logo {
+    height: 80px;
+    width: 80px;
+    display: inline-block;
+    border-radius: 50%;
+    padding-left: 25px;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-replay .replay-info-wrap .replay-info .service-info {
+    display: inline-block;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-replay .replay-info-wrap .replay-info .service-info .service-name {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-replay .replay-info-wrap .replay-info .service-info span {
+    display: block;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    color: #8B8B8B;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-replay .replay-info-wrap p.reply-date {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    text-align: right;
+    color: #000000;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-replay .replay {
+    padding: 20px 45px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #444444;
 }
