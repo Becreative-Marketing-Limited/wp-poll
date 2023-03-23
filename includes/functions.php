@@ -876,10 +876,10 @@ function liquidpoll_get_review_stars( $rating = 0, $theme = 1 ) {
 
 		echo '<div class="rating-item ' . esc_attr( $active_class ) . '">';
 
-		echo '<input type="radio" id="' . $unique_id_full . '" class="rating-checkbox" ' . $is_checked_full . ' value="' . $value_full . '" name="star"/>';
+		echo '<input type="radio" id="' . $unique_id_full . '" class="rating-checkbox" ' . $is_checked_full . ' value="' . $value_full . '" name="rating"/>';
 		echo '<label class="full" for="' . $unique_id_full . '"><svg role="img" aria-label="rating"><use xlink:href="#star"></use></svg></label>';
 
-		echo '<input type="radio" id="' . $unique_id_half . '" class="rating-checkbox" ' . $is_checked_half . ' value="' . $value_half . '" name="star"/>';
+		echo '<input type="radio" id="' . $unique_id_half . '" class="rating-checkbox" ' . $is_checked_half . ' value="' . $value_half . '" name="rating"/>';
 		echo '<label class="half" for="' . $unique_id_half . '" name="star"><svg role="img" aria-label="rating"><use xlink:href="#star"></use></svg></label>';
 
 		echo '</div>';

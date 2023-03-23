@@ -470,7 +470,7 @@
 
     $(document).on('ready', function () {
 
-        let el_rating = $('input[name="star"]'), el_rating_item = $('.rating-item');
+        let el_rating = $('input[name="rating"]'), el_rating_item = $('.rating-item');
 
         el_rating_item.click(function (e) {
             let el_this_rating_item = $(this),
@@ -489,17 +489,21 @@
             }
         });
 
-        el_rating.change(function () {
-            let el_this_rating = $(this),
-                el_this_rating_wrap = el_this_rating.parent(),
-                el_all_rating = el_this_rating_wrap.parent().find('.rating-item');
-
-            el_all_rating.removeClass('active');
-
-            if (this.checked) {
-                el_this_rating_wrap.addClass("active");
-            }
-        });
+        // el_rating.change(function () {
+        //     let el_this_rating = $(this),
+        //         el_this_rating_wrap = el_this_rating.parent(),
+        //         el_all_rating = el_this_rating_wrap.parent().find('.rating-item');
+        //
+        //     el_all_rating.removeClass('active');
+        //
+        //     if (this.checked) {
+        //         el_this_rating_wrap.addClass("active");
+        //     }
+        //
+        //
+        //
+        //     el_this_rating_wrap.parent().parent().submit();
+        // });
     });
 
     $(document).on('click', '.reviews-relevant', function () {
