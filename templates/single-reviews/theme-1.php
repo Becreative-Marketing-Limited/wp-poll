@@ -118,17 +118,17 @@ global $poll, $liquidpoll, $current_user;
         <div class="liquidpoll-relevant-wrap">
             <div class="relevant-items">
                 <label class="relevant-item">
-                    <input type="checkbox" name="relevant" value="most-relevant">
+                    <input type="radio" name="relevant" value="most-relevant">
                     <span class="liquidpoll-checkbox"></span>
                     <span>Most Relevant</span>
                 </label>
                 <label class="relevant-item">
-                    <input type="checkbox" name="newest" value="newest">
+                    <input type="radio" name="relevant" value="newest">
                     <span class="liquidpoll-checkbox"></span>
                     <span>Newest</span>
                 </label>
                 <label class="relevant-item">
-                    <input type="checkbox" name="oldest" value="oldest">
+                    <input type="radio" name="relevant" value="oldest">
                     <span class="liquidpoll-checkbox"></span>
                     <span>Oldest</span>
                 </label>
@@ -139,7 +139,6 @@ global $poll, $liquidpoll, $current_user;
 
 
 <div class="liquidpoll-reviews-items">
-
 
     <div class="liquidpoll-reviews-item liquidpoll-review-box">
         <div class="review-box-heading">
@@ -217,9 +216,117 @@ global $poll, $liquidpoll, $current_user;
             </div>
             <div class="replay">
                 <p>Thanks so much for your review! It means a lot to know you'd happily recommend us and we're delighted
-                to hear you were happy with the installation service and product received. Enjoy your product!</p>
+                    to hear you were happy with the installation service and product received. Enjoy your product!</p>
             </div>
 
+        </div>
+
+    </div>
+
+</div>
+
+<div class="liquidpoll-filter-modal-wrap">
+
+    <div class="liquidpoll-filter-modal">
+        <div class="modal-heading">
+            <h2>Filter by</h2>
+            <div class="close-button">
+                <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24.75 14.25L14.25 24.75M14.25 14.25L24.75 24.75M37 19.5C37 29.165 29.165 37 19.5 37C9.83502 37 2 29.165 2 19.5C2 9.83502 9.83502 2 19.5 2C29.165 2 37 9.83502 37 19.5Z"
+                          stroke="#9397EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <hr class="liquidpoll-divider">
+
+        <div class="filter-rating">
+            <span>Rating</span>
+            <div class="filter-stars">
+                <div>
+                    <input type="checkbox" id="rating-1" name="rating-filter" value="1">
+                    <label class="filter-star" for="rating-1">
+                        <span>1</span>
+                        <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                            <use xlink:href="#star"></use>
+                        </svg>
+                    </label>
+                </div>
+                <div>
+                    <input type="checkbox" id="rating-2" name="rating-filter" value="2">
+                    <label class="filter-star" for="rating-2">
+                        <span>2</span>
+                        <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                            <use xlink:href="#star"></use>
+                        </svg>
+                    </label>
+                </div>
+                <div>
+                    <input type="checkbox" id="rating-3" name="rating-filter" value="3">
+                    <label class="filter-star" for="rating-3">
+                        <span>3</span>
+                        <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                            <use xlink:href="#star"></use>
+                        </svg>
+                    </label>
+                </div>
+                <div>
+                    <input type="checkbox" id="rating-4" name="rating-filter" value="4">
+                    <label class="filter-star" for="rating-4">
+                        <span>4</span>
+                        <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                            <use xlink:href="#star"></use>
+                        </svg>
+                    </label>
+                </div>
+                <div>
+                    <input type="checkbox" id="rating-5" name="rating-filter" value="5">
+                    <label class="filter-star" for="rating-5">
+                        <span>5</span>
+                        <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                            <use xlink:href="#star"></use>
+                        </svg>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-date">
+            <span>Date posted</span>
+            <div class="filter-date-items">
+                <label class="date-item">
+                    <input type="radio" name="filter-date" value="all">
+                    <span class="liquidpoll-checkbox"></span>
+                    <span class="date-label">All reviews</span>
+                </label>
+                <label class="date-item">
+                    <input type="radio" name="filter-date" value="30">
+                    <span class="liquidpoll-checkbox"></span>
+                    <span class="date-label">Last 30 days</span>
+                </label>
+                <label class="date-item">
+                    <input type="radio" name="filter-date" value="3">
+                    <span class="liquidpoll-checkbox"></span>
+                    <span class="date-label">Last 3 months</span>
+                </label>
+                <label class="date-item">
+                    <input type="radio" name="filter-date" value="6">
+                    <span class="liquidpoll-checkbox"></span>
+                    <span class="date-label">Last 6 months</span>
+                </label>
+                <label class="date-item">
+                    <input type="radio" name="filter-date" value="12">
+                    <span class="liquidpoll-checkbox"></span>
+                    <span class="date-label">Last 12 months</span>
+                </label>
+            </div>
+        </div>
+
+        <hr class="liquidpoll-divider">
+
+        <div class="filter-footer">
+            <button class="button-rest">Reset</button>
+            <button class="button-filter">Filter</button>
         </div>
 
     </div>

@@ -518,6 +518,30 @@
         }
     });
 
+    $(document).on('click', '.reviews-filter', function () {
+        let filterModal = $('.liquidpoll-filter-modal-wrap');
+
+        filterModal.addClass('show-modal');
+    });
+
+    $(document).on('click', '.close-button', function (e) {
+        e.preventDefault()
+        let filterModal = $('.liquidpoll-filter-modal-wrap');
+
+        if (filterModal.hasClass('show-modal')) {
+            filterModal.removeClass('show-modal');
+        }
+    });
+
+    $(document).on('mouseup', function (e) {
+
+        let outside_popup_box = $('.liquidpoll-filter-modal');
+
+        if (!outside_popup_box.is(e.target) && outside_popup_box.has(e.target).length === 0) {
+            outside_popup_box.find('.close-button').trigger('click');
+        }
+    });
+
 
 })(jQuery, window, document, liquidpoll_object);
 
