@@ -31,16 +31,16 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
             </svg>
         </div>
         <div class="service-logo">
-            <img src="">
+            <img src="<?php echo esc_url(LIQUIDPOLL_PLUGIN_URL . 'assets/images/service-logo.svg') ?>" alt="service">
         </div>
         <div class="service-info">
             <span class="service-name">Liquid Poll Pro</span>
             <span><a href="#">liquidpoll.com</a></span>
         </div>
     </div>
-    <div class="divider"></div>
+    <hr class="liquidpoll-divider">
     <div class="rating-selected">
-        <div class="rating-label">
+        <div class="form-group rating-label">
             <label class="rating-header">Rate your experience</label>
         </div>
     </div>
@@ -57,20 +57,20 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
 
     <div class="form-group experience-date">
         <label for="experience-time" class="review-label">When did you have this experience?</label>
-        <input type="datetime-local" id="experience-time" name="experience-time">
+        <input type="text" id="experience-time" name="experience-time">
     </div>
 
     <div class="consent">
-        <label for="rdo1">
-            <input type="checkbox" id="rdo1" name="radio">
-            <span class="rdo"></span>
-            <span>I confirm this review about my own genuine experience. I am eligible to leave this review, and have not been offered any incentive or payment to leave a review for this company</span>
+        <label class="consent-items" for="consent">
+            <input type="checkbox" id="consent" name="consent">
+            <span class="liquidpoll-checkbox"></span>
+            <span class="consent-desc">I confirm this review about my own genuine experience. I am eligible to leave this review, and have not been offered any incentive or payment to leave a review for this company</span>
         </label>
     </div>
-    <div class="divider"></div>
+    <hr class="liquidpoll-divider">
     <div class="submit-section">
-        <img class="user-logo" src="">
-        <p class="user-name">Miranda Ash-Patel</p>
+        <img class="user-logo" src="<?php echo esc_url( get_avatar_url( $current_user->user_email ) ); ?>" alt="<?php echo esc_attr( 'poller' ); ?>">
+        <p class="user-name"><?php echo esc_html( $current_user->display_name ); ?></p>
 
         <button type="submit" class="review-submit">Submit your review</button>
     </div>
@@ -273,7 +273,7 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
                             </svg>
                         </div>
                         <div class="service-logo">
-                            <img src="">
+                            <img src="<?php echo esc_url(LIQUIDPOLL_PLUGIN_URL . 'assets/images/service-logo.svg') ?>" alt="service-logo">
                         </div>
                         <div class="service-info">
                             <span class="service-name">Liquid Poll Pro</span>

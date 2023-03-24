@@ -546,6 +546,15 @@
         }
     });
 
+    $(document).on('ready',function (){
+
+        let datepicker = $('.reviews-form input[name="experience-time"]');
+
+        datepicker.flatpickr({
+            dateFormat: "d-m-Y",
+        });
+    });
+
 
 })(jQuery, window, document, liquidpoll_object);
 
