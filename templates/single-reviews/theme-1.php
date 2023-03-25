@@ -39,10 +39,9 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
         </div>
     </div>
     <hr class="liquidpoll-divider">
-    <div class="rating-selected">
-        <div class="form-group rating-label">
-            <label class="rating-header">Rate your experience</label>
-        </div>
+    <div class="form-group rating-selected">
+        <label class="rating-header">Rate your experience</label>
+        <?php echo liquidpoll_get_review_stars(); ?>
     </div>
 
     <div class="form-group review-title">

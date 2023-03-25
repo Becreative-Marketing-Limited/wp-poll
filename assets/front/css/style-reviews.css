@@ -839,11 +839,13 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     color: #5F64EB;
 }
 
-.reviews-main .reviews-form .rating-wrap .rating {
+.reviews-main .reviews-form .rating-selected {
+    padding-top: 30px;
+}
+
+.reviews-main .reviews-form .rating-selected .rating-wrap {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
+    padding-top: 20px;
 }
 
 .reviews-main .reviews-form .review-title {
