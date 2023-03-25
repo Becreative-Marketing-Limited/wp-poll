@@ -551,7 +551,9 @@
         let datepicker = $('.reviews-form input[name="experience-time"]');
 
         datepicker.flatpickr({
-            dateFormat: "d-m-Y",
+            dateFormat: 'd-m-Y',
+            altInput: true,
+            altFormat: 'd-m-Y',
         });
     });
 

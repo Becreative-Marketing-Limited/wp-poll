@@ -889,7 +889,13 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 }
 
 .reviews-main .reviews-form .experience-date {
+    position: relative;
     padding-bottom: 50px;
+}
+
+.reviews-main .reviews-form .experience-date svg {
+    position: absolute;
+    margin: 14px 20px;
 }
 
 .reviews-main .experience-date .review-label {
@@ -905,14 +911,31 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     border-radius: 5px;
 }
 
+.reviews-main .reviews-form .experience-date input.flatpickr-input {
+    height: 50px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #000000;
+    padding-left: 80px;
+}
+
 .reviews-main .reviews-form .consent {
     padding: 0 30px 60px 0;
 }
-.reviews-main .reviews-form .consent .consent-items{
 
+.reviews-main .reviews-form .consent .consent-items {
+    display: flex;
 }
-.reviews-main .reviews-form .consent .consent-desc{
 
+.reviews-main .reviews-form .consent .consent-items .liquidpoll-checkbox {
+    flex: none;
+}
+
+.reviews-main .reviews-form .consent .consent-items .consent-desc {
+    margin-left: 20px;
+    font-size: 17px;
+    line-height: 23px;
+    color: #000000;
 }
 
 .reviews-main .reviews-form .submit-section {
@@ -924,7 +947,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     width: 100px;
     height: 100px;
     margin: 0 auto;
-   border-radius: 50%;
+    border-radius: 50%;
 }
 
 .reviews-main .reviews-form .submit-section p {
