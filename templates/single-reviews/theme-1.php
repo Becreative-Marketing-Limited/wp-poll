@@ -117,7 +117,7 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
         <div class="review-stat-filter">
 
             <label class="stat-filter-item">
-                <input type="checkbox" name="rating" value="5">
+                <input type="radio" name="rating" value="5">
                 <span class="liquidpoll-checkbox"></span>
                 <span class="rating-value">5</span>
                 <svg class="rating-star star-icon fill" role="img" aria-label="rating">
@@ -128,7 +128,7 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
             </label>
 
             <label class="stat-filter-item">
-                <input type="checkbox" name="rating" value="4">
+                <input type="radio" name="rating" value="4">
                 <span class="liquidpoll-checkbox"></span>
                 <span class="rating-value">4</span>
                 <svg class="rating-star star-icon fill" role="img" aria-label="rating">
@@ -139,7 +139,7 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
             </label>
 
             <label class="stat-filter-item">
-                <input type="checkbox" name="rating" value="3">
+                <input type="radio" name="rating" value="3">
                 <span class="liquidpoll-checkbox"></span>
                 <span class="rating-value">3</span>
                 <svg class="rating-star star-icon fill" role="img" aria-label="rating">
@@ -150,7 +150,7 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
             </label>
 
             <label class="stat-filter-item">
-                <input type="checkbox" name="rating" value="2">
+                <input type="radio" name="rating" value="2">
                 <span class="liquidpoll-checkbox"></span>
                 <span class="rating-value">2</span>
                 <svg class="rating-star star-icon fill" role="img" aria-label="rating">
@@ -161,7 +161,7 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
             </label>
 
             <label class="stat-filter-item">
-                <input type="checkbox" name="rating" value="1">
+                <input type="radio" name="rating" value="1">
                 <span class="liquidpoll-checkbox"></span>
                 <span class="rating-value">1</span>
                 <svg class="rating-star star-icon fill" role="img" aria-label="rating">

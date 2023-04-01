@@ -346,7 +346,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     background-color: #FFF;
 }
 
-.reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item input[type="checkbox"]:checked + .liquidpoll-checkbox {
+.reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item input[type="radio"]:checked + .liquidpoll-checkbox {
     background-color: #5F64EB;
 }
 
@@ -445,7 +445,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     box-shadow: 0 0 8px 0 #0000004d;
     border-radius: 10px;
     border: 2px solid #FFF;
-    padding: 35px 30px;
+    padding: 30px 20px;
     max-width: 248px;
 }
 
@@ -625,6 +625,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     visibility: hidden;
     transform: scale(1);
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    z-index: 999;
 }
 
 .reviews-main .show-modal {
