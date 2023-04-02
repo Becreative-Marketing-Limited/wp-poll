@@ -31,7 +31,7 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
             </svg>
         </div>
         <div class="service-logo">
-            <img src="<?php echo esc_url(LIQUIDPOLL_PLUGIN_URL . 'assets/images/service-logo.svg') ?>" alt="service">
+            <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/service-logo.svg' ) ?>" alt="service">
         </div>
         <div class="service-info">
             <span class="service-name">Liquid Poll Pro</span>
@@ -41,7 +41,7 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
     <hr class="liquidpoll-divider">
     <div class="form-group rating-selected">
         <label class="rating-header">Rate your experience</label>
-        <?php echo liquidpoll_get_review_stars(); ?>
+		<?php echo liquidpoll_get_review_stars( $rating_selected ); ?>
     </div>
 
     <div class="form-group review-title">
@@ -276,7 +276,7 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
                             </svg>
                         </div>
                         <div class="service-logo">
-                            <img src="<?php echo esc_url(LIQUIDPOLL_PLUGIN_URL . 'assets/images/service-logo.svg') ?>" alt="service-logo">
+                            <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/service-logo.svg' ) ?>" alt="service-logo">
                         </div>
                         <div class="service-info">
                             <span class="service-name">Liquid Poll Pro</span>
