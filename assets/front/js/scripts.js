@@ -470,56 +470,52 @@
 
     $(document).on('ready', function () {
 
-        let el_rating_item = $('.rating-item'),
-            datepicker = $('.reviews-form input[name="experience-time"]');
+        let el_rating = $('.rating-item input[name="rating"]'),
+            datepicker = $('.reviews-form input[name="experience_time"]'),
+            reviews_form = $('form.reviews-form');
 
-        el_rating_item.click(function (e) {
-            let el_this_rating_item = $(this),
-                el_selected_id = null,
-                parentOffset = $(this).offset(),
-                relative_x = e.pageX - parentOffset.left;
+        el_rating.change(function () {
+            let el_this_rating = $(this),
+                el_this_rating_wrap = el_this_rating.parent(),
+                el_all_rating = el_this_rating_wrap.parent().find('.rating-item');
 
-            console.log(relative_x);
+            el_all_rating.removeClass('active');
 
-
-            if (relative_x >= 30) {
-                el_this_rating_item.addClass('active');
-                el_selected_id = el_this_rating_item.find('label.full').attr('for');
-                el_this_rating_item.find('#' + el_selected_id).prop("checked", true);
-            } else {
-                el_this_rating_item.addClass('active');
-                el_selected_id = el_this_rating_item.find('label.half').attr('for');
-                el_this_rating_item.find('#' + el_selected_id).prop("checked", true);
+            if (this.checked) {
+                el_this_rating_wrap.addClass("active");
             }
 
-            console.log(el_this_rating_item.find('#' + el_selected_id).is(':checked'));
+            el_this_rating.parents('form.liquidpoll-reviews-rating').submit();
         });
-
-        // el_rating.change(function () {
-        //     let el_this_rating = $(this),
-        //         el_this_rating_wrap = el_this_rating.parent(),
-        //         el_all_rating = el_this_rating_wrap.parent().find('.rating-item');
-        //
-        //     el_all_rating.removeClass('active');
-        //
-        //     if (this.checked) {
-        //         el_this_rating_wrap.addClass("active");
-        //     }
-        //
-        //
-        //
-        //     el_this_rating_wrap.parent().parent().submit();
-        // });
 
         datepicker.flatpickr({
             dateFormat: 'd-m-Y',
             altInput: true,
             altFormat: 'd-m-Y',
         });
-    });
 
-    $(document).on('change', '.rating-checkbox', function () {
-        console.log('ok 2');
+        reviews_form.submit(function () {
+
+            let review_form = $(this),
+                review_form_value = review_form.serialize();
+
+            $.ajax({
+                type: 'POST',
+                context: this,
+                url: pluginObject.ajaxurl,
+                data: {
+                    'action': 'liquidpoll_submit_review',
+                    'form_data': review_form_value,
+                },
+                success: function (response) {
+                    if (response.success) {
+                        console.log(response.data);
+                    }
+                }
+            });
+
+            return false;
+        });
     });
 
 

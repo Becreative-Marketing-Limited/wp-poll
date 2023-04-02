@@ -60,12 +60,52 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_action( 'wp_ajax_liquidpoll_get_polls', array( $this, 'reports_get_polls' ) );
 			add_action( 'wp_ajax_liquidpoll_get_option_values', array( $this, 'reports_get_option_values' ) );
 			add_action( 'wp_ajax_liquidpoll-activate-addon', array( $this, 'activate_addon' ) );
+
+
+			// Reviews
+			add_action( 'wp_ajax_liquidpoll_submit_review', array( $this, 'liquidpoll_submit_review' ) );
 		}
 
 
 		/**
-         * Install and Activate add-on
-         *
+		 * Handle review submission
+		 *
+		 * @return void
+		 */
+		function liquidpoll_submit_review() {
+
+            global $wpdb;
+
+			$_form_data = isset( $_POST['form_data'] ) ? sanitize_text_field( $_POST['form_data'] ) : '';
+
+			wp_parse_str( $_form_data, $form_data );
+
+			$poll_id            = Utils::get_args_option( 'poll_id', $form_data );
+			$rating             = Utils::get_args_option( 'rating', $form_data );
+			$review_title       = Utils::get_args_option( 'review_title', $form_data );
+			$review_description = Utils::get_args_option( 'review_description', $form_data );
+			$experience_time    = Utils::get_args_option( 'experience_time', $form_data );
+			$consent            = Utils::get_args_option( 'consent', $form_data );
+			$poll               = liquidpoll_get_poll( $poll_id );
+
+			if ( ! $poll instanceof LIQUIDPOLL_Poll ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Invalid poll.', 'wp-poll' ) ) );
+			}
+
+			if ( $poll->get_meta( 'is_consent_required', false ) && $consent != 'on' ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Required consent missing.', 'wp-poll' ) ) );
+			}
+
+            // Store submission to Results table
+
+            // Then store metadata to Results meta table
+
+		}
+
+
+		/**
+		 * Install and Activate add-on
+		 *
 		 * @return void
 		 */
 		function activate_addon() {

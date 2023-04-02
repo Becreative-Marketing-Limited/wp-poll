@@ -7,6 +7,7 @@ defined( 'ABSPATH' ) || exit;
 
 global $poll, $liquidpoll, $current_user, $wp_query;
 
+$login_url             = wp_login_url( site_url( $_SERVER['REQUEST_URI'] ) );
 $rating_selected       = isset( $_GET['rating'] ) ? sanitize_text_field( $_GET['rating'] ) : '';
 $class_reviews_form    = '';
 $class_reviews_listing = 'active';
@@ -16,14 +17,11 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
 	$class_reviews_listing = '';
 }
 
-//echo "<pre>";
-//print_r( wp_login_url( site_url( $_SERVER['REQUEST_URI'] ) ) );
-//echo "</pre>";
 
 ?>
 
 
-<form class="reviews-form <?php echo esc_attr( $class_reviews_form ); ?>">
+<form method="post" action="" class="reviews-form <?php echo esc_attr( $class_reviews_form ); ?>">
     <div class="service">
         <div class="icon">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,27 +43,27 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
     </div>
 
     <div class="form-group review-title">
-        <label for="title" class="review-title-label">Give your review a title</label>
-        <input type="text" id="title" name="title" placeholder="Impressed with the service!">
+        <label for="review_title" class="review-title-label">Give your review a title</label>
+        <input type="text" id="review_title" name="review_title" placeholder="Impressed with the service!">
     </div>
 
     <div class="form-group review-textarea">
-        <label for="review" class="review-label">Briefly tell us about your experience</label>
-        <textarea id="review" name="review"></textarea>
+        <label for="review_description" class="review-label">Briefly tell us about your experience</label>
+        <textarea id="review_description" name="review_description"></textarea>
     </div>
 
     <div class="form-group experience-date">
-        <label for="experience-time" class="review-label">When did you have this experience?</label>
+        <label for="experience_time" class="review-label">When did you have this experience?</label>
         <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19 9H1M14 1V5M6 1V5M5.8 21H14.2C15.8802 21 16.7202 21 17.362 20.673C17.9265 20.3854 18.3854 19.9265 18.673 19.362C19 18.7202 19 17.8802 19 16.2V7.8C19 6.11984 19 5.27976 18.673 4.63803C18.3854 4.07354 17.9265 3.6146 17.362 3.32698C16.7202 3 15.8802 3 14.2 3H5.8C4.11984 3 3.27976 3 2.63803 3.32698C2.07354 3.6146 1.6146 4.07354 1.32698 4.63803C1 5.27976 1 6.11984 1 7.8V16.2C1 17.8802 1 18.7202 1.32698 19.362C1.6146 19.9265 2.07354 20.3854 2.63803 20.673C3.27976 21 4.11984 21 5.8 21Z"
                   stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <input type="text" id="experience-time" name="experience-time">
+        <input type="text" id="experience_time" name="experience_time">
     </div>
 
     <div class="consent">
         <label class="consent-items" for="consent">
-            <input type="checkbox" id="consent" name="consent">
+            <input type="checkbox" id="consent" name="consent" required>
             <span class="liquidpoll-checkbox"></span>
             <span class="consent-desc">I confirm this review about my own genuine experience. I am eligible to leave this review, and have not been offered any incentive or payment to leave a review for this company</span>
         </label>
@@ -75,7 +73,12 @@ if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 
         <img class="user-logo" src="<?php echo esc_url( get_avatar_url( $current_user->user_email ) ); ?>" alt="<?php echo esc_attr( 'poller' ); ?>">
         <p class="user-name"><?php echo esc_html( $current_user->display_name ); ?></p>
 
-        <button type="submit" class="review-submit">Submit your review</button>
+		<?php if ( is_user_logged_in() ) : ?>
+            <input type="hidden" name="poll_id" value="<?php echo esc_attr( $poll->get_id() ); ?>">
+            <button type="submit" class="review-submit">Submit your review</button>
+		<?php else: ?>
+            <a href="<?php echo esc_url( $login_url ); ?>" class="review-submit"><?php esc_html_e( 'Login to continue', 'wp-poll' ); ?></a>
+		<?php endif; ?>
     </div>
 </form>
 
