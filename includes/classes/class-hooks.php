@@ -76,7 +76,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
             global $wpdb;
 
-			$_form_data = isset( $_POST['form_data'] ) ? sanitize_text_field( $_POST['form_data'] ) : '';
+			$_form_data = isset( $_POST['form_data'] ) ? $_POST['form_data'] : '';
 
 			wp_parse_str( $_form_data, $form_data );
 
@@ -88,6 +88,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			$consent            = Utils::get_args_option( 'consent', $form_data );
 			$poll               = liquidpoll_get_poll( $poll_id );
 
+
 			if ( ! $poll instanceof LIQUIDPOLL_Poll ) {
 				wp_send_json_error( array( 'message' => esc_html__( 'Invalid poll.', 'wp-poll' ) ) );
 			}
@@ -96,9 +97,16 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				wp_send_json_error( array( 'message' => esc_html__( 'Required consent missing.', 'wp-poll' ) ) );
 			}
 
-            // Store submission to Results table
+			// Store submission to Results table
+			$data_args = array(
+				'poll_id'         => sanitize_text_field( $poll_id ),
+				'poll_type'       => $poll->get_type(),
+				'polled_value'    => sanitize_text_field( $rating ),
+				'polled_comments' => sanitize_text_field( $review_description ),
+			);
+			$response  = liquidpoll_insert_results( $data_args );
 
-            // Then store metadata to Results meta table
+			// Then store metadata to Results meta table
 
 		}
 
