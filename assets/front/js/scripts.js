@@ -467,6 +467,97 @@
         return false;
     });
 
+
+    $(document).on('ready', function () {
+
+        let el_rating = $('input[name="rating"]'), el_rating_item = $('.rating-item');
+
+        el_rating_item.click(function (e) {
+            let el_this_rating_item = $(this),
+                el_selected_id = null,
+                parentOffset = $(this).offset(),
+                relative_x = e.pageX - parentOffset.left;
+
+            if (relative_x >= 30) {
+                el_this_rating_item.addClass('active');
+                el_selected_id = el_this_rating_item.find('label.full').attr('for');
+                el_this_rating_item.find('#' + el_selected_id).prop("checked", true);
+            } else {
+                el_this_rating_item.addClass('active');
+                el_selected_id = el_this_rating_item.find('label.half').attr('for');
+                el_this_rating_item.find('#' + el_selected_id).prop("checked", true);
+            }
+        });
+
+        // el_rating.change(function () {
+        //     let el_this_rating = $(this),
+        //         el_this_rating_wrap = el_this_rating.parent(),
+        //         el_all_rating = el_this_rating_wrap.parent().find('.rating-item');
+        //
+        //     el_all_rating.removeClass('active');
+        //
+        //     if (this.checked) {
+        //         el_this_rating_wrap.addClass("active");
+        //     }
+        //
+        //
+        //
+        //     el_this_rating_wrap.parent().parent().submit();
+        // });
+    });
+
+    $(document).on('click', '.reviews-relevant', function () {
+
+        let relevant_filter = $('.liquidpoll-relevant-wrap');
+        relevant_filter.show();
+
+    });
+
+    $(document).on('mouseup', function (e) {
+
+        let relevant_filter = $('.liquidpoll-relevant-wrap');
+
+        if (relevant_filter.has(e.target).length === 0) {
+            relevant_filter.hide();
+        }
+    });
+
+    $(document).on('click', '.reviews-filter', function () {
+        let filterModal = $('.liquidpoll-filter-modal-wrap');
+
+        filterModal.addClass('show-modal');
+    });
+
+    $(document).on('click', '.close-button', function (e) {
+        e.preventDefault()
+        let filterModal = $('.liquidpoll-filter-modal-wrap');
+
+        if (filterModal.hasClass('show-modal')) {
+            filterModal.removeClass('show-modal');
+        }
+    });
+
+    $(document).on('mouseup', function (e) {
+
+        let outside_popup_box = $('.liquidpoll-filter-modal');
+
+        if (!outside_popup_box.is(e.target) && outside_popup_box.has(e.target).length === 0) {
+            outside_popup_box.find('.close-button').trigger('click');
+        }
+    });
+
+    $(document).on('ready',function (){
+
+        let datepicker = $('.reviews-form input[name="experience-time"]');
+
+        datepicker.flatpickr({
+            dateFormat: 'd-m-Y',
+            altInput: true,
+            altFormat: 'd-m-Y',
+        });
+    });
+
+
 })(jQuery, window, document, liquidpoll_object);
 
 

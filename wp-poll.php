@@ -21,6 +21,7 @@ defined( 'LIQUIDPOLL_PLUGIN_DIR' ) || define( 'LIQUIDPOLL_PLUGIN_DIR', plugin_di
 defined( 'LIQUIDPOLL_PLUGIN_FILE' ) || define( 'LIQUIDPOLL_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 defined( 'LIQUIDPOLL_RESULTS_TABLE' ) || define( 'LIQUIDPOLL_RESULTS_TABLE', sprintf( '%sliquidpoll_results', $wpdb->prefix ) );
 defined( 'LIQUIDPOLL_EMAILS_TABLE' ) || define( 'LIQUIDPOLL_EMAILS_TABLE', sprintf( '%sliquidpoll_emails', $wpdb->prefix ) );
+defined( 'LIQUIDPOLL_META_TABLE' ) || define( 'LIQUIDPOLL_META_TABLE', sprintf( '%sliquidpoll_meta', $wpdb->prefix ) );
 defined( 'LIQUIDPOLL_PLUGIN_LINK' ) || define( 'LIQUIDPOLL_PLUGIN_LINK', 'https://www.liquidpoll.com/pro' );
 defined( 'LIQUIDPOLL_DOCS_URL' ) || define( 'LIQUIDPOLL_DOCS_URL', 'https://www.liquidpoll.com/docs' );
 defined( 'LIQUIDPOLL_REVIEW_URL' ) || define( 'LIQUIDPOLL_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
@@ -150,6 +151,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			wp_enqueue_script( 'liquidpoll-front-cb', LIQUIDPOLL_PLUGIN_URL . 'assets/front/js/svgcheckbx.js', array( 'jquery' ), $version, $load_in_footer );
 			wp_enqueue_script( 'rangeslider', plugins_url( 'assets/front/js/rangeslider.min.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
 			wp_enqueue_script( 'roundslider', plugins_url( 'assets/front/js/roundslider.min.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
+			wp_enqueue_script( 'datepicker', plugins_url( 'assets/front/js/flatpickr.min.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
 			wp_enqueue_script( 'liquidpoll-front', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
 			wp_localize_script( 'liquidpoll-front', 'liquidpoll_object', $this->localize_scripts_data() );
 
@@ -157,9 +159,11 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			wp_enqueue_style( 'tooltip', LIQUIDPOLL_PLUGIN_URL . 'assets/tool-tip.min.css' );
 			wp_enqueue_style( 'rangeslider', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/rangeslider.css', array(), $version );
 			wp_enqueue_style( 'roundslider', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/roundslider.min.css', array(), $version );
+			wp_enqueue_style( 'datepicker', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/flatpickr.min.css', array(), $version );
 			wp_enqueue_style( 'liquidpoll-front-cb', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/checkbox.css', array(), $version );
 			wp_enqueue_style( 'liquidpoll-front', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style.css', array(), $version );
 			wp_enqueue_style( 'liquidpoll-front-nps', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style-nps.css', array(), $version );
+			wp_enqueue_style( 'liquidpoll-front-reviews', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style-reviews.css', array(), $version );
 		}
 
 
