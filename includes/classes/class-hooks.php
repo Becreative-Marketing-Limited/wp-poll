@@ -64,6 +64,30 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 			// Reviews
 			add_action( 'wp_ajax_liquidpoll_submit_review', array( $this, 'liquidpoll_submit_review' ) );
+			add_action( 'wp_ajax_liquidpoll_submit_review_useful', array( $this, 'liquidpoll_submit_review_useful' ) );
+		}
+
+
+		function liquidpoll_submit_review_useful() {
+			global $wpdb;
+
+			$result_id = $_POST['review_id'] ?? '';
+
+			$meta_value = array(
+				array(
+					'poller_id_ip' => liquidpoll_get_poller(),
+					'datetime'     => current_time( 'mysql' ),
+				),
+			);
+
+			$args = array(
+				'result_id'  => $result_id,
+				'meta_key'   => 'results_useful_data',
+				'meta_value' => serialize($meta_value),
+				'datetime'   => current_time( 'mysql' ),
+			);
+
+			$result = $wpdb->insert( LIQUIDPOLL_RESULTS_META_TABLE, $args );
 		}
 
 

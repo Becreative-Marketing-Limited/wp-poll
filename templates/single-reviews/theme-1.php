@@ -272,7 +272,7 @@ $consent_desc = Utils::get_meta( 'reviews_consent_desc' );
                 <hr class="liquidpoll-divider">
                 <div class="review-share-wrap">
                     <div class="review-share">
-                        <button class="useful">
+                        <button class="useful" data-review-id="<?php echo esc_attr($result_id) ?>">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5 17V8.2M1 9.8V15.4C1 16.2837 1.71634 17 2.6 17H13.341C14.5256 17 15.533 16.1357 15.7131 14.9649L16.5746 9.36494C16.7983 7.91112 15.6735 6.6 14.2025 6.6H11.4C10.9582 6.6 10.6 6.24183 10.6 5.8V2.97267C10.6 1.8832 9.7168 1 8.62733 1C8.36747 1 8.13198 1.15304 8.02644 1.3905L5.21115 7.72491C5.08275 8.01381 4.79625 8.2 4.4801 8.2H2.6C1.71634 8.2 1 8.91634 1 9.8Z"
                                       stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
