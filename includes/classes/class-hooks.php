@@ -82,7 +82,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 			$review_useful_data = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM " . LIQUIDPOLL_RESULTS_META_TABLE . " WHERE result_id = %s AND meta_key = %s", $result_id, 'results_useful_data' ) );
 
-			if ( false === $review_useful_data ) {
+			if ( ! $review_useful_data ) {
 
 				$useful_data = array(
 					array(
@@ -122,7 +122,6 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 				wp_send_json_success( array( 'message' => $result ) );
 			}
-
 		}
 
 

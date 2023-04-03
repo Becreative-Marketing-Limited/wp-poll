@@ -543,6 +543,10 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     cursor: pointer;
 }
 
+.reviews-main .liquidpoll-reviews-item .review-share .useful.active svg path {
+    stroke: var(--liquidpoll-reviews-theme-1-color-1);
+}
+
 .reviews-main .liquidpoll-reviews-item .review-share .useful span {
     font-style: normal;
     font-weight: 400;

@@ -589,6 +589,11 @@
                 'review_id': review_id,
             },
             success: function (response) {
+                if (response.success) {
+                    if (response.data.message === 1 || response.data.message === '1') {
+                        $(this).addClass('active');
+                    }
+                }
 
             }
         });
