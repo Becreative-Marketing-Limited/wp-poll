@@ -647,6 +647,38 @@ if ( ! function_exists( 'liquidpoll_insert_results' ) ) {
 }
 
 
+if ( ! function_exists( 'liquidpoll_insert_results_meta' ) ) {
+	/**
+	 * Insert poll results meta in database
+	 *
+	 * @param $id
+	 * @param $meta_key
+	 * @param $meta_value
+	 *
+	 * @return true|WP_Error
+	 */
+	function liquidpoll_insert_results_meta( $id, $meta_key, $meta_value ) {
+
+		global $wpdb;
+
+		$args = array(
+			'result_id'  => $id,
+			'meta_key'   => $meta_key,
+			'meta_value' => $meta_value,
+			'datetime'   => current_time( 'mysql' ),
+		);
+
+		$response = $wpdb->insert( LIQUIDPOLL_RESULTS_META_TABLE_TABLE, $args );
+
+		if ( ! $response ) {
+			return new WP_Error( 'database_error', $wpdb->last_error );
+		}
+
+		return true;
+	}
+}
+
+
 if ( ! function_exists( 'liquidpoll_insert_email' ) ) {
 	/**
 	 * Insert poll email in database
