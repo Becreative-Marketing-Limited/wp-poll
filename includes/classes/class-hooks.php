@@ -68,26 +68,61 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		}
 
 
+        /**
+         * Handle review useful data submission
+         *
+		 * @return void
+		 */
 		function liquidpoll_submit_review_useful() {
+
 			global $wpdb;
 
-			$result_id = $_POST['review_id'] ?? '';
+			$result_id    = $_POST['review_id'] ?? '';
+			$poller_id_ip = liquidpoll_get_poller();
 
-			$meta_value = array(
-				array(
-					'poller_id_ip' => liquidpoll_get_poller(),
+			$review_useful_data = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM " . LIQUIDPOLL_RESULTS_META_TABLE . " WHERE result_id = %s AND meta_key = %s", $result_id, 'results_useful_data' ) );
+
+			if ( false === $review_useful_data ) {
+
+				$useful_data = array(
+					array(
+						'poller_id_ip' => $poller_id_ip,
+						'datetime'     => current_time( 'mysql' ),
+					),
+				);
+
+				$args = array(
+					'result_id'  => $result_id,
+					'meta_key'   => 'results_useful_data',
+					'meta_value' => serialize( $useful_data ),
+					'datetime'   => current_time( 'mysql' ),
+				);
+
+				$result = $wpdb->insert( LIQUIDPOLL_RESULTS_META_TABLE, $args );
+
+				wp_send_json_success( array( 'message' => $result ) );
+			}
+
+			$useful_data = unserialize( $review_useful_data );
+
+			if ( ! empty( $useful_data ) && ! in_array( $poller_id_ip, array_column( $useful_data, 'poller_id_ip' ) ) ) {
+
+				$useful_data[] = array(
+					'poller_id_ip' => $poller_id_ip,
 					'datetime'     => current_time( 'mysql' ),
-				),
-			);
+				);
 
-			$args = array(
-				'result_id'  => $result_id,
-				'meta_key'   => 'results_useful_data',
-				'meta_value' => serialize($meta_value),
-				'datetime'   => current_time( 'mysql' ),
-			);
+				$args = array(
+					'meta_value' => serialize( $useful_data ),
+				);
 
-			$result = $wpdb->insert( LIQUIDPOLL_RESULTS_META_TABLE, $args );
+				$where = array( 'result_id' => $result_id, 'meta_key' => 'results_useful_data' );
+
+				$result = $wpdb->update( LIQUIDPOLL_RESULTS_META_TABLE, $args, $where );
+
+				wp_send_json_success( array( 'message' => $result ) );
+			}
+
 		}
 
 

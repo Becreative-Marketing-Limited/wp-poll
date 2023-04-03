@@ -579,7 +579,6 @@
     $(document).on('click','.useful',function(){
 
         let review_id = $(this).data('review-id');
-        console.log(review_id)
 
         $.ajax({
             type: 'POST',
