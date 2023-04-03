@@ -74,9 +74,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function liquidpoll_submit_review() {
 
-            global $wpdb;
-
-			$_form_data = isset( $_POST['form_data'] ) ? $_POST['form_data'] : '';
+			$_form_data = $_POST['form_data'] ?? '';
 
 			wp_parse_str( $_form_data, $form_data );
 
@@ -104,10 +102,18 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				'polled_value'    => sanitize_text_field( $rating ),
 				'polled_comments' => sanitize_text_field( $review_description ),
 			);
-			$response  = liquidpoll_insert_results( $data_args );
+			$result_id = liquidpoll_insert_results( $data_args );
+
+			if ( ! $result_id || is_wp_error( $result_id ) ) {
+				wp_send_json_error( array( 'message' => $result_id->get_error_message() ) );
+			}
 
 			// Then store metadata to Results meta table
+			liquidpoll_update_results_meta( $result_id, 'review_title', $review_title );
+			liquidpoll_update_results_meta( $result_id, 'experience_time', $experience_time );
+			liquidpoll_update_results_meta( $result_id, 'consent', $consent );
 
+			wp_send_json_success( array( 'message' => esc_html__( 'Successfully submitted review. Redirecting now...', 'wp-poll' ) ) );
 		}
 
 
@@ -219,7 +225,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 
 		/**
-		 * Display reports menu contnet
+		 * Display reports menu content
 		 */
 		function render_complete_report() {
 

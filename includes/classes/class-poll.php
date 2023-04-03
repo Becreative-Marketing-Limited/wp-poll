@@ -205,7 +205,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 				}
 			} else if ( 'reaction' == $this->get_type() ) {
 				$polled_data   = array();
-				$poll_options  = $this->get_meta( 'poll_meta_options_raction', array() );
+				$poll_options  = $this->get_meta( 'poll_meta_options_reaction', array() );
 				$query_results = $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_id = {$this->get_id()} AND poll_type = 'reaction'", ARRAY_A );
 
 				foreach ( $query_results as $query_result ) {
@@ -213,6 +213,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 						$polled_data[ $poller_id_ip ][] = $query_result['polled_value'];
 					}
 				}
+			} else if ( 'reviews' == $this->get_type() ) {
+				return $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_id = {$this->get_id()} AND poll_type = 'reviews'", ARRAY_A );
 			} else {
 				$polled_data  = $this->get_polled_data();
 				$poll_options = $this->get_meta( 'poll_meta_options', array() );

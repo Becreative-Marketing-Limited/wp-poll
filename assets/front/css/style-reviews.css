@@ -230,7 +230,14 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     fill: none;
 }
 
-.reviews-main .rating-wrap .rating-item label:hover svg, .reviews-main .rating-wrap .rating-item label:hover ~ label svg, .reviews-main .rating-wrap .rating-item label:hover ~ label.half svg, .reviews-main .rating-wrap .rating-item label.half:hover svg, .reviews-main .rating-wrap input[name=rating]:focus ~ label svg, .reviews-main .rating-wrap input[name=rating]:checked ~ label svg, .reviews-main .rating-wrap .rating-item:hover ~ .rating-item label svg, .reviews-main .rating-wrap .rating-item.active ~ .rating-item label svg {
+.reviews-main .rating-wrap .rating-item label:hover svg,
+.reviews-main .rating-wrap .rating-item label:hover ~ label svg,
+.reviews-main .rating-wrap .rating-item label:hover ~ label.half svg,
+.reviews-main .rating-wrap .rating-item label.half:hover svg,
+.reviews-main .rating-wrap input[name=rating]:focus ~ label svg,
+.reviews-main .rating-wrap input[name=rating]:checked ~ label svg,
+.reviews-main .rating-wrap .rating-item:hover ~ .rating-item label svg,
+.reviews-main .rating-wrap .rating-item.active ~ .rating-item label svg {
     fill: #8488F0;
 }
 
@@ -533,6 +540,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     border: none;
     background: none;
     padding-right: 25px;
+    cursor: pointer;
 }
 
 .reviews-main .liquidpoll-reviews-item .review-share .useful span {
@@ -547,6 +555,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 .reviews-main .liquidpoll-reviews-item .review-share .share {
     border: none;
     background: none;
+    cursor: pointer;
 }
 
 .reviews-main .liquidpoll-reviews-item .review-share .share span {
@@ -801,11 +810,11 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     border: 2px solid #F5F5F5;
     border-radius: 10px;
     margin: auto;
-    padding:0 30px;
+    padding: 0 30px;
     background: #fff;
 }
 
-.form-group label{
+.form-group label {
     display: block;
     font-style: normal;
     font-weight: 600;
@@ -825,6 +834,9 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     width: 80px;
     border-radius: 50%;
     margin: 0 20px 0 30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .reviews-main .reviews-form .service .service-name {
@@ -971,6 +983,15 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     margin-bottom: 30px;
 }
 
+.reviews-main .reviews-form .submit-section .liquidpoll-responses {
+    margin: 0 auto 30px auto;
+    text-align: left;
+}
+
+.reviews-main .reviews-form .submit-section .liquidpoll-responses span.message {
+    margin-left: 10px;
+}
+
 .reviews-main .reviews-form .submit-section .review-submit {
     display: inline-block;
     margin: 0 auto;
@@ -983,4 +1004,38 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     line-height: 28px;
     text-align: center;
     color: #FFFFFF;
+    position: relative;
+    transition: 0.3s;
+}
+
+.reviews-main .reviews-form .submit-section .review-submit.loading {
+    padding-right: 51px;
+}
+
+.reviews-main .reviews-form .submit-section .review-submit.loading:after {
+    content: ' ';
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    top: 50%;
+    right: 26px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    border-right-color: #41ea48;
+    animation: loading 1s linear infinite;
+    margin: -8px -8px;
+}
+
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg)
+    }
+    50% {
+        transform: rotate(180deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
 }

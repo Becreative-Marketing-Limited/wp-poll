@@ -496,8 +496,15 @@
 
         reviews_form.submit(function () {
 
-            let review_form = $(this),
-                review_form_value = review_form.serialize();
+            let el_review_form = $(this),
+                el_submit_btn = el_review_form.find('.submit-section .review-submit'),
+                review_form_value = el_review_form.serialize(),
+                el_review_response = el_review_form.find('.submit-section .liquidpoll-responses'),
+                el_review_response_message = el_review_response.find('span.message');
+
+            el_submit_btn.addClass('loading');
+            el_review_response_message.html('');
+            el_review_response.fadeOut();
 
             $.ajax({
                 type: 'POST',
@@ -509,7 +516,13 @@
                 },
                 success: function (response) {
                     if (response.success) {
-                        console.log(response.data);
+                        el_submit_btn.removeClass('loading');
+                        el_review_response_message.html(response.data.message);
+                        el_review_response.fadeIn();
+
+                        setTimeout(function () {
+                            window.location.href = window.location.origin + window.location.pathname;
+                        }, 2000);
                     }
                 }
             });
