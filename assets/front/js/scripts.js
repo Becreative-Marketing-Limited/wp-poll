@@ -576,6 +576,26 @@
     });
 
 
+    $(document).on('click','.useful',function(){
+
+        let review_id = $(this).data('review-id');
+        console.log(review_id)
+
+        $.ajax({
+            type: 'POST',
+            context: this,
+            url: pluginObject.ajaxurl,
+            data: {
+                'action': 'liquidpoll_submit_review_useful',
+                'review_id': review_id,
+            },
+            success: function (response) {
+
+            }
+        });
+    });
+
+
 })(jQuery, window, document, liquidpoll_object);
 
 
