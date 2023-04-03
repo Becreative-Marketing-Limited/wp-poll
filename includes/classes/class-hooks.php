@@ -231,19 +231,28 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 			$report_table = new LIQUIDPOLL_Poll_reports();
 			$current_page = isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
+			$result_id    = isset( $_REQUEST['id'] ) ? sanitize_text_field( $_REQUEST['id'] ) : '';
 
 			ob_start();
 
-			printf( '<h2>%s</h2>', esc_html__( 'LiquidPoll - Reports', 'wp-poll' ) );
-			printf( '<p>%s</p>', esc_html__( 'Complete poll reports.', 'wp-poll' ) );
+			if ( ! empty( $result_id ) ) {
+				printf( '<h2>%s</h2>', esc_html__( 'LiquidPoll - Results Reply', 'wp-poll' ) );
 
-			$report_table->prepare_items();
+                include LIQUIDPOLL_PLUGIN_DIR . 'includes/admin-templates/results-edit.php';
 
-			printf( '<form><input type="hidden" name="page" value="%s"></form>', $current_page );
+			} else {
 
-			$report_table->display();
+				printf( '<h2>%s</h2>', esc_html__( 'LiquidPoll - Reports', 'wp-poll' ) );
+				printf( '<p>%s</p>', esc_html__( 'Complete poll reports.', 'wp-poll' ) );
 
-			printf( '<div class="wrap monster-downloadertable-colum">%s</div>', ob_get_clean() );
+				$report_table->prepare_items();
+
+				printf( '<form><input type="hidden" name="page" value="%s"></form>', $current_page );
+
+				$report_table->display();
+			}
+
+			printf( '<div class="wrap">%s</div>', ob_get_clean() );
 		}
 
 		/**
