@@ -11,6 +11,7 @@ global $poll, $liquidpoll, $current_user, $wp_query, $wpdb;
 
 $login_url             = wp_login_url( site_url( $_SERVER['REQUEST_URI'] ) );
 $rating_selected       = isset( $_GET['rating'] ) ? sanitize_text_field( $_GET['rating'] ) : '';
+$rating_filtered       = isset( $_GET['r'] ) ? sanitize_text_field( $_GET['r'] ) : '';
 $class_reviews_form    = '';
 $class_reviews_listing = 'active';
 
@@ -23,6 +24,24 @@ $service_logo = Utils::get_meta( 'reviews_service_logo' );
 $service_name = Utils::get_meta( 'reviews_service_name' );
 $service_url  = Utils::get_meta( 'reviews_service_url' );
 $consent_desc = Utils::get_meta( 'reviews_consent_desc' );
+
+$all_reviews        = $poll->get_poll_results();
+$all_reviews_rating = array();
+$all_reviews_value  = 0;
+
+foreach ( $all_reviews as $review ) {
+
+	$polled_value = Utils::get_args_option( 'polled_value', $review );
+
+	if ( ! empty( $polled_value ) && $polled_value >= 0 && $polled_value <= 5 ) {
+		$polled_value = ( ( $polled_value / 0.5 ) % 2 !== 0 ) ? $polled_value + 0.5 : $polled_value;
+
+		$all_reviews_value                   += $polled_value;
+		$all_reviews_rating[ $polled_value ] += 1;
+	}
+}
+
+$overall_rating = $all_reviews_value / count( $all_reviews );
 
 ?>
 
@@ -102,11 +121,12 @@ $consent_desc = Utils::get_meta( 'reviews_consent_desc' );
     <form action="" method="get" class="liquidpoll-reviews-rating liquidpoll-review-box">
         <div class="user-meta">
             <div class="avatar">
-                <img src="<?php echo esc_url( get_avatar_url( $current_user->user_email ) ); ?>" alt="<?php echo esc_attr( 'poller' ); ?>">
+                <img src="<?php echo esc_url( get_avatar_url( $current_user->user_email ) ); ?>"
+                     alt="<?php echo esc_attr( 'poller' ); ?>">
             </div>
             <div class="user">
                 <span class="user-name"><?php echo esc_html( $current_user->display_name ); ?></span>
-                <span class="user-reviews-count">47 Reviews</span>
+                <span class="user-reviews-count"><?php echo sprintf( esc_html__( '%s Reviews', 'wp-poll' ), liquidpoll_get_poller_submission_count( $current_user->ID, 'reviews' ) ); ?></span>
             </div>
         </div>
 
@@ -116,11 +136,11 @@ $consent_desc = Utils::get_meta( 'reviews_consent_desc' );
         </div>
     </form>
 
-    <div class="liquidpoll-reviews-stat liquidpoll-review-box">
+    <form action="" method="get" class="liquidpoll-reviews-stat liquidpoll-review-box">
         <div class="review-stat-heading">
             <div class="stat-heading">
                 <h2>Reviews</h2>
-                <span>225 ratings</span>
+                <span><?php echo sprintf( esc_html__( '%s Reviews', 'wp-poll' ), count( $all_reviews ) ); ?></span>
             </div>
             <div class="stat-rating">
                 <div class="star">
@@ -128,68 +148,35 @@ $consent_desc = Utils::get_meta( 'reviews_consent_desc' );
                         <use xlink:href="#star"></use>
                     </svg>
                 </div>
-                <span class="stat"><span class="rating">4.9</span>out of 5</span>
+                <span class="stat"><span class="rating"><?php echo esc_attr( $overall_rating ); ?></span>out of 5</span>
             </div>
         </div>
 
         <div class="review-stat-filter">
 
-            <label class="stat-filter-item">
-                <input type="radio" name="rating" value="5">
-                <span class="liquidpoll-checkbox"></span>
-                <span class="rating-value">5</span>
-                <svg class="rating-star star-icon fill" role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-                <span class="rating-value-bar"><span style="width: 75%"></span></span>
-                <span class="rating-result-value">75%</span>
-            </label>
+			<?php for ( $index = 5; $index > 0; -- $index ) :
 
-            <label class="stat-filter-item">
-                <input type="radio" name="rating" value="4">
-                <span class="liquidpoll-checkbox"></span>
-                <span class="rating-value">4</span>
-                <svg class="rating-star star-icon fill" role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-                <span class="rating-value-bar"><span style="width: 52%"></span></span>
-                <span class="rating-result-value">52%</span>
-            </label>
+				$rating_times = isset( $all_reviews_rating[ $index ] ) ? $all_reviews_rating[ $index ] : 0;
+				$rating_percentage = ( $rating_times / count( $all_reviews ) ) * 100;
 
-            <label class="stat-filter-item">
-                <input type="radio" name="rating" value="3">
-                <span class="liquidpoll-checkbox"></span>
-                <span class="rating-value">3</span>
-                <svg class="rating-star star-icon fill" role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-                <span class="rating-value-bar"><span style="width: 5%"></span></span>
-                <span class="rating-result-value">5%></span>
-            </label>
+				?>
 
-            <label class="stat-filter-item">
-                <input type="radio" name="rating" value="2">
-                <span class="liquidpoll-checkbox"></span>
-                <span class="rating-value">2</span>
-                <svg class="rating-star star-icon fill" role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-                <span class="rating-value-bar"><span style="width: 1%"></span></span>
-                <span class="rating-result-value"><1%></span>
-            </label>
+                <label class="stat-filter-item">
+                    <input type="radio" name="r"
+                           value="<?php echo esc_attr( $index ) ?>" <?php echo esc_attr( checked( $index, $rating_filtered, false ) ) ?>>
+                    <span class="liquidpoll-checkbox"></span>
+                    <span class="rating-value"><?php echo esc_html__( $index ) ?></span>
+                    <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                        <use xlink:href="#star"></use>
+                    </svg>
+                    <span class="rating-value-bar"><span
+                                style="width: <?php echo esc_attr( $rating_percentage ); ?>%"></span></span>
+                    <span class="rating-result-value"><?php echo esc_attr( $rating_percentage ); ?>%</span>
+                </label>
 
-            <label class="stat-filter-item">
-                <input type="radio" name="rating" value="1">
-                <span class="liquidpoll-checkbox"></span>
-                <span class="rating-value">1</span>
-                <svg class="rating-star star-icon fill" role="img" aria-label="rating">
-                    <use xlink:href="#star"></use>
-                </svg>
-                <span class="rating-value-bar"><span style="width: 1%"></span></span>
-                <span class="rating-result-value"><1%></span>
-            </label>
+			<?php endfor; ?>
         </div>
-    </div>
+    </form>
 
     <div class="liquidpoll-reviews-filter">
         <div class="reviews-filter">
@@ -229,26 +216,28 @@ $consent_desc = Utils::get_meta( 'reviews_consent_desc' );
 
     <div class="liquidpoll-reviews-items">
 
-		<?php foreach ( $poll->get_poll_results() as $poll_result ) : ?>
+		<?php foreach ( $poll->get_poll_results( array( 'rating' => $rating_filtered ) ) as $poll_result ) : ?>
 
 			<?php
-			$result_id       = Utils::get_args_option( 'id', $poll_result );
-			$polled_value    = Utils::get_args_option( 'polled_value', $poll_result, 0 );
-			$polled_comments = Utils::get_args_option( 'polled_comments', $poll_result );
-			$poller_id       = Utils::get_args_option( 'poller_id_ip', $poll_result );
-			$poller_user     = get_user_by( 'id', $poller_id );
-			$datetime        = strtotime( Utils::get_args_option( 'datetime', $poll_result ) );
-			$time_ago        = human_time_diff( $datetime, time() );
-			$review_title    = liquidpoll_get_results_meta( $result_id, 'review_title' );
-			$experience_time = strtotime( liquidpoll_get_results_meta( $result_id, 'experience_time' ) );
-			$experience_time = date( "F j, Y", $experience_time );
+			$result_id          = Utils::get_args_option( 'id', $poll_result );
+			$polled_value       = Utils::get_args_option( 'polled_value', $poll_result, 0 );
+			$polled_comments    = Utils::get_args_option( 'polled_comments', $poll_result );
+			$poller_id          = Utils::get_args_option( 'poller_id_ip', $poll_result );
+			$poller_user        = get_user_by( 'id', $poller_id );
+			$datetime           = strtotime( Utils::get_args_option( 'datetime', $poll_result ) );
+			$time_ago           = human_time_diff( $datetime, time() );
+			$review_title       = liquidpoll_get_results_meta( $result_id, 'review_title' );
+			$experience_time    = strtotime( liquidpoll_get_results_meta( $result_id, 'experience_time' ) );
+			$experience_time    = date( "F j, Y", $experience_time );
+			$current_user_liked = liquidpoll_is_current_user_useful_submitted( $result_id, $current_user->ID ) ? 'active' : '';
 			?>
 
             <div class="liquidpoll-reviews-item liquidpoll-review-box">
                 <div class="review-box-heading">
                     <div class="user-details">
                         <div class="user-avatar">
-                            <img src="<?php echo esc_url( get_avatar_url( $poller_user->user_email ) ); ?>" alt="<?php echo esc_attr( 'poller' ); ?>">
+                            <img src="<?php echo esc_url( get_avatar_url( $poller_user->user_email ) ); ?>"
+                                 alt="<?php echo esc_attr( 'poller' ); ?>">
                         </div>
                         <div class="user-stat">
                             <p class="user-name"><?php echo esc_html( $poller_user->display_name ); ?></p>
@@ -272,19 +261,22 @@ $consent_desc = Utils::get_meta( 'reviews_consent_desc' );
                 <hr class="liquidpoll-divider">
                 <div class="review-share-wrap">
                     <div class="review-share">
-                        <button class="useful" data-review-id="<?php echo esc_attr($result_id) ?>">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button class="useful <?php echo esc_attr( $current_user_liked ); ?>"
+                                data-review-id="<?php echo esc_attr( $result_id ) ?>">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5 17V8.2M1 9.8V15.4C1 16.2837 1.71634 17 2.6 17H13.341C14.5256 17 15.533 16.1357 15.7131 14.9649L16.5746 9.36494C16.7983 7.91112 15.6735 6.6 14.2025 6.6H11.4C10.9582 6.6 10.6 6.24183 10.6 5.8V2.97267C10.6 1.8832 9.7168 1 8.62733 1C8.36747 1 8.13198 1.15304 8.02644 1.3905L5.21115 7.72491C5.08275 8.01381 4.79625 8.2 4.4801 8.2H2.6C1.71634 8.2 1 8.91634 1 9.8Z"
                                       stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <span>Useful</span>
+                            <span><?php esc_html_e( 'Useful', 'wp-poll' ); ?></span>
                         </button>
                         <button class="share">
-                            <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="17" height="18" viewBox="0 0 17 18" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5.472 10.208L10.936 13.392M10.928 4.608L5.472 7.792M15.4 3.4C15.4 4.72548 14.3255 5.8 13 5.8C11.6745 5.8 10.6 4.72548 10.6 3.4C10.6 2.07452 11.6745 1 13 1C14.3255 1 15.4 2.07452 15.4 3.4ZM5.8 9C5.8 10.3255 4.72548 11.4 3.4 11.4C2.07452 11.4 1 10.3255 1 9C1 7.67452 2.07452 6.6 3.4 6.6C4.72548 6.6 5.8 7.67452 5.8 9ZM15.4 14.6C15.4 15.9255 14.3255 17 13 17C11.6745 17 10.6 15.9255 10.6 14.6C10.6 13.2745 11.6745 12.2 13 12.2C14.3255 12.2 15.4 13.2745 15.4 14.6Z"
                                       stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <span>Share</span>
+                            <span><?php esc_html_e( 'Share', 'wp-poll' ); ?></span>
                         </button>
                     </div>
                     <div class="review-report">

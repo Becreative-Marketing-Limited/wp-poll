@@ -6,6 +6,8 @@
  * @package includes/classes/class-poll
  */
 
+use WPDK\Utils;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
@@ -189,7 +191,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		 *
 		 * @return mixed|void
 		 */
-		function get_poll_results() {
+		function get_poll_results( $args = array() ) {
 
 			global $wpdb;
 
@@ -214,7 +216,15 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 					}
 				}
 			} else if ( 'reviews' == $this->get_type() ) {
-				return $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_id = {$this->get_id()} AND poll_type = 'reviews'", ARRAY_A );
+
+				$where_clause = "WHERE poll_id = {$this->get_id()} AND poll_type = 'reviews'";
+				$rating       = Utils::get_args_option( 'rating', $args );
+
+				if ( ! empty( $rating ) && $rating > 1 && $rating <= 5 ) {
+					$where_clause .= " AND polled_value=$rating";
+				}
+
+				return $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . ' ' . $where_clause, ARRAY_A );
 			} else {
 				$polled_data  = $this->get_polled_data();
 				$poll_options = $this->get_meta( 'poll_meta_options', array() );

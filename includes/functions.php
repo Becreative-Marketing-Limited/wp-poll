@@ -969,3 +969,27 @@ function liquidpoll_get_poller_submission_count( $poller_id_ip = '', $poll_type 
 
 	return $wpdb->get_var( "SELECT COUNT(*) FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poller_id_ip = '$poller_id_ip' AND poll_type = '$poll_type'" );
 }
+
+
+if ( ! function_exists( 'liquidpoll_is_current_user_useful_submitted' ) ) {
+	/**
+	 * @param $result_id
+	 * @param $current_user
+	 *
+	 * @return bool
+	 */
+	function liquidpoll_is_current_user_useful_submitted( $result_id, $current_user ) {
+		$user_useful_submitted = false;
+		$useful_data           = unserialize( liquidpoll_get_results_meta( $result_id, 'results_useful_data' ) );
+
+		if ( ! $useful_data ) {
+			return false;
+		}
+
+		if ( ! empty( $useful_data ) && in_array( $current_user, array_column( $useful_data, 'poller_id_ip' ) ) ) {
+			$user_useful_submitted = true;
+		}
+
+		return $user_useful_submitted;
+	}
+}
