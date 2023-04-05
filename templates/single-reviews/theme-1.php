@@ -12,6 +12,9 @@ global $poll, $liquidpoll, $current_user, $wp_query, $wpdb;
 $login_url             = wp_login_url( site_url( $_SERVER['REQUEST_URI'] ) );
 $rating_selected       = isset( $_GET['rating'] ) ? sanitize_text_field( $_GET['rating'] ) : '';
 $rating_filtered       = isset( $_GET['r'] ) ? sanitize_text_field( $_GET['r'] ) : '';
+$relevant_orderby      = isset( $_GET['relevant'] ) ? sanitize_text_field( $_GET['relevant'] ) : '';
+$filter_date           = isset( $_GET['filter_date'] ) ? sanitize_text_field( $_GET['filter_date'] ) : '';
+$filter_by_ratings     = isset( $_GET['filter_rating'] ) ? $_GET['filter_rating'] : '';
 $class_reviews_form    = '';
 $class_reviews_listing = 'active';
 
@@ -186,7 +189,7 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
                       stroke="#5F64EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
-        <div class="reviews-relevant">
+        <form class="reviews-relevant" action="" method="get">
             <span class="filter">Most relevant</span>
             <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.33333 8.66667H18.6667M2 2H22M8.66667 15.3333H15.3333" stroke="#5F64EB" stroke-width="3"
@@ -195,28 +198,30 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
             <div class="liquidpoll-relevant-wrap">
                 <div class="relevant-items">
                     <label class="relevant-item">
-                        <input type="radio" name="relevant" value="most-relevant">
-                        <span class="liquidpoll-checkbox"></span>
-                        <span>Most Relevant</span>
-                    </label>
-                    <label class="relevant-item">
-                        <input type="radio" name="relevant" value="newest">
+                        <input type="radio" name="relevant" value="DESC">
                         <span class="liquidpoll-checkbox"></span>
                         <span>Newest</span>
                     </label>
                     <label class="relevant-item">
-                        <input type="radio" name="relevant" value="oldest">
+                        <input type="radio" name="relevant" value="ASC">
                         <span class="liquidpoll-checkbox"></span>
                         <span>Oldest</span>
                     </label>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="liquidpoll-reviews-items">
 
-		<?php foreach ( $poll->get_poll_results( array( 'rating' => $rating_filtered ) ) as $poll_result ) : ?>
+		<?php foreach (
+			$poll->get_poll_results( array(
+				'rating'        => $rating_filtered,
+				'relevant'      => $relevant_orderby,
+				'filter_date'   => $filter_date,
+				'filter_rating' => $filter_by_ratings,
+			) ) as $poll_result
+		) : ?>
 
 			<?php
 			$result_id          = Utils::get_args_option( 'id', $poll_result );
@@ -321,7 +326,7 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
 
     <div class="liquidpoll-filter-modal-wrap">
 
-        <div class="liquidpoll-filter-modal">
+        <form class="liquidpoll-filter-modal">
             <div class="modal-heading">
                 <h2>Filter by</h2>
                 <div class="close-button">
@@ -337,51 +342,20 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
             <div class="filter-rating">
                 <span>Rating</span>
                 <div class="filter-stars">
-                    <div>
-                        <input type="checkbox" id="rating-1" name="rating-filter" value="1">
-                        <label class="filter-star" for="rating-1">
-                            <span>1</span>
-                            <svg class="rating-star star-icon fill" role="img" aria-label="rating">
-                                <use xlink:href="#star"></use>
-                            </svg>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="rating-2" name="rating-filter" value="2">
-                        <label class="filter-star" for="rating-2">
-                            <span>2</span>
-                            <svg class="rating-star star-icon fill" role="img" aria-label="rating">
-                                <use xlink:href="#star"></use>
-                            </svg>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="rating-3" name="rating-filter" value="3">
-                        <label class="filter-star" for="rating-3">
-                            <span>3</span>
-                            <svg class="rating-star star-icon fill" role="img" aria-label="rating">
-                                <use xlink:href="#star"></use>
-                            </svg>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="rating-4" name="rating-filter" value="4">
-                        <label class="filter-star" for="rating-4">
-                            <span>4</span>
-                            <svg class="rating-star star-icon fill" role="img" aria-label="rating">
-                                <use xlink:href="#star"></use>
-                            </svg>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="rating-5" name="rating-filter" value="5">
-                        <label class="filter-star" for="rating-5">
-                            <span>5</span>
-                            <svg class="rating-star star-icon fill" role="img" aria-label="rating">
-                                <use xlink:href="#star"></use>
-                            </svg>
-                        </label>
-                    </div>
+
+					<?php for ( $index = 1; $index <= 5; $index ++ ) : ?>
+                        <div>
+                            <input type="checkbox" id="rating-<?php echo esc_attr( $index ) ?>" name="filter_rating[]"
+                                   value="<?php echo esc_attr( $index ) ?>">
+                            <label class="filter-star" for="rating-<?php echo esc_attr( $index ) ?>">
+                                <span><?php echo esc_html__( $index ) ?></span>
+                                <svg class="rating-star star-icon fill" role="img" aria-label="rating">
+                                    <use xlink:href="#star"></use>
+                                </svg>
+                            </label>
+                        </div>
+					<?php endfor; ?>
+
                 </div>
             </div>
 
@@ -389,27 +363,27 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
                 <span>Date posted</span>
                 <div class="filter-date-items">
                     <label class="date-item">
-                        <input type="radio" name="filter-date" value="all">
+                        <input type="radio" name="filter_date" value="all">
                         <span class="liquidpoll-checkbox"></span>
                         <span class="date-label">All reviews</span>
                     </label>
                     <label class="date-item">
-                        <input type="radio" name="filter-date" value="30">
+                        <input type="radio" name="filter_date" value="last_30">
                         <span class="liquidpoll-checkbox"></span>
                         <span class="date-label">Last 30 days</span>
                     </label>
                     <label class="date-item">
-                        <input type="radio" name="filter-date" value="3">
+                        <input type="radio" name="filter_date" value="last_3">
                         <span class="liquidpoll-checkbox"></span>
                         <span class="date-label">Last 3 months</span>
                     </label>
                     <label class="date-item">
-                        <input type="radio" name="filter-date" value="6">
+                        <input type="radio" name="filter_date" value="last_6">
                         <span class="liquidpoll-checkbox"></span>
                         <span class="date-label">Last 6 months</span>
                     </label>
                     <label class="date-item">
-                        <input type="radio" name="filter-date" value="12">
+                        <input type="radio" name="filter_date" value="last_12">
                         <span class="liquidpoll-checkbox"></span>
                         <span class="date-label">Last 12 months</span>
                     </label>
@@ -419,11 +393,11 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
             <hr class="liquidpoll-divider">
 
             <div class="filter-footer">
-                <button class="button-rest">Reset</button>
+                <button class="button-reset">Reset</button>
                 <button class="button-filter">Filter</button>
             </div>
 
-        </div>
+        </form>
 
     </div>
 

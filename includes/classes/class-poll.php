@@ -217,14 +217,53 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 				}
 			} else if ( 'reviews' == $this->get_type() ) {
 
-				$where_clause = "WHERE poll_id = {$this->get_id()} AND poll_type = 'reviews'";
-				$rating       = Utils::get_args_option( 'rating', $args );
+				$where_clause      = "WHERE poll_id = {$this->get_id()} AND poll_type = 'reviews'";
+				$orderby_clause    = "";
+				$rating            = Utils::get_args_option( 'rating', $args );
+				$relevant_orderby  = Utils::get_args_option( 'relevant', $args );
+				$filter_date       = Utils::get_args_option( 'filter_date', $args );
+				$filter_by_ratings = Utils::get_args_option( 'filter_rating', $args );
 
 				if ( ! empty( $rating ) && $rating > 1 && $rating <= 5 ) {
 					$where_clause .= " AND polled_value=$rating";
 				}
 
-				return $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . ' ' . $where_clause, ARRAY_A );
+				if ( ! empty( $relevant_orderby ) && ( $relevant_orderby === 'DESC' || $relevant_orderby === 'ASC' ) ) {
+					$orderby_clause .= "ORDER BY datetime $relevant_orderby";
+				}
+
+				if ( ! empty( $filter_date ) ) {
+
+					if ( 'last_30' == $filter_date ) {
+						$date_1 = date( 'Y-m-d', strtotime( '-30 days' ) );
+						$date_2 = date( 'Y-m-d' );
+					} else if ( 'last_3' == $filter_date ) {
+						$date_1 = date( 'Y-m-d', strtotime( '-3 month' ) );
+						$date_2 = date( 'Y-m-d' );
+					} else if ( 'last_6' == $filter_date ) {
+						$date_1 = date( 'Y-m-d', strtotime( '-6 month' ) );
+						$date_2 = date( 'Y-m-d' );
+					} else if ( 'last_12' == $filter_date ) {
+						$date_1 = date( 'Y-m-d', strtotime( '-1 year' ) );
+						$date_2 = date( 'Y-m-d' );
+					}
+
+					if ( ! empty( $date_1 ) && ! empty( $date_2 ) ) {
+						$where_clause .= " AND datetime between '{$date_1}' AND '{$date_2}'";
+					}
+
+				}
+
+				if ( ! empty( $filter_by_ratings ) && is_array( $filter_by_ratings ) ) {
+
+					$filter_by_ratings = array_map( function ( $rating_value ) {
+						return "polled_value=$rating_value";
+					}, $filter_by_ratings );
+					$filter_by_ratings = implode( ' OR ', $filter_by_ratings );
+					$where_clause      .= " AND ($filter_by_ratings)";
+				}
+
+				return $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . ' ' . $where_clause . ' ' . $orderby_clause, ARRAY_A );
 			} else {
 				$polled_data  = $this->get_polled_data();
 				$poll_options = $this->get_meta( 'poll_meta_options', array() );

@@ -473,6 +473,7 @@
         let el_rating = $('.rating-item input[name="rating"]'),
             datepicker = $('.reviews-form input[name="experience_time"]'),
             el_filter_rating = $('.stat-filter-item input[name="r"]'),
+            el_filter_relevant = $('.relevant-item input[name="relevant"]'),
             reviews_form = $('form.reviews-form');
 
         el_rating.change(function () {
@@ -493,6 +494,13 @@
             let el_this_filter_rating = $(this);
 
             el_this_filter_rating.parents('form.liquidpoll-reviews-stat').submit();
+        });
+
+        el_filter_relevant.change(function (){
+            let el_this_filter_relevant = $(this);
+            console.log('ok')
+
+            el_this_filter_relevant.parents('form.reviews-relevant').submit();
         });
 
         datepicker.flatpickr({
