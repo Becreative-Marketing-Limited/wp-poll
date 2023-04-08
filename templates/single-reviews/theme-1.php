@@ -19,14 +19,15 @@ $class_reviews_form    = '';
 $class_reviews_listing = 'active';
 
 if ( ! empty( $rating_selected ) && $rating_selected > 1 && $rating_selected <= 5 ) {
-	$class_reviews_form    = 'active';
-	$class_reviews_listing = '';
+    $class_reviews_form    = 'active';
+    $class_reviews_listing = '';
 }
 
-$service_logo = Utils::get_meta( 'reviews_service_logo' );
-$service_name = Utils::get_meta( 'reviews_service_name' );
-$service_url  = Utils::get_meta( 'reviews_service_url' );
-$consent_desc = Utils::get_meta( 'reviews_consent_desc' );
+$service_logo     = Utils::get_meta( 'reviews_service_logo' );
+$service_name     = Utils::get_meta( 'reviews_service_name' );
+$service_url      = Utils::get_meta( 'reviews_service_url' );
+$consent_required = $poll->get_meta( 'is_consent_required', false ) ? 'required' : '';
+$consent_desc     = Utils::get_meta( 'reviews_consent_desc' );
 
 $all_reviews        = $poll->get_poll_results();
 $all_reviews_rating = array();
@@ -34,17 +35,17 @@ $all_reviews_value  = 0;
 
 foreach ( $all_reviews as $review ) {
 
-	$polled_value = Utils::get_args_option( 'polled_value', $review );
+    $polled_value = Utils::get_args_option( 'polled_value', $review );
 
-	if ( ! empty( $polled_value ) && $polled_value >= 0 && $polled_value <= 5 ) {
-		$polled_value = ( ( $polled_value / 0.5 ) % 2 !== 0 ) ? $polled_value + 0.5 : $polled_value;
+    if ( ! empty( $polled_value ) && $polled_value >= 0 && $polled_value <= 5 ) {
+        $polled_value = ( ( $polled_value / 0.5 ) % 2 !== 0 ) ? $polled_value + 0.5 : $polled_value;
 
-		$all_reviews_value                   += $polled_value;
-		$all_reviews_rating[ $polled_value ] += 1;
-	}
+        $all_reviews_value                   += $polled_value;
+        $all_reviews_rating[ $polled_value ] += 1;
+    }
 }
 
-$overall_rating = $all_reviews_value / count( $all_reviews );
+$overall_rating = round( $all_reviews_value / count( $all_reviews ), 1 );
 
 ?>
 
@@ -86,15 +87,16 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
         <label for="experience_time"
                class="review-label"><?php esc_html_e( 'When did you have this experience?', 'wp-poll' ) ?></label>
         <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 9H1M14 1V5M6 1V5M5.8 21H14.2C15.8802 21 16.7202 21 17.362 20.673C17.9265 20.3854 18.3854 19.9265 18.673 19.362C19 18.7202 19 17.8802 19 16.2V7.8C19 6.11984 19 5.27976 18.673 4.63803C18.3854 4.07354 17.9265 3.6146 17.362 3.32698C16.7202 3 15.8802 3 14.2 3H5.8C4.11984 3 3.27976 3 2.63803 3.32698C2.07354 3.6146 1.6146 4.07354 1.32698 4.63803C1 5.27976 1 6.11984 1 7.8V16.2C1 17.8802 1 18.7202 1.32698 19.362C1.6146 19.9265 2.07354 20.3854 2.63803 20.673C3.27976 21 4.11984 21 5.8 21Z"
-                  stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+                d="M19 9H1M14 1V5M6 1V5M5.8 21H14.2C15.8802 21 16.7202 21 17.362 20.673C17.9265 20.3854 18.3854 19.9265 18.673 19.362C19 18.7202 19 17.8802 19 16.2V7.8C19 6.11984 19 5.27976 18.673 4.63803C18.3854 4.07354 17.9265 3.6146 17.362 3.32698C16.7202 3 15.8802 3 14.2 3H5.8C4.11984 3 3.27976 3 2.63803 3.32698C2.07354 3.6146 1.6146 4.07354 1.32698 4.63803C1 5.27976 1 6.11984 1 7.8V16.2C1 17.8802 1 18.7202 1.32698 19.362C1.6146 19.9265 2.07354 20.3854 2.63803 20.673C3.27976 21 4.11984 21 5.8 21Z"
+                stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <input type="text" id="experience_time" name="experience_time">
     </div>
 
     <div class="consent">
         <label class="consent-items" for="consent">
-            <input type="checkbox" id="consent" name="consent" required>
+            <input type="checkbox" id="consent" name="consent" <?php echo esc_attr( $consent_required ) ?>>
             <span class="liquidpoll-checkbox"></span>
             <span class="consent-desc"><?php echo esc_html__( $consent_desc, 'wp-poll' ) ?></span>
         </label>
@@ -159,10 +161,9 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
 
 			<?php for ( $index = 5; $index > 0; -- $index ) :
 
-				$rating_times = isset( $all_reviews_rating[ $index ] ) ? $all_reviews_rating[ $index ] : 0;
-				$rating_percentage = ( $rating_times / count( $all_reviews ) ) * 100;
-
-				?>
+                $rating_times = isset( $all_reviews_rating[ $index ] ) ? $all_reviews_rating[ $index ] : 0;
+                $rating_percentage = round( ( $rating_times / count( $all_reviews ) ) * 100 );
+                ?>
 
                 <label class="stat-filter-item">
                     <input type="radio" name="r"
@@ -223,19 +224,20 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
 			) ) as $poll_result
 		) : ?>
 
-			<?php
-			$result_id          = Utils::get_args_option( 'id', $poll_result );
-			$polled_value       = Utils::get_args_option( 'polled_value', $poll_result, 0 );
-			$polled_comments    = Utils::get_args_option( 'polled_comments', $poll_result );
-			$poller_id          = Utils::get_args_option( 'poller_id_ip', $poll_result );
-			$poller_user        = get_user_by( 'id', $poller_id );
-			$datetime           = strtotime( Utils::get_args_option( 'datetime', $poll_result ) );
-			$time_ago           = human_time_diff( $datetime, time() );
-			$review_title       = liquidpoll_get_results_meta( $result_id, 'review_title' );
-			$experience_time    = strtotime( liquidpoll_get_results_meta( $result_id, 'experience_time' ) );
-			$experience_time    = date( "F j, Y", $experience_time );
-			$current_user_liked = liquidpoll_is_current_user_useful_submitted( $result_id, $current_user->ID ) ? 'active' : '';
-			?>
+            <?php
+            $result_id          = Utils::get_args_option( 'id', $poll_result );
+            $polled_value       = Utils::get_args_option( 'polled_value', $poll_result, 0 );
+            $polled_comments    = Utils::get_args_option( 'polled_comments', $poll_result );
+            $poller_id          = Utils::get_args_option( 'poller_id_ip', $poll_result );
+            $poller_user        = get_user_by( 'id', $poller_id );
+            $datetime           = strtotime( Utils::get_args_option( 'datetime', $poll_result ) );
+            $time_ago           = human_time_diff( $datetime, time() );
+            $review_title       = liquidpoll_get_results_meta( $result_id, 'review_title' );
+            $experience_time    = strtotime( liquidpoll_get_results_meta( $result_id, 'experience_time' ) );
+            $experience_time    = date( "F j, Y", $experience_time );
+            $current_user_liked = liquidpoll_is_current_user_useful_submitted( $result_id, $current_user->ID ) ? 'active' : '';
+            $result_replies     = liquidpoll_get_results_meta( $result_id, 'result_replies', array() );
+            ?>
 
             <div class="liquidpoll-reviews-item liquidpoll-review-box">
                 <div class="review-box-heading">
@@ -293,34 +295,40 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
                 </div>
 
                 <div class="review-replay">
+                    <?php if ( is_array( $result_replies ) ) : ?>
+                        <?php foreach ( $result_replies as $replies ):
+                            $reply_content = Utils::get_args_option('reply_content',$replies);
+                            $reply_datetime = Utils::get_args_option('datetime',$replies);
+                            ?>
 
-                    <div class="replay-info-wrap">
-                        <div class="replay-info">
-                            <div class="replay-icon">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2 2V3.4C2 6.76031 2 8.44047 2.65396 9.72394C3.2292 10.8529 4.14708 11.7708 5.27606 12.346C6.55953 13 8.23969 13 11.6 13H18M18 13L13 8M18 13L13 18"
-                                          stroke="#5F64EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                            <div class="replay-info-wrap">
+                                <div class="replay-info">
+                                    <div class="replay-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 2V3.4C2 6.76031 2 8.44047 2.65396 9.72394C3.2292 10.8529 4.14708 11.7708 5.27606 12.346C6.55953 13 8.23969 13 11.6 13H18M18 13L13 8M18 13L13 18"
+                                                  stroke="#5F64EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="service-logo">
+                                        <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/service-logo.svg' ) ?>" alt="service-logo">
+                                    </div>
+                                    <div class="service-info">
+                                        <span class="service-name">Liquid Poll Pro</span>
+                                        <span>replied</span>
+                                    </div>
+                                </div>
+                                <p class="reply-date">February 25, 2023</p>
                             </div>
-                            <div class="service-logo">
-                                <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/service-logo.svg' ) ?>" alt="service-logo">
+                            <div class="replay">
+                                <p><?php echo apply_filters( 'the_content', $reply_content ); ?></p>
                             </div>
-                            <div class="service-info">
-                                <span class="service-name">Liquid Poll Pro</span>
-                                <span>replied</span>
-                            </div>
-                        </div>
-                        <p class="reply-date">February 25, 2023</p>
-                    </div>
-                    <div class="replay">
-                        <p>Thanks so much for your review! It means a lot to know you'd happily recommend us and we're delighted
-                            to hear you were happy with the installation service and product received. Enjoy your product!</p>
-                    </div>
+                        <?php endforeach; ?>
 
+                    <?php endif; ?>
                 </div>
 
             </div>
-		<?php endforeach; ?>
+        <?php endforeach; ?>
 
     </div>
 
@@ -393,8 +401,8 @@ $overall_rating = $all_reviews_value / count( $all_reviews );
             <hr class="liquidpoll-divider">
 
             <div class="filter-footer">
-                <button class="button-reset">Reset</button>
-                <button class="button-filter">Filter</button>
+                <button type="reset" class="button-reset">Reset</button>
+                <button type="submit" class="button-filter">Filter</button>
             </div>
 
         </form>

@@ -251,6 +251,13 @@ class LIQUIDPOLL_Poll_meta {
 					'dependency' => array( '_type', '==', 'reviews', 'all' ),
 				),
 				array(
+					'id'         => 'is_consent_required',
+					'title'      => esc_html__( 'Require Consent', 'wp-poll' ),
+					'type'       => 'switcher',
+					'default'    => false,
+					'dependency' => array( '_type', '==', 'reviews', 'all' ),
+				),
+				array(
 					'id'         => 'reviews_consent_desc',
 					'title'      => esc_html__( 'Consent Description', 'wp-poll' ),
 					'type'       => 'textarea',

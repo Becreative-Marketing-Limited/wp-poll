@@ -65,12 +65,43 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			// Reviews
 			add_action( 'wp_ajax_liquidpoll_submit_review', array( $this, 'liquidpoll_submit_review' ) );
 			add_action( 'wp_ajax_liquidpoll_submit_review_useful', array( $this, 'liquidpoll_submit_review_useful' ) );
+			add_action( 'wp_ajax_liquidpoll_send_reply', array( $this, 'liquidpoll_send_reply' ) );
+		}
+
+		function liquidpoll_send_reply() {
+
+			$_form_data = isset( $_POST['form_data'] ) ? $_POST['form_data'] : '';
+
+			parse_str( $_form_data, $form_data );;
+
+			if ( empty( $result_id = Utils::get_args_option( 'result_id', $form_data ) ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Empty result ID', 'wp-poll' ) ) );
+			}
+
+			if ( empty( $result_reply = Utils::get_args_option( 'result_reply', $form_data ) ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Empty result content', 'wp-poll' ) ) );
+			}
+
+			$result_replies   = liquidpoll_get_results_meta( $result_id, 'result_replies', array() );
+			$result_replies[] = array(
+				'reply_content' => $result_reply,
+				'user_id'       => get_current_user_id(),
+				'datetime'      => current_time( 'mysql' ),
+			);
+
+			$response = liquidpoll_update_results_meta( $result_id, 'result_replies', $result_replies );
+
+			if ( is_wp_error( $response ) ) {
+				wp_send_json_error( array( 'message' => $response->get_error_message() ) );
+			}
+
+			wp_send_json_success();
 		}
 
 
-        /**
-         * Handle review useful data submission
-         *
+		/**
+		 * Handle review useful data submission
+		 *
 		 * @return void
 		 */
 		function liquidpoll_submit_review_useful() {

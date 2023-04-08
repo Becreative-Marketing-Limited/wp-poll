@@ -26,6 +26,9 @@ $review_title    = liquidpoll_get_results_meta( $result_id, 'review_title' );
 $experience_time = strtotime( liquidpoll_get_results_meta( $result_id, 'experience_time' ) );
 $experience_time = date( "F j, Y", $experience_time );
 
+
+$result_replies   = liquidpoll_get_results_meta( $result_id, 'result_replies', array() );
+
 ?>
 
 <div class="liquidpoll-result-edit">
@@ -78,12 +81,13 @@ $experience_time = date( "F j, Y", $experience_time );
 
     </div>
 
-    <form class="liquidpoll-result-replies" action="" method="get">
+    <form class="liquidpoll-result-replies" action="" method="post">
         <div class="liquidpoll-reply-box">
             <div class="textarea-wrap">
                 <label for="liquidpoll-result-reply">Submit Reply</label>
                 <textarea required name="result_reply" id="liquidpoll-result-reply" rows="5" placeholder="Start typing reply..."></textarea>
             </div>
+            <input type="hidden" name="result_id" value="<?php echo esc_attr( $result_id ); ?>">
             <button type="submit" class="liquidpoll-button">Send Reply</button>
         </div>
     </form>

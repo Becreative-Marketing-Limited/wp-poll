@@ -661,14 +661,27 @@ if ( ! function_exists( 'liquidpoll_update_results_meta' ) ) {
 
 		global $wpdb;
 
-		$args = array(
+		$meta_value = is_array( $meta_value ) ? serialize( $meta_value ) : $meta_value;
+		$args       = array(
 			'result_id'  => $result_id,
 			'meta_key'   => $meta_key,
 			'meta_value' => $meta_value,
 			'datetime'   => current_time( 'mysql' ),
 		);
 
-		$response = $wpdb->insert( LIQUIDPOLL_RESULTS_META_TABLE, $args );
+		if ( ! empty( liquidpoll_get_results_meta( $result_id, $meta_key ) ) ) {
+			$response = $wpdb->update( LIQUIDPOLL_RESULTS_META_TABLE,
+				array(
+					'meta_value' => $meta_value,
+				),
+				array(
+					'result_id' => $result_id,
+					'meta_key'  => $meta_key
+				)
+			);
+		} else {
+			$response = $wpdb->insert( LIQUIDPOLL_RESULTS_META_TABLE, $args );
+		}
 
 		if ( ! $response ) {
 			return new WP_Error( 'database_error', $wpdb->last_error );
@@ -696,7 +709,7 @@ if ( ! function_exists( 'liquidpoll_get_results_meta' ) ) {
 		$meta_value = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM " . LIQUIDPOLL_RESULTS_META_TABLE . " WHERE result_id = %s AND meta_key = %s", $result_id, $meta_key ) );
 
 		if ( $meta_value ) {
-			return $meta_value;
+			return  is_serialized( $meta_value )  ? unserialize( $meta_value ) : $meta_value;
 		}
 
 		return false;

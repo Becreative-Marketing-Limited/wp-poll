@@ -507,6 +507,7 @@
             dateFormat: 'd-m-Y',
             altInput: true,
             altFormat: 'd-m-Y',
+            maxDate: 'today',
         });
 
         reviews_form.submit(function () {
