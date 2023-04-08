@@ -50,7 +50,7 @@ foreach ( $all_reviews as $review ) {
 	}
 }
 
-$overall_rating = round( $all_reviews_value / count( $all_reviews ), 1 );
+$overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count( $all_reviews ), 1 ) : 0;
 
 ?>
 
@@ -162,9 +162,9 @@ $overall_rating = round( $all_reviews_value / count( $all_reviews ), 1 );
 
 			<?php for ( $index = 5; $index > 0; -- $index ) :
 
-				$rating_times = isset( $all_reviews_rating[ $index ] ) ? $all_reviews_rating[ $index ] : 0;
-				$rating_percentage = round( ( $rating_times / count( $all_reviews ) ) * 100 );
-				?>
+                $rating_times = isset( $all_reviews_rating[ $index ] ) ? $all_reviews_rating[ $index ] : 0;
+                $rating_percentage = count( $all_reviews ) > 0 ? round( ( $rating_times / count( $all_reviews ) ) * 100 ) : 0;
+                ?>
 
                 <label class="stat-filter-item">
                     <input type="radio" name="r"
