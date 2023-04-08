@@ -585,7 +585,7 @@ if ( ! function_exists( 'liquidpoll_create_table' ) ) {
 			UNIQUE KEY id (id)
 		)";
 
-		$sql_meta_table = "CREATE TABLE IF NOT EXISTS " . LIQUIDPOLL_META_TABLE . " (
+		$sql_meta_table = "CREATE TABLE IF NOT EXISTS " . LIQUIDPOLL_RESULTS_META_TABLE . " (
 			id int(100) NOT NULL AUTO_INCREMENT,
 			result_id int(100) NOT NULL,
 			meta_key VARCHAR(255) NOT NULL,
@@ -596,7 +596,7 @@ if ( ! function_exists( 'liquidpoll_create_table' ) ) {
 
 		maybe_create_table( LIQUIDPOLL_RESULTS_TABLE, $sql_results_table );
 		maybe_create_table( LIQUIDPOLL_EMAILS_TABLE, $sql_emails_table );
-		maybe_create_table( LIQUIDPOLL_META_TABLE, $sql_meta_table );
+		maybe_create_table( LIQUIDPOLL_RESULTS_META_TABLE, $sql_meta_table );
 
 		if ( ! function_exists( 'maybe_add_column' ) ) {
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
@@ -642,7 +642,77 @@ if ( ! function_exists( 'liquidpoll_insert_results' ) ) {
 			return new WP_Error( 'database_error', $wpdb->last_error );
 		}
 
-		return true;
+		return $wpdb->insert_id;
+	}
+}
+
+
+if ( ! function_exists( 'liquidpoll_update_results_meta' ) ) {
+	/**
+	 * Insert poll results meta in database
+	 *
+	 * @param $result_id
+	 * @param $meta_key
+	 * @param $meta_value
+	 *
+	 * @return int|WP_Error
+	 */
+	function liquidpoll_update_results_meta( $result_id, $meta_key, $meta_value ) {
+
+		global $wpdb;
+
+		$meta_value = is_array( $meta_value ) ? serialize( $meta_value ) : $meta_value;
+		$args       = array(
+			'result_id'  => $result_id,
+			'meta_key'   => $meta_key,
+			'meta_value' => $meta_value,
+			'datetime'   => current_time( 'mysql' ),
+		);
+
+		if ( ! empty( liquidpoll_get_results_meta( $result_id, $meta_key ) ) ) {
+			$response = $wpdb->update( LIQUIDPOLL_RESULTS_META_TABLE,
+				array(
+					'meta_value' => $meta_value,
+				),
+				array(
+					'result_id' => $result_id,
+					'meta_key'  => $meta_key
+				)
+			);
+		} else {
+			$response = $wpdb->insert( LIQUIDPOLL_RESULTS_META_TABLE, $args );
+		}
+
+		if ( ! $response ) {
+			return new WP_Error( 'database_error', $wpdb->last_error );
+		}
+
+		return $wpdb->insert_id;
+	}
+}
+
+
+if ( ! function_exists( 'liquidpoll_get_results_meta' ) ) {
+	/**
+	 * Return result meta value
+	 *
+	 * @param $result_id
+	 * @param $meta_key
+	 * @param $default
+	 *
+	 * @return false|string
+	 */
+	function liquidpoll_get_results_meta( $result_id, $meta_key, $default = '' ) {
+
+		global $wpdb;
+
+		$meta_value = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM " . LIQUIDPOLL_RESULTS_META_TABLE . " WHERE result_id = %s AND meta_key = %s", $result_id, $meta_key ) );
+
+		if ( $meta_value ) {
+			return is_serialized( $meta_value ) ? unserialize( $meta_value ) : $meta_value;
+		}
+
+		return false;
 	}
 }
 
@@ -841,55 +911,101 @@ if ( ! function_exists( 'liquidpoll_get_data_from_email_table' ) ) {
 }
 
 
-function liquidpoll_get_review_stars( $rating = 0, $theme = 1 ) {
+if ( ! function_exists( 'liquidpoll_get_review_stars' ) ) {
+	/**
+	 * @param $rating
+	 * @param $theme
+	 *
+	 * @return false|string
+	 */
+	function liquidpoll_get_review_stars( $rating = 0, $theme = 1 ) {
 
-	$is_checked       = false;
-	$selectable_class = $rating > 0 ? 'not-selectable' : '';
+		$is_checked       = false;
+		$rating           = empty( $rating ) ? 0 : $rating;
+		$selectable_class = $rating > 0 ? 'not-selectable' : '';
 
-	ob_start();
+		ob_start();
 
-	echo '<div class="rating-wrap ' . esc_attr( $selectable_class . ' theme-' . $theme ) . '">';
+		echo '<div class="rating-wrap ' . esc_attr( $selectable_class . ' theme-' . $theme ) . '">';
 
-	for ( $index = 5; $index > 0; -- $index ) {
+		for ( $index = 5; $index > 0; -- $index ) {
 
-		$unique_id_full  = uniqid();
-		$unique_id_half  = uniqid();
-		$value_full      = $index;
-		$value_half      = ( $index + 0.5 ) - 1;
-		$is_checked_full = $index <= $rating ? 'checked' : '';
-		$is_checked_half = $index - $rating == 0.5 ? 'checked' : '';
-		$active_class    = '';
+			$unique_id_full  = uniqid();
+			$unique_id_half  = uniqid();
+			$value_full      = $index;
+			$value_half      = ( $index + 0.5 ) - 1;
+			$is_checked_full = $index <= $rating ? 'checked' : '';
+			$is_checked_half = $index - $rating == 0.5 ? 'checked' : '';
+			$active_class    = '';
 
-		if ( $is_checked ) {
-			$is_checked_full = $is_checked_half = '';
+			if ( $is_checked ) {
+				$is_checked_full = $is_checked_half = '';
+			}
+
+			if ( ! empty( $is_checked_half ) ) {
+				$is_checked   = true;
+				$active_class = 'active';
+			}
+
+			if ( ! empty( $is_checked_full ) ) {
+				$is_checked   = true;
+				$active_class = 'active';
+			}
+
+			echo '<div class="rating-item ' . esc_attr( $active_class ) . '">';
+
+			echo '<input type="radio" id="' . $unique_id_full . '" class="rating-checkbox" ' . $is_checked_full . ' value="' . $value_full . '" name="rating"/>';
+			echo '<label class="full" for="' . $unique_id_full . '"><svg role="img" aria-label="rating"><use xlink:href="#star"></use></svg></label>';
+
+			echo '<input type="radio" id="' . $unique_id_half . '" class="rating-checkbox" ' . $is_checked_half . ' value="' . $value_half . '" name="rating"/>';
+			echo '<label class="half" for="' . $unique_id_half . '" name="star"><svg role="img" aria-label="rating"><use xlink:href="#star"></use></svg></label>';
+
+			echo '</div>';
 		}
-
-		if ( ! empty( $is_checked_half ) ) {
-			$is_checked   = true;
-			$active_class = 'active';
-		}
-
-		if ( ! empty( $is_checked_full ) ) {
-			$is_checked   = true;
-			$active_class = 'active';
-		}
-
-		echo '<div class="rating-item ' . esc_attr( $active_class ) . '">';
-
-		echo '<input type="radio" id="' . $unique_id_full . '" class="rating-checkbox" ' . $is_checked_full . ' value="' . $value_full . '" name="rating"/>';
-		echo '<label class="full" for="' . $unique_id_full . '"><svg role="img" aria-label="rating"><use xlink:href="#star"></use></svg></label>';
-
-		echo '<input type="radio" id="' . $unique_id_half . '" class="rating-checkbox" ' . $is_checked_half . ' value="' . $value_half . '" name="rating"/>';
-		echo '<label class="half" for="' . $unique_id_half . '" name="star"><svg role="img" aria-label="rating"><use xlink:href="#star"></use></svg></label>';
 
 		echo '</div>';
+
+		echo '<svg style="position: absolute; width: 0; height: 0; overflow: hidden" width="42" height="42" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">';
+		echo '<symbol id="star"><path d="M19.554 3.74151C20.0186 2.75426 20.2509 2.26063 20.5662 2.10291C20.8406 1.9657 21.1594 1.9657 21.4338 2.10291C21.7491 2.26063 21.9814 2.75426 22.446 3.74151L26.8538 13.1078C26.991 13.3993 27.0595 13.545 27.1598 13.6582C27.2485 13.7584 27.3549 13.8395 27.4732 13.8972C27.6067 13.9623 27.76 13.9858 28.0666 14.0328L37.9262 15.5444C38.9644 15.7036 39.4835 15.7832 39.7238 16.0492C39.9328 16.2806 40.0311 16.5986 39.9913 16.9146C39.9456 17.2779 39.5698 17.6618 38.8181 18.4298L31.6863 25.7157C31.464 25.9429 31.3529 26.0564 31.2811 26.1916C31.2176 26.3112 31.1769 26.4426 31.1612 26.5786C31.1434 26.7321 31.1696 26.8925 31.2221 27.2134L32.9049 37.5045C33.0824 38.5899 33.1711 39.1326 33.0043 39.4547C32.8592 39.7349 32.6013 39.9314 32.3024 39.9896C31.9588 40.0564 31.4942 39.8001 30.5649 39.2875L21.7506 34.4255C21.4759 34.274 21.3386 34.1982 21.194 34.1685C21.0659 34.1421 20.9341 34.1421 20.806 34.1685C20.6614 34.1982 20.524 34.274 20.2494 34.4255L11.4351 39.2875C10.5058 39.8001 10.0412 40.0564 9.69763 39.9896C9.39872 39.9314 9.14078 39.7349 8.99568 39.4547C8.8289 39.1326 8.91764 38.5899 9.09513 37.5045L10.7779 27.2134C10.8304 26.8925 10.8566 26.7321 10.8388 26.5786C10.8231 26.4426 10.7824 26.3112 10.7189 26.1916C10.6471 26.0564 10.536 25.9429 10.3137 25.7157L3.18191 18.4298C2.43025 17.6618 2.05442 17.2779 2.00868 16.9146C1.96889 16.5986 2.06719 16.2806 2.27622 16.0492C2.51647 15.7832 3.03559 15.7036 4.07385 15.5444L13.9334 14.0328C14.24 13.9858 14.3933 13.9623 14.5268 13.8972C14.6451 13.8395 14.7515 13.7584 14.8402 13.6582C14.9405 13.545 15.009 13.3993 15.1462 13.1078L19.554 3.74151Z" stroke-linecap="round" stroke-linejoin="bevel"/></symbol>';
+		echo '</svg>';
+
+		return ob_get_clean();
 	}
+}
 
-	echo '</div>';
 
-	echo '<svg style="position: absolute; width: 0; height: 0; overflow: hidden" width="42" height="42" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">';
-	echo '<symbol id="star"><path d="M19.554 3.74151C20.0186 2.75426 20.2509 2.26063 20.5662 2.10291C20.8406 1.9657 21.1594 1.9657 21.4338 2.10291C21.7491 2.26063 21.9814 2.75426 22.446 3.74151L26.8538 13.1078C26.991 13.3993 27.0595 13.545 27.1598 13.6582C27.2485 13.7584 27.3549 13.8395 27.4732 13.8972C27.6067 13.9623 27.76 13.9858 28.0666 14.0328L37.9262 15.5444C38.9644 15.7036 39.4835 15.7832 39.7238 16.0492C39.9328 16.2806 40.0311 16.5986 39.9913 16.9146C39.9456 17.2779 39.5698 17.6618 38.8181 18.4298L31.6863 25.7157C31.464 25.9429 31.3529 26.0564 31.2811 26.1916C31.2176 26.3112 31.1769 26.4426 31.1612 26.5786C31.1434 26.7321 31.1696 26.8925 31.2221 27.2134L32.9049 37.5045C33.0824 38.5899 33.1711 39.1326 33.0043 39.4547C32.8592 39.7349 32.6013 39.9314 32.3024 39.9896C31.9588 40.0564 31.4942 39.8001 30.5649 39.2875L21.7506 34.4255C21.4759 34.274 21.3386 34.1982 21.194 34.1685C21.0659 34.1421 20.9341 34.1421 20.806 34.1685C20.6614 34.1982 20.524 34.274 20.2494 34.4255L11.4351 39.2875C10.5058 39.8001 10.0412 40.0564 9.69763 39.9896C9.39872 39.9314 9.14078 39.7349 8.99568 39.4547C8.8289 39.1326 8.91764 38.5899 9.09513 37.5045L10.7779 27.2134C10.8304 26.8925 10.8566 26.7321 10.8388 26.5786C10.8231 26.4426 10.7824 26.3112 10.7189 26.1916C10.6471 26.0564 10.536 25.9429 10.3137 25.7157L3.18191 18.4298C2.43025 17.6618 2.05442 17.2779 2.00868 16.9146C1.96889 16.5986 2.06719 16.2806 2.27622 16.0492C2.51647 15.7832 3.03559 15.7036 4.07385 15.5444L13.9334 14.0328C14.24 13.9858 14.3933 13.9623 14.5268 13.8972C14.6451 13.8395 14.7515 13.7584 14.8402 13.6582C14.9405 13.545 15.009 13.3993 15.1462 13.1078L19.554 3.74151Z" stroke-linecap="round" stroke-linejoin="bevel"/></symbol>';
-	echo '</svg>';
+if ( ! function_exists( 'liquidpoll_get_poller_submission_count' ) ) {
+	function liquidpoll_get_poller_submission_count( $poller_id_ip = '', $poll_type = 'poll' ) {
 
-	return ob_get_clean();
+		global $wpdb;
+
+		$poller_id_ip = empty( $poller_id_ip ) ? get_current_user_id() : $poller_id_ip;
+
+		return $wpdb->get_var( "SELECT COUNT(*) FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poller_id_ip = '$poller_id_ip' AND poll_type = '$poll_type'" );
+	}
+}
+
+
+if ( ! function_exists( 'liquidpoll_is_current_user_useful_submitted' ) ) {
+	/**
+	 * @param $result_id
+	 * @param $current_user
+	 *
+	 * @return bool
+	 */
+	function liquidpoll_is_current_user_useful_submitted( $result_id, $current_user ) {
+
+		$user_useful_submitted = false;
+		$useful_data           = liquidpoll_get_results_meta( $result_id, 'results_useful_data' );
+
+		if ( ! $useful_data ) {
+			return false;
+		}
+
+		if ( ! empty( $useful_data ) && in_array( $current_user, array_column( $useful_data, 'poller_id_ip' ) ) ) {
+			$user_useful_submitted = true;
+		}
+
+		return $user_useful_submitted;
+	}
 }

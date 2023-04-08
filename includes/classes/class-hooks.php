@@ -60,12 +60,155 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_action( 'wp_ajax_liquidpoll_get_polls', array( $this, 'reports_get_polls' ) );
 			add_action( 'wp_ajax_liquidpoll_get_option_values', array( $this, 'reports_get_option_values' ) );
 			add_action( 'wp_ajax_liquidpoll-activate-addon', array( $this, 'activate_addon' ) );
+
+
+			// Reviews
+			add_action( 'wp_ajax_liquidpoll_submit_review', array( $this, 'liquidpoll_submit_review' ) );
+			add_action( 'wp_ajax_liquidpoll_submit_review_useful', array( $this, 'liquidpoll_submit_review_useful' ) );
+			add_action( 'wp_ajax_liquidpoll_send_reply', array( $this, 'liquidpoll_send_reply' ) );
+		}
+
+		function liquidpoll_send_reply() {
+
+			$_form_data = isset( $_POST['form_data'] ) ? $_POST['form_data'] : '';
+
+			parse_str( $_form_data, $form_data );;
+
+			if ( empty( $result_id = Utils::get_args_option( 'result_id', $form_data ) ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Empty result ID', 'wp-poll' ) ) );
+			}
+
+			if ( empty( $result_reply = Utils::get_args_option( 'result_reply', $form_data ) ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Empty result content', 'wp-poll' ) ) );
+			}
+
+			$result_replies   = liquidpoll_get_results_meta( $result_id, 'result_replies', array() );
+			$result_replies[] = array(
+				'reply_content' => $result_reply,
+				'user_id'       => get_current_user_id(),
+				'datetime'      => current_time( 'mysql' ),
+			);
+
+			$response = liquidpoll_update_results_meta( $result_id, 'result_replies', $result_replies );
+
+			if ( is_wp_error( $response ) ) {
+				wp_send_json_error( array( 'message' => $response->get_error_message() ) );
+			}
+
+			wp_send_json_success();
 		}
 
 
 		/**
-         * Install and Activate add-on
-         *
+		 * Handle review useful data submission
+		 *
+		 * @return void
+		 */
+		function liquidpoll_submit_review_useful() {
+
+			global $wpdb;
+
+			$result_id    = $_POST['review_id'] ?? '';
+			$poller_id_ip = liquidpoll_get_poller();
+
+			$review_useful_data = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM " . LIQUIDPOLL_RESULTS_META_TABLE . " WHERE result_id = %s AND meta_key = %s", $result_id, 'results_useful_data' ) );
+
+			if ( ! $review_useful_data ) {
+
+				$useful_data = array(
+					array(
+						'poller_id_ip' => $poller_id_ip,
+						'datetime'     => current_time( 'mysql' ),
+					),
+				);
+
+				$args = array(
+					'result_id'  => $result_id,
+					'meta_key'   => 'results_useful_data',
+					'meta_value' => serialize( $useful_data ),
+					'datetime'   => current_time( 'mysql' ),
+				);
+
+				$result = $wpdb->insert( LIQUIDPOLL_RESULTS_META_TABLE, $args );
+
+				wp_send_json_success( array( 'message' => $result ) );
+			}
+
+			$useful_data = unserialize( $review_useful_data );
+
+			if ( ! empty( $useful_data ) && ! in_array( $poller_id_ip, array_column( $useful_data, 'poller_id_ip' ) ) ) {
+
+				$useful_data[] = array(
+					'poller_id_ip' => $poller_id_ip,
+					'datetime'     => current_time( 'mysql' ),
+				);
+
+				$args = array(
+					'meta_value' => serialize( $useful_data ),
+				);
+
+				$where = array( 'result_id' => $result_id, 'meta_key' => 'results_useful_data' );
+
+				$result = $wpdb->update( LIQUIDPOLL_RESULTS_META_TABLE, $args, $where );
+
+				wp_send_json_success( array( 'message' => $result ) );
+			}
+		}
+
+
+		/**
+		 * Handle review submission
+		 *
+		 * @return void
+		 */
+		function liquidpoll_submit_review() {
+
+			$_form_data = $_POST['form_data'] ?? '';
+
+			wp_parse_str( $_form_data, $form_data );
+
+			$poll_id            = Utils::get_args_option( 'poll_id', $form_data );
+			$rating             = Utils::get_args_option( 'rating', $form_data );
+			$review_title       = Utils::get_args_option( 'review_title', $form_data );
+			$review_description = Utils::get_args_option( 'review_description', $form_data );
+			$experience_time    = Utils::get_args_option( 'experience_time', $form_data );
+			$consent            = Utils::get_args_option( 'consent', $form_data );
+			$poll               = liquidpoll_get_poll( $poll_id );
+
+
+			if ( ! $poll instanceof LIQUIDPOLL_Poll ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Invalid poll.', 'wp-poll' ) ) );
+			}
+
+			if ( $poll->get_meta( 'is_consent_required', false ) && $consent != 'on' ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Required consent missing.', 'wp-poll' ) ) );
+			}
+
+			// Store submission to Results table
+			$data_args = array(
+				'poll_id'         => sanitize_text_field( $poll_id ),
+				'poll_type'       => $poll->get_type(),
+				'polled_value'    => sanitize_text_field( $rating ),
+				'polled_comments' => sanitize_text_field( $review_description ),
+			);
+			$result_id = liquidpoll_insert_results( $data_args );
+
+			if ( ! $result_id || is_wp_error( $result_id ) ) {
+				wp_send_json_error( array( 'message' => $result_id->get_error_message() ) );
+			}
+
+			// Then store metadata to Results meta table
+			liquidpoll_update_results_meta( $result_id, 'review_title', $review_title );
+			liquidpoll_update_results_meta( $result_id, 'experience_time', $experience_time );
+			liquidpoll_update_results_meta( $result_id, 'consent', $consent );
+
+			wp_send_json_success( array( 'message' => esc_html__( 'Successfully submitted review. Redirecting now...', 'wp-poll' ) ) );
+		}
+
+
+		/**
+		 * Install and Activate add-on
+		 *
 		 * @return void
 		 */
 		function activate_addon() {
@@ -171,25 +314,34 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 
 		/**
-		 * Display reports menu contnet
+		 * Display reports menu content
 		 */
 		function render_complete_report() {
 
 			$report_table = new LIQUIDPOLL_Poll_reports();
 			$current_page = isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
+			$result_id    = isset( $_REQUEST['id'] ) ? sanitize_text_field( $_REQUEST['id'] ) : '';
 
 			ob_start();
 
-			printf( '<h2>%s</h2>', esc_html__( 'LiquidPoll - Reports', 'wp-poll' ) );
-			printf( '<p>%s</p>', esc_html__( 'Complete poll reports.', 'wp-poll' ) );
+			if ( ! empty( $result_id ) ) {
+				printf( '<h2>%s</h2>', esc_html__( 'LiquidPoll - Results Reply', 'wp-poll' ) );
 
-			$report_table->prepare_items();
+                include LIQUIDPOLL_PLUGIN_DIR . 'includes/admin-templates/results-edit.php';
 
-			printf( '<form><input type="hidden" name="page" value="%s"></form>', $current_page );
+			} else {
 
-			$report_table->display();
+				printf( '<h2>%s</h2>', esc_html__( 'LiquidPoll - Reports', 'wp-poll' ) );
+				printf( '<p>%s</p>', esc_html__( 'Complete poll reports.', 'wp-poll' ) );
 
-			printf( '<div class="wrap monster-downloadertable-colum">%s</div>', ob_get_clean() );
+				$report_table->prepare_items();
+
+				printf( '<form><input type="hidden" name="page" value="%s"></form>', $current_page );
+
+				$report_table->display();
+			}
+
+			printf( '<div class="wrap">%s</div>', ob_get_clean() );
 		}
 
 		/**

@@ -20,8 +20,8 @@ defined( 'LIQUIDPOLL_PLUGIN_URL' ) || define( 'LIQUIDPOLL_PLUGIN_URL', WP_PLUGIN
 defined( 'LIQUIDPOLL_PLUGIN_DIR' ) || define( 'LIQUIDPOLL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 defined( 'LIQUIDPOLL_PLUGIN_FILE' ) || define( 'LIQUIDPOLL_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 defined( 'LIQUIDPOLL_RESULTS_TABLE' ) || define( 'LIQUIDPOLL_RESULTS_TABLE', sprintf( '%sliquidpoll_results', $wpdb->prefix ) );
+defined( 'LIQUIDPOLL_RESULTS_META_TABLE' ) || define( 'LIQUIDPOLL_RESULTS_META_TABLE', sprintf( '%sliquidpoll_results_meta', $wpdb->prefix ) );
 defined( 'LIQUIDPOLL_EMAILS_TABLE' ) || define( 'LIQUIDPOLL_EMAILS_TABLE', sprintf( '%sliquidpoll_emails', $wpdb->prefix ) );
-defined( 'LIQUIDPOLL_META_TABLE' ) || define( 'LIQUIDPOLL_META_TABLE', sprintf( '%sliquidpoll_meta', $wpdb->prefix ) );
 defined( 'LIQUIDPOLL_PLUGIN_LINK' ) || define( 'LIQUIDPOLL_PLUGIN_LINK', 'https://www.liquidpoll.com/pro' );
 defined( 'LIQUIDPOLL_DOCS_URL' ) || define( 'LIQUIDPOLL_DOCS_URL', 'https://www.liquidpoll.com/docs' );
 defined( 'LIQUIDPOLL_REVIEW_URL' ) || define( 'LIQUIDPOLL_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );

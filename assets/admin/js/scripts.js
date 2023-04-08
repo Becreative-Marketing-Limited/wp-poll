@@ -44,6 +44,7 @@
         // $('.liquidpoll-export-form input[name="date"]').val(value_id);
     });
 
+
     $(document).on('change', '.liquidpoll-sort-form select[name="type"]', function () {
 
         let this_selection = $(this),
@@ -93,6 +94,7 @@
         });
     });
 
+
     $(document).on('change', '.liquidpoll-sort-form select[name="value"]', function () {
         let this_selection = $(this),
             value_id = this_selection.val();
@@ -109,6 +111,7 @@
         window.onbeforeunload = null;
         window.location.href = currentPageURL + '&poll-id=' + pollSelectionFieldValue + '#tab=reports';
     });
+
 
     $(window).on('load', function () {
         let updateContainer = $('#wp-poll-pro-update'),
@@ -145,6 +148,7 @@
             metaContent.removeClass('loading');
         }, 500);
     });
+
 
     $(document).on('change', '#poll_style_countdown, #poll_options_theme, #poll_animation_checkbox, #poll_animation_radio', function () {
 
@@ -209,6 +213,7 @@
         window.location.replace(redirectURL);
     });
 
+
     $(document).on('change', '#liquidpoll_reports_poll_id', function () {
 
 
@@ -234,9 +239,6 @@
     });
 
 
-    /**
-     * Add new option in poll meta box
-     */
     $(document).on('click', '.liquidpoll-add-poll-option', function () {
 
         console.log($(this).data('poll-id'));
@@ -259,9 +261,6 @@
     });
 
 
-    /**
-     * Remove option in poll meta box
-     */
     $(document).on('click', 'span.option-remove', function () {
 
         let status = $(this).data('status'), buttonRemove = $(this), pollOption = $(this).parent().parent();
@@ -276,9 +275,7 @@
         }
     });
 
-    /**
-     * Install and activate add-on.
-     */
+
     $(document).on('click', '.liquidpoll-activate-addon', function () {
 
         let addOnID = $(this).data('addon-id');
@@ -290,7 +287,7 @@
         let loader = $('.loader');
 
         $(this).html('Activating').append(loader)
-        loader.css('display','inline-block')
+        loader.css('display', 'inline-block')
 
         $.ajax({
             type: 'POST',
@@ -312,6 +309,36 @@
     });
 
 
+    $(document).on('submit', '.liquidpoll-result-replies > form.liquidpoll-reply-box', function (e) {
+
+        e.preventDefault();
+
+        let el_reply_form = $(this);
+
+        el_reply_form.addClass('loading');
+
+        $.ajax({
+            type: 'POST',
+            context: this,
+            url: pluginObject.ajaxurl,
+            data: {
+                'action': 'liquidpoll_send_reply',
+                'form_data': el_reply_form.serialize(),
+            },
+            success: function (response) {
+                console.log(response);
+
+                setTimeout(function () {
+                    el_reply_form.removeClass('loading');
+                    if (response.success) {
+                        window.location.reload();
+                    }
+                }, 2000);
+            }
+        });
+
+        return false;
+    });
 })(jQuery, window, document, liquidpoll_object);
 
 

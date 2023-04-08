@@ -218,13 +218,55 @@ class LIQUIDPOLL_Poll_meta {
 					'type'        => 'select',
 					'placeholder' => esc_html__( 'Select post type', 'wp-poll' ),
 					'options'     => 'post_types',
-					'dependency'  => array( '_type|_reaction_position', '==|any', 'reaction|below_content,above_content', 'all' ),
+					'dependency'  => array(
+						'_type|_reaction_position',
+						'==|any',
+						'reaction|below_content,above_content',
+						'all'
+					),
 				),
 				array(
 					'id'         => '_reaction_floating_position',
 					'title'      => esc_html__( 'Floating Position', 'wp-poll' ),
 					'type'       => 'spacing',
 					'dependency' => array( '_type|_reaction_position', '==|==', 'reaction|floating', 'all' ),
+				),
+				array(
+					'id'         => 'reviews_service_logo',
+					'title'      => esc_html__( 'Service Logo', 'wp-poll' ),
+					'type'       => 'media',
+					'url'        => false,
+					'dependency' => array( '_type', '==', 'reviews', 'all' ),
+				),
+				array(
+					'id'         => 'reviews_service_name',
+					'title'      => esc_html__( 'Service Name', 'wp-poll' ),
+					'type'       => 'text',
+					'dependency' => array( '_type', '==', 'reviews', 'all' ),
+				),
+				array(
+					'id'         => 'reviews_service_url',
+					'title'      => esc_html__( 'Service URL', 'wp-poll' ),
+					'type'       => 'text',
+					'dependency' => array( '_type', '==', 'reviews', 'all' ),
+				),
+				array(
+					'id'         => 'is_consent_required',
+					'title'      => esc_html__( 'Require Consent', 'wp-poll' ),
+					'type'       => 'switcher',
+					'default'    => false,
+					'dependency' => array( '_type', '==', 'reviews', 'all' ),
+				),
+				array(
+					'id'         => 'reviews_consent_desc',
+					'title'      => esc_html__( 'Consent Description', 'wp-poll' ),
+					'type'       => 'textarea',
+					'attributes'  => array(
+						'rows'  => '4',
+						'cols'  => '75',
+						'style' => 'width:auto;min-height: auto;',
+					),
+					'dependency' => array( '_type', '==', 'reviews', 'all' ),
 				),
 			), $post_selection_fields, $poll_setting_fields )
 		);

@@ -1,7 +1,6 @@
 /*
 * Admin css
 */
-
 :root {
     --sliderxwoo-primary-color: #774ea9;
     --sliderxwoo-red-color: #ff6a5f;
@@ -10,8 +9,7 @@
     --wpdk_settings-primary-color-dim: var(--sliderxwoo-primary-color-dim);
 }
 
-body.post-type-poll #titlediv #title,
-body.post-type-poll #titlediv #title:focus {
+body.post-type-poll #titlediv #title, body.post-type-poll #titlediv #title:focus {
     padding: 12px 8px;
     height: auto;
     border-radius: 3px;
@@ -30,12 +28,9 @@ body.post-type-poll #submitdiv {
     border: none;
 }
 
-body.post-type-poll #submitdiv .postbox-header,
-body.post-type-poll #submitdiv .handlediv,
-body.post-type-poll #submitdiv .hndle {
+body.post-type-poll #submitdiv .postbox-header, body.post-type-poll #submitdiv .handlediv, body.post-type-poll #submitdiv .hndle {
     display: none;
 }
-
 
 .liquidpoll-no-display {
     display: none;
@@ -46,7 +41,6 @@ body.post-type-poll #submitdiv .hndle {
     padding: 8px 12px;
     line-height: 20px;
 }
-
 
 #poll_metabox .liquidpoll-add-poll-option {
     position: relative;
@@ -59,7 +53,6 @@ body.post-type-poll #submitdiv .hndle {
     color: #fff;
     text-indent: 10px;
 }
-
 
 #poll_metabox .liquidpoll-add-poll-option:after {
     content: '+';
@@ -110,7 +103,6 @@ body.post-type-poll #submitdiv .hndle {
     background: #435863e8;
 }
 
-
 .poll-option-controls > span:hover {
     background: #176a75e8;
 }
@@ -135,14 +127,12 @@ body.post-type-poll #submitdiv .hndle {
     width: 100%;
 }
 
-
 .post-type-poll .wps-field fieldset label {
     display: inline-block;
     margin-bottom: 10px;
 }
 
-.post-type-poll .wps-field fieldset label input[type="checkbox"],
-.post-type-poll .wps-field fieldset label input[type="radio"] {
+.post-type-poll .wps-field fieldset label input[type="checkbox"], .post-type-poll .wps-field fieldset label input[type="radio"] {
     margin-top: -2px;
     margin-right: 8px;
 }
@@ -177,16 +167,12 @@ body.post-type-poll #submitdiv .hndle {
     width: 75%;
 }
 
-.widget-inside .wps-field .wps-field-inputs select,
-.widget-inside .wps-field .wps-field-inputs input {
+.widget-inside .wps-field .wps-field-inputs select, .widget-inside .wps-field .wps-field-inputs input {
     width: 100%;
     max-width: 100%;
 }
 
-a.liquidpoll-preview-link,
-a.liquidpoll-preview-link:active,
-a.liquidpoll-preview-link:focus,
-a.liquidpoll-preview-link:hover {
+a.liquidpoll-preview-link, a.liquidpoll-preview-link:active, a.liquidpoll-preview-link:focus, a.liquidpoll-preview-link:hover {
     margin-left: 10px;
     text-decoration: none;
     color: #FF5722;
@@ -197,7 +183,6 @@ a.liquidpoll-preview-link:hover {
 /**
  * Notices
  */
-
 .liquidpoll-notice {
     background: #00bcd43b;
     padding: 10px;
@@ -226,7 +211,6 @@ a.liquidpoll-preview-link:hover {
     margin-left: 0;
 }
 
-
 span.shortcode {
     background: #f1f1f1;
     border: 1px solid #a2a2a2;
@@ -242,11 +226,9 @@ span.shortcode {
     font-weight: 600;
 }
 
-
 /**
  * Extensions
  */
-
 .pb-extensions {
     padding: 25px;
 }
@@ -273,7 +255,6 @@ span.shortcode {
     background: #fff;
 }
 
-
 .pb-extensions .pb-extension .info h2 {
     margin-top: 0;
 }
@@ -293,10 +274,7 @@ span.shortcode {
     display: inline-block;
 }
 
-.pb-extensions .pb-extension .info .pricing a.price,
-.pb-extensions .pb-extension .info .pricing a.price:focus,
-.pb-extensions .pb-extension .info .pricing a.price:hover,
-.pb-extensions .pb-extension .info .pricing a.price:active {
+.pb-extensions .pb-extension .info .pricing a.price, .pb-extensions .pb-extension .info .pricing a.price:focus, .pb-extensions .pb-extension .info .pricing a.price:hover, .pb-extensions .pb-extension .info .pricing a.price:active {
     background-color: #e65550;
     background-image: linear-gradient(-100deg, #424242d9, transparent);
     padding: 8px 15px;
@@ -310,12 +288,7 @@ span.shortcode {
     box-shadow: none;
 }
 
-a.liquidpoll-support,
-a.liquidpoll-support:focus,
-a.liquidpoll-support:active,
-a.liquidpoll-doc,
-a.liquidpoll-doc:focus,
-a.liquidpoll-doc:active {
+a.liquidpoll-support, a.liquidpoll-support:focus, a.liquidpoll-support:active, a.liquidpoll-doc, a.liquidpoll-doc:focus, a.liquidpoll-doc:active {
     background: #e61f63;
     color: #fff;
     padding: 3px 12px 5px;
@@ -440,13 +413,11 @@ a.liquidpoll-doc {
     max-width: 36px;
 }
 
-.liquidpoll-sort-form input[name="date_1"].no-display,
-.liquidpoll-sort-form input[name="date_2"].no-display {
+.liquidpoll-sort-form input[name="date_1"].no-display, .liquidpoll-sort-form input[name="date_2"].no-display {
     display: none;
 }
 
-.liquidpoll-sort-form input[name="date_1"],
-.liquidpoll-sort-form input[name="date_2"] {
+.liquidpoll-sort-form input[name="date_1"], .liquidpoll-sort-form input[name="date_2"] {
     width: 98px;
     font-size: 12px;
     line-height: 22px;
@@ -471,6 +442,177 @@ span.poll-type.type-nps {
     text-transform: uppercase;
 }
 
-.wpdk_settings-section[data-section-id="reports"] .liquidpoll-reports-field{
+.wpdk_settings-section[data-section-id="reports"] .liquidpoll-reports-field {
     padding: 15px 0 0 15px;
+}
+
+/**
+ * Results edit screen
+ */
+.liquidpoll-result-edit {
+    display: flex;
+    margin-top: 30px;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-details {
+    width: 50%;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-details .liquidpoll-edit-item {
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid #dedede;
+    background: #fff;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-details .liquidpoll-edit-item:last-child {
+    border-bottom: none;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-details .liquidpoll-edit-item .item-title {
+    width: 30%;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-details .liquidpoll-edit-item .item-value {
+}
+
+.liquidpoll-result-edit .liquidpoll-result-replies {
+    margin-left: 30px;
+    background: #fff;
+    width: calc(50% - 90px);
+    padding: 30px;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box {
+}
+
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap {
+    margin-bottom: 20px;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap > label {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap > textarea, .liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap > textarea:focus, .liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap > textarea:active {
+    width: 100%;
+    border: 1px solid #c3c3ff;
+    box-shadow: none;
+    outline: none;
+    padding: 10px;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .liquidpoll-button, .liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .liquidpoll-button:focus, .liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .liquidpoll-button:active {
+    background: #5F64EB;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    color: #FFFFFF;
+    position: relative;
+    transition: 0.3s;
+    cursor: pointer;
+    box-shadow: none;
+    outline: none;
+    border: none;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box.loading .liquidpoll-button {
+    padding-right: 60px;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box.loading .liquidpoll-button:after {
+    content: ' ';
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    border-right-color: #41ea48;
+    animation: loading 1s linear infinite;
+    margin: -11px -11px;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies {
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply {
+    /* border-bottom: 1px solid rgb(95 100 235 / 34%); */
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author .author-image {
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #f2f2ff;
+    box-shadow: 0 0 20px rgb(95 100 235 / 17%);
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author .author-image img {
+    width: 100%;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author .author-details {
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author .author-details .author-name {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author .author-details .reply-time {
+    margin: 0 0 0 0;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-content {
+    background: #f2f2ff;
+    padding: 0 12px;
+    display: inline-block;
+    margin: 20px 0 0 0;
+    border-radius: 4px;
+    width: calc(100% - 24px);
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-content * {
+    font-size: 14px;
+    line-height: 21px;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    50% {
+        transform: rotate(180deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
 }

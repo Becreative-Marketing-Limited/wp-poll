@@ -205,8 +205,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 
 
 		/**
-         * Column poller_name
-         *
+		 * Column poller_name
+		 *
 		 * @param $item
 		 *
 		 * @return void
@@ -263,12 +263,13 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 		 */
 		function column_poll( $item ) {
 
-			$poll_id = Utils::get_args_option( 'poll_id', $item );
-			$poll    = liquidpoll_get_poll( $poll_id );
-
+			$poll_id       = Utils::get_args_option( 'poll_id', $item );
+			$result_id     = Utils::get_args_option( 'id', $item );
+			$poll          = liquidpoll_get_poll( $poll_id );
 			$row_actions[] = sprintf( '<span class="type %1$s">%1$s</span>', $poll->get_type() );
+			$title_link    = $poll->get_type() == 'reviews' ? admin_url( 'edit.php?post_type=poll&page=reports&id=' . $result_id ) : $poll->get_permalink();
 
-			printf( '<strong><a href="%s" class="row-title">%s</a></strong>', $poll->get_permalink(), $poll->get_name() );
+			printf( '<strong><a href="%s" class="row-title">%s</a></strong>', $title_link, $poll->get_name() );
 			printf( '<div class="row-actions visible">%s</div>', implode( ' | ', $row_actions ) );
 		}
 
