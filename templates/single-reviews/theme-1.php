@@ -62,10 +62,13 @@ $overall_rating = round( $all_reviews_value / count( $all_reviews ), 1 );
                       stroke-linejoin="round"/>
             </svg>
         </a>
-        <div class="service-logo" style='background-image: url("<?php echo esc_url( $service_logo['url'] ) ?>)'></div>
+
         <div class="service-info">
-            <span class="service-name"><?php echo esc_html__( $service_name ) ?></span>
-            <span><a href="<?php echo esc_url( $service_url ) ?>"><?php echo esc_html__( $service_url ) ?></a></span>
+            <div class="service-logo" style='background-image: url("<?php echo esc_url( $service_logo['url'] ) ?>)'></div>
+            <span>
+                <span class="service-name"><?php echo esc_html__( $service_name ) ?></span>
+                <a href="<?php echo esc_url( $service_url ) ?>"><?php echo esc_html__( $service_url ) ?></a>
+            </span>
         </div>
     </div>
     <hr class="liquidpoll-divider">
@@ -293,14 +296,15 @@ $overall_rating = round( $all_reviews_value / count( $all_reviews ), 1 );
                                 <div class="replay-info">
                                     <div class="replay-icon">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M2 2V3.4C2 6.76031 2 8.44047 2.65396 9.72394C3.2292 10.8529 4.14708 11.7708 5.27606 12.346C6.55953 13 8.23969 13 11.6 13H18M18 13L13 8M18 13L13 18"
-                                                  stroke="#5F64EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M2 2V3.4C2 6.76031 2 8.44047 2.65396 9.72394C3.2292 10.8529 4.14708 11.7708 5.27606 12.346C6.55953 13 8.23969 13 11.6 13H18M18 13L13 8M18 13L13 18" stroke="#5F64EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                     </div>
-                                    <div class="service-logo"><img src="<?php echo esc_url( get_avatar_url( $reply_author->ID ) ); ?>" alt="<?php echo esc_attr( $reply_author->display_name ); ?>"></div>
                                     <div class="service-info">
-                                        <span class="service-name"><?php echo esc_html( $reply_author->display_name ); ?></span>
-                                        <span><?php echo sprintf( esc_html__( 'Replied %s ago', 'wp-poll' ), human_time_diff( strtotime( Utils::get_args_option( 'datetime', $reply ) ), time() ) ) ?></span>
+                                        <div class="service-logo"><img src="<?php echo esc_url( get_avatar_url( $reply_author->ID ) ); ?>" alt="<?php echo esc_attr( $reply_author->display_name ); ?>"></div>
+                                        <div class="service-details">
+                                            <span class="service-name"><?php echo esc_html( $reply_author->display_name ); ?></span>
+                                            <span><?php echo sprintf( esc_html__( 'Replied %s ago', 'wp-poll' ), human_time_diff( strtotime( Utils::get_args_option( 'datetime', $reply ) ), time() ) ) ?></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <p class="reply-date"><?php echo date( "jS M Y", strtotime( Utils::get_args_option( 'datetime', $reply ) ) ); ?></p>
