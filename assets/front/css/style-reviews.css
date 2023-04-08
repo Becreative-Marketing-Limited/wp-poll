@@ -373,7 +373,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 
 .reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .rating-value-bar {
     position: relative;
-    width: calc(100% - 160px);
+    width: calc(100% - 200px);
     background: #F2F2F2;
     height: 20px;
     border-radius: 40px;
@@ -389,6 +389,10 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     top: 0;
     left: 0;
     border-radius: 40px;
+}
+
+.reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .rating-result-value {
+    width: 45px;
 }
 
 .reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .rating-value {
@@ -574,11 +578,20 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     padding-top: 25px;
 }
 
+.reviews-main .liquidpoll-reviews-item .review-share {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
 .reviews-main .liquidpoll-reviews-item .review-share .useful {
     border: none;
     background: none;
     padding-right: 25px;
     cursor: pointer;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 .reviews-main .liquidpoll-reviews-item .review-share .useful.active svg path {
@@ -598,6 +611,9 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     border: none;
     background: none;
     cursor: pointer;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 .reviews-main .liquidpoll-reviews-item .review-share .share span {
@@ -610,7 +626,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 }
 
 .reviews-main .liquidpoll-reviews-item .review-replay {
-    padding-top: 40px;
+    margin-top: 30px;
 }
 
 .reviews-main .liquidpoll-reviews-item .review-replay .replay-info-wrap {
@@ -635,6 +651,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     display: inline-block;
     border-radius: 50%;
     margin-right: 25px;
+    overflow: hidden;
 }
 
 .reviews-main .liquidpoll-reviews-item .review-replay .replay-info-wrap .replay-info .service-info .service-name {
@@ -847,7 +864,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 }
 
 .reviews-main form.reviews-form {
-    max-width: 700px;
+    width: 100%;
     box-sizing: border-box;
     border: 2px solid #F5F5F5;
     border-radius: 10px;
@@ -939,15 +956,13 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 }
 
 .reviews-main .reviews-form .review-textarea {
-    padding: 0 30px 40px 0;
+    padding: 0 0 40px 0;
 }
 
-.reviews-main .reviews-form .review-textarea textarea#review {
+.reviews-main .reviews-form .review-textarea textarea {
     background: #FFFFFF;
     border: 1px solid #C4C4C4;
     border-radius: 5px;
-    height: 195px;
-    width: 640px;
 }
 
 .reviews-main .reviews-form .experience-date {
@@ -993,9 +1008,9 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 }
 
 .reviews-main .reviews-form .consent .consent-items .consent-desc {
-    margin-left: 20px;
+    margin-left: 15px;
     font-size: 17px;
-    line-height: 23px;
+    line-height: 27px;
     color: #000000;
 }
 
@@ -1081,3 +1096,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
         transform: rotate(360deg)
     }
 }
+
+
+/*Responsive*/
+/*390*/

@@ -709,7 +709,7 @@ if ( ! function_exists( 'liquidpoll_get_results_meta' ) ) {
 		$meta_value = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM " . LIQUIDPOLL_RESULTS_META_TABLE . " WHERE result_id = %s AND meta_key = %s", $result_id, $meta_key ) );
 
 		if ( $meta_value ) {
-			return  is_serialized( $meta_value )  ? unserialize( $meta_value ) : $meta_value;
+			return is_serialized( $meta_value ) ? unserialize( $meta_value ) : $meta_value;
 		}
 
 		return false;
@@ -974,13 +974,15 @@ if ( ! function_exists( 'liquidpoll_get_review_stars' ) ) {
 }
 
 
-function liquidpoll_get_poller_submission_count( $poller_id_ip = '', $poll_type = 'poll' ) {
+if ( ! function_exists( 'liquidpoll_get_poller_submission_count' ) ) {
+	function liquidpoll_get_poller_submission_count( $poller_id_ip = '', $poll_type = 'poll' ) {
 
-	global $wpdb;
+		global $wpdb;
 
-	$poller_id_ip = empty( $poller_id_ip ) ? get_current_user_id() : $poller_id_ip;
+		$poller_id_ip = empty( $poller_id_ip ) ? get_current_user_id() : $poller_id_ip;
 
-	return $wpdb->get_var( "SELECT COUNT(*) FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poller_id_ip = '$poller_id_ip' AND poll_type = '$poll_type'" );
+		return $wpdb->get_var( "SELECT COUNT(*) FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poller_id_ip = '$poller_id_ip' AND poll_type = '$poll_type'" );
+	}
 }
 
 
@@ -992,8 +994,9 @@ if ( ! function_exists( 'liquidpoll_is_current_user_useful_submitted' ) ) {
 	 * @return bool
 	 */
 	function liquidpoll_is_current_user_useful_submitted( $result_id, $current_user ) {
+
 		$user_useful_submitted = false;
-		$useful_data           = unserialize( liquidpoll_get_results_meta( $result_id, 'results_useful_data' ) );
+		$useful_data           = liquidpoll_get_results_meta( $result_id, 'results_useful_data' );
 
 		if ( ! $useful_data ) {
 			return false;

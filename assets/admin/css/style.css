@@ -456,13 +456,17 @@ span.poll-type.type-nps {
 
 .liquidpoll-result-edit .liquidpoll-result-details {
     width: 50%;
-    background: #fff;
 }
 
 .liquidpoll-result-edit .liquidpoll-result-details .liquidpoll-edit-item {
     display: flex;
     padding: 15px;
     border-bottom: 1px solid #dedede;
+    background: #fff;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-details .liquidpoll-edit-item:last-child {
+    border-bottom: none;
 }
 
 .liquidpoll-result-edit .liquidpoll-result-details .liquidpoll-edit-item .item-title {
@@ -483,11 +487,9 @@ span.poll-type.type-nps {
 }
 
 .liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box {
-
 }
 
 .liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap {
-
     margin-bottom: 20px;
 }
 
@@ -499,9 +501,7 @@ span.poll-type.type-nps {
     display: inline-block;
 }
 
-.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap > textarea,
-.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap > textarea:focus,
-.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap > textarea:active {
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap > textarea, .liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap > textarea:focus, .liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .textarea-wrap > textarea:active {
     width: 100%;
     border: 1px solid #c3c3ff;
     box-shadow: none;
@@ -509,14 +509,12 @@ span.poll-type.type-nps {
     padding: 10px;
 }
 
-.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .liquidpoll-button,
-.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .liquidpoll-button:focus,
-.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .liquidpoll-button:active {
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .liquidpoll-button, .liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .liquidpoll-button:focus, .liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box .liquidpoll-button:active {
     background: #5F64EB;
     border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 16px;
-    line-height: 24px;
+    padding: 12px 24px;
+    font-size: 18px;
+    line-height: 28px;
     text-align: center;
     color: #FFFFFF;
     position: relative;
@@ -525,4 +523,96 @@ span.poll-type.type-nps {
     box-shadow: none;
     outline: none;
     border: none;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box.loading .liquidpoll-button {
+    padding-right: 60px;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-replies .liquidpoll-reply-box.loading .liquidpoll-button:after {
+    content: ' ';
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    border-right-color: #41ea48;
+    animation: loading 1s linear infinite;
+    margin: -11px -11px;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies {
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply {
+    /* border-bottom: 1px solid rgb(95 100 235 / 34%); */
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author .author-image {
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #f2f2ff;
+    box-shadow: 0 0 20px rgb(95 100 235 / 17%);
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author .author-image img {
+    width: 100%;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author .author-details {
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author .author-details .author-name {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-author .author-details .reply-time {
+    margin: 0 0 0 0;
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-content {
+    background: #f2f2ff;
+    padding: 0 12px;
+    display: inline-block;
+    margin: 20px 0 0 0;
+    border-radius: 4px;
+    width: calc(100% - 24px);
+}
+
+.liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-content * {
+    font-size: 14px;
+    line-height: 21px;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    50% {
+        transform: rotate(180deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
 }

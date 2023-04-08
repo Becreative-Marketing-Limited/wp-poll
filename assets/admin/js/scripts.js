@@ -287,7 +287,7 @@
         let loader = $('.loader');
 
         $(this).html('Activating').append(loader)
-        loader.css('display','inline-block')
+        loader.css('display', 'inline-block')
 
         $.ajax({
             type: 'POST',
@@ -307,11 +307,13 @@
     });
 
 
-    $(document).on('submit', '.liquidpoll-result-replies', function (e) {
+    $(document).on('submit', '.liquidpoll-result-replies > form.liquidpoll-reply-box', function (e) {
 
         e.preventDefault();
 
         let el_reply_form = $(this);
+
+        el_reply_form.addClass('loading');
 
         $.ajax({
             type: 'POST',
@@ -322,10 +324,14 @@
                 'form_data': el_reply_form.serialize(),
             },
             success: function (response) {
-                if (response.success) {
-                    window.location.reload();
-                }
-                console.log(response)
+                console.log(response);
+
+                setTimeout(function () {
+                    el_reply_form.removeClass('loading');
+                    if (response.success) {
+                        window.location.reload();
+                    }
+                }, 2000);
             }
         });
 

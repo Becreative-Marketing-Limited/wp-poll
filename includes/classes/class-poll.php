@@ -218,7 +218,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			} else if ( 'reviews' == $this->get_type() ) {
 
 				$where_clause      = "WHERE poll_id = {$this->get_id()} AND poll_type = 'reviews'";
-				$orderby_clause    = "";
+				$orderby_clause    = "ORDER BY datetime DESC";
 				$rating            = Utils::get_args_option( 'rating', $args );
 				$relevant_orderby  = Utils::get_args_option( 'relevant', $args );
 				$filter_date       = Utils::get_args_option( 'filter_date', $args );
@@ -229,7 +229,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 				}
 
 				if ( ! empty( $relevant_orderby ) && ( $relevant_orderby === 'DESC' || $relevant_orderby === 'ASC' ) ) {
-					$orderby_clause .= "ORDER BY datetime $relevant_orderby";
+					$orderby_clause = "ORDER BY datetime $relevant_orderby";
 				}
 
 				if ( ! empty( $filter_date ) ) {
