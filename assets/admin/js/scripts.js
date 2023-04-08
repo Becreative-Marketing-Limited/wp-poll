@@ -298,9 +298,9 @@
                 'addon_id': addOnID,
             },
             success: function (response) {
-                if (response.success) {
+                if(response.success){
                     $(this).removeClass('liquidpoll-activate-addon').addClass('active').removeAttr('data-addon-id');
-                    loader.css('display', 'none')
+                    loader.css('display','none')
                     $(this).parent().parent().parent().append(loader)
                     $(this).text("Active");
                 }
