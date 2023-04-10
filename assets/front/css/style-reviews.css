@@ -240,6 +240,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 .reviews-main .rating-wrap .rating-item:hover ~ .rating-item label svg,
 .reviews-main .rating-wrap .rating-item.active ~ .rating-item label svg {
     fill: #8488F0;
+    stroke: #FFF0EA;
 }
 
 .reviews-main .rating-wrap .rating-item:hover, .reviews-main .rating-wrap .rating-item:hover ~ .rating-item, .reviews-main .rating-wrap .rating-item.active, .reviews-main .rating-wrap .rating-item.active ~ .rating-item {
@@ -346,8 +347,10 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 .reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item {
     display: flex;
     width: 100%;
+    height: 30px;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
     cursor: pointer;
 }
 
@@ -406,7 +409,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    margin: 20px 0;
 }
 
 .reviews-main .liquidpoll-reviews-filter .reviews-filter {
@@ -558,6 +561,18 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     margin: 30px 0;
 }
 
+.reviews-main .liquidpoll-reviews-item .review-stars .rating-wrap .rating-item {
+    margin-right: 7px;
+    border-radius: 7px;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-stars .rating-wrap .rating-item label svg {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    transform: scale(0.7);
+}
+
 .reviews-main .liquidpoll-reviews-item .comment-heading {
     font-style: normal;
     font-weight: 600;
@@ -569,6 +584,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 .reviews-main .liquidpoll-reviews-item .review-comment > p {
     font-size: 20px;
     line-height: 30px;
+    margin: 20px 0 30px;
 }
 
 .reviews-main .liquidpoll-reviews-item .review-share-wrap {
@@ -1109,7 +1125,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 /*Responsive*/
 /*390*/
 
-@media screen and (min-device-width: 320px) and (max-device-width: 390px) {
+@media screen and (min-device-width: 320px) and (max-device-width: 460px) {
 
     .liquidpoll-reviews-rating .user-meta {
         margin-bottom: 20px;
