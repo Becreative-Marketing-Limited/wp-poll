@@ -174,7 +174,9 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			$experience_time    = Utils::get_args_option( 'experience_time', $form_data );
 			$consent            = Utils::get_args_option( 'consent', $form_data );
 			$poll               = liquidpoll_get_poll( $poll_id );
-
+			$polled_data        = $poll->get_poll_results();
+			$reviewed_poller    = array_column( $polled_data, 'poller_id_ip' );
+			$poller             = liquidpoll_get_poller();
 
 			if ( ! $poll instanceof LIQUIDPOLL_Poll ) {
 				wp_send_json_error( array( 'message' => esc_html__( 'Invalid poll.', 'wp-poll' ) ) );
@@ -182,6 +184,13 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 			if ( $poll->get_meta( 'is_consent_required', false ) && $consent != 'on' ) {
 				wp_send_json_error( array( 'message' => esc_html__( 'Required consent missing.', 'wp-poll' ) ) );
+			}
+
+			/**
+			 * Check if already voted
+			 */
+			if ( in_array( $poller, $reviewed_poller ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'You already reviewed.', 'wp-poll' ) ) );
 			}
 
 			// Store submission to Results table
@@ -327,7 +336,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			if ( ! empty( $result_id ) ) {
 				printf( '<h2>%s</h2>', esc_html__( 'LiquidPoll - Results Reply', 'wp-poll' ) );
 
-                include LIQUIDPOLL_PLUGIN_DIR . 'includes/admin-templates/results-edit.php';
+				include LIQUIDPOLL_PLUGIN_DIR . 'includes/admin-templates/results-edit.php';
 
 			} else {
 

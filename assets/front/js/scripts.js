@@ -490,13 +490,13 @@
             el_this_rating.parents('form.liquidpoll-reviews-rating').submit();
         });
 
-        el_filter_rating.change(function (){
+        el_filter_rating.change(function () {
             let el_this_filter_rating = $(this);
 
             el_this_filter_rating.parents('form.liquidpoll-reviews-stat').submit();
         });
 
-        el_filter_relevant.change(function (){
+        el_filter_relevant.change(function () {
             let el_this_filter_relevant = $(this);
             console.log('ok')
 
@@ -536,6 +536,13 @@
                         el_review_response_message.html(response.data.message);
                         el_review_response.fadeIn();
 
+                        setTimeout(function () {
+                            window.location.href = window.location.origin + window.location.pathname;
+                        }, 2000);
+                    } else {
+                        el_review_response_message.html(response.data.message);
+                        el_review_response.removeClass('liquidpoll-success').addClass('liquidpoll-error');
+                        el_review_response.fadeIn();
                         setTimeout(function () {
                             window.location.href = window.location.origin + window.location.pathname;
                         }, 2000);
@@ -592,7 +599,7 @@
     });
 
 
-    $(document).on('click','.useful',function(){
+    $(document).on('click', '.useful', function () {
 
         let review_id = $(this).data('review-id');
 
