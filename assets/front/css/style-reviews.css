@@ -593,6 +593,10 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     transform: scale(0.7);
 }
 
+.reviews-main .liquidpoll-reviews-item .review-stars .rating-wrap .rating-item label.half {
+    width: 22px;
+}
+
 .reviews-main .liquidpoll-reviews-item .comment-heading {
     font-style: normal;
     font-weight: 600;
@@ -816,6 +820,10 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 
 .reviews-main .liquidpoll-filter-modal-wrap .liquidpoll-filter-modal .filter-rating .filter-stars .filter-star .star-icon {
     transform: scale(0.5);
+}
+
+.reviews-main .liquidpoll-filter-modal-wrap .liquidpoll-filter-modal .filter-rating .filter-stars .filter-star svg use {
+    filter: drop-shadow(2px 3px 2px rgba(64, 72, 146, 0.41));
 }
 
 .reviews-main .liquidpoll-filter-modal-wrap .liquidpoll-filter-modal .filter-date {
