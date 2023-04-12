@@ -146,7 +146,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
         <div class="review-stat-heading">
             <div class="stat-heading">
                 <h2>Reviews</h2>
-                <span><?php echo sprintf( esc_html__( '%s Reviews', 'wp-poll' ), count( $all_reviews ) ); ?></span>
+                <span><?php echo sprintf( esc_html__( '%s ratings', 'wp-poll' ), count( $all_reviews ) ); ?></span>
             </div>
             <div class="stat-rating">
                 <div class="star">
