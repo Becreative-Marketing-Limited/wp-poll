@@ -388,6 +388,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     stroke: #FFF0EA;
     padding: 8px;
     transform: scale(0.5);
+    margin-left: -20px;
 }
 
 .reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .rating-star use {
@@ -1158,10 +1159,6 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
         padding: 40px 30px 14px;
     }
 
-    .liquidpoll-reviews-rating .user-meta {
-        margin-bottom: 20px;
-    }
-
     .reviews-main .liquidpoll-reviews-rating {
         flex-direction: column;
         align-items: flex-start;
@@ -1202,13 +1199,13 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     }
 
     .reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .liquidpoll-checkbox {
-        width: 22px;
-        height: 22px;
+        width: 23px;
+        height: 23px;
     }
 
     .reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .liquidpoll-checkbox:after {
-        top: 4px;
-        left: 4px;
+        top: 5px;
+        left: 5px;
         width: 10px;
         height: 10px;
     }
@@ -1217,9 +1214,13 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
         margin-left: 5px;
     }
 
+    .reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .rating-star {
+        margin-left: -15px;
+    }
+
     .reviews-main .liquidpoll-reviews-stat .review-stat-filter .stat-filter-item .rating-value-bar {
         margin-right: 8px;
-        width: calc(100% - 160px);
+        width: calc(100% - 142px);
     }
 
     .reviews-main .liquidpoll-reviews-filter .reviews-filter,
