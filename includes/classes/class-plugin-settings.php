@@ -361,6 +361,59 @@ class LIQUIDPOLL_Settings {
 						),
 					),
 				),
+				array(
+					'title'  => esc_html__( 'Reviews', 'wp-poll' ),
+					'fields' => array(
+						array(
+							'id'          => 'liquidpoll_reviews_rating_title',
+							'title'       => esc_html__( 'Rating Title Label', 'wp-poll' ),
+							'type'        => 'text',
+							'placeholder' => esc_html__( 'Rate your experience', 'wp-poll' ),
+						),
+						array(
+							'id'          => 'liquidpoll_reviews_title',
+							'title'       => esc_html__( 'Reviews Title Label', 'wp-poll' ),
+							'type'        => 'text',
+							'placeholder' => esc_html__( 'Give your review a title', 'wp-poll' ),
+						),
+						array(
+							'id'          => 'liquidpoll_reviews_title_placeholder',
+							'title'       => esc_html__( 'Title Placeholder', 'wp-poll' ),
+							'type'        => 'text',
+							'placeholder' => esc_html__( 'Impressed with the service!', 'wp-poll' ),
+						),
+						array(
+							'id'          => 'liquidpoll_reviews_content_title',
+							'title'       => esc_html__( 'Content Title Label', 'wp-poll' ),
+							'type'        => 'text',
+							'placeholder' => esc_html__( 'Briefly tell us about your experience', 'wp-poll' ),
+						),
+						array(
+							'id'          => 'liquidpoll_reviews_content_title_placeholder',
+							'title'       => esc_html__( 'Content Title Placeholder', 'wp-poll' ),
+							'type'        => 'text',
+							'placeholder' => esc_html__( 'Share your experience in detail..', 'wp-poll' ),
+						),
+						array(
+							'id'          => 'liquidpoll_reviews_experience_title',
+							'title'       => esc_html__( 'Experience Title Label', 'wp-poll' ),
+							'type'        => 'text',
+							'placeholder' => esc_html__( 'When did you have this experience?', 'wp-poll' ),
+						),
+						array(
+							'id'          => 'liquidpoll_reviews_submit_button',
+							'title'       => esc_html__( 'Submit Button Label', 'wp-poll' ),
+							'type'        => 'text',
+							'placeholder' => esc_html__( 'Submit your review', 'wp-poll' ),
+						),
+						array(
+							'id'          => 'liquidpoll_reviews_login_button',
+							'title'       => esc_html__( 'Login Button Label', 'wp-poll' ),
+							'type'        => 'text',
+							'placeholder' => esc_html__( 'Login to continue', 'wp-poll' ),
+						),
+					),
+				),
 			),
 		);
 

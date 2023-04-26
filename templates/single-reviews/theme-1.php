@@ -27,7 +27,7 @@ $service_logo            = Utils::get_meta( 'reviews_service_logo' );
 $service_name            = Utils::get_meta( 'reviews_service_name' );
 $service_url             = Utils::get_meta( 'reviews_service_url' );
 $consent_required        = $poll->get_meta( 'is_consent_required', false ) ? 'required' : '';
-$consent_desc            = Utils::get_meta( 'reviews_consent_desc' );
+$consent_desc            = Utils::get_meta( 'reviews_consent_desc', '', 'I confirm this review about my own genuine experience. I am eligible to leave this review and have not been offered any incentive or payment to leave a review for this company.' );
 $all_reviews             = $poll->get_poll_results();
 $all_reviews_rating      = array();
 $all_reviews_value       = 0;
@@ -73,23 +73,22 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
     </div>
     <hr class="liquidpoll-divider">
     <div class="form-group rating-selected">
-        <label class="rating-header"><?php esc_html_e( 'Rate your experience', 'wp-poll' ); ?></label>
-		<?php echo liquidpoll_get_review_stars( $rating_selected ); ?>
+        <label class="rating-header"><?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_rating_title', 'Rate your experience' ), 'wp-poll' ); ?></label>
+        <?php echo liquidpoll_get_review_stars( $rating_selected ); ?>
     </div>
 
     <div class="form-group review-title">
-        <label for="review_title"
-               class="review-title-label"><?php esc_html_e( 'Give your review a title', 'wp-poll' ); ?></label>
-        <input type="text" id="review_title" name="review_title" placeholder="Impressed with the service!">
+        <label for="review_title" class="review-title-label"><?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_title', 'Give your review a title' ), 'wp-poll' ); ?></label>
+        <input type="text" id="review_title" name="review_title" placeholder="<?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_title_placeholder', 'Impressed with the service!' ), 'wp-poll' ); ?>">
     </div>
 
     <div class="form-group review-textarea">
-        <label for="review_description" class="review-label"><?php esc_html_e( 'Briefly tell us about your experience', 'wp-poll' ); ?></label>
-        <textarea id="review_description" name="review_description" rows="3" placeholder="Share your experience in detail.."></textarea>
+        <label for="review_description" class="review-label"><?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_content_title', 'Briefly tell us about your experience' ), 'wp-poll' ); ?></label>
+        <textarea id="review_description" name="review_description" rows="3" placeholder="<?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_content_title_placeholder', 'Share your experience in detail..' ), 'wp-poll' ); ?>"></textarea>
     </div>
 
     <div class="form-group experience-date">
-        <label for="experience_time" class="review-label"><?php esc_html_e( 'When did you have this experience?', 'wp-poll' ) ?></label>
+        <label for="experience_time" class="review-label"><?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_experience_title', 'When did you have this experience?' ) ); ?></label>
         <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19 9H1M14 1V5M6 1V5M5.8 21H14.2C15.8802 21 16.7202 21 17.362 20.673C17.9265 20.3854 18.3854 19.9265 18.673 19.362C19 18.7202 19 17.8802 19 16.2V7.8C19 6.11984 19 5.27976 18.673 4.63803C18.3854 4.07354 17.9265 3.6146 17.362 3.32698C16.7202 3 15.8802 3 14.2 3H5.8C4.11984 3 3.27976 3 2.63803 3.32698C2.07354 3.6146 1.6146 4.07354 1.32698 4.63803C1 5.27976 1 6.11984 1 7.8V16.2C1 17.8802 1 18.7202 1.32698 19.362C1.6146 19.9265 2.07354 20.3854 2.63803 20.673C3.27976 21 4.11984 21 5.8 21Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -112,13 +111,13 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
             <span class="icon-box"></span><span class="message"></span>
         </p>
 
-		<?php if ( is_user_logged_in() ) : ?>
+        <?php if ( is_user_logged_in() ) : ?>
             <input type="hidden" name="poll_id" value="<?php echo esc_attr( $poll->get_id() ); ?>">
-            <button type="submit" class="review-submit"><?php esc_html_e( 'Submit your review', 'wp-poll' ); ?></button>
-		<?php else: ?>
+            <button type="submit" class="review-submit"><?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_submit_button', 'Submit your review' ), 'wp-poll' ); ?></button>
+        <?php else: ?>
             <a href="<?php echo esc_url( $login_url ); ?>"
-               class="review-submit"><?php esc_html_e( 'Login to continue', 'wp-poll' ); ?></a>
-		<?php endif; ?>
+               class="review-submit"><?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_login_button', 'Login to continue' ), 'wp-poll' ); ?></a>
+        <?php endif; ?>
     </div>
 </form>
 

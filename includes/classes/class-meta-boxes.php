@@ -630,6 +630,15 @@ class LIQUIDPOLL_Poll_meta {
 					'dependency'   => array( '_theme|_type', 'any|==', '1,2,3,5,8,9,10|poll', 'all' ),
 				),
 				array(
+					'id'           => '_two_columns_for_options_on_mobile',
+					'title'        => esc_html__( 'Options Column on Mobile', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Display two columns for options on mobile, default is one.', 'wp-poll' ),
+					'type'         => 'switcher',
+					'default'      => false,
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_theme|_type', 'any|==', '6,7|poll', 'all' ),
+				),
+				array(
 					'id'           => '_timer_type',
 					'title'        => esc_html__( 'Countdown Timer Type', 'wp-poll' ),
 					'subtitle'     => esc_html__( 'Select countdown timer type..', 'wp-poll' ),
@@ -742,7 +751,7 @@ class LIQUIDPOLL_Poll_meta {
 				array(
 					'id'         => 'subheading_typography',
 					'type'       => 'subheading',
-					'content'    => esc_html__( 'Typography Controls', 'slider-x-woo' ),
+					'content'    => esc_html__( 'Typography Controls', 'wp-poll' ),
 					'dependency' => array( '_type', '==', 'poll,nps', 'all' ),
 				),
 				array(
@@ -780,7 +789,7 @@ class LIQUIDPOLL_Poll_meta {
 				array(
 					'id'         => 'subheading_typography_button_submit',
 					'type'       => 'subheading',
-					'content'    => esc_html__( 'Typography Controls - Buttons - Submit', 'slider-x-woo' ),
+					'content'    => esc_html__( 'Typography Controls - Buttons - Submit', 'wp-poll' ),
 					'dependency' => array( '_type', '==', 'poll,nps', 'all' ),
 				),
 				array(
@@ -801,7 +810,7 @@ class LIQUIDPOLL_Poll_meta {
 				array(
 					'id'         => 'subheading_typography_button_results',
 					'type'       => 'subheading',
-					'content'    => esc_html__( 'Typography Controls - Buttons - Results', 'slider-x-woo' ),
+					'content'    => esc_html__( 'Typography Controls - Buttons - Results', 'wp-poll' ),
 					'dependency' => array( '_type', '==', 'poll', 'all' ),
 				),
 				array(
