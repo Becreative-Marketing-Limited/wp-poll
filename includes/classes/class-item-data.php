@@ -476,6 +476,10 @@ if ( ! class_exists( 'LIQUIDPOLL_Item_data' ) ) {
 						$this->theme = $this->get_meta( '_theme_reaction', 1 );
 						break;
 
+					case 'reviews':
+						$this->theme = $this->get_meta( '_theme_reviews', 1 );
+						break;
+
 					default:
 						$this->theme = $this->get_meta( '_theme', 1 );
 						break;
