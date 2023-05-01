@@ -1,3 +1,6 @@
+/**
+ * Style - Reviews
+ */
 
 :root {
     --liquidpoll-reviews-theme-1-color-1: #5F64EB;
@@ -193,14 +196,14 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 /**
  * Rating Start
  */
-.reviews-main .rating-wrap input[type=radio] {
+ .rating-wrap input[type=radio] {
     display: none;
     width: 0;
     opacity: 0;
     margin-left: -2px;
 }
 
-.reviews-main .rating-wrap .rating-item {
+ .rating-wrap .rating-item {
     display: inline-block;
     position: relative;
     float: right;
@@ -211,17 +214,17 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     cursor: pointer;
 }
 
-.reviews-main .rating-wrap .rating-item:first-child {
+ .rating-wrap .rating-item:first-child {
     margin-right: 0;
 }
 
-.reviews-main .rating-wrap .rating-item label {
+ .rating-wrap .rating-item label {
     float: right;
     cursor: pointer;
     margin: 0;
 }
 
-.reviews-main .rating-wrap .rating-item label svg {
+ .rating-wrap .rating-item label svg {
     fill: #CED0EB;
     color: transparent;
     transition: 0.3s;
@@ -233,34 +236,34 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     display: inherit;
 }
 
-.reviews-main .rating-wrap .rating-item label.half {
+ .rating-wrap .rating-item label.half {
     overflow: hidden;
     position: absolute;
     width: 30px;
 }
 
-.reviews-main .rating-wrap .rating-item label.half svg {
+ .rating-wrap .rating-item label.half svg {
     fill: none;
 }
 
-.reviews-main .rating-wrap .rating-item label:hover svg,
-.reviews-main .rating-wrap .rating-item label:hover ~ label svg,
-.reviews-main .rating-wrap .rating-item label:hover ~ label.half svg,
-.reviews-main .rating-wrap .rating-item label.half:hover svg,
-.reviews-main .rating-wrap input[name=rating]:focus ~ label svg,
-.reviews-main .rating-wrap input[name=rating]:checked ~ label svg,
-.reviews-main .rating-wrap .rating-item:hover ~ .rating-item label svg,
-.reviews-main .rating-wrap .rating-item.active ~ .rating-item label svg {
+.rating-wrap .rating-item label:hover svg,
+.rating-wrap .rating-item label:hover ~ label svg,
+.rating-wrap .rating-item label:hover ~ label.half svg,
+.rating-wrap .rating-item label.half:hover svg,
+.rating-wrap input[name=rating]:focus ~ label svg,
+.rating-wrap input[name=rating]:checked ~ label svg,
+.rating-wrap .rating-item:hover ~ .rating-item label svg,
+.rating-wrap .rating-item.active ~ .rating-item label svg {
     fill: #8488F0;
     stroke: #FFF0EA;
     filter: drop-shadow(2px 3px 2px rgba(64, 72, 146, 0.41));
 }
 
-.reviews-main .rating-wrap .rating-item:hover, .reviews-main .rating-wrap .rating-item:hover ~ .rating-item, .reviews-main .rating-wrap .rating-item.active, .reviews-main .rating-wrap .rating-item.active ~ .rating-item {
+.rating-wrap .rating-item:hover, .rating-wrap .rating-item:hover ~ .rating-item, .rating-wrap .rating-item.active, .rating-wrap .rating-item.active ~ .rating-item {
     background: #8488F0;
 }
 
-.reviews-main .review-icons .rating-label {
+.review-icons .rating-label {
     font-size: 16px;
     line-height: 24px;
     font-weight: 600;

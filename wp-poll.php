@@ -164,6 +164,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			wp_enqueue_style( 'liquidpoll-front', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style.css', array(), $version );
 			wp_enqueue_style( 'liquidpoll-front-nps', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style-nps.css', array(), $version );
 			wp_enqueue_style( 'liquidpoll-front-reviews', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style-reviews.css', array(), $version );
+			wp_enqueue_style( 'liquidpoll-front-reviews-widget', LIQUIDPOLL_PLUGIN_URL . 'assets/front/css/style-reviews-widget.css', array(), $version );
 		}
 
 

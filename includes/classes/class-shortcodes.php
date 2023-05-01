@@ -129,8 +129,12 @@ if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
 		 */
 		public function display_poll_archive( $atts, $content = null ) {
 
-			$atts = (array) $atts;
-			$atts = array_filter( $atts );
+			$atts      = (array) $atts;
+			$atts      = array_filter( $atts );
+			$poll_id   = empty( $atts['id'] ) ? '' : $atts['id'];
+			$poll      = liquidpoll_get_poll( $poll_id );
+			$view_type = empty( $atts['view_type'] ) ? '' : $atts['view_type'];
+			$styles    = empty( $atts['styles'] ) ? '' : $atts['styles'];
 
 			$defaults = array(
 				'post_type'       => 'poll',
@@ -147,7 +151,11 @@ if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
 
 			ob_start();
 
-			liquidpoll_get_template( 'archive-poll.php', $args );
+			if ( 'reviews' == $poll->get_type() && $view_type && $styles ) {
+				liquidpoll_get_template( "archive-reviews/{$view_type}-widget-{$styles}.php", $args );
+			} else {
+				liquidpoll_get_template( 'archive-poll.php', $args );
+			}
 
 			return ob_get_clean();
 		}
