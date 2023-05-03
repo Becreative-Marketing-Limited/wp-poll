@@ -3,13 +3,12 @@
  */
 
 .reviews-slider {
-    max-width: 1458px !important;
+    min-width: 1458px !important;
 }
 
 .slider-heading {
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .reviews-slider .slider-heading .rate {
@@ -128,4 +127,36 @@
     font-size: 12px;
     line-height: 14px;
     color: #5F64EB;
+}
+
+
+/**
+ * Style 2- Reviews Widget
+ */
+
+.reviews-slider.style-2 .user-avatar {
+    left: 96px;
+}
+
+.reviews-slider.style-2 .comment-heading{
+    text-align: left;
+}
+
+.reviews-slider.style-2 .user{
+    text-align: center;
+}
+
+
+/**
+ * Style 2- Reviews Widget
+ */
+
+.reviews-wrap.style-3 .single-review{
+    padding-top: 20px;
+}
+.reviews-wrap.style-3 .user-avater {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
 }

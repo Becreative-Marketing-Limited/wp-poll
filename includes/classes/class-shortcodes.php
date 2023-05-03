@@ -134,7 +134,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
 			$poll_id   = empty( $atts['id'] ) ? '' : $atts['id'];
 			$poll      = liquidpoll_get_poll( $poll_id );
 			$view_type = empty( $atts['view_type'] ) ? '' : $atts['view_type'];
-			$styles    = empty( $atts['styles'] ) ? '' : $atts['styles'];
+			$styles    = empty( $atts['styles'] ) ? '1' : $atts['styles'];
 
 			$defaults = array(
 				'post_type'       => 'poll',
