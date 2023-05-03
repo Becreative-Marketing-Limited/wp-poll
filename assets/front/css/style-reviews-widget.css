@@ -2,6 +2,130 @@
  * Style - Reviews Widget
  */
 
-form.review-stars {
+.reviews-slider {
+    max-width: 1458px !important;
+}
+
+.slider-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reviews-slider .slider-heading .rate {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 47px;
+    color: #000000;
+}
+
+.reviews-slider .slider-heading form.review-stars {
     display: inline-block;
+    margin: 0 20px;
+}
+
+.reviews-slider .slider-heading span {
+    font-size: 29px;
+    line-height: 30px;
+    color: #000000;
+}
+
+.reviews-slider .slider-heading .count {
+    display: block;
+    font-weight: 700;
+    font-size: 29px;
+    line-height: 30px;
+    color: #5F64EB;
+}
+
+.reviews-slider .slider-heading-wrap .rating {
+    text-align: center;
+    font-size: 20px;
+    line-height: 23px;
+    color: #838383;
+    margin: 0;
+    padding-top: 15px;
+}
+
+.reviews-slider .reviews-wrap {
+    margin: 80px auto;
+    display: flex;
+    align-items: center;
+}
+
+.single-review {
+    background: #FFFFFF;
+    border: 2px solid #F5F5F5;
+    border-radius: 15px;
+    max-width: 272px;
+    padding: 68px 0 35px 25px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.single-review .user-avatar {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: -31px;
+}
+
+.single-review .icon-quote {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
+
+.reviews-slider form.review-stars {
+    display: inline-block;
+    margin: 15px 0;
+}
+
+.reviews-slider .single-review .rating-wrap .rating-item {
+    margin-right: 5px;
+}
+
+.reviews-slider .single-review .rating-wrap .rating-item label svg {
+    width: 42px;
+    height: 42px;
+    transform: scale(0.7);
+    padding: 0;
+}
+
+.reviews-slider .comment-heading {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 23px;
+}
+
+.reviews-slider .user-name {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+}
+
+.reviews-slider .user-location {
+    margin: 5px 0;
+}
+
+.reviews-slider .user-location .location {
+    font-size: 13px;
+    line-height: 15px;
+    color: #606060;
+    margin-left: 5px;
+}
+
+.reviews-slider .review-comment {
+    font-size: 13px;
+    line-height: 20px;
+    margin-top: 10px;
+}
+
+.reviews-slider .review-link {
+    font-size: 12px;
+    line-height: 14px;
+    color: #5F64EB;
 }
