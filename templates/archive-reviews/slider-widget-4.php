@@ -12,18 +12,30 @@ $styles = isset($args['styles']) ? $args['styles'] : '1';
 <div class="reviews-slider style-<?php echo esc_attr($styles); ?>">
 	<div class="slider-heading-wrap">
 		<div class="slider-heading">
-			<span class="rate">Rated Excellent!</span>
+			<div class="rate-wrap">
+				<span class="rate">Rated Excellent!</span>
+				<div class="review-count">
+					<span>Based on</span>
+					<span class="count">225 Reviews</span>
+				</div>
+			</div>
 			<form class="review-stars">
 				<?php echo liquidpoll_get_review_stars( 4.5 ); ?>
 			</form>
-			<div class="review-count">
-				<span>Based on</span>
-				<span class="count">225 Reviews</span>
-			</div>
 		</div>
 	</div>
 	<div class="reviews-wrap">
 		<div class="single-review">
+			<div class="review-comment-heading">
+				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+			</div>
+			<form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+			</form>
+			<div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
+			</div>
+			<hr class="liquidpoll-divider">
 			<div class="user">
 				<div class="user-avatar">
 					<img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -39,18 +51,18 @@ $styles = isset($args['styles']) ? $args['styles'] : '1';
 					</div>
 				</div>
 			</div>
-			<form class="review-stars">
-				<?php echo liquidpoll_get_review_stars( 4 ); ?>
-			</form>
-			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
-			</div>
-			<div class="review-comment">
-				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
-			</div>
-			<a class="review-link" href="">Read full review</a>
 		</div>
 		<div class="single-review">
+			<div class="review-comment-heading">
+				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+			</div>
+			<form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+			</form>
+			<div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
+			</div>
+			<hr class="liquidpoll-divider">
 			<div class="user">
 				<div class="user-avatar">
 					<img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -66,18 +78,18 @@ $styles = isset($args['styles']) ? $args['styles'] : '1';
 					</div>
 				</div>
 			</div>
-			<form class="review-stars">
-				<?php echo liquidpoll_get_review_stars( 4 ); ?>
-			</form>
-			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
-			</div>
-			<div class="review-comment">
-				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
-			</div>
-			<a class="review-link" href="">Read full review</a>
 		</div>
 		<div class="single-review">
+			<div class="review-comment-heading">
+				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+			</div>
+			<form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+			</form>
+			<div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
+			</div>
+			<hr class="liquidpoll-divider">
 			<div class="user">
 				<div class="user-avatar">
 					<img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -93,18 +105,18 @@ $styles = isset($args['styles']) ? $args['styles'] : '1';
 					</div>
 				</div>
 			</div>
-			<form class="review-stars">
-				<?php echo liquidpoll_get_review_stars( 4 ); ?>
-			</form>
-			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
-			</div>
-			<div class="review-comment">
-				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
-			</div>
-			<a class="review-link" href="">Read full review</a>
 		</div>
 		<div class="single-review">
+			<div class="review-comment-heading">
+				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+			</div>
+			<form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+			</form>
+			<div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
+			</div>
+			<hr class="liquidpoll-divider">
 			<div class="user">
 				<div class="user-avatar">
 					<img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -120,18 +132,18 @@ $styles = isset($args['styles']) ? $args['styles'] : '1';
 					</div>
 				</div>
 			</div>
-			<form class="review-stars">
-				<?php echo liquidpoll_get_review_stars( 4 ); ?>
-			</form>
-			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
-			</div>
-			<div class="review-comment">
-				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
-			</div>
-			<a class="review-link" href="">Read full review</a>
 		</div>
 		<div class="single-review">
+			<div class="review-comment-heading">
+				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+			</div>
+			<form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+			</form>
+			<div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
+			</div>
+			<hr class="liquidpoll-divider">
 			<div class="user">
 				<div class="user-avatar">
 					<img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -147,18 +159,6 @@ $styles = isset($args['styles']) ? $args['styles'] : '1';
 					</div>
 				</div>
 			</div>
-			<form class="review-stars">
-				<?php echo liquidpoll_get_review_stars( 4 ); ?>
-			</form>
-			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
-			</div>
-			<div class="review-comment">
-				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
-			</div>
-			<a class="review-link" href="">Read full review</a>
 		</div>
 	</div>
 </div>
-
-
