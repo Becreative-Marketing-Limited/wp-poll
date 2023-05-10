@@ -41,7 +41,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 		<div class="slider-heading">
 			<span class="rate">Rated</span>
 			<form class="review-stars">
-				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+				<?php echo liquidpoll_get_review_stars( $overall_rating ); ?>
 			</form>
 			<div class="review-count">
 				<span>Based on</span>
@@ -60,13 +60,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 			$polled_comments = Utils::get_args_option( 'polled_comments', $poll_result );
 			$poller_id       = Utils::get_args_option( 'poller_id_ip', $poll_result );
 			$poller_user     = get_user_by( 'id', $poller_id );
-			$datetime        = strtotime( Utils::get_args_option( 'datetime', $poll_result ) );
-			$time_ago        = human_time_diff( $datetime, time() );
 			$review_title    = liquidpoll_get_results_meta( $result_id, 'review_title' );
-			$experience_time = strtotime( liquidpoll_get_results_meta( $result_id, 'experience_time' ) );
-			$experience_time = date( "F j, Y", $experience_time );
-			$result_replies  = liquidpoll_get_results_meta( $result_id, 'result_replies', array() );
-			$result_replies  = ! is_array( $result_replies ) ? array() : $result_replies;
 			?>
 
 			<div class="single-review">
@@ -268,6 +262,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 			</div>
 			<a class="review-link" href="<?php echo esc_url( $single_review_url ) ?>" target="_blank">Read full review</a>
 		</div>
+
 	</div>
 </div>
 
@@ -278,7 +273,24 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
         slidesToShow: 5,
         slidesToScroll: 1,
         prevArrow: false,
-        nextArrow: '<button type="button" class="style-<?php echo esc_attr( $slider_button_styles ); ?> slick-next">Next</button>'
+        nextArrow: '<button type="button" class="style-<?php echo esc_attr( $slider_button_styles ); ?> slick-next">Next</button>',
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+
+        ]
     });
 </script>
 

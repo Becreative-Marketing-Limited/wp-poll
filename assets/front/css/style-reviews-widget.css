@@ -6,6 +6,10 @@
     padding-top: 31px;
 }
 
+.style-2.slick-next {
+    right: -12px;
+}
+
 .style-1.slick-next::before {
     background: url(../../images/slider-button-1.svg) no-repeat;
     content: "";
@@ -25,7 +29,7 @@
 }
 
 .reviews-slider {
-    min-width: 1458px !important;
+    max-width: 1458px !important;
 }
 
 .slider-heading-wrap {
