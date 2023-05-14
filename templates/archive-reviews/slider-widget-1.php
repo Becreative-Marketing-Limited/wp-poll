@@ -269,24 +269,41 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 <script>
     jQuery('.reviews-wrap.style-1').slick({
         infinite: true,
+        mobileFirst: true,
         speed: 500,
-        slidesToShow: 5,
+        slidesToShow: 1,
         slidesToScroll: 1,
         prevArrow: false,
         nextArrow: '<button type="button" class="style-<?php echo esc_attr( $slider_button_styles ); ?> slick-next">Next</button>',
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 5,
+                }
+            },
+            {
+                breakpoint: 1180,
                 settings: {
                     slidesToShow: 4,
-                    slidesToScroll: 4,
+                }
+            },
+            {
+                breakpoint: 910,
+                settings: {
+                    slidesToShow: 3,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
                 }
             }
 
