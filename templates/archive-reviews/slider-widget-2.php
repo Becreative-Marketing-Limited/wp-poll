@@ -45,7 +45,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 				<p class="rating"><?php echo esc_attr( $overall_rating ); ?> out of 5</p>
 			</div>
 			<form class="review-stars">
-				<?php echo liquidpoll_get_review_stars( 4.5 ); ?>
+				<?php echo liquidpoll_get_review_stars( $overall_rating ); ?>
 			</form>
 			<div class="review-count">
 				<span>Based on</span>
