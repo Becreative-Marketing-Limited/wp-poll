@@ -67,7 +67,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 
 			<div class="single-review">
 				<div class="review-comment-heading">
-					<h2 class="comment-heading"><?php echo esc_html( $review_title ); ?></h2>
+					<span class="comment-heading"><?php echo esc_html( $review_title ); ?></span>
 				</div>
 				<form class="review-stars">
 					<?php echo liquidpoll_get_review_stars( $polled_value ); ?>
@@ -97,7 +97,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 
 		<div class="single-review">
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<form class="review-stars">
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
@@ -124,7 +124,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 		</div>
 		<div class="single-review">
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<form class="review-stars">
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
@@ -151,7 +151,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 		</div>
 		<div class="single-review">
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<form class="review-stars">
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
@@ -178,7 +178,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 		</div>
 		<div class="single-review">
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<form class="review-stars">
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
@@ -205,7 +205,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 		</div>
 		<div class="single-review">
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<form class="review-stars">
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
@@ -232,7 +232,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 		</div>
 		<div class="single-review">
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<form class="review-stars">
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
@@ -259,7 +259,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 		</div>
 		<div class="single-review">
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<form class="review-stars">
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>

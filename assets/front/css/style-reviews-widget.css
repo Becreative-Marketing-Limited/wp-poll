@@ -90,7 +90,7 @@
     border: 2px solid #F5F5F5;
     border-radius: 15px;
     width: 272px;
-    padding: 68px 0 35px 25px;
+    padding: 63px 0 35px 25px;
     margin-right: 10px;
     position: relative;
 }
@@ -126,7 +126,12 @@
     padding: 0;
 }
 
+.reviews-slider .single-review .rating-wrap .rating-item label.half {
+    width: 21px;
+}
+
 .reviews-slider .comment-heading {
+    display: block;
     font-size: 18px;
     font-weight: 600;
     line-height: 23px;
@@ -142,7 +147,8 @@
 }
 
 .reviews-slider .user-location {
-    margin: 5px 0;
+    display: flex;
+    align-items: center;
 }
 
 .reviews-slider .user-location .location {
@@ -156,7 +162,7 @@
     font-size: 13px;
     line-height: 20px;
     margin-top: 10px;
-    min-height: 60px;
+    min-height: 40px;
 }
 
 .reviews-slider .review-comment p {
@@ -168,6 +174,8 @@
     font-size: 12px;
     line-height: 14px;
     color: #5F64EB;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /**
@@ -200,6 +208,10 @@
     transform: scale(1.3);
 }
 
+.reviews-slider.style-2 .slider-heading-wrap .rating-wrap .rating-item label.half {
+    width: 36px;
+}
+
 .reviews-slider.style-2 .slider-heading-wrap .review-count {
     display: flex;
     justify-content: center;
@@ -211,7 +223,7 @@
 
 
 .reviews-slider.style-2 .user-avatar {
-    left: 96px;
+    left: calc(50% - 40px);
 }
 
 .reviews-slider.style-2 .comment-heading {
@@ -220,6 +232,11 @@
 
 .reviews-slider.style-2 .user {
     text-align: center;
+}
+
+.reviews-slider.style-2 .user-location {
+    justify-content: center;
+    margin-left: -25px;
 }
 
 
@@ -314,7 +331,7 @@
 }
 
 .reviews-slider.style-4 .single-review .review-comment {
-    margin-top: 0;
+    margin: 0 0 10px 0;
 }
 
 .reviews-slider.style-4 .liquidpoll-divider {
@@ -511,7 +528,7 @@
     }
 }
 
-@media screen and (max-device-width: 420px){
+@media screen and (max-device-width: 420px) {
 
     .reviews-slider.style-5 .single-review {
         padding-right: 0;
@@ -520,6 +537,15 @@
     .reviews-slider.style-5 .single-review .review-stars-wrap {
         flex-direction: column;
         align-items: start;
+    }
+
+    .reviews-slider.style-5 .single-review .comment-heading {
+        width: calc(100% - 25px);
+        margin: 15px 0;
+    }
+
+    .reviews-slider.style-5 .single-review .review-comment p {
+        width: calc(100% - 25px);
     }
 }
 

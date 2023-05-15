@@ -45,7 +45,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 				<p class="rating"><?php echo esc_attr( $overall_rating ); ?> out of 5</p>
 			</div>
 			<form class="review-stars">
-				<?php echo liquidpoll_get_review_stars( $overall_rating ); ?>
+				<?php echo liquidpoll_get_review_stars( 4.5 ); ?>
 			</form>
 			<div class="review-count">
 				<span>Based on</span>
@@ -84,7 +84,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 					<?php echo liquidpoll_get_review_stars( $polled_value ); ?>
 				</form>
 				<div class="review-comment-heading">
-					<h2 class="comment-heading"><?php echo esc_html( $review_title ); ?></h2>
+					<span class="comment-heading"><?php echo esc_html( $review_title ); ?></span>
 				</div>
 				<div class="review-comment">
 					<?php echo apply_filters( 'the_content', wp_trim_words( $polled_comments, 12 ) ); ?>
@@ -112,7 +112,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
 			</form>
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<div class="review-comment">
 				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
@@ -137,7 +137,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
 			</form>
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<div class="review-comment">
 				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
@@ -162,7 +162,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
 			</form>
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<div class="review-comment">
 				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
@@ -187,7 +187,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
 			</form>
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<div class="review-comment">
 				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
@@ -212,7 +212,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
 			</form>
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<div class="review-comment">
 				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
@@ -237,7 +237,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 				<?php echo liquidpoll_get_review_stars( 4 ); ?>
 			</form>
 			<div class="review-comment-heading">
-				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
+				<span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
 			</div>
 			<div class="review-comment">
 				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
