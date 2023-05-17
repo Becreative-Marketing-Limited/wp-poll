@@ -210,6 +210,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			liquidpoll_update_results_meta( $result_id, 'review_title', $review_title );
 			liquidpoll_update_results_meta( $result_id, 'experience_time', $experience_time );
 			liquidpoll_update_results_meta( $result_id, 'consent', $consent );
+			liquidpoll_update_results_meta( $result_id, 'poller_ip_address', liquidpoll_get_ip_address() );
 
 			wp_send_json_success( array( 'message' => esc_html__( 'Successfully submitted review. Redirecting now...', 'wp-poll' ) ) );
 		}

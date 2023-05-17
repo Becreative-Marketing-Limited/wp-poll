@@ -55,12 +55,13 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 		<?php foreach ( $poll->get_poll_results( array() ) as $poll_result ) : ?>
 
 			<?php
-			$result_id       = Utils::get_args_option( 'id', $poll_result );
-			$polled_value    = Utils::get_args_option( 'polled_value', $poll_result, 0 );
-			$polled_comments = Utils::get_args_option( 'polled_comments', $poll_result );
-			$poller_id       = Utils::get_args_option( 'poller_id_ip', $poll_result );
-			$poller_user     = get_user_by( 'id', $poller_id );
-			$review_title    = liquidpoll_get_results_meta( $result_id, 'review_title' );
+			$result_id         = Utils::get_args_option( 'id', $poll_result );
+			$polled_value      = Utils::get_args_option( 'polled_value', $poll_result, 0 );
+			$polled_comments   = Utils::get_args_option( 'polled_comments', $poll_result );
+			$poller_id         = Utils::get_args_option( 'poller_id_ip', $poll_result );
+			$poller_user       = get_user_by( 'id', $poller_id );
+			$review_title      = liquidpoll_get_results_meta( $result_id, 'review_title' );
+			$poller_ip_address = liquidpoll_get_results_meta( $result_id, 'poller_ip_address' );
 			?>
 
 			<div class="single-review">
@@ -78,7 +79,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 						<path d="M5 6.5C5.82843 6.5 6.5 5.82843 6.5 5C6.5 4.17157 5.82843 3.5 5 3.5C4.17157 3.5 3.5 4.17157 3.5 5C3.5 5.82843 4.17157 6.5 5 6.5Z" stroke="#8D8D8D" stroke-linecap="round" stroke-linejoin="round"/>
 						<path d="M5 11C7 9 9 7.20914 9 5C9 2.79086 7.20914 1 5 1C2.79086 1 1 2.79086 1 5C1 7.20914 3 9 5 11Z" stroke="#8D8D8D" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
-					<span class="location">United Kingdom</span>
+					<span class="location"><?php echo esc_html__( liquidpoll_get_poller_location( $poller_ip_address ) ) ?></span>
 				</div>
 				<form class="review-stars">
 					<?php echo liquidpoll_get_review_stars( $polled_value ); ?>

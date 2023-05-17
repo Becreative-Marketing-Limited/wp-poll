@@ -1009,3 +1009,31 @@ if ( ! function_exists( 'liquidpoll_is_current_user_useful_submitted' ) ) {
 		return $user_useful_submitted;
 	}
 }
+
+
+if ( ! function_exists( 'liquidpoll_get_poller_location' ) ) {
+
+	/**
+	 * @param $ip_address
+	 *
+	 * @return string
+	 */
+	function liquidpoll_get_poller_location( $ip_address ) {
+		if ( empty( $ipinfo_token = Utils::get_option( 'liquidpoll_ipinfo_token' ) ) ) {
+			return esc_html__( 'Earth', 'wp-poll' );
+		}
+
+		if ( is_wp_error( $response = wp_remote_get( 'https://ipinfo.io/' . $ip_address . '/json?token=' . $ipinfo_token ) ) ) {
+			return esc_html__( 'Earth', 'wp-poll' );
+		}
+
+		$response = wp_remote_retrieve_body( $response );
+		$response = json_decode( $response, true );
+
+		if ( isset( $response['city'] ) && isset( $response['country'] ) ) {
+			return sprintf( esc_html__( '%s, %s', 'wp-poll' ), $response['city'], $response['country'] );
+		}
+
+		return esc_html__( 'Earth', 'wp-poll' );
+	}
+}
