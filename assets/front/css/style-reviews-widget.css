@@ -554,7 +554,7 @@
  */
 
 .reviews-tiles {
-    min-width: 973px;
+    max-width: 973px !important;
 }
 
 .reviews-tiles.style-1 .slider-heading .rate {
@@ -585,7 +585,11 @@
 }
 
 .reviews-tiles.style-1 .reviews-wrap {
-    margin: 110px 0 80px;
+    margin: 110px auto 0;
+}
+
+.reviews-tiles.style-1 .single-review-wrap {
+    padding-top: 31px;
 }
 
 .reviews-tiles.style-1 .single-review .rating-wrap .rating-item label svg {
@@ -603,6 +607,7 @@
 .reviews-tiles.style-1 .single-review {
     width: 311px;
     padding: 63px 20px 25px 20px;
+    margin-left: 0;
 }
 
 .reviews-tiles.style-1 .single-review .icon-quote {
