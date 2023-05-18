@@ -48,8 +48,9 @@ $styles = isset($args['styles']) ? $args['styles'] : '1';
 			<div class="review-comment-heading">
 				<h2 class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></h2>
 			</div>
+			<p class="publish-time">2 days ago</p>
 			<div class="review-comment">
-				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from start to finish fast and efficient and kept informed every step of the way.The fitters Christian and Brent with absolutely brilliant, friendly and helpful and have done a fantastic job. Highly recommended.' ); ?>
 			</div>
 		</div>
 	</div>

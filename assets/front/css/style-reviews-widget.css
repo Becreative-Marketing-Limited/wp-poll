@@ -553,6 +553,10 @@
  * Style 1 - Reviews Tiles
  */
 
+.reviews-tiles {
+    min-width: 973px;
+}
+
 .reviews-tiles.style-1 .slider-heading .rate {
     font-weight: 700;
     font-size: 40px;
@@ -596,6 +600,16 @@
     margin: 15px 0;
 }
 
+.reviews-tiles.style-1 .single-review {
+    width: 311px;
+    padding: 63px 20px 25px 20px;
+}
+
+.reviews-tiles.style-1 .single-review .icon-quote {
+    right: 20px;
+    top: 20px;
+}
+
 .reviews-tiles.style-1 .single-review .rating-wrap .rating-item {
     margin-right: 5px;
 }
@@ -631,9 +645,21 @@
     margin-left: 5px;
 }
 
+.reviews-tiles.style-1 .reviews-wrap .single-review .publish-time {
+    margin: 0;
+    font-size: 13px;
+    line-height: 15px;
+    color: #9D9D9D;
+}
+
 .reviews-tiles.style-1 .review-comment {
     font-size: 13px;
     line-height: 20px;
-    margin-top: 10px;
+    margin: 10px 7px 0 0;
+    color: #444444;
+}
+
+.reviews-tiles.style-1 .review-comment p {
+    margin: 0;
 }
 
