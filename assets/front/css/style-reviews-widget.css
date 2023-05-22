@@ -28,8 +28,8 @@
     opacity: 1;
     height: 50px;
     width: 50px;
-    -webkit-filter: drop-shadow( 0px 4px 14px rgba(64, 68, 84, 0.11) );
-    filter: drop-shadow( 0px 4px 14px rgba(64, 68, 84, 0.11) );
+    -webkit-filter: drop-shadow(0px 4px 14px rgba(64, 68, 84, 0.11));
+    filter: drop-shadow(0px 4px 14px rgba(64, 68, 84, 0.11));
 }
 
 .reviews-slider {
@@ -45,7 +45,7 @@
     justify-content: center;
 }
 
-.reviews-slider .slider-heading .rate {
+.slider-heading .rate {
     font-weight: 700;
     font-size: 40px;
     line-height: 47px;
@@ -57,13 +57,13 @@
     margin: 0 20px;
 }
 
-.reviews-slider .slider-heading span {
+.slider-heading span {
     font-size: 29px;
     line-height: 30px;
     color: #000000;
 }
 
-.reviews-slider .slider-heading .count {
+.slider-heading .count {
     display: block;
     font-weight: 700;
     font-size: 29px;
@@ -126,17 +126,18 @@
     padding: 0;
 }
 
-.reviews-slider .single-review .rating-wrap .rating-item label.half {
+.single-review .rating-wrap .rating-item label.half {
     width: 21px;
 }
 
-.reviews-slider .comment-heading {
+.comment-heading {
     display: block;
     font-size: 18px;
     font-weight: 600;
     line-height: 23px;
     min-height: 46px;
     width: calc(100% - 23px);
+    color: #000000;
 }
 
 .reviews-slider .user-name {
@@ -415,10 +416,12 @@
 .reviews-slider.style-5 .single-review form.review-stars {
     margin: 10px 0;
 }
-.reviews-slider.style-5 .single-review .comment-heading{
+
+.reviews-slider.style-5 .single-review .comment-heading {
     font-size: 20px;
     width: 100%;
 }
+
 .reviews-slider.style-5 .single-review .review-comment {
     font-size: 17px;
     line-height: 27px;
@@ -462,10 +465,11 @@
 
 @media screen and (min-device-width: 320px) and (max-device-width: 584px) {
 
-    .slick-next{
+    .slick-next {
         top: 100%;
         right: unset;
     }
+
     .slider-heading {
         flex-direction: column;
     }
@@ -603,8 +607,8 @@
 .reviews-tiles.style-1 .single-review {
     width: 311px;
     padding: 63px 20px 25px 20px;
-    margin-left: 0;
-    margin-bottom: 40px !important;
+    margin-right: 0;
+    margin-bottom: 50px !important;
 }
 
 .reviews-tiles.style-1 .single-review .icon-quote {
@@ -662,6 +666,104 @@
 }
 
 .reviews-tiles.style-1 .review-comment p {
+    margin: 0;
+}
+
+/**
+ * Style 2 - Reviews Tiles
+ */
+
+.reviews-tiles.style-2 .slider-heading {
+    flex-direction: column;
+    align-items: center;
+}
+
+.reviews-tiles.style-2 .slider-heading form.review-stars {
+    display: inline-block;
+    margin: 25px 0;
+}
+
+.reviews-tiles.style-2 .reviews-wrap.tiles-grid {
+    margin: 80px auto;
+}
+
+.reviews-tiles.style-2 .single-review {
+    width: 280px;
+    padding: 20px;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+
+.reviews-tiles.style-2 .single-review .review-stars {
+    display: inline-block;
+    margin: 15px 0;
+}
+
+.reviews-tiles.style-2 .single-review .rating-wrap .rating-item {
+    margin-right: 5px;
+}
+
+.reviews-tiles.style-2 .single-review .rating-wrap .rating-item label svg {
+    width: 42px;
+    height: 42px;
+    transform: scale(0.7);
+    padding: 0;
+}
+
+.reviews-tiles.style-2 .slider-heading .count {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.reviews-tiles.style-2 .user-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: unset;
+}
+
+.reviews-tiles.style-2 .user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.reviews-tiles.style-2 .user-info {
+    margin-left: 10px;
+}
+
+.reviews-tiles.style-2 .user-name {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.reviews-tiles.style-2 .user-location {
+    margin: 0;
+    display: flex;
+}
+
+.reviews-tiles.style-2 .user-location .location {
+    font-size: 13px;
+    line-height: 15px;
+    color: #606060;
+    margin-left: 5px;
+}
+
+.reviews-tiles.style-2 .comment-heading {
+    width: 100%;
+}
+
+.reviews-tiles.style-2 .review-comment {
+    font-size: 13px;
+    line-height: 20px;
+    margin-top: 10px;
+    min-height: 60px;
+}
+
+.reviews-tiles.style-2 .review-comment p {
     margin: 0;
 }
 
