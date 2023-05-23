@@ -1,6 +1,6 @@
 <?php
 /**
- * Tiles Widget - 2
+ * Tiles Widget - 3
  */
 
 use WPDK\Utils;
@@ -39,7 +39,10 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 <div class="reviews-tiles style-<?php echo esc_attr( $styles ); ?>">
     <div class="slider-heading-wrap">
         <div class="slider-heading">
-            <span class="rate">Rated Excellent!</span>
+            <div class="rate-wrap">
+                <span class="rate">Rated</span>
+                <p class="rating"><?php echo esc_attr( $overall_rating ); ?> out of 5</p>
+            </div>
             <form class="review-stars">
 				<?php echo liquidpoll_get_review_stars( $overall_rating ); ?>
             </form>
@@ -66,6 +69,17 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 			?>
 
             <div class="single-review">
+                <div class="review-comment-heading">
+                    <span class="comment-heading"><?php echo esc_html( $review_title ); ?></span>
+                </div>
+                <p class="publish-time"><?php echo sprintf( esc_html__( '%s ago', 'wp-poll' ), $time_ago ); ?></p>
+                <form class="review-stars">
+					<?php echo liquidpoll_get_review_stars( $polled_value ); ?>
+                </form>
+                <div class="review-comment">
+					<?php echo wpautop( $polled_comments ); ?>
+                </div>
+                <hr class="liquidpoll-divider">
                 <div class="user">
                     <div class="user-avatar">
                         <img src="<?php echo esc_url( get_avatar_url( $poller_user->user_email ) ); ?>" alt="<?php echo esc_attr( 'poller' ); ?>">
@@ -81,21 +95,22 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         </div>
                     </div>
                 </div>
-                <form class="review-stars">
-					<?php echo liquidpoll_get_review_stars( $polled_value ); ?>
-                </form>
-                <div class="review-comment-heading">
-                    <span class="comment-heading"><?php echo esc_html( $review_title ); ?></span>
-                </div>
-                <p class="publish-time"><?php echo sprintf( esc_html__( '%s ago', 'wp-poll' ), $time_ago ); ?></p>
-                <div class="review-comment">
-					<?php echo wpautop( $polled_comments ); ?>
-                </div>
             </div>
 
 		<?php endforeach; ?>
 
         <div class="single-review">
+            <div class="review-comment-heading">
+                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
+            </div>
+            <p class="publish-time">2 days ago</p>
+            <form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+            </form>
+            <div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...The fitters Christian and Brent with absolutely brilliant, friendly and helpful and have done a fantastic job.' ); ?>
+            </div>
+            <hr class="liquidpoll-divider">
             <div class="user">
                 <div class="user-avatar">
                     <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -110,19 +125,20 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         <span class="location">United Kingdom</span>
                     </div>
                 </div>
-            </div>
-            <form class="review-stars">
-			    <?php echo liquidpoll_get_review_stars( 4 ); ?>
-            </form>
-            <div class="review-comment-heading">
-                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
-            </div>
-            <p class="publish-time">2 days ago</p>
-            <div class="review-comment">
-			    <?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from start to finish fast and efficient and kept informed every step of the way.The fitters Christian and Brent with absolutely brilliant, friendly and helpful and have done a fantastic job. Highly recommended.' ); ?>
             </div>
         </div>
         <div class="single-review">
+            <div class="review-comment-heading">
+                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
+            </div>
+            <p class="publish-time">2 days ago</p>
+            <form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+            </form>
+            <div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Professional and experienced 2-man team (Christian & Brent) who installed our pergola completed in an extremely organised, efficient & timely manner.' ); ?>
+            </div>
+            <hr class="liquidpoll-divider">
             <div class="user">
                 <div class="user-avatar">
                     <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -137,19 +153,20 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         <span class="location">United Kingdom</span>
                     </div>
                 </div>
-            </div>
-            <form class="review-stars">
-			    <?php echo liquidpoll_get_review_stars( 4 ); ?>
-            </form>
-            <div class="review-comment-heading">
-                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
-            </div>
-            <p class="publish-time">2 days ago</p>
-            <div class="review-comment">
-			    <?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...The fitters Christian and Brent with absolutely brilliant, friendly and helpful and have done a fantastic job. Highly recommended.' ); ?>
             </div>
         </div>
         <div class="single-review">
+            <div class="review-comment-heading">
+                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
+            </div>
+            <p class="publish-time">2 days ago</p>
+            <form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+            </form>
+            <div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from start to finish fast and efficient and kept informed every step of the way.The fitters Christian and Brent with absolutely brilliant, friendly and helpful and have done a fantastic job. Highly recommended.' ); ?>
+            </div>
+            <hr class="liquidpoll-divider">
             <div class="user">
                 <div class="user-avatar">
                     <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -164,19 +181,20 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         <span class="location">United Kingdom</span>
                     </div>
                 </div>
-            </div>
-            <form class="review-stars">
-			    <?php echo liquidpoll_get_review_stars( 4 ); ?>
-            </form>
-            <div class="review-comment-heading">
-                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
-            </div>
-            <p class="publish-time">2 days ago</p>
-            <div class="review-comment">
-			    <?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
             </div>
         </div>
         <div class="single-review">
+            <div class="review-comment-heading">
+                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
+            </div>
+            <p class="publish-time">2 days ago</p>
+            <form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+            </form>
+            <div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
+            </div>
+            <hr class="liquidpoll-divider">
             <div class="user">
                 <div class="user-avatar">
                     <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -191,19 +209,20 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         <span class="location">United Kingdom</span>
                     </div>
                 </div>
-            </div>
-            <form class="review-stars">
-			    <?php echo liquidpoll_get_review_stars( 4 ); ?>
-            </form>
-            <div class="review-comment-heading">
-                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
-            </div>
-            <p class="publish-time">2 days ago</p>
-            <div class="review-comment">
-			    <?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
             </div>
         </div>
         <div class="single-review">
+            <div class="review-comment-heading">
+                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
+            </div>
+            <p class="publish-time">2 days ago</p>
+            <form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+            </form>
+            <div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
+            </div>
+            <hr class="liquidpoll-divider">
             <div class="user">
                 <div class="user-avatar">
                     <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -218,19 +237,20 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         <span class="location">United Kingdom</span>
                     </div>
                 </div>
-            </div>
-            <form class="review-stars">
-			    <?php echo liquidpoll_get_review_stars( 4 ); ?>
-            </form>
-            <div class="review-comment-heading">
-                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
-            </div>
-            <p class="publish-time">2 days ago</p>
-            <div class="review-comment">
-			    <?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
             </div>
         </div>
         <div class="single-review">
+            <div class="review-comment-heading">
+                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
+            </div>
+            <p class="publish-time">2 days ago</p>
+            <form class="review-stars">
+				<?php echo liquidpoll_get_review_stars( 4 ); ?>
+            </form>
+            <div class="review-comment">
+				<?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
+            </div>
+            <hr class="liquidpoll-divider">
             <div class="user">
                 <div class="user-avatar">
                     <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
@@ -245,43 +265,6 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         <span class="location">United Kingdom</span>
                     </div>
                 </div>
-            </div>
-            <form class="review-stars">
-			    <?php echo liquidpoll_get_review_stars( 4 ); ?>
-            </form>
-            <div class="review-comment-heading">
-                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
-            </div>
-            <p class="publish-time">2 days ago</p>
-            <div class="review-comment">
-			    <?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
-            </div>
-        </div>
-        <div class="single-review">
-            <div class="user">
-                <div class="user-avatar">
-                    <img src="<?php echo esc_url( LIQUIDPOLL_PLUGIN_URL . 'assets/images/author.png' ) ?>" alt="">
-                </div>
-                <div class="user-info">
-                    <span class="user-name">Miranda Ash-Patel</span>
-                    <div class="user-location">
-                        <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 6.5C5.82843 6.5 6.5 5.82843 6.5 5C6.5 4.17157 5.82843 3.5 5 3.5C4.17157 3.5 3.5 4.17157 3.5 5C3.5 5.82843 4.17157 6.5 5 6.5Z" stroke="#8D8D8D" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M5 11C7 9 9 7.20914 9 5C9 2.79086 7.20914 1 5 1C2.79086 1 1 2.79086 1 5C1 7.20914 3 9 5 11Z" stroke="#8D8D8D" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span class="location">United Kingdom</span>
-                    </div>
-                </div>
-            </div>
-            <form class="review-stars">
-			    <?php echo liquidpoll_get_review_stars( 4 ); ?>
-            </form>
-            <div class="review-comment-heading">
-                <span class="comment-heading"><?php echo 'I’m impressed with the product and service!'; ?></span>
-            </div>
-            <p class="publish-time">2 days ago</p>
-            <div class="review-comment">
-			    <?php echo apply_filters( 'the_content', 'Couldn’t have had a better experience than I have with SUNS lifestyle from...' ); ?>
             </div>
         </div>
     </div>

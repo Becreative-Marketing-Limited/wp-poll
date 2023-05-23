@@ -71,7 +71,7 @@
     color: #5F64EB;
 }
 
-.reviews-slider .slider-heading-wrap .rating {
+.slider-heading-wrap .rating {
     text-align: center;
     font-size: 20px;
     line-height: 23px;
@@ -631,6 +631,7 @@
     font-size: 18px;
     font-weight: 600;
     line-height: 23px;
+    width: 100%;
 }
 
 .reviews-tiles.style-1 .user-name {
@@ -756,6 +757,13 @@
     width: 100%;
 }
 
+.reviews-tiles.style-2 .reviews-wrap .single-review .publish-time {
+    margin: 0;
+    font-size: 13px;
+    line-height: 15px;
+    color: #9D9D9D;
+}
+
 .reviews-tiles.style-2 .review-comment {
     font-size: 13px;
     line-height: 20px;
@@ -765,5 +773,177 @@
 
 .reviews-tiles.style-2 .review-comment p {
     margin: 0;
+}
+
+/**
+ * Style 3 - Reviews Tiles
+ */
+
+.reviews-tiles.style-3 .reviews-wrap {
+    margin: auto;
+}
+
+.reviews-tiles.style-3 .slider-heading-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.reviews-tiles.style-3 .slider-heading {
+    display: block;
+}
+
+.reviews-tiles.style-3 .slider-heading .rate-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reviews-tiles.style-3 .slider-heading-wrap .slider-heading form.review-stars {
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.reviews-tiles.style-3 .slider-heading-wrap .rating-wrap .rating-item label svg {
+    width: 75px;
+    height: 75px;
+    padding: 15px;
+    transform: scale(1.3);
+}
+
+.reviews-tiles.style-3 .slider-heading-wrap .rating-wrap .rating-item label.half {
+    width: 36px;
+}
+
+.reviews-tiles.style-3 .slider-heading-wrap .review-count {
+    display: flex;
+    justify-content: center;
+}
+
+.reviews-tiles.style-3 .slider-heading-wrap .review-count .count {
+    margin-left: 8px;
+}
+
+.reviews-tiles.style-3 .single-review {
+    width: 280px;
+    padding: 20px;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+
+.reviews-tiles.style-3 .single-review .review-stars {
+    display: inline-block;
+    margin: 15px 0;
+}
+
+.reviews-tiles.style-3 .single-review .rating-wrap .rating-item {
+    margin-right: 5px;
+}
+
+.reviews-tiles.style-3 .single-review .rating-wrap .rating-item label svg {
+    width: 42px;
+    height: 42px;
+    transform: scale(0.7);
+    padding: 0;
+}
+
+.reviews-tiles.style-3 .single-review .comment-heading {
+    width: 100%;
+}
+
+.reviews-tiles.style-3 .single-review .publish-time {
+    margin: 0;
+    font-size: 13px;
+    line-height: 15px;
+    color: #9D9D9D;
+}
+
+.reviews-tiles.style-3 .single-review .review-comment {
+    margin: 0 0 15px 0;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.reviews-tiles.style-3 .single-review .review-comment p {
+    margin: 0;
+}
+
+.reviews-tiles.style-3 .user {
+    display: flex;
+    align-items: center;
+    margin: 20px 0 0;
+
+}
+
+.reviews-tiles.style-3 .user-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: unset;
+}
+
+.reviews-tiles.style-3 .user-info {
+    margin-left: 10px;
+}
+
+.reviews-tiles.style-3 .user-name {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.reviews-tiles.style-3 .user-location {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.reviews-tiles.style-3 .user-location .location {
+    font-size: 13px;
+    line-height: 15px;
+    color: #606060;
+    margin-left: 5px;
+}
+
+@media screen and (max-device-width: 584px) {
+
+    .reviews-tiles.style-1 .slider-heading {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .reviews-tiles.style-1 .slider-heading .rate {
+        font-size: 35px;
+    }
+
+    .reviews-tiles.style-1 .slider-heading form.review-stars {
+        display: inline-block;
+        margin: 25px 0;
+    }
+
+    .reviews-tiles .slider-heading-wrap .slider-heading .rating-wrap .rating-item label svg {
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        transform: scale(0.7);
+    }
+
+    .reviews-tiles.style-2 .slider-heading form.review-stars {
+        margin: 20px 0;
+    }
+
+    .reviews-tiles.style-2 .slider-heading .rate {
+        font-size: 35px;
+    }
+
+    .reviews-tiles.style-3 .slider-heading-wrap .slider-heading form.review-stars {
+        margin: 20px 0;
+        display: inline-block;
+    }
+
+    .reviews-tiles.style-3 .single-review .comment-heading {
+        width: 100%;
+    }
 }
 
