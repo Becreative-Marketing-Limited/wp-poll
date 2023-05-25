@@ -7,7 +7,6 @@ use WPDK\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
-$styles = isset( $args['styles'] ) ? $args['styles'] : '1';
 if ( ! isset( $args['id'] ) ) {
 	return;
 }
@@ -15,7 +14,9 @@ if ( ! isset( $args['id'] ) ) {
 $poll_id              = $args['id'];
 $poll                 = liquidpoll_get_poll( $poll_id );
 $single_review_url    = $poll->get_permalink();
+$styles               = $args['styles'] ?? '1';
 $slider_button_styles = $args['slider_button'] ?? 1;
+$global_rating        = $args['show_global_rating'] ?? 'yes';
 $all_reviews          = $poll->get_poll_results();
 $all_reviews_rating   = array();
 $all_reviews_value    = 0;
@@ -37,20 +38,26 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 ?>
 
 <div class="reviews-tiles style-<?php echo esc_attr( $styles ); ?>">
-    <div class="slider-heading-wrap">
-        <div class="slider-heading">
-            <div class="rate-wrap">
-                <span class="rate">Rated Excellent!</span>
-                <div class="review-count">
-                    <span>Based on</span>
-                    <span class="count"><?php echo sprintf( esc_html__( '%s Reviews', 'wp-poll' ), count( $all_reviews ) ); ?></span>
+
+	<?php if ( 'yes' == $global_rating ) : ?>
+
+        <div class="slider-heading-wrap">
+            <div class="slider-heading">
+                <div class="rate-wrap">
+                    <span class="rate">Rated Excellent!</span>
+                    <div class="review-count">
+                        <span>Based on</span>
+                        <span class="count"><?php echo sprintf( esc_html__( '%s Reviews', 'wp-poll' ), count( $all_reviews ) ); ?></span>
+                    </div>
                 </div>
+                <form class="review-stars">
+					<?php echo liquidpoll_get_review_stars( $overall_rating ); ?>
+                </form>
             </div>
-            <form class="review-stars">
-				<?php echo liquidpoll_get_review_stars( $overall_rating ); ?>
-            </form>
         </div>
-    </div>
+
+	<?php endif; ?>
+
     <div class="reviews-wrap tiles-grid">
 
 		<?php foreach ( $poll->get_poll_results( array() ) as $poll_result ) : ?>
@@ -296,5 +303,3 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
         });
     });
 </script>
-
-
