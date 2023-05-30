@@ -1287,3 +1287,173 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
         flex-direction: column;
     }
 }
+
+/**
+ * reports modal
+ */
+
+.reviews-main .liquidpoll-report-modal-wrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    z-index: 999;
+}
+
+.reviews-main .liquidpoll-report-modal-wrap.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.reviews-main .liquidpoll-report-modal {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999999;
+}
+
+.reviews-main .liquidpoll-report-modal #tab-area {
+    width: 510px;
+    height: 100%;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.reviews-main .liquidpoll-report-modal .report-title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    color: #5F64EB;
+    margin: 20px 10px;
+    display: inline-block;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-next {
+    padding: 14px 25px;
+    margin-left: 20px;
+    border-radius: 10px;
+    background: var(--liquidpoll-reviews-theme-1-color-1);
+    color: #fff;
+    font-size: 24px;
+    text-align: right;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-prev {
+    padding: 14px 25px;
+    border-radius: 10px;
+    background: #E1E2FF;
+    color: var(--liquidpoll-reviews-theme-1-color-1);
+    font-size: 24px;
+    text-align: right;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.reviews-main .liquidpoll-report-modal .btn-submit-report {
+    padding: 14px 25px;
+    margin-left: 20px;
+    border-radius: 10px;
+    background: var(--liquidpoll-reviews-theme-1-color-1);
+    color: #fff;
+    font-size: 24px;
+    text-align: right;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.reviews-main .liquidpoll-report-modal .btn-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+
+.tab-pan {
+    display: none;
+    padding: 10px 10px 30px;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .content-title {
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 30px;
+    color: #000000;
+}
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .liquidpoll-divider {
+    margin: 20px 0;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .content {
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .purchase-consent {
+    align-items: center;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-checkbox.liquidpoll-checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-checkbox.liquidpoll-checkbox:after {
+    top: 5px;
+    left: 5px;
+    width: 7px;
+    height: 7px;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .purchase-consent-label {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-reason-wrap {
+    margin: 20px 0 20px;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-reason {
+    align-items: center;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-reason-label {
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+}
+
+.tab-pan.active {
+    display: block;
+}
+.hide {
+    display: none;
+}
+.tab-nav {
+    width: 100%;
+    text-align: right;
+    box-sizing: border-box;
+}

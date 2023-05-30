@@ -395,4 +395,70 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 
     </div>
 
+    <div class="liquidpoll-report-modal-wrap">
+
+        <form class="liquidpoll-report-modal">
+            <div id="tab-area">
+                <span class="report-title">Flag review</span>
+                <div class="tab-content">
+                    <div class="tab-pan active">
+                        <span class="content-title">Do you think there’s a problem with this review?</span>
+                        <hr class="liquidpoll-divider">
+                        <p class="content">You can use this flagging process if you’re a consumer. <a href="">Read more.</a></p>
+                        <label class="purchase-consent">
+                            <input type="radio" name="report_purchase_consent" value="yes">
+                            <span class="report-checkbox liquidpoll-checkbox"></span>
+                            <span class="purchase-consent-label">I have purchased this item</span>
+                        </label>
+                    </div>
+                    <div class="tab-pan">
+                        <span class="content-title">Please choose a reason</span>
+                        <div class="report-reason-wrap">
+                            <label class="report-reason">
+                                <input type="radio" name="report_reason" value="yes">
+                                <span class="report-checkbox liquidpoll-checkbox"></span>
+                                <span class="report-reason-label">Reason 1</span>
+                            </label>
+                            <label class="report-reason">
+                                <input type="radio" name="report_reason" value="yes">
+                                <span class="report-checkbox liquidpoll-checkbox"></span>
+                                <span class="report-reason-label">Reason 2</span>
+                            </label>
+                            <label class="report-reason">
+                                <input type="radio" name="report_reason" value="yes">
+                                <span class="report-checkbox liquidpoll-checkbox"></span>
+                                <span class="report-reason-label">Reason 3</span>
+                            </label>
+                            <label class="report-reason">
+                                <input type="radio" name="report_reason" value="yes">
+                                <span class="report-checkbox liquidpoll-checkbox"></span>
+                                <span class="report-reason-label">Reason 4</span>
+                            </label>
+                            <label class="report-reason">
+                                <input type="radio" name="report_reason" value="yes">
+                                <span class="report-checkbox liquidpoll-checkbox"></span>
+                                <span class="report-reason-label">Reason 5</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="tab-pan">
+                        <span class="content-title">Want to flag this review for [selected reason]?</span>
+                        <hr class="liquidpoll-divider">
+                    </div>
+                    <div class="tab-pan">Part 4</div>
+                </div>
+                <div class="tab-nav">
+                    <button type="button" class="tab-prev hide">Back</button>
+                    <button type="button" class="tab-next">Next</button>
+                    <button class="btn-submit-report hide">Continue</button>
+                </div>
+                <svg class="btn-close" width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24.75 14.25L14.25 24.75M14.25 14.25L24.75 24.75M37 19.5C37 29.165 29.165 37 19.5 37C9.83502 37 2 29.165 2 19.5C2 9.83502 9.83502 2 19.5 2C29.165 2 37 9.83502 37 19.5Z" stroke="#9397EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+        </form>
+
+    </div>
+
 </div>

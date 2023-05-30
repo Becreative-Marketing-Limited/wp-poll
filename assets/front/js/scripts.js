@@ -622,6 +622,50 @@
         });
     });
 
+    $(document).on('click', '.review-report', function () {
+        let reportModal = $('.liquidpoll-report-modal-wrap');
+
+        reportModal.addClass('show-modal');
+    });
+
+    $(document).on('ready', function (e) {
+
+        jQuery(document).ready(function () {
+            jQuery(".tab-next").click(function () {
+                let cur = $(this).closest("#tab-area").find(".tab-pan.active");
+                if (jQuery(cur).next().length > 0) {
+                    $(".tab-prev").removeClass("hide");
+                    jQuery(".tab-pan").removeClass("active");
+                    jQuery(cur).next().addClass("active");
+                }
+                if (jQuery(cur).next().next().length === 0) {
+                    $(".tab-next").addClass("hide");
+                    $(".btn-submit-report").removeClass("hide");
+                }
+            });
+
+            $(".tab-prev").click(function () {
+                let cur = $(this).closest("#tab-area").find(".tab-pan.active");
+                if (jQuery(cur).prev().length > 0) {
+                    $(".btn-submit-report").addClass("hide");
+                    $(".tab-next").removeClass("hide");
+                    jQuery(".tab-pan").removeClass("active");
+                    jQuery(cur).prev().addClass("active");
+                }
+                if (jQuery(cur).prev().prev().length === 0) {
+                    $(".tab-prev").addClass("hide");
+                }
+            });
+        });
+
+    });
+
+    $(document).on('click', '.btn-close', function () {
+        let reportModal = $('.liquidpoll-report-modal-wrap');
+
+        reportModal.removeClass('show-modal');
+    });
+
 
 })(jQuery, window, document, liquidpoll_object);
 
