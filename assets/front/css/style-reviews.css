@@ -661,6 +661,10 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     align-items: center;
 }
 
+.reviews-main .liquidpoll-reviews-item .review-report {
+    cursor: pointer;
+}
+
 .reviews-main .liquidpoll-reviews-item .review-share .share span {
     font-style: normal;
     font-weight: 400;
@@ -1400,6 +1404,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 }
 
 .reviews-main .liquidpoll-report-modal .tab-content .tab-pan .content {
+    display: block;
     font-size: 20px;
     line-height: 23px;
     color: #000000;
@@ -1446,13 +1451,71 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     color: #000000;
 }
 
-.tab-pan.active {
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .content-wrap {
+    margin-top: 20px;
+    padding: 20px 15px;
+    background: #F2F2F2;
+    border-radius: 5px;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .content-wrap .review-title {
+    display: block;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .content-wrap .review-comment {
+    font-size: 15px;
+    line-height: 23px;
+    color: #444444;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-content-list {
+    margin-bottom: 30px;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-content-list .content-list-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-content-list li {
+    font-size: 20px;
+    color: #000000;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .content-wrap p {
+    margin-bottom: 10px;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan .thankyou.content {
+    margin: 20px 0;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan input#report-email {
+    margin: 20px 0;
+}
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan input#report-email::placeholder {
+    font-size: 20px;
+    line-height: 23px;
+    color: #A8A8A8;
+}
+
+
+.reviews-main .liquidpoll-report-modal .tab-content .tab-pan.active {
     display: block;
 }
-.hide {
+
+.reviews-main .liquidpoll-report-modal .hide {
     display: none;
 }
-.tab-nav {
+
+.reviews-main .liquidpoll-report-modal .tab-nav {
     width: 100%;
     text-align: right;
     box-sizing: border-box;

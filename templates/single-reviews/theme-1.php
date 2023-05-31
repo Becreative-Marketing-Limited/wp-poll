@@ -444,8 +444,31 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                     <div class="tab-pan">
                         <span class="content-title">Want to flag this review for [selected reason]?</span>
                         <hr class="liquidpoll-divider">
+                        <div class="report-content-list">
+                            <span class="content-list-title">We can ask reviewers to remove, for example:</span>
+                            <ul>
+                                <li>Your name, phone number, address or email</li>
+                                <li>Information that can be used to identify you</li>
+                                <li>Text that breaches privacy laws</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="tab-pan">Part 4</div>
+                    <div class="tab-pan">
+                        <span class="content-title">Select the [selected reason context]</span>
+                        <div class="content-wrap">
+                            <span class="review-title">I will definitely get back to this place...</span>
+                            <p class="review-comment">Professional and experienced 2-man team (Christian & Brent) who installed our pergola completed in an extremely organised, efficient & timely manner. Friendly, accommodating and courteous team (as we have found the whole process has been dealt with by SUNS Lifestyle from start to finish)Fantastic quality pergola and adds a lovely feature to our garden.</p>
+                        </div>
+                    </div>
+                    <div class="tab-pan">
+                        <label class="content-title" for="report-email">Enter your email:</label>
+                        <input type="email" id="report-email" name="report-email" placeholder="name@mail.com">
+                        <span class="content">I confirm that the information I’ve provided here is true and correct.</span>
+                    </div>
+                    <div class="tab-pan">
+                        <span class="content-title">Thank you for flagging this review!</span>
+                        <span class="thankyou content">We will get back to you after one of our staff has reviewed your report.</span>
+                    </div>
                 </div>
                 <div class="tab-nav">
                     <button type="button" class="tab-prev hide">Back</button>
