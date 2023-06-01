@@ -415,34 +415,34 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         <span class="content-title">Please choose a reason</span>
                         <div class="report-reason-wrap">
                             <label class="report-reason">
-                                <input type="radio" name="report_reason" value="yes">
+                                <input type="radio" name="report_reason" value="Reason 1">
                                 <span class="report-checkbox liquidpoll-checkbox"></span>
                                 <span class="report-reason-label">Reason 1</span>
                             </label>
                             <label class="report-reason">
-                                <input type="radio" name="report_reason" value="yes">
+                                <input type="radio" name="report_reason" value="Reason 2">
                                 <span class="report-checkbox liquidpoll-checkbox"></span>
                                 <span class="report-reason-label">Reason 2</span>
                             </label>
                             <label class="report-reason">
-                                <input type="radio" name="report_reason" value="yes">
+                                <input type="radio" name="report_reason" value="Reason 3">
                                 <span class="report-checkbox liquidpoll-checkbox"></span>
                                 <span class="report-reason-label">Reason 3</span>
                             </label>
                             <label class="report-reason">
-                                <input type="radio" name="report_reason" value="yes">
+                                <input type="radio" name="report_reason" value="Reason 4">
                                 <span class="report-checkbox liquidpoll-checkbox"></span>
                                 <span class="report-reason-label">Reason 4</span>
                             </label>
                             <label class="report-reason">
-                                <input type="radio" name="report_reason" value="yes">
+                                <input type="radio" name="report_reason" value="Reason 5">
                                 <span class="report-checkbox liquidpoll-checkbox"></span>
                                 <span class="report-reason-label">Reason 5</span>
                             </label>
                         </div>
                     </div>
                     <div class="tab-pan">
-                        <span class="content-title">Want to flag this review for [selected reason]?</span>
+                        <span class="flag-reason content-title">Want to flag this review for </span>
                         <hr class="liquidpoll-divider">
                         <div class="report-content-list">
                             <span class="content-list-title">We can ask reviewers to remove, for example:</span>
@@ -454,7 +454,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         </div>
                     </div>
                     <div class="tab-pan">
-                        <span class="content-title">Select the [selected reason context]</span>
+                        <span class="selected-title content-title">Select the </span>
                         <div class="content-wrap">
                             <span class="review-title">I will definitely get back to this place...</span>
                             <p class="review-comment">Professional and experienced 2-man team (Christian & Brent) who installed our pergola completed in an extremely organised, efficient & timely manner. Friendly, accommodating and courteous team (as we have found the whole process has been dealt with by SUNS Lifestyle from start to finish)Fantastic quality pergola and adds a lovely feature to our garden.</p>

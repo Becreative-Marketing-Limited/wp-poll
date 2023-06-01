@@ -623,9 +623,25 @@
     });
 
     $(document).on('click', '.review-report', function () {
-        let reportModal = $('.liquidpoll-report-modal-wrap');
+        let report_modal = $('.liquidpoll-report-modal-wrap');
 
-        reportModal.addClass('show-modal');
+        report_modal.addClass('show-modal');
+
+        let review = $(this).parent().parent(),
+            review_title = review.find('.comment-heading').html(),
+            review_comment = review.find('.review-comment > p').html(),
+            content_title = $('.selected-title.content-title'),
+            flag_reason = $('.flag-reason.content-title');
+
+        $('.content-wrap .review-title').html(review_title);
+        $('.content-wrap .review-comment').html(review_comment);
+
+        $('input[name="report_reason"]').on('change', function () {
+            let selected_reason = $('input[name="report_reason"]:checked').val();
+
+            content_title.append(selected_reason);
+            flag_reason.append(selected_reason += '?');
+        });
     });
 
     $(document).on('ready', function (e) {
@@ -664,6 +680,8 @@
         let reportModal = $('.liquidpoll-report-modal-wrap');
 
         reportModal.removeClass('show-modal');
+        reportModal.children().trigger('reset')
+
     });
 
 
