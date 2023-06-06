@@ -498,7 +498,6 @@
 
         el_filter_relevant.change(function () {
             let el_this_filter_relevant = $(this);
-            console.log('ok')
 
             el_this_filter_relevant.parents('form.reviews-relevant').submit();
         });
@@ -628,19 +627,21 @@
         report_modal.addClass('show-modal');
 
         let review = $(this).parent().parent(),
+            review_id = $(this).data('review-id'),
             review_title = review.find('.comment-heading').html(),
             review_comment = review.find('.review-comment > p').html(),
             content_title = $('.selected-title.content-title'),
             flag_reason = $('.flag-reason.content-title');
 
+        $('#review-id').val(review_id);
         $('.content-wrap .review-title').html(review_title);
         $('.content-wrap .review-comment').html(review_comment);
 
         $('input[name="report_reason"]').on('change', function () {
             let selected_reason = $('input[name="report_reason"]:checked').val();
 
-            content_title.append(selected_reason);
-            flag_reason.append(selected_reason += '?');
+            content_title.html('Select the ' + selected_reason);
+            flag_reason.html('Want to flag this review for ' + selected_reason + '?');
         });
     });
 
@@ -681,7 +682,40 @@
 
         reportModal.removeClass('show-modal');
         reportModal.children().trigger('reset')
+    });
 
+    $(document).on('submit','.liquidpoll-report-modal',function (e){
+
+        let el_report_form = $('.liquidpoll-report-modal'),
+            report_form_value = el_report_form.serialize(),
+            el_review_response = el_report_form.find('.tab-content .liquidpoll-responses'),
+            el_review_response_message = el_review_response.find('span.message');
+
+        console.log(report_form_value);
+
+        $.ajax({
+            type: 'POST',
+            context: this,
+            url: pluginObject.ajaxurl,
+            data: {
+                'action': 'liquidpoll_submit_review_report',
+                'form_data': report_form_value,
+            },
+            success: function (response) {
+                if (response.success) {
+                    $('.liquidpoll-report-modal-wrap').removeClass('show-modal');
+                    window.location.href = window.location.origin + window.location.pathname;
+                }else {
+                    el_review_response_message.html(response.data.message);
+                    el_review_response.removeClass('liquidpoll-success').addClass('liquidpoll-error');
+                    el_review_response.fadeIn();
+                    setTimeout(function () {
+                        window.location.href = window.location.origin + window.location.pathname;
+                    }, 2000);
+                }
+            }
+        });
+       return false;
     });
 
 

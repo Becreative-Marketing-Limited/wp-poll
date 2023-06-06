@@ -261,12 +261,50 @@ class LIQUIDPOLL_Poll_meta {
 					'id'         => 'reviews_consent_desc',
 					'title'      => esc_html__( 'Consent Description', 'wp-poll' ),
 					'type'       => 'textarea',
-					'attributes'  => array(
+					'attributes' => array(
 						'rows'  => '4',
 						'cols'  => '75',
 						'style' => 'width:auto;min-height: auto;',
 					),
 					'dependency' => array( '_type', '==', 'reviews', 'all' ),
+				),
+				array(
+					'id'         => 'reviews_report_read_more_url',
+					'title'      => esc_html__( 'Read more URL', 'wp-poll' ),
+					'desc'       => esc_html__( 'URL for Read more on the report modal', 'wp-poll' ),
+					'type'       => 'text',
+					'dependency' => array( '_type', '==', 'reviews', 'all' ),
+				),
+				array(
+					'id'              => 'reviews_report_reason',
+					'title'           => esc_html__( 'Report Reason', 'wp-poll' ),
+					'desc'            => esc_html__( 'Report reasons for the report modal', 'wp-poll' ),
+					'type'            => 'repeater',
+					'button_title'    => esc_html__( 'Add option', 'wp-poll' ),
+					'disable_actions' => array( 'clone' ),
+					'fields'          => array(
+						array(
+							'id'    => 'reason',
+							'title' => esc_html__( 'Reason', 'wp-poll' ),
+							'type'  => 'text',
+						),
+					),
+					'dependency'      => array( '_type', '==', 'reviews', 'all' ),
+					'default'         => array(
+						array(
+							'reason' => esc_html__( 'Harmful or illegal', 'wp-poll' ),
+						),
+						array(
+							'reason' => esc_html__( 'Personal information', 'wp-poll' ),
+						),
+						array(
+							'reason' => esc_html__( 'Advertising or promotional', 'wp-poll' ),
+						),
+						array(
+							'reason' => esc_html__( 'Not based on a genuine experience', 'wp-poll' ),
+						),
+
+					),
 				),
 			), $post_selection_fields, $poll_setting_fields )
 		);

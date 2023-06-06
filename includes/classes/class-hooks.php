@@ -66,7 +66,88 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_action( 'wp_ajax_liquidpoll_submit_review', array( $this, 'liquidpoll_submit_review' ) );
 			add_action( 'wp_ajax_liquidpoll_submit_review_useful', array( $this, 'liquidpoll_submit_review_useful' ) );
 			add_action( 'wp_ajax_liquidpoll_send_reply', array( $this, 'liquidpoll_send_reply' ) );
+			add_action( 'wp_ajax_liquidpoll_submit_review_report', array( $this, 'liquidpoll_submit_review_report' ) );
 		}
+
+
+		/**
+		 * Handle review report data submission
+		 *
+		 * @return void
+		 */
+		function liquidpoll_submit_review_report() {
+			global $wpdb;
+
+			$_form_data = isset( $_POST['form_data'] ) ? $_POST['form_data'] : '';
+
+			parse_str( $_form_data, $form_data );;
+
+			if ( empty( $result_id = Utils::get_args_option( 'review_id', $form_data ) ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Empty result ID', 'wp-poll' ) ) );
+			}
+
+			if ( empty( $report_reason = Utils::get_args_option( 'report_reason', $form_data ) ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Empty report reason', 'wp-poll' ) ) );
+			}
+
+			if ( empty( $report_email = Utils::get_args_option( 'report_email', $form_data ) ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Empty email', 'wp-poll' ) ) );
+			}
+
+			$result_report_data = liquidpoll_get_results_meta( $result_id, 'results_report_data' );
+			$poller_id_ip       = liquidpoll_get_poller();
+			$perches_consent    = Utils::get_args_option( 'report_purchase_consent', $form_data );
+
+			if ( ! $result_report_data ) {
+
+				$report_data = array(
+					array(
+						'poller_id_ip'     => $poller_id_ip,
+						'report_reason'    => $report_reason,
+						'report_email'     => $report_email,
+						'purchase_consent' => $perches_consent,
+						'datetime'         => current_time( 'mysql' ),
+					),
+				);
+
+				$args = array(
+					'result_id'  => $result_id,
+					'meta_key'   => 'results_report_data',
+					'meta_value' => serialize( $report_data ),
+					'datetime'   => current_time( 'mysql' ),
+				);
+
+				$result = $wpdb->insert( LIQUIDPOLL_RESULTS_META_TABLE, $args );
+
+				wp_send_json_success( array( 'message' => $result ) );
+			}
+
+			$report_data = unserialize( $result_report_data );
+
+			if ( ! empty( $report_data ) && ! in_array( $poller_id_ip, array_column( $report_data, 'poller_id_ip' ) ) ) {
+
+				$report_data[] = array(
+					'poller_id_ip'     => $poller_id_ip,
+					'report_reason'    => $report_reason,
+					'report_email'     => $report_email,
+					'purchase_consent' => $perches_consent,
+					'datetime'         => current_time( 'mysql' ),
+				);
+
+				$args = array(
+					'meta_value' => serialize( $report_data ),
+				);
+
+				$where = array( 'result_id' => $result_id, 'meta_key' => 'results_report_data' );
+
+				$result = $wpdb->update( LIQUIDPOLL_RESULTS_META_TABLE, $args, $where );
+
+				wp_send_json_success( array( 'message' => $result ) );
+			} else {
+				wp_send_json_error( array( 'message' => esc_html__( 'You have already flagged this review.', 'wp-poll' ) ) );
+			}
+		}
+
 
 		function liquidpoll_send_reply() {
 

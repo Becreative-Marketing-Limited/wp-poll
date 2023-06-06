@@ -25,6 +25,8 @@ $experience_time = strtotime( liquidpoll_get_results_meta( $result_id, 'experien
 $experience_time = date( "F j, Y", $experience_time );
 $result_replies  = liquidpoll_get_results_meta( $result_id, 'result_replies', array() );
 $result_replies  = ! is_array( $result_replies ) ? array() : $result_replies;
+$result_reports  = liquidpoll_get_results_meta( $result_id, 'results_report_data', array() );
+$result_reports  = ! is_array( $result_reports ) ? array() : $result_reports;
 
 ?>
 
@@ -103,5 +105,39 @@ $result_replies  = ! is_array( $result_replies ) ? array() : $result_replies;
             <input type="hidden" name="result_id" value="<?php echo esc_attr( $result_id ); ?>">
             <button type="submit" class="liquidpoll-button">Send Reply</button>
         </form>
+    </div>
+
+    <div class="liquidpoll-result-reports">
+        <h2> Review reports</h2>
+        <div class="liquidpoll-review-report">
+
+			<?php foreach ( $result_reports as $report ) : $report_author = get_user_by( 'id', Utils::get_args_option( 'poller_id_ip', $report ) ); ?>
+
+                <div class="reply-author">
+                    <div class="author-image"><img src="<?php echo esc_url( get_avatar_url( $report_author->ID ) ); ?>" alt="<?php echo esc_attr( $report_author->display_name ); ?>"></div>
+                    <div class="author-details">
+                        <p class="author-name"><?php echo esc_html( $report_author->display_name ); ?></p>
+                        <p class="reply-time"><?php echo date( "jS M Y, g:i a", strtotime( Utils::get_args_option( 'datetime', $report ) ) ); ?></p>
+                    </div>
+                </div>
+
+                <div class="liquidpoll-edit-item">
+                    <div class="item-title">Report Reason</div>
+                    <div class="item-value"><?php echo esc_html__( Utils::get_args_option( 'report_reason', $report ), 'wp-poll' ) ?></div>
+                </div>
+
+                <div class="liquidpoll-edit-item">
+                    <div class="item-title">Report E-mail</div>
+                    <div class="item-value"><?php echo esc_html__( Utils::get_args_option( 'report_email', $report ), 'wp-poll' ) ?></div>
+                </div>
+
+                <div class="liquidpoll-edit-item">
+                    <div class="item-title">Purchase Consent</div>
+                    <div class="item-value"><?php echo esc_html__( Utils::get_args_option( 'purchase_consent', $report, 'No' ), 'wp-poll' ) ?></div>
+                </div>
+
+			<?php endforeach; ?>
+
+        </div>
     </div>
 </div>

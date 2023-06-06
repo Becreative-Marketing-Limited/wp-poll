@@ -28,6 +28,8 @@ $service_name            = Utils::get_meta( 'reviews_service_name' );
 $service_url             = Utils::get_meta( 'reviews_service_url' );
 $consent_required        = $poll->get_meta( 'is_consent_required', false ) ? 'required' : '';
 $consent_desc            = Utils::get_meta( 'reviews_consent_desc', '', 'I confirm this review about my own genuine experience. I am eligible to leave this review and have not been offered any incentive or payment to leave a review for this company.' );
+$read_more_url           = $poll->get_meta( 'reviews_report_read_more_url', '' );
+$report_reason           = $poll->get_meta( 'reviews_report_reason' );
 $all_reviews             = $poll->get_poll_results();
 $all_reviews_rating      = array();
 $all_reviews_value       = 0;
@@ -251,46 +253,42 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                     </div>
                 </div>
                 <form class="review-stars">
-					<?php echo liquidpoll_get_review_stars( $polled_value ); ?>
+		            <?php echo liquidpoll_get_review_stars( $polled_value ); ?>
                 </form>
                 <div class="review-comment-heading">
                     <h2 class="comment-heading"><?php echo esc_html( $review_title ); ?></h2>
                 </div>
                 <div class="review-comment">
-					<?php echo apply_filters( 'the_content', $polled_comments ); ?>
+		            <?php echo apply_filters( 'the_content', $polled_comments ); ?>
                 </div>
                 <hr class="liquidpoll-divider">
                 <div class="review-share-wrap">
                     <div class="review-share">
-                        <button class="useful <?php echo esc_attr( $current_user_liked ); ?>"
-                                data-review-id="<?php echo esc_attr( $result_id ) ?>">
+                        <button class="useful <?php echo esc_attr( $current_user_liked ); ?>" data-review-id="<?php echo esc_attr( $result_id ) ?>">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 17V8.2M1 9.8V15.4C1 16.2837 1.71634 17 2.6 17H13.341C14.5256 17 15.533 16.1357 15.7131 14.9649L16.5746 9.36494C16.7983 7.91112 15.6735 6.6 14.2025 6.6H11.4C10.9582 6.6 10.6 6.24183 10.6 5.8V2.97267C10.6 1.8832 9.7168 1 8.62733 1C8.36747 1 8.13198 1.15304 8.02644 1.3905L5.21115 7.72491C5.08275 8.01381 4.79625 8.2 4.4801 8.2H2.6C1.71634 8.2 1 8.91634 1 9.8Z"
-                                      stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 17V8.2M1 9.8V15.4C1 16.2837 1.71634 17 2.6 17H13.341C14.5256 17 15.533 16.1357 15.7131 14.9649L16.5746 9.36494C16.7983 7.91112 15.6735 6.6 14.2025 6.6H11.4C10.9582 6.6 10.6 6.24183 10.6 5.8V2.97267C10.6 1.8832 9.7168 1 8.62733 1C8.36747 1 8.13198 1.15304 8.02644 1.3905L5.21115 7.72491C5.08275 8.01381 4.79625 8.2 4.4801 8.2H2.6C1.71634 8.2 1 8.91634 1 9.8Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <span><?php esc_html_e( 'Useful', 'wp-poll' ); ?></span>
                         </button>
                         <button class="share">
                             <svg width="17" height="18" viewBox="0 0 17 18" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.472 10.208L10.936 13.392M10.928 4.608L5.472 7.792M15.4 3.4C15.4 4.72548 14.3255 5.8 13 5.8C11.6745 5.8 10.6 4.72548 10.6 3.4C10.6 2.07452 11.6745 1 13 1C14.3255 1 15.4 2.07452 15.4 3.4ZM5.8 9C5.8 10.3255 4.72548 11.4 3.4 11.4C2.07452 11.4 1 10.3255 1 9C1 7.67452 2.07452 6.6 3.4 6.6C4.72548 6.6 5.8 7.67452 5.8 9ZM15.4 14.6C15.4 15.9255 14.3255 17 13 17C11.6745 17 10.6 15.9255 10.6 14.6C10.6 13.2745 11.6745 12.2 13 12.2C14.3255 12.2 15.4 13.2745 15.4 14.6Z"
-                                      stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5.472 10.208L10.936 13.392M10.928 4.608L5.472 7.792M15.4 3.4C15.4 4.72548 14.3255 5.8 13 5.8C11.6745 5.8 10.6 4.72548 10.6 3.4C10.6 2.07452 11.6745 1 13 1C14.3255 1 15.4 2.07452 15.4 3.4ZM5.8 9C5.8 10.3255 4.72548 11.4 3.4 11.4C2.07452 11.4 1 10.3255 1 9C1 7.67452 2.07452 6.6 3.4 6.6C4.72548 6.6 5.8 7.67452 5.8 9ZM15.4 14.6C15.4 15.9255 14.3255 17 13 17C11.6745 17 10.6 15.9255 10.6 14.6C10.6 13.2745 11.6745 12.2 13 12.2C14.3255 12.2 15.4 13.2745 15.4 14.6Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <span><?php esc_html_e( 'Share', 'wp-poll' ); ?></span>
                         </button>
                     </div>
-                    <div class="review-report">
+                    <div class="review-report" data-review-id="<?php echo esc_attr( $result_id ) ?>">
                         <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 11.4C1 11.4 1.8 10.6 4.2 10.6C6.6 10.6 8.2 12.2 10.6 12.2C13 12.2 13.8 11.4 13.8 11.4V1.8C13.8 1.8 13 2.6 10.6 2.6C8.2 2.6 6.6 1 4.2 1C1.8 1 1 1.8 1 1.8L1 17"
-                                  stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 11.4C1 11.4 1.8 10.6 4.2 10.6C6.6 10.6 8.2 12.2 10.6 12.2C13 12.2 13.8 11.4 13.8 11.4V1.8C13.8 1.8 13 2.6 10.6 2.6C8.2 2.6 6.6 1 4.2 1C1.8 1 1 1.8 1 1.8L1 17" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </div>
 
-				<?php if ( count( $result_replies ) > 0 ) : ?>
+	            <?php if ( count( $result_replies ) > 0 ) : ?>
                     <div class="review-replay">
-						<?php foreach ( $result_replies as $reply ): $reply_author = get_user_by( 'id', Utils::get_args_option( 'user_id', $reply ) ); ?>
+			            <?php foreach ( $result_replies as $reply ): $reply_author = get_user_by( 'id', Utils::get_args_option( 'user_id', $reply ) ); ?>
                             <div class="replay-info-wrap">
                                 <div class="replay-info">
                                     <div class="replay-icon">
@@ -397,14 +395,14 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 
     <div class="liquidpoll-report-modal-wrap">
 
-        <form class="liquidpoll-report-modal">
+        <form method="post" class="liquidpoll-report-modal">
             <div id="tab-area">
                 <span class="report-title">Flag review</span>
                 <div class="tab-content">
                     <div class="tab-pan active">
                         <span class="content-title">Do you think there’s a problem with this review?</span>
                         <hr class="liquidpoll-divider">
-                        <p class="content">You can use this flagging process if you’re a consumer. <a href="">Read more.</a></p>
+                        <p class="content">You can use this flagging process if you’re a consumer. <a target="_blank" href="<?php echo esc_url( $read_more_url ) ?>">Read more.</a></p>
                         <label class="purchase-consent">
                             <input type="radio" name="report_purchase_consent" value="yes">
                             <span class="report-checkbox liquidpoll-checkbox"></span>
@@ -414,31 +412,15 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                     <div class="tab-pan">
                         <span class="content-title">Please choose a reason</span>
                         <div class="report-reason-wrap">
-                            <label class="report-reason">
-                                <input type="radio" name="report_reason" value="Reason 1">
-                                <span class="report-checkbox liquidpoll-checkbox"></span>
-                                <span class="report-reason-label">Reason 1</span>
-                            </label>
-                            <label class="report-reason">
-                                <input type="radio" name="report_reason" value="Reason 2">
-                                <span class="report-checkbox liquidpoll-checkbox"></span>
-                                <span class="report-reason-label">Reason 2</span>
-                            </label>
-                            <label class="report-reason">
-                                <input type="radio" name="report_reason" value="Reason 3">
-                                <span class="report-checkbox liquidpoll-checkbox"></span>
-                                <span class="report-reason-label">Reason 3</span>
-                            </label>
-                            <label class="report-reason">
-                                <input type="radio" name="report_reason" value="Reason 4">
-                                <span class="report-checkbox liquidpoll-checkbox"></span>
-                                <span class="report-reason-label">Reason 4</span>
-                            </label>
-                            <label class="report-reason">
-                                <input type="radio" name="report_reason" value="Reason 5">
-                                <span class="report-checkbox liquidpoll-checkbox"></span>
-                                <span class="report-reason-label">Reason 5</span>
-                            </label>
+
+							<?php foreach ( $report_reason as $reason ): ?>
+                                <label class="report-reason">
+                                    <input type="radio" name="report_reason" value="<?php echo esc_attr( Utils::get_args_option( 'reason', $reason ) ); ?>">
+                                    <span class="report-checkbox liquidpoll-checkbox"></span>
+                                    <span class="report-reason-label"><?php echo esc_html__( Utils::get_args_option( 'reason', $reason ), 'wp-poll' ); ?></span>
+                                </label>
+							<?php endforeach; ?>
+
                         </div>
                     </div>
                     <div class="tab-pan">
@@ -462,19 +444,23 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                     </div>
                     <div class="tab-pan">
                         <label class="content-title" for="report-email">Enter your email:</label>
-                        <input type="email" id="report-email" name="report-email" placeholder="name@mail.com">
+                        <input type="email" id="report-email" name="report_email" placeholder="name@mail.com">
                         <span class="content">I confirm that the information I’ve provided here is true and correct.</span>
                     </div>
                     <div class="tab-pan">
                         <span class="content-title">Thank you for flagging this review!</span>
                         <span class="thankyou content">We will get back to you after one of our staff has reviewed your report.</span>
+                        <p class="liquidpoll-responses liquidpoll-success">
+                            <span class="icon-box"></span><span class="message"></span>
+                        </p>
                     </div>
                 </div>
                 <div class="tab-nav">
                     <button type="button" class="tab-prev hide">Back</button>
                     <button type="button" class="tab-next">Next</button>
-                    <button class="btn-submit-report hide">Continue</button>
+                    <button type="submit" class="btn-submit-report hide">Continue</button>
                 </div>
+                <input type="hidden" id="review-id" name="review_id" value=""/>
                 <svg class="btn-close" width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M24.75 14.25L14.25 24.75M14.25 14.25L24.75 24.75M37 19.5C37 29.165 29.165 37 19.5 37C9.83502 37 2 29.165 2 19.5C2 9.83502 9.83502 2 19.5 2C29.165 2 37 9.83502 37 19.5Z" stroke="#9397EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>

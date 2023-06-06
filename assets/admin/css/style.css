@@ -451,6 +451,7 @@ span.poll-type.type-nps {
  */
 .liquidpoll-result-edit {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 30px;
 }
 
@@ -601,6 +602,93 @@ span.poll-type.type-nps {
 .liquidpoll-result-edit .liquidpoll-replies .liquidpoll-reply .reply-content * {
     font-size: 14px;
     line-height: 21px;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-reports {
+    width: 50%;
+    margin: 30px 0;
+    background: #fff;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-reports h2{
+    margin-left: 20px;
+}
+
+.liquidpoll-result-edit .liquidpoll-review-report {
+    margin: 20px 0 20px 20px;
+}
+
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .liquidpoll-reply {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+ .reply-author {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+}
+
+.reply-author .author-image {
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #f2f2ff;
+    box-shadow: 0 0 20px rgb(95 100 235 / 17%);
+}
+
+.author-details .author-name {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.reply-author .author-image img {
+    width: 100%;
+}
+
+.reply-author .author-details .reply-time {
+    margin: 0 0 0 0;
+}
+
+.liquidpoll-reply .reply-content {
+    background: #f2f2ff;
+    padding: 0 12px;
+    display: inline-block;
+    margin: 20px 0 0 0;
+    border-radius: 4px;
+    width: calc(100% - 24px);
+}
+
+.reply-author .author-details .author-name {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.liquidpoll-edit-item {
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid #dedede;
+    background: #fff;
+}
+
+.item-title {
+    width: 30%;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.liquidpoll-edit-item:last-child {
+    border-bottom: none;
 }
 
 @keyframes loading {
