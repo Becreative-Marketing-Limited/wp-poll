@@ -135,7 +135,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 
 			$poll_options = $this->get_poll_options();
 
-			if ( 'reaction' == $this->get_type() ) {
+			if ( 'reaction' == $this->get_type() || 'reviews' == $this->get_type() ) {
 				$option_label = $option_id;
 			} else {
 				$option_label = $poll_options[ $option_id ]['label'] ?? '';

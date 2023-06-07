@@ -1520,3 +1520,55 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     text-align: right;
     box-sizing: border-box;
 }
+
+
+@media screen and (max-device-width: 584px) {
+
+    .reviews-main .liquidpoll-report-modal #tab-area {
+        width: 300px;
+    }
+
+    .reviews-main .liquidpoll-report-modal .tab-content .tab-pan .content-title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .reviews-main .liquidpoll-report-modal .tab-content .tab-pan .content {
+        font-size: 15px;
+        line-height: 18px;
+    }
+
+    .reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-reason-label {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-content-list .content-list-title {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .reviews-main .liquidpoll-report-modal .tab-content .tab-pan .report-content-list li {
+        font-size: 14px;
+    }
+
+    .reviews-main .liquidpoll-report-modal .tab-prev {
+        padding: 10px 18px;
+        border-radius: 7px;
+        font-size: 20px;
+    }
+
+    .reviews-main .liquidpoll-report-modal .tab-next {
+        padding: 10px 18px;
+        margin-left: 10px;
+        border-radius: 7px;
+        font-size: 20px;
+    }
+
+    .reviews-main .liquidpoll-report-modal .btn-submit-report {
+        padding: 10px 18px;
+        margin-left: 10px;
+        border-radius: 7px;
+        font-size: 20px;
+    }
+}

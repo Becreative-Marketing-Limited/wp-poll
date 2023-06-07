@@ -369,6 +369,10 @@ a.liquidpoll-doc {
     background: #9c27b0;
 }
 
+.poll_page_reports .row-actions .type.reviews{
+    background: #5F64EB;
+}
+
 .poll_page_reports .liquidpoll-report-export {
     margin-left: 15px;
     display: flex;
@@ -440,6 +444,10 @@ span.poll-type.type-reaction {
 span.poll-type.type-nps {
     background: #795548;
     text-transform: uppercase;
+}
+
+span.poll-type.type-reviews {
+    background: #5F64EB;
 }
 
 .wpdk_settings-section[data-section-id="reports"] .liquidpoll-reports-field {
@@ -624,13 +632,13 @@ span.poll-type.type-nps {
     margin-bottom: 25px;
 }
 
- .reply-author {
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .reply-author {
     display: flex;
     justify-content: start;
     align-items: flex-start;
 }
 
-.reply-author .author-image {
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .reply-author .author-image {
     width: 56px;
     height: 56px;
     overflow: hidden;
@@ -640,7 +648,7 @@ span.poll-type.type-nps {
     box-shadow: 0 0 20px rgb(95 100 235 / 17%);
 }
 
-.author-details .author-name {
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .author-details .author-name {
     margin: 0 0 5px 0;
     font-size: 16px;
     line-height: 24px;
@@ -648,15 +656,15 @@ span.poll-type.type-nps {
     display: inline-block;
 }
 
-.reply-author .author-image img {
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .reply-author .author-image img {
     width: 100%;
 }
 
-.reply-author .author-details .reply-time {
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .reply-author .author-details .reply-time {
     margin: 0 0 0 0;
 }
 
-.liquidpoll-reply .reply-content {
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .liquidpoll-reply .reply-content {
     background: #f2f2ff;
     padding: 0 12px;
     display: inline-block;
@@ -665,7 +673,7 @@ span.poll-type.type-nps {
     width: calc(100% - 24px);
 }
 
-.reply-author .author-details .author-name {
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .reply-author .author-details .author-name {
     margin: 0 0 5px 0;
     font-size: 16px;
     line-height: 24px;
@@ -673,21 +681,21 @@ span.poll-type.type-nps {
     display: inline-block;
 }
 
-.liquidpoll-edit-item {
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .liquidpoll-edit-item {
     display: flex;
     padding: 15px;
     border-bottom: 1px solid #dedede;
     background: #fff;
 }
 
-.item-title {
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .item-title {
     width: 30%;
     font-size: 16px;
     line-height: 24px;
     font-weight: 500;
 }
 
-.liquidpoll-edit-item:last-child {
+.liquidpoll-result-edit .liquidpoll-result-reports .liquidpoll-review-report .liquidpoll-edit-item:last-child {
     border-bottom: none;
 }
 

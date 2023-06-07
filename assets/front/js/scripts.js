@@ -691,8 +691,6 @@
             el_review_response = el_report_form.find('.tab-content .liquidpoll-responses'),
             el_review_response_message = el_review_response.find('span.message');
 
-        console.log(report_form_value);
-
         $.ajax({
             type: 'POST',
             context: this,
