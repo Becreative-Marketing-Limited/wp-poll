@@ -188,15 +188,13 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
         <div class="reviews-filter">
             <span class="filter">Filter</span>
             <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 5L14 5M14 5C14 6.65686 15.3431 8 17 8C18.6569 8 20 6.65685 20 5C20 3.34315 18.6569 2 17 2C15.3431 2 14 3.34315 14 5ZM8 13L20 13M8 13C8 14.6569 6.65685 16 5 16C3.34315 16 2 14.6569 2 13C2 11.3431 3.34315 10 5 10C6.65685 10 8 11.3431 8 13Z"
-                      stroke="#5F64EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 5L14 5M14 5C14 6.65686 15.3431 8 17 8C18.6569 8 20 6.65685 20 5C20 3.34315 18.6569 2 17 2C15.3431 2 14 3.34315 14 5ZM8 13L20 13M8 13C8 14.6569 6.65685 16 5 16C3.34315 16 2 14.6569 2 13C2 11.3431 3.34315 10 5 10C6.65685 10 8 11.3431 8 13Z" stroke="#5F64EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
         <form class="reviews-relevant" action="" method="get">
             <span class="filter">Most relevant</span>
             <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.33333 8.66667H18.6667M2 2H22M8.66667 15.3333H15.3333" stroke="#5F64EB" stroke-width="3"
-                      stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5.33333 8.66667H18.6667M2 2H22M8.66667 15.3333H15.3333" stroke="#5F64EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <div class="liquidpoll-relevant-wrap">
                 <div class="relevant-items">
@@ -323,8 +321,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                 <h2>Filter by</h2>
                 <div class="close-button">
                     <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M24.75 14.25L14.25 24.75M14.25 14.25L24.75 24.75M37 19.5C37 29.165 29.165 37 19.5 37C9.83502 37 2 29.165 2 19.5C2 9.83502 9.83502 2 19.5 2C29.165 2 37 9.83502 37 19.5Z"
-                              stroke="#9397EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M24.75 14.25L14.25 24.75M14.25 14.25L24.75 24.75M37 19.5C37 29.165 29.165 37 19.5 37C9.83502 37 2 29.165 2 19.5C2 9.83502 9.83502 2 19.5 2C29.165 2 37 9.83502 37 19.5Z" stroke="#9397EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
             </div>
@@ -400,17 +397,17 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                 <span class="report-title">Flag review</span>
                 <div class="tab-content">
                     <div class="tab-pan active">
-                        <span class="content-title">Do you think there’s a problem with this review?</span>
+                        <span class="content-title"><?php echo esc_html__( 'Do you think there’s a problem with this review?', 'wp-poll' ) ?></span>
                         <hr class="liquidpoll-divider">
-                        <p class="content">You can use this flagging process if you’re a consumer. <a target="_blank" href="<?php echo esc_url( $read_more_url ) ?>">Read more.</a></p>
+                        <p class="content"><?php echo esc_html__( 'You can use this flagging process if you’re a consumer.', 'wp-poll' ) ?> <a target="_blank" href="<?php echo esc_url( $read_more_url ) ?>"><?php echo esc_html__( 'Read more.', 'wp-poll' ) ?></a></p>
                         <label class="purchase-consent">
                             <input type="radio" name="report_purchase_consent" value="yes">
                             <span class="report-checkbox liquidpoll-checkbox"></span>
-                            <span class="purchase-consent-label">I have purchased this item</span>
+                            <span class="purchase-consent-label"><?php echo esc_html__( 'I have purchased this item', 'wp-poll' ) ?></span>
                         </label>
                     </div>
                     <div class="tab-pan">
-                        <span class="content-title">Please choose a reason</span>
+                        <span class="content-title"><?php echo esc_html__( 'Please choose a reason', 'wp-poll' ) ?></span>
                         <div class="report-reason-wrap">
 
 							<?php foreach ( $report_reason as $reason ): ?>
@@ -424,14 +421,14 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         </div>
                     </div>
                     <div class="tab-pan">
-                        <span class="flag-reason content-title">Want to flag this review for </span>
+                        <span class="flag-reason content-title"><?php echo esc_html__( 'Want to flag this review for ', 'wp-poll' ) ?></span>
                         <hr class="liquidpoll-divider">
                         <div class="report-content-list">
-                            <span class="content-list-title">We can ask reviewers to remove, for example:</span>
+                            <span class="content-list-title"><?php echo esc_html__( 'We can ask reviewers to remove, for example:', 'wp-poll' ) ?></span>
                             <ul>
-                                <li>Your name, phone number, address or email</li>
-                                <li>Information that can be used to identify you</li>
-                                <li>Text that breaches privacy laws</li>
+                                <li><?php echo esc_html__( 'Your name, phone number, address or email', 'wp-poll' ) ?></li>
+                                <li><?php echo esc_html__( 'Information that can be used to identify you', 'wp-poll' ) ?></li>
+                                <li><?php echo esc_html__( 'Text that breaches privacy laws', 'wp-poll' ) ?></li>
                             </ul>
                         </div>
                     </div>
@@ -443,13 +440,13 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         </div>
                     </div>
                     <div class="tab-pan">
-                        <label class="content-title" for="report-email">Enter your email:</label>
+                        <label class="content-title" for="report-email"><?php echo esc_html__( 'Enter your email:', 'wp-poll' ) ?></label>
                         <input type="email" id="report-email" name="report_email" placeholder="name@mail.com">
-                        <span class="content">I confirm that the information I’ve provided here is true and correct.</span>
+                        <span class="content"><?php echo esc_html__( 'I confirm that the information I’ve provided here is true and correct.', 'wp-poll' ) ?></span>
                     </div>
                     <div class="tab-pan">
-                        <span class="content-title">Thank you for flagging this review!</span>
-                        <span class="thankyou content">We will get back to you after one of our staff has reviewed your report.</span>
+                        <span class="content-title"><?php echo esc_html__( 'Thank you for flagging this review!', 'wp-poll' ) ?></span>
+                        <span class="thankyou content"><?php echo esc_html__( 'We will get back to you after one of our staff has reviewed your report.', 'wp-poll' ) ?></span>
                         <p class="liquidpoll-responses liquidpoll-success">
                             <span class="icon-box"></span><span class="message"></span>
                         </p>

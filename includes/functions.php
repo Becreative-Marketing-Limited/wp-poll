@@ -1023,6 +1023,10 @@ if ( ! function_exists( 'liquidpoll_get_poller_location' ) ) {
 			return esc_html__( 'Earth', 'wp-poll' );
 		}
 
+		if ( ! $ip_address ) {
+			return esc_html__( 'Earth', 'wp-poll' );
+		}
+
 		if ( is_wp_error( $response = wp_remote_get( 'https://ipinfo.io/' . $ip_address . '/json?token=' . $ipinfo_token ) ) ) {
 			return esc_html__( 'Earth', 'wp-poll' );
 		}
