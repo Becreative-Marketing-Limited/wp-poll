@@ -884,11 +884,8 @@ class LIQUIDPOLL_Poll_meta {
 			1   => array(
 				'label' => esc_html__( 'Theme 1', 'wp-poll' ),
 			),
-			2   => array(
-				'label' => esc_html__( 'Theme 2', 'wp-poll' ),
-			),
 			998 => array(
-				'label'        => esc_html__( '4+ are in pro', 'wp-poll' ),
+				'label'        => esc_html__( '8+ are in pro', 'wp-poll' ),
 				'availability' => 'pro',
 			),
 			999 => array(
