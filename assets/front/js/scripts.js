@@ -560,6 +560,13 @@
         relevant_filter.show();
     });
 
+    $(document).on('click', '.share', function () {
+
+        let share_button = $(this);
+        share_button.find('.social-share-wrap').toggle()
+
+    });
+
 
     $(document).on('mouseup', function (e) {
 

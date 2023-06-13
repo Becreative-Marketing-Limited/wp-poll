@@ -659,6 +659,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     display: flex;
     justify-content: start;
     align-items: center;
+    position: relative;
 }
 
 .reviews-main .liquidpoll-reviews-item .review-report {
@@ -1571,4 +1572,71 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
         border-radius: 7px;
         font-size: 20px;
     }
+}
+
+/**
+ * share popup
+ */
+
+
+.reviews-main .liquidpoll-reviews-item .review-share-wrap .review-share .share .social-share-wrap {
+    position: absolute;
+    top: -300px;
+    left: 60px;
+    display: none;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share-wrap .review-share .share .social-share-wrap .social-share {
+    max-width: 246px;
+    padding: 36px 30px;
+    background: #ffffff;
+    box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.17);
+    border-radius: 10px 10px 10px 0;
+    position: relative;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share-wrap .review-share .share .social-share-wrap .social-share:after {
+    position: absolute;
+    content: '';
+    z-index: 999999;
+    left: 0;
+    bottom: -28px;
+    border-right: 30px solid transparent;
+    border-top: 30px solid #fff;
+    filter: drop-shadow(4px 14px 14px rgba(0, 0, 0, 0.17));
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share-wrap .review-share .share .social-share-wrap .social-share .social-share-title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    display: block;
+    text-align: center;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share-wrap .review-share .share .social-share-wrap .social-share .social {
+    margin-top: 15px;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share-wrap .review-share .share .social-share-wrap .social .social-link {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+    height: 40px;
+    width: 185px;
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share-wrap .review-share .share .social-share-wrap .social .social-link svg {
+    border-radius: 50%
+}
+
+.reviews-main .liquidpoll-reviews-item .review-share-wrap .review-share .share .social-share-wrap .social .social-name {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+    margin-left: 10px;
+    padding: 0;
 }
