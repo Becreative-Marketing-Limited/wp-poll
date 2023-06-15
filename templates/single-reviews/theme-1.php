@@ -1,6 +1,6 @@
 <?php
 /**
- * Single Review - Title
+ * Single Reviews
  */
 
 use WPDK\Utils;
@@ -218,19 +218,23 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
 		<?php foreach ( $poll->get_poll_results( $poll_results_query_args ) as $poll_result ) : ?>
 
 			<?php
-			$result_id          = Utils::get_args_option( 'id', $poll_result );
-			$polled_value       = Utils::get_args_option( 'polled_value', $poll_result, 0 );
-			$polled_comments    = Utils::get_args_option( 'polled_comments', $poll_result );
-			$poller_id          = Utils::get_args_option( 'poller_id_ip', $poll_result );
-			$poller_user        = get_user_by( 'id', $poller_id );
-			$datetime           = strtotime( Utils::get_args_option( 'datetime', $poll_result ) );
-			$time_ago           = human_time_diff( $datetime, time() );
-			$review_title       = liquidpoll_get_results_meta( $result_id, 'review_title' );
-			$experience_time    = strtotime( liquidpoll_get_results_meta( $result_id, 'experience_time' ) );
-			$experience_time    = date( "F j, Y", $experience_time );
-			$current_user_liked = liquidpoll_is_current_user_useful_submitted( $result_id, $current_user->ID ) ? 'active' : '';
-			$result_replies     = liquidpoll_get_results_meta( $result_id, 'result_replies', array() );
-			$result_replies     = ! is_array( $result_replies ) ? array() : $result_replies;
+			$result_id           = Utils::get_args_option( 'id', $poll_result );
+			$polled_value        = Utils::get_args_option( 'polled_value', $poll_result, 0 );
+			$polled_comments     = Utils::get_args_option( 'polled_comments', $poll_result );
+			$poller_id           = Utils::get_args_option( 'poller_id_ip', $poll_result );
+			$poller_user         = get_user_by( 'id', $poller_id );
+			$datetime            = strtotime( Utils::get_args_option( 'datetime', $poll_result ) );
+			$time_ago            = human_time_diff( $datetime, time() );
+			$review_title        = liquidpoll_get_results_meta( $result_id, 'review_title' );
+			$experience_time     = strtotime( liquidpoll_get_results_meta( $result_id, 'experience_time' ) );
+			$experience_time     = date( "F j, Y", $experience_time );
+			$current_user_liked  = liquidpoll_is_current_user_useful_submitted( $result_id, $current_user->ID ) ? 'active' : '';
+			$result_replies      = liquidpoll_get_results_meta( $result_id, 'result_replies', array() );
+			$result_replies      = ! is_array( $result_replies ) ? array() : $result_replies;
+			$single_review_url   = site_url( "reviews/{$result_id}" );
+			$fb_sharer_url       = "http://www.facebook.com/sharer.php?u={$single_review_url}";
+			$linkedin_sharer_url = "https://www.linkedin.com/shareArticle?mini=true&url={$single_review_url}";
+			$twitter_sharer_url  = "http://twitter.com/share?text={$review_title}&url={$single_review_url}";
 			?>
 
             <div class="liquidpoll-reviews-item liquidpoll-review-box">
@@ -251,13 +255,15 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                     </div>
                 </div>
                 <form class="review-stars">
-		            <?php echo liquidpoll_get_review_stars( $polled_value ); ?>
+					<?php echo liquidpoll_get_review_stars( $polled_value ); ?>
                 </form>
                 <div class="review-comment-heading">
-                    <h2 class="comment-heading"><?php echo esc_html( $review_title ); ?></h2>
+                    <a target="_blank" href="<?php echo esc_url( $single_review_url ) ?>">
+                        <h2 class="comment-heading"><?php echo esc_html( $review_title ); ?></h2>
+                    </a>
                 </div>
                 <div class="review-comment">
-		            <?php echo apply_filters( 'the_content', $polled_comments ); ?>
+					<?php echo apply_filters( 'the_content', $polled_comments ); ?>
                 </div>
                 <hr class="liquidpoll-divider">
                 <div class="review-share-wrap">
@@ -279,7 +285,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                                 <div class="social-share">
                                     <span class="social-share-title">Share this review</span>
                                     <div class="social">
-                                        <a class="social-link" href="">
+                                        <a class="social-link" href="<?php echo esc_url( $fb_sharer_url ) ?>">
                                             <svg width="35" height="36" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_2224_4660)">
                                                     <rect y="0.5" width="35" height="35" rx="17.5" fill="white"/>
@@ -295,11 +301,13 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                                         </a>
                                     </div>
                                     <div class="social">
-                                        <a class="social-link" href="">
+                                        <a class="social-link" href="<?php echo esc_url( $twitter_sharer_url ) ?>">
                                             <svg width="35" height="36" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_2224_4646)">
                                                     <rect y="0.5" width="35" height="35" rx="17.5" fill="white"/>
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M35 0.5H0V35.5H35V0.5ZM24.08 13.4416C24.6497 13.3561 25.206 13.1976 25.7351 12.9698C25.777 12.9522 25.7946 12.941 25.802 12.9457C25.8074 12.9491 25.8074 12.961 25.8074 12.9851C25.8122 13.0846 25.7796 13.1823 25.7161 13.259C25.3493 13.7738 24.9097 14.2326 24.411 14.6211C24.3979 14.6308 24.383 14.6407 24.3674 14.6511C24.2972 14.6979 24.2132 14.754 24.2132 14.838C24.2132 17.5394 23.5207 20.2371 21.5498 22.1927C19.0424 24.6849 15.2833 25.3622 11.9426 24.4414C11.2976 24.2569 10.6749 24.0017 10.0859 23.6804C9.888 23.5739 9.69776 23.4636 9.50752 23.338C9.46567 23.2999 9.42762 23.2581 9.46567 23.2391C9.50371 23.22 9.53796 23.2162 9.68635 23.2391C10.6272 23.3228 11.5749 23.2007 12.4639 22.8814C12.5037 22.8677 12.5473 22.853 12.594 22.8373C13.119 22.6601 14.0339 22.3514 14.275 21.9112L14.2978 21.8884C14.2151 21.87 14.1379 21.8627 14.063 21.8556C14.0138 21.851 13.9656 21.8464 13.9173 21.8389C13.027 21.5802 11.8132 21.116 11.2539 19.594C11.2197 19.5065 11.2539 19.4571 11.3453 19.4761C11.7693 19.5336 12.2 19.5207 12.6199 19.438C12.4723 19.4087 12.3282 19.3641 12.1899 19.3049C11.6226 19.0755 11.1264 18.6996 10.7521 18.2156C10.3777 17.7316 10.1386 17.1569 10.0592 16.5502C10.0484 16.4236 10.0484 16.2963 10.0592 16.1697C10.063 16.0784 10.1049 16.0517 10.181 16.1012C10.5862 16.3076 11.0287 16.4305 11.4822 16.4627C11.3376 16.3485 11.2007 16.2268 11.0675 16.1012C10.0782 15.1614 9.69396 13.259 10.4854 12.0567C10.55 11.9654 10.5919 11.9654 10.6718 12.0567C12.4905 14.1227 14.7163 15.0853 17.4292 15.4848C17.4977 15.4962 17.4977 15.4848 17.4977 15.4049C17.4178 14.9379 17.4294 14.4597 17.5319 13.9971C17.6562 13.5108 17.8833 13.0567 18.1978 12.6654C18.4967 12.2853 18.8694 11.9695 19.2935 11.7371C19.7242 11.5166 20.1956 11.3871 20.6785 11.3566C21.1761 11.3251 21.6744 11.407 22.1358 11.5963C22.4775 11.7477 22.7934 11.9518 23.0717 12.2013C23.1326 12.2571 23.1898 12.3168 23.243 12.3801C23.2605 12.3977 23.2826 12.4102 23.3067 12.4162C23.3308 12.4222 23.3561 12.4216 23.3799 12.4143C24.0625 12.244 24.7208 11.9883 25.3394 11.6534C25.3528 11.646 25.3679 11.6422 25.3832 11.6422C25.3985 11.6422 25.4135 11.646 25.4269 11.6534C25.4448 11.6661 25.4387 11.6875 25.4327 11.7082C25.4298 11.7184 25.4269 11.7283 25.4269 11.7371C25.3119 12.0957 25.1313 12.4298 24.8943 12.7225C24.7383 12.9166 24.3464 13.396 24.08 13.4416Z" fill="#33CCFF"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                          d="M35 0.5H0V35.5H35V0.5ZM24.08 13.4416C24.6497 13.3561 25.206 13.1976 25.7351 12.9698C25.777 12.9522 25.7946 12.941 25.802 12.9457C25.8074 12.9491 25.8074 12.961 25.8074 12.9851C25.8122 13.0846 25.7796 13.1823 25.7161 13.259C25.3493 13.7738 24.9097 14.2326 24.411 14.6211C24.3979 14.6308 24.383 14.6407 24.3674 14.6511C24.2972 14.6979 24.2132 14.754 24.2132 14.838C24.2132 17.5394 23.5207 20.2371 21.5498 22.1927C19.0424 24.6849 15.2833 25.3622 11.9426 24.4414C11.2976 24.2569 10.6749 24.0017 10.0859 23.6804C9.888 23.5739 9.69776 23.4636 9.50752 23.338C9.46567 23.2999 9.42762 23.2581 9.46567 23.2391C9.50371 23.22 9.53796 23.2162 9.68635 23.2391C10.6272 23.3228 11.5749 23.2007 12.4639 22.8814C12.5037 22.8677 12.5473 22.853 12.594 22.8373C13.119 22.6601 14.0339 22.3514 14.275 21.9112L14.2978 21.8884C14.2151 21.87 14.1379 21.8627 14.063 21.8556C14.0138 21.851 13.9656 21.8464 13.9173 21.8389C13.027 21.5802 11.8132 21.116 11.2539 19.594C11.2197 19.5065 11.2539 19.4571 11.3453 19.4761C11.7693 19.5336 12.2 19.5207 12.6199 19.438C12.4723 19.4087 12.3282 19.3641 12.1899 19.3049C11.6226 19.0755 11.1264 18.6996 10.7521 18.2156C10.3777 17.7316 10.1386 17.1569 10.0592 16.5502C10.0484 16.4236 10.0484 16.2963 10.0592 16.1697C10.063 16.0784 10.1049 16.0517 10.181 16.1012C10.5862 16.3076 11.0287 16.4305 11.4822 16.4627C11.3376 16.3485 11.2007 16.2268 11.0675 16.1012C10.0782 15.1614 9.69396 13.259 10.4854 12.0567C10.55 11.9654 10.5919 11.9654 10.6718 12.0567C12.4905 14.1227 14.7163 15.0853 17.4292 15.4848C17.4977 15.4962 17.4977 15.4848 17.4977 15.4049C17.4178 14.9379 17.4294 14.4597 17.5319 13.9971C17.6562 13.5108 17.8833 13.0567 18.1978 12.6654C18.4967 12.2853 18.8694 11.9695 19.2935 11.7371C19.7242 11.5166 20.1956 11.3871 20.6785 11.3566C21.1761 11.3251 21.6744 11.407 22.1358 11.5963C22.4775 11.7477 22.7934 11.9518 23.0717 12.2013C23.1326 12.2571 23.1898 12.3168 23.243 12.3801C23.2605 12.3977 23.2826 12.4102 23.3067 12.4162C23.3308 12.4222 23.3561 12.4216 23.3799 12.4143C24.0625 12.244 24.7208 11.9883 25.3394 11.6534C25.3528 11.646 25.3679 11.6422 25.3832 11.6422C25.3985 11.6422 25.4135 11.646 25.4269 11.6534C25.4448 11.6661 25.4387 11.6875 25.4327 11.7082C25.4298 11.7184 25.4269 11.7283 25.4269 11.7371C25.3119 12.0957 25.1313 12.4298 24.8943 12.7225C24.7383 12.9166 24.3464 13.396 24.08 13.4416Z"
+                                                          fill="#33CCFF"/>
                                                 </g>
                                                 <defs>
                                                     <clipPath id="clip0_2224_4646">
@@ -311,7 +319,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                                         </a>
                                     </div>
                                     <div class="social">
-                                        <a class="social-link" href="">
+                                        <a class="social-link" href="<?php echo esc_url( $linkedin_sharer_url ) ?>">
                                             <svg width="35" height="36" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_2224_4642)">
                                                     <rect y="0.5" width="35" height="35" rx="17.5" fill="white"/>
@@ -325,6 +333,16 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                                             </svg>
                                             <span class="social-name">Share on Linkedin</span>
                                         </a>
+                                    </div>
+                                    <div class="social">
+                                        <p class="social-link copy-url tt--hint tt--top" aria-label="Click to Copy" data-text-copied="URL Copied">
+                                            <input id="singleReview" type="hidden" value="<?php echo esc_url( $single_review_url ) ?>">
+                                            <svg width="35" height="36" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="17.5" cy="18" r="17.5" fill="#D9D9D9"/>
+                                                <path d="M16.3325 19.3333C16.6904 19.8118 17.147 20.2077 17.6713 20.4941C18.1956 20.7806 18.7754 20.9509 19.3714 20.9936C19.9674 21.0363 20.5655 20.9503 21.1253 20.7415C21.6851 20.5327 22.1935 20.2059 22.6159 19.7833L25.1159 17.2833C25.8748 16.4975 26.2948 15.445 26.2853 14.3525C26.2758 13.26 25.8376 12.215 25.0651 11.4424C24.2926 10.6699 23.2475 10.2317 22.155 10.2222C21.0625 10.2127 20.01 10.6327 19.2242 11.3917L17.7909 12.8167M19.6659 17.6667C19.308 17.1882 18.8514 16.7924 18.3271 16.5059C17.8027 16.2194 17.2229 16.0491 16.627 16.0064C16.031 15.9637 15.4329 16.0497 14.8731 16.2585C14.3133 16.4673 13.8049 16.7941 13.3825 17.2167L10.8825 19.7167C10.1235 20.5025 9.70355 21.555 9.71305 22.6475C9.72254 23.74 10.1607 24.7851 10.9333 25.5576C11.7058 26.3301 12.7509 26.7683 13.8434 26.7778C14.9358 26.7873 15.9883 26.3673 16.7742 25.6083L18.1992 24.1833" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span class="social-name">Copy URL link</span>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

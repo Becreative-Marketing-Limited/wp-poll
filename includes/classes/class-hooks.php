@@ -67,6 +67,40 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			add_action( 'wp_ajax_liquidpoll_submit_review_useful', array( $this, 'liquidpoll_submit_review_useful' ) );
 			add_action( 'wp_ajax_liquidpoll_send_reply', array( $this, 'liquidpoll_send_reply' ) );
 			add_action( 'wp_ajax_liquidpoll_submit_review_report', array( $this, 'liquidpoll_submit_review_report' ) );
+			add_filter( 'query_vars', array( $this, 'add_query_var' ) );
+			add_filter( 'template_include', array( $this, 'add_single_review_template' ) );
+		}
+
+
+		/**
+		 * @param $query_vars
+		 *
+		 * @return mixed
+		 */
+		function add_query_var( $query_vars ) {
+
+			$query_vars[] = 'reviews';
+
+			return $query_vars;
+		}
+
+
+		/**
+		 * @param $template
+		 *
+		 * @return mixed|string
+		 */
+		function add_single_review_template( $template ) {
+
+			global $wp, $wp_query;
+
+			$review_id = $wp_query->get( 'reviews' );
+
+			if ( ! empty( $review_id ) ) {
+				$template = LIQUIDPOLL_PLUGIN_DIR . 'templates/review-single.php';
+			}
+
+			return $template;
 		}
 
 
@@ -973,6 +1007,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 			// Create data table if not exists
 			liquidpoll_create_table();
+
+			add_rewrite_endpoint( 'reviews', EP_ROOT | EP_PAGES );
 		}
 	}
 

@@ -268,7 +268,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     line-height: 24px;
     font-weight: 600;
     color: #5F64EB;
-    margin: 20px 0 26px 0;
+    margin: 18px 0 24px 0 !important;
     text-align: center;
     display: inline-block;
     width: 100%;
@@ -608,6 +608,10 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
     font-size: 26px;
     line-height: 30px;
     color: #000000;
+}
+
+.reviews-main .liquidpoll-reviews-item .comment-heading:hover {
+    text-decoration: underline;
 }
 
 .reviews-main .liquidpoll-reviews-item .review-comment > p {
@@ -1581,7 +1585,7 @@ input[type="radio"]:checked + .liquidpoll-checkbox:after {
 
 .reviews-main .liquidpoll-reviews-item .review-share-wrap .review-share .share .social-share-wrap {
     position: absolute;
-    top: -300px;
+    top: -375px;
     left: 60px;
     display: none;
 }

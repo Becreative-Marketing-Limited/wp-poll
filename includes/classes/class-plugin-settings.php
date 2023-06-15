@@ -175,6 +175,22 @@ class LIQUIDPOLL_Settings {
 						),
 					),
 				),
+				array(
+					'title'  => esc_html__( 'Reviews', 'wp-poll' ),
+					'desc'   => esc_html__( 'You need to sign up on Twilio and get necessary information below to make the SMS functions enable. Click here to Start now', 'wp-poll' ),
+					'fields' => array(
+						array(
+							'id'           => '_reviews_feature_image',
+							'title'        => esc_html__( 'Feature Image for Social Sharing', 'wp-poll' ),
+							'subtitle'     => esc_html__( 'This image will apply to all your reviews when they are been shared on social media.', 'wp-poll' ),
+							'desc'         => esc_html__( 'Use 1200x630 pixels image size for social sharing', 'wp-poll-pro' ),
+							'type'         => 'media',
+							'preview_size' => 'full',
+							'library'      => 'image',
+							'url'          => false,
+						),
+					),
+				),
 			),
 		);
 

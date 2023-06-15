@@ -720,7 +720,28 @@
                 }
             }
         });
-       return false;
+        return false;
+    });
+
+    $(document).on('click', '.copy-url', function () {
+
+        let el_input = document.createElement('input'),
+            el_preview = $(this),
+            text_hint = el_preview.attr('aria-label'),
+            text_copied = el_preview.data('text-copied');
+
+        document.body.appendChild(el_input);
+        el_input.value = el_preview.find('input#singleReview').val();
+        el_input.select();
+        document.execCommand('copy', false);
+        el_input.remove();
+        el_preview.attr('aria-label', text_copied);
+        setTimeout(function () {
+            el_preview.attr('aria-label', text_hint);
+            $('.social-share-wrap').hide();
+        }, 2000);
+
+        return false
     });
 
 
