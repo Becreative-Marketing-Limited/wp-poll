@@ -251,7 +251,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         </div>
                     </div>
                     <div class="review-published">
-                        <p class="published-ti me"><?php echo sprintf( wp_kses_post( '<strong>Posted</strong> %s ago' ), $time_ago ) ?></p>
+                        <p class="published-time"><?php echo sprintf( wp_kses_post( '<strong>Posted</strong> %s ago' ), $time_ago ) ?></p>
                         <p class="experienced-time"><?php echo sprintf( wp_kses_post( '<strong>Experienced</strong> %s' ), $experience_time ) ?></p>
                     </div>
                 </div>
