@@ -76,12 +76,13 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
     <hr class="liquidpoll-divider">
     <div class="form-group rating-selected">
         <label class="rating-header"><?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_rating_title', 'Rate your experience' ), 'wp-poll' ); ?></label>
-        <?php echo liquidpoll_get_review_stars( $rating_selected ); ?>
+		<?php echo liquidpoll_get_review_stars( $rating_selected ); ?>
     </div>
 
     <div class="form-group review-title">
         <label for="review_title" class="review-title-label"><?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_title', 'Give your review a title' ), 'wp-poll' ); ?></label>
-        <input type="text" id="review_title" name="review_title" placeholder="<?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_title_placeholder', 'Impressed with the service!' ), 'wp-poll' ); ?>">
+        <input type="text" id="review_title" name="review_title" required autofocus placeholder="<?php echo esc_html__( Utils::get_option( 'liquidpoll_reviews_title_placeholder', 'Impressed with the service!' ), 'wp-poll' ); ?>">
+        <span><strong style="color:red">*</strong> This field is required</span>
     </div>
 
     <div class="form-group review-textarea">
@@ -250,12 +251,12 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                         </div>
                     </div>
                     <div class="review-published">
-                        <p class="published-time"><?php echo sprintf( wp_kses_post( '<strong>Posted</strong> %s ago' ), $time_ago ) ?></p>
+                        <p class="published-ti me"><?php echo sprintf( wp_kses_post( '<strong>Posted</strong> %s ago' ), $time_ago ) ?></p>
                         <p class="experienced-time"><?php echo sprintf( wp_kses_post( '<strong>Experienced</strong> %s' ), $experience_time ) ?></p>
                     </div>
                 </div>
                 <form class="review-stars">
-					<?php echo liquidpoll_get_review_stars( $polled_value ); ?>
+		            <?php echo liquidpoll_get_review_stars( $polled_value ); ?>
                 </form>
                 <div class="review-comment-heading">
                     <a target="_blank" href="<?php echo esc_url( $single_review_url ) ?>">
@@ -263,7 +264,7 @@ $overall_rating = count( $all_reviews ) > 0 ? round( $all_reviews_value / count(
                     </a>
                 </div>
                 <div class="review-comment">
-					<?php echo apply_filters( 'the_content', $polled_comments ); ?>
+		            <?php echo apply_filters( 'the_content', $polled_comments ); ?>
                 </div>
                 <hr class="liquidpoll-divider">
                 <div class="review-share-wrap">
