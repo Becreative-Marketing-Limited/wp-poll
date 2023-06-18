@@ -152,7 +152,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
 			ob_start();
 
 			if ( 'reviews' == $poll->get_type() && $view_type && $styles ) {
-				liquidpoll_get_template( "archive-reviews/{$view_type}-widget-{$styles}.php", $args );
+				liquidpoll_get_template( "archive-reviews/{$view_type}-widget-{$styles}.php", $args,'' ,LIQUIDPOLL_PRO_PLUGIN_DIR . 'templates/',true);
 			} else {
 				liquidpoll_get_template( 'archive-poll.php', $args );
 			}

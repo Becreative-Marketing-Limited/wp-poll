@@ -308,37 +308,6 @@
         });
     });
 
-
-    $(document).on('submit', '.liquidpoll-result-replies > form.liquidpoll-reply-box', function (e) {
-
-        e.preventDefault();
-
-        let el_reply_form = $(this);
-
-        el_reply_form.addClass('loading');
-
-        $.ajax({
-            type: 'POST',
-            context: this,
-            url: pluginObject.ajaxurl,
-            data: {
-                'action': 'liquidpoll_send_reply',
-                'form_data': el_reply_form.serialize(),
-            },
-            success: function (response) {
-                console.log(response);
-
-                setTimeout(function () {
-                    el_reply_form.removeClass('loading');
-                    if (response.success) {
-                        window.location.reload();
-                    }
-                }, 2000);
-            }
-        });
-
-        return false;
-    });
 })(jQuery, window, document, liquidpoll_object);
 
 

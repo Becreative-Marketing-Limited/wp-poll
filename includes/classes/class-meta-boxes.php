@@ -165,6 +165,7 @@ class LIQUIDPOLL_Poll_meta {
 						),
 						'reviews'  => array(
 							'label' => esc_html__( 'Reviews', 'wp-poll' ),
+							'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 						),
 					),
 					'default' => 'poll',
@@ -881,13 +882,6 @@ class LIQUIDPOLL_Poll_meta {
 	function get_reviews_themes() {
 
 		$themes = array(
-			1   => array(
-				'label' => esc_html__( 'Theme 1', 'wp-poll' ),
-			),
-			998 => array(
-				'label'        => esc_html__( '8+ are in pro', 'wp-poll' ),
-				'availability' => 'pro',
-			),
 			999 => array(
 				'label'        => esc_html__( '10+ are coming soon', 'wp-poll' ),
 				'availability' => 'upcoming',

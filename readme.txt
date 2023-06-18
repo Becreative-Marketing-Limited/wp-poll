@@ -4,7 +4,7 @@
 	Tags: poll, polls, survey, NPS, reviews, ratings, vote
 	Requires at least: 4.6
 	Tested up to: 6.2.2
-	Stable tag: 3.3.66
+	Stable tag: 3.3.67
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -366,4 +366,7 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.66 =
 * 17/06/2023 - NEW - Reviews share added.
+
+= 3.3.67 =
+* 18/06/2023 - FIX - Update on reviews.
 

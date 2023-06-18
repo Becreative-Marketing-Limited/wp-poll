@@ -48,7 +48,7 @@ if ( post_password_required() ) {
 			} elseif ( 'reviews' == $poll->get_type() ) {
 
 				ob_start();
-				liquidpoll_get_template_part( 'single-reviews/theme', $poll->get_theme(), ( $poll->get_theme() > 1 && liquidpoll()->is_pro() ) );
+				liquidpoll_get_template_part( 'single-reviews/theme', $poll->get_theme(), ( $poll->get_theme() > 0 && liquidpoll()->is_pro() ) );
 				printf( '<div class="reviews-main" data-poll-id="%s">%s</div>', $poll->get_id(), ob_get_clean() );
 
 			} elseif ( 'reaction' == $poll->get_type() ) {
