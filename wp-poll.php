@@ -154,6 +154,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 			wp_enqueue_script( 'datepicker', plugins_url( 'assets/front/js/flatpickr.min.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
 			wp_enqueue_script( 'slick-slider', plugins_url( 'assets/front/js/slick.min.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
 			wp_enqueue_script( 'masonry', plugins_url( 'assets/front/js/masonry.pkgd.min.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
+			wp_enqueue_script( 'apexcharts_front', plugins_url( 'assets/apexcharts.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
 			wp_enqueue_script( 'liquidpoll-front', plugins_url( 'assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), $version, $load_in_footer );
 			wp_localize_script( 'liquidpoll-front', 'liquidpoll_object', $this->localize_scripts_data() );
 
