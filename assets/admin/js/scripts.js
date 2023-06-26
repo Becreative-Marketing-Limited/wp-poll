@@ -278,7 +278,9 @@
 
     $(document).on('click', '.liquidpoll-activate-addon', function () {
 
-        let addOnID = $(this).data('addon-id');
+        let addOnID = $(this).data('addon-id'),
+            addOnNonce = $(this).data('addon-nonce'),
+            nonceName = $(this).data('addon-nonce-name');
 
         if (typeof addOnID === 'undefined') {
             return;
@@ -296,11 +298,13 @@
             data: {
                 'action': 'liquidpoll-activate-addon',
                 'addon_id': addOnID,
+                'addon_nonce': addOnNonce,
+                'addon_nonce_name': nonceName,
             },
             success: function (response) {
-                if(response.success){
+                if (response.success) {
                     $(this).removeClass('liquidpoll-activate-addon').addClass('active').removeAttr('data-addon-id');
-                    loader.css('display','none')
+                    loader.css('display', 'none')
                     $(this).parent().parent().parent().append(loader)
                     $(this).text("Active");
                 }

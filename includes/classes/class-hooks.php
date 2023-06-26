@@ -69,54 +69,60 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 * @return void
 		 */
 		function activate_addon() {
-			$addon_id = isset( $_POST['addon_id'] ) ? sanitize_text_field( $_POST['addon_id'] ) : '';
+			$addon_id         = isset( $_POST['addon_id'] ) ? sanitize_text_field( $_POST['addon_id'] ) : '';
+			$addon_nonce      = isset( $_POST['addon_nonce'] ) ? sanitize_text_field( $_POST['addon_nonce'] ) : '';
+			$addon_nonce_name = isset( $_POST['addon_nonce_name'] ) ? sanitize_text_field( $_POST['addon_nonce_name'] ) : '';
 
-			if ( empty( $addon_id ) ) {
+			if ( empty( $addon_id ) || empty( $addon_nonce_name ) ) {
 				return;
 			}
 
-			// Include required libs for installation
-			require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
-			require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
-			require_once( ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php' );
-			require_once( ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php' );
+			if ( current_user_can( 'activate_plugins' ) && wp_verify_nonce( $addon_nonce, $addon_nonce_name ) ) {
 
-			// Get Plugin Info
-			$api      = plugins_api( 'plugin_information',
-				array(
-					'slug'   => $addon_id,
-					'fields' => array(
-						'short_description' => false,
-						'sections'          => false,
-						'requires'          => false,
-						'rating'            => false,
-						'ratings'           => false,
-						'downloaded'        => false,
-						'last_updated'      => false,
-						'added'             => false,
-						'tags'              => false,
-						'compatibility'     => false,
-						'homepage'          => false,
-						'donate_link'       => false,
-					),
-				)
-			);
-			$skin     = new WP_Ajax_Upgrader_Skin();
-			$upgrader = new Plugin_Upgrader( $skin );
-			$upgrader->install( $api->download_link );
 
-			defined( 'WP_ADMIN' ) || define( 'WP_ADMIN', true );
-			defined( 'WP_NETWORK_ADMIN' ) || define( 'WP_NETWORK_ADMIN', true ); // Need for Multisite
-			defined( 'WP_USER_ADMIN' ) || define( 'WP_USER_ADMIN', true );
+				// Include required libs for installation
+				require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
+				require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+				require_once( ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php' );
+				require_once( ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php' );
 
-			// Include required libs for activation
-			require_once( '../wp-load.php' );
-			require_once( '../wp-admin/includes/admin.php' );
-			require_once( '../wp-admin/includes/plugin.php' );
-			$plugin   = "{$api->slug}/{$api->slug}.php";
-			$response = activate_plugin( $plugin );
+				// Get Plugin Info
+				$api      = plugins_api( 'plugin_information',
+					array(
+						'slug'   => $addon_id,
+						'fields' => array(
+							'short_description' => false,
+							'sections'          => false,
+							'requires'          => false,
+							'rating'            => false,
+							'ratings'           => false,
+							'downloaded'        => false,
+							'last_updated'      => false,
+							'added'             => false,
+							'tags'              => false,
+							'compatibility'     => false,
+							'homepage'          => false,
+							'donate_link'       => false,
+						),
+					)
+				);
+				$skin     = new WP_Ajax_Upgrader_Skin();
+				$upgrader = new Plugin_Upgrader( $skin );
+				$upgrader->install( $api->download_link );
 
-			wp_send_json_success( $response );
+				defined( 'WP_ADMIN' ) || define( 'WP_ADMIN', true );
+				defined( 'WP_NETWORK_ADMIN' ) || define( 'WP_NETWORK_ADMIN', true ); // Need for Multisite
+				defined( 'WP_USER_ADMIN' ) || define( 'WP_USER_ADMIN', true );
+
+				// Include required libs for activation
+				require_once( '../wp-load.php' );
+				require_once( '../wp-admin/includes/admin.php' );
+				require_once( '../wp-admin/includes/plugin.php' );
+				$plugin   = "{$api->slug}/{$api->slug}.php";
+				$response = activate_plugin( $plugin );
+
+				wp_send_json_success( $response );
+			}
 		}
 
 

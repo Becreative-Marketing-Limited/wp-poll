@@ -138,7 +138,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Addons' ) ) {
 				} else if ( 'comingsoon' == $addon_status ) {
 					printf( '<button class="link" disabled>%s</button>', esc_html__( 'Coming soon', 'wp-poll' ) );
 				} else {
-					printf( '<button class="link liquidpoll-activate-addon" data-addon-id="%s">%s</button>', $addon_id, esc_html__( 'Install & Activate', 'wp-poll' ) );
+					printf( '<button class="link liquidpoll-activate-addon" data-addon-nonce-name="addon-nonce" data-addon-nonce="%s" data-addon-id="%s">%s</button>', wp_create_nonce( 'addon-nonce' ), $addon_id, esc_html__( 'Install & Activate', 'wp-poll' ) );
 				}
 
 				return sprintf( '<div class="addon %s">%s</div>', implode( ' ', $classes ), ob_get_clean() );

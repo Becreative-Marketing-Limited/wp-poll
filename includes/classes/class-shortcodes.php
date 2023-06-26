@@ -129,10 +129,15 @@ if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
 		 */
 		public function display_poll_archive( $atts, $content = null ) {
 
-			$atts      = (array) $atts;
-			$atts      = array_filter( $atts );
-			$poll_id   = empty( $atts['id'] ) ? '' : $atts['id'];
-			$poll      = liquidpoll_get_poll( $poll_id );
+			$atts    = (array) $atts;
+			$atts    = array_filter( $atts );
+			$poll_id = empty( $atts['id'] ) ? '' : $atts['id'];
+			$poll    = liquidpoll_get_poll( $poll_id );
+
+			if ( ! $poll instanceof LIQUIDPOLL_Poll ) {
+				return false;
+			}
+
 			$view_type = empty( $atts['view_type'] ) ? '' : $atts['view_type'];
 			$styles    = empty( $atts['styles'] ) ? '1' : $atts['styles'];
 
@@ -151,8 +156,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Shortcodes' ) ) {
 
 			ob_start();
 
-			if ( 'reviews' == $poll->get_type() && $view_type && $styles && defined('LIQUIDPOLL_PRO_PLUGIN_DIR') ) {
-				liquidpoll_get_template( "archive-reviews/{$view_type}-widget-{$styles}.php", $args,'' ,LIQUIDPOLL_PRO_PLUGIN_DIR . 'templates/',true);
+			if ( 'reviews' == $poll->get_type() && $view_type && $styles && defined( 'LIQUIDPOLL_PRO_PLUGIN_DIR' ) ) {
+				liquidpoll_get_template( "archive-reviews/{$view_type}-widget-{$styles}.php", $args, '', LIQUIDPOLL_PRO_PLUGIN_DIR . 'templates/', true );
 			} else {
 				liquidpoll_get_template( 'archive-poll.php', $args );
 			}
