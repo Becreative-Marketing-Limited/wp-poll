@@ -52,11 +52,12 @@ class LIQUIDPOLL_Poll_meta {
 
 		$poll_setting_fields   = array(
 			array(
-				'id'      => 'settings_hide_for_logged_out_users',
-				'title'   => esc_html__( 'Settings', 'wp-poll' ),
-				'label'   => esc_html__( 'Hide for logged out users.', 'wp-poll' ),
-				'type'    => 'switcher',
-				'default' => false,
+				'id'         => 'settings_hide_for_logged_out_users',
+				'title'      => esc_html__( 'Settings', 'wp-poll' ),
+				'label'      => esc_html__( 'Hide for logged out users.', 'wp-poll' ),
+				'type'       => 'switcher',
+				'default'    => false,
+				'dependency' => array( '_type', '!=', 'reviews', 'all' ),
 			),
 			array(
 				'id'         => 'settings_vote_after_deadline',
@@ -100,6 +101,15 @@ class LIQUIDPOLL_Poll_meta {
 				'default'    => true,
 				'class'      => 'padding-top-none',
 				'dependency' => array( '_type', '==', 'reaction', 'all' ),
+			),
+			array(
+				'id'         => 'settings_allow_guest_review_mode',
+				'title'      => esc_html__( 'Settings', 'wp-poll' ),
+				'label'      => esc_html__( 'Guest Review mode.', 'wp-poll' ),
+				'desc'       => esc_html__( 'Allow anyone to leave a review without having to create an account.', 'wp-poll' ),
+				'type'       => 'switcher',
+				'default'    => false,
+				'dependency' => array( '_type', '==', 'reviews', 'all' ),
 			),
 		);
 		$poll_setting_fields   = apply_filters( 'LiquidPoll/Filters/poll_setting_fields', $poll_setting_fields );
