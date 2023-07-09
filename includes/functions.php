@@ -603,8 +603,10 @@ if ( ! function_exists( 'liquidpoll_create_table' ) ) {
 		}
 
 		$sql_add_column = "ALTER TABLE " . LIQUIDPOLL_EMAILS_TABLE . " ADD consent VARCHAR(255) AFTER email_address";
+		$sql_add_status_column = "ALTER TABLE " . LIQUIDPOLL_RESULTS_TABLE . " ADD status VARCHAR(255) DEFAULT 'approved' AFTER polled_comments";
 
 		maybe_add_column( LIQUIDPOLL_EMAILS_TABLE, 'consent', $sql_add_column );
+		maybe_add_column( LIQUIDPOLL_RESULTS_TABLE, 'status', $sql_add_status_column );
 	}
 }
 
@@ -628,6 +630,7 @@ if ( ! function_exists( 'liquidpoll_insert_results' ) ) {
 			'poller_id_ip'    => liquidpoll_get_poller(),
 			'polled_value'    => '',
 			'polled_comments' => '',
+			'status' => '',
 			'datetime'        => current_time( 'mysql' ),
 		);
 		$args     = wp_parse_args( $args, $defaults );

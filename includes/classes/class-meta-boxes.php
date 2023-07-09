@@ -330,6 +330,13 @@ class LIQUIDPOLL_Poll_meta {
 			), $post_selection_fields, $poll_setting_fields )
 		);
 
+		$field_sections['reviews_list'] = array(
+			'id'       => 'reviews_approval_page',
+			'title'    => __( 'Reviews', 'wp-poll' ),
+			'icon'     => 'fas fa-star',
+			'external' => true,
+		);
+
 		$field_sections['poll_options'] = array(
 			'title'  => __( 'Options', 'wp-poll' ),
 			'icon'   => 'fa fa-th-large',
