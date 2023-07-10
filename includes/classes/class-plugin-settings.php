@@ -195,7 +195,7 @@ class LIQUIDPOLL_Settings {
 							'title'        => esc_html__( 'Reviews Approval', 'wp-poll' ),
 							'label'        => esc_html__( 'Settings to turn ON Reviews Approval.', 'wp-poll' ),
 							'type'         => 'switcher',
-							'default'      => false,
+							'default'      => true,
 							'availability' => ! liquidpoll()->is_pro() ? 'pro' : '',
 						),
 					),
