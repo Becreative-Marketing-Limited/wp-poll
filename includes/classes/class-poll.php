@@ -223,9 +223,14 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 				$relevant_orderby  = Utils::get_args_option( 'relevant', $args );
 				$filter_date       = Utils::get_args_option( 'filter_date', $args );
 				$filter_by_ratings = Utils::get_args_option( 'filter_rating', $args );
+				$status            = Utils::get_args_option( 'status', $args );
 
 				if ( ! empty( $rating ) && $rating > 1 && $rating <= 5 ) {
 					$where_clause .= " AND polled_value=$rating";
+				}
+
+				if ( ! empty( $status ) ) {
+					$where_clause .= " AND status = '{$status}'";
 				}
 
 				if ( ! empty( $relevant_orderby ) && ( $relevant_orderby === 'DESC' || $relevant_orderby === 'ASC' ) ) {
