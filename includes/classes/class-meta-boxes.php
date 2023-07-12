@@ -155,7 +155,7 @@ class LIQUIDPOLL_Poll_meta {
 		}
 
 		$field_sections['general_settings'] = array(
-			'title'  => __( 'General Settings', 'wp-poll' ),
+			'title'  => __( 'Settings', 'wp-poll' ),
 			'icon'   => 'fa fa-cog',
 			'fields' => array_merge( array(
 				array(
@@ -615,7 +615,7 @@ class LIQUIDPOLL_Poll_meta {
 		);
 
 		$field_sections['poll_styling'] = array(
-			'title'  => __( 'Style Settings', 'wp-poll' ),
+			'title'  => __( 'Styling', 'wp-poll' ),
 			'icon'   => 'fa fa-bolt',
 			'fields' => array(
 				array(
