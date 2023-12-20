@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: LiquidPoll - Advanced Polls for Creators and Brands
+ * Plugin Name: LiquidPoll - Polls, Surveys, NPS and Feedback Reviews
  * Plugin URI: https://liquidpoll.com
  * Description: It allows user to poll in your website with many awesome features.
  * Version: 3.3.73

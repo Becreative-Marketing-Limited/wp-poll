@@ -1,4 +1,4 @@
-=== LiquidPoll - Advanced Polls for Creators and Brands ===
+=== LiquidPoll - Polls, Surveys, NPS and Feedback Reviews ===
 	Contributors: frankopazo,liquidpoll
 	Donate link: https://www.paypal.com/paypalme/frankopazo
 	Tags: poll, polls, survey, NPS, reviews, ratings, vote
