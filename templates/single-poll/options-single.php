@@ -22,7 +22,7 @@ $option_name    = $poll->get_type() == 'survey' && $options_type == 'checkbox' ?
 $theme_args     = $poll->get_theme_args( $poll->get_theme() );
 $theme_width    = isset( $theme_args ) && ! empty( $theme_args ) ? $theme_args['width'] : '';
 $theme_height   = isset( $theme_args ) && ! empty( $theme_args ) ? $theme_args['height'] : '';
-$resized_thumb  = $thumb ? liquidpoll_resizer( $thumb, $theme_width, $theme_height, true, true, true ) : '';
+$resized_thumb  = ($thumb && $theme_width) ? liquidpoll_resizer( $thumb, $theme_width, $theme_height, true, true, true ) : '';
 
 ?>
 
