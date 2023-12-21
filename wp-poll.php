@@ -24,8 +24,9 @@ defined( 'LIQUIDPOLL_RESULTS_META_TABLE' ) || define( 'LIQUIDPOLL_RESULTS_META_T
 defined( 'LIQUIDPOLL_EMAILS_TABLE' ) || define( 'LIQUIDPOLL_EMAILS_TABLE', sprintf( '%sliquidpoll_emails', $wpdb->prefix ) );
 defined( 'LIQUIDPOLL_PLUGIN_LINK' ) || define( 'LIQUIDPOLL_PLUGIN_LINK', 'https://www.liquidpoll.com/pro' );
 defined( 'LIQUIDPOLL_DOCS_URL' ) || define( 'LIQUIDPOLL_DOCS_URL', 'https://www.liquidpoll.com/docs' );
+defined( 'LIQUIDPOLL_ACCOUNT_URL' ) || define( 'LIQUIDPOLL_ACCOUNT_URL', 'https://www.liquidpoll.com/customer-dashboard/' );
 defined( 'LIQUIDPOLL_REVIEW_URL' ) || define( 'LIQUIDPOLL_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
-defined( 'LIQUIDPOLL_TICKET_URL' ) || define( 'LIQUIDPOLL_TICKET_URL', 'https://www.liquidpoll.com/my-account/' );
+defined( 'LIQUIDPOLL_TICKET_URL' ) || define( 'LIQUIDPOLL_TICKET_URL', 'support@liquidpoll.com' );
 defined( 'LIQUIDPOLL_COMMUNITY_URL' ) || define( 'LIQUIDPOLL_COMMUNITY_URL', 'https://www.facebook.com/groups/liquidpoll/' );
 defined( 'LIQUIDPOLL_VERSION' ) || define( 'LIQUIDPOLL_VERSION', '3.3.73' );
 

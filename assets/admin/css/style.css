@@ -288,7 +288,7 @@ span.shortcode {
     box-shadow: none;
 }
 
-a.liquidpoll-support, a.liquidpoll-support:focus, a.liquidpoll-support:active, a.liquidpoll-doc, a.liquidpoll-doc:focus, a.liquidpoll-doc:active {
+a.liquidpoll-support, a.liquidpoll-support:focus, a.liquidpoll-support:active, a.liquidpoll-doc, a.liquidpoll-doc:focus, a.liquidpoll-doc:active, a.liquidpoll-account, a.liquidpoll-account:focus, a.liquidpoll-account:active {
     background: #e61f63;
     color: #fff;
     padding: 3px 12px 5px;
@@ -301,6 +301,10 @@ a.liquidpoll-support, a.liquidpoll-support:focus, a.liquidpoll-support:active, a
 
 a.liquidpoll-doc {
     background: #292929;
+}
+
+a.liquidpoll-account {
+    background: #774ea9;
 }
 
 .pbsettings-section[data-section-id="reports"] {

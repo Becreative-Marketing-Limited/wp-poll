@@ -353,7 +353,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		function add_plugin_actions( $links ) {
 
 			$links = array_merge( array(
-				'settings' => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=liquidpoll-settings' ), esc_html__( 'Settings', 'wp-poll' ) ),
+				'settings' => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=settings' ), esc_html__( 'Settings', 'wp-poll' ) ),
 //				'extensions' => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=poll&page=liquidpoll-settings&tab=liquidpoll-extensions' ), esc_html__( 'Extensions', 'wp-poll' ) ),
 			), $links );
 
@@ -379,8 +379,12 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 				$row_meta = array(
 					'docs'    => sprintf( '<a href="%s" class="liquidpoll-doc" target="_blank">%s</a>', esc_url( LIQUIDPOLL_DOCS_URL ), esc_html__( 'Documentation', 'wp-poll' ) ),
-					'support' => sprintf( '<a href="%s" class="liquidpoll-support" target="_blank">%s</a>', esc_url( LIQUIDPOLL_TICKET_URL ), esc_html__( 'Support Ticket', 'wp-poll' ) ),
+					'support' => sprintf( '<a href="%s" class="liquidpoll-support" target="_blank">%s</a>', esc_attr('mailto:' . LIQUIDPOLL_TICKET_URL ), esc_html__( 'Support Ticket', 'wp-poll' ) ),
 				);
+
+                if ( is_plugin_active('wp-poll-pro/wp-poll-pro.php') ) {
+	                $row_meta['account'] = sprintf( '<a href="%s" class="liquidpoll-account" target="_blank">%s</a>', esc_url( LIQUIDPOLL_ACCOUNT_URL ), esc_html__( 'Account', 'wp-poll' ) );
+                }
 
 				return array_merge( $links, $row_meta );
 			}

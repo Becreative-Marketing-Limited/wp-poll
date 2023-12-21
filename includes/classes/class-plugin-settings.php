@@ -32,7 +32,7 @@ class LIQUIDPOLL_Settings {
 			'quick_links'         => array(
 				'supports' => array(
 					'label' => esc_html__( 'Support', 'wp-poll' ),
-					'url'   => LIQUIDPOLL_TICKET_URL,
+					'url'   => 'mailto:' . LIQUIDPOLL_TICKET_URL,
 				),
 				'docs'     => array(
 					'label' => esc_html__( 'Documentations', 'wp-poll' ),
