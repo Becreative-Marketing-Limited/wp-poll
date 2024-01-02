@@ -174,7 +174,7 @@ class LIQUIDPOLL_Poll_meta {
 							'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 						),
 						'reviews'  => array(
-							'label' => esc_html__( 'Reviews', 'wp-poll' ),
+							'label'        => esc_html__( 'Reviews', 'wp-poll' ),
 							'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 						),
 					),
@@ -1011,7 +1011,7 @@ class LIQUIDPOLL_Poll_meta {
 	 */
 	function get_reaction_emojis() {
 
-		$_emojis = array( 'angry', 'cry', 'dislike', 'halo', 'like', 'love', 'party', 'smile', 'thinking', 'zany', );
+		$_emojis = array( 'angel', 'angry', 'anger', 'blushing', 'cry', 'crying', 'cussing', 'dislike', 'flushed', 'halo', 'happy', 'heart-eyes', 'cool', 'kiss', 'meh', 'nose-stem', 'laugh', 'laughing-tears', 'like', 'love', 'party', 'sad', 'sad-tear', 'shocked', 'silly', 'sleeping', 'vomiting', 'smile', 'thinking', 'zany', );
 
 		foreach ( $_emojis as $emoji ) {
 			$emojis[ $emoji ] = $this->get_reaction_emoji_url( $emoji );

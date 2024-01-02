@@ -1,0 +1,34 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2636_5661)">
+<mask id="mask0_2636_5661" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1080">
+<path d="M1080 0H0V1080H1080V0Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_2636_5661)">
+<mask id="mask1_2636_5661" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1080">
+<path d="M0.700684 0.995789H1079.3V1079.19H0.700684V0.995789Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_2636_5661)">
+<path d="M540 155.737C752.206 155.737 924.501 327.967 924.501 540.094C924.501 752.22 752.206 924.451 540 924.451C327.794 924.451 155.5 752.22 155.5 540.094C155.5 327.967 327.794 155.737 540 155.737Z" fill="url(#paint0_radial_2636_5661)"/>
+</g>
+<path d="M538.954 526.629C585.363 526.674 622.989 583.772 622.922 654.052C622.854 724.331 585.118 781.357 538.708 781.312C492.299 781.267 454.673 724.169 454.74 653.89C454.808 583.61 492.544 526.585 538.954 526.629Z" fill="black"/>
+<path d="M419.281 348.349C436.429 348.366 450.33 370.005 450.304 396.64C450.279 423.274 436.335 444.886 419.188 444.87C402.041 444.853 388.139 423.215 388.165 396.58C388.191 369.945 402.134 348.333 419.281 348.349Z" fill="black"/>
+<path d="M660.468 348.582C677.615 348.598 691.517 370.237 691.491 396.872C691.465 423.507 677.522 445.119 660.375 445.102C643.227 445.086 629.326 423.447 629.352 396.812C629.377 370.177 643.32 348.565 660.468 348.582Z" fill="black"/>
+<path d="M631.225 277.295C667.653 270.372 712.021 296.251 723.933 326.206" stroke="black" stroke-width="1.99478"/>
+<path d="M631.225 277.295C667.653 270.372 712.021 296.251 723.933 326.206" stroke="black" stroke-width="1.99478"/>
+<path d="M631.225 277.295C667.653 270.372 712.021 296.251 723.933 326.206" stroke="black" stroke-width="21.9426" stroke-linecap="round"/>
+<path d="M435.179 277.106C398.764 270.113 354.346 295.907 342.377 325.839" stroke="black" stroke-width="21.9426" stroke-linecap="round"/>
+</g>
+</g>
+<defs>
+<radialGradient id="paint0_radial_2636_5661" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(607.662 465.741) scale(483.467 483.286)">
+<stop stop-color="#FDD737"/>
+<stop offset="0.65" stop-color="#F4B945"/>
+<stop offset="0.88" stop-color="#EA9A52"/>
+<stop offset="0.95" stop-color="#F3B751"/>
+<stop offset="1" stop-color="#FBD450"/>
+</radialGradient>
+<clipPath id="clip0_2636_5661">
+<rect width="1080" height="1080" fill="white"/>
+</clipPath>
+</defs>
+</svg>
