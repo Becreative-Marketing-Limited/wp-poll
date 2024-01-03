@@ -26,6 +26,12 @@
         }
     });
 
+    $(function () {
+        let el_sortable = $(".wpdk_settings--image-group");
+        el_sortable.sortable();
+        el_sortable.disableSelection();
+    });
+
 
     $(document).on('change', '.liquidpoll-sort-form select[name="date"]', function () {
         let this_selection = $(this),
