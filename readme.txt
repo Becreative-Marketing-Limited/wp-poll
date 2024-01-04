@@ -4,7 +4,7 @@
 	Tags: poll, polls, survey, NPS, reviews, ratings, vote
 	Requires at least: 4.6
 	Tested up to: 6.4.2
-	Stable tag: 3.3.75
+	Stable tag: 3.3.76
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -393,3 +393,6 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.75 =
 * 03/01/2024 - NEW - New emoji added for Reaction.
+
+= 3.3.76 =
+* 04/01/2024 - NEW - Add settings for Reaction emoji size.

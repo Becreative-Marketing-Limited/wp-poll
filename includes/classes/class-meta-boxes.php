@@ -894,6 +894,20 @@ class LIQUIDPOLL_Poll_meta {
 					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
 					'dependency'   => array( '_type', '==', 'poll', 'all' ),
 				),
+				array(
+					'id'           => '_emoji_size',
+					'title'        => esc_html__( 'Emoji size', 'wp-poll' ),
+					'subtitle'     => esc_html__( 'Control your preferred emoji size.', 'wp-poll' ),
+					'type'         => 'button_set',
+					'options'      => array(
+						'34'  => array( 'label' => esc_html__( 'Small', 'wp-poll' ) ),
+						'68'  => array( 'label' => esc_html__( 'Medium', 'wp-poll' ) ),
+						'102' => array( 'label' => esc_html__( 'Large', 'wp-poll' ) ),
+					),
+					'default'      => '34',
+					'availability' => liquidpoll()->is_pro() ? '' : 'pro',
+					'dependency'   => array( '_type', '==', 'reaction', 'all' ),
+				),
 			),
 		);
 
