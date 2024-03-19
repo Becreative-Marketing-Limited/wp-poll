@@ -2,9 +2,9 @@
 	Contributors: frankopazo,liquidpoll
 	Donate link: https://www.paypal.com/paypalme/frankopazo
 	Tags: poll, polls, survey, NPS, reviews, ratings, vote
-	Requires at least: 4.6
-	Tested up to: 6.4.2
-	Stable tag: 3.3.76
+	Requires at least: 5.6
+	Tested up to: 6.5
+	Stable tag: 3.3.77
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -396,3 +396,7 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.76 =
 * 04/01/2024 - NEW - Add settings for Reaction emoji size.
+
+= 3.3.77 =
+* 20/03/2024 - FIX - Fixed poller list visibility issue.
+* 20/03/2024 - FIX - Compatibility check with latest WordPress version.
