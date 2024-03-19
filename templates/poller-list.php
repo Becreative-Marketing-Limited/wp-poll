@@ -16,8 +16,10 @@ $poll_id   = isset( $args['poll_id'] ) ? $args['poll_id'] : '';
 $option_id = isset( $args['option_id'] ) ? $args['option_id'] : '';
 $poll      = liquidpoll_get_poll( $poll_id );
 
-if ( ! $poll || empty( $poll ) ) {
-	exit;
+if ( empty( $poll ) || $poll->get_post()->post_status !== 'publish' ) {
+	printf( '<p class="liquidpoll-notice liquidpoll-notice-warning">%s</p>', esc_html__( 'This content is not available', 'wp-poll' ) );
+
+	return;
 }
 
 ?>

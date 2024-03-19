@@ -1,4 +1,0 @@
-
-[submodule "includes/wpdk"]
-	path = includes/wpdk
-	url = git@github.com:jaedm97/wpdk.git
