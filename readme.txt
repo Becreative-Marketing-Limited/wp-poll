@@ -4,7 +4,7 @@
 	Tags: poll, polls, survey, NPS, reviews, ratings, vote
 	Requires at least: 5.6
 	Tested up to: 6.5
-	Stable tag: 3.3.77
+	Stable tag: 3.3.78
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -400,3 +400,7 @@ Display all your polls in one place so that you can create a landing page where 
 = 3.3.77 =
 * 20/03/2024 - FIX - Fixed poller list visibility issue.
 * 20/03/2024 - FIX - Compatibility check with latest WordPress version.
+
+= 3.3.78 =
+* 05/07/2024 - FIX - Fixed security issue in submitting NPS poll's comment.
+

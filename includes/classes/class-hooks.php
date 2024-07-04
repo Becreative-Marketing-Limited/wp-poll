@@ -254,7 +254,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 				'poll_id'         => $poll_id,
 				'poll_type'       => 'nps',
 				'polled_value'    => Utils::get_args_option( 'nps_score', $form_data ),
-				'polled_comments' => Utils::get_args_option( 'nps_feedback', $form_data ),
+				'polled_comments' => wp_kses_post( Utils::get_args_option( 'nps_feedback', $form_data ) ),
 			);
 			$response  = liquidpoll_insert_results( $data_args );
 
@@ -379,12 +379,12 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 				$row_meta = array(
 					'docs'    => sprintf( '<a href="%s" class="liquidpoll-doc" target="_blank">%s</a>', esc_url( LIQUIDPOLL_DOCS_URL ), esc_html__( 'Documentation', 'wp-poll' ) ),
-					'support' => sprintf( '<a href="%s" class="liquidpoll-support" target="_blank">%s</a>', esc_attr('mailto:' . LIQUIDPOLL_TICKET_URL ), esc_html__( 'Support Ticket', 'wp-poll' ) ),
+					'support' => sprintf( '<a href="%s" class="liquidpoll-support" target="_blank">%s</a>', esc_attr( 'mailto:' . LIQUIDPOLL_TICKET_URL ), esc_html__( 'Support Ticket', 'wp-poll' ) ),
 				);
 
-                if ( is_plugin_active('wp-poll-pro/wp-poll-pro.php') ) {
-	                $row_meta['account'] = sprintf( '<a href="%s" class="liquidpoll-account" target="_blank">%s</a>', esc_url( LIQUIDPOLL_ACCOUNT_URL ), esc_html__( 'Account', 'wp-poll' ) );
-                }
+				if ( is_plugin_active( 'wp-poll-pro/wp-poll-pro.php' ) ) {
+					$row_meta['account'] = sprintf( '<a href="%s" class="liquidpoll-account" target="_blank">%s</a>', esc_url( LIQUIDPOLL_ACCOUNT_URL ), esc_html__( 'Account', 'wp-poll' ) );
+				}
 
 				return array_merge( $links, $row_meta );
 			}

@@ -3,7 +3,7 @@
  * Plugin Name: LiquidPoll - Polls, Surveys, NPS and Feedback Reviews
  * Plugin URI: https://liquidpoll.com
  * Description: It allows user to poll in your website with many awesome features.
- * Version: 3.3.77
+ * Version: 3.3.78
  * Author: LiquidPoll
  * Text Domain: wp-poll
  * Domain Path: /languages/
@@ -28,7 +28,7 @@ defined( 'LIQUIDPOLL_ACCOUNT_URL' ) || define( 'LIQUIDPOLL_ACCOUNT_URL', 'https:
 defined( 'LIQUIDPOLL_REVIEW_URL' ) || define( 'LIQUIDPOLL_REVIEW_URL', 'https://wordpress.org/support/plugin/wp-poll/reviews/#new-post' );
 defined( 'LIQUIDPOLL_TICKET_URL' ) || define( 'LIQUIDPOLL_TICKET_URL', 'support@liquidpoll.com' );
 defined( 'LIQUIDPOLL_COMMUNITY_URL' ) || define( 'LIQUIDPOLL_COMMUNITY_URL', 'https://www.facebook.com/groups/liquidpoll/' );
-defined( 'LIQUIDPOLL_VERSION' ) || define( 'LIQUIDPOLL_VERSION', '3.3.77' );
+defined( 'LIQUIDPOLL_VERSION' ) || define( 'LIQUIDPOLL_VERSION', '3.3.78' );
 
 if ( ! class_exists( 'LIQUIDPOLL_Main' ) ) {
 	/**
