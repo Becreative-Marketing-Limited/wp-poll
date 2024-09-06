@@ -3,8 +3,8 @@
 	Donate link: https://www.paypal.com/paypalme/frankopazo
 	Tags: poll, polls, survey, NPS, reviews, ratings, vote
 	Requires at least: 5.6
-	Tested up to: 6.5
-	Stable tag: 3.3.78
+	Tested up to: 6.6
+	Stable tag: 3.3.79
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -403,4 +403,7 @@ Display all your polls in one place so that you can create a landing page where 
 
 = 3.3.78 =
 * 05/07/2024 - FIX - Fixed security issue in submitting NPS poll's comment.
+
+= 3.3.79 =
+* 07/09/2024 - FIX - Fixed security vulnerability issues in the entire plugin.
 
