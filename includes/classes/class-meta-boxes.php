@@ -194,7 +194,7 @@ class LIQUIDPOLL_Poll_meta {
 					'subtitle'      => esc_html__( 'Specify a date when this poll will end. Leave empty to ignore this option', 'wp-poll' ),
 					'type'          => 'date',
 					'autocomplete'  => 'off',
-					'placeholder'   => date( 'Y-m-d' ),
+					'placeholder'   => gmdate( 'Y-m-d' ),
 					'field_options' => array(
 						'dateFormat' => 'yy-mm-dd',
 					),

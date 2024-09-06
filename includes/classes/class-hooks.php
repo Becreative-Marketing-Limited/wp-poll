@@ -69,9 +69,9 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 * @return void
 		 */
 		function activate_addon() {
-			$addon_id         = isset( $_POST['addon_id'] ) ? sanitize_text_field( $_POST['addon_id'] ) : '';
-			$addon_nonce      = isset( $_POST['addon_nonce'] ) ? sanitize_text_field( $_POST['addon_nonce'] ) : '';
-			$addon_nonce_name = isset( $_POST['addon_nonce_name'] ) ? sanitize_text_field( $_POST['addon_nonce_name'] ) : '';
+			$addon_id         = isset( $_POST['addon_id'] ) ? sanitize_text_field( wp_unslash( $_POST['addon_id'] ) ) : '';
+			$addon_nonce      = isset( $_POST['addon_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['addon_nonce'] ) ) : '';
+			$addon_nonce_name = isset( $_POST['addon_nonce_name'] ) ? sanitize_text_field( wp_unslash( $_POST['addon_nonce_name'] ) ) : '';
 
 			if ( empty( $addon_id ) || empty( $addon_nonce_name ) ) {
 				return;
@@ -131,7 +131,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function reports_get_option_values() {
 
-			$object_id        = isset( $_POST['object_id'] ) ? sanitize_text_field( $_POST['object_id'] ) : '';
+			$object_id        = isset( $_POST['object_id'] ) ? sanitize_text_field( wp_unslash( $_POST['object_id'] ) ) : '';
 			$poll             = liquidpoll_get_poll( $object_id );
 			$select_options[] = sprintf( '<option value="">%s</option>', esc_html__( 'All Values', 'wp-poll' ) );
 
@@ -148,7 +148,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function reports_get_polls() {
 
-			$poll_type = isset( $_POST['poll_type'] ) ? sanitize_text_field( $_POST['poll_type'] ) : '';
+			$poll_type = isset( $_POST['poll_type'] ) ? sanitize_text_field( wp_unslash( $_POST['poll_type'] ) ) : '';
 			$all_polls = get_posts( array(
 				'post_type'      => 'poll',
 				'posts_per_page' => - 1,
@@ -182,8 +182,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		function render_complete_report() {
 
 			$report_table = new LIQUIDPOLL_Poll_reports();
-			$current_page = isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
-			$result_id    = isset( $_REQUEST['id'] ) ? sanitize_text_field( $_REQUEST['id'] ) : '';
+			$current_page = isset( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : '';
+			$result_id    = isset( $_REQUEST['id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['id'] ) ) : '';
 
 			ob_start();
 
@@ -245,10 +245,13 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function liquidpoll_submit_nps() {
 
-			$poll_id    = isset( $_POST['poll_id'] ) ? sanitize_text_field( $_POST['poll_id'] ) : '';
+			$poll_id    = isset( $_POST['poll_id'] ) ? sanitize_text_field( wp_unslash( $_POST['poll_id'] ) ) : '';
 			$_form_data = isset( $_POST['form_data'] ) ? wp_unslash( $_POST['form_data'] ) : '';
 
 			parse_str( $_form_data, $form_data );
+
+			// Further sanitize individual form fields if necessary
+			$form_data = array_map('sanitize_text_field', $form_data);
 
 			$data_args = array(
 				'poll_id'         => $poll_id,
@@ -285,17 +288,17 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function download_csv_report() {
 
-			$export_nonce = isset( $_REQUEST['liquidpoll_export_nonce_value'] ) ? $_REQUEST['liquidpoll_export_nonce_value'] : '';
+			$export_nonce = isset( $_REQUEST['liquidpoll_export_nonce_value'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['liquidpoll_export_nonce_value'] ) ) : '';
 			if ( ! wp_verify_nonce( $export_nonce, 'liquidpoll_export_nonce' ) ) {
 				return;
 			}
 
-			$poll_id = isset( $_REQUEST['liquidpoll_reports_poll_id'] ) ? sanitize_text_field( $_REQUEST['liquidpoll_reports_poll_id'] ) : '';
+			$poll_id = isset( $_REQUEST['liquidpoll_reports_poll_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['liquidpoll_reports_poll_id'] ) ) : '';
 			$poll    = liquidpoll_get_poll( $poll_id );
 
 			$poll_reports   = array();
 			$polled_data    = $poll->get_polled_data();
-			$filename       = $poll->get_name() . '_' . date( "Y_m_d_H_i_s" );
+			$filename       = $poll->get_name() . '_' . gmdate( "Y_m_d_H_i_s" );
 			$poll_options   = array_map( function ( $option ) {
 				return liquidpoll()->get_args_option( 'label', '', $option );
 			}, $poll->get_poll_options() );
@@ -324,13 +327,14 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 			header( "Pragma: no-cache" );
 			header( "Expires: 0" );
 
-			$out = fopen( 'php://output', 'w' );
-
+			global $wp_filesystem;
+			WP_Filesystem();
+			
+			$csv_content = '';
 			foreach ( $poll_reports as $poll_report ) {
-				fputcsv( $out, $poll_report );
+				$csv_content .= implode( ',', $poll_report ) . "\n";
 			}
-
-			fclose( $out );
+			$wp_filesystem->put_contents( 'php://output', $csv_content );
 			die();
 		}
 
@@ -425,7 +429,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function liquidpoll_get_poll_results() {
 
-			$poll_id = isset( $_POST['poll_id'] ) ? sanitize_text_field( $_POST['poll_id'] ) : '';
+			$poll_id = isset( $_POST['poll_id'] ) ? sanitize_text_field( wp_unslash( $_POST['poll_id'] ) ) : '';
 
 			if ( empty( $poll_id ) ) {
 				wp_send_json_error( esc_html__( 'Invalid data found !', 'wp-poll' ) );
@@ -442,8 +446,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function liquidpoll_submit_poll() {
 
-			$poll_id      = isset( $_POST['poll_id'] ) ? sanitize_text_field( $_POST['poll_id'] ) : '';
-			$checked_data = isset( $_POST['checked_data'] ) ? stripslashes_deep( $_POST['checked_data'] ) : array();
+			$poll_id      = isset( $_POST['poll_id'] ) ? sanitize_text_field( wp_unslash( $_POST['poll_id'] ) ) : '';
+			$checked_data = isset( $_POST['checked_data'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['checked_data'] ) ) : array();
 			$poll         = liquidpoll_get_poll( $poll_id );
 			$checked_data = isset( $checked_data[0] ) ? $checked_data[0] : '';
 
@@ -531,8 +535,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function liquidpoll_front_new_option() {
 
-			$poll_id      = isset( $_POST['poll_id'] ) ? sanitize_text_field( $_POST['poll_id'] ) : '';
-			$option_value = isset( $_POST['opt_val'] ) ? sanitize_text_field( $_POST['opt_val'] ) : '';
+			$poll_id      = isset( $_POST['poll_id'] ) ? sanitize_text_field( wp_unslash( $_POST['poll_id'] ) ) : '';
+			$option_value = isset( $_POST['opt_val'] ) ? sanitize_text_field( wp_unslash( $_POST['opt_val'] ) ) : '';
 
 			if ( empty( $option_value ) || empty( $poll_id ) ) {
 				wp_send_json_error();
@@ -561,7 +565,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function ajax_new_poll_option() {
 
-			$poll_id = isset( $_GET['poll_id'] ) ? sanitize_text_field( $_GET['poll_id'] ) : '';
+			$poll_id = isset( $_GET['poll_id'] ) ? sanitize_text_field( wp_unslash( $_GET['poll_id'] ) ) : '';
 
 			ob_start();
 
@@ -601,8 +605,8 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 
 			global $pagenow;
 
-			$post_type   = isset( $_GET['post_type'] ) ? sanitize_text_field( $_GET['post_type'] ) : '';
-			$filter_type = isset( $_REQUEST['poll_type'] ) ? sanitize_text_field( $_REQUEST['poll_type'] ) : '';
+			$post_type   = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
+			$filter_type = isset( $_REQUEST['poll_type'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['poll_type'] ) ) : '';
 
 			if ( is_admin() && 'poll' == $post_type && 'edit.php' == $pagenow && $filter_type ) {
 				$query->query_vars['meta_key']   = '_type';
@@ -618,7 +622,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Hooks' ) ) {
 		 */
 		function add_dropdown_for_poll_type() {
 
-			$filter_type = isset( $_REQUEST['poll_type'] ) ? sanitize_text_field( $_REQUEST['poll_type'] ) : '';
+			$filter_type = isset( $_REQUEST['poll_type'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['poll_type'] ) ) : '';
 
 			?>
             <div class="alignleft ">
