@@ -6,7 +6,7 @@
  * @author Liquidpoll
  */
 
-if ( empty( $poll_id = isset( $_GET['poll-id'] ) ? sanitize_text_field( $_GET['poll-id'] ) : '' ) ) {
+if ( empty( $poll_id = isset( $_GET['poll-id'] ) ? sanitize_text_field( wp_unslash( $_GET['poll-id'] ) ) : '' ) ) {
 	liquidpoll()->print_notice( esc_html__( 'Please select a poll.', 'wp-poll' ), 'error', false );
 }
 
@@ -33,17 +33,17 @@ $poll         = liquidpoll_get_poll( $poll_id );
 $seriesVotes  = array_values( $poll->get_poll_reports( 'counts' ) );
 $seriesLabels = array_values( $poll->get_poll_reports( 'labels' ) );
 $totalVotes   = $poll->get_poll_reports( 'total_votes' );
-$chart_type   = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : 'pie';
+$chart_type   = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : 'pie';
 
 if ( $chart_type == 'pie' ) {
 	$series = array_values( $poll->get_poll_reports( 'counts' ) );
-	$series = json_encode( $series );
+	$series = wp_json_encode( $series );
 } else if ( $chart_type == 'bar' ) {
 	$series = array(
 		'name' => esc_html__( 'Voted', 'wp-poll' ),
 		'data' => array_values( $poll->get_poll_reports( 'percentages' ) ),
 	);
-	$series = sprintf( '[%s]', preg_replace( '/"([a-zA-Z]+[a-zA-Z0-9_]*)":/', '$1:', json_encode( $series ) ) );
+	$series = sprintf( '[%s]', preg_replace( '/"([a-zA-Z]+[a-zA-Z0-9_]*)":/', '$1:', wp_json_encode( $series ) ) );
 }
 ?>
 
@@ -53,8 +53,8 @@ if ( $chart_type == 'pie' ) {
 <script>
     let pollTitle = '<?php printf( esc_html__( 'Poll : %s', 'wp-poll' ), $poll->get_name() ); ?>',
         series = <?php echo $series; ?>,
-        seriesVotes = <?php echo json_encode( $seriesVotes ); ?>,
-        seriesLabels = <?php echo json_encode( $seriesLabels ); ?>,
+        seriesVotes = <?php echo wp_json_encode( $seriesVotes ); ?>,
+        seriesLabels = <?php echo wp_json_encode( $seriesLabels ); ?>,
         totalVotes = <?php echo esc_html( $totalVotes ); ?>,
         chartType = '<?php echo esc_html( $chart_type ); ?>',
         options = {

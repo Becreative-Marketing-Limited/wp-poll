@@ -48,7 +48,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 				}
 
 				// Check deadline
-				if ( date( 'U' ) < $poll_deadline ) {
+				if ( gmdate( 'U' ) < $poll_deadline ) {
 					$can_vote = true;
 				}
 			}
@@ -198,7 +198,11 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			if ( 'nps' == $this->get_type() ) {
 				$polled_data   = array();
 				$poll_options  = $this->get_meta( 'poll_meta_options_nps', array() );
-				$query_results = $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_id = {$this->get_id()} AND poll_type = 'nps'", ARRAY_A );
+				$query_results = $wpdb->get_results( $wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}liquidpoll_results WHERE poll_id = %d AND poll_type = %s",
+					$this->get_id(),
+					'nps'
+				), ARRAY_A );
 
 				foreach ( $query_results as $query_result ) {
 					if ( ! empty( $poller_id_ip = $query_result['poller_id_ip'] ) ) {
@@ -208,7 +212,11 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 			} else if ( 'reaction' == $this->get_type() ) {
 				$polled_data   = array();
 				$poll_options  = $this->get_meta( 'poll_meta_options_reaction', array() );
-				$query_results = $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poll_id = {$this->get_id()} AND poll_type = 'reaction'", ARRAY_A );
+				$query_results = $wpdb->get_results( $wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}liquidpoll_results WHERE poll_id = %d AND poll_type = %s",
+					$this->get_id(),
+					'reaction'
+				), ARRAY_A );
 
 				foreach ( $query_results as $query_result ) {
 					if ( ! empty( $poller_id_ip = $query_result['poller_id_ip'] ) ) {
@@ -217,7 +225,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 				}
 			} else if ( 'reviews' == $this->get_type() ) {
 
-				$where_clause      = "WHERE poll_id = {$this->get_id()} AND poll_type = 'reviews'";
+				$where_clause      = $wpdb->prepare("WHERE poll_id = %d AND poll_type = %s", $this->get_id(), 'reviews');
 				$orderby_clause    = "ORDER BY datetime DESC";
 				$rating            = Utils::get_args_option( 'rating', $args );
 				$relevant_orderby  = Utils::get_args_option( 'relevant', $args );
@@ -226,49 +234,59 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 				$status            = Utils::get_args_option( 'status', $args );
 
 				if ( ! empty( $rating ) && $rating > 1 && $rating <= 5 ) {
-					$where_clause .= " AND polled_value=$rating";
+					$where_clause .= $wpdb->prepare(" AND polled_value = %d", $rating);
 				}
 
 				if ( ! empty( $status ) ) {
-					$where_clause .= " AND status = '{$status}'";
+					$where_clause .= $wpdb->prepare(" AND status = %s", $status);
 				}
 
 				if ( ! empty( $relevant_orderby ) && ( $relevant_orderby === 'DESC' || $relevant_orderby === 'ASC' ) ) {
-					$orderby_clause = "ORDER BY datetime $relevant_orderby";
+					$orderby_clause = $wpdb->prepare("ORDER BY datetime %s", $relevant_orderby);
 				}
 
 				if ( ! empty( $filter_date ) ) {
 
+					$date_1 = '';
+					$date_2 = '';
+
 					if ( 'last_30' == $filter_date ) {
-						$date_1 = date( 'Y-m-d', strtotime( '-30 days' ) );
-						$date_2 = date( 'Y-m-d' );
+						$date_1 = gmdate( 'Y-m-d', strtotime( '-30 days' ) );
+						$date_2 = gmdate( 'Y-m-d' );
 					} else if ( 'last_3' == $filter_date ) {
-						$date_1 = date( 'Y-m-d', strtotime( '-3 month' ) );
-						$date_2 = date( 'Y-m-d' );
+						$date_1 = gmdate( 'Y-m-d', strtotime( '-3 month' ) );
+						$date_2 = gmdate( 'Y-m-d' );
 					} else if ( 'last_6' == $filter_date ) {
-						$date_1 = date( 'Y-m-d', strtotime( '-6 month' ) );
-						$date_2 = date( 'Y-m-d' );
+						$date_1 = gmdate( 'Y-m-d', strtotime( '-6 month' ) );
+						$date_2 = gmdate( 'Y-m-d' );
 					} else if ( 'last_12' == $filter_date ) {
-						$date_1 = date( 'Y-m-d', strtotime( '-1 year' ) );
-						$date_2 = date( 'Y-m-d' );
+						$date_1 = gmdate( 'Y-m-d', strtotime( '-1 year' ) );
+						$date_2 = gmdate( 'Y-m-d' );
 					}
 
 					if ( ! empty( $date_1 ) && ! empty( $date_2 ) ) {
-						$where_clause .= " AND datetime between '{$date_1}' AND '{$date_2}'";
+						$where_clause .= $wpdb->prepare(" AND datetime BETWEEN %s AND %s", $date_1, $date_2);
 					}
 
 				}
 
 				if ( ! empty( $filter_by_ratings ) && is_array( $filter_by_ratings ) ) {
 
-					$filter_by_ratings = array_map( function ( $rating_value ) {
-						return "polled_value=$rating_value";
+					$filter_by_ratings = array_map( function ( $rating_value ) use ($wpdb) {
+						return $wpdb->prepare("polled_value = %d", $rating_value);
 					}, $filter_by_ratings );
 					$filter_by_ratings = implode( ' OR ', $filter_by_ratings );
 					$where_clause      .= " AND ($filter_by_ratings)";
 				}
 
-				return $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . ' ' . $where_clause . ' ' . $orderby_clause, ARRAY_A );
+				return $wpdb->get_results( 
+					$wpdb->prepare(
+						"SELECT * FROM {$wpdb->prefix}liquidpoll_results %s %s",
+						$where_clause,
+						$orderby_clause
+					),
+					ARRAY_A
+				);
 			} else {
 				$polled_data  = $this->get_polled_data();
 				$poll_options = $this->get_meta( 'poll_meta_options', array() );
@@ -414,7 +432,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll' ) ) {
 		function get_poll_deadline( $format = 'M j Y G:i:s' ) {
 
 			$deadline = $this->get_meta( '_deadline' );
-			$deadline = empty( $deadline ) ? '' : date( $format, strtotime( $deadline ) );
+			$deadline = empty( $deadline ) ? '' : gmdate( $format, strtotime( $deadline ) );
 
 			return apply_filters( 'liquidpoll_filters_poll_deadline', $deadline );
 		}

@@ -30,13 +30,18 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 
 			if ( $which == "top" ) {
 
-				$current_page = isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
-				$filter_type  = isset( $_REQUEST['type'] ) ? sanitize_text_field( $_REQUEST['type'] ) : '';
-				$object_id    = isset( $_REQUEST['object'] ) ? sanitize_text_field( $_REQUEST['object'] ) : '';
-				$value_id     = isset( $_REQUEST['value'] ) ? sanitize_text_field( $_REQUEST['value'] ) : '';
-				$date         = isset( $_REQUEST['date'] ) ? sanitize_text_field( $_REQUEST['date'] ) : '';
-				$date_1       = isset( $_REQUEST['date_1'] ) ? sanitize_text_field( $_REQUEST['date_1'] ) : '';
-				$date_2       = isset( $_REQUEST['date_2'] ) ? sanitize_text_field( $_REQUEST['date_2'] ) : '';
+				// Add nonce verification
+				if ( ! isset( $_REQUEST['liquidpoll_reports_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['liquidpoll_reports_nonce'] ) ), 'liquidpoll_reports_action' ) ) {
+					wp_die( 'Invalid nonce specified', 'Error', array( 'response' => 403 ) );
+				}
+
+				$current_page = isset( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : '';
+				$filter_type  = isset( $_REQUEST['type'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['type'] ) ) : '';
+				$object_id    = isset( $_REQUEST['object'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['object'] ) ) : '';
+				$value_id     = isset( $_REQUEST['value'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['value'] ) ) : '';
+				$date         = isset( $_REQUEST['date'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['date'] ) ) : '';
+				$date_1       = isset( $_REQUEST['date_1'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['date_1'] ) ) : '';
+				$date_2       = isset( $_REQUEST['date_2'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['date_2'] ) ) : '';
 				$date_1       = 'custom' == $date ? $date_1 : '';
 				$date_2       = 'custom' == $date ? $date_2 : '';
 				$all_objects  = array();
@@ -65,6 +70,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 				?>
                 <div class="alignleft">
                     <form action="<?php echo admin_url( 'edit.php?post_type=poll&page=reports' ); ?>" method="get" class="liquidpoll-sort-form">
+						<?php wp_nonce_field( 'liquidpoll_reports_action', 'liquidpoll_reports_nonce' ); ?>
                         <label>
                             <select name="type">
                                 <option value=""><?php esc_html_e( 'All Types', 'wp-poll' ); ?></option>
@@ -125,7 +131,7 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
                     </form>
                 </div>
                 <div class="alignleft">
-                    <form action="<?php echo admin_url( 'admin-ajax.php' ); ?>" method="post" class="liquidpoll-export-form <?= liquidpoll()->is_pro() ? '' : 'disabled'; ?>">
+                    <form action="<?php echo admin_url( 'admin-ajax.php' ); ?>" method="post" class="liquidpoll-export-form <?php echo liquidpoll()->is_pro() ? '' : 'disabled'; ?>">
                         <input type="hidden" name="action" value="liquidpoll_download_reports">
                         <input type="hidden" name="type" value="<?php echo esc_attr( $filter_type ); ?>">
                         <input type="hidden" name="object" value="<?php echo esc_attr( $object_id ); ?>">
@@ -324,43 +330,54 @@ if ( ! class_exists( 'LIQUIDPOLL_Poll_reports' ) ) {
 
 			global $wpdb;
 
-			$poll_type       = isset( $_REQUEST['type'] ) ? sanitize_text_field( $_REQUEST['type'] ) : '';
-			$object_id       = isset( $_REQUEST['object'] ) ? sanitize_text_field( $_REQUEST['object'] ) : '';
-			$value_id        = isset( $_REQUEST['value'] ) ? sanitize_text_field( $_REQUEST['value'] ) : '';
-			$date            = isset( $_REQUEST['date'] ) ? sanitize_text_field( $_REQUEST['date'] ) : '';
-			$date_1          = isset( $_REQUEST['date_1'] ) ? sanitize_text_field( $_REQUEST['date_1'] ) : '';
-			$date_2          = isset( $_REQUEST['date_2'] ) ? sanitize_text_field( $_REQUEST['date_2'] ) : '';
+			// Add nonce verification
+			if ( ! isset( $_REQUEST['liquidpoll_reports_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['liquidpoll_reports_nonce'] ) ), 'liquidpoll_reports_action' ) ) {
+				wp_die( 'Invalid nonce specified', 'Error', array( 'response' => 403 ) );
+			}
+
+			$poll_type       = isset( $_REQUEST['type'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['type'] ) ) : '';
+			$object_id       = isset( $_REQUEST['object'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['object'] ) ) : '';
+			$value_id        = isset( $_REQUEST['value'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['value'] ) ) : '';
+			$date            = isset( $_REQUEST['date'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['date'] ) ) : '';
+			$date_1          = isset( $_REQUEST['date_1'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['date_1'] ) ) : '';
+			$date_2          = isset( $_REQUEST['date_2'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['date_2'] ) ) : '';
 			$where_clauses[] = '1=1';
 
 			if ( in_array( $poll_type, array( 'poll', 'nps', 'reaction' ) ) ) {
-				$where_clauses[] = "poll_type = '{$poll_type}'";
+				$where_clauses[] = $wpdb->prepare( "poll_type = %s", $poll_type );
 			}
 
 			if ( ! empty( $object_id ) ) {
-				$where_clauses[] = "poll_id = '{$object_id}'";
+				$where_clauses[] = $wpdb->prepare( "poll_id = %s", $object_id );
 			}
 
 			if ( ! empty( $value_id ) ) {
-				$where_clauses[] = "polled_value = '{$value_id}'";
+				$where_clauses[] = $wpdb->prepare( "polled_value = %s", $value_id );
 			}
 
 			if ( 'last_30' == $date ) {
-				$date_1 = date( 'Y-m-d', strtotime( '-30 days' ) );
-				$date_2 = date( 'Y-m-d' );
+				$date_1 = gmdate( 'Y-m-d', strtotime( '-30 days' ) );
+				$date_2 = gmdate( 'Y-m-d' );
 			} else if ( 'last_15' == $date ) {
-				$date_1 = date( 'Y-m-d', strtotime( '-15 days' ) );
-				$date_2 = date( 'Y-m-d' );
+				$date_1 = gmdate( 'Y-m-d', strtotime( '-15 days' ) );
+				$date_2 = gmdate( 'Y-m-d' );
 			} else if ( 'last_7' == $date ) {
-				$date_1 = date( 'Y-m-d', strtotime( '-7 days' ) );
-				$date_2 = date( 'Y-m-d' );
+				$date_1 = gmdate( 'Y-m-d', strtotime( '-7 days' ) );
+				$date_2 = gmdate( 'Y-m-d' );
 			}
 
 			if ( ! empty( $date_1 ) && ! empty( $date_2 ) ) {
-				$where_clauses[] = "datetime between '{$date_1}' AND '{$date_2}'";
+				$where_clauses[] = $wpdb->prepare( "datetime BETWEEN %s AND %s", $date_1, $date_2 );
 			}
 
 			$where_conditions = implode( ' AND ', $where_clauses );
-			$all_poll_data    = $wpdb->get_results( "SELECT * FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE " . $where_conditions . " ORDER BY datetime DESC", ARRAY_A );
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$query = $wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}liquidpoll_results WHERE %1s ORDER BY datetime DESC",
+				$where_conditions
+			);
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$all_poll_data = $wpdb->get_results( $query, ARRAY_A );
 
 			return apply_filters( 'LiquidPoll/Filters/get_data', $all_poll_data );
 		}

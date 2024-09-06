@@ -214,13 +214,14 @@ if ( ! function_exists( 'liquidpoll_get_ip_address' ) ) {
 	 * @return mixed
 	 */
 	function liquidpoll_get_ip_address() {
+		$ip = '';
 
 		if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-			$ip = $_SERVER['HTTP_CLIENT_IP'];
+			$ip = sanitize_text_field( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ) );
 		} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		} else {
-			$ip = $_SERVER['REMOTE_ADDR'];
+			$ip = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
+		} elseif ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+			$ip = sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
 		}
 
 		return $ip;
@@ -435,6 +436,7 @@ if ( ! function_exists( 'liquidpoll_get_template' ) ) {
 		$located = liquidpoll_locate_template( $template_name, $template_path, $default_path, $backtrace_file, $main_template );
 
 		if ( ! file_exists( $located ) ) {
+			/* translators: %s: file path */
 			return new WP_Error( 'invalid_data', __( '%s does not exist.', 'wp-poll' ), '<code>' . $located . '</code>' );
 		}
 
@@ -661,7 +663,6 @@ if ( ! function_exists( 'liquidpoll_update_results_meta' ) ) {
 	 * @return int|WP_Error
 	 */
 	function liquidpoll_update_results_meta( $result_id, $meta_key, $meta_value ) {
-
 		global $wpdb;
 
 		$meta_value = is_array( $meta_value ) ? serialize( $meta_value ) : $meta_value;
@@ -673,7 +674,8 @@ if ( ! function_exists( 'liquidpoll_update_results_meta' ) ) {
 		);
 
 		if ( ! empty( liquidpoll_get_results_meta( $result_id, $meta_key ) ) ) {
-			$response = $wpdb->update( LIQUIDPOLL_RESULTS_META_TABLE,
+			$response = $wpdb->update( 
+				$wpdb->prepare( '%s', LIQUIDPOLL_RESULTS_META_TABLE ),
 				array(
 					'meta_value' => $meta_value,
 				),
@@ -683,7 +685,7 @@ if ( ! function_exists( 'liquidpoll_update_results_meta' ) ) {
 				)
 			);
 		} else {
-			$response = $wpdb->insert( LIQUIDPOLL_RESULTS_META_TABLE, $args );
+			$response = $wpdb->insert( $wpdb->prepare( '%s', LIQUIDPOLL_RESULTS_META_TABLE ), $args );
 		}
 
 		if ( ! $response ) {
@@ -706,10 +708,13 @@ if ( ! function_exists( 'liquidpoll_get_results_meta' ) ) {
 	 * @return false|string
 	 */
 	function liquidpoll_get_results_meta( $result_id, $meta_key, $default = '' ) {
-
 		global $wpdb;
 
-		$meta_value = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM " . LIQUIDPOLL_RESULTS_META_TABLE . " WHERE result_id = %s AND meta_key = %s", $result_id, $meta_key ) );
+		$meta_value = $wpdb->get_var( $wpdb->prepare( 
+			"SELECT meta_value FROM {$wpdb->prepare( '%s', LIQUIDPOLL_RESULTS_META_TABLE )} WHERE result_id = %s AND meta_key = %s", 
+			$result_id, 
+			$meta_key 
+		) );
 
 		if ( $meta_value ) {
 			return is_serialized( $meta_value ) ? unserialize( $meta_value ) : $meta_value;
@@ -729,7 +734,6 @@ if ( ! function_exists( 'liquidpoll_insert_email' ) ) {
 	 * @return WP_Error|bool
 	 */
 	function liquidpoll_insert_email( $args = array() ) {
-
 		global $wpdb;
 
 		$defaults    = array(
@@ -742,13 +746,17 @@ if ( ! function_exists( 'liquidpoll_insert_email' ) ) {
 			'datetime'      => current_time( 'mysql' ),
 		);
 		$args        = wp_parse_args( $args, $defaults );
-		$entry_count = $wpdb->get_var( "SELECT COUNT(*) FROM " . LIQUIDPOLL_EMAILS_TABLE . " WHERE poll_id = '{$args['poll_id']}' AND email_address = '{$args['email_address']}'" );
+		$entry_count = $wpdb->get_var( $wpdb->prepare( 
+			"SELECT COUNT(*) FROM {$wpdb->prepare( '%s', LIQUIDPOLL_EMAILS_TABLE )} WHERE poll_id = %s AND email_address = %s",
+			$args['poll_id'],
+			$args['email_address']
+		) );
 
 		if ( $entry_count > 0 ) {
 			return new WP_Error( 'duplicate_try', esc_html__( 'Already in the list', 'wp-poll' ) );
 		}
 
-		$response = $wpdb->insert( LIQUIDPOLL_EMAILS_TABLE, $args );
+		$response = $wpdb->insert( $wpdb->prepare( '%s', LIQUIDPOLL_EMAILS_TABLE ), $args );
 
 		if ( ! $response ) {
 			return new WP_Error( 'database_error', $wpdb->last_error );
@@ -888,7 +896,11 @@ if ( ! function_exists( 'liquidpoll_get_poller_name' ) ) {
 	function liquidpoll_get_poller_name( $poll_id, $poller_id_ip ) {
 		global $wpdb;
 
-		$poller_name = $wpdb->get_var( $wpdb->prepare( "SELECT first_name FROM " . LIQUIDPOLL_EMAILS_TABLE . " WHERE poll_id = %s AND poller_id_ip = %s", $poll_id, $poller_id_ip ) );
+		$poller_name = $wpdb->get_var( $wpdb->prepare( 
+			"SELECT first_name FROM {$wpdb->prepare( '%s', LIQUIDPOLL_EMAILS_TABLE )} WHERE poll_id = %s AND poller_id_ip = %s", 
+			$poll_id, 
+			$poller_id_ip 
+		) );
 
 		return $poller_name;
 	}
@@ -907,7 +919,11 @@ if ( ! function_exists( 'liquidpoll_get_data_from_email_table' ) ) {
 	function liquidpoll_get_data_from_email_table( $poll_id, $poller_id_ip ) {
 		global $wpdb;
 
-		$poller_info = $wpdb->get_results( $wpdb->prepare( "SELECT first_name,last_name,email_address,consent FROM " . LIQUIDPOLL_EMAILS_TABLE . " WHERE poll_id = %s AND poller_id_ip = %s", $poll_id, $poller_id_ip ), ARRAY_A );
+		$poller_info = $wpdb->get_results( $wpdb->prepare( 
+			"SELECT first_name,last_name,email_address,consent FROM {$wpdb->prepare( '%s', LIQUIDPOLL_EMAILS_TABLE )} WHERE poll_id = %s AND poller_id_ip = %s", 
+			$poll_id, 
+			$poller_id_ip 
+		), ARRAY_A );
 
 		return end( $poller_info );
 	}
@@ -979,12 +995,15 @@ if ( ! function_exists( 'liquidpoll_get_review_stars' ) ) {
 
 if ( ! function_exists( 'liquidpoll_get_poller_submission_count' ) ) {
 	function liquidpoll_get_poller_submission_count( $poller_id_ip = '', $poll_type = 'poll' ) {
-
 		global $wpdb;
 
 		$poller_id_ip = empty( $poller_id_ip ) ? get_current_user_id() : $poller_id_ip;
 
-		return $wpdb->get_var( "SELECT COUNT(*) FROM " . LIQUIDPOLL_RESULTS_TABLE . " WHERE poller_id_ip = '$poller_id_ip' AND poll_type = '$poll_type'" );
+		return $wpdb->get_var( $wpdb->prepare( 
+			"SELECT COUNT(*) FROM {$wpdb->prepare( '%s', LIQUIDPOLL_RESULTS_TABLE )} WHERE poller_id_ip = %s AND poll_type = %s",
+			$poller_id_ip,
+			$poll_type
+		) );
 	}
 }
 
@@ -1038,7 +1057,8 @@ if ( ! function_exists( 'liquidpoll_get_poller_location' ) ) {
 		$response = json_decode( $response, true );
 
 		if ( isset( $response['city'] ) && isset( $response['country'] ) ) {
-			return sprintf( esc_html__( '%s, %s', 'wp-poll' ), $response['city'], $response['country'] );
+			/* translators: %1$s: city name, %2$s: country name */
+			return sprintf( esc_html__( '%1$s, %2$s', 'wp-poll' ), $response['city'], $response['country'] );
 		}
 
 		return esc_html__( 'Earth', 'wp-poll' );

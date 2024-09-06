@@ -708,7 +708,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$name          = $multiple ? sprintf( '%s[]', $id ) : sprintf( '%s', $id );
 			$multiple_text = $multiple ? 'multiple' : '';
 			$field_options = isset( $option['field_options'] ) ? $option['field_options'] : array();
-			$field_options = preg_replace( '/"([^"]+)"\s*:\s*/', '$1:', json_encode( $field_options ) );
+			$field_options = preg_replace( '/"([^"]+)"\s*:\s*/', '$1:', wp_json_encode( $field_options ) );
 
 			if ( empty( $value ) || ! $value ) {
 				$value = isset( $option['default'] ) ? $option['default'] : $value;
@@ -769,7 +769,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$value         = isset( $option['value'] ) ? $option['value'] : get_option( $id );
 			$disabled      = isset( $option['disabled'] ) && $option['disabled'] ? 'disabled' : '';
 			$field_options = isset( $option['field_options'] ) ? $option['field_options'] : array();
-			$field_options = preg_replace( '/"([^"]+)"\s*:\s*/', '$1:', json_encode( $field_options ) );
+			$field_options = preg_replace( '/"([^"]+)"\s*:\s*/', '$1:', wp_json_encode( $field_options ) );
 			$field_id      = str_replace( array( '[', ']' ), '', $id );
 
 			if ( empty( $value ) || ! $value ) {
@@ -809,7 +809,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$value         = isset( $option['value'] ) ? $option['value'] : get_option( $id );
 			$disabled      = isset( $option['disabled'] ) && $option['disabled'] ? 'disabled' : '';
 			$field_options = isset( $option['field_options'] ) ? $option['field_options'] : array();
-			$field_options = preg_replace( '/"([^"]+)"\s*:\s*/', '$1:', json_encode( $field_options ) );
+			$field_options = preg_replace( '/"([^"]+)"\s*:\s*/', '$1:', wp_json_encode( $field_options ) );
 			$field_id      = str_replace( array( '[', ']' ), '', $id );
 
 			if ( empty( $value ) || ! $value ) {
@@ -1258,7 +1258,11 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 			global $pagenow;
 
-			parse_str( $_SERVER['QUERY_STRING'], $nav_url_args );
+			$query_string = '';
+			if (isset($_SERVER['QUERY_STRING'])) {
+				$query_string = sanitize_text_field(wp_unslash($_SERVER['QUERY_STRING']));
+			}
+			$nav_url_args = wp_parse_args($query_string);
 
 			?>
             <nav class="nav-tab-wrapper">
@@ -1411,9 +1415,10 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				return new WP_Error( 'not_found', sprintf( 'Taxonomy <strong>%s</strong> does not exists !', $taxonomy ) );
 			}
 
-			$terms = get_terms( $taxonomy, array(
+			$terms = get_terms(array(
+				'taxonomy' => $taxonomy,
 				'hide_empty' => false,
-			) );
+			));
 
 			foreach ( $terms as $term ) {
 				$taxonomies[ $term->term_id ] = $term->name;
@@ -1519,7 +1524,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$page_keys   = array_keys( $all_pages );
 			$default_tab = ! empty( $all_pages ) ? reset( $page_keys ) : "";
 
-			return isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : $default_tab;
+			return isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : $default_tab;
 		}
 
 
